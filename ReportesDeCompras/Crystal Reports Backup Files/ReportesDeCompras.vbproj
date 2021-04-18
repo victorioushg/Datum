@@ -1,0 +1,478 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{E9780A9C-EA94-451B-BAE5-7415548EC381}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ReportesDeCompras</RootNamespace>
+    <AssemblyName>ReportesDeCompras</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>ReportesDeCompras.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>ReportesDeCompras.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasAuditoriasProveedores.vb">
+      <Link>rptComprasAuditoriasProveedores.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasAuditoriasProveedores.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasCompra.vb">
+      <Link>rptComprasCompra.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasCompra.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasEstadodeCuentaProveedores0G.vb">
+      <Link>rptComprasEstadodeCuentaProveedores0G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasEstadodeCuentaProveedores0G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasGasto.vb">
+      <Link>rptComprasGasto.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasGasto.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasLibroIVAGeneral.vb">
+      <Link>rptComprasLibroIVAGeneral.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasLibroIVAGeneral.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasListadoDocumentos0G.vb">
+      <Link>rptComprasListadoDocumentos0G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasListadoDocumentos0G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasListadoDocumentos1G.vb">
+      <Link>rptComprasListadoDocumentos1G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasListadoDocumentos1G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasListadoDocumentos2G.vb">
+      <Link>rptComprasListadoDocumentos2G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasListadoDocumentos2G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasListadoDocumentos3G.vb">
+      <Link>rptComprasListadoDocumentos3G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasListadoDocumentos3G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasListadoDoc_Items0G.vb">
+      <Link>rptComprasListadoDoc_Items0G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasListadoDoc_Items0G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasListadoDoc_Items1G.vb">
+      <Link>rptComprasListadoDoc_Items1G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasListadoDoc_Items1G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasListadoDoc_Items2G.vb">
+      <Link>rptComprasListadoDoc_Items2G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasListadoDoc_Items2G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasMovimientosProveedores0G.vb">
+      <Link>rptComprasMovimientosProveedores0G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasMovimientosProveedores0G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasNotaCredito.vb">
+      <Link>rptComprasNotaCredito.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasNotaCredito.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasNotaDebito.vb">
+      <Link>rptComprasNotaDebito.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasNotaDebito.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasOrdenDeCompra.vb">
+      <Link>rptComprasOrdenDeCompra.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasOrdenDeCompra.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasProveedores0G.vb">
+      <Link>rptComprasProveedores0G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasProveedores0G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasProveedores1G.vb">
+      <Link>rptComprasProveedores1G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasProveedores1G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasProveedores2G.vb">
+      <Link>rptComprasProveedores2G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasProveedores2G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasRecepcion.vb">
+      <Link>rptComprasRecepcion.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasRecepcion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasRecibo.vb">
+      <Link>rptComprasRecibo.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasRecibo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasRetencionesISLR.vb">
+      <Link>rptComprasRetencionesISLR.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasRetencionesISLR.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasRetencionesIVA.vb">
+      <Link>rptComprasRetencionesIVA.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasRetencionesIVA.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasRetencionISLR.vb">
+      <Link>rptComprasRetencionISLR.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasRetencionISLR.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasRetencionIVA.vb">
+      <Link>rptComprasRetencionIVA.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasRetencionIVA.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasSaldosProveedores0G.vb">
+      <Link>rptComprasSaldosProveedores0G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasSaldosProveedores0G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasSaldosProveedores1G.vb">
+      <Link>rptComprasSaldosProveedores1G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasSaldosProveedores1G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasSaldosProveedores2G.vb">
+      <Link>rptComprasSaldosProveedores2G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasSaldosProveedores2G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasVencimientos.vb">
+      <Link>rptComprasVencimientos.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasVencimientos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasVencimientosResumen.vb">
+      <Link>rptComprasVencimientosResumen.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptComprasVencimientosResumen.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasAuditoriasProveedores.rpt">
+      <Link>rptComprasAuditoriasProveedores.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasAuditoriasProveedores.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasCompra.rpt">
+      <Link>rptComprasCompra.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasCompra.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasEstadodeCuentaProveedores0G.rpt">
+      <Link>rptComprasEstadodeCuentaProveedores0G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasEstadodeCuentaProveedores0G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasGasto.rpt">
+      <Link>rptComprasGasto.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasGasto.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasLibroIVAGeneral.rpt">
+      <Link>rptComprasLibroIVAGeneral.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasLibroIVAGeneral.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasListadoDocumentos0G.rpt">
+      <Link>rptComprasListadoDocumentos0G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasListadoDocumentos0G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasListadoDocumentos1G.rpt">
+      <Link>rptComprasListadoDocumentos1G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasListadoDocumentos1G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasListadoDocumentos2G.rpt">
+      <Link>rptComprasListadoDocumentos2G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasListadoDocumentos2G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasListadoDocumentos3G.rpt">
+      <Link>rptComprasListadoDocumentos3G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasListadoDocumentos3G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasListadoDoc_Items0G.rpt">
+      <Link>rptComprasListadoDoc_Items0G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasListadoDoc_Items0G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasListadoDoc_Items1G.rpt">
+      <Link>rptComprasListadoDoc_Items1G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasListadoDoc_Items1G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasListadoDoc_Items2G.rpt">
+      <Link>rptComprasListadoDoc_Items2G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasListadoDoc_Items2G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasMovimientosProveedores0G.rpt">
+      <Link>rptComprasMovimientosProveedores0G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasMovimientosProveedores0G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasNotaCredito.rpt">
+      <Link>rptComprasNotaCredito.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasNotaCredito.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasNotaDebito.rpt">
+      <Link>rptComprasNotaDebito.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasNotaDebito.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasOrdenDeCompra.rpt">
+      <Link>rptComprasOrdenDeCompra.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasOrdenDeCompra.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasProveedores0G.rpt">
+      <Link>rptComprasProveedores0G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasProveedores0G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasProveedores1G.rpt">
+      <Link>rptComprasProveedores1G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasProveedores1G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasProveedores2G.rpt">
+      <Link>rptComprasProveedores2G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasProveedores2G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasRecepcion.rpt">
+      <Link>rptComprasRecepcion.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasRecepcion.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasRecibo.rpt">
+      <Link>rptComprasRecibo.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasRecibo.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasRetencionesISLR.rpt">
+      <Link>rptComprasRetencionesISLR.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasRetencionesISLR.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasRetencionesIVA.rpt">
+      <Link>rptComprasRetencionesIVA.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasRetencionesIVA.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasRetencionISLR.rpt">
+      <Link>rptComprasRetencionISLR.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasRetencionISLR.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasRetencionIVA.rpt">
+      <Link>rptComprasRetencionIVA.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasRetencionIVA.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasSaldosProveedores0G.rpt">
+      <Link>rptComprasSaldosProveedores0G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasSaldosProveedores0G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasSaldosProveedores1G.rpt">
+      <Link>rptComprasSaldosProveedores1G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasSaldosProveedores1G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasSaldosProveedores2G.rpt">
+      <Link>rptComprasSaldosProveedores2G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasSaldosProveedores2G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasVencimientos.rpt">
+      <Link>rptComprasVencimientos.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasVencimientos.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesCompras\rptComprasVencimientosResumen.rpt">
+      <Link>rptComprasVencimientosResumen.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptComprasVencimientosResumen.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

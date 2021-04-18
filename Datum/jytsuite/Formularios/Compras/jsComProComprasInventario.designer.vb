@@ -1,0 +1,235 @@
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class jsComProComprasInventario
+    Inherits System.Windows.Forms.Form
+
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        If disposing AndAlso components IsNot Nothing Then
+            components.Dispose()
+        End If
+        MyBase.Dispose(disposing)
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsComProComprasInventario))
+        Me.lblInfo = New System.Windows.Forms.Label()
+        Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnOK = New System.Windows.Forms.Button()
+        Me.dg = New System.Windows.Forms.DataGridView()
+        Me.grpTotales = New System.Windows.Forms.GroupBox()
+        Me.pb = New System.Windows.Forms.ProgressBar()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.lblProgreso = New System.Windows.Forms.Label()
+        Me.btnFecha = New System.Windows.Forms.Button()
+        Me.txtFechaProceso = New System.Windows.Forms.TextBox()
+        Me.lblFecha = New System.Windows.Forms.Label()
+        Me.dgMercas = New System.Windows.Forms.DataGridView()
+        Me.grpAceptarSalir.SuspendLayout()
+        CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpTotales.SuspendLayout()
+        CType(Me.dgMercas, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
+        '
+        'lblInfo
+        '
+        Me.lblInfo.BackColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(217, Byte), Integer))
+        Me.lblInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblInfo.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.lblInfo.Location = New System.Drawing.Point(0, 453)
+        Me.lblInfo.Name = "lblInfo"
+        Me.lblInfo.Size = New System.Drawing.Size(963, 27)
+        Me.lblInfo.TabIndex = 80
+        '
+        'grpAceptarSalir
+        '
+        Me.grpAceptarSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpAceptarSalir.ColumnCount = 2
+        Me.grpAceptarSalir.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.grpAceptarSalir.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.grpAceptarSalir.Controls.Add(Me.btnCancel, 1, 0)
+        Me.grpAceptarSalir.Controls.Add(Me.btnOK, 0, 0)
+        Me.grpAceptarSalir.Location = New System.Drawing.Point(804, 453)
+        Me.grpAceptarSalir.Name = "grpAceptarSalir"
+        Me.grpAceptarSalir.RowCount = 1
+        Me.grpAceptarSalir.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.grpAceptarSalir.Size = New System.Drawing.Size(165, 30)
+        Me.grpAceptarSalir.TabIndex = 85
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnCancel.Image = Global.Datum.My.Resources.Resources.button_cancel
+        Me.btnCancel.Location = New System.Drawing.Point(85, 3)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(76, 24)
+        Me.btnCancel.TabIndex = 1
+        Me.btnCancel.Text = "Cancelar"
+        Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        '
+        'btnOK
+        '
+        Me.btnOK.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.btnOK.Image = Global.Datum.My.Resources.Resources.button_ok
+        Me.btnOK.Location = New System.Drawing.Point(3, 3)
+        Me.btnOK.Name = "btnOK"
+        Me.btnOK.Size = New System.Drawing.Size(76, 24)
+        Me.btnOK.TabIndex = 0
+        Me.btnOK.Text = "Aceptar"
+        Me.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        '
+        'dg
+        '
+        Me.dg.AllowUserToAddRows = False
+        Me.dg.AllowUserToDeleteRows = False
+        Me.dg.AllowUserToOrderColumns = True
+        Me.dg.AllowUserToResizeColumns = False
+        Me.dg.AllowUserToResizeRows = False
+        Me.dg.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dg.Location = New System.Drawing.Point(10, 4)
+        Me.dg.Name = "dg"
+        Me.dg.ReadOnly = True
+        Me.dg.Size = New System.Drawing.Size(941, 188)
+        Me.dg.TabIndex = 86
+        '
+        'grpTotales
+        '
+        Me.grpTotales.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpTotales.Controls.Add(Me.pb)
+        Me.grpTotales.Controls.Add(Me.Label14)
+        Me.grpTotales.Controls.Add(Me.lblProgreso)
+        Me.grpTotales.Location = New System.Drawing.Point(10, 384)
+        Me.grpTotales.Name = "grpTotales"
+        Me.grpTotales.Size = New System.Drawing.Size(963, 63)
+        Me.grpTotales.TabIndex = 152
+        Me.grpTotales.TabStop = False
+        '
+        'pb
+        '
+        Me.pb.Location = New System.Drawing.Point(9, 30)
+        Me.pb.Name = "pb"
+        Me.pb.Size = New System.Drawing.Size(948, 20)
+        Me.pb.TabIndex = 16
+        '
+        'Label14
+        '
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(8, 8)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(72, 20)
+        Me.Label14.TabIndex = 15
+        Me.Label14.Text = "Progreso ..."
+        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblProgreso
+        '
+        Me.lblProgreso.Font = New System.Drawing.Font("Consolas", 6.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblProgreso.Location = New System.Drawing.Point(84, 8)
+        Me.lblProgreso.Name = "lblProgreso"
+        Me.lblProgreso.Size = New System.Drawing.Size(714, 20)
+        Me.lblProgreso.TabIndex = 14
+        Me.lblProgreso.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'btnFecha
+        '
+        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFecha.Location = New System.Drawing.Point(235, 352)
+        Me.btnFecha.Name = "btnFecha"
+        Me.btnFecha.Size = New System.Drawing.Size(25, 20)
+        Me.btnFecha.TabIndex = 155
+        Me.btnFecha.Text = "•••"
+        Me.btnFecha.UseVisualStyleBackColor = True
+        '
+        'txtFechaProceso
+        '
+        Me.txtFechaProceso.Enabled = False
+        Me.txtFechaProceso.Location = New System.Drawing.Point(143, 352)
+        Me.txtFechaProceso.MaxLength = 25
+        Me.txtFechaProceso.Name = "txtFechaProceso"
+        Me.txtFechaProceso.Size = New System.Drawing.Size(86, 20)
+        Me.txtFechaProceso.TabIndex = 154
+        Me.txtFechaProceso.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblFecha
+        '
+        Me.lblFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFecha.Location = New System.Drawing.Point(16, 352)
+        Me.lblFecha.Name = "lblFecha"
+        Me.lblFecha.Size = New System.Drawing.Size(121, 20)
+        Me.lblFecha.TabIndex = 153
+        Me.lblFecha.Text = "Fecha recepción :"
+        Me.lblFecha.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dgMercas
+        '
+        Me.dgMercas.AllowUserToAddRows = False
+        Me.dgMercas.AllowUserToDeleteRows = False
+        Me.dgMercas.AllowUserToOrderColumns = True
+        Me.dgMercas.AllowUserToResizeColumns = False
+        Me.dgMercas.AllowUserToResizeRows = False
+        Me.dgMercas.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgMercas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgMercas.Location = New System.Drawing.Point(11, 198)
+        Me.dgMercas.Name = "dgMercas"
+        Me.dgMercas.ReadOnly = True
+        Me.dgMercas.Size = New System.Drawing.Size(941, 136)
+        Me.dgMercas.TabIndex = 156
+        '
+        'jsComProComprasInventario
+        '
+        Me.AcceptButton = Me.btnOK
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.ClientSize = New System.Drawing.Size(963, 480)
+        Me.ControlBox = False
+        Me.Controls.Add(Me.dgMercas)
+        Me.Controls.Add(Me.btnFecha)
+        Me.Controls.Add(Me.txtFechaProceso)
+        Me.Controls.Add(Me.lblFecha)
+        Me.Controls.Add(Me.grpTotales)
+        Me.Controls.Add(Me.dg)
+        Me.Controls.Add(Me.grpAceptarSalir)
+        Me.Controls.Add(Me.lblInfo)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Name = "jsComProComprasInventario"
+        Me.ShowInTaskbar = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Procesar Compras hacia Inventarios"
+        Me.grpAceptarSalir.ResumeLayout(False)
+        CType(Me.dg, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpTotales.ResumeLayout(False)
+        CType(Me.dgMercas, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
+
+    End Sub
+    Friend WithEvents lblInfo As System.Windows.Forms.Label
+    Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents btnCancel As System.Windows.Forms.Button
+    Friend WithEvents btnOK As System.Windows.Forms.Button
+    Friend WithEvents dg As System.Windows.Forms.DataGridView
+    Friend WithEvents grpTotales As System.Windows.Forms.GroupBox
+    Friend WithEvents pb As System.Windows.Forms.ProgressBar
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents lblProgreso As System.Windows.Forms.Label
+    Friend WithEvents btnFecha As System.Windows.Forms.Button
+    Friend WithEvents txtFechaProceso As System.Windows.Forms.TextBox
+    Friend WithEvents lblFecha As System.Windows.Forms.Label
+    Friend WithEvents dgMercas As System.Windows.Forms.DataGridView
+End Class

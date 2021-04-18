@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsControl" targetNamespace="http://tempuri.org/dsControl.xsd" xmlns:mstns="http://tempuri.org/dsControl.xsd" xmlns="http://tempuri.org/dsControl.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="MySettings" AppSettingsPropertyName="jytsuitemilacaConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="jytsuitemilacaConnectionString (MySettings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Datum.My.MySettings.GlobalReference.Default.jytsuitemilacaConnectionString" Provider="MySql.Data.MySqlClient" />
+          <Connection AppSettingsObjectName="MySettings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (MySettings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Datum.My.MySettings.GlobalReference.Default.ConnectionString" Provider="MySql.Data.MySqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="dtIVATableAdapter" GeneratorDataComponentClassName="dtIVATableAdapter" Name="dtIVA" UserDataComponentName="dtIVATableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ConnectionString (MySettings)" DbObjectName="jytsuitemilaca.jsproivagas" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>select numgas documento, tipoiva, poriva, baseiva, impiva from jsproivagas where 
+ numgas = 'GAS0001548' and
+ id_emp ='01'</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="documento" DataSetColumn="documento" />
+              <Mapping SourceColumn="tipoiva" DataSetColumn="tipoiva" />
+              <Mapping SourceColumn="poriva" DataSetColumn="poriva" />
+              <Mapping SourceColumn="baseiva" DataSetColumn="baseiva" />
+              <Mapping SourceColumn="impiva" DataSetColumn="impiva" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="dtDescuentosTableAdapter" GeneratorDataComponentClassName="dtDescuentosTableAdapter" Name="dtDescuentos" UserDataComponentName="dtDescuentosTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ConnectionString (MySettings)" DbObjectName="jytsuitemilaca.jsvendescot" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>select renglon, descrip, pordes, descuento 
+from jsvendescot 
+where 
+numcot = 'CO00000521' and
+id_emp = '01'</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="renglon" DataSetColumn="renglon" />
+              <Mapping SourceColumn="descrip" DataSetColumn="descrip" />
+              <Mapping SourceColumn="pordes" DataSetColumn="pordes" />
+              <Mapping SourceColumn="descuento" DataSetColumn="descuento" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="dtComentariosTableAdapter" GeneratorDataComponentClassName="dtComentariosTableAdapter" Name="dtComentarios" UserDataComponentName="dtComentariosTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ConnectionString (MySettings)" DbObjectName="jytsuitemilaca.jsconctacom" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>select codigo, comentario 
+from jsconctacom
+where 
+origen  = 'COT' and
+id_emp = '01'</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="codigo" DataSetColumn="codigo" />
+              <Mapping SourceColumn="comentario" DataSetColumn="comentario" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsControl" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsControl" msprop:Generator_UserDSName="dsControl">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dtIVA" msprop:Generator_TableClassName="dtIVADataTable" msprop:Generator_TableVarName="tabledtIVA" msprop:Generator_TablePropName="dtIVA" msprop:Generator_RowDeletingName="dtIVARowDeleting" msprop:Generator_UserTableName="dtIVA" msprop:Generator_RowChangingName="dtIVARowChanging" msprop:Generator_RowEvHandlerName="dtIVARowChangeEventHandler" msprop:Generator_RowDeletedName="dtIVARowDeleted" msprop:Generator_RowEvArgName="dtIVARowChangeEvent" msprop:Generator_RowChangedName="dtIVARowChanged" msprop:Generator_RowClassName="dtIVARow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="documento" msprop:Generator_ColumnVarNameInTable="columndocumento" msprop:Generator_ColumnPropNameInRow="documento" msprop:Generator_ColumnPropNameInTable="documentoColumn" msprop:Generator_UserColumnName="documento">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="tipoiva" msprop:Generator_ColumnVarNameInTable="columntipoiva" msprop:Generator_ColumnPropNameInRow="tipoiva" msprop:Generator_ColumnPropNameInTable="tipoivaColumn" msprop:Generator_UserColumnName="tipoiva">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="poriva" msprop:Generator_ColumnVarNameInTable="columnporiva" msprop:Generator_ColumnPropNameInRow="poriva" msprop:Generator_ColumnPropNameInTable="porivaColumn" msprop:Generator_UserColumnName="poriva" type="xs:double" />
+              <xs:element name="baseiva" msprop:Generator_ColumnVarNameInTable="columnbaseiva" msprop:Generator_ColumnPropNameInRow="baseiva" msprop:Generator_ColumnPropNameInTable="baseivaColumn" msprop:Generator_UserColumnName="baseiva" type="xs:double" />
+              <xs:element name="impiva" msprop:Generator_ColumnVarNameInTable="columnimpiva" msprop:Generator_ColumnPropNameInRow="impiva" msprop:Generator_ColumnPropNameInTable="impivaColumn" msprop:Generator_UserColumnName="impiva" type="xs:double" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtDescuentos" msprop:Generator_TableClassName="dtDescuentosDataTable" msprop:Generator_TableVarName="tabledtDescuentos" msprop:Generator_TablePropName="dtDescuentos" msprop:Generator_RowDeletingName="dtDescuentosRowDeleting" msprop:Generator_UserTableName="dtDescuentos" msprop:Generator_RowChangingName="dtDescuentosRowChanging" msprop:Generator_RowEvHandlerName="dtDescuentosRowChangeEventHandler" msprop:Generator_RowDeletedName="dtDescuentosRowDeleted" msprop:Generator_RowEvArgName="dtDescuentosRowChangeEvent" msprop:Generator_RowChangedName="dtDescuentosRowChanged" msprop:Generator_RowClassName="dtDescuentosRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="renglon" msprop:Generator_ColumnVarNameInTable="columnrenglon" msprop:Generator_ColumnPropNameInRow="renglon" msprop:Generator_ColumnPropNameInTable="renglonColumn" msprop:Generator_UserColumnName="renglon">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="descrip" msprop:Generator_ColumnVarNameInTable="columndescrip" msprop:Generator_ColumnPropNameInRow="descrip" msprop:Generator_ColumnPropNameInTable="descripColumn" msprop:Generator_UserColumnName="descrip">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pordes" msprop:Generator_ColumnVarNameInTable="columnpordes" msprop:Generator_ColumnPropNameInRow="pordes" msprop:Generator_ColumnPropNameInTable="pordesColumn" msprop:Generator_UserColumnName="pordes" type="xs:double" />
+              <xs:element name="descuento" msprop:Generator_ColumnVarNameInTable="columndescuento" msprop:Generator_ColumnPropNameInRow="descuento" msprop:Generator_ColumnPropNameInTable="descuentoColumn" msprop:Generator_UserColumnName="descuento" type="xs:double" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtComentarios" msprop:Generator_TableClassName="dtComentariosDataTable" msprop:Generator_TableVarName="tabledtComentarios" msprop:Generator_TablePropName="dtComentarios" msprop:Generator_RowDeletingName="dtComentariosRowDeleting" msprop:Generator_UserTableName="dtComentarios" msprop:Generator_RowChangingName="dtComentariosRowChanging" msprop:Generator_RowEvHandlerName="dtComentariosRowChangeEventHandler" msprop:Generator_RowDeletedName="dtComentariosRowDeleted" msprop:Generator_RowEvArgName="dtComentariosRowChangeEvent" msprop:Generator_RowChangedName="dtComentariosRowChanged" msprop:Generator_RowClassName="dtComentariosRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="codigo" msprop:Generator_ColumnVarNameInTable="columncodigo" msprop:Generator_ColumnPropNameInRow="codigo" msprop:Generator_ColumnPropNameInTable="codigoColumn" msprop:Generator_UserColumnName="codigo">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="comentario" msprop:Generator_ColumnVarNameInTable="columncomentario" msprop:Generator_ColumnPropNameInRow="comentario" msprop:Generator_ColumnPropNameInTable="comentarioColumn" msprop:Generator_UserColumnName="comentario">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:dtIVA" />
+      <xs:field xpath="mstns:documento" />
+      <xs:field xpath="mstns:tipoiva" />
+    </xs:unique>
+    <xs:unique name="dtDescuentos_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:dtDescuentos" />
+      <xs:field xpath="mstns:renglon" />
+    </xs:unique>
+    <xs:unique name="dtComentarios_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:dtComentarios" />
+      <xs:field xpath="mstns:codigo" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,4 @@
+D:\DESARROLLO\ProyectosDotNet\OldVersion\Datum2\FuncionesBematechDirecta\fBematechDirecta\fBematechDirecta\obj\Debug\fBematechDirecta.csprojAssemblyReference.cache
+D:\DESARROLLO\ProyectosDotNet\OldVersion\Datum2\FuncionesBematechDirecta\fBematechDirecta\fBematechDirecta\obj\Debug\fBematechDirecta.csproj.ResolveComReference.cache
+D:\DESARROLLO\ProyectosDotNet\Datum\FuncionesBematechDirecta\fBematechDirecta\fBematechDirecta\obj\Debug\fBematechDirecta.csprojAssemblyReference.cache
+D:\DESARROLLO\ProyectosDotNet\Datum\FuncionesBematechDirecta\fBematechDirecta\fBematechDirecta\obj\Debug\fBematechDirecta.csproj.ResolveComReference.cache

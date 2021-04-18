@@ -1,0 +1,943 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{46C2A044-AA80-467F-AFB1-3C56DFD3D4CA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>POS_Datum.My.MyApplication</StartupObject>
+    <RootNamespace>POS_Datum</RootNamespace>
+    <AssemblyName>POS_Datum</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>Off</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ManifestCertificateThumbprint>08E8D78D651FA33DEBB29B866513D3D2812461C0</ManifestCertificateThumbprint>
+    <ManifestKeyFile>POS_Datum_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <TargetZone>LocalIntranet</TargetZone>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+    <SignManifests>false</SignManifests>
+    <ApplicationIcon>LOGO.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>C:\Users\victorious\Documents\Visual Studio 2010\Projects\POS_DATUM\publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>23</ApplicationRevision>
+    <ApplicationVersion>2.8.1.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>POS_Datum.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>POS_Datum.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="C1.Win.C1Command.2">
+      <HintPath>..\..\..\ComponentOne\C1.Win.C1Command.2.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.C1Input.2">
+      <HintPath>..\..\..\ComponentOne\C1.Win.C1Input.2.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.C1Ribbon.2, Version=2.0.20082.94, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL">
+      <HintPath>..\..\..\ComponentOne\C1.Win.C1Ribbon.2.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.C1SuperTooltip.2">
+      <HintPath>..\..\..\ComponentOne\C1.Win.C1SuperTooltip.2.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine">
+      <HintPath>..\..\..\..\..\archivos de programa\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource">
+      <HintPath>..\..\..\..\..\archivos de programa\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared">
+      <HintPath>..\..\..\..\..\archivos de programa\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Windows.Forms">
+      <HintPath>..\..\..\..\..\archivos de programa\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="FP_AclasBixolon">
+      <HintPath>..\..\..\ReportesFiscales\ReportesAclasBixolon\FP_AclasBixolon\FP_AclasBixolon\bin\Debug\FP_AclasBixolon.dll</HintPath>
+    </Reference>
+    <Reference Include="fTransport">
+      <HintPath>..\..\..\Datum\FuncionesTransportables\fTransport\fTransport\bin\Debug\fTransport.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework">
+      <HintPath>..\..\metroframework-modern-ui-master\metroframework-modern-ui-master\MetroFramework\bin\Debug\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design">
+      <HintPath>..\..\metroframework-modern-ui-master\metroframework-modern-ui-master\MetroFramework.Demo\bin\Debug\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts">
+      <HintPath>..\..\metroframework-modern-ui-master\metroframework-modern-ui-master\MetroFramework.Demo\bin\Debug\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.18.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Packages\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="RawPrinterHeper">
+      <HintPath>..\..\..\RawPrinterHelper\RawPrinterHeper\RawPrinterHeper\bin\Debug\RawPrinterHeper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.Ribbon">
+      <HintPath>..\..\..\Ribbon_5.0_2018-03-26\Net 4.5\System.Windows.Forms.Ribbon.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TfhkaNet, Version=1.7.1.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\TFHKAnet\TfhkaNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="fTransport" />
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcCausasCreditos.designer.vb">
+      <Link>Formularios\jsControlArcCausasCreditos.designer.vb</Link>
+      <DependentUpon>jsControlArcCausasCreditos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcCausasCreditos.vb">
+      <Link>Formularios\jsControlArcCausasCreditos.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcCausasCreditosMovimientos.designer.vb">
+      <Link>Formularios\jsControlArcCausasCreditosMovimientos.designer.vb</Link>
+      <DependentUpon>jsControlArcCausasCreditosMovimientos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcCausasCreditosMovimientos.vb">
+      <Link>Formularios\jsControlArcCausasCreditosMovimientos.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcIVA.designer.vb">
+      <Link>Formularios\jsControlArcIVA.designer.vb</Link>
+      <DependentUpon>jsControlArcIVA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcIVA.vb">
+      <Link>Formularios\jsControlArcIVA.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcIVAMovimientos.designer.vb">
+      <Link>Formularios\jsControlArcIVAMovimientos.designer.vb</Link>
+      <DependentUpon>jsControlArcIVAMovimientos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcIVAMovimientos.vb">
+      <Link>Formularios\jsControlArcIVAMovimientos.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimple.designer.vb">
+      <Link>Formularios\jsControlArcTablaSimple.designer.vb</Link>
+      <DependentUpon>jsControlArcTablaSimple.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimple.vb">
+      <Link>Formularios\jsControlArcTablaSimple.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimpleMovimientos.designer.vb">
+      <Link>Formularios\jsControlArcTablaSimpleMovimientos.designer.vb</Link>
+      <DependentUpon>jsControlArcTablaSimpleMovimientos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimpleMovimientos.vb">
+      <Link>Formularios\jsControlArcTablaSimpleMovimientos.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimpleSeleccion.designer.vb">
+      <Link>Formularios\jsControlArcTablaSimpleSeleccion.designer.vb</Link>
+      <DependentUpon>jsControlArcTablaSimpleSeleccion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimpleSeleccion.vb">
+      <Link>Formularios\jsControlArcTablaSimpleSeleccion.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTarjetas.designer.vb">
+      <Link>Formularios\jsControlArcTarjetas.designer.vb</Link>
+      <DependentUpon>jsControlArcTarjetas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTarjetas.vb">
+      <Link>Formularios\jsControlArcTarjetas.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTarjetasMovimientos.designer.vb">
+      <Link>Formularios\jsControlArcTarjetasMovimientos.designer.vb</Link>
+      <DependentUpon>jsControlArcTarjetasMovimientos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTarjetasMovimientos.vb">
+      <Link>Formularios\jsControlArcTarjetasMovimientos.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\FechaSistemaPlus.designer.vb">
+      <Link>Formularios\FechaSistemaPlus.designer.vb</Link>
+      <DependentUpon>FechaSistemaPlus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\FechaSistemaPlus.vb">
+      <Link>Formularios\FechaSistemaPlus.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\FechaSistema.designer.vb">
+      <Link>Formularios\FechaSistema.designer.vb</Link>
+      <DependentUpon>FechaSistema.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\FechaSistema.vb">
+      <Link>Formularios\FechaSistema.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\frmBuscar.designer.vb">
+      <Link>Formularios\frmBuscar.designer.vb</Link>
+      <DependentUpon>frmBuscar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\frmBuscar.vb">
+      <Link>Formularios\frmBuscar.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\frmEspere.Designer.vb">
+      <Link>Formularios\frmEspere.Designer.vb</Link>
+      <DependentUpon>frmEspere.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\frmEspere.vb">
+      <Link>Formularios\frmEspere.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenComentariosRenglones.designer.vb">
+      <Link>Formularios\jsGenComentariosRenglones.designer.vb</Link>
+      <DependentUpon>jsGenComentariosRenglones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenComentariosRenglones.vb">
+      <Link>Formularios\jsGenComentariosRenglones.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenConsultaRIF.designer.vb">
+      <Link>Formularios\jsGenConsultaRIF.designer.vb</Link>
+      <DependentUpon>jsGenConsultaRIF.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenConsultaRIF.vb">
+      <Link>Formularios\jsGenConsultaRIF.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenDescuentosComprasRenglon.designer.vb">
+      <Link>Formularios\jsGenDescuentosComprasRenglon.designer.vb</Link>
+      <DependentUpon>jsGenDescuentosComprasRenglon.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenDescuentosComprasRenglon.vb">
+      <Link>Formularios\jsGenDescuentosComprasRenglon.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenRenglonesMovimientos.designer.vb">
+      <Link>Formularios\jsGenRenglonesMovimientos.designer.vb</Link>
+      <DependentUpon>jsGenRenglonesMovimientos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenRenglonesMovimientos.vb">
+      <Link>Formularios\jsGenRenglonesMovimientos.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcListaCostosPreciosNormal.designer.vb">
+      <Link>Formularios\jsMerArcListaCostosPreciosNormal.designer.vb</Link>
+      <DependentUpon>jsMerArcListaCostosPreciosNormal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcListaCostosPreciosNormal.vb">
+      <Link>Formularios\jsMerArcListaCostosPreciosNormal.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcListadoItemsEnCompras.designer.vb">
+      <Link>Formularios\jsMerArcListadoItemsEnCompras.designer.vb</Link>
+      <DependentUpon>jsMerArcListadoItemsEnCompras.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcListadoItemsEnCompras.vb">
+      <Link>Formularios\jsMerArcListadoItemsEnCompras.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcListadoItemsEnFacturas.designer.vb">
+      <Link>Formularios\jsMerArcListadoItemsEnFacturas.designer.vb</Link>
+      <DependentUpon>jsMerArcListadoItemsEnFacturas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcListadoItemsEnFacturas.vb">
+      <Link>Formularios\jsMerArcListadoItemsEnFacturas.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcLotesMercancia.designer.vb">
+      <Link>Formularios\jsMerArcLotesMercancia.designer.vb</Link>
+      <DependentUpon>jsMerArcLotesMercancia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcLotesMercancia.vb">
+      <Link>Formularios\jsMerArcLotesMercancia.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcLotesMercanciaMovimientos.designer.vb">
+      <Link>Formularios\jsMerArcLotesMercanciaMovimientos.designer.vb</Link>
+      <DependentUpon>jsMerArcLotesMercanciaMovimientos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcLotesMercanciaMovimientos.vb">
+      <Link>Formularios\jsMerArcLotesMercanciaMovimientos.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcServiciosA.designer.vb">
+      <Link>Formularios\jsMerArcServiciosA.designer.vb</Link>
+      <DependentUpon>jsMerArcServiciosA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcServiciosA.vb">
+      <Link>Formularios\jsMerArcServiciosA.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcServiciosMovimientos.designer.vb">
+      <Link>Formularios\jsMerArcServiciosMovimientos.designer.vb</Link>
+      <DependentUpon>jsMerArcServiciosMovimientos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcServiciosMovimientos.vb">
+      <Link>Formularios\jsMerArcServiciosMovimientos.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\ConsultasGenerales.vb">
+      <Link>Modulos\ConsultasGenerales.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\FuncionesBancos.vb">
+      <Link>Modulos\FuncionesBancos.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\FuncionesControl.vb">
+      <Link>Modulos\FuncionesControl.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\FuncionesMercancias.vb">
+      <Link>Modulos\FuncionesMercancias.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\FuncionesReportesGraficos.vb">
+      <Link>Modulos\FuncionesReportesGraficos.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\FuncionesReportesRAW.vb">
+      <Link>Modulos\FuncionesReportesRAW.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\FuncionesTransportables.vb">
+      <Link>Modulos\FuncionesTransportables.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\FuncionesVentas.vb">
+      <Link>Modulos\FuncionesVentas.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\jytsistema.vb">
+      <Link>Modulos\jytsistema.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\MyPrinter.vb">
+      <Link>Modulos\MyPrinter.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\TablaBaseDatos.vb">
+      <Link>Modulos\TablaBaseDatos.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\TablasBancos.vb">
+      <Link>Modulos\TablasBancos.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\TablasCompras.vb">
+      <Link>Modulos\TablasCompras.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\TablasControl.vb">
+      <Link>Modulos\TablasControl.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\TablasMercancias.vb">
+      <Link>Modulos\TablasMercancias.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\TablasPuntoDeVenta.vb">
+      <Link>Modulos\TablasPuntoDeVenta.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\TablasVentas.vb">
+      <Link>Modulos\TablasVentas.vb</Link>
+    </Compile>
+    <Compile Include="Datasets\dsPOS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPOS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\dtLogin.designer.vb">
+      <DependentUpon>dtLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\dtLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\dtSupervisor.designer.vb">
+      <DependentUpon>dtSupervisor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\dtSupervisor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmServidor.designer.vb">
+      <DependentUpon>frmServidor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmServidor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\jsGenFormasPagoMovimientoPlus.designer.vb">
+      <DependentUpon>jsGenFormasPagoMovimientoPlus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\jsGenFormasPagoMovimientoPlus.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\jsPOSFacturasXConformar.designer.vb">
+      <DependentUpon>jsPOSFacturasXConformar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\jsPOSFacturasXConformar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\jsPOSRetirosEfectivo.designer.vb">
+      <DependentUpon>jsPOSRetirosEfectivo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\jsPOSRetirosEfectivo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\jsPOSRetencionIVA.designer.vb">
+      <DependentUpon>jsPOSRetencionIVA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\jsPOSRetencionIVA.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\jsPOSAbono.designer.vb">
+      <DependentUpon>jsPOSAbono.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\jsPOSAbono.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\jsPOSRecambioMercancia.designer.vb">
+      <DependentUpon>jsPOSRecambioMercancia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\jsPOSRecambioMercancia.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\jsPOSProConfigurarAclas.designer.vb">
+      <DependentUpon>jsPOSProConfigurarAclas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\jsPOSProConfigurarAclas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\jsPOSProCierre.designer.vb">
+      <DependentUpon>jsPOSProCierre.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\jsPOSProCierre.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\jsGenFormasPagoMovimiento.designer.vb">
+      <DependentUpon>jsGenFormasPagoMovimiento.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\jsGenFormasPagoMovimiento.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\jsGenFormasPago.Designer.vb">
+      <DependentUpon>jsGenFormasPago.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\jsGenFormasPago.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\jsPOSRepParametros.designer.vb">
+      <DependentUpon>jsPOSRepParametros.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\jsPOSRepParametros.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\jsPOSFacturaDevolucion.designer.vb">
+      <DependentUpon>jsPOSFacturaDevolucion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\jsPOSFacturaDevolucion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\scrMainPlus.designer.vb">
+      <DependentUpon>scrMainPlus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\scrMainPlus.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\scrMain.designer.vb">
+      <DependentUpon>scrMain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\scrMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modulos\ConsultasPuntoDeVenta.vb" />
+    <Compile Include="Modulos\FuncionesImpresionPnP.vb" />
+    <Compile Include="Modulos\FuncionesImpresionFiscal.vb" />
+    <Compile Include="Modulos\FuncionesImpresionAclas.vb" />
+    <Compile Include="Modulos\FuncionesImpresionBematech.vb" />
+    <Compile Include="Modulos\FuncionesPuntosDeVenta.vb" />
+    <Compile Include="Modulos\Funciones_Solo_POS.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="MyExtendedBrowserControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Progress_Bar.vb" />
+    <Compile Include="Reportes\frmViewer.designer.vb">
+      <DependentUpon>frmViewer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\frmViewer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReportesPOS\rptReporteZ.vb">
+      <DependentUpon>rptReporteZ.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\ReportesPOS\rptReporteX.vb">
+      <DependentUpon>rptReporteX.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\rpt.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcCausasCreditos.resx">
+      <Link>Formularios\jsControlArcCausasCreditos.resx</Link>
+      <DependentUpon>jsControlArcCausasCreditos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcCausasCreditosMovimientos.resx">
+      <Link>Formularios\jsControlArcCausasCreditosMovimientos.resx</Link>
+      <DependentUpon>jsControlArcCausasCreditosMovimientos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcIVA.resx">
+      <Link>Formularios\jsControlArcIVA.vb</Link>
+      <DependentUpon>jsControlArcIVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcIVAMovimientos.resx">
+      <Link>Formularios\jsControlArcIVAMovimientos.resx</Link>
+      <DependentUpon>jsControlArcIVAMovimientos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimple.resx">
+      <Link>Formularios\jsControlArcTablaSimple.resx</Link>
+      <DependentUpon>jsControlArcTablaSimple.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimpleMovimientos.resx">
+      <Link>Formularios\jsControlArcTablaSimpleMovimientos.resx</Link>
+      <DependentUpon>jsControlArcTablaSimpleMovimientos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimpleSeleccion.resx">
+      <Link>Formularios\jsControlArcTablaSimpleSeleccion.resx</Link>
+      <DependentUpon>jsControlArcTablaSimpleSeleccion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTarjetas.resx">
+      <Link>Formularios\jsControlArcTarjetas.resx</Link>
+      <DependentUpon>jsControlArcTarjetas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTarjetasMovimientos.resx">
+      <Link>Formularios\jsControlArcTarjetasMovimientos.resx</Link>
+      <DependentUpon>jsControlArcTarjetasMovimientos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\FechaSistemaPlus.resx">
+      <Link>Formularios\FechaSistemaPlus.resx</Link>
+      <DependentUpon>FechaSistemaPlus.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\FechaSistema.resx">
+      <Link>Formularios\FechaSistema.resx</Link>
+      <DependentUpon>FechaSistema.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\frmBuscar.resx">
+      <Link>Formularios\frmBuscar.resx</Link>
+      <DependentUpon>frmBuscar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\frmEspere.resx">
+      <Link>Formularios\frmEspere.resx</Link>
+      <DependentUpon>frmEspere.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenComentariosRenglones.resx">
+      <Link>Formularios\jsGenComentariosRenglones.resx</Link>
+      <DependentUpon>jsGenComentariosRenglones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenConsultaRIF.resx">
+      <Link>Formularios\jsGenConsultaRIF.resx</Link>
+      <DependentUpon>jsGenConsultaRIF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenDescuentosComprasRenglon.resx">
+      <Link>Formularios\jsGenDescuentosComprasRenglon.resx</Link>
+      <DependentUpon>jsGenDescuentosComprasRenglon.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenRenglonesMovimientos.resx">
+      <Link>Formularios\jsGenRenglonesMovimientos.resx</Link>
+      <DependentUpon>jsGenRenglonesMovimientos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcListaCostosPreciosNormal.resx">
+      <Link>Formularios\jsMerArcListaCostosPreciosNormal.resx</Link>
+      <DependentUpon>jsMerArcListaCostosPreciosNormal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcListadoItemsEnCompras.resx">
+      <Link>Formularios\jsMerArcListadoItemsEnCompras.resx</Link>
+      <DependentUpon>jsMerArcListadoItemsEnCompras.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcListadoItemsEnFacturas.resx">
+      <Link>Formularios\jsMerArcListadoItemsEnFacturas.resx</Link>
+      <DependentUpon>jsMerArcListadoItemsEnFacturas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcLotesMercancia.resx">
+      <Link>Formularios\jsMerArcLotesMercancia.resx</Link>
+      <DependentUpon>jsMerArcLotesMercancia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcLotesMercanciaMovimientos.resx">
+      <Link>Formularios\jsMerArcLotesMercanciaMovimientos.resx</Link>
+      <DependentUpon>jsMerArcLotesMercanciaMovimientos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcServiciosA.resx">
+      <Link>Formularios\jsMerArcServiciosA.resx</Link>
+      <DependentUpon>jsMerArcServiciosA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcServiciosMovimientos.resx">
+      <Link>Formularios\jsMerArcServiciosMovimientos.resx</Link>
+      <DependentUpon>jsMerArcServiciosMovimientos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\dtLogin.resx">
+      <DependentUpon>dtLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\dtSupervisor.resx">
+      <DependentUpon>dtSupervisor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmServidor.resx">
+      <DependentUpon>frmServidor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\jsGenFormasPagoMovimientoPlus.resx">
+      <DependentUpon>jsGenFormasPagoMovimientoPlus.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\jsPOSFacturasXConformar.resx">
+      <DependentUpon>jsPOSFacturasXConformar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\jsPOSRetirosEfectivo.resx">
+      <DependentUpon>jsPOSRetirosEfectivo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\jsPOSRetencionIVA.resx">
+      <DependentUpon>jsPOSRetencionIVA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\jsPOSAbono.resx">
+      <DependentUpon>jsPOSAbono.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\jsPOSRecambioMercancia.resx">
+      <DependentUpon>jsPOSRecambioMercancia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\jsPOSProConfigurarAclas.resx">
+      <DependentUpon>jsPOSProConfigurarAclas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\jsPOSProCierre.resx">
+      <DependentUpon>jsPOSProCierre.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\jsGenFormasPagoMovimiento.resx">
+      <DependentUpon>jsGenFormasPagoMovimiento.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\jsGenFormasPago.resx">
+      <DependentUpon>jsGenFormasPago.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\jsPOSRepParametros.resx">
+      <DependentUpon>jsPOSRepParametros.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\jsPOSFacturaDevolucion.resx">
+      <DependentUpon>jsPOSFacturaDevolucion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\scrMainPlus.resx">
+      <DependentUpon>scrMainPlus.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\scrMain.resx">
+      <DependentUpon>scrMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\licenses.licx" />
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\frmViewer.resx">
+      <DependentUpon>frmViewer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReportesPOS\rptReporteZ.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptReporteZ.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReportesPOS\rptReporteX.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptReporteX.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\rpt.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt.vb</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="Datasets\dsPOS.xsc">
+      <DependentUpon>dsPOS.xsd</DependentUpon>
+    </None>
+    <None Include="Datasets\dsPOS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPOS.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Datasets\dsPOS.xss">
+      <DependentUpon>dsPOS.xsd</DependentUpon>
+    </None>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_cancel.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_ok.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Apagar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tab_remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\colors.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Configurar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\35_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Palette.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circle_green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Actualizar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\banda-amarilla.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\banda-azul.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mercancias.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Subir_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bajar_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Modificar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Agregar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Eliminar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Primero.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Anterior.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Anterior1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Siguiente.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ultimo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Buscar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Oferta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Seleccionar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fondo-azul.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BolivarFuerte100.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\DepositarEfectivo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3924545A-F8E2-475A-B1A4-05175BC41E50}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reiniciar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\app.manifest" />
+    <None Include="POS_Datum_TemporaryKey.pfx" />
+    <None Include="Resources\Columnas1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LOGO.ico" />
+    <None Include="Resources\ret_iva.png" />
+    <None Include="Resources\ControlDeEfectivo.png" />
+    <None Include="Resources\Plus.png" />
+    <None Include="Resources\Dollar2.png" />
+    <None Include="Resources\Minus.png" />
+    <None Include="Resources\Arrow2 - Up.png" />
+    <None Include="Resources\Arrow2 - Down.png" />
+    <None Include="Resources\Minus1.png" />
+    <None Include="Resources\Dollar21.png" />
+    <None Include="Resources\Plus1.png" />
+    <None Include="Resources\Printer.png" />
+    <None Include="Resources\Folder.png" />
+    <None Include="Resources\Folder Up.png" />
+    <None Include="Resources\Loop.png" />
+    <None Include="Resources\Document Spreadsheet.png" />
+    <None Include="Resources\Arrow - UpRight.png" />
+    <None Include="Resources\Arrow - DownRight.png" />
+    <None Include="Resources\Security.png" />
+    <None Include="Resources\Cart.png" />
+    <None Include="Resources\Gear.png" />
+    <None Include="Resources\Char - Star.png" />
+    <None Include="Resources\Pen.png" />
+    <None Include="Resources\Cancel.png" />
+    <None Include="Resources\User.png" />
+    <None Include="Resources\Shutdown.png" />
+    <Content Include="Resources\wait30trans.gif" />
+    <None Include="Resources\Datum_Yellow.png" />
+    <None Include="Resources\i_Error.png" />
+    <None Include="Resources\i_Ayuda.png" />
+    <None Include="Resources\i_Advertencia.png" />
+    <None Include="Resources\i_Info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

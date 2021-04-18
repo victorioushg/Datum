@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{815286AB-3CDB-4030-B073-D62815601FCE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ReportesDeBancos</RootNamespace>
+    <AssemblyName>ReportesDeBancos</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>ReportesDeBancos.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>ReportesDeBancos.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanBancosFicha.vb">
+      <Link>rptBanBancosFicha.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanBancosFicha.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanBancosIDB.vb">
+      <Link>rptBanBancosIDB.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanBancosIDB.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanBancosIDBMes.vb">
+      <Link>rptBanBancosIDBMes.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanBancosIDBMes.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanBancosListado.vb">
+      <Link>rptBanBancosListado.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanBancosListado.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanBancosMovimientos.vb">
+      <Link>rptBanBancosMovimientos.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanBancosMovimientos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanCajaCierre.vb">
+      <Link>rptBanCajaCierre.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanCajaCierre.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanCajaMovimientos.vb">
+      <Link>rptBanCajaMovimientos.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanCajaMovimientos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanCajaNoDepositada.vb">
+      <Link>rptBanCajaNoDepositada.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanCajaNoDepositada.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanChequesDevueltos.vb">
+      <Link>rptBanChequesDevueltos.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanChequesDevueltos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanComprobanteEgreso.vb">
+      <Link>rptBanComprobanteEgreso.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanComprobanteEgreso.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanComprobanteEgresoContable.vb">
+      <Link>rptBanComprobanteEgresoContable.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanComprobanteEgresoContable.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanConciliacionBancaria.vb">
+      <Link>rptBanConciliacionBancaria.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanConciliacionBancaria.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanDepositos.vb">
+      <Link>rptBanDepositos.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanDepositos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanEstadodeCuenta.vb">
+      <Link>rptBanEstadodeCuenta.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanEstadodeCuenta.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanFormatoCheque.vb">
+      <Link>rptBanFormatoCheque.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanFormatoCheque.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanListadoBancos_Disponibilidad.vb">
+      <Link>rptBanListadoBancos_Disponibilidad.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanListadoBancos_Disponibilidad.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanNotaChequeDevuelto.vb">
+      <Link>rptBanNotaChequeDevuelto.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanNotaChequeDevuelto.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanNotaTicketDevuelto.vb">
+      <Link>rptBanNotaTicketDevuelto.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanNotaTicketDevuelto.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanRemesasCestaTicket.vb">
+      <Link>rptBanRemesasCestaTicket.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanRemesasCestaTicket.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanReposisionSaldoCaja.vb">
+      <Link>rptBanReposisionSaldoCaja.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanReposisionSaldoCaja.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanSaldosPorMes.vb">
+      <Link>rptBanSaldosPorMes.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanSaldosPorMes.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanTransferencia.vb">
+      <Link>rptBanTransferencia.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBanTransferencia.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanBancosFicha.rpt">
+      <Link>rptBanBancosFicha.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanBancosFicha.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanBancosIDB.rpt">
+      <Link>rptBanBancosIDB.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanBancosIDB.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanBancosIDBMes.rpt">
+      <Link>rptBanBancosIDBMes.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanBancosIDBMes.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanBancosListado.rpt">
+      <Link>rptBanBancosListado.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanBancosListado.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanBancosMovimientos.rpt">
+      <Link>rptBanBancosMovimientos.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanBancosMovimientos.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanCajaCierre.rpt">
+      <Link>rptBanCajaCierre.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanCajaCierre.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanCajaMovimientos.rpt">
+      <Link>rptBanCajaMovimientos.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanCajaMovimientos.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanCajaNoDepositada.rpt">
+      <Link>rptBanCajaNoDepositada.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanCajaNoDepositada.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanChequesDevueltos.rpt">
+      <Link>rptBanChequesDevueltos.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanChequesDevueltos.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanComprobanteEgreso.rpt">
+      <Link>rptBanComprobanteEgreso.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanComprobanteEgreso.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanComprobanteEgresoContable.rpt">
+      <Link>rptBanComprobanteEgresoContable.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanComprobanteEgresoContable.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanConciliacionBancaria.rpt">
+      <Link>rptBanConciliacionBancaria.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanConciliacionBancaria.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanDepositos.rpt">
+      <Link>rptBanDepositos.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanDepositos.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanEstadodeCuenta.rpt">
+      <Link>rptBanEstadodeCuenta.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanEstadodeCuenta.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanFormatoCheque.rpt">
+      <Link>rptBanFormatoCheque.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanFormatoCheque.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanListadoBancos_Disponibilidad.rpt">
+      <Link>rptBanListadoBancos_Disponibilidad.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanListadoBancos_Disponibilidad.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanNotaChequeDevuelto.rpt">
+      <Link>rptBanNotaChequeDevuelto.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanNotaChequeDevuelto.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanNotaTicketDevuelto.rpt">
+      <Link>rptBanNotaTicketDevuelto.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanNotaTicketDevuelto.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanRemesasCestaTicket.rpt">
+      <Link>rptBanRemesasCestaTicket.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanRemesasCestaTicket.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanReposisionSaldoCaja.rpt">
+      <Link>rptBanReposisionSaldoCaja.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanReposisionSaldoCaja.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanSaldosPorMes.rpt">
+      <Link>rptBanSaldosPorMes.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanSaldosPorMes.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesBancos\rptBanTransferencia.rpt">
+      <Link>rptBanTransferencia.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBanTransferencia.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

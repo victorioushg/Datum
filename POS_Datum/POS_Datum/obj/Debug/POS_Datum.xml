@@ -1,0 +1,510 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+POS_Datum
+</name>
+</assembly>
+<members>
+<member name="T:POS_Datum.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources._Loop">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Abajo">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Abajo_1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Actualizar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Agregar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Anterior">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Anterior1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Apagar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Arriba">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Arriba_1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Arrow___DownRight">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Arrow___UpRight">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Arrow2___Down">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Arrow2___Up">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Bajar_1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Bajar_2">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.banda_amarilla">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.banda_azul">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.BolivarFuerte100">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Buscar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.button_cancel">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.button_ok">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Cancel">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Cart">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Char___Star">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.circle_green">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.colores">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Columnas">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Configurar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.ControlDeEfectivo">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Datum_Yellow">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.DepositarEfectivo">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Document_Spreadsheet">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Dollar2">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Dollar21">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Elimina_renglon">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Eliminar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Folder">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Folder_Up">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.fondoazul">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Gear">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.i_Advertencia">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.i_Ayuda">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.i_Error">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.i_Info">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Imprimir">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Mas">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Menos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Mercancias">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Minus">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Minus1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Modificar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.multiplicador">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Oferta">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Pagar1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Pen">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Plus">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Plus1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Primero">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Printer">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Recambios">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.reiniciar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.ret_iva">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Security">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Seleccionar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Shutdown">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Siguiente">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Subir_1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Subir_2">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Totales">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Totalizar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.Ultimo">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.User">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:POS_Datum.My.Resources.Resources.wait30trans">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="M:POS_Datum.ConsultasGenerales.SeleccionGENExistenciasAFecha(System.DateTime,System.String,System.String,System.String,System.String)">
+ <summary>
+ Devuelve las existencias de todas las mercancías a una fecha deseada
+ </summary>
+ <param name="FechaHasta">Fecha para la cual deseas ver existencia</param>
+ <param name="FiltroAlmacen">Cadena ej. "b.Almacen in ('00001') and " (letra debe ser b.) "</param>
+ <param name="CampoUnidadDeseado">Campo de la UNIDAD en BD que se desea ver la existencia (letra debe ser b.)"</param>
+ <remarks></remarks>
+</member>
+<member name="T:POS_Datum.dsPOS">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:POS_Datum.dsPOS.dtReporteXDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:POS_Datum.dsPOS.dtReporteXRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:POS_Datum.dsPOS.dtReporteXRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:POS_Datum.dsPOSTableAdapters.dtReporteXTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:POS_Datum.dsPOSTableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:POS_Datum.dsPOSTableAdapters.TableAdapterManager.UpdateUpdatedRows(POS_Datum.dsPOS,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:POS_Datum.dsPOSTableAdapters.TableAdapterManager.UpdateInsertedRows(POS_Datum.dsPOS,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:POS_Datum.dsPOSTableAdapters.TableAdapterManager.UpdateDeletedRows(POS_Datum.dsPOS,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:POS_Datum.dsPOSTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:POS_Datum.dsPOSTableAdapters.TableAdapterManager.UpdateAll(POS_Datum.dsPOS)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:POS_Datum.dsPOSTableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:POS_Datum.dsPOSTableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="P:POS_Datum.Progress_Bar.WindowTitle">
+ <summary>
+ TITULO DE LA VENTANA DEL PROGRESS BAR.
+ </summary>
+</member>
+<member name="P:POS_Datum.Progress_Bar.OverallProgressValue">
+ <summary>
+ El valor porcentaje para el progreso actual de la tarea.
+ </summary>
+</member>
+<member name="P:POS_Datum.Progress_Bar.OverallProgressText">
+ <summary>
+ Texto descriptivo para el progreso actual de la tarea.
+ </summary>
+</member>
+<member name="P:POS_Datum.Progress_Bar.PartialProgressValue">
+ <summary>
+ Valor porcentual de progreso parcial de la tarea. Si es omitido, el valor parcial del progress bar no es mostrado.
+ </summary>
+</member>
+<member name="P:POS_Datum.Progress_Bar.PartialProgressText">
+ <summary>
+ Texto descriptivo del progreso parcial de la tarea.
+ </summary>
+</member>
+<member name="P:POS_Datum.Progress_Bar.CallerThreadSet">
+ <summary>
+ Optional. El hilo que llama esta clase/hilo. Use si desea que la ventana de la barra de progreso  se cierre cuando el hilo que hace el llmado termine.
+ </summary>
+</member>
+<member name="P:POS_Datum.Progress_Bar.CallerThreadGet">
+ <summary>
+ El Hilo que llama esta clase/hilo.
+ </summary>
+</member>
+<member name="P:POS_Datum.Progress_Bar.TimeOut">
+ <summary>
+ Optional, defecto = 60. Tiempo en segundos sin recibir actualizaion de progreso. Se le pregunta al usuario si desea o no cerrar la ventana.
+ </summary>
+</member>
+</members>
+</doc>

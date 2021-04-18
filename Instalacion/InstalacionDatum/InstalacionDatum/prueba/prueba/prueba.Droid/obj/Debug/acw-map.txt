@@ -1,0 +1,4 @@
+prueba.Droid.MainActivity, prueba.Droid;md5e207b08bd653baaadb2c5273cc71326a.MainActivity
+prueba.Droid.MainActivity, prueba.Droid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5e207b08bd653baaadb2c5273cc71326a.MainActivity
+prueba.Droid.MainActivity;md5e207b08bd653baaadb2c5273cc71326a.MainActivity
+prueba.droid.MainActivity;md5e207b08bd653baaadb2c5273cc71326a.MainActivity

@@ -1,0 +1,886 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{B80EEA39-9775-4286-B324-E3A6DC2FD977}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ReportesDeMercancias</RootNamespace>
+    <AssemblyName>ReportesDeMercancias</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>ReportesDeMercancias.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>ReportesDeMercancias.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaBarra.vb">
+      <Link>rptMercanciaBarra.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaBarra.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaBarraPrecio.vb">
+      <Link>rptMercanciaBarraPrecio.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaBarraPrecio.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaCatalogo1G.vb">
+      <Link>rptMercanciaCatalogo1G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaCatalogo1G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaCatalogo2G.vb">
+      <Link>rptMercanciaCatalogo2G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaCatalogo2G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaCatalogo3G.vb">
+      <Link>rptMercanciaCatalogo3G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaCatalogo3G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaCatalogo4G.vb">
+      <Link>rptMercanciaCatalogo4G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaCatalogo4G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaCatalogoSG.vb">
+      <Link>rptMercanciaCatalogoSG.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaCatalogoSG.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaComprasMer0G.vb">
+      <Link>rptMercanciaComprasMer0G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaComprasMer0G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaComprasMer1G.vb">
+      <Link>rptMercanciaComprasMer1G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaComprasMer1G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaComprasMer2G.vb">
+      <Link>rptMercanciaComprasMer2G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaComprasMer2G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaComprasMer3G.vb">
+      <Link>rptMercanciaComprasMer3G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaComprasMer3G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaConteo.vb">
+      <Link>rptMercanciaConteo.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaConteo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaEquivalencias1G.vb">
+      <Link>rptMercanciaEquivalencias1G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaEquivalencias1G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaEquivalencias2G.vb">
+      <Link>rptMercanciaEquivalencias2G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaEquivalencias2G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaEquivalencias3G.vb">
+      <Link>rptMercanciaEquivalencias3G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaEquivalencias3G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaEquivalencias4G.vb">
+      <Link>rptMercanciaEquivalencias4G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaEquivalencias4G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaEquivalenciasSG.vb">
+      <Link>rptMercanciaEquivalenciasSG.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaEquivalenciasSG.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaExistencias1G.vb">
+      <Link>rptMercanciaExistencias1G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaExistencias1G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaExistencias2G.vb">
+      <Link>rptMercanciaExistencias2G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaExistencias2G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaExistencias3G.vb">
+      <Link>rptMercanciaExistencias3G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaExistencias3G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaExistencias4G.vb">
+      <Link>rptMercanciaExistencias4G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaExistencias4G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaExistenciasSG.vb">
+      <Link>rptMercanciaExistenciasSG.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaExistenciasSG.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaFicha.vb">
+      <Link>rptMercanciaFicha.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaFicha.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaIventarioLegalSG.vb">
+      <Link>rptMercanciaIventarioLegalSG.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaIventarioLegalSG.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaJerarquias.vb">
+      <Link>rptMercanciaJerarquias.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaJerarquias.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaMovimiento1G.vb">
+      <Link>rptMercanciaMovimiento1G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaMovimiento1G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaMovimiento2G.vb">
+      <Link>rptMercanciaMovimiento2G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaMovimiento2G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaMovimiento3G.vb">
+      <Link>rptMercanciaMovimiento3G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaMovimiento3G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaMovimiento4G.vb">
+      <Link>rptMercanciaMovimiento4G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaMovimiento4G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaMovimientoSG.vb">
+      <Link>rptMercanciaMovimientoSG.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaMovimientoSG.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaMovimientosResumen.vb">
+      <Link>rptMercanciaMovimientosResumen.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaMovimientosResumen.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaObsoleta1G.vb">
+      <Link>rptMercanciaObsoleta1G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaObsoleta1G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaObsoleta2G.vb">
+      <Link>rptMercanciaObsoleta2G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaObsoleta2G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaObsoleta3G.vb">
+      <Link>rptMercanciaObsoleta3G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaObsoleta3G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaObsoleta4G.vb">
+      <Link>rptMercanciaObsoleta4G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaObsoleta4G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaObsoletaSG.vb">
+      <Link>rptMercanciaObsoletaSG.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaObsoletaSG.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaOferta.vb">
+      <Link>rptMercanciaOferta.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaOferta.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPrecios1G.vb">
+      <Link>rptMercanciaPrecios1G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaPrecios1G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPrecios2G.vb">
+      <Link>rptMercanciaPrecios2G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaPrecios2G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPrecios3G.vb">
+      <Link>rptMercanciaPrecios3G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaPrecios3G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPrecios4G.vb">
+      <Link>rptMercanciaPrecios4G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaPrecios4G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPreciosEquivalentes0G.vb">
+      <Link>rptMercanciaPreciosEquivalentes0G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaPreciosEquivalentes0G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPreciosEquivalentes1G.vb">
+      <Link>rptMercanciaPreciosEquivalentes1G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaPreciosEquivalentes1G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPreciosEquivalentes2G.vb">
+      <Link>rptMercanciaPreciosEquivalentes2G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaPreciosEquivalentes2G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPreciosEquivalentes3G.vb">
+      <Link>rptMercanciaPreciosEquivalentes3G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaPreciosEquivalentes3G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPreciosEquivalentes4G.vb">
+      <Link>rptMercanciaPreciosEquivalentes4G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaPreciosEquivalentes4G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPreciosEspeciales.vb">
+      <Link>rptMercanciaPreciosEspeciales.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaPreciosEspeciales.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPreciosFuturos.vb">
+      <Link>rptMercanciaPreciosFuturos.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaPreciosFuturos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPreciosSG.vb">
+      <Link>rptMercanciaPreciosSG.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaPreciosSG.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaServicios.vb">
+      <Link>rptMercanciaServicios.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaServicios.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaTransferencia.vb">
+      <Link>rptMercanciaTransferencia.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaTransferencia.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaTransferencias0G.vb">
+      <Link>rptMercanciaTransferencias0G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaTransferencias0G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasMerActG0.vb">
+      <Link>rptMercanciaVentasMerActG0.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaVentasMerActG0.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasMerActG1.vb">
+      <Link>rptMercanciaVentasMerActG1.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaVentasMerActG1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasMerActG2.vb">
+      <Link>rptMercanciaVentasMerActG2.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaVentasMerActG2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasMerActG3.vb">
+      <Link>rptMercanciaVentasMerActG3.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaVentasMerActG3.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasMerActG4.vb">
+      <Link>rptMercanciaVentasMerActG4.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaVentasMerActG4.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasMerG0.vb">
+      <Link>rptMercanciaVentasMerG0.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaVentasMerG0.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasMerG1.vb">
+      <Link>rptMercanciaVentasMerG1.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaVentasMerG1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasMerG2.vb">
+      <Link>rptMercanciaVentasMerG2.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaVentasMerG2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasMerG3.vb">
+      <Link>rptMercanciaVentasMerG3.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaVentasMerG3.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasPorItemActMesMes0G.vb">
+      <Link>rptMercanciaVentasPorItemActMesMes0G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaVentasPorItemActMesMes0G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasPorItemActMesMes1G.vb">
+      <Link>rptMercanciaVentasPorItemActMesMes1G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaVentasPorItemActMesMes1G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasPorItemActMesMes2G.vb">
+      <Link>rptMercanciaVentasPorItemActMesMes2G.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMercanciaVentasPorItemActMesMes2G.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaBarra.rpt">
+      <Link>rptMercanciaBarra.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaBarra.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaBarraPrecio.rpt">
+      <Link>rptMercanciaBarraPrecio.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaBarraPrecio.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaCatalogo1G.rpt">
+      <Link>rptMercanciaCatalogo1G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaCatalogo1G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaCatalogo2G.rpt">
+      <Link>rptMercanciaCatalogo2G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaCatalogo2G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaCatalogo3G.rpt">
+      <Link>rptMercanciaCatalogo3G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaCatalogo3G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaCatalogo4G.rpt">
+      <Link>rptMercanciaCatalogo4G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaCatalogo4G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaCatalogoSG.rpt">
+      <Link>rptMercanciaCatalogoSG.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaCatalogoSG.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaComprasMer0G.rpt">
+      <Link>rptMercanciaComprasMer0G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaComprasMer0G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaComprasMer1G.rpt">
+      <Link>rptMercanciaComprasMer1G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaComprasMer1G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaComprasMer2G.rpt">
+      <Link>rptMercanciaComprasMer2G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaComprasMer2G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaComprasMer3G.rpt">
+      <Link>rptMercanciaComprasMer3G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaComprasMer3G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaConteo.rpt">
+      <Link>rptMercanciaConteo.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaConteo.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaEquivalencias1G.rpt">
+      <Link>rptMercanciaEquivalencias1G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaEquivalencias1G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaEquivalencias2G.rpt">
+      <Link>rptMercanciaEquivalencias2G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaEquivalencias2G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaEquivalencias3G.rpt">
+      <Link>rptMercanciaEquivalencias3G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaEquivalencias3G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaEquivalencias4G.rpt">
+      <Link>rptMercanciaEquivalencias4G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaEquivalencias4G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaEquivalenciasSG.rpt">
+      <Link>rptMercanciaEquivalenciasSG.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaEquivalenciasSG.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaExistencias1G.rpt">
+      <Link>rptMercanciaExistencias1G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaExistencias1G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaExistencias2G.rpt">
+      <Link>rptMercanciaExistencias2G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaExistencias2G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaExistencias3G.rpt">
+      <Link>rptMercanciaExistencias3G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaExistencias3G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaExistencias4G.rpt">
+      <Link>rptMercanciaExistencias4G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaExistencias4G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaExistenciasSG.rpt">
+      <Link>rptMercanciaExistenciasSG.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaExistenciasSG.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaFicha.rpt">
+      <Link>rptMercanciaFicha.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaFicha.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaIventarioLegalSG.rpt">
+      <Link>rptMercanciaIventarioLegalSG.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaIventarioLegalSG.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaJerarquias.rpt">
+      <Link>rptMercanciaJerarquias.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaJerarquias.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaMovimiento1G.rpt">
+      <Link>rptMercanciaMovimiento1G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaMovimiento1G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaMovimiento2G.rpt">
+      <Link>rptMercanciaMovimiento2G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaMovimiento2G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaMovimiento3G.rpt">
+      <Link>rptMercanciaMovimiento3G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaMovimiento3G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaMovimiento4G.rpt">
+      <Link>rptMercanciaMovimiento4G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaMovimiento4G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaMovimientoSG.rpt">
+      <Link>rptMercanciaMovimientoSG.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaMovimientoSG.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaMovimientosResumen.rpt">
+      <Link>rptMercanciaMovimientosResumen.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaMovimientosResumen.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaObsoleta1G.rpt">
+      <Link>rptMercanciaObsoleta1G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaObsoleta1G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaObsoleta2G.rpt">
+      <Link>rptMercanciaObsoleta2G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaObsoleta2G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaObsoleta3G.rpt">
+      <Link>rptMercanciaObsoleta3G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaObsoleta3G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaObsoleta4G.rpt">
+      <Link>rptMercanciaObsoleta4G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaObsoleta4G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaObsoletaSG.rpt">
+      <Link>rptMercanciaObsoletaSG.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaObsoletaSG.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaOferta.rpt">
+      <Link>rptMercanciaOferta.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaOferta.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPrecios1G.rpt">
+      <Link>rptMercanciaPrecios1G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaPrecios1G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPrecios2G.rpt">
+      <Link>rptMercanciaPrecios2G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaPrecios2G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPrecios3G.rpt">
+      <Link>rptMercanciaPrecios3G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaPrecios3G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPrecios4G.rpt">
+      <Link>rptMercanciaPrecios4G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaPrecios4G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPreciosEquivalentes0G.rpt">
+      <Link>rptMercanciaPreciosEquivalentes0G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaPreciosEquivalentes0G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPreciosEquivalentes1G.rpt">
+      <Link>rptMercanciaPreciosEquivalentes1G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaPreciosEquivalentes1G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPreciosEquivalentes2G.rpt">
+      <Link>rptMercanciaPreciosEquivalentes2G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaPreciosEquivalentes2G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPreciosEquivalentes3G.rpt">
+      <Link>rptMercanciaPreciosEquivalentes3G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaPreciosEquivalentes3G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPreciosEquivalentes4G.rpt">
+      <Link>rptMercanciaPreciosEquivalentes4G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaPreciosEquivalentes4G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPreciosEspeciales.rpt">
+      <Link>rptMercanciaPreciosEspeciales.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaPreciosEspeciales.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPreciosFuturos.rpt">
+      <Link>rptMercanciaPreciosFuturos.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaPreciosFuturos.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaPreciosSG.rpt">
+      <Link>rptMercanciaPreciosSG.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaPreciosSG.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaServicios.rpt">
+      <Link>rptMercanciaServicios.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaServicios.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaTransferencia.rpt">
+      <Link>rptMercanciaTransferencia.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaTransferencia.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaTransferencias0G.rpt">
+      <Link>rptMercanciaTransferencias0G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaTransferencias0G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasMerActG0.rpt">
+      <Link>rptMercanciaVentasMerActG0.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaVentasMerActG0.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasMerActG1.rpt">
+      <Link>rptMercanciaVentasMerActG1.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaVentasMerActG1.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasMerActG2.rpt">
+      <Link>rptMercanciaVentasMerActG2.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaVentasMerActG2.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasMerActG3.rpt">
+      <Link>rptMercanciaVentasMerActG3.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaVentasMerActG3.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasMerActG4.rpt">
+      <Link>rptMercanciaVentasMerActG4.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaVentasMerActG4.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasMerG0.rpt">
+      <Link>rptMercanciaVentasMerG0.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaVentasMerG0.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasMerG1.rpt">
+      <Link>rptMercanciaVentasMerG1.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaVentasMerG1.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasMerG2.rpt">
+      <Link>rptMercanciaVentasMerG2.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaVentasMerG2.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasMerG3.rpt">
+      <Link>rptMercanciaVentasMerG3.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaVentasMerG3.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasPorItemActMesMes0G.rpt">
+      <Link>rptMercanciaVentasPorItemActMesMes0G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaVentasPorItemActMesMes0G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasPorItemActMesMes1G.rpt">
+      <Link>rptMercanciaVentasPorItemActMesMes1G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaVentasPorItemActMesMes1G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Reportes\ReportesMercancias\rptMercanciaVentasPorItemActMesMes2G.rpt">
+      <Link>rptMercanciaVentasPorItemActMesMes2G.rpt</Link>
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMercanciaVentasPorItemActMesMes2G.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

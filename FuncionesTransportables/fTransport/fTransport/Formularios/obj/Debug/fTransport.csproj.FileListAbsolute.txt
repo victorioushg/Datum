@@ -1,0 +1,7 @@
+C:\DESARROLLO\ProyectosDotNet\Datum\FuncionesTransportables\fTransport\fTransport\bin\Debug\fTransport.dll
+C:\DESARROLLO\ProyectosDotNet\Datum\FuncionesTransportables\fTransport\fTransport\bin\Debug\fTransport.pdb
+C:\DESARROLLO\ProyectosDotNet\Datum\FuncionesTransportables\fTransport\fTransport\obj\Debug\fTransport.dll
+C:\DESARROLLO\ProyectosDotNet\Datum\FuncionesTransportables\fTransport\fTransport\obj\Debug\fTransport.pdb
+C:\DESARROLLO\ProyectosDotNet\Datum\FuncionesTransportables\fTransport\fTransport\obj\Debug\fTransport.Properties.Resources.resources
+C:\DESARROLLO\ProyectosDotNet\Datum\FuncionesTransportables\fTransport\fTransport\obj\Debug\fTransport.csproj.GenerateResource.Cache
+C:\DESARROLLO\ProyectosDotNet\Datum\FuncionesTransportables\fTransport\fTransport\obj\Debug\fTransport.csprojResolveAssemblyReference.cache

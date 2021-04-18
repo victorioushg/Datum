@@ -1,0 +1,9 @@
+C:\Desarrollo\ProyectosDotNet\Datum\ReportesDeVentas\ReportesDeVentas\bin\Debug\ReportesDeVentas.dll
+C:\Desarrollo\ProyectosDotNet\Datum\ReportesDeVentas\ReportesDeVentas\bin\Debug\ReportesDeVentas.pdb
+C:\Desarrollo\ProyectosDotNet\Datum\ReportesDeVentas\ReportesDeVentas\bin\Debug\ReportesDeVentas.xml
+C:\Desarrollo\ProyectosDotNet\Datum\ReportesDeVentas\ReportesDeVentas\obj\Debug\ReportesDeVentas.Resources.resources
+C:\Desarrollo\ProyectosDotNet\Datum\ReportesDeVentas\ReportesDeVentas\obj\Debug\ReportesDeVentas.dll
+C:\Desarrollo\ProyectosDotNet\Datum\ReportesDeVentas\ReportesDeVentas\obj\Debug\ReportesDeVentas.xml
+C:\Desarrollo\ProyectosDotNet\Datum\ReportesDeVentas\ReportesDeVentas\obj\Debug\ReportesDeVentas.pdb
+C:\DESARROLLO\ProyectosDotNet\Datum\ReportesDeVentas\ReportesDeVentas\obj\Debug\ReportesDeVentas.vbproj.GenerateResource.Cache
+C:\DESARROLLO\ProyectosDotNet\Datum\ReportesDeVentas\ReportesDeVentas\obj\Debug\ReportesDeVentas.vbprojResolveAssemblyReference.cache

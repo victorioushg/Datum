@@ -1,0 +1,5 @@
+C:\DESARROLLO\ProyectosDotNet\ReportesFiscales\ReportesAclasBixolon\FP_AclasBixolon\FP_AclasBixolon\bin\Debug\FP_AclasBixolon.dll
+C:\DESARROLLO\ProyectosDotNet\ReportesFiscales\ReportesAclasBixolon\FP_AclasBixolon\FP_AclasBixolon\bin\Debug\FP_AclasBixolon.pdb
+C:\DESARROLLO\ProyectosDotNet\ReportesFiscales\ReportesAclasBixolon\FP_AclasBixolon\FP_AclasBixolon\bin\Debug\TfhkaNet.dll
+C:\DESARROLLO\ProyectosDotNet\ReportesFiscales\ReportesAclasBixolon\FP_AclasBixolon\FP_AclasBixolon\obj\Debug\FP_AclasBixolon.dll
+C:\DESARROLLO\ProyectosDotNet\ReportesFiscales\ReportesAclasBixolon\FP_AclasBixolon\FP_AclasBixolon\obj\Debug\FP_AclasBixolon.pdb
