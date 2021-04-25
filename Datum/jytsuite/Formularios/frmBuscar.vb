@@ -1,5 +1,5 @@
 Imports MySql.Data.MySqlClient
-
+Imports Syncfusion.WinForms.Input
 Public Class frmBuscar
     Private dtBuscar As New DataTable, dtOrigen As New DataTable
     Private ft As New Transportables

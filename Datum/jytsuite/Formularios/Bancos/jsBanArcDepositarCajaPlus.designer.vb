@@ -22,15 +22,16 @@ Partial Class jsBanArcDepositarCajaPlus
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsBanArcDepositarCajaPlus))
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.grpCaja = New System.Windows.Forms.GroupBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnGo = New System.Windows.Forms.Button()
+        Me.txtVendedor = New System.Windows.Forms.TextBox()
+        Me.btnVendedor = New System.Windows.Forms.Button()
+        Me.btnRP = New System.Windows.Forms.Button()
+        Me.cmbFP = New System.Windows.Forms.ComboBox()
+        Me.txtRP = New System.Windows.Forms.TextBox()
+        Me.cmbSeleccion = New System.Windows.Forms.ComboBox()
         Me.txtBuscar = New System.Windows.Forms.TextBox()
         Me.lblBuscar = New System.Windows.Forms.Label()
-        Me.btnRP = New System.Windows.Forms.Button()
-        Me.txtRP = New System.Windows.Forms.TextBox()
-        Me.cmbFP = New System.Windows.Forms.ComboBox()
-        Me.btnGo = New System.Windows.Forms.Button()
-        Me.btnFechaSeleccion = New System.Windows.Forms.Button()
-        Me.txtFechaSeleccion = New System.Windows.Forms.TextBox()
-        Me.cmbSeleccion = New System.Windows.Forms.ComboBox()
         Me.lblCaja = New System.Windows.Forms.Label()
         Me.lblTituloCaja = New System.Windows.Forms.Label()
         Me.grpTotales = New System.Windows.Forms.GroupBox()
@@ -53,10 +54,8 @@ Partial Class jsBanArcDepositarCajaPlus
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtISRL = New System.Windows.Forms.TextBox()
-        Me.btnEmision = New System.Windows.Forms.Button()
         Me.txtAjustes = New System.Windows.Forms.TextBox()
         Me.txtConcepto = New System.Windows.Forms.TextBox()
-        Me.txtEmision = New System.Windows.Forms.TextBox()
         Me.txtDeposito = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -66,15 +65,14 @@ Partial Class jsBanArcDepositarCajaPlus
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.dg = New System.Windows.Forms.DataGridView()
-        Me.txtVendedor = New System.Windows.Forms.TextBox()
-        Me.btnVendedor = New System.Windows.Forms.Button()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtEmision = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaSeleccion = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpCaja.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.grpTotales.SuspendLayout()
         Me.grptextos.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblInfo
@@ -100,6 +98,91 @@ Partial Class jsBanArcDepositarCajaPlus
         Me.grpCaja.TabIndex = 82
         Me.grpCaja.TabStop = False
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.txtFechaSeleccion)
+        Me.GroupBox1.Controls.Add(Me.btnGo)
+        Me.GroupBox1.Controls.Add(Me.txtVendedor)
+        Me.GroupBox1.Controls.Add(Me.btnVendedor)
+        Me.GroupBox1.Controls.Add(Me.btnRP)
+        Me.GroupBox1.Controls.Add(Me.cmbFP)
+        Me.GroupBox1.Controls.Add(Me.txtRP)
+        Me.GroupBox1.Controls.Add(Me.cmbSeleccion)
+        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Location = New System.Drawing.Point(10, 2)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(318, 90)
+        Me.GroupBox1.TabIndex = 143
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Selecciona ítems"
+        '
+        'btnGo
+        '
+        Me.btnGo.AutoSize = True
+        Me.btnGo.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGo.Image = CType(resources.GetObject("btnGo.Image"), System.Drawing.Image)
+        Me.btnGo.Location = New System.Drawing.Point(249, 30)
+        Me.btnGo.Name = "btnGo"
+        Me.btnGo.Size = New System.Drawing.Size(46, 45)
+        Me.btnGo.TabIndex = 135
+        Me.btnGo.UseVisualStyleBackColor = True
+        '
+        'txtVendedor
+        '
+        Me.txtVendedor.Location = New System.Drawing.Point(144, 64)
+        Me.txtVendedor.Name = "txtVendedor"
+        Me.txtVendedor.Size = New System.Drawing.Size(54, 20)
+        Me.txtVendedor.TabIndex = 141
+        Me.txtVendedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'btnVendedor
+        '
+        Me.btnVendedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnVendedor.Location = New System.Drawing.Point(204, 64)
+        Me.btnVendedor.Name = "btnVendedor"
+        Me.btnVendedor.Size = New System.Drawing.Size(29, 20)
+        Me.btnVendedor.TabIndex = 142
+        Me.btnVendedor.Text = "•••"
+        Me.btnVendedor.UseVisualStyleBackColor = True
+        '
+        'btnRP
+        '
+        Me.btnRP.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRP.Location = New System.Drawing.Point(204, 41)
+        Me.btnRP.Name = "btnRP"
+        Me.btnRP.Size = New System.Drawing.Size(29, 20)
+        Me.btnRP.TabIndex = 138
+        Me.btnRP.Text = "•••"
+        Me.btnRP.UseVisualStyleBackColor = True
+        '
+        'cmbFP
+        '
+        Me.cmbFP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbFP.FormattingEnabled = True
+        Me.cmbFP.Location = New System.Drawing.Point(87, 40)
+        Me.cmbFP.Margin = New System.Windows.Forms.Padding(1)
+        Me.cmbFP.Name = "cmbFP"
+        Me.cmbFP.Size = New System.Drawing.Size(51, 21)
+        Me.cmbFP.TabIndex = 136
+        '
+        'txtRP
+        '
+        Me.txtRP.Location = New System.Drawing.Point(144, 41)
+        Me.txtRP.Name = "txtRP"
+        Me.txtRP.Size = New System.Drawing.Size(54, 20)
+        Me.txtRP.TabIndex = 137
+        Me.txtRP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'cmbSeleccion
+        '
+        Me.cmbSeleccion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbSeleccion.FormattingEnabled = True
+        Me.cmbSeleccion.Location = New System.Drawing.Point(15, 15)
+        Me.cmbSeleccion.Margin = New System.Windows.Forms.Padding(1)
+        Me.cmbSeleccion.Name = "cmbSeleccion"
+        Me.cmbSeleccion.Size = New System.Drawing.Size(218, 21)
+        Me.cmbSeleccion.TabIndex = 132
+        '
         'txtBuscar
         '
         Me.txtBuscar.Location = New System.Drawing.Point(375, 55)
@@ -116,74 +199,6 @@ Partial Class jsBanArcDepositarCajaPlus
         Me.lblBuscar.TabIndex = 139
         Me.lblBuscar.Text = "Buscar"
         Me.lblBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'btnRP
-        '
-        Me.btnRP.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRP.Location = New System.Drawing.Point(204, 41)
-        Me.btnRP.Name = "btnRP"
-        Me.btnRP.Size = New System.Drawing.Size(29, 20)
-        Me.btnRP.TabIndex = 138
-        Me.btnRP.Text = "•••"
-        Me.btnRP.UseVisualStyleBackColor = True
-        '
-        'txtRP
-        '
-        Me.txtRP.Location = New System.Drawing.Point(144, 41)
-        Me.txtRP.Name = "txtRP"
-        Me.txtRP.Size = New System.Drawing.Size(54, 20)
-        Me.txtRP.TabIndex = 137
-        Me.txtRP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'cmbFP
-        '
-        Me.cmbFP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbFP.FormattingEnabled = True
-        Me.cmbFP.Location = New System.Drawing.Point(87, 40)
-        Me.cmbFP.Margin = New System.Windows.Forms.Padding(1)
-        Me.cmbFP.Name = "cmbFP"
-        Me.cmbFP.Size = New System.Drawing.Size(51, 21)
-        Me.cmbFP.TabIndex = 136
-        '
-        'btnGo
-        '
-        Me.btnGo.AutoSize = True
-        Me.btnGo.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGo.Image = CType(resources.GetObject("btnGo.Image"), System.Drawing.Image)
-        Me.btnGo.Location = New System.Drawing.Point(249, 30)
-        Me.btnGo.Name = "btnGo"
-        Me.btnGo.Size = New System.Drawing.Size(46, 45)
-        Me.btnGo.TabIndex = 135
-        Me.btnGo.UseVisualStyleBackColor = True
-        '
-        'btnFechaSeleccion
-        '
-        Me.btnFechaSeleccion.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaSeleccion.Location = New System.Drawing.Point(109, 64)
-        Me.btnFechaSeleccion.Name = "btnFechaSeleccion"
-        Me.btnFechaSeleccion.Size = New System.Drawing.Size(29, 20)
-        Me.btnFechaSeleccion.TabIndex = 134
-        Me.btnFechaSeleccion.Text = "•••"
-        Me.btnFechaSeleccion.UseVisualStyleBackColor = True
-        '
-        'txtFechaSeleccion
-        '
-        Me.txtFechaSeleccion.Enabled = False
-        Me.txtFechaSeleccion.Location = New System.Drawing.Point(15, 64)
-        Me.txtFechaSeleccion.Name = "txtFechaSeleccion"
-        Me.txtFechaSeleccion.Size = New System.Drawing.Size(88, 20)
-        Me.txtFechaSeleccion.TabIndex = 133
-        Me.txtFechaSeleccion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'cmbSeleccion
-        '
-        Me.cmbSeleccion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbSeleccion.FormattingEnabled = True
-        Me.cmbSeleccion.Location = New System.Drawing.Point(15, 15)
-        Me.cmbSeleccion.Margin = New System.Windows.Forms.Padding(1)
-        Me.cmbSeleccion.Name = "cmbSeleccion"
-        Me.cmbSeleccion.Size = New System.Drawing.Size(218, 21)
-        Me.cmbSeleccion.TabIndex = 132
         '
         'lblCaja
         '
@@ -280,6 +295,7 @@ Partial Class jsBanArcDepositarCajaPlus
         '
         'grptextos
         '
+        Me.grptextos.Controls.Add(Me.txtEmision)
         Me.grptextos.Controls.Add(Me.txtTotalDeposito)
         Me.grptextos.Controls.Add(Me.Label14)
         Me.grptextos.Controls.Add(Me.Label13)
@@ -292,10 +308,8 @@ Partial Class jsBanArcDepositarCajaPlus
         Me.grptextos.Controls.Add(Me.Label9)
         Me.grptextos.Controls.Add(Me.Label8)
         Me.grptextos.Controls.Add(Me.txtISRL)
-        Me.grptextos.Controls.Add(Me.btnEmision)
         Me.grptextos.Controls.Add(Me.txtAjustes)
         Me.grptextos.Controls.Add(Me.txtConcepto)
-        Me.grptextos.Controls.Add(Me.txtEmision)
         Me.grptextos.Controls.Add(Me.txtDeposito)
         Me.grptextos.Controls.Add(Me.Label7)
         Me.grptextos.Controls.Add(Me.Label6)
@@ -416,16 +430,6 @@ Partial Class jsBanArcDepositarCajaPlus
         Me.txtISRL.TabIndex = 105
         Me.txtISRL.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'btnEmision
-        '
-        Me.btnEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmision.Location = New System.Drawing.Point(178, 32)
-        Me.btnEmision.Name = "btnEmision"
-        Me.btnEmision.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmision.TabIndex = 104
-        Me.btnEmision.Text = "•••"
-        Me.btnEmision.UseVisualStyleBackColor = True
-        '
         'txtAjustes
         '
         Me.txtAjustes.Enabled = False
@@ -443,15 +447,6 @@ Partial Class jsBanArcDepositarCajaPlus
         Me.txtConcepto.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtConcepto.Size = New System.Drawing.Size(402, 42)
         Me.txtConcepto.TabIndex = 6
-        '
-        'txtEmision
-        '
-        Me.txtEmision.Enabled = False
-        Me.txtEmision.Location = New System.Drawing.Point(72, 32)
-        Me.txtEmision.Name = "txtEmision"
-        Me.txtEmision.Size = New System.Drawing.Size(100, 20)
-        Me.txtEmision.TabIndex = 5
-        Me.txtEmision.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtDeposito
         '
@@ -542,8 +537,8 @@ Partial Class jsBanArcDepositarCajaPlus
         Me.dg.AllowUserToResizeColumns = False
         Me.dg.AllowUserToResizeRows = False
         Me.dg.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dg.Location = New System.Drawing.Point(-1, 94)
         Me.dg.Name = "dg"
@@ -551,42 +546,29 @@ Partial Class jsBanArcDepositarCajaPlus
         Me.dg.Size = New System.Drawing.Size(810, 207)
         Me.dg.TabIndex = 86
         '
-        'txtVendedor
+        'txtEmision
         '
-        Me.txtVendedor.Location = New System.Drawing.Point(144, 64)
-        Me.txtVendedor.Name = "txtVendedor"
-        Me.txtVendedor.Size = New System.Drawing.Size(54, 20)
-        Me.txtVendedor.TabIndex = 141
-        Me.txtVendedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtEmision.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmision.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmision.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmision.Location = New System.Drawing.Point(72, 32)
+        Me.txtEmision.Name = "txtEmision"
+        Me.txtEmision.Size = New System.Drawing.Size(114, 19)
+        Me.txtEmision.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmision.TabIndex = 214
         '
-        'btnVendedor
+        'txtFechaSeleccion
         '
-        Me.btnVendedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVendedor.Location = New System.Drawing.Point(204, 64)
-        Me.btnVendedor.Name = "btnVendedor"
-        Me.btnVendedor.Size = New System.Drawing.Size(29, 20)
-        Me.btnVendedor.TabIndex = 142
-        Me.btnVendedor.Text = "•••"
-        Me.btnVendedor.UseVisualStyleBackColor = True
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.txtFechaSeleccion)
-        Me.GroupBox1.Controls.Add(Me.btnGo)
-        Me.GroupBox1.Controls.Add(Me.txtVendedor)
-        Me.GroupBox1.Controls.Add(Me.btnFechaSeleccion)
-        Me.GroupBox1.Controls.Add(Me.btnVendedor)
-        Me.GroupBox1.Controls.Add(Me.btnRP)
-        Me.GroupBox1.Controls.Add(Me.cmbFP)
-        Me.GroupBox1.Controls.Add(Me.txtRP)
-        Me.GroupBox1.Controls.Add(Me.cmbSeleccion)
-        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(10, 2)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(318, 90)
-        Me.GroupBox1.TabIndex = 143
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Selecciona ítems"
+        Me.txtFechaSeleccion.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaSeleccion.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaSeleccion.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaSeleccion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaSeleccion.Location = New System.Drawing.Point(15, 64)
+        Me.txtFechaSeleccion.Name = "txtFechaSeleccion"
+        Me.txtFechaSeleccion.Size = New System.Drawing.Size(123, 19)
+        Me.txtFechaSeleccion.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaSeleccion.TabIndex = 214
         '
         'jsBanArcDepositarCajaPlus
         '
@@ -609,14 +591,14 @@ Partial Class jsBanArcDepositarCajaPlus
         Me.Text = "Depositar movimientos desde caja"
         Me.grpCaja.ResumeLayout(False)
         Me.grpCaja.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.grpTotales.ResumeLayout(False)
         Me.grpTotales.PerformLayout()
         Me.grptextos.ResumeLayout(False)
         Me.grptextos.PerformLayout()
         Me.grpAceptarSalir.ResumeLayout(False)
         CType(Me.dg, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -630,14 +612,12 @@ Partial Class jsBanArcDepositarCajaPlus
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents txtAjustes As System.Windows.Forms.TextBox
     Friend WithEvents txtConcepto As System.Windows.Forms.TextBox
-    Friend WithEvents txtEmision As System.Windows.Forms.TextBox
     Friend WithEvents txtDeposito As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents txtSaldoSel As System.Windows.Forms.TextBox
     Friend WithEvents txtDocSel As System.Windows.Forms.TextBox
-    Friend WithEvents btnEmision As System.Windows.Forms.Button
     Friend WithEvents txtISRL As System.Windows.Forms.TextBox
     Friend WithEvents txtCargos As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
@@ -657,8 +637,6 @@ Partial Class jsBanArcDepositarCajaPlus
     Friend WithEvents btnOK As System.Windows.Forms.Button
     Friend WithEvents lblCaja As System.Windows.Forms.Label
     Friend WithEvents btnGo As System.Windows.Forms.Button
-    Friend WithEvents btnFechaSeleccion As System.Windows.Forms.Button
-    Friend WithEvents txtFechaSeleccion As System.Windows.Forms.TextBox
     Friend WithEvents cmbSeleccion As System.Windows.Forms.ComboBox
     Friend WithEvents cmbFP As System.Windows.Forms.ComboBox
     Friend WithEvents txtRP As System.Windows.Forms.TextBox
@@ -669,4 +647,6 @@ Partial Class jsBanArcDepositarCajaPlus
     Friend WithEvents btnVendedor As System.Windows.Forms.Button
     Friend WithEvents txtVendedor As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents txtEmision As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaSeleccion As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

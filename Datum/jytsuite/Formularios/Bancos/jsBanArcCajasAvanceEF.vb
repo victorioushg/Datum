@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsBanArcCajasAvanceEF
     Private Const sModulo As String = "Avance de Efectivo"
     Private Const nTabla As String = "tarjetas"
@@ -35,7 +36,7 @@ Public Class jsBanArcCajasAvanceEF
         Me.ShowDialog()
     End Sub
     Private Sub IniciarTXT()
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
         ft.RellenaCombo(aFormaPag, cmbFormaPago, 0)
         txtDocumento.Text = Contador(MyConn, lblInfo, Gestion.iBancos, "BANNUMAEF", "02")
         txtDocPago.Text = ""
@@ -54,7 +55,7 @@ Public Class jsBanArcCajasAvanceEF
     End Sub
     Private Sub AsignarTXT(ByVal nPosicion As Integer)
         With dt
-            txtFecha.Text = ft.FormatoFecha(CDate(.Rows(nPosicion).Item("fecha").ToString))
+            txtFecha.Value = .Rows(nPosicion).Item("fecha")
             ft.RellenaCombo(aFormaPag, cmbFormaPago, Array.IndexOf(aFormaPagR, .Rows(nPosicion).Item("formpag")))
             txtDocumento.Text = .Rows(nPosicion).Item("nummov")
             txtDocPago.Text = IIf(IsDBNull(.Rows(nPosicion).Item("numpag")), "", .Rows(nPosicion).Item("numpag"))
@@ -71,6 +72,8 @@ Public Class jsBanArcCajasAvanceEF
 
     Private Sub jsBanArcCajasAvanceEF_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Me.Tag = sModulo
+        Dim dates As SfDateTimeEdit() = {txtFecha}
+        SetSizeDateObjects(dates)
         InsertarAuditoria(MyConn, MovAud.ientrar, sModulo, CodigoCaja)
         ds = DataSetRequery(ds, strSQL, MyConn, nTabla, lblInfo)
         dtTar = ds.Tables(nTabla)
@@ -124,13 +127,13 @@ Public Class jsBanArcCajasAvanceEF
             Insertar = True
             Apuntador = dt.Rows.Count
         End If
-        InsertEditBANCOSRenglonCaja(MyConn, lblInfo, Insertar, CodigoCaja, Renglon, CDate(txtFecha.Text), "CAJ", _
-             "SA", txtDocumento.Text, "EF", "", "", -1 * ValorNumero(txtImporte.Text), "", "AVANCE EFECTIVO", "", jytsistema.MyDate, 1, _
+        InsertEditBANCOSRenglonCaja(MyConn, lblInfo, Insertar, CodigoCaja, Renglon, txtFecha.Value, "CAJ",
+             "SA", txtDocumento.Text, "EF", "", "", -1 * ValorNumero(txtImporte.Text), "", "AVANCE EFECTIVO", "", jytsistema.MyDate, 1,
              "", "", "", MyDate, "", "", "0")
 
-        InsertEditBANCOSRenglonCaja(MyConn, lblInfo, Insertar, CodigoCaja, Renglon, CDate(txtFecha.Text), "CAJ", _
-                     "EN", txtDocumento.Text, aFormaPagR(cmbFormaPago.SelectedIndex), _
-                     txtDocPago.Text, txtRefPago.Text, ValorNumero(txtImporte.Text), "", "AVANCE EFECTIVO", "", jytsistema.MyDate, 1, _
+        InsertEditBANCOSRenglonCaja(MyConn, lblInfo, Insertar, CodigoCaja, Renglon, txtFecha.Value, "CAJ",
+                     "EN", txtDocumento.Text, aFormaPagR(cmbFormaPago.SelectedIndex),
+                     txtDocPago.Text, txtRefPago.Text, ValorNumero(txtImporte.Text), "", "AVANCE EFECTIVO", "", jytsistema.MyDate, 1,
                      "", "", "", MyDate, "", "", "0")
 
 
@@ -182,10 +185,6 @@ Public Class jsBanArcCajasAvanceEF
             txtRefPago.Text = ""
         End If
         f = Nothing
-    End Sub
-
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, btnFecha)
     End Sub
 
     Private Sub txtImporte_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtImporte.KeyPress

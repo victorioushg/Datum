@@ -1,5 +1,6 @@
 Imports MySql.Data.MySqlClient
 Imports Microsoft.Win32
+Imports Syncfusion.WinForms.Input
 Public Class jsVenProGuiaDespacho
     Private Const sModulo As String = "Guia De Despacho"
     Private Const nTabla As String = "tblEncabGuiaDespacho"
@@ -39,8 +40,6 @@ Public Class jsVenProGuiaDespacho
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
             dt = ds.Tables(nTabla)
 
-
-
             DesactivarMarco0()
             If dt.Rows.Count > 0 Then
                 nPosicionEncab = dt.Rows.Count - 1
@@ -50,6 +49,8 @@ Public Class jsVenProGuiaDespacho
                 IniciarDocumento(False)
             End If
             ft.ActivarMenuBarra(myConn, ds, dt, lRegion, MenuBarra, jytsistema.sUsuario)
+            Dim dates As SfDateTimeEdit() = {txtEmision, txtFacturaDesde, txtFacturaHasta}
+            SetSizeDateObjects(dates)
             AsignarTooltips()
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
@@ -109,7 +110,7 @@ Public Class jsVenProGuiaDespacho
                 With .Rows(nRow)
                     'Encabezado 
                     txtCodigo.Text = .Item("codigoguia")
-                    txtEmision.Text = ft.FormatoFecha(CDate(.Item("fechaguia").ToString))
+                    txtEmision.Value = .Item("fechaguia")
                     txtUsuario.Text = .Item("elaborador")
                     txtEstatus.Text = aEstatus(.Item("estatus"))
                     txtComentario.Text = ft.MuestraCampoTexto(.Item("descripcion"))
@@ -118,8 +119,8 @@ Public Class jsVenProGuiaDespacho
                     tslblPesoT.Text = ft.FormatoCantidad(.Item("totalkilos"))
                     txtTotal.Text = ft.FormatoNumero(.Item("totalguia"))
 
-                    txtFacturaDesde.Text = ft.FormatoFecha(CDate(.Item("emisionfac").ToString))
-                    txtFacturaHasta.Text = ft.FormatoFecha(CDate(.Item("hastafac").ToString))
+                    txtFacturaDesde.Value = .Item("emisionfac")
+                    txtFacturaHasta.Value = .Item("hastafac")
 
                     'Renglones
                     AsignarMovimientos(.Item("codigoguia"))
@@ -170,20 +171,17 @@ Public Class jsVenProGuiaDespacho
             txtCodigo.Text = ""
         End If
 
-
         txtUsuario.Text = ""
         txtNombreUsuario.Text = ""
         txtTransporte.Text = ""
         txtComentario.Text = ""
         txtEstatus.Text = aEstatus(0)
-        txtEmision.Text = ft.FormatoFecha(sFechadeTrabajo)
+        txtEmision.Value = jytsistema.sFechadeTrabajo
         tslblPesoT.Text = ft.FormatoCantidad(0)
-
         txtTotal.Text = ft.FormatoNumero(0.0)
-        txtFacturaDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtFacturaHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFacturaDesde.Value = jytsistema.sFechadeTrabajo
+        txtFacturaHasta.Value = jytsistema.sFechadeTrabajo
         txtChoferTransporte.Text = ""
-
 
         'Movimientos
         MostrarItemsEnMenuBarra(MenuBarraRenglon, 0, 0)
@@ -196,7 +194,7 @@ Public Class jsVenProGuiaDespacho
         grpAceptarSalir.Visible = True
 
         ft.habilitarObjetos(True, False, grpEncab, grpTotales, MenuBarraRenglon)
-        ft.habilitarObjetos(True, True, txtComentario, btnEmision, btnTransporte, btnDesde, btnHasta, _
+        ft.habilitarObjetos(True, True, txtComentario, txtEmision, btnTransporte, txtFacturaDesde, txtFacturaHasta,
                          btnTransporte)
         MenuBarra.Enabled = False
         ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
@@ -205,9 +203,8 @@ Public Class jsVenProGuiaDespacho
     Private Sub DesactivarMarco0()
 
         grpAceptarSalir.Visible = False
-        ft.habilitarObjetos(False, True, txtCodigo, txtEmision, btnEmision, txtUsuario, txtNombreUsuario, _
-                        btnDesde, btnHasta, txtEstatus, _
-                        txtComentario, txtTransporte, txtNombreTransporte, txtChoferTransporte, txtCapacidadTransporte, _
+        ft.habilitarObjetos(False, True, txtCodigo, txtEmision, txtUsuario, txtNombreUsuario,
+                        txtEstatus, txtComentario, txtTransporte, txtNombreTransporte, txtChoferTransporte, txtCapacidadTransporte,
                         txtFacturaDesde, txtFacturaHasta)
 
         ft.habilitarObjetos(False, True, txtTotal)
@@ -250,7 +247,7 @@ Public Class jsVenProGuiaDespacho
     End Sub
     Private Function Validado() As Boolean
 
-        If FechaUltimoBloqueo(myConn, "jsvenencgui") >= Convert.ToDateTime(txtEmision.Text) Then
+        If FechaUltimoBloqueo(myConn, "jsvenencgui") >= txtEmision.Value Then
             ft.mensajeCritico("FECHA MENOR QUE ULTIMA FECHA DE CIERRE...")
             Return False
         End If
@@ -289,8 +286,8 @@ Public Class jsVenProGuiaDespacho
 
         End If
 
-        InsertEditVENTASEncabezadoGuiaDespacho(myConn, lblInfo, Inserta, Codigo, txtComentario.Text, jytsistema.sUsuario, txtTransporte.Text, _
-                                               CDate(txtEmision.Text), CDate(txtFacturaDesde.Text), CDate(txtFacturaHasta.Text), _
+        InsertEditVENTASEncabezadoGuiaDespacho(myConn, lblInfo, Inserta, Codigo, txtComentario.Text, jytsistema.sUsuario, txtTransporte.Text,
+                                               txtEmision.Value, txtFacturaDesde.Value, txtFacturaHasta.Value,
                                                dtRenglones.Rows.Count, CDbl(txtTotal.Text), CDbl(tslblPesoT.Text), 0, 0)
 
         ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
@@ -420,7 +417,7 @@ Public Class jsVenProGuiaDespacho
     Private Sub btnAgregarMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarMovimiento.Click
         Dim f As New jsVenProGuiaDespachoMovimientos
         f.Apuntador = Me.BindingContext(ds, nTablaRenglones).Position
-        f.Cargar(myConn, CDate(txtFacturaDesde.Text), CDate(txtFacturaHasta.Text), txtCodigo.Text)
+        f.Cargar(myConn, txtFacturaDesde.Value, txtFacturaHasta.Value, txtCodigo.Text)
         AsignarMovimientos(txtCodigo.Text)
         f = Nothing
     End Sub
@@ -479,13 +476,8 @@ Public Class jsVenProGuiaDespacho
         AsignaMov(Me.BindingContext(ds, nTablaRenglones).Position, False)
     End Sub
 
-    Private Sub btnEmision_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEmision.Click
-        txtEmision.Text = SeleccionaFecha(CDate(txtEmision.Text), Me, sender)
-    End Sub
-
-
     Private Sub btnAsesor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTransporte.Click
-        txtTransporte.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codtra codigo, nomtra descripcion from jsconctatra where id_emp = '" & jytsistema.WorkID & "'  order by 1 ", "Transportes", _
+        txtTransporte.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codtra codigo, nomtra descripcion from jsconctatra where id_emp = '" & jytsistema.WorkID & "'  order by 1 ", "Transportes",
                                                txtTransporte.Text)
     End Sub
 
@@ -511,17 +503,8 @@ Public Class jsVenProGuiaDespacho
 
 
     Private Sub btnCliente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        txtUsuario.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcli codigo, nombre descripcion, disponible, elt(estatus+1, 'Activo', 'Bloqueado', 'Inactivo', 'Desincorporado') estatus from jsvencatcli where estatus < 3 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Clientes", _
+        txtUsuario.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcli codigo, nombre descripcion, disponible, elt(estatus+1, 'Activo', 'Bloqueado', 'Inactivo', 'Desincorporado') estatus from jsvencatcli where estatus < 3 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Clientes",
                                             txtUsuario.Text)
-    End Sub
-
-
-    Private Sub btnDesde_Click(sender As System.Object, e As System.EventArgs) Handles btnDesde.Click
-        txtFacturaDesde.Text = SeleccionaFecha(CDate(txtFacturaDesde.Text), Me, sender)
-    End Sub
-
-    Private Sub btnHasta_Click(sender As System.Object, e As System.EventArgs) Handles btnHasta.Click
-        txtFacturaHasta.Text = SeleccionaFecha(CDate(txtFacturaHasta.Text), Me, sender)
     End Sub
 
     Private Sub btnRelacion_Click(sender As System.Object, e As System.EventArgs) Handles btnRelacion.Click

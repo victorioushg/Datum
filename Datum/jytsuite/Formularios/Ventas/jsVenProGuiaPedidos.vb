@@ -1,5 +1,5 @@
 Imports MySql.Data.MySqlClient
-Imports Microsoft.Win32
+Imports Syncfusion.WinForms.Input
 Public Class jsVenProGuiaPedidos
     Private Const sModulo As String = "Guia De PEDIDOS"
     Private Const nTabla As String = "tblEncabGuiaDespacho"
@@ -39,7 +39,8 @@ Public Class jsVenProGuiaPedidos
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
             dt = ds.Tables(nTabla)
 
-
+            Dim dates As SfDateTimeEdit() = {txtEmision, txtFacturaDesde, txtFacturaHasta}
+            SetSizeDateObjects(dates)
 
             DesactivarMarco0()
             If dt.Rows.Count > 0 Then
@@ -109,7 +110,7 @@ Public Class jsVenProGuiaPedidos
                 With .Rows(nRow)
                     'Encabezado 
                     txtCodigo.Text = .Item("codigoguia")
-                    txtEmision.Text = ft.FormatoFecha(CDate(.Item("fechaguia").ToString))
+                    txtEmision.Value = .Item("fechaguia")
                     txtUsuario.Text = .Item("elaborador")
                     txtEstatus.Text = aEstatus(.Item("estatus"))
                     txtComentario.Text = ft.MuestraCampoTexto(.Item("descripcion"))
@@ -118,8 +119,8 @@ Public Class jsVenProGuiaPedidos
                     tslblPesoT.Text = ft.FormatoCantidad(.Item("totalkilos"))
                     txtTotal.Text = ft.FormatoNumero(.Item("totalguia"))
 
-                    txtFacturaDesde.Text = ft.FormatoFecha(CDate(.Item("emisionfac").ToString))
-                    txtFacturaHasta.Text = ft.FormatoFecha(CDate(.Item("hastafac").ToString))
+                    txtFacturaDesde.Value = .Item("emisionfac")
+                    txtFacturaHasta.Value = .Item("hastafac")
 
                     'Renglones
                     AsignarMovimientos(.Item("codigoguia"))
@@ -148,8 +149,8 @@ Public Class jsVenProGuiaPedidos
         Dim aCampos() As String = {"codigofac", "nomcli", "condpag", "totalfac", "kilosfac", ""}
         Dim aNombres() As String = {"Número PEDIDO", "Nombre Cliente", "Condición Pago", "Total PEDIDO", "Peso PEDIDO (Kgs)", ""}
         Dim aAnchos() As Integer = {150, 400, 70, 120, 120, 100}
-        Dim aAlineacion() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, _
-                                        AlineacionDataGrid.Centro, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, _
+        Dim aAlineacion() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda,
+                                        AlineacionDataGrid.Centro, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha,
                                         AlineacionDataGrid.Izquierda}
 
         Dim aFormatos() As String = {"", "", "", sFormatoNumero, sFormatoCantidad, ""}
@@ -176,12 +177,12 @@ Public Class jsVenProGuiaPedidos
         txtTransporte.Text = ""
         txtComentario.Text = ""
         txtEstatus.Text = aEstatus(0)
-        txtEmision.Text = ft.FormatoFecha(sFechadeTrabajo)
+        txtEmision.Value = jytsistema.sFechadeTrabajo
         tslblPesoT.Text = ft.FormatoCantidad(0)
 
         txtTotal.Text = ft.FormatoNumero(0.0)
-        txtFacturaDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtFacturaHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFacturaDesde.Value = jytsistema.sFechadeTrabajo
+        txtFacturaHasta.Value = jytsistema.sFechadeTrabajo
         txtChoferTransporte.Text = ""
 
 
@@ -196,7 +197,7 @@ Public Class jsVenProGuiaPedidos
         grpAceptarSalir.Visible = True
 
         ft.habilitarObjetos(True, False, grpEncab, grpTotales, MenuBarraRenglon)
-        ft.habilitarObjetos(True, True, txtComentario, btnEmision, btnTransporte, btnDesde, btnHasta, _
+        ft.habilitarObjetos(True, True, txtComentario, txtEmision, btnTransporte, txtFacturaHasta, txtFacturaDesde,
                          btnTransporte)
         MenuBarra.Enabled = False
         ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
@@ -205,9 +206,8 @@ Public Class jsVenProGuiaPedidos
     Private Sub DesactivarMarco0()
 
         grpAceptarSalir.Visible = False
-        ft.habilitarObjetos(False, True, txtCodigo, txtEmision, btnEmision, txtUsuario, txtNombreUsuario, _
-                        btnDesde, btnHasta, txtEstatus, _
-                        txtComentario, txtTransporte, txtNombreTransporte, txtChoferTransporte, txtCapacidadTransporte, _
+        ft.habilitarObjetos(False, True, txtCodigo, txtEmision, txtUsuario, txtNombreUsuario,
+                        txtEstatus, txtComentario, txtTransporte, txtNombreTransporte, txtChoferTransporte, txtCapacidadTransporte,
                         txtFacturaDesde, txtFacturaHasta)
 
         ft.habilitarObjetos(False, True, txtTotal)
@@ -285,8 +285,8 @@ Public Class jsVenProGuiaPedidos
 
         End If
 
-        InsertEditVENTASEncabezadoGuiaPedidos(myConn, lblInfo, Inserta, Codigo, txtComentario.Text, jytsistema.sUsuario, txtTransporte.Text, _
-                                               CDate(txtEmision.Text), CDate(txtFacturaDesde.Text), CDate(txtFacturaHasta.Text), _
+        InsertEditVENTASEncabezadoGuiaPedidos(myConn, lblInfo, Inserta, Codigo, txtComentario.Text, jytsistema.sUsuario, txtTransporte.Text,
+                                               txtEmision.Value, txtFacturaDesde.Value, txtFacturaHasta.Value,
                                                dtRenglones.Rows.Count, CDbl(txtTotal.Text), CDbl(tslblPesoT.Text), 0, 0)
 
         ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
@@ -391,7 +391,7 @@ Public Class jsVenProGuiaPedidos
     End Sub
 
 
-    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick, _
+    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick,
        dg.CellMouseClick
         Me.BindingContext(ds, nTablaRenglones).Position = e.RowIndex
         MostrarItemsEnMenuBarra(MenuBarraRenglon, e.RowIndex, ds.Tables(nTablaRenglones).Rows.Count)
@@ -407,7 +407,7 @@ Public Class jsVenProGuiaPedidos
     Private Sub btnAgregarMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarMovimiento.Click
         Dim f As New jsVenProGuiaPedidosMovimientos
         f.Apuntador = Me.BindingContext(ds, nTablaRenglones).Position
-        f.Cargar(myConn, CDate(txtFacturaDesde.Text), CDate(txtFacturaHasta.Text), txtCodigo.Text)
+        f.Cargar(myConn, txtFacturaDesde.Value, txtFacturaHasta.Value, txtCodigo.Text)
         AsignarMovimientos(txtCodigo.Text)
         f = Nothing
     End Sub
@@ -431,7 +431,7 @@ Public Class jsVenProGuiaPedidos
 
                     ft.Ejecutar_strSQL(myconn, " update jsvenencped set numpag = '' where numped = '" & .Item("codigofac") & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
-                    nPosicionRenglon = EliminarRegistros(myConn, lblInfo, ds, nTablaRenglones, "jsvenrenguipedidos", strSQLMov, aCamposDel, aStringsDel, _
+                    nPosicionRenglon = EliminarRegistros(myConn, lblInfo, ds, nTablaRenglones, "jsvenrenguipedidos", strSQLMov, aCamposDel, aStringsDel,
                                                   Me.BindingContext(ds, nTablaRenglones).Position, True)
 
 
@@ -466,13 +466,8 @@ Public Class jsVenProGuiaPedidos
         AsignaMov(Me.BindingContext(ds, nTablaRenglones).Position, False)
     End Sub
 
-    Private Sub btnEmision_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEmision.Click
-        txtEmision.Text = SeleccionaFecha(CDate(txtEmision.Text), Me, sender)
-    End Sub
-
-
     Private Sub btnAsesor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTransporte.Click
-        txtTransporte.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codtra codigo, nomtra descripcion from jsconctatra where id_emp = '" & jytsistema.WorkID & "'  order by 1 ", "Transportes", _
+        txtTransporte.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codtra codigo, nomtra descripcion from jsconctatra where id_emp = '" & jytsistema.WorkID & "'  order by 1 ", "Transportes",
                                                txtTransporte.Text)
     End Sub
 
@@ -497,17 +492,8 @@ Public Class jsVenProGuiaPedidos
 
 
     Private Sub btnCliente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        txtUsuario.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcli codigo, nombre descripcion, disponible, elt(estatus+1, 'Activo', 'Bloqueado', 'Inactivo', 'Desincorporado') estatus from jsvencatcli where estatus < 3 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Clientes", _
+        txtUsuario.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcli codigo, nombre descripcion, disponible, elt(estatus+1, 'Activo', 'Bloqueado', 'Inactivo', 'Desincorporado') estatus from jsvencatcli where estatus < 3 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Clientes",
                                             txtUsuario.Text)
-    End Sub
-
-
-    Private Sub btnDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDesde.Click
-        txtFacturaDesde.Text = SeleccionaFecha(CDate(txtFacturaDesde.Text), Me, sender)
-    End Sub
-
-    Private Sub btnHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHasta.Click
-        txtFacturaHasta.Text = SeleccionaFecha(CDate(txtFacturaHasta.Text), Me, sender)
     End Sub
 
     Private Sub btnRelacion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRelacion.Click
@@ -550,9 +536,6 @@ Public Class jsVenProGuiaPedidos
     '    End If
 
     'End Sub
-   
 
-    Private Sub btnFacturas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
-    End Sub
 End Class

@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Imports fTransport
 Public Class jsBanArcDepositarCajaPlus
     Private Const sModulo As String = "Depositar Caja"
@@ -62,22 +63,21 @@ Public Class jsBanArcDepositarCajaPlus
         sCorredor(0) = Mid(Corredor, 1, 5)
         sCorredor(1) = jytsistema.WorkID
 
+        Dim dates As SfDateTimeEdit() = {txtEmision, txtFechaSeleccion}
+        SetSizeDateObjects(dates)
+
         lblTituloCaja.Text = IIf(tDeposito = 2, "Depositar remesas o sobres del corredor ", lblTituloCaja.Text)
         lblCaja.Text = IIf(tDeposito = 2, Corredor, CodCaja)
         ft.mensajeEtiqueta(lblInfo, " Escoja el o los documentos  a depositar e indique emision, número y/o concepto de este depósito ...", Transportables.tipoMensaje.iAyuda)
-        txtEmision.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtEmision.Value = jytsistema.sFechadeTrabajo
         txtAjustes.Text = ft.FormatoNumero(0.0)
         txtDeposito.Text = IIf(tDeposito = 0, Contador(myConn, lblInfo, Gestion.iBancos, "BANNUMDEP", "04"), "")
 
-        ft.habilitarObjetos(False, True, txtFechaSeleccion, txtDocSel, txtSaldoSel, txtEmision, txtTotalDeposito)
-
+        ft.habilitarObjetos(False, True, txtDocSel, txtSaldoSel, txtTotalDeposito)
         ft.RellenaCombo(aSeleccion, cmbSeleccion)
-
-        txtFechaSeleccion.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFechaSeleccion.Value = jytsistema.sFechadeTrabajo
 
         MovimientosCaja(Mid(lblCaja.Text, 1, 2), tDeposito, Mid(lblCaja.Text, 1, 5))
-
-
 
         Dim iRow As DataGridViewRow
         For Each iRow In dg.Rows
@@ -100,8 +100,8 @@ Public Class jsBanArcDepositarCajaPlus
                 fTipoOrigen = "CE"
                 Verlinea(False, False, False, False, False, False)
 
-                Dim aFields() As String = {"sel.entero.1.0", "fecha.fecha.0.0", "nummov.cadena.15.0", "tipomov.cadena.2.0", "formpag.cadena.2.0", _
-                                           "numpag.cadena.30.0", "refpag.cadena.50.0", "importe.doble.19.2", "concepto.cadena.250.0", _
+                Dim aFields() As String = {"sel.entero.1.0", "fecha.fecha.0.0", "nummov.cadena.15.0", "tipomov.cadena.2.0", "formpag.cadena.2.0",
+                                           "numpag.cadena.30.0", "refpag.cadena.50.0", "importe.doble.19.2", "concepto.cadena.250.0",
                                            "origen.cadena.3.0", "cantidad.entero.4.0", "codven.cadena.5.0", "id_emp.cadena.2.0"}
 
                 CrearTabla(myConn, lblInfo, jytsistema.WorkDataBase, True, tblCaja, aFields)
@@ -133,8 +133,8 @@ Public Class jsBanArcDepositarCajaPlus
                 fTipoOrigen = "TA"
                 Verlinea(False, False, True, True, False, False)
 
-                Dim aFields() As String = {"sel.entero.1.0", "fecha.fecha.0.0", "nummov.cadena.15.0", "tipomov.cadena.2.0", "formpag.cadena.2.0", "numpag.cadena.20.0", _
-                                           "refpag.cadena.50.0", "importe.doble.19.2", "concepto.cadena.250.0", "origen.cadena.3.0", "cantidad.entero.4.0", _
+                Dim aFields() As String = {"sel.entero.1.0", "fecha.fecha.0.0", "nummov.cadena.15.0", "tipomov.cadena.2.0", "formpag.cadena.2.0", "numpag.cadena.20.0",
+                                           "refpag.cadena.50.0", "importe.doble.19.2", "concepto.cadena.250.0", "origen.cadena.3.0", "cantidad.entero.4.0",
                                            "codven.cadena.5.0", "id_emp.cadena.2.0"}
                 CrearTabla(myConn, lblInfo, jytsistema.WorkDataBase, True, tblCaja, aFields)
 
@@ -163,7 +163,7 @@ Public Class jsBanArcDepositarCajaPlus
                 fTipoOrigen = "CT"
                 Verlinea(True, True, True, False, True, True)
 
-                Dim aFields() As String = {"sel.entero.1.0", "TICKETS.entero.6.0", "MONTO.doble.19.2", "NUMCAN.cadena.20.0", "CORREDOR.cadena.15.0", "NUMSOBRE.cadena.20.0", _
+                Dim aFields() As String = {"sel.entero.1.0", "TICKETS.entero.6.0", "MONTO.doble.19.2", "NUMCAN.cadena.20.0", "CORREDOR.cadena.15.0", "NUMSOBRE.cadena.20.0",
                                            "FECHASOBRE.fecha.0.0", "NUMDEP.cadena.20.0", "id_emp.cadena.2.0"}
                 CrearTabla(myConn, lblInfo, jytsistema.WorkDataBase, True, tblCaja, aFields)
 
@@ -202,7 +202,7 @@ Public Class jsBanArcDepositarCajaPlus
 
     End Sub
 
-    Private Sub Verlinea(ByVal Tickets As Boolean, ByVal Ajustes As Boolean, ByVal Comision As Boolean, _
+    Private Sub Verlinea(ByVal Tickets As Boolean, ByVal Ajustes As Boolean, ByVal Comision As Boolean,
         ByVal ISLR As Boolean, ByVal Cargos As Boolean, ByVal IVA As Boolean)
         Label11.Visible = Tickets : txtTickets.Visible = Tickets : Label10.Visible = Tickets : txtNumControl.Visible = Tickets
         Label13.Visible = Ajustes : txtAjustes.Visible = Ajustes : txtAjustes.Enabled = True
@@ -258,9 +258,6 @@ Public Class jsBanArcDepositarCajaPlus
     Private Function CorredorTipo(ByVal MyConn As MySqlConnection, ByVal dsCT As DataSet, ByVal Corredor As String) As Boolean
         If CInt(qFoundAndSign(MyConn, lblInfo, "jsvencestic", aCorredor, sCorredor, "iniciotipo")) > 0 Then Return True
     End Function
-    Private Sub btnEmision_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEmision.Click
-        txtEmision.Text = SeleccionaFecha(CDate(txtEmision.Text), Me, sender)
-    End Sub
 
     Private Sub jsBanDepositarCaja_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         InsertarAuditoria(myConn, MovAud.iSalir, sModulo, CodigoBanco)
@@ -284,10 +281,10 @@ Public Class jsBanArcDepositarCajaPlus
         Dim CodigoProveedor As String = ""
         If tDeposito = 2 Then CodigoProveedor = CStr(qFoundAndSign(myConn, lblInfo, "jsvencestic", aCorredor, sCorredor, "codpro"))
 
-        InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, CDate(txtEmision.Text), txtDeposito.Text, "DP", CodigoBanco, _
-                 IIf(tDeposito = 2, "", Mid(lblCaja.Text, 1, 2)), txtConcepto.Text, ValorNumero(txtTotalDeposito.Text), "CAJ", _
-                 IIf(tDeposito = 2, txtNumControl.Text, ""), "", "", "0", _
-                 jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, fTipoOrigen, "", jytsistema.sFechadeTrabajo, "0", _
+        InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, txtEmision.Value, txtDeposito.Text, "DP", CodigoBanco,
+                 IIf(tDeposito = 2, "", Mid(lblCaja.Text, 1, 2)), txtConcepto.Text, ValorNumero(txtTotalDeposito.Text), "CAJ",
+                 IIf(tDeposito = 2, txtNumControl.Text, ""), "", "", "0",
+                 jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, fTipoOrigen, "", jytsistema.sFechadeTrabajo, "0",
                  CodigoProveedor, "")
 
         If tDeposito <> 2 Then
@@ -295,8 +292,8 @@ Public Class jsBanArcDepositarCajaPlus
             For Each selectedItem As DataGridViewRow In dg.Rows
 
                 If CBool(selectedItem.Cells(0).Value) Then
-                    ft.Ejecutar_strSQL(myconn, "UPDATE jsbantracaj SET DEPOSITO = '" & txtDeposito.Text & "',  " _
-                        & " fecha_dep = '" & ft.FormatoFechaMySQL(CDate(txtEmision.Text)) & "', " _
+                    ft.Ejecutar_strSQL(myConn, "UPDATE jsbantracaj SET DEPOSITO = '" & txtDeposito.Text & "',  " _
+                        & " fecha_dep = '" & ft.FormatoFechaMySQL(txtEmision.Value) & "', " _
                         & " codban = '" & CodigoBanco & "' " _
                         & " where " _
                         & " caja = '" & Mid(CodigoCaja, 1, 2) & "' and " _
@@ -331,17 +328,17 @@ Public Class jsBanArcDepositarCajaPlus
             Dim TotalGasto As Double = BaseIVA + ValorNumero(txtIVA.Text)
 
 
-            InsertEditCOMPRASEncabezadoGasto(myConn, lblInfo, True, txtNumControl.Text, txtNumControl.Text, "", CDate(txtEmision.Text), _
-                CDate(txtEmision.Text), CodigoProveedor, CodigoProveedor, NombreProveedor, RIFProveedor, _
-                NITProveedor, "GASTOS CHEQUES ALIMENTACION", "", "", CodigoContable, CodigoGrupo, _
-                CodigoSubgrupo, BaseIVA, 0, 0, 0, TipoIVA, PorcentajeIVA(myConn, lblInfo, CDate(txtEmision.Text), TipoIVA), BaseIVA, _
-                ValorNumero(txtIVA.Text), TotalGasto, CDate(txtEmision.Text), 1, 0, "EF", txtDeposito.Text, "", "", "", 0.0#, _
+            InsertEditCOMPRASEncabezadoGasto(myConn, lblInfo, True, txtNumControl.Text, txtNumControl.Text, "", txtEmision.Value,
+                txtEmision.Value, CodigoProveedor, CodigoProveedor, NombreProveedor, RIFProveedor,
+                NITProveedor, "GASTOS CHEQUES ALIMENTACION", "", "", CodigoContable, CodigoGrupo,
+                CodigoSubgrupo, BaseIVA, 0, 0, 0, TipoIVA, PorcentajeIVA(myConn, lblInfo, txtEmision.Value, TipoIVA), BaseIVA,
+                ValorNumero(txtIVA.Text), TotalGasto, txtEmision.Value, 1, 0, "EF", txtDeposito.Text, "", "", "", 0.0#,
                 "", 0, 0, 0, 0, "", jytsistema.sFechadeTrabajo, 0, "", "COM", "", "", "0")
 
             For Each selectedItem As DataGridViewRow In dg.Rows
                 If CBool(selectedItem.Cells(0).Value) Then
-                    ft.Ejecutar_strSQL(myconn, "UPDATE jsventabtic SET NUMDEP = '" & txtDeposito.Text & "', " _
-                                    & " FECHADEP = '" & ft.FormatoFechaMySQL(CDate(txtEmision.Text)) & "', " _
+                    ft.Ejecutar_strSQL(myConn, "UPDATE jsventabtic SET NUMDEP = '" & txtDeposito.Text & "', " _
+                                    & " FECHADEP = '" & ft.FormatoFechaMySQL(txtEmision.Value) & "', " _
                                     & " BANCODEP = '" & CodigoBanco & "' " _
                                     & " where " _
                                     & " CORREDOR = '" & Mid(lblCaja.Text, 1, 5) & "' and " _
@@ -362,7 +359,7 @@ Public Class jsBanArcDepositarCajaPlus
                 If .Rows.Count > 0 Then
                     For tCont = 0 To .Rows.Count - 1
                         If .Rows(tCont).Item("numdep") <> "" Then
-                            ft.Ejecutar_strSQL(myconn, "update jsbantracaj set " _
+                            ft.Ejecutar_strSQL(myConn, "update jsbantracaj set " _
                              & " DEPOSITO = '" & .Rows(tCont).Item("NUMDEP") & "', " _
                             & " FECHA_DEP = '" & ft.FormatoFechaMySQL(CDate(.Rows(tCont).Item("FECHADEP").ToString)) & "', " _
                             & " CODBAN = '" & .Rows(tCont).Item("BANCODEP") & "' WHERE " _
@@ -382,7 +379,7 @@ Public Class jsBanArcDepositarCajaPlus
     End Sub
     Private Function Validado() As Boolean
 
-        If FechaUltimoBloqueo(myConn, "jsbantraban") >= Convert.ToDateTime(txtEmision.Text) Then
+        If FechaUltimoBloqueo(myConn, "jsbantraban") >= txtEmision.Value Then
             ft.mensajeCritico("FECHA MENOR QUE ULTIMA FECHA DE CIERRE...")
             Return False
         End If
@@ -438,16 +435,16 @@ Public Class jsBanArcDepositarCajaPlus
 
         ValidaSeleccion = False
 
-        If txtRP.Text.Trim = "" AndAlso (cmbSeleccion.SelectedIndex = 6 Or _
+        If txtRP.Text.Trim = "" AndAlso (cmbSeleccion.SelectedIndex = 6 Or
                                           cmbSeleccion.SelectedIndex = 3) Then
 
-            ft.MensajeCritico("Debe indicar N° Referencia pago ")
+            ft.mensajeCritico("Debe indicar N° Referencia pago ")
             Exit Function
         End If
 
-        If txtVendedor.Text.Trim = "" AndAlso (cmbSeleccion.SelectedIndex = 5 Or _
+        If txtVendedor.Text.Trim = "" AndAlso (cmbSeleccion.SelectedIndex = 5 Or
                                            cmbSeleccion.SelectedIndex = 6) Then
-            ft.MensajeCritico("Debe indicar Vendedor ")
+            ft.mensajeCritico("Debe indicar Vendedor ")
             Exit Function
         End If
 
@@ -478,29 +475,29 @@ Public Class jsBanArcDepositarCajaPlus
     End Function
 
     Private Sub txtDeposito_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDeposito.GotFocus
-        ft.mensajeEtiqueta(lblInfo, "Indique el número deposito ... ", Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, "Indique el número deposito ... ", Transportables.tipoMensaje.iInfo)
         txtDeposito.MaxLength = 15
     End Sub
 
     Private Sub txtConcepto_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtConcepto.GotFocus
-        ft.mensajeEtiqueta(lblInfo, "Indique el concepto o comentario para este deposito ... ", Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, "Indique el concepto o comentario para este deposito ... ", Transportables.tipoMensaje.iInfo)
         txtDeposito.MaxLength = 250
     End Sub
 
-    Private Sub btnEmision_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEmision.GotFocus
-        ft.mensajeEtiqueta(lblInfo, "seleccione la fecha de emisión de este depósito...", Transportables.TipoMensaje.iInfo)
+    Private Sub btnEmision_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
+        ft.mensajeEtiqueta(lblInfo, "seleccione la fecha de emisión de este depósito...", Transportables.tipoMensaje.iInfo)
     End Sub
     Private Sub txtNumControl_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtNumControl.GotFocus
-        ft.mensajeEtiqueta(lblInfo, "Indique el Nº de Control ...", Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, "Indique el Nº de Control ...", Transportables.tipoMensaje.iInfo)
     End Sub
-    Private Sub txtAjustes_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAjustes.TextChanged, _
+    Private Sub txtAjustes_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAjustes.TextChanged,
         txtComision.TextChanged, txtCargos.TextChanged, txtISRL.TextChanged, txtIVA.TextChanged, txtSaldoSel.TextChanged
 
-        txtTotalDeposito.Text = ft.FormatoNumero(ValorNumero(txtSaldoSel.Text) + ValorNumero(txtAjustes.Text) + ValorNumero(txtComision.Text) + _
+        txtTotalDeposito.Text = ft.FormatoNumero(ValorNumero(txtSaldoSel.Text) + ValorNumero(txtAjustes.Text) + ValorNumero(txtComision.Text) +
             ValorNumero(txtCargos.Text) + ValorNumero(txtISRL.Text) + ValorNumero(txtIVA.Text))
 
     End Sub
-    Private Sub cmbSeleccion_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbSeleccion.SelectedIndexChanged, _
+    Private Sub cmbSeleccion_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbSeleccion.SelectedIndexChanged,
         cmbFP.SelectedIndexChanged
 
         '0= "Ninguno",                                   {"EF", "CH", "TA", "CT"}
@@ -514,21 +511,21 @@ Public Class jsBanArcDepositarCajaPlus
         txtRP.Text = ""
         Select Case cmbSeleccion.SelectedIndex.ToString + cmbFP.Text
             Case "2EF", "2CH", "2TA", "2CT"
-                ft.visualizarObjetos(True, txtFechaSeleccion, btnFechaSeleccion)
+                ft.visualizarObjetos(True, txtFechaSeleccion)
                 ft.visualizarObjetos(False, cmbFP, txtRP, btnRP, txtVendedor, btnVendedor)
             Case "3EF", "3CH", "3TA", "3CT"
-                ft.visualizarObjetos(False, txtFechaSeleccion, btnFechaSeleccion, txtVendedor, btnVendedor)
+                ft.visualizarObjetos(False, txtFechaSeleccion, txtVendedor, btnVendedor)
                 ft.visualizarObjetos(True, cmbFP, txtRP, btnRP)
             Case "4EF", "4CH", "4TA", "4CT"
-                ft.visualizarObjetos(True, txtFechaSeleccion, btnFechaSeleccion, cmbFP)
+                ft.visualizarObjetos(True, txtFechaSeleccion, cmbFP)
                 ft.visualizarObjetos(False, txtRP, btnRP, txtVendedor, btnVendedor)
             Case "5EF", "5CH", "5TA", "5CT"
-                ft.visualizarObjetos(True, txtVendedor, btnVendedor, txtFechaSeleccion, btnFechaSeleccion, cmbFP)
+                ft.visualizarObjetos(True, txtVendedor, btnVendedor, txtFechaSeleccion, cmbFP)
                 ft.visualizarObjetos(False, txtRP, btnRP)
             Case "6EF", "6CH", "6TA", "6CT"
-                ft.visualizarObjetos(True, txtVendedor, btnVendedor, txtFechaSeleccion, btnFechaSeleccion, cmbFP, txtRP, btnRP)
+                ft.visualizarObjetos(True, txtVendedor, btnVendedor, txtFechaSeleccion, cmbFP, txtRP, btnRP)
             Case Else
-                ft.visualizarObjetos(False, txtVendedor, btnVendedor, txtFechaSeleccion, btnFechaSeleccion, cmbFP, txtRP, btnRP)
+                ft.visualizarObjetos(False, txtVendedor, btnVendedor, txtFechaSeleccion, cmbFP, txtRP, btnRP)
         End Select
     End Sub
 
@@ -553,31 +550,31 @@ Public Class jsBanArcDepositarCajaPlus
                     Case 1 'Todos
                         nRow.Cells(0).Value = True
                     Case 2 ' Por fecha
-                        If ft.FormatoFechaMySQL(nFecha) = ft.FormatoFechaMySQL(CDate(txtFechaSeleccion.Text)) Then _
+                        If ft.FormatoFechaMySQL(nFecha) = ft.FormatoFechaMySQL(txtFechaSeleccion.Value) Then _
                             nRow.Cells(0).Value = True
                     Case 3 'FormaPago/Refer.Pago 
-                        If nFormaPago = cmbFP.Text AndAlso _
+                        If nFormaPago = cmbFP.Text AndAlso
                             nReferPago = txtRP.Text Then nRow.Cells(0).Value = True
                     Case 4 'Fecha/FormaPago
-                        If nFormaPago = cmbFP.Text AndAlso _
-                                 ft.FormatoFechaMySQL(nFecha) = ft.FormatoFechaMySQL(CDate(txtFechaSeleccion.Text)) Then
+                        If nFormaPago = cmbFP.Text AndAlso
+                                 ft.FormatoFechaMySQL(nFecha) = ft.FormatoFechaMySQL(txtFechaSeleccion.Value) Then
 
                             nRow.Cells(0).Value = True
 
                         End If
                     Case 5 '"Vendedor/Fecha/FormaPago"
-                        If nVendedor = txtVendedor.Text AndAlso _
-                            nFormaPago = cmbFP.Text AndAlso _
-                                 ft.FormatoFechaMySQL(nFecha) = ft.FormatoFechaMySQL(CDate(txtFechaSeleccion.Text)) Then
+                        If nVendedor = txtVendedor.Text AndAlso
+                            nFormaPago = cmbFP.Text AndAlso
+                                 ft.FormatoFechaMySQL(nFecha) = ft.FormatoFechaMySQL(txtFechaSeleccion.Value) Then
 
                             nRow.Cells(0).Value = True
 
                         End If
                     Case 6 'Vendedor/Fecha/FormaPago/ReferPago
-                        If nVendedor = txtVendedor.Text AndAlso _
-                            nFormaPago = cmbFP.Text AndAlso _
-                                nReferPago = txtRP.Text AndAlso _
-                                 ft.FormatoFechaMySQL(nFecha) = ft.FormatoFechaMySQL(CDate(txtFechaSeleccion.Text)) Then
+                        If nVendedor = txtVendedor.Text AndAlso
+                            nFormaPago = cmbFP.Text AndAlso
+                                nReferPago = txtRP.Text AndAlso
+                                 ft.FormatoFechaMySQL(nFecha) = ft.FormatoFechaMySQL(txtFechaSeleccion.Value) Then
                             nRow.Cells(0).Value = True
 
                         End If
@@ -586,9 +583,6 @@ Public Class jsBanArcDepositarCajaPlus
             CalculaTotales()
         End If
 
-    End Sub
-    Private Sub btnFechaSeleccion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaSeleccion.Click
-        txtFechaSeleccion.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtFechaSeleccion.Text), Me, btnFechaSeleccion))
     End Sub
 
     Private Sub btnBP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRP.Click
@@ -662,7 +656,7 @@ Public Class jsBanArcDepositarCajaPlus
                     tSel += CInt(selectedItem.Cells(4).Value)
                     dComision -= ComisionCorredorSobre(myConn, ds, selectedItem.Cells(3).Value, selectedItem.Cells(2).Value)
                     dCar -= CDbl(qFoundAndSign(myConn, lblInfo, "jsvencestic", aCorredor, sCorredor, "cargos"))
-                    dIVA = -1 * Math.Round((Math.Abs(dComision) + Math.Abs(dCar)) * PorcentajeIVA(myConn, lblInfo, CDate(txtEmision.Text), TipoIVA) / 100, 2)
+                    dIVA = -1 * Math.Round((Math.Abs(dComision) + Math.Abs(dCar)) * PorcentajeIVA(myConn, lblInfo, txtEmision.Value, TipoIVA) / 100, 2)
                 End If
             Next
 

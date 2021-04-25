@@ -20,26 +20,25 @@ Partial Class jsBanArcCajasMovimientos
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsBanArcCajasMovimientos))
-        Me.lblInfo = New System.Windows.Forms.Label
-        Me.txtFecha = New System.Windows.Forms.TextBox
-        Me.txtDocumento = New System.Windows.Forms.TextBox
-        Me.txtDocPago = New System.Windows.Forms.TextBox
-        Me.txtRefPago = New System.Windows.Forms.TextBox
-        Me.txtImporte = New System.Windows.Forms.TextBox
-        Me.cmbTipo = New System.Windows.Forms.ComboBox
-        Me.cmbFormaPago = New System.Windows.Forms.ComboBox
-        Me.btnFecha = New System.Windows.Forms.Button
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.btnTarjeta = New System.Windows.Forms.Button
-        Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.btnOK = New System.Windows.Forms.Button
+        Me.lblInfo = New System.Windows.Forms.Label()
+        Me.txtDocumento = New System.Windows.Forms.TextBox()
+        Me.txtDocPago = New System.Windows.Forms.TextBox()
+        Me.txtRefPago = New System.Windows.Forms.TextBox()
+        Me.txtImporte = New System.Windows.Forms.TextBox()
+        Me.cmbTipo = New System.Windows.Forms.ComboBox()
+        Me.cmbFormaPago = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.btnTarjeta = New System.Windows.Forms.Button()
+        Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnOK = New System.Windows.Forms.Button()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpAceptarSalir.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -52,15 +51,6 @@ Partial Class jsBanArcCajasMovimientos
         Me.lblInfo.Name = "lblInfo"
         Me.lblInfo.Size = New System.Drawing.Size(565, 31)
         Me.lblInfo.TabIndex = 80
-        '
-        'txtFecha
-        '
-        Me.txtFecha.Enabled = False
-        Me.txtFecha.Location = New System.Drawing.Point(202, 12)
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(144, 20)
-        Me.txtFecha.TabIndex = 82
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtDocumento
         '
@@ -114,16 +104,6 @@ Partial Class jsBanArcCajasMovimientos
         Me.cmbFormaPago.Name = "cmbFormaPago"
         Me.cmbFormaPago.Size = New System.Drawing.Size(144, 21)
         Me.cmbFormaPago.TabIndex = 104
-        '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(348, 12)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(29, 20)
-        Me.btnFecha.TabIndex = 105
-        Me.btnFecha.Text = "•••"
-        Me.btnFecha.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -238,6 +218,18 @@ Partial Class jsBanArcCajasMovimientos
         Me.btnOK.Text = "Aceptar"
         Me.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         '
+        'txtFecha
+        '
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(202, 10)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(114, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 214
+        '
         'jsBanArcCajasMovimientos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
@@ -245,6 +237,7 @@ Partial Class jsBanArcCajasMovimientos
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(565, 200)
         Me.ControlBox = False
+        Me.Controls.Add(Me.txtFecha)
         Me.Controls.Add(Me.grpAceptarSalir)
         Me.Controls.Add(Me.btnTarjeta)
         Me.Controls.Add(Me.Label7)
@@ -254,14 +247,12 @@ Partial Class jsBanArcCajasMovimientos
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.btnFecha)
         Me.Controls.Add(Me.cmbFormaPago)
         Me.Controls.Add(Me.cmbTipo)
         Me.Controls.Add(Me.txtImporte)
         Me.Controls.Add(Me.txtRefPago)
         Me.Controls.Add(Me.txtDocPago)
         Me.Controls.Add(Me.txtDocumento)
-        Me.Controls.Add(Me.txtFecha)
         Me.Controls.Add(Me.lblInfo)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -276,14 +267,12 @@ Partial Class jsBanArcCajasMovimientos
 
     End Sub
     Friend WithEvents lblInfo As System.Windows.Forms.Label
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
     Friend WithEvents txtDocumento As System.Windows.Forms.TextBox
     Friend WithEvents txtDocPago As System.Windows.Forms.TextBox
     Friend WithEvents txtRefPago As System.Windows.Forms.TextBox
     Friend WithEvents txtImporte As System.Windows.Forms.TextBox
     Friend WithEvents cmbTipo As System.Windows.Forms.ComboBox
     Friend WithEvents cmbFormaPago As System.Windows.Forms.ComboBox
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
@@ -295,4 +284,5 @@ Partial Class jsBanArcCajasMovimientos
     Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

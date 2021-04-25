@@ -20,6 +20,7 @@ Public Class jsVenArcPresupuestos
     Private dtIVA As New DataTable
     Private dtDescuentos As New DataTable
     Private dtClientes As New DataTable
+    Private dtAsesores As New DataTable
     Private ft As New Transportables
 
     Private i_modo As Integer
@@ -33,8 +34,10 @@ Public Class jsVenArcPresupuestos
             & " a.emision <= '" & ft.FormatoFechaMySQL(jytsistema.sFechadeTrabajo) & "' and " _
             & " a.id_emp = '" & jytsistema.WorkID & "' order by a.numcot"
 
-    Private strSQLCliente = " select codcli, nombre, disponible, elt(estatus+1, 'Activo', 'Bloqueado', 'Inactivo', 'Desincorporado') estatus " +
+    Private strSQLCliente = " select codcli, nombre, disponible, elt(estatus+1, 'Activo', 'Bloqueado', 'Inactivo', 'Desincorporado') estatus " &
         " from jsvencatcli where estatus < 3 And id_emp = '" & jytsistema.WorkID & "' order by 1 "
+    Private strSQLAsesor = " select codven, CONCAT( apellidos, ', ', nombres) nombre from jsvencatven where tipo = '" & TipoVendedor.iFuerzaventa &
+        "' and estatus = 1  and id_emp = '" & jytsistema.WorkID & "'  order by 1 "
 
     Private Impresa As Integer
 
@@ -49,13 +52,21 @@ Public Class jsVenArcPresupuestos
 
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
             ds = DataSetRequery(ds, strSQLCliente, myConn, "tabla_clientes", lblInfo)
+            ds = DataSetRequery(ds, strSQLAsesor, myConn, "tabla_asesores", lblInfo)
+
             dt = ds.Tables(nTabla)
             dtClientes = ds.Tables("tabla_clientes")
+            dtAsesores = ds.Tables("tabla_asesores")
 
             ''Clientes
             sfCBCliente.DisplayMember = "nombre"
             sfCBCliente.ValueMember = "codcli"
             sfCBCliente.DataSource = dtClientes
+
+            ''Asesores 
+            sfCBAsesores.DisplayMember = "nombre"
+            sfCBAsesores.ValueMember = "codven"
+            sfCBAsesores.DataSource = dtAsesores
 
             DesactivarMarco0()
             If dt.Rows.Count > 0 Then
@@ -141,7 +152,7 @@ Public Class jsVenArcPresupuestos
                 txtEstatus.Text = aEstatus(.Item("estatus"))
                 sfCBCliente.SelectedValue = .Item("codcli")
                 txtComentario.Text = ft.muestraCampoTexto(.Item("comen"))
-                txtAsesor.Text = ft.muestraCampoTexto(.Item("codven"))
+                sfCBAsesores.SelectedValue = .Item("codven")
                 ft.RellenaCombo(aTarifa, cmbTarifa, ft.InArray(aTarifa, .Item("tarifa")))
 
                 tslblPesoT.Text = ft.FormatoCantidad(.Item("kilos"))
@@ -205,7 +216,7 @@ Public Class jsVenArcPresupuestos
         End If
 
         sfCBCliente.SelectedValue = Nothing
-        txtAsesor.Text = ""
+        sfCBAsesores.SelectedValue = Nothing
         ft.RellenaCombo(aTarifa, cmbTarifa)
         txtComentario.Text = ""
         txtEmision.Value = sFechadeTrabajo
@@ -233,9 +244,8 @@ Public Class jsVenArcPresupuestos
         grpAceptarSalir.Visible = True
 
         ft.habilitarObjetos(True, False, grpEncab, grpTotales, MenuBarraRenglon, MenuDescuentos)
-        ft.habilitarObjetos(True, True, txtComentario, txtEmision, txtVence, sfCBCliente, cmbTarifa,
-                         btnAsesor, txtAsesor)
-        If Not CBool(ParametroPlus(myConn, Gestion.iVentas, "VENCOTPA09")) Then ft.habilitarObjetos(False, True, txtAsesor, btnAsesor)
+        ft.habilitarObjetos(True, True, txtComentario, txtEmision, txtVence, sfCBCliente, cmbTarifa, sfCBAsesores)
+        If Not CBool(ParametroPlus(myConn, Gestion.iVentas, "VENCOTPA09")) Then ft.habilitarObjetos(False, True, sfCBAsesores)
 
 
         MenuBarra.Enabled = False
@@ -246,8 +256,7 @@ Public Class jsVenArcPresupuestos
 
         grpAceptarSalir.Visible = False
         ft.habilitarObjetos(False, True, txtCodigo, txtEmision, txtVence, txtEstatus,
-                sfCBCliente, txtComentario, txtAsesor, btnAsesor, txtNombreAsesor,
-                cmbTarifa, txtTotalCambioEmision, txtTotalActual)
+                sfCBCliente, txtComentario, sfCBAsesores, cmbTarifa, txtTotalCambioEmision, txtTotalActual)
 
         ft.habilitarObjetos(False, True, txtDescuentos, txtCargos, MenuDescuentos, txtSubTotal, txtTotalIVA, txtTotal)
 
@@ -302,7 +311,7 @@ Public Class jsVenArcPresupuestos
             Return False
         End If
 
-        If txtNombreAsesor.Text = "" Then
+        If sfCBAsesores.SelectedValue = Nothing Then
             ft.mensajeCritico("Debe indicar un nombre de Asesor válido...")
             Return False
         End If
@@ -336,7 +345,7 @@ Public Class jsVenArcPresupuestos
         End If
 
         InsertEditVENTASEncabezadoPresupuesto(myConn, lblInfo, Inserta, Codigo, txtEmision.Value, txtVence.Value,
-                                               sfCBCliente.SelectedValue, txtComentario.Text, txtAsesor.Text, cmbTarifa.Text,
+                                               sfCBCliente.SelectedValue, txtComentario.Text, sfCBAsesores.SelectedValue, cmbTarifa.Text,
                                                ValorNumero(txtSubTotal.Text), ValorNumero(txtDescuentos.Text), ValorNumero(txtCargos.Text),
                                                ValorNumero(txtTotalIVA.Text), ValorNumero(txtTotal.Text),
                                                ft.InArray(aEstatus, txtEstatus.Text), dtRenglones.Rows.Count,
@@ -534,7 +543,7 @@ Public Class jsVenArcPresupuestos
         If sfCBCliente.SelectedValue <> "" Then
             Dim f As New jsGenRenglonesMovimientos
             f.Apuntador = Me.BindingContext(ds, nTablaRenglones).Position
-            f.Agregar(myConn, ds, dtRenglones, "COT", txtCodigo.Text, txtEmision.Value, , cmbTarifa.Text, sfCBCliente.SelectedValue, , , , , , , , , , txtAsesor.Text)
+            f.Agregar(myConn, ds, dtRenglones, "COT", txtCodigo.Text, txtEmision.Value, , cmbTarifa.Text, sfCBCliente.SelectedValue, , , , , , , , , , sfCBAsesores.SelectedValue)
             ds = DataSetRequery(ds, strSQLMov, myConn, nTablaRenglones, lblInfo)
             AsignaMov(f.Apuntador, True)
             CalculaTotales()
@@ -548,7 +557,7 @@ Public Class jsVenArcPresupuestos
             Dim f As New jsGenRenglonesMovimientos
             f.Apuntador = Me.BindingContext(ds, nTablaRenglones).Position
             f.Editar(myConn, ds, dtRenglones, "COT", txtCodigo.Text, txtEmision.Value, , cmbTarifa.Text, sfCBCliente.SelectedValue,
-                     IIf(dtRenglones.Rows(Me.BindingContext(ds, nTablaRenglones).Position).Item("item").ToString.Substring(0, 1) = "$", True, False), , , , , , , , , txtAsesor.Text)
+                     IIf(dtRenglones.Rows(Me.BindingContext(ds, nTablaRenglones).Position).Item("item").ToString.Substring(0, 1) = "$", True, False), , , , , , , , , sfCBAsesores.SelectedValue)
             ds = DataSetRequery(ds, strSQLMov, myConn, nTablaRenglones, lblInfo)
             AsignaMov(f.Apuntador, True)
             CalculaTotales()
@@ -643,38 +652,19 @@ Public Class jsVenArcPresupuestos
 
     End Sub
 
-    Private Sub btnAsesor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsesor.Click
-        If CBool(ParametroPlus(myConn, Gestion.iVentas, "VENCOTPA09")) Then
-            Dim f As New jsControlArcTablaSimple
-            Dim dtVen As DataTable
-            Dim nTablaVen As String = "tblVendedores"
-            ds = DataSetRequery(ds, " select codven codigo, CONCAT( apellidos, ', ', nombres) descripcion from jsvencatven where tipo = '" & TipoVendedor.iFuerzaventa & "' and estatus = 1  and id_emp = '" & jytsistema.WorkID & "'  order by 1 ",
-                                  myConn, nTablaVen, lblInfo)
-            dtVen = ds.Tables(nTablaVen)
-            f.Cargar("Asesores Comerciales", ds, dtVen, nTablaVen, TipoCargaFormulario.iShowDialog, False)
-            txtAsesor.Text = f.Seleccion
-            f = Nothing
-            dtVen = Nothing
-        Else
-            ft.mensajeCritico("Escogencia de asesor comercial no permitida...")
-        End If
-    End Sub
-
     Private Sub sfCBCliente_SelectedIndexChanged(sender As Object, e As EventArgs) Handles sfCBCliente.SelectedIndexChanged
-        txtAsesor.Text = ft.DevuelveScalarCadena(myConn, "SELECT b.codven " _
+
+        If i_modo = movimiento.iAgregar Then
+
+            sfCBAsesores.SelectedValue = ft.DevuelveScalarCadena(myConn, "SELECT b.codven " _
                                                                    & " FROM jsvenrenrut a  " _
                                                                    & " LEFT JOIN jsvenencrut b ON (a.codrut = b.codrut AND a.tipo = b.tipo AND a.id_emp = b.id_emp) " _
                                                                    & " WHERE " _
                                                                    & " a.tipo = '0' AND " _
                                                                    & " a.cliente = '" & sfCBCliente.SelectedValue & "' AND " _
                                                                    & " a.id_emp = '" & jytsistema.WorkID & "' ")
+        End If
 
-    End Sub
-    Private Sub txtAsesor_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAsesor.TextChanged
-        Dim aFld() As String = {"codven", "tipo", "id_emp"}
-        Dim aStr() As String = {txtAsesor.Text, "0", jytsistema.WorkID}
-        txtNombreAsesor.Text = qFoundAndSign(myConn, lblInfo, "jsvencatven", aFld, aStr, "apellidos") & ", " _
-                & qFoundAndSign(myConn, lblInfo, "jsvencatven", aFld, aStr, "nombres")
     End Sub
 
     Private Sub btnAgregaDescuento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregaDescuento.Click
@@ -683,7 +673,7 @@ Public Class jsVenArcPresupuestos
                 ft.mensajeCritico("DESCUENTOS NO PERMITIDOS")
             Else
                 Dim f As New jsGenDescuentosVentas
-                f.Agregar(myConn, ds, dtDescuentos, "jsvendescot", "numcot", txtCodigo.Text, sModulo, txtAsesor.Text, 0,
+                f.Agregar(myConn, ds, dtDescuentos, "jsvendescot", "numcot", txtCodigo.Text, sModulo, sfCBAsesores.SelectedValue, 0,
                           txtEmision.Value, ValorNumero(txtSubTotal.Text))
                 CalculaTotales()
                 f = Nothing

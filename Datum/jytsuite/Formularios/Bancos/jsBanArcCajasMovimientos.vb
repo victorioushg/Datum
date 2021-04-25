@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsBanArcCajasMovimientos
     Private Const sModulo As String = "Movimiento de caja"
     Private Const nTabla As String = "tarjetas"
@@ -37,7 +38,7 @@ Public Class jsBanArcCajasMovimientos
         Me.ShowDialog()
     End Sub
     Private Sub IniciarTXT()
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
         ft.RellenaCombo(aTipo, cmbTipo, 0)
         ft.RellenaCombo(aFormaPag, cmbFormaPago, 0)
         txtDocumento.Text = ""
@@ -57,7 +58,7 @@ Public Class jsBanArcCajasMovimientos
     End Sub
     Private Sub AsignarTXT(ByVal nPosicion As Integer)
         With dt
-            txtFecha.Text = ft.FormatoFecha(CDate(.Rows(nPosicion).Item("fecha").ToString))
+            txtFecha.Value = .Rows(nPosicion).Item("fecha")
             ft.RellenaCombo(aTipo, cmbTipo, Array.IndexOf(aTipoR, .Rows(nPosicion).Item("tipomov")))
             ft.RellenaCombo(aFormaPag, cmbFormaPago, Array.IndexOf(aFormaPagR, .Rows(nPosicion).Item("formpag")))
             txtDocumento.Text = .Rows(nPosicion).Item("nummov")
@@ -75,10 +76,14 @@ Public Class jsBanArcCajasMovimientos
 
     Private Sub jsBanCajasMovimientos_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Me.Tag = sModulo
-        ft.habilitarObjetos(False, True, txtFecha)
+
         InsertarAuditoria(MyConn, MovAud.ientrar, sModulo, CodigoCaja)
         ds = DataSetRequery(ds, strSQL, MyConn, nTabla, lblInfo)
         dtTar = ds.Tables(nTabla)
+
+        Dim dates As SfDateTimeEdit() = {txtFecha}
+        SetSizeDateObjects(dates)
+
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -128,7 +133,7 @@ Public Class jsBanArcCajasMovimientos
         End If
 
         Dim aAdicionales() As String = {" caja = '" & CodigoCaja & "' AND "}
-        If FechaUltimoBloqueo(MyConn, "jsbantracaj", aAdicionales) >= Convert.ToDateTime(txtFecha.Text) Then
+        If FechaUltimoBloqueo(MyConn, "jsbantracaj", aAdicionales) >= txtFecha.Value Then
             ft.mensajeEtiqueta(lblInfo, "FECHA MENOR QUE ULTIMA FECHA DE CIERRE...", Transportables.tipoMensaje.iAdvertencia)
             Return False
         End If
@@ -145,9 +150,9 @@ Public Class jsBanArcCajasMovimientos
                 Insertar = True
                 Apuntador = dt.Rows.Count
             End If
-            InsertEditBANCOSRenglonCaja(MyConn, lblInfo, Insertar, CodigoCaja, Renglon, CDate(txtFecha.Text), "CAJ", _
-                 aTipoR(cmbTipo.SelectedIndex), txtDocumento.Text, aFormaPagR(cmbFormaPago.SelectedIndex), _
-                 txtDocPago.Text, txtRefPago.Text, IIf(cmbTipo.SelectedIndex = 0, 1, -1) * ValorNumero(txtImporte.Text), "", "", "", jytsistema.MyDate, 1, _
+            InsertEditBANCOSRenglonCaja(MyConn, lblInfo, Insertar, CodigoCaja, Renglon, txtFecha.Value, "CAJ",
+                 aTipoR(cmbTipo.SelectedIndex), txtDocumento.Text, aFormaPagR(cmbFormaPago.SelectedIndex),
+                 txtDocPago.Text, txtRefPago.Text, IIf(cmbTipo.SelectedIndex = 0, 1, -1) * ValorNumero(txtImporte.Text), "", "", "", jytsistema.MyDate, 1,
                  "", "", "", MyDate, "", "", "0")
 
             InsertarAuditoria(MyConn, MovAud.iSalir, sModulo, CodigoCaja & " " & txtDocumento.Text)
@@ -202,11 +207,6 @@ Public Class jsBanArcCajasMovimientos
             txtRefPago.Text = ""
         End If
         f = Nothing
-    End Sub
-
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, btnFecha)
-
     End Sub
 
     Private Sub txtImporte_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtImporte.KeyPress
