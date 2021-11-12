@@ -325,12 +325,12 @@ Module FuncionesBancos
                                                + " numorg = '" + "DB" + ft.RellenaConCaracter(jytsistema.sFechadeTrabajo.Month.ToString, 2, "0", Transportables.lado.izquierdo) + jytsistema.sFechadeTrabajo.Year.ToString + "' and " _
                                                + " id_emp = '" + jytsistema.WorkID + "' ") = 0 Then Insertar = True
 
-                    InsertEditBANCOSMovimientoBanco(MyConn, lblInfo, Insertar, FechaDocumento, Numerodocumento, "ND", CodigoBanco, "", _
-                                                     DescripcionIDB + " MES : " + ft.RellenaConCaracter(jytsistema.sFechadeTrabajo.Month.ToString, 2, "0", Transportables.lado.izquierdo) + "/" + jytsistema.sFechadeTrabajo.Year.ToString, _
-                                                    -1 * Math.Abs(Importe) * PorcentajeIDB / 100, _
-                                                    "BAN", "DB" + ft.RellenaConCaracter(jytsistema.sFechadeTrabajo.Month.ToString, 2, "0", Transportables.lado.izquierdo) + jytsistema.sFechadeTrabajo.Year.ToString, _
-                                                    "", "", "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, "ND", "", jytsistema.sFechadeTrabajo, _
-                                                    "0", "", "")
+                    InsertEditBANCOSMovimientoBanco(MyConn, lblInfo, Insertar, FechaDocumento, Numerodocumento, "ND", CodigoBanco, "",
+                                                     DescripcionIDB + " MES : " + ft.RellenaConCaracter(jytsistema.sFechadeTrabajo.Month.ToString, 2, "0", Transportables.lado.izquierdo) + "/" + jytsistema.sFechadeTrabajo.Year.ToString,
+                                                    -1 * Math.Abs(Importe) * PorcentajeIDB / 100,
+                                                    "BAN", "DB" + ft.RellenaConCaracter(jytsistema.sFechadeTrabajo.Month.ToString, 2, "0", Transportables.lado.izquierdo) + jytsistema.sFechadeTrabajo.Year.ToString,
+                                                    "", "", "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, "ND", "", jytsistema.sFechadeTrabajo,
+                                                    "0", "", "", jytsistema.WorkCurrency.Id, DateTime.Now())
 
                 End If
 

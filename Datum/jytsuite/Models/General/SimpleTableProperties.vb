@@ -37,3 +37,14 @@
 	End Sub
 
 End Class
+
+Public Class TextoValor
+	Public Property Text As String
+	Public Property Value As String
+	Public Property Index As Integer
+	Public Sub New(ByVal text As String, ByVal value As String, ByVal index As Integer)
+		Me.Text = text
+		Me.Value = value
+		Me.Index = index
+	End Sub
+End Class

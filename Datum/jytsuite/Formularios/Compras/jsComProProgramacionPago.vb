@@ -1,11 +1,13 @@
 Imports MySql.Data.MySqlClient
 Imports fTransport
+Imports Syncfusion.WinForms.Input
+
 Public Class jsComProProgramacionPago
     Private Const sModulo As String = "Pagos Programados"
     Private Const lRegion As String = "RibbonButton236"
     Private Const nTabla As String = "tblEncab"
     Private Const nTablaRenglones As String = "tblRenglones_"
-   
+
 
     Private strSQL As String = " select a.* from jsproencprg a where a.id_emp = '" & jytsistema.WorkID & "' order by a.numprg "
 
@@ -26,7 +28,7 @@ Public Class jsComProProgramacionPago
     Private Eliminados As New ArrayList
 
     Private Impresa As Integer
-    
+
     Private Sub jsComArcCompras_FormClosed(sender As Object, e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         ft = Nothing
     End Sub
@@ -38,6 +40,9 @@ Public Class jsComProProgramacionPago
 
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
             dt = ds.Tables(nTabla)
+
+            Dim dates As SfDateTimeEdit() = {txtEmision, txtDesde, txtHasta}
+            SetSizeDateObjects(dates)
 
             DesactivarMarco0()
             If dt.Rows.Count > 0 Then
@@ -52,7 +57,7 @@ Public Class jsComProProgramacionPago
             AsignarTooltips()
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
-            ft.MensajeCritico("Error en conexión de base de datos: " & ex.Message)
+            ft.mensajeCritico("Error en conexión de base de datos: " & ex.Message)
         End Try
 
     End Sub
@@ -115,9 +120,9 @@ Public Class jsComProProgramacionPago
             With .Rows(nRow)
                 'Encabezado 
                 txtCodigo.Text = ft.muestraCampoTexto(.Item("numprg"))
-                txtEmision.Text = ft.muestraCampoFecha(.Item("fechaprg"))
-                txtDesde.Text = ft.muestraCampoFecha(.Item("fechaprgdesde"))
-                txtHasta.Text = ft.muestraCampoFecha(.Item("fechaprghasta"))
+                txtEmision.Value = .Item("fechaprg")
+                txtDesde.Value = .Item("fechaprgdesde")
+                txtHasta.Value = .Item("fechaprghasta")
                 txtComentario.Text = ft.muestraCampoTexto(.Item("comen"))
 
                 txtEstatus.Text = ft.muestraCampoTexto(aEstatus(.Item("estatusprg")))
@@ -174,9 +179,9 @@ Public Class jsComProProgramacionPago
 
         ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtComentario)
 
-        txtEmision.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtEmision.Value = jytsistema.sFechadeTrabajo
+        txtHasta.Value = jytsistema.sFechadeTrabajo
+        txtDesde.Value = jytsistema.sFechadeTrabajo
         txtEstatus.Text = ft.muestraCampoTexto(aEstatus(0))
         txtTotal.Text = "0.00"
         lblRecibido.Visible = False
@@ -194,17 +199,16 @@ Public Class jsComProProgramacionPago
         grpAceptarSalir.Visible = True
 
         ft.habilitarObjetos(True, False, grpEncab, grpTotales, MenuBarraRenglon)
-        ft.habilitarObjetos(True, True, txtComentario, btnEmision, btnHasta, _
-                         btnEmision)
+        ft.habilitarObjetos(True, True, txtComentario, txtEmision, txtDesde, txtHasta)
 
         MenuBarra.Enabled = False
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
     End Sub
     Private Sub DesactivarMarco0()
 
         grpAceptarSalir.Visible = False
-        ft.habilitarObjetos(False, True, txtCodigo, txtEmision, btnEmision, btnHasta, _
+        ft.habilitarObjetos(False, True, txtCodigo, txtEmision, txtDesde, txtHasta,
                 txtComentario)
 
         ft.habilitarObjetos(False, True, txtTotal)
@@ -212,7 +216,7 @@ Public Class jsComProProgramacionPago
         MenuBarraRenglon.Enabled = False
         MenuBarra.Enabled = True
 
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -221,7 +225,7 @@ Public Class jsComProProgramacionPago
             AgregaYCancela()
         Else
             If dtRenglones.Rows.Count = 0 Then
-                ft.MensajeCritico("DEBE INCLUIR AL MENOS UN ITEM...")
+                ft.mensajeCritico("DEBE INCLUIR AL MENOS UN ITEM...")
                 Return
             End If
         End If
@@ -250,14 +254,12 @@ Public Class jsComProProgramacionPago
         End If
     End Sub
     Private Sub Imprimir()
-        'Dim f As New jsComRepParametros
-        'f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cCompra, "Compra", txtProveedor.Text, txtCodigo.Text, CDate(txtEmision.Text))
-        'f = Nothing
+
     End Sub
     Private Function Validado() As Boolean
 
         If txtCodigo.Text = "" Then
-            ft.MensajeCritico("Debe indicar un Número de Compra válido...")
+            ft.mensajeCritico("Debe indicar un Número de Compra válido...")
             Return False
         End If
 
@@ -289,8 +291,8 @@ Public Class jsComProProgramacionPago
             nPosicionEncab = ds.Tables(nTabla).Rows.Count
         End If
 
-        InsertEditCOMPRASEncabezadoPROGRAMACION(myConn, lblInfo, Inserta, Codigo, Convert.ToDateTime(txtFechaProceso.Text), _
-               Convert.ToDateTime(txtEmision.Text), Convert.ToDateTime(txtHasta.Text), iEstatus, "", txtComentario.Text, _
+        InsertEditCOMPRASEncabezadoPROGRAMACION(myConn, lblInfo, Inserta, Codigo, txtEmision.Value,
+               txtDesde.Value, txtHasta.Value, iEstatus, "", txtComentario.Text,
                Convert.ToDouble(txtTotal.Text))
 
         ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
@@ -307,7 +309,7 @@ Public Class jsComProProgramacionPago
     End Sub
 
     Private Sub txtNombre_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtComentario.GotFocus
-        ft.mensajeEtiqueta(lblInfo, " Indique comentario ... ", Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, " Indique comentario ... ", Transportables.tipoMensaje.iInfo)
     End Sub
 
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
@@ -410,7 +412,7 @@ Public Class jsComProProgramacionPago
             ft.mensajeAdvertencia("Debe indicar un número de PROGRAMACION VALIDO...")
         Else
             Dim f As New jsComProProgramacionPagoMovimiento
-            f.Cargar(myConn, CDate(txtDesde.Text), CDate(txtHasta.Text))
+            f.Cargar(myConn, txtDesde.Value, txtHasta.Value)
             If Not f.Seleccionado Is Nothing Then
 
                 For Each nRow As Object In f.Seleccionado
@@ -449,7 +451,7 @@ Public Class jsComProProgramacionPago
     End Sub
     Private Sub EliminarMovimiento()
 
-       nPosicionRenglon = Me.BindingContext(ds, nTablaRenglones).Position
+        nPosicionRenglon = Me.BindingContext(ds, nTablaRenglones).Position
 
         If nPosicionRenglon >= 0 Then
 
@@ -511,14 +513,6 @@ Public Class jsComProProgramacionPago
         Imprimir()
     End Sub
 
-    Private Sub btnEmision_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEmision.Click
-        txtEmision.Text = SeleccionaFecha(CDate(txtEmision.Text), Me, sender)
-    End Sub
-
-    Private Sub btnEmisionIVA_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHasta.Click
-        txtHasta.Text = SeleccionaFecha(CDate(txtHasta.Text), Me, sender)
-    End Sub
-
     Private Sub dg_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles dg.KeyUp
         Select Case e.KeyCode
             Case Keys.Down
@@ -530,17 +524,6 @@ Public Class jsComProProgramacionPago
                 nPosicionRenglon = Me.BindingContext(ds, nTablaRenglones).Position
                 AsignaMov(nPosicionRenglon, False)
         End Select
-    End Sub
-
-    Private Sub txtEmision_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtEmision.TextChanged
-        txtHasta.Text = txtEmision.Text
-    End Sub
-
-    Private Sub btnReconstruir_Click(sender As System.Object, e As System.EventArgs) Handles btnReconstruir.Click
-        'If lblRecibido.Visible Then
-        '    ActualizarInventarios(txtCodigo.Text, txtProveedor.Text)
-        '    ft.mensajeInformativo("Proceso terminado!!! ")
-        'End If
     End Sub
 
 End Class

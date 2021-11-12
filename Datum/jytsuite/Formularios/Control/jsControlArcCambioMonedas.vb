@@ -3,10 +3,11 @@ Imports Syncfusion.WinForms.DataGrid.Enums
 Imports Syncfusion.WinForms.DataGrid
 Imports Syncfusion.WinForms.ListView.Enums
 Imports Syncfusion.WinForms.Input.Enums
+Imports System.Windows.Documents
 
 Public Class jsControlArcCambioMonedas
 
-    Private Const sModulo As String = "Monedas"
+    Private Const sModulo As String = "CambiodeMoneda"
     Private Const lRegion As String = "RibbonButton185"
     Private Const nTabla As String = "monedas"
     Private Const nTablaCurrencies As String = "Currencies"
@@ -88,25 +89,25 @@ Public Class jsControlArcCambioMonedas
 
     Private Sub IniciarGrilla()
 
-        SfDataGrid1.Style.AddNewRowStyle.BackColor = Color.DarkCyan
-        SfDataGrid1.Style.AddNewRowStyle.TextColor = Color.White
+        dataGrid.Style.AddNewRowStyle.BackColor = Color.DarkCyan
+        dataGrid.Style.AddNewRowStyle.TextColor = Color.White
 
-        SfDataGrid1.ThemeName = "Office2016DarkGray"
-        SfDataGrid1.AutoGenerateColumns = False
-        SfDataGrid1.AutoSizeColumnsMode = AutoSizeColumnsMode.Fill
-        SfDataGrid1.Columns.Add(New GridComboBoxColumn() With {.MappingName = "Moneda", .HeaderText = "Pais/Moneda",
+        dataGrid.ThemeName = "Office2016DarkGray"
+        dataGrid.AutoGenerateColumns = False
+        dataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.Fill
+        dataGrid.Columns.Add(New GridComboBoxColumn() With {.MappingName = "Moneda", .HeaderText = "Pais/Moneda",
                                 .ValueMember = "ID",
                                 .DisplayMember = "PaisMoneda",
                                 .DataSource = dtCurrencies,
                                 .AutoCompleteMode = AutoCompleteMode.SuggestAppend,
                                 .DropDownStyle = DropDownStyle.DropDown})
 
-        SfDataGrid1.Columns.Add(New GridNumericColumn() With {
+        dataGrid.Columns.Add(New GridNumericColumn() With {
                                 .MappingName = "Equivale",
                                 .HeaderText = "Equivale",
                                 .Width = 250,
                                 .Format = cFormatoNumero})
-        SfDataGrid1.Columns.Add(New GridDateTimeColumn() With {
+        dataGrid.Columns.Add(New GridDateTimeColumn() With {
                                 .MappingName = "Fecha",
                                 .HeaderText = "Fecha",
                                 .AllowNull = True,
@@ -115,29 +116,25 @@ Public Class jsControlArcCambioMonedas
                                 .Pattern = DateTimePattern.Custom,
                                 .Format = "dd-MM-yyyy HH:mm:ss"})
 
-        'SfDataGrid1.Columns.Add(New GridButtonColumn() With {.MappingName = "Eliminar", .HeaderText = "Eliminar",
-        '                        .Image = My.Resources.Eliminar, .ImageSize = New Size(16, 16),
-        '                        .Width = 70})
 
-        'SfDataGrid1.Columns("Eliminar").CellStyle.HorizontalAlignment = HorizontalAlignment.Center
-        SfDataGrid1.Columns("Fecha").CellStyle.HorizontalAlignment = HorizontalAlignment.Center
+        dataGrid.Columns("Fecha").CellStyle.HorizontalAlignment = HorizontalAlignment.Center
 
-        SfDataGrid1.Columns("Equivale").CellStyle.HorizontalAlignment = HorizontalAlignment.Right
+        dataGrid.Columns("Equivale").CellStyle.HorizontalAlignment = HorizontalAlignment.Right
 
-        SfDataGrid1.AddNewRowPosition = RowPosition.Top
-        SfDataGrid1.AddNewRowText = "doble click para agregar una nueva fila"
-        SfDataGrid1.NewItemPlaceholderPosition = Syncfusion.Data.NewItemPlaceholderPosition.AtBeginning
+        dataGrid.AddNewRowPosition = RowPosition.Top
+        dataGrid.AddNewRowText = "doble click para agregar una nueva fila"
+        dataGrid.NewItemPlaceholderPosition = Syncfusion.Data.NewItemPlaceholderPosition.AtBeginning
 
-        SfDataGrid1.AutoSizeColumnsMode = AutoSizeColumnsMode.Fill
-        SfDataGrid1.AllowEditing = True
-        SfDataGrid1.Columns(1).AllowEditing = True
-        SfDataGrid1.DataSource = listOfCambios
+        dataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.Fill
+        dataGrid.AllowEditing = True
+        dataGrid.Columns(1).AllowEditing = True
+        dataGrid.DataSource = listOfCambios
 
     End Sub
-    Private Sub SfDataGrid1_RowValidated(sender As Object, e As Events.RowValidatedEventArgs) Handles SfDataGrid1.RowValidated
+    Private Sub SfDataGrid1_RowValidated(sender As Object, e As Events.RowValidatedEventArgs) Handles dataGrid.RowValidated
 
         Dim data As CambioMoneda = DirectCast(e.DataRow.RowData, CambioMoneda)
-        Dim newRow As Boolean = SfDataGrid1.IsAddNewRowIndex(e.DataRow.RowIndex)
+        Dim newRow As Boolean = dataGrid.IsAddNewRowIndex(e.DataRow.RowIndex)
         InsertEditCONTROLCambioMoneda(myConn, lblInfo, newRow, data)
 
         dt.Rows.Clear()
@@ -149,8 +146,8 @@ Public Class jsControlArcCambioMonedas
         'SfDataGrid1.DataSource = listOfCambios
 
     End Sub
-    Private Sub SfDataGrid1_RowValidating(sender As Object, e As Events.RowValidatingEventArgs) Handles SfDataGrid1.RowValidating
-        If SfDataGrid1.IsAddNewRowIndex(e.DataRow.RowIndex) Then
+    Private Sub SfDataGrid1_RowValidating(sender As Object, e As Events.RowValidatingEventArgs) Handles dataGrid.RowValidating
+        If dataGrid.IsAddNewRowIndex(e.DataRow.RowIndex) Then
             Dim data = DirectCast(e.DataRow.RowData, CambioMoneda)
             If (String.IsNullOrEmpty(data.Fecha) Or String.IsNullOrEmpty(data.Moneda) Or String.IsNullOrEmpty(data.Equivale)) Then
                 e.ErrorMessage = "Campo(s) vacios, por favor verifique... "
@@ -159,14 +156,14 @@ Public Class jsControlArcCambioMonedas
         End If
     End Sub
 
-    Private Sub SfDataGrid1_CurrentCellBeginEdit(sender As Object, e As Events.CurrentCellBeginEditEventArgs) Handles SfDataGrid1.CurrentCellBeginEdit
-        If Not SfDataGrid1.IsAddNewRowIndex(e.DataRow.RowIndex) And (
+    Private Sub SfDataGrid1_CurrentCellBeginEdit(sender As Object, e As Events.CurrentCellBeginEditEventArgs) Handles dataGrid.CurrentCellBeginEdit
+        If Not dataGrid.IsAddNewRowIndex(e.DataRow.RowIndex) And (
             e.DataColumn.GridColumn.MappingName = "Moneda" Or e.DataColumn.GridColumn.MappingName = "Fecha") Then
             e.Cancel = True
         End If
     End Sub
 
-    Private Sub SfDataGrid1_AddNewRowInitiating(sender As Object, e As Events.AddNewRowInitiatingEventArgs) Handles SfDataGrid1.AddNewRowInitiating
+    Private Sub SfDataGrid1_AddNewRowInitiating(sender As Object, e As Events.AddNewRowInitiatingEventArgs) Handles dataGrid.AddNewRowInitiating
         Dim data = TryCast(e.NewObject, CambioMoneda)
         data.Moneda = defaultChange
         data.Equivale = 0.00
@@ -174,13 +171,7 @@ Public Class jsControlArcCambioMonedas
 
     Private Function GetCambios(dt As DataTable) As List(Of CambioMoneda)
         Dim cambios As New List(Of CambioMoneda)()
-        For i As Integer = 0 To dt.Rows.Count - 1
-            Dim cambio As CambioMoneda = New CambioMoneda()
-            cambio.Fecha = dt.Rows(i).Item(0)
-            cambio.Moneda = dt.Rows(i).Item(1)
-            cambio.Equivale = dt.Rows(i).Item(2)
-            cambios.Add(cambio)
-        Next i
+        cambios = ConvertDataTable(Of CambioMoneda)(dt)
         Return cambios
     End Function
 

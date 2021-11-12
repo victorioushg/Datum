@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsMerArcLotesMercanciaMovimientos
 
     Private Const sModulo As String = "Movimiento de lotes de mercancía"
@@ -54,17 +56,17 @@ Public Class jsMerArcLotesMercanciaMovimientos
     End Sub
     Private Sub AsignarTooltips()
         'Menu Barra 
-        C1SuperTooltip1.SetToolTip(btnVence, "<B>Selecciona fehca</B> vencimiento para el lote... ")
+        C1SuperTooltip1.SetToolTip(txtVencimiento, "<B>Selecciona fehca</B> vencimiento para el lote... ")
     End Sub
     Private Sub Habilitar()
-        ft.habilitarObjetos(False, True, txtVencimiento)
+
         If i_modo = movimiento.iEditar Then _
-            ft.habilitarObjetos(False, True, btnVence)
+            ft.habilitarObjetos(False, True, txtVencimiento)
     End Sub
     Private Sub IniciarTXT()
 
         txtLote.Text = ""
-        txtVencimiento.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtVencimiento.Value = jytsistema.sFechadeTrabajo
 
     End Sub
     Private Sub AsignarTXT(ByVal nPosicion As Integer)
@@ -82,11 +84,11 @@ Public Class jsMerArcLotesMercanciaMovimientos
 
     Private Sub jsMerArcLotesMercanciaMovimientos_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         InsertarAuditoria(MyConn, MovAud.ientrar, sModulo, txtLote.Text)
+        Dim dates As SfDateTimeEdit() = {txtVencimiento}
+        SetSizeDateObjects(dates)
     End Sub
 
-    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtLote.GotFocus, _
-        txtVencimiento.GotFocus, _
-        btnVence.GotFocus
+    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtLote.GotFocus
 
         Select Case sender.name
             Case "txtLote"
@@ -118,7 +120,7 @@ Public Class jsMerArcLotesMercanciaMovimientos
                 Apuntador = dtLocal.Rows.Count
             End If
 
-            InsertEditMERCASLoteMercancia(MyConn, lblInfo, Insertar, CodigoMercancia, txtLote.Text, _
+            InsertEditMERCASLoteMercancia(MyConn, lblInfo, Insertar, CodigoMercancia, txtLote.Text,
                         CDate(txtVencimiento.Text), 0, 0)
 
             InsertarAuditoria(MyConn, MovAud.iSalir, sModulo, txtLote.Text)
@@ -136,7 +138,4 @@ Public Class jsMerArcLotesMercanciaMovimientos
         ft.enfocarTexto(txt)
     End Sub
 
-    Private Sub btnCodigo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVence.Click
-        txtVencimiento.Text = SeleccionaFecha(CDate(txtVencimiento.Text), Me, btnVence)
-    End Sub
 End Class

@@ -23,8 +23,6 @@ Partial Class jsMerArcLotesMercanciaMovimientos
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsMerArcLotesMercanciaMovimientos))
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.grpTarjeta = New System.Windows.Forms.GroupBox()
-        Me.btnVence = New System.Windows.Forms.Button()
-        Me.txtVencimiento = New System.Windows.Forms.TextBox()
         Me.txtLote = New System.Windows.Forms.TextBox()
         Me.lblDescripcion = New System.Windows.Forms.Label()
         Me.lblCodigo = New System.Windows.Forms.Label()
@@ -32,6 +30,7 @@ Partial Class jsMerArcLotesMercanciaMovimientos
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.C1SuperTooltip1 = New C1.Win.C1SuperTooltip.C1SuperTooltip(Me.components)
+        Me.txtVencimiento = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpTarjeta.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
         Me.SuspendLayout()
@@ -49,35 +48,15 @@ Partial Class jsMerArcLotesMercanciaMovimientos
         'grpTarjeta
         '
         Me.grpTarjeta.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.grpTarjeta.Controls.Add(Me.btnVence)
         Me.grpTarjeta.Controls.Add(Me.txtVencimiento)
         Me.grpTarjeta.Controls.Add(Me.txtLote)
         Me.grpTarjeta.Controls.Add(Me.lblDescripcion)
         Me.grpTarjeta.Controls.Add(Me.lblCodigo)
         Me.grpTarjeta.Location = New System.Drawing.Point(0, 1)
         Me.grpTarjeta.Name = "grpTarjeta"
-        Me.grpTarjeta.Size = New System.Drawing.Size(538, 80)
+        Me.grpTarjeta.Size = New System.Drawing.Size(437, 80)
         Me.grpTarjeta.TabIndex = 80
         Me.grpTarjeta.TabStop = False
-        '
-        'btnVence
-        '
-        Me.btnVence.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVence.Location = New System.Drawing.Point(246, 39)
-        Me.btnVence.Name = "btnVence"
-        Me.btnVence.Size = New System.Drawing.Size(27, 20)
-        Me.btnVence.TabIndex = 45
-        Me.btnVence.Text = "···"
-        Me.btnVence.UseVisualStyleBackColor = True
-        '
-        'txtVencimiento
-        '
-        Me.txtVencimiento.Location = New System.Drawing.Point(137, 39)
-        Me.txtVencimiento.Multiline = True
-        Me.txtVencimiento.Name = "txtVencimiento"
-        Me.txtVencimiento.Size = New System.Drawing.Size(104, 21)
-        Me.txtVencimiento.TabIndex = 14
-        Me.txtVencimiento.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtLote
         '
@@ -126,7 +105,7 @@ Partial Class jsMerArcLotesMercanciaMovimientos
         '
         Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Image = My.Resources.Resources.button_cancel
+        Me.btnCancel.Image = Global.Datum.My.Resources.Resources.button_cancel
         Me.btnCancel.Location = New System.Drawing.Point(85, 3)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(76, 24)
@@ -137,7 +116,7 @@ Partial Class jsMerArcLotesMercanciaMovimientos
         'btnOK
         '
         Me.btnOK.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.btnOK.Image = My.Resources.Resources.button_ok
+        Me.btnOK.Image = Global.Datum.My.Resources.Resources.button_ok
         Me.btnOK.Location = New System.Drawing.Point(3, 3)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(76, 24)
@@ -148,6 +127,18 @@ Partial Class jsMerArcLotesMercanciaMovimientos
         'C1SuperTooltip1
         '
         Me.C1SuperTooltip1.Font = New System.Drawing.Font("Tahoma", 8.0!)
+        '
+        'txtVencimiento
+        '
+        Me.txtVencimiento.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtVencimiento.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtVencimiento.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtVencimiento.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtVencimiento.Location = New System.Drawing.Point(137, 41)
+        Me.txtVencimiento.Name = "txtVencimiento"
+        Me.txtVencimiento.Size = New System.Drawing.Size(136, 19)
+        Me.txtVencimiento.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtVencimiento.TabIndex = 214
         '
         'jsMerArcLotesMercanciaMovimientos
         '
@@ -177,11 +168,10 @@ Partial Class jsMerArcLotesMercanciaMovimientos
     Friend WithEvents grpTarjeta As System.Windows.Forms.GroupBox
     Friend WithEvents lblDescripcion As System.Windows.Forms.Label
     Friend WithEvents lblCodigo As System.Windows.Forms.Label
-    Friend WithEvents txtVencimiento As System.Windows.Forms.TextBox
     Friend WithEvents txtLote As System.Windows.Forms.TextBox
     Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
-    Friend WithEvents btnVence As System.Windows.Forms.Button
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
+    Friend WithEvents txtVencimiento As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

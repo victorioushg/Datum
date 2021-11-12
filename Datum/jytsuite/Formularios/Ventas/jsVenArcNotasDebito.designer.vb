@@ -24,6 +24,11 @@ Partial Class jsVenArcNotasDebito
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.dg = New System.Windows.Forms.DataGridView()
         Me.grpEncab = New System.Windows.Forms.GroupBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.cmbAsesores = New Syncfusion.WinForms.ListView.SfComboBox()
+        Me.cmbCliente = New Syncfusion.WinForms.ListView.SfComboBox()
+        Me.cmbMonedas = New Syncfusion.WinForms.ListView.SfComboBox()
+        Me.txtEmision = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.txtImpresion = New System.Windows.Forms.TextBox()
         Me.txtFactura = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -42,14 +47,7 @@ Partial Class jsVenArcNotasDebito
         Me.txtNombreTransporte = New System.Windows.Forms.TextBox()
         Me.txtTransporte = New System.Windows.Forms.TextBox()
         Me.btnTransporte = New System.Windows.Forms.Button()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.txtNombreAsesor = New System.Windows.Forms.TextBox()
-        Me.txtAsesor = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.txtNombreCliente = New System.Windows.Forms.TextBox()
-        Me.btnCliente = New System.Windows.Forms.Button()
-        Me.txtCliente = New System.Windows.Forms.TextBox()
-        Me.btnAsesor = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.cmbTarifa = New System.Windows.Forms.ComboBox()
         Me.txtEstatus = New System.Windows.Forms.TextBox()
@@ -111,10 +109,12 @@ Partial Class jsVenArcNotasDebito
         Me.txtTotalIVA = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.txtTotal = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtEmision = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.lblTotal = New System.Windows.Forms.Label()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpEncab.SuspendLayout()
+        CType(Me.cmbAsesores, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cmbCliente, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cmbMonedas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAceptarSalir.SuspendLayout()
         Me.MenuBarra.SuspendLayout()
         Me.MenuBarraRenglon.SuspendLayout()
@@ -127,9 +127,9 @@ Partial Class jsVenArcNotasDebito
         Me.lblInfo.BackColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(217, Byte), Integer))
         Me.lblInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblInfo.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.lblInfo.Location = New System.Drawing.Point(0, 410)
+        Me.lblInfo.Location = New System.Drawing.Point(0, 638)
         Me.lblInfo.Name = "lblInfo"
-        Me.lblInfo.Size = New System.Drawing.Size(754, 28)
+        Me.lblInfo.Size = New System.Drawing.Size(1164, 28)
         Me.lblInfo.TabIndex = 80
         '
         'dg
@@ -146,7 +146,7 @@ Partial Class jsVenArcNotasDebito
         Me.dg.Location = New System.Drawing.Point(0, 249)
         Me.dg.Name = "dg"
         Me.dg.ReadOnly = True
-        Me.dg.Size = New System.Drawing.Size(755, 85)
+        Me.dg.Size = New System.Drawing.Size(1165, 294)
         Me.dg.TabIndex = 82
         '
         'grpEncab
@@ -154,6 +154,10 @@ Partial Class jsVenArcNotasDebito
         Me.grpEncab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpEncab.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpEncab.Controls.Add(Me.Label12)
+        Me.grpEncab.Controls.Add(Me.cmbAsesores)
+        Me.grpEncab.Controls.Add(Me.cmbCliente)
+        Me.grpEncab.Controls.Add(Me.cmbMonedas)
         Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.txtImpresion)
         Me.grpEncab.Controls.Add(Me.txtFactura)
@@ -173,14 +177,7 @@ Partial Class jsVenArcNotasDebito
         Me.grpEncab.Controls.Add(Me.txtNombreTransporte)
         Me.grpEncab.Controls.Add(Me.txtTransporte)
         Me.grpEncab.Controls.Add(Me.btnTransporte)
-        Me.grpEncab.Controls.Add(Me.Label13)
-        Me.grpEncab.Controls.Add(Me.txtNombreAsesor)
-        Me.grpEncab.Controls.Add(Me.txtAsesor)
         Me.grpEncab.Controls.Add(Me.Label11)
-        Me.grpEncab.Controls.Add(Me.txtNombreCliente)
-        Me.grpEncab.Controls.Add(Me.btnCliente)
-        Me.grpEncab.Controls.Add(Me.txtCliente)
-        Me.grpEncab.Controls.Add(Me.btnAsesor)
         Me.grpEncab.Controls.Add(Me.Label6)
         Me.grpEncab.Controls.Add(Me.cmbTarifa)
         Me.grpEncab.Controls.Add(Me.txtEstatus)
@@ -192,9 +189,92 @@ Partial Class jsVenArcNotasDebito
         Me.grpEncab.Controls.Add(Me.Label1)
         Me.grpEncab.Location = New System.Drawing.Point(0, 42)
         Me.grpEncab.Name = "grpEncab"
-        Me.grpEncab.Size = New System.Drawing.Size(754, 162)
+        Me.grpEncab.Size = New System.Drawing.Size(1164, 162)
         Me.grpEncab.TabIndex = 85
         Me.grpEncab.TabStop = False
+        '
+        'Label12
+        '
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(19, 92)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(95, 19)
+        Me.Label12.TabIndex = 242
+        Me.Label12.Text = "Asesor "
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'cmbAsesores
+        '
+        Me.cmbAsesores.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbAsesores.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbAsesores.DisplayMember = "nombre"
+        Me.cmbAsesores.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbAsesores.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbAsesores.Location = New System.Drawing.Point(120, 92)
+        Me.cmbAsesores.Name = "cmbAsesores"
+        Me.cmbAsesores.Size = New System.Drawing.Size(329, 23)
+        Me.cmbAsesores.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.cmbAsesores.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbAsesores.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbAsesores.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbAsesores.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbAsesores.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbAsesores.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbAsesores.TabIndex = 241
+        Me.cmbAsesores.ValueMember = "Codigo"
+        '
+        'cmbCliente
+        '
+        Me.cmbCliente.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbCliente.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbCliente.DisplayMember = "nombre"
+        Me.cmbCliente.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbCliente.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCliente.Location = New System.Drawing.Point(120, 33)
+        Me.cmbCliente.Name = "cmbCliente"
+        Me.cmbCliente.Size = New System.Drawing.Size(630, 23)
+        Me.cmbCliente.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.cmbCliente.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbCliente.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCliente.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbCliente.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCliente.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbCliente.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCliente.TabIndex = 240
+        Me.cmbCliente.ValueMember = "codcli"
+        '
+        'cmbMonedas
+        '
+        Me.cmbMonedas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbMonedas.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbMonedas.DisplayMember = "nombre"
+        Me.cmbMonedas.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbMonedas.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbMonedas.Location = New System.Drawing.Point(756, 13)
+        Me.cmbMonedas.Name = "cmbMonedas"
+        Me.cmbMonedas.Size = New System.Drawing.Size(228, 22)
+        Me.cmbMonedas.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.cmbMonedas.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbMonedas.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbMonedas.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbMonedas.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbMonedas.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbMonedas.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbMonedas.TabIndex = 239
+        Me.cmbMonedas.ValueMember = "codcli"
+        '
+        'txtEmision
+        '
+        Me.txtEmision.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmision.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmision.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmision.Location = New System.Drawing.Point(276, 12)
+        Me.txtEmision.Name = "txtEmision"
+        Me.txtEmision.Size = New System.Drawing.Size(114, 19)
+        Me.txtEmision.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmision.TabIndex = 238
+        Me.txtEmision.Value = New Date(2021, 10, 31, 0, 0, 0, 0)
         '
         'txtImpresion
         '
@@ -381,86 +461,15 @@ Partial Class jsVenArcNotasDebito
         Me.btnTransporte.Text = "•••"
         Me.btnTransporte.UseVisualStyleBackColor = True
         '
-        'Label13
-        '
-        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(9, 95)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(108, 19)
-        Me.Label13.TabIndex = 212
-        Me.Label13.Text = "Asesor comercial"
-        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtNombreAsesor
-        '
-        Me.txtNombreAsesor.Enabled = False
-        Me.txtNombreAsesor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNombreAsesor.Location = New System.Drawing.Point(217, 95)
-        Me.txtNombreAsesor.MaxLength = 19
-        Me.txtNombreAsesor.Name = "txtNombreAsesor"
-        Me.txtNombreAsesor.Size = New System.Drawing.Size(369, 20)
-        Me.txtNombreAsesor.TabIndex = 209
-        '
-        'txtAsesor
-        '
-        Me.txtAsesor.Enabled = False
-        Me.txtAsesor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAsesor.Location = New System.Drawing.Point(120, 95)
-        Me.txtAsesor.MaxLength = 19
-        Me.txtAsesor.Name = "txtAsesor"
-        Me.txtAsesor.Size = New System.Drawing.Size(60, 20)
-        Me.txtAsesor.TabIndex = 208
-        Me.txtAsesor.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label11
         '
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(22, 56)
+        Me.Label11.Location = New System.Drawing.Point(22, 59)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(95, 19)
         Me.Label11.TabIndex = 207
         Me.Label11.Text = "Comentario"
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtNombreCliente
-        '
-        Me.txtNombreCliente.Enabled = False
-        Me.txtNombreCliente.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNombreCliente.Location = New System.Drawing.Point(259, 33)
-        Me.txtNombreCliente.MaxLength = 19
-        Me.txtNombreCliente.Name = "txtNombreCliente"
-        Me.txtNombreCliente.Size = New System.Drawing.Size(491, 20)
-        Me.txtNombreCliente.TabIndex = 206
-        '
-        'btnCliente
-        '
-        Me.btnCliente.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCliente.Location = New System.Drawing.Point(228, 33)
-        Me.btnCliente.Name = "btnCliente"
-        Me.btnCliente.Size = New System.Drawing.Size(25, 20)
-        Me.btnCliente.TabIndex = 205
-        Me.btnCliente.Text = "•••"
-        Me.btnCliente.UseVisualStyleBackColor = True
-        '
-        'txtCliente
-        '
-        Me.txtCliente.Enabled = False
-        Me.txtCliente.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCliente.Location = New System.Drawing.Point(120, 33)
-        Me.txtCliente.MaxLength = 19
-        Me.txtCliente.Name = "txtCliente"
-        Me.txtCliente.Size = New System.Drawing.Size(105, 20)
-        Me.txtCliente.TabIndex = 204
-        '
-        'btnAsesor
-        '
-        Me.btnAsesor.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAsesor.Location = New System.Drawing.Point(186, 95)
-        Me.btnAsesor.Name = "btnAsesor"
-        Me.btnAsesor.Size = New System.Drawing.Size(25, 20)
-        Me.btnAsesor.TabIndex = 201
-        Me.btnAsesor.Text = "•••"
-        Me.btnAsesor.UseVisualStyleBackColor = True
         '
         'Label6
         '
@@ -506,11 +515,11 @@ Partial Class jsVenArcNotasDebito
         'txtComentario
         '
         Me.txtComentario.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtComentario.Location = New System.Drawing.Point(120, 54)
+        Me.txtComentario.Location = New System.Drawing.Point(120, 59)
         Me.txtComentario.MaxLength = 50
         Me.txtComentario.Multiline = True
         Me.txtComentario.Name = "txtComentario"
-        Me.txtComentario.Size = New System.Drawing.Size(466, 40)
+        Me.txtComentario.Size = New System.Drawing.Size(466, 29)
         Me.txtComentario.TabIndex = 4
         '
         'txtCodigo
@@ -561,7 +570,7 @@ Partial Class jsVenArcNotasDebito
         Me.grpAceptarSalir.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.grpAceptarSalir.Controls.Add(Me.btnCancel, 1, 0)
         Me.grpAceptarSalir.Controls.Add(Me.btnOK, 0, 0)
-        Me.grpAceptarSalir.Location = New System.Drawing.Point(589, 407)
+        Me.grpAceptarSalir.Location = New System.Drawing.Point(999, 635)
         Me.grpAceptarSalir.Name = "grpAceptarSalir"
         Me.grpAceptarSalir.RowCount = 1
         Me.grpAceptarSalir.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -598,7 +607,7 @@ Partial Class jsVenArcNotasDebito
         Me.MenuBarra.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAgregar, Me.btnEditar, Me.btnEliminar, Me.btnBuscar, Me.ToolStripSeparator1, Me.btnPrimero, Me.btnAnterior, Me.ToolStripSeparator2, Me.Items, Me.lblItems, Me.ToolStripSeparator3, Me.btnSiguiente, Me.btnUltimo, Me.ToolStripSeparator4, Me.btnImprimir, Me.ToolStripSeparator5, Me.btnSalir, Me.ToolStripSeparator6, Me.btnDuplicar})
         Me.MenuBarra.Location = New System.Drawing.Point(0, 0)
         Me.MenuBarra.Name = "MenuBarra"
-        Me.MenuBarra.Size = New System.Drawing.Size(754, 39)
+        Me.MenuBarra.Size = New System.Drawing.Size(1164, 39)
         Me.MenuBarra.TabIndex = 88
         Me.MenuBarra.Text = "ToolStrip1"
         '
@@ -750,7 +759,7 @@ Partial Class jsVenArcNotasDebito
         Me.MenuBarraRenglon.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAgregarMovimiento, Me.btnAgregarServicio, Me.btnEditarMovimiento, Me.btnEliminarMovimiento, Me.btnBuscarMovimiento, Me.ToolStripSeparator8, Me.btnPrimerMovimiento, Me.btnAnteriorMovimiento, Me.ToolStripSeparator9, Me.itemsrenglon, Me.lblitemsrenglon, Me.ToolStripSeparator10, Me.btnSiguienteMovimiento, Me.btnUltimoMovimiento, Me.ToolStripSeparator11, Me.tslblPeso, Me.tslblPesoT, Me.ToolStripLabel1, Me.ToolStripSeparator7, Me.btnCortar})
         Me.MenuBarraRenglon.Location = New System.Drawing.Point(0, 207)
         Me.MenuBarraRenglon.Name = "MenuBarraRenglon"
-        Me.MenuBarraRenglon.Size = New System.Drawing.Size(1000, 39)
+        Me.MenuBarraRenglon.Size = New System.Drawing.Size(1410, 39)
         Me.MenuBarraRenglon.TabIndex = 89
         Me.MenuBarraRenglon.Text = "ToolStrip1"
         '
@@ -921,10 +930,10 @@ Partial Class jsVenArcNotasDebito
         Me.grpTotales.Controls.Add(Me.txtTotalIVA)
         Me.grpTotales.Controls.Add(Me.Label9)
         Me.grpTotales.Controls.Add(Me.txtTotal)
-        Me.grpTotales.Controls.Add(Me.Label8)
-        Me.grpTotales.Location = New System.Drawing.Point(0, 332)
+        Me.grpTotales.Controls.Add(Me.lblTotal)
+        Me.grpTotales.Location = New System.Drawing.Point(1, 541)
         Me.grpTotales.Name = "grpTotales"
-        Me.grpTotales.Size = New System.Drawing.Size(754, 75)
+        Me.grpTotales.Size = New System.Drawing.Size(1164, 94)
         Me.grpTotales.TabIndex = 91
         Me.grpTotales.TabStop = False
         Me.grpTotales.Text = " Totales "
@@ -937,27 +946,27 @@ Partial Class jsVenArcNotasDebito
         Me.dgIVA.AllowUserToResizeColumns = False
         Me.dgIVA.AllowUserToResizeRows = False
         Me.dgIVA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgIVA.Location = New System.Drawing.Point(442, 8)
+        Me.dgIVA.Location = New System.Drawing.Point(357, 8)
         Me.dgIVA.Name = "dgIVA"
         Me.dgIVA.ReadOnly = True
-        Me.dgIVA.Size = New System.Drawing.Size(205, 40)
+        Me.dgIVA.Size = New System.Drawing.Size(290, 58)
         Me.dgIVA.TabIndex = 213
         '
         'txtSubTotal
         '
         Me.txtSubTotal.Enabled = False
         Me.txtSubTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSubTotal.Location = New System.Drawing.Point(6, 50)
+        Me.txtSubTotal.Location = New System.Drawing.Point(6, 68)
         Me.txtSubTotal.MaxLength = 19
         Me.txtSubTotal.Name = "txtSubTotal"
-        Me.txtSubTotal.Size = New System.Drawing.Size(97, 20)
+        Me.txtSubTotal.Size = New System.Drawing.Size(173, 20)
         Me.txtSubTotal.TabIndex = 205
         Me.txtSubTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label10
         '
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(9, 29)
+        Me.Label10.Location = New System.Drawing.Point(5, 47)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(99, 19)
         Me.Label10.TabIndex = 207
@@ -968,17 +977,17 @@ Partial Class jsVenArcNotasDebito
         '
         Me.txtTotalIVA.Enabled = False
         Me.txtTotalIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTotalIVA.Location = New System.Drawing.Point(550, 51)
+        Me.txtTotalIVA.Location = New System.Drawing.Point(472, 69)
         Me.txtTotalIVA.MaxLength = 19
         Me.txtTotalIVA.Name = "txtTotalIVA"
-        Me.txtTotalIVA.Size = New System.Drawing.Size(97, 20)
+        Me.txtTotalIVA.Size = New System.Drawing.Size(175, 20)
         Me.txtTotalIVA.TabIndex = 204
         Me.txtTotalIVA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label9
         '
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(439, 51)
+        Me.Label9.Location = New System.Drawing.Point(361, 69)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(28, 19)
         Me.Label9.TabIndex = 206
@@ -989,41 +998,29 @@ Partial Class jsVenArcNotasDebito
         '
         Me.txtTotal.Enabled = False
         Me.txtTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTotal.Location = New System.Drawing.Point(653, 51)
+        Me.txtTotal.Location = New System.Drawing.Point(652, 69)
         Me.txtTotal.MaxLength = 19
         Me.txtTotal.Name = "txtTotal"
-        Me.txtTotal.Size = New System.Drawing.Size(97, 20)
+        Me.txtTotal.Size = New System.Drawing.Size(163, 20)
         Me.txtTotal.TabIndex = 203
         Me.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'Label8
+        'lblTotal
         '
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(650, 21)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(97, 27)
-        Me.Label8.TabIndex = 12
-        Me.Label8.Text = "TOTAL Nota Débito"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtEmision
-        '
-        Me.txtEmision.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtEmision.Cursor = System.Windows.Forms.Cursors.Default
-        Me.txtEmision.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
-        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmision.Location = New System.Drawing.Point(276, 12)
-        Me.txtEmision.Name = "txtEmision"
-        Me.txtEmision.Size = New System.Drawing.Size(114, 19)
-        Me.txtEmision.Style.BackColor = System.Drawing.Color.AliceBlue
-        Me.txtEmision.TabIndex = 238
+        Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotal.Location = New System.Drawing.Point(653, 47)
+        Me.lblTotal.Name = "lblTotal"
+        Me.lblTotal.Size = New System.Drawing.Size(162, 19)
+        Me.lblTotal.TabIndex = 12
+        Me.lblTotal.Text = "TOTAL Nota Débito"
+        Me.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'jsVenArcNotasDebito
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(754, 438)
+        Me.ClientSize = New System.Drawing.Size(1164, 666)
         Me.ControlBox = False
         Me.Controls.Add(Me.grpTotales)
         Me.Controls.Add(Me.MenuBarraRenglon)
@@ -1040,6 +1037,9 @@ Partial Class jsVenArcNotasDebito
         CType(Me.dg, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpEncab.ResumeLayout(False)
         Me.grpEncab.PerformLayout()
+        CType(Me.cmbAsesores, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cmbCliente, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cmbMonedas, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpAceptarSalir.ResumeLayout(False)
         Me.MenuBarra.ResumeLayout(False)
         Me.MenuBarra.PerformLayout()
@@ -1098,16 +1098,9 @@ Partial Class jsVenArcNotasDebito
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
     Friend WithEvents txtEstatus As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents btnAsesor As System.Windows.Forms.Button
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents cmbTarifa As System.Windows.Forms.ComboBox
     Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents txtNombreCliente As System.Windows.Forms.TextBox
-    Friend WithEvents btnCliente As System.Windows.Forms.Button
-    Friend WithEvents txtCliente As System.Windows.Forms.TextBox
-    Friend WithEvents txtNombreAsesor As System.Windows.Forms.TextBox
-    Friend WithEvents txtAsesor As System.Windows.Forms.TextBox
-    Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents tslblPeso As System.Windows.Forms.ToolStripLabel
     Friend WithEvents tslblPesoT As System.Windows.Forms.ToolStripLabel
     Friend WithEvents grpTotales As System.Windows.Forms.GroupBox
@@ -1117,7 +1110,7 @@ Partial Class jsVenArcNotasDebito
     Friend WithEvents txtTotalIVA As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents txtTotal As System.Windows.Forms.TextBox
-    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents lblTotal As System.Windows.Forms.Label
     Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
     Friend WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents btnDuplicar As System.Windows.Forms.ToolStripButton
@@ -1144,4 +1137,8 @@ Partial Class jsVenArcNotasDebito
     Friend WithEvents ToolStripSeparator7 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents btnCortar As System.Windows.Forms.ToolStripButton
     Friend WithEvents txtEmision As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents cmbMonedas As Syncfusion.WinForms.ListView.SfComboBox
+    Friend WithEvents cmbCliente As Syncfusion.WinForms.ListView.SfComboBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents cmbAsesores As Syncfusion.WinForms.ListView.SfComboBox
 End Class

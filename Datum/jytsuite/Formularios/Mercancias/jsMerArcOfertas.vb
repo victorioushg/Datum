@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsMerArcOfertas
     Private Const sModulo As String = "Ofertas de mercancia"
     Private Const lRegion As String = "RibbonButton142"
@@ -34,7 +35,8 @@ Public Class jsMerArcOfertas
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
             dt = ds.Tables(nTabla)
 
-
+            Dim dates As SfDateTimeEdit() = {txtFechaDesde, txtFechaHasta}
+            SetSizeDateObjects(dates)
 
             DesactivarMarco0()
             If dt.Rows.Count > 0 Then
@@ -103,8 +105,8 @@ Public Class jsMerArcOfertas
                     'Encabezado 
                     txtOferta.Text = .Item("codofe")
                     txtComentario.Text = ft.muestraCampoTexto(.Item("descrip"))
-                    txtFechaDesde.Text = ft.muestraCampoFecha(.Item("desde").ToString)
-                    txtFechaHasta.Text = ft.muestraCampoFecha(.Item("hasta").ToString)
+                    txtFechaDesde.Value = .Item("desde")
+                    txtFechaHasta.Value = .Item("hasta")
                     chkA.Checked = CBool(.Item("tarifa_a"))
                     chkB.Checked = CBool(.Item("tarifa_b"))
                     chkC.Checked = CBool(.Item("tarifa_c"))
@@ -137,8 +139,8 @@ Public Class jsMerArcOfertas
         Dim aCampos() As String = {"codart", "descrip", "limitei", "limites", "unidad", "porcentaje", "otorgapor", ""}
         Dim aNombres() As String = {"Código", "Descripción", "De...", "A...", "Unidad", "Porcentaje Descuento", "Otorgado Por...", ""}
         Dim aAnchos() As Integer = {70, 300, 45, 90, 90, 70, 100, 100}
-        Dim aAlineacion() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, _
-                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro, _
+        Dim aAlineacion() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda,
+                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro,
                                         AlineacionDataGrid.Derecha, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda}
 
         Dim aFormatos() As String = {"", "", sFormatoCantidad, sFormatoCantidad, "", sFormatoNumero, "", ""}
@@ -166,9 +168,9 @@ Public Class jsMerArcOfertas
         Dim aCampos() As String = {"cantidad", "unidad", "codart", "cantidadbon", "unidadbon", "itembon", "nombreitembon", "cantidadinicio", "unidadart", "codigoart", "otorgacan", ""}
         Dim aNombres() As String = {"A partir de...", " ", "de...", "Se bonificara...", " ", " ", " ", "Por cada...", "", "de...", "Otorgado por...", ""}
         Dim aAnchos() As Integer = {70, 40, 90, 70, 40, 90, 200, 70, 40, 90, 90, 100}
-        Dim aAlineacion() As Integer = {AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, _
-                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, _
-                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, _
+        Dim aAlineacion() As Integer = {AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda,
+                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda,
+                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda,
                                         AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda}
 
         Dim aFormatos() As String = {sFormatoCantidad, "", "", sFormatoCantidad, "", "", "", sFormatoCantidad, "", "", "", ""}
@@ -186,8 +188,8 @@ Public Class jsMerArcOfertas
         End If
 
         txtComentario.Text = ""
-        txtFechaDesde.Text = ft.FormatoFecha(sFechadeTrabajo)
-        txtFechaHasta.Text = ft.FormatoFecha(sFechadeTrabajo)
+        txtFechaDesde.Value = sFechadeTrabajo
+        txtFechaHasta.Value = sFechadeTrabajo
         txtItems.Text = ft.FormatoEntero(0)
         chkA.Checked = True
         chkB.Checked = True
@@ -207,7 +209,7 @@ Public Class jsMerArcOfertas
         grpAceptarSalir.Visible = True
 
         ft.habilitarObjetos(True, False, grpEncab, MenuBarraRenglon)
-        ft.habilitarObjetos(True, True, txtComentario, btnFechaDEsde, btnFechaHasta, chkA, chkB, chkC, chkD, chkE, chkF)
+        ft.habilitarObjetos(True, True, txtComentario, txtFechaDesde, txtFechaHasta, chkA, chkB, chkC, chkD, chkE, chkF)
 
         MenuBarra.Enabled = False
         ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
@@ -267,8 +269,8 @@ Public Class jsMerArcOfertas
 
         End If
 
-        InsertEditMERCASEncabezadoOferta(myConn, lblInfo, Inserta, Codigo, CDate(txtFechaDesde.Text), CDate(txtFechaHasta.Text), _
-                                                txtComentario.Text, IIf(chkA.Checked, 1, 0), IIf(chkB.Checked, 1, 0), IIf(chkC.Checked, 1, 0), _
+        InsertEditMERCASEncabezadoOferta(myConn, lblInfo, Inserta, Codigo, CDate(txtFechaDesde.Text), CDate(txtFechaHasta.Text),
+                                                txtComentario.Text, IIf(chkA.Checked, 1, 0), IIf(chkB.Checked, 1, 0), IIf(chkC.Checked, 1, 0),
                                                 IIf(chkD.Checked, 1, 0), IIf(chkE.Checked, 1, 0), IIf(chkF.Checked, 1, 0))
 
 
@@ -356,7 +358,7 @@ Public Class jsMerArcOfertas
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
-    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick, _
+    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick,
        dg.CellMouseClick
         nPosicionRenglon = e.RowIndex
         Me.BindingContext(ds, nTablaRenglones).Position = e.RowIndex
@@ -398,10 +400,10 @@ Public Class jsMerArcOfertas
                 With dtRenglones.Rows(nPosicionRenglon)
                     InsertarAuditoria(myConn, MovAud.iEliminar, sModulo, .Item("codofe") & .Item("codart"))
                     Dim aCamposDel() As String = {"codofe", "codart", "id_emp"}
-                    Dim aStringsDel() As String = {.Item("codofe"), .Item("codart"), jytsistema.WorkID}
-                    nPosicionRenglon = EliminarRegistros(myConn, lblInfo, ds, nTablaRenglones, "jsmerrenofe", strSQLMov, aCamposDel, aStringsDel, _
+                    Dim aStringsDel() As String = { .Item("codofe"), .Item("codart"), jytsistema.WorkID}
+                    nPosicionRenglon = EliminarRegistros(myConn, lblInfo, ds, nTablaRenglones, "jsmerrenofe", strSQLMov, aCamposDel, aStringsDel,
                                                   Me.BindingContext(ds, nTablaRenglones).Position, True)
-                    nPosicionBono = EliminarRegistros(myConn, lblInfo, ds, nTablaRenglones, "jsmerrenbon", strSQLMov, aCamposDel, aStringsDel, _
+                    nPosicionBono = EliminarRegistros(myConn, lblInfo, ds, nTablaRenglones, "jsmerrenbon", strSQLMov, aCamposDel, aStringsDel,
                                                   Me.BindingContext(ds, nTablaRenglones).Position, True)
 
                     If dtRenglones.Rows.Count - 1 < nPosicionRenglon Then nPosicionRenglon = dtRenglones.Rows.Count - 1
@@ -438,15 +440,4 @@ Public Class jsMerArcOfertas
         f = Nothing
     End Sub
 
-    Private Sub btnFechaDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaDEsde.Click
-        txtFechaDesde.Text = SeleccionaFecha(CDate(txtFechaDesde.Text), Me, sender)
-    End Sub
-
-    Private Sub btnFechaHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaHasta.Click
-        txtFechaHasta.Text = SeleccionaFecha(CDate(txtFechaHasta.Text), Me, sender)
-    End Sub
-
-    Private Sub dg_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dg.CellContentClick
-
-    End Sub
 End Class

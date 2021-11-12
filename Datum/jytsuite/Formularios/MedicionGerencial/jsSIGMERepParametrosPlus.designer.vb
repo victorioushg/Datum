@@ -54,10 +54,13 @@ Partial Class jsSIGMERepParametrosPlus
         Me.grpGrupos = New System.Windows.Forms.GroupBox()
         Me.C1DockingTab1 = New C1.Win.C1Command.C1DockingTab()
         Me.TabPageMercas = New C1.Win.C1Command.C1DockingTabPage()
-        Me.lblMarcasSeleccion = New System.Windows.Forms.Label()
-        Me.lblCategoriasSeleccion = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.lblDivision = New System.Windows.Forms.Label()
+        Me.lblMarcasSeleccion = New System.Windows.Forms.Label()
         Me.lblCategoria = New System.Windows.Forms.Label()
+        Me.lblCategoriasSeleccion = New System.Windows.Forms.Label()
         Me.btnCodjer6 = New System.Windows.Forms.Button()
         Me.txtCodjer3 = New System.Windows.Forms.TextBox()
         Me.txtCodjer2 = New System.Windows.Forms.TextBox()
@@ -179,19 +182,14 @@ Partial Class jsSIGMERepParametrosPlus
         Me.btnAsesorDesde = New System.Windows.Forms.Button()
         Me.txtAsesorHasta = New System.Windows.Forms.TextBox()
         Me.txtAsesorDesde = New System.Windows.Forms.TextBox()
-        Me.btnPeriodoHasta = New System.Windows.Forms.Button()
-        Me.btnPeriodoDesde = New System.Windows.Forms.Button()
-        Me.txtPeriodoHasta = New System.Windows.Forms.TextBox()
-        Me.txtPeriodoDesde = New System.Windows.Forms.TextBox()
         Me.lblPeriodoHasta = New System.Windows.Forms.Label()
         Me.lblPeriodo = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.lblNombreReporte = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lblInfo = New System.Windows.Forms.Label()
-        Me.lblDivision = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
+        Me.txtPeriodoDesde = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtPeriodoHasta = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpImprimirSalir.SuspendLayout()
         Me.grpConstantes.SuspendLayout()
         Me.grpGrupos.SuspendLayout()
@@ -611,24 +609,6 @@ Partial Class jsSIGMERepParametrosPlus
         Me.TabPageMercas.TabIndex = 0
         Me.TabPageMercas.Text = "Mercancías"
         '
-        'lblMarcasSeleccion
-        '
-        Me.lblMarcasSeleccion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMarcasSeleccion.Location = New System.Drawing.Point(127, 30)
-        Me.lblMarcasSeleccion.Name = "lblMarcasSeleccion"
-        Me.lblMarcasSeleccion.Size = New System.Drawing.Size(812, 20)
-        Me.lblMarcasSeleccion.TabIndex = 116
-        Me.lblMarcasSeleccion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'lblCategoriasSeleccion
-        '
-        Me.lblCategoriasSeleccion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCategoriasSeleccion.Location = New System.Drawing.Point(129, 9)
-        Me.lblCategoriasSeleccion.Name = "lblCategoriasSeleccion"
-        Me.lblCategoriasSeleccion.Size = New System.Drawing.Size(813, 20)
-        Me.lblCategoriasSeleccion.TabIndex = 115
-        Me.lblCategoriasSeleccion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.Label13)
@@ -662,6 +642,43 @@ Partial Class jsSIGMERepParametrosPlus
         Me.GroupBox1.TabIndex = 147
         Me.GroupBox1.TabStop = False
         '
+        'Label13
+        '
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(130, 73)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(812, 20)
+        Me.Label13.TabIndex = 149
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label12
+        '
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(0, 92)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(93, 20)
+        Me.Label12.TabIndex = 148
+        Me.Label12.Text = "Jerarquías Niv"
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblDivision
+        '
+        Me.lblDivision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDivision.Location = New System.Drawing.Point(130, 51)
+        Me.lblDivision.Name = "lblDivision"
+        Me.lblDivision.Size = New System.Drawing.Size(812, 20)
+        Me.lblDivision.TabIndex = 147
+        Me.lblDivision.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblMarcasSeleccion
+        '
+        Me.lblMarcasSeleccion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMarcasSeleccion.Location = New System.Drawing.Point(127, 30)
+        Me.lblMarcasSeleccion.Name = "lblMarcasSeleccion"
+        Me.lblMarcasSeleccion.Size = New System.Drawing.Size(812, 20)
+        Me.lblMarcasSeleccion.TabIndex = 116
+        Me.lblMarcasSeleccion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'lblCategoria
         '
         Me.lblCategoria.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -671,6 +688,15 @@ Partial Class jsSIGMERepParametrosPlus
         Me.lblCategoria.TabIndex = 117
         Me.lblCategoria.Text = "Categorías"
         Me.lblCategoria.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblCategoriasSeleccion
+        '
+        Me.lblCategoriasSeleccion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCategoriasSeleccion.Location = New System.Drawing.Point(129, 9)
+        Me.lblCategoriasSeleccion.Name = "lblCategoriasSeleccion"
+        Me.lblCategoriasSeleccion.Size = New System.Drawing.Size(813, 20)
+        Me.lblCategoriasSeleccion.TabIndex = 115
+        Me.lblCategoriasSeleccion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'btnCodjer6
         '
@@ -1554,6 +1580,8 @@ Partial Class jsSIGMERepParametrosPlus
         '
         Me.grpCriterios.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpCriterios.Controls.Add(Me.txtPeriodoHasta)
+        Me.grpCriterios.Controls.Add(Me.txtPeriodoDesde)
         Me.grpCriterios.Controls.Add(Me.lblAño)
         Me.grpCriterios.Controls.Add(Me.cmbAño)
         Me.grpCriterios.Controls.Add(Me.btnLoteHasta)
@@ -1587,10 +1615,6 @@ Partial Class jsSIGMERepParametrosPlus
         Me.grpCriterios.Controls.Add(Me.btnAsesorDesde)
         Me.grpCriterios.Controls.Add(Me.txtAsesorHasta)
         Me.grpCriterios.Controls.Add(Me.txtAsesorDesde)
-        Me.grpCriterios.Controls.Add(Me.btnPeriodoHasta)
-        Me.grpCriterios.Controls.Add(Me.btnPeriodoDesde)
-        Me.grpCriterios.Controls.Add(Me.txtPeriodoHasta)
-        Me.grpCriterios.Controls.Add(Me.txtPeriodoDesde)
         Me.grpCriterios.Controls.Add(Me.lblPeriodoHasta)
         Me.grpCriterios.Controls.Add(Me.lblPeriodo)
         Me.grpCriterios.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1604,7 +1628,7 @@ Partial Class jsSIGMERepParametrosPlus
         'lblAño
         '
         Me.lblAño.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAño.Location = New System.Drawing.Point(127, 11)
+        Me.lblAño.Location = New System.Drawing.Point(709, 11)
         Me.lblAño.Name = "lblAño"
         Me.lblAño.Size = New System.Drawing.Size(159, 19)
         Me.lblAño.TabIndex = 150
@@ -1616,7 +1640,7 @@ Partial Class jsSIGMERepParametrosPlus
         '
         Me.cmbAño.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbAño.FormattingEnabled = True
-        Me.cmbAño.Location = New System.Drawing.Point(293, 9)
+        Me.cmbAño.Location = New System.Drawing.Point(887, 11)
         Me.cmbAño.Margin = New System.Windows.Forms.Padding(1)
         Me.cmbAño.Name = "cmbAño"
         Me.cmbAño.Size = New System.Drawing.Size(74, 21)
@@ -1946,48 +1970,6 @@ Partial Class jsSIGMERepParametrosPlus
         Me.txtAsesorDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtAsesorDesde.Visible = False
         '
-        'btnPeriodoHasta
-        '
-        Me.btnPeriodoHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPeriodoHasta.Location = New System.Drawing.Point(602, 10)
-        Me.btnPeriodoHasta.Name = "btnPeriodoHasta"
-        Me.btnPeriodoHasta.Size = New System.Drawing.Size(25, 20)
-        Me.btnPeriodoHasta.TabIndex = 115
-        Me.btnPeriodoHasta.Text = "•••"
-        Me.btnPeriodoHasta.UseVisualStyleBackColor = True
-        Me.btnPeriodoHasta.Visible = False
-        '
-        'btnPeriodoDesde
-        '
-        Me.btnPeriodoDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPeriodoDesde.Location = New System.Drawing.Point(404, 10)
-        Me.btnPeriodoDesde.Name = "btnPeriodoDesde"
-        Me.btnPeriodoDesde.Size = New System.Drawing.Size(25, 20)
-        Me.btnPeriodoDesde.TabIndex = 114
-        Me.btnPeriodoDesde.Text = "•••"
-        Me.btnPeriodoDesde.UseVisualStyleBackColor = True
-        Me.btnPeriodoDesde.Visible = False
-        '
-        'txtPeriodoHasta
-        '
-        Me.txtPeriodoHasta.Enabled = False
-        Me.txtPeriodoHasta.Location = New System.Drawing.Point(490, 10)
-        Me.txtPeriodoHasta.Name = "txtPeriodoHasta"
-        Me.txtPeriodoHasta.Size = New System.Drawing.Size(107, 20)
-        Me.txtPeriodoHasta.TabIndex = 112
-        Me.txtPeriodoHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.txtPeriodoHasta.Visible = False
-        '
-        'txtPeriodoDesde
-        '
-        Me.txtPeriodoDesde.Enabled = False
-        Me.txtPeriodoDesde.Location = New System.Drawing.Point(292, 10)
-        Me.txtPeriodoDesde.Name = "txtPeriodoDesde"
-        Me.txtPeriodoDesde.Size = New System.Drawing.Size(107, 20)
-        Me.txtPeriodoDesde.TabIndex = 111
-        Me.txtPeriodoDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.txtPeriodoDesde.Visible = False
-        '
         'lblPeriodoHasta
         '
         Me.lblPeriodoHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -2062,33 +2044,29 @@ Partial Class jsSIGMERepParametrosPlus
         Me.lblInfo.Size = New System.Drawing.Size(974, 44)
         Me.lblInfo.TabIndex = 91
         '
-        'lblDivision
+        'txtPeriodoDesde
         '
-        Me.lblDivision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDivision.Location = New System.Drawing.Point(130, 51)
-        Me.lblDivision.Name = "lblDivision"
-        Me.lblDivision.Size = New System.Drawing.Size(812, 20)
-        Me.lblDivision.TabIndex = 147
-        Me.lblDivision.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.txtPeriodoDesde.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtPeriodoDesde.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtPeriodoDesde.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtPeriodoDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPeriodoDesde.Location = New System.Drawing.Point(293, 11)
+        Me.txtPeriodoDesde.Name = "txtPeriodoDesde"
+        Me.txtPeriodoDesde.Size = New System.Drawing.Size(114, 19)
+        Me.txtPeriodoDesde.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtPeriodoDesde.TabIndex = 214
         '
-        'Label12
+        'txtPeriodoHasta
         '
-        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(0, 92)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(93, 20)
-        Me.Label12.TabIndex = 148
-        Me.Label12.Text = "Jerarquías Niv"
-        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label13
-        '
-        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(130, 73)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(812, 20)
-        Me.Label13.TabIndex = 149
-        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.txtPeriodoHasta.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtPeriodoHasta.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtPeriodoHasta.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtPeriodoHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPeriodoHasta.Location = New System.Drawing.Point(489, 11)
+        Me.txtPeriodoHasta.Name = "txtPeriodoHasta"
+        Me.txtPeriodoHasta.Size = New System.Drawing.Size(114, 19)
+        Me.txtPeriodoHasta.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtPeriodoHasta.TabIndex = 215
         '
         'jsSIGMERepParametrosPlus
         '
@@ -2147,12 +2125,8 @@ Partial Class jsSIGMERepParametrosPlus
     Friend WithEvents txtOrdenHasta As System.Windows.Forms.TextBox
     Friend WithEvents txtOrdenDesde As System.Windows.Forms.TextBox
     Friend WithEvents grpCriterios As System.Windows.Forms.GroupBox
-    Friend WithEvents txtPeriodoHasta As System.Windows.Forms.TextBox
-    Friend WithEvents txtPeriodoDesde As System.Windows.Forms.TextBox
     Friend WithEvents lblPeriodoHasta As System.Windows.Forms.Label
     Friend WithEvents lblPeriodo As System.Windows.Forms.Label
-    Friend WithEvents btnPeriodoHasta As System.Windows.Forms.Button
-    Friend WithEvents btnPeriodoDesde As System.Windows.Forms.Button
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents lblNombreReporte As System.Windows.Forms.Label
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
@@ -2306,4 +2280,6 @@ Partial Class jsSIGMERepParametrosPlus
     Friend WithEvents lblDivision As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents txtPeriodoHasta As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtPeriodoDesde As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsMerArcPreciosEspeciales
     Private Const sModulo As String = "Listas de precios especiales"
     Private Const lRegion As String = "RibbonButton141"
@@ -28,8 +29,10 @@ Public Class jsMerArcPreciosEspeciales
         Me.Dock = DockStyle.Fill
         Try
             myConn.Open()
-
             dt = ft.AbrirDataTable(ds, nTabla, myConn, strSQL)
+
+            Dim dates As SfDateTimeEdit() = {txtFechaDesde, txtFechaHasta}
+            SetSizeDateObjects(dates)
 
             DesactivarMarco0()
             If dt.Rows.Count > 0 Then
@@ -73,8 +76,8 @@ Public Class jsMerArcPreciosEspeciales
 
                     txtLista.Text = ft.muestraCampoTexto(.Item("codlis"))
                     txtComentario.Text = ft.muestraCampoTexto(.Item("descrip"))
-                    txtFechaDesde.Text = ft.muestraCampoFecha(.Item("emision").ToString)
-                    txtFechaHasta.Text = ft.muestraCampoFecha(.Item("vence").ToString)
+                    txtFechaDesde.Value = .Item("emision")
+                    txtFechaHasta.Value = .Item("vence")
 
                     'Renglones
                     AsignarMovimientos(.Item("codlis"))
@@ -114,8 +117,8 @@ Public Class jsMerArcPreciosEspeciales
         End If
 
         txtComentario.Text = ""
-        txtFechaDesde.Text = ft.FormatoFecha(sFechadeTrabajo)
-        txtFechaHasta.Text = ft.FormatoFecha(sFechadeTrabajo)
+        txtFechaDesde.Value = sFechadeTrabajo
+        txtFechaHasta.Value = sFechadeTrabajo
         txtItems.Text = ft.FormatoEntero(0)
 
         'Movimientos
@@ -129,7 +132,7 @@ Public Class jsMerArcPreciosEspeciales
         grpAceptarSalir.Visible = True
 
         ft.habilitarObjetos(True, False, grpEncab, MenuBarraRenglon)
-        ft.habilitarObjetos(True, True, txtComentario, btnFechaDEsde, btnFechaHasta)
+        ft.habilitarObjetos(True, True, txtComentario, txtFechaDesde, txtFechaHasta)
 
         MenuBarra.Enabled = False
         ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
@@ -375,14 +378,6 @@ Public Class jsMerArcPreciosEspeciales
         Dim f As New jsMerRepParametros
         f.Cargar(TipoCargaFormulario.iShowDialog, ReporteMercancias.cPreciosEspeciales, "Precios Especiales", txtLista.Text)
         f = Nothing
-    End Sub
-
-    Private Sub btnEmision_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaDEsde.Click
-        txtFechaDesde.Text = SeleccionaFecha(CDate(txtFechaDesde.Text), Me, sender)
-    End Sub
-
-    Private Sub btnFechaHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaHasta.Click
-        txtFechaHasta.Text = SeleccionaFecha(CDate(txtFechaHasta.Text), Me, sender)
     End Sub
 
 End Class

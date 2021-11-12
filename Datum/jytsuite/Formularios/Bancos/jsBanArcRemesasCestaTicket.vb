@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+Imports fTransport
 Public Class jsBanArcRemesasCestaTicket
     Private Const sModulo As String = "Remesas cheques de alimentación"
     Private Const nTablaR As String = "Remesa"
@@ -32,11 +34,16 @@ Public Class jsBanArcRemesasCestaTicket
         CodigoCorredor = Mid(Corredor, 1, 5)
         CodigoCaja = CodCaja
 
+        Dim dates As SfDateTimeEdit() = {txtEmision}
+        SetSizeDateObjects(dates)
+
         lblTituloCaja.Text = "Remesas de cheques de alimentación corredor "
         lblCaja.Text = Corredor
         ft.mensajeEtiqueta(lblInfo, " Indique el número de remesa y escoja el o los documentos  para la construcción de la misma ...", Transportables.TipoMensaje.iAyuda)
-        ft.habilitarObjetos(False, True, txtEmision, txtDocSel, txtTickets, txtSaldoSel)
-        txtEmision.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        ft.habilitarObjetos(False, True, txtDocSel, txtTickets, txtSaldoSel)
+
+
+        txtEmision.Value = jytsistema.sFechadeTrabajo
         txtRemesa.Text = ""
 
         Me.ShowDialog()
@@ -110,9 +117,6 @@ Public Class jsBanArcRemesasCestaTicket
         txtSaldoSel.Text = ft.FormatoNumero(dSel)
 
     End Sub
-    Private Sub btnEmision_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEmision.Click
-        txtEmision.Text = SeleccionaFecha(CDate(txtEmision.Text), Me, sender)
-    End Sub
 
     Private Sub jsBanRemesasCestaTicket_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         ft = Nothing
@@ -134,13 +138,13 @@ Public Class jsBanArcRemesasCestaTicket
     Private Sub GuardarRemesa()
         InsertarAuditoria(myConn, MovAud.iIncluir, sModulo, txtRemesa.Text)
 
-        ft.Ejecutar_strSQL(myconn, " UPDATE jsventabtic SET NUMSOBRE = '' " _
+        ft.Ejecutar_strSQL(myConn, " UPDATE jsventabtic SET NUMSOBRE = '' " _
            & ", FECHASOBRE = '0000-00-00' " _
            & " where " _
            & " NUMSOBRE = '" & txtRemesa.Text & "' AND " _
            & " ID_EMP ='" & jytsistema.WorkID & "' ")
 
-        ft.Ejecutar_strSQL(myconn, "UPDATE jsventracob set REMESA = '' WHERE " _
+        ft.Ejecutar_strSQL(myConn, "UPDATE jsventracob set REMESA = '' WHERE " _
             & " REMESA = '" & txtRemesa.Text & "' and " _
             & " ID_EMP ='" & jytsistema.WorkID & "' ")
 
@@ -148,21 +152,21 @@ Public Class jsBanArcRemesasCestaTicket
         For iCont = 0 To lv.Items.Count - 1
             If lv.Items(iCont).Checked Then
 
-                ft.Ejecutar_strSQL(myconn, " UPDATE jsventabtic SET NUMSOBRE = '" & txtRemesa.Text & "', " _
-                                    & " FECHASOBRE = '" & ft.FormatoFechaMySQL(txtEmision.Text) & "' " _
+                ft.Ejecutar_strSQL(myConn, " UPDATE jsventabtic SET NUMSOBRE = '" & txtRemesa.Text & "', " _
+                                    & " FECHASOBRE = '" & ft.FormatoFechaMySQL(txtEmision.Value) & "' " _
                                     & " where " _
                                     & " CORREDOR = '" & CodigoCorredor & "' AND " _
                                     & " NUMCAN = '" & lv.Items(iCont).SubItems(2).Text & "' " _
                                     & " and ID_EMP ='" & jytsistema.WorkID & "' ")
 
-                ft.Ejecutar_strSQL(myconn, "UPDATE jsventracob SET REMESA = '" & txtRemesa.Text & "' " _
+                ft.Ejecutar_strSQL(myConn, "UPDATE jsventracob SET REMESA = '" & txtRemesa.Text & "' " _
                                     & " where " _
                                     & " COMPROBA = '" & lv.Items(iCont).SubItems(2).Text & "' " _
                                     & " and ID_EMP ='" & jytsistema.WorkID & "' ")
 
             Else
 
-                ft.Ejecutar_strSQL(myconn, "UPDATE jsventabtic SET NUMSOBRE = '', FECHASOBRE = '0000-00-00' " _
+                ft.Ejecutar_strSQL(myConn, "UPDATE jsventabtic SET NUMSOBRE = '', FECHASOBRE = '0000-00-00' " _
                     & " where " _
                     & " CORREDOR = '" & CodigoCorredor & "' AND " _
                     & " NUMCAN = '" & lv.Items(iCont).SubItems(2).Text & "' " _
@@ -191,11 +195,11 @@ Public Class jsBanArcRemesasCestaTicket
     End Function
 
     Private Sub txtRemesa_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtRemesa.GotFocus
-        ft.mensajeEtiqueta(lblInfo, "Indique el número de remesa ... ", Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, "Indique el número de remesa ... ", Transportables.tipoMensaje.iInfo)
         txtRemesa.MaxLength = 15
     End Sub
 
-    Private Sub btnEmision_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEmision.GotFocus
-        ft.mensajeEtiqueta(lblInfo, "seleccione la fecha de emisión de este depósito...", Transportables.TipoMensaje.iInfo)
+    Private Sub btnEmision_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
+        ft.mensajeEtiqueta(lblInfo, "seleccione la fecha de emisión de este depósito...", Transportables.tipoMensaje.iInfo)
     End Sub
 End Class

@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsVenArcClientesExpediente
 
     Private Const sModulo As String = "Clientes y CxC - Expediente"
@@ -35,12 +36,12 @@ Public Class jsVenArcClientesExpediente
         CodCliente = CodigoCliente
         elEstatus = Estatus
 
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
         txtCausa.Text = "NOTA DE USUARIO"
         txtEstatus.Text = aCondicion(Estatus)
         txtComentario.Text = ""
 
-        ft.habilitarObjetos(False, True, txtFecha, txtCausa, txtEstatus)
+        ft.habilitarObjetos(False, True, txtCausa, txtEstatus)
 
 
         Me.ShowDialog()
@@ -52,6 +53,8 @@ Public Class jsVenArcClientesExpediente
 
 
     Private Sub jsVenArcClientesExpediente_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Dim dates As SfDateTimeEdit() = {txtFecha}
+        SetSizeDateObjects(dates)
     End Sub
 
     Private Function Validado() As Boolean
@@ -95,10 +98,6 @@ Public Class jsVenArcClientesExpediente
 
     Private Sub txtComentario_GotFocus(sender As Object, e As System.EventArgs) Handles txtComentario.GotFocus
         ft.mensajeEtiqueta(lblInfo, "Indique un comentario válido...", Transportables.tipoMensaje.iAyuda)
-    End Sub
-
-    Private Sub btnFecha_Click(sender As System.Object, e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtFecha.Text), Me, btnFecha))
     End Sub
 
 End Class

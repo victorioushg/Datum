@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Imports System.IO
 Imports System.Text
 Public Class jsVenProNestleBPAID
@@ -24,18 +25,18 @@ Public Class jsVenProNestleBPAID
     End Sub
     Private Sub IniciarTXT()
 
-        ft.habilitarObjetos(False, True, txtFechaDesde, txtFechaHasta)
-        ft.habilitarObjetos(True, True, btnFechaDesde, btnFechaHasta)
+        Dim dates As SfDateTimeEdit() = {txtFechaDesde, txtFechaHasta}
+        SetSizeDateObjects(dates)
 
-        txtFechaDesde.Text = ft.FormatoFecha(PrimerDiaMes(jytsistema.sFechadeTrabajo))
-        txtFechaHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFechaDesde.Value = PrimerDiaMes(jytsistema.sFechadeTrabajo)
+        txtFechaHasta.Value = jytsistema.sFechadeTrabajo
 
         txtRutaArchivo.Text = CamnioNombreArchivo()
 
 
     End Sub
     Private Function CamnioNombreArchivo() As String
-        Return CaminoArchivo & NombreArchivoBase & Format(CDate(txtFechaDesde.Text), "ddMMyy") & "_" & Format(CDate(txtFechaHasta.Text), "ddMMyy") & ".txt"
+        Return CaminoArchivo & NombreArchivoBase & Format(txtFechaDesde.Value, "ddMMyy") & "_" & Format(txtFechaHasta.Value, "ddMMyy") & ".txt"
     End Function
 
     Private Sub jsComProRetencionesIVA_FormClosed(sender As Object, e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
@@ -59,16 +60,13 @@ Public Class jsVenProNestleBPAID
 
 
             If File.Exists(txtRutaArchivo.Text) Then _
-                 My.Computer.FileSystem.DeleteFile( _
-                     txtRutaArchivo.Text, _
-                     FileIO.UIOption.OnlyErrorDialogs, _
-                     FileIO.RecycleOption.DeletePermanently, _
+                 My.Computer.FileSystem.DeleteFile(
+                     txtRutaArchivo.Text,
+                     FileIO.UIOption.OnlyErrorDialogs,
+                     FileIO.RecycleOption.DeletePermanently,
                      FileIO.UICancelOption.DoNothing)
 
-
-
-
-            strRetenciones = SeleccionCOMPRASListadoRetencionesIVA(CDate(txtFechaDesde.Text), CDate(txtFechaHasta.Text), "", "")
+            strRetenciones = SeleccionCOMPRASListadoRetencionesIVA(txtFechaDesde.Value, txtFechaHasta.Value, "", "")
             ds = DataSetRequery(ds, strRetenciones, MyConn, nTablaRetenciones, lblInfo)
             dtRetenciones = ds.Tables(nTablaRetenciones)
 
@@ -83,29 +81,24 @@ Public Class jsVenProNestleBPAID
                     Dim nPer As String = .Item("PERIODO")
 
                     Dim RifCliente As String = .Item("rifpro").ToString.TrimEnd()
-                    Linea = Mid(.Item("rifemp"), 1, 1) & RellenaCadenaConCaracter(Mid(.Item("rifemp"), 2, Len(.Item("rifemp"))), "I", 9, "0") & _
-                    vbTab & .Item("periodo").ToString & _
-                    vbTab & ft.FormatoFechaMySQL(CDate(.Item("emision").ToString)) & _
-                    vbTab & .Item("tipooperacion") & _
-                    vbTab & .Item("tipodocumento") & _
-                    vbTab & Mid(RifCliente, 1, 1) & RellenaCadenaConCaracter(Mid(RifCliente, 2, Len(RifCliente)), "I", 9, "0") & _
-                    vbTab & Trim(.Item("numcom")) & _
-                    vbTab & .Item("num_control") & _
-                    vbTab & Format(.Item("tot_com"), "0.00") & _
-                    vbTab & Format(.Item("baseiva"), "0.00") & _
-                    vbTab & Format(.Item("retencion"), "0.00") & _
-                    vbTab & .Item("doc_afectado") & _
-                    vbTab & .Item("num_retencion") & _
-                    vbTab & Format(.Item("montoexento"), "0.00") & _
-                    vbTab & Format(.Item("poriva"), "0.00") & _
+                    Linea = Mid(.Item("rifemp"), 1, 1) & RellenaCadenaConCaracter(Mid(.Item("rifemp"), 2, Len(.Item("rifemp"))), "I", 9, "0") &
+                    vbTab & .Item("periodo").ToString &
+                    vbTab & ft.FormatoFechaMySQL(CDate(.Item("emision").ToString)) &
+                    vbTab & .Item("tipooperacion") &
+                    vbTab & .Item("tipodocumento") &
+                    vbTab & Mid(RifCliente, 1, 1) & RellenaCadenaConCaracter(Mid(RifCliente, 2, Len(RifCliente)), "I", 9, "0") &
+                    vbTab & Trim(.Item("numcom")) &
+                    vbTab & .Item("num_control") &
+                    vbTab & Format(.Item("tot_com"), "0.00") &
+                    vbTab & Format(.Item("baseiva"), "0.00") &
+                    vbTab & Format(.Item("retencion"), "0.00") &
+                    vbTab & .Item("doc_afectado") &
+                    vbTab & .Item("num_retencion") &
+                    vbTab & Format(.Item("montoexento"), "0.00") &
+                    vbTab & Format(.Item("poriva"), "0.00") &
                     vbTab & .Item("num_expediente")
 
                     sb.AppendLine(Linea)
-
-                    'sb.AppendLine("= = = = = =")
-                    'sb.Append(sr.ReadToEnd())
-                    'sb.AppendLine()
-                    'sb.AppendLine()
 
                 End With
             Next
@@ -118,19 +111,11 @@ Public Class jsVenProNestleBPAID
             ProgressBar1.Value = 0
             lblProgreso.Text = ""
 
-            InsertarAuditoria(MyConn, MovAud.iSalir, sModulo, txtFechaDesde.Text)
-            '      Me.Close()
-
+            InsertarAuditoria(MyConn, MovAud.iSalir, sModulo, txtFechaDesde.Value)
         End If
 
     End Sub
 
-    Private Sub btnFechaDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaDesde.Click
-        txtFechaDesde.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtFechaDesde.Text), Me, btnFechaDesde))
-    End Sub
-    Private Sub btnFechaHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaHasta.Click
-        txtFechaHasta.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtFechaHasta.Text), Me, btnFechaHasta))
-    End Sub
     Private Sub btnClienteDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRutaArchivo.Click
         Dim ofd As New OpenFileDialog()
 
@@ -146,14 +131,8 @@ Public Class jsVenProNestleBPAID
         ofd = Nothing
     End Sub
 
-
-
-
-    Private Sub txtFechaDesde_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaDesde.TextChanged
-        If txtFechaDesde.Text <> "" AndAlso txtFechaHasta.Text <> "" Then txtRutaArchivo.Text = CamnioNombreArchivo()
+    Private Sub txtFechaDesde_ValueChanged(sender As Object, e As Events.DateTimeValueChangedEventArgs) Handles txtFechaDesde.ValueChanged, txtFechaHasta.ValueChanged
+        CamnioNombreArchivo()
     End Sub
 
-    Private Sub txtFechaHasta_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaHasta.TextChanged
-        If txtFechaDesde.Text <> "" AndAlso txtFechaHasta.Text <> "" Then txtRutaArchivo.Text = CamnioNombreArchivo()
-    End Sub
 End Class

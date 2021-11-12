@@ -1,5 +1,6 @@
 Imports MySql.Data.MySqlClient
 Imports ReportesDeBancos
+Imports fTransport
 Imports Syncfusion.WinForms.Input
 Public Class jsBanArcBancos
     Private Const sModulo As String = "Bancos"

@@ -20,18 +20,12 @@ Partial Class jsVenProPedidosFacturacion
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblInfo = New System.Windows.Forms.Label()
-        Me.txtHasta = New System.Windows.Forms.TextBox()
-        Me.txtDesde = New System.Windows.Forms.TextBox()
-        Me.btnFecha = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.txtFecha = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.btnDesde = New System.Windows.Forms.Button()
-        Me.btnHasta = New System.Windows.Forms.Button()
         Me.txtPesoPedidos = New System.Windows.Forms.TextBox()
         Me.txtTotalpedidos = New System.Windows.Forms.TextBox()
         Me.txtItems = New System.Windows.Forms.TextBox()
@@ -55,6 +49,9 @@ Partial Class jsVenProPedidosFacturacion
         Me.cmbTransporte = New System.Windows.Forms.ComboBox()
         Me.dgAsesores = New System.Windows.Forms.DataGridView()
         Me.dgPedidos = New System.Windows.Forms.DataGridView()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtDesde = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtHasta = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpAceptarSalir.SuspendLayout()
         CType(Me.C1PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpTotales.SuspendLayout()
@@ -71,34 +68,6 @@ Partial Class jsVenProPedidosFacturacion
         Me.lblInfo.Name = "lblInfo"
         Me.lblInfo.Size = New System.Drawing.Size(966, 26)
         Me.lblInfo.TabIndex = 80
-        '
-        'txtHasta
-        '
-        Me.txtHasta.Enabled = False
-        Me.txtHasta.Location = New System.Drawing.Point(320, 91)
-        Me.txtHasta.Name = "txtHasta"
-        Me.txtHasta.Size = New System.Drawing.Size(85, 20)
-        Me.txtHasta.TabIndex = 82
-        Me.txtHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'txtDesde
-        '
-        Me.txtDesde.Location = New System.Drawing.Point(320, 70)
-        Me.txtDesde.MaxLength = 15
-        Me.txtDesde.Name = "txtDesde"
-        Me.txtDesde.Size = New System.Drawing.Size(85, 20)
-        Me.txtDesde.TabIndex = 83
-        Me.txtDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(180, 70)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(29, 20)
-        Me.btnFecha.TabIndex = 105
-        Me.btnFecha.Text = "•••"
-        Me.btnFecha.UseVisualStyleBackColor = True
         '
         'Label3
         '
@@ -156,16 +125,6 @@ Partial Class jsVenProPedidosFacturacion
         Me.Label2.Text = "hasta"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'txtFecha
-        '
-        Me.txtFecha.Enabled = False
-        Me.txtFecha.Location = New System.Drawing.Point(89, 70)
-        Me.txtFecha.MaxLength = 15
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(85, 20)
-        Me.txtFecha.TabIndex = 124
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label9
         '
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -174,26 +133,6 @@ Partial Class jsVenProPedidosFacturacion
         Me.Label9.Size = New System.Drawing.Size(77, 35)
         Me.Label9.TabIndex = 125
         Me.Label9.Text = "Fecha facturación"
-        '
-        'btnDesde
-        '
-        Me.btnDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDesde.Location = New System.Drawing.Point(406, 70)
-        Me.btnDesde.Name = "btnDesde"
-        Me.btnDesde.Size = New System.Drawing.Size(29, 20)
-        Me.btnDesde.TabIndex = 131
-        Me.btnDesde.Text = "•••"
-        Me.btnDesde.UseVisualStyleBackColor = True
-        '
-        'btnHasta
-        '
-        Me.btnHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnHasta.Location = New System.Drawing.Point(406, 91)
-        Me.btnHasta.Name = "btnHasta"
-        Me.btnHasta.Size = New System.Drawing.Size(29, 20)
-        Me.btnHasta.TabIndex = 132
-        Me.btnHasta.Text = "•••"
-        Me.btnHasta.UseVisualStyleBackColor = True
         '
         'txtPesoPedidos
         '
@@ -448,6 +387,42 @@ Partial Class jsVenProPedidosFacturacion
         Me.dgPedidos.Size = New System.Drawing.Size(713, 268)
         Me.dgPedidos.TabIndex = 212
         '
+        'txtFecha
+        '
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(89, 74)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(114, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 214
+        '
+        'txtDesde
+        '
+        Me.txtDesde.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtDesde.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtDesde.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDesde.Location = New System.Drawing.Point(296, 69)
+        Me.txtDesde.Name = "txtDesde"
+        Me.txtDesde.Size = New System.Drawing.Size(114, 19)
+        Me.txtDesde.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtDesde.TabIndex = 215
+        '
+        'txtHasta
+        '
+        Me.txtHasta.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtHasta.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtHasta.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHasta.Location = New System.Drawing.Point(296, 91)
+        Me.txtHasta.Name = "txtHasta"
+        Me.txtHasta.Size = New System.Drawing.Size(114, 19)
+        Me.txtHasta.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtHasta.TabIndex = 216
+        '
         'jsVenProPedidosFacturacion
         '
         Me.AcceptButton = Me.btnOK
@@ -456,6 +431,9 @@ Partial Class jsVenProPedidosFacturacion
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(966, 512)
         Me.ControlBox = False
+        Me.Controls.Add(Me.txtHasta)
+        Me.Controls.Add(Me.txtDesde)
+        Me.Controls.Add(Me.txtFecha)
         Me.Controls.Add(Me.dgPedidos)
         Me.Controls.Add(Me.dgAsesores)
         Me.Controls.Add(Me.C1PictureBox1)
@@ -476,16 +454,10 @@ Partial Class jsVenProPedidosFacturacion
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.txtItems)
-        Me.Controls.Add(Me.btnHasta)
-        Me.Controls.Add(Me.btnDesde)
         Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.txtFecha)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.grpAceptarSalir)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.btnFecha)
-        Me.Controls.Add(Me.txtDesde)
-        Me.Controls.Add(Me.txtHasta)
         Me.Controls.Add(Me.lblInfo)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Name = "jsVenProPedidosFacturacion"
@@ -502,18 +474,12 @@ Partial Class jsVenProPedidosFacturacion
 
     End Sub
     Friend WithEvents lblInfo As System.Windows.Forms.Label
-    Friend WithEvents txtHasta As System.Windows.Forms.TextBox
-    Friend WithEvents txtDesde As System.Windows.Forms.TextBox
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents btnDesde As System.Windows.Forms.Button
-    Friend WithEvents btnHasta As System.Windows.Forms.Button
     Friend WithEvents txtPesoPedidos As System.Windows.Forms.TextBox
     Friend WithEvents txtTotalpedidos As System.Windows.Forms.TextBox
     Friend WithEvents txtItems As System.Windows.Forms.TextBox
@@ -537,4 +503,7 @@ Partial Class jsVenProPedidosFacturacion
     Friend WithEvents cmbTransporte As System.Windows.Forms.ComboBox
     Friend WithEvents dgAsesores As System.Windows.Forms.DataGridView
     Friend WithEvents dgPedidos As System.Windows.Forms.DataGridView
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtDesde As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtHasta As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

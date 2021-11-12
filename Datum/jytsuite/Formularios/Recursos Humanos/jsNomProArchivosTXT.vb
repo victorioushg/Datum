@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Imports System.IO
 Imports System.Text
 Public Class jsNomProArchivosTXT
@@ -18,17 +19,18 @@ Public Class jsNomProArchivosTXT
     Public Sub Cargar(ByVal MyCon As MySqlConnection)
 
         MyConn = MyCon
+        Dim dates As SfDateTimeEdit() = {txtFechaDesde, txtFechaHasta}
+        SetSizeDateObjects(dates)
         IniciarTXT()
         Me.Show()
 
     End Sub
     Private Sub IniciarTXT()
 
-        ft.habilitarObjetos(False, True, txtFechaDesde, txtFechaHasta)
-        ft.habilitarObjetos(True, True, btnFechaDesde, btnFechaHasta)
+        ft.habilitarObjetos(True, True, txtFechaDesde, txtFechaHasta)
 
-        txtFechaDesde.Text = ft.FormatoFecha(PrimerDiaMes(jytsistema.sFechadeTrabajo))
-        txtFechaHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFechaDesde.Value = PrimerDiaMes(jytsistema.sFechadeTrabajo)
+        txtFechaHasta.Value = jytsistema.sFechadeTrabajo
 
         txtRutaArchivo.Text = CamnioNombreArchivo()
 
@@ -124,13 +126,6 @@ Public Class jsNomProArchivosTXT
         End If
 
     End Sub
-
-    Private Sub btnFechaDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaDesde.Click
-        txtFechaDesde.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtFechaDesde.Text), Me, btnFechaDesde))
-    End Sub
-    Private Sub btnFechaHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaHasta.Click
-        txtFechaHasta.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtFechaHasta.Text), Me, btnFechaHasta))
-    End Sub
     Private Sub btnClienteDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRutaArchivo.Click
         Dim ofd As New OpenFileDialog()
 
@@ -145,15 +140,10 @@ Public Class jsNomProArchivosTXT
 
         ofd = Nothing
     End Sub
-
-
-
-
-    Private Sub txtFechaDesde_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaDesde.TextChanged
-        If txtFechaDesde.Text <> "" AndAlso txtFechaHasta.Text <> "" Then txtRutaArchivo.Text = CamnioNombreArchivo()
+    Private Sub txtFechaDesde_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaDesde.ValueChanged
+        txtRutaArchivo.Text = CamnioNombreArchivo()
     End Sub
-
-    Private Sub txtFechaHasta_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaHasta.TextChanged
-        If txtFechaDesde.Text <> "" AndAlso txtFechaHasta.Text <> "" Then txtRutaArchivo.Text = CamnioNombreArchivo()
+    Private Sub txtFechaHasta_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaHasta.ValueChanged
+        txtRutaArchivo.Text = CamnioNombreArchivo()
     End Sub
 End Class

@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsComProReconstruccionDeSaldos
     Private Const sModulo As String = "Reconstrucción de Saldos y movimientos de Proveedores y mercancías"
 
@@ -15,17 +17,18 @@ Public Class jsComProReconstruccionDeSaldos
     Public Sub Cargar(ByVal MyCon As MySqlConnection)
 
         MyConn = MyCon
+        Dim dates As SfDateTimeEdit() = {txtFechaDesde, txtFechaHasta}
+        SetSizeDateObjects(dates)
         IniciarTXT()
         Me.Show()
 
     End Sub
     Private Sub IniciarTXT()
 
-        ft.habilitarObjetos(False, True, txtFechaDesde, txtFechaHasta)
-        ft.habilitarObjetos(True, True, txtProveedorDesde, txtProveedorHasta, btnProveedorDesde, btnProveedorHasta, btnFechaDesde, btnFechaHasta)
+        ft.habilitarObjetos(True, True, txtProveedorDesde, txtProveedorHasta, btnProveedorDesde, btnProveedorHasta)
 
-        txtFechaDesde.Text = ft.FormatoFecha(PrimerDiaMes(jytsistema.sFechadeTrabajo))
-        txtFechaHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFechaDesde.Value = PrimerDiaMes(jytsistema.sFechadeTrabajo)
+        txtFechaHasta.Value = jytsistema.sFechadeTrabajo
 
         chkMercancias.Checked = True
         chkCxP.Checked = True
@@ -35,7 +38,6 @@ Public Class jsComProReconstruccionDeSaldos
 
     Private Sub jsComProReconstruccionDeSaldos_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Me.Tag = sModulo
-
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -76,12 +78,7 @@ Public Class jsComProReconstruccionDeSaldos
 
     End Sub
 
-    Private Sub btnFechaDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaDesde.Click
-        txtFechaDesde.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtFechaDesde.Text), Me, btnFechaDesde))
-    End Sub
-    Private Sub btnFechaHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaHasta.Click
-        txtFechaHasta.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtFechaHasta.Text), Me, btnFechaHasta))
-    End Sub
+
     Private Sub btnClienteDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnProveedorDesde.Click
         txtProveedorDesde.Text = CargarTablaSimple(MyConn, lblInfo, ds, " select codpro codigo, nombre descripcion, rif, ingreso from jsprocatpro where id_emp = '" & jytsistema.WorkID & "' order by codpro  ", "Proveedores", txtProveedorDesde.Text)
     End Sub
@@ -109,7 +106,7 @@ Public Class jsComProReconstruccionDeSaldos
             For jCont = 0 To dtProveedores.Rows.Count - 1
                 With dtProveedores.Rows(jCont)
                     SaldoCxP(MyConn, lblInfo, .Item("CODPRO"))
-                    refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, CInt(jCont / dtProveedores.Rows.Count * 100), _
+                    refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, CInt(jCont / dtProveedores.Rows.Count * 100),
                                                   "PROVEEDOR : " & .Item("CODPRO") & " " & .Item("NOMBRE"))
                 End With
             Next
@@ -120,28 +117,24 @@ Public Class jsComProReconstruccionDeSaldos
     End Sub
 
     Private Sub EliminaMovimientosTemporalesCXP()
-
         refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, 100, " ELIMINANDO MOVIMIENTOS ")
-        ft.Ejecutar_strSQL(myconn, " delete from jsprotrapag where " _
+        ft.Ejecutar_strSQL(MyConn, " delete from jsprotrapag where " _
                 & " substring(nummov,1,3) in ('TMP','FCT') and " _
-                & " emision >= '" & ft.FormatoFechaMySQL(CDate(txtFechaDesde.Text)) & "' and " _
-                & " emision <= '" & ft.FormatoFechaMySQL(CDate(txtFechaHasta.Text)) & "' and " _
+                & " emision >= '" & ft.FormatoFechaMySQL(txtFechaDesde.Value) & "' and " _
+                & " emision <= '" & ft.FormatoFechaMySQL(txtFechaHasta.Value) & "' and " _
                 & IIf(txtProveedorDesde.Text <> "", " codpro >= '" & txtProveedorDesde.Text & "' and ", "") _
                 & IIf(txtProveedorHasta.Text <> "", " codpro <= '" & txtProveedorHasta.Text & "' and ", "") _
                 & " EJERCICIO = '" & jytsistema.WorkExercise & "' AND " _
                 & " ID_EMP = '" & jytsistema.WorkID & "' ")
-
-
     End Sub
 
     Private Sub EliminaMovimientos(ByVal Origen As String)
 
         refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, 100, " ELIMINANDO MOVIMIENTOS ...")
-
-        ft.Ejecutar_strSQL(myconn, " delete from jsmertramer where " _
+        ft.Ejecutar_strSQL(MyConn, " delete from jsmertramer where " _
             & " origen = '" & Origen & "' and " _
-            & " date_format(fechamov, '%Y-%m-%d') >= '" & ft.FormatoFechaMySQL(CDate(txtFechaDesde.Text)) & "' and " _
-            & " date_format(fechamov, '%Y-%m-%d') <= '" & ft.FormatoFechaMySQL(CDate(txtFechaHasta.Text)) & "' and " _
+            & " date_format(fechamov, '%Y-%m-%d') >= '" & ft.FormatoFechaMySQL(txtFechaDesde.Value) & "' and " _
+            & " date_format(fechamov, '%Y-%m-%d') <= '" & ft.FormatoFechaMySQL(txtFechaHasta.Value) & "' and " _
             & IIf(txtProveedorDesde.Text <> "", " prov_cli >= '" & txtProveedorDesde.Text & "' and ", "") _
             & IIf(txtProveedorHasta.Text <> "", " prov_cli <= '" & txtProveedorHasta.Text & "' and ", "") _
             & " EJERCICIO = '" & jytsistema.WorkExercise & "' AND " _
@@ -170,8 +163,8 @@ Public Class jsComProReconstruccionDeSaldos
 
 
         ds = DataSetRequery(ds, " select * from jsproencncr where " _
-            & " emision >= '" & ft.FormatoFechaMySQL(CDate(txtFechaDesde.Text)) & "' and " _
-            & " emision <= '" & ft.FormatoFechaMySQL(CDate(txtFechaHasta.Text)) & "' and " _
+            & " emision >= '" & ft.FormatoFechaMySQL(txtFechaDesde.Value) & "' and " _
+            & " emision <= '" & ft.FormatoFechaMySQL(txtFechaHasta.Value) & "' and " _
             & IIf(txtProveedorDesde.Text <> "", " codpro >= '" & txtProveedorDesde.Text & "' and ", "") _
             & IIf(txtProveedorHasta.Text <> "", " codpro <= '" & txtProveedorHasta.Text & "' and ", "") _
             & " ID_EMP = '" & jytsistema.WorkID & "' " _
@@ -202,15 +195,15 @@ Public Class jsComProReconstruccionDeSaldos
                                     Costo = dtRenglones.Rows(kCont).Item("CANTIDAD") * UltimoCostoAFecha(MyConn, dtRenglones.Rows(kCont).Item("ITEM"), CDate(.Item("emision").ToString)) / Equivalencia(MyConn, dtRenglones.Rows(kCont).Item("ITEM"), dtRenglones.Rows(kCont).Item("UNIDAD"))
                                     If ft.DevuelveScalarCadena(MyConn, " select codart from jsmertramer where codart = '" & dtRenglones.Rows(kCont).Item("ITEM") & "' and tipomov = 'SA' and numdoc = '" & .Item("NUMNCR") & "' and prov_cli = '" & .Item("CODPRO") & "' and origen = 'NCC' and asiento = '" & dtRenglones.Rows(kCont).Item("RENGLON") & dtRenglones.Rows(kCont).Item("ESTATUS") & "' and id_emp = '" & jytsistema.WorkID & "' ") <> 0 Then
 
-                                        InsertEditMERCASMovimientoInventario(MyConn, lblInfo, True, dtRenglones.Rows(kCont).Item("ITEM"), .Item("emision"), "EN", _
-                                               dtRenglones.Rows(kCont).Item("numncr"), dtRenglones.Rows(kCont).Item("UNIDAD"), dtRenglones.Rows(kCont).Item("CANTIDAD"), _
-                                               dtRenglones.Rows(kCont).Item("PESO"), Costo, Costo, "NCC", dtRenglones.Rows(kCont).Item("numncr"), IIf(IsDBNull(dtRenglones.Rows(kCont).Item("LOTE")), "", dtRenglones.Rows(kCont).Item("lote")), _
-                                               .Item("codpro"), dtRenglones.Rows(kCont).Item("TOTREN"), dtRenglones.Rows(kCont).Item("TOTRENDES"), 0.0#, dtRenglones.Rows(kCont).Item("TOTREN") - dtRenglones.Rows(kCont).Item("TOTRENDES"), _
+                                        InsertEditMERCASMovimientoInventario(MyConn, lblInfo, True, dtRenglones.Rows(kCont).Item("ITEM"), .Item("emision"), "EN",
+                                               dtRenglones.Rows(kCont).Item("numncr"), dtRenglones.Rows(kCont).Item("UNIDAD"), dtRenglones.Rows(kCont).Item("CANTIDAD"),
+                                               dtRenglones.Rows(kCont).Item("PESO"), Costo, Costo, "NCC", dtRenglones.Rows(kCont).Item("numncr"), IIf(IsDBNull(dtRenglones.Rows(kCont).Item("LOTE")), "", dtRenglones.Rows(kCont).Item("lote")),
+                                               .Item("codpro"), dtRenglones.Rows(kCont).Item("TOTREN"), dtRenglones.Rows(kCont).Item("TOTRENDES"), 0.0#, dtRenglones.Rows(kCont).Item("TOTREN") - dtRenglones.Rows(kCont).Item("TOTRENDES"),
                                                .Item("codven"), .Item("almacen"), dtRenglones.Rows(kCont).Item("RENGLON"), jytsistema.sFechadeTrabajo)
 
                                     End If
                                 End If
-                                refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, CInt(iCont / dtEncab.Rows.Count * 100), _
+                                refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, CInt(iCont / dtEncab.Rows.Count * 100),
                                                               NumeroFactura & " : " & dtRenglones.Rows(kCont).Item("ITEM") & " " & dtRenglones.Rows(kCont).Item("DESCRIP"))
                             Next
                         End If
@@ -231,10 +224,10 @@ Public Class jsComProReconstruccionDeSaldos
                             sSigno = 1
 
 
-                            InsertEditCOMPRASCXP(MyConn, lblInfo, True, .Item("codpro"), strTipo, .Item("numNCR"), CDate(.Item("emision").ToString), ft.FormatoHora(Now()), _
-                                CDate(.Item("vence").ToString), "", strTipo1 & ": " & .Item("numNCR"), sSigno * .Item("tot_NCR"), .Item("imp_iva"), _
-                                .Item("formapag"), .Item("numpag"), .Item("nompag"), "", "NCR", "", "", "", .Item("caja"), .Item("numNCR"), "0", _
-                                "", jytsistema.sFechadeTrabajo, .Item("CODCON"), "", "", 0.0#, 0.0#, "", "", "", "", .Item("codven"), _
+                            InsertEditCOMPRASCXP(MyConn, lblInfo, True, .Item("codpro"), strTipo, .Item("numNCR"), CDate(.Item("emision").ToString), ft.FormatoHora(Now()),
+                                CDate(.Item("vence").ToString), "", strTipo1 & ": " & .Item("numNCR"), sSigno * .Item("tot_NCR"), .Item("imp_iva"),
+                                .Item("formapag"), .Item("numpag"), .Item("nompag"), "", "NCR", "", "", "", .Item("caja"), .Item("numNCR"), "0",
+                                "", jytsistema.sFechadeTrabajo, .Item("CODCON"), "", "", 0.0#, 0.0#, "", "", "", "", .Item("codven"),
                                 .Item("codven"), 0, sFOTipo, "0")
 
                             SaldoCxP(MyConn, lblInfo, .Item("codpro"))
@@ -263,8 +256,8 @@ Public Class jsComProReconstruccionDeSaldos
         pb2.Visible = True
 
         ds = DataSetRequery(ds, " select * from jsproenccom where " _
-           & " emision >= '" & ft.FormatoFechaMySQL(CDate(txtFechaDesde.Text)) & "' and " _
-           & " emision <= '" & ft.FormatoFechaMySQL(CDate(txtFechaHasta.Text)) & "' and " _
+           & " emision >= '" & ft.FormatoFechaMySQL(txtFechaDesde.Value) & "' and " _
+           & " emision <= '" & ft.FormatoFechaMySQL(txtFechaHasta.Value) & "' and " _
            & IIf(txtProveedorDesde.Text <> "", " codpro >= '" & txtProveedorDesde.Text & "' and ", "") _
            & IIf(txtProveedorHasta.Text <> "", " codpro <= '" & txtProveedorHasta.Text & "' and ", "") _
            & " ID_EMP = '" & jytsistema.WorkID & "' " _
@@ -284,7 +277,7 @@ Public Class jsComProReconstruccionDeSaldos
                     Almacen = .Item("ALMACEN")
                     Emision = CDate(.Item("EMISION").ToString)
 
-                    refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, 100, _
+                    refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, 100,
                                                   " COMPRA N° : " & NumeroFactura & " - PROVEEDOR : " & CodigoProveedor)
 
                     ds = DataSetRequery(ds, " SELECT * FROM jsprorencom where " _
@@ -303,10 +296,10 @@ Public Class jsComProReconstruccionDeSaldos
                         For Each dtRow As DataRow In dtRenglones.Rows
                             With dtRow
                                 If .Item("item").ToString.Substring(0, 1) <> "$" Then
-                                    InsertEditMERCASMovimientoInventario(MyConn, lblInfo, True, .Item("item"), Emision, "EN", NumeroFactura, _
-                                                                         .Item("unidad"), .Item("cantidad"), .Item("peso"), .Item("costotot"), _
-                                                                         .Item("costototdes"), "COM", NumeroFactura, .Item("lote"), CodigoProveedor, _
-                                                                          0.0, 0.0, 0, 0.0, "", _
+                                    InsertEditMERCASMovimientoInventario(MyConn, lblInfo, True, .Item("item"), Emision, "EN", NumeroFactura,
+                                                                         .Item("unidad"), .Item("cantidad"), .Item("peso"), .Item("costotot"),
+                                                                         .Item("costototdes"), "COM", NumeroFactura, .Item("lote"), CodigoProveedor,
+                                                                          0.0, 0.0, 0, 0.0, "",
                                                                          Almacen, .Item("renglon"), jytsistema.sFechadeTrabajo)
 
                                     Dim MontoUltimaCompra As Double = UltimoCostoAFecha(MyConn, .Item("item"), jytsistema.sFechadeTrabajo) ' IIf(.Item("cantidad") > 0, .Item("costototdes") / .Item("cantidad"), .Item("costototdes")) / Equivalencia(myConn,  .Item("item"), .Item("unidad"))
@@ -344,8 +337,8 @@ Public Class jsComProReconstruccionDeSaldos
         ds = DataSetRequery(ds, " select * " _
                             & " from jsmertramer " _
                             & " where " _
-                            & " fechamov >= '" & ft.FormatoFechaHoraMySQLInicial(CDate(txtFechaDesde.Text)) & "' and " _
-                            & " fechamov <= '" & ft.FormatoFechaHoraMySQLFinal(CDate(txtFechaHasta.Text)) & "' and " _
+                            & " fechamov >= '" & ft.FormatoFechaHoraMySQLInicial(txtFechaDesde.Value) & "' and " _
+                            & " fechamov <= '" & ft.FormatoFechaHoraMySQLFinal(txtFechaHasta.Value) & "' and " _
                             & " codart = '" & CodigoArticulo & "' AND " _
                             & " origen in ('FAC', 'PVE', 'NDV', 'TRF', 'INV') AND " _
                             & " tipomov in ('SA', 'AS' ) AND " _
@@ -353,8 +346,8 @@ Public Class jsComProReconstruccionDeSaldos
                             & " UNION select * " _
                             & " from jsmertramer " _
                             & " where " _
-                            & " fechamov >= '" & ft.FormatoFechaHoraMySQLInicial(CDate(txtFechaDesde.Text)) & "' and " _
-                            & " fechamov <= '" & ft.FormatoFechaHoraMySQLFinal(CDate(txtFechaHasta.Text)) & "' and " _
+                            & " fechamov >= '" & ft.FormatoFechaHoraMySQLInicial(txtFechaDesde.Value) & "' and " _
+                            & " fechamov <= '" & ft.FormatoFechaHoraMySQLFinal(txtFechaHasta.Value) & "' and " _
                             & " codart = '" & CodigoArticulo & "' AND " _
                             & " origen in ('NCV') AND " _
                             & " tipomov in ('EN') AND " _
@@ -372,18 +365,18 @@ Public Class jsComProReconstruccionDeSaldos
                 lblProgreso.Text = xx & " ARTICULO : " & .Item("CODART") & " " & .Item("numdoc") & " " & .Item("fechamov").ToString
 
                 Dim nCosto As Double = UltimoCostoAFecha(MyConn, .Item("codart"), CDate(.Item("fechamov").ToString))
-                Dim nEquivale As Double = Equivalencia(myConn,  .Item("codart"), .Item("unidad"))
+                Dim nEquivale As Double = Equivalencia(MyConn, .Item("codart"), .Item("unidad"))
                 Dim Descuento As Double = 0
 
 
                 Dim Costotal As Double = nCosto * .Item("cantidad") / IIf(nEquivale = 0, 1, nEquivale)
                 Dim CostotalDescuento As Double = nCosto * (1 - Descuento / 100) * .Item("cantidad") / IIf(nEquivale = 0, 1, nEquivale)
 
-                InsertEditMERCASMovimientoInventario(MyConn, lblInfo, False, .Item("codart"), CDate(.Item("fechamov").ToString), _
-                                                      .Item("tipomov"), .Item("numdoc"), .Item("unidad"), .Item("cantidad"), .Item("peso"), _
-                                                      Costotal, CostotalDescuento, .Item("origen"), .Item("numorg"), _
+                InsertEditMERCASMovimientoInventario(MyConn, lblInfo, False, .Item("codart"), CDate(.Item("fechamov").ToString),
+                                                      .Item("tipomov"), .Item("numdoc"), .Item("unidad"), .Item("cantidad"), .Item("peso"),
+                                                      Costotal, CostotalDescuento, .Item("origen"), .Item("numorg"),
                                                       .Item("lote"), .Item("prov_cli"), .Item("ventotal"), .Item("ventotaldes"),
-                                                      .Item("impiva"), .Item("descuento"), .Item("vendedor"), .Item("almacen"), _
+                                                      .Item("impiva"), .Item("descuento"), .Item("vendedor"), .Item("almacen"),
                                                       .Item("asiento"), CDate(.Item("fechasi").ToString))
 
                 refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, 100, "")
@@ -416,8 +409,8 @@ Public Class jsComProReconstruccionDeSaldos
         refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, 100, " COMPRAS  ")
 
         ds = DataSetRequery(ds, " select * from jsproenccom where " _
-            & " emision >= '" & ft.FormatoFechaMySQL(CDate(txtFechaDesde.Text)) & "' and " _
-            & " emision <= '" & ft.FormatoFechaMySQL(CDate(txtFechaHasta.Text)) & "' and " _
+            & " emision >= '" & ft.FormatoFechaMySQL(txtFechaDesde.Value) & "' and " _
+            & " emision <= '" & ft.FormatoFechaMySQL(txtFechaHasta.Value) & "' and " _
             & IIf(txtProveedorDesde.Text <> "", " codpro >= '" & txtProveedorDesde.Text & "' and ", "") _
             & IIf(txtProveedorHasta.Text <> "", " codpro <= '" & txtProveedorHasta.Text & "' and ", "") _
             & " ID_EMP = '" & jytsistema.WorkID & "' " _
@@ -452,29 +445,29 @@ Public Class jsComProReconstruccionDeSaldos
 
                                     Dim ExisteONO As String = ft.DevuelveScalarCadena(MyConn, " select codart from jsmertramer where codart = '" & dtRenglones.Rows(kCont).Item("ITEM") _
                                                              & "' and tipomov = 'EN' and numdoc = '" & .Item("NUMCOM") _
-                                                             & "' and ORIGEN = 'COM' AND prov_cli = '" & .Item("CODPRO") & "' and ASIENTO = '" & _
+                                                             & "' and ORIGEN = 'COM' AND prov_cli = '" & .Item("CODPRO") & "' and ASIENTO = '" &
                                                              dtRenglones.Rows(kCont).Item("RENGLON") & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
                                     If ExisteONO = "" Then
 
-                                        InsertEditMERCASMovimientoInventario(MyConn, lblInfo, True, dtRenglones.Rows(kCont).Item("ITEM"), CDate(.Item("emision").ToString), "EN", _
-                                        dtRenglones.Rows(kCont).Item("NUMCOM"), dtRenglones.Rows(kCont).Item("UNIDAD"), dtRenglones.Rows(kCont).Item("CANTIDAD"), _
-                                        dtRenglones.Rows(kCont).Item("PESO"), Costo, Costo, "COM", dtRenglones.Rows(kCont).Item("NUMCOM"), IIf(IsDBNull(dtRenglones.Rows(kCont).Item("LOTE")), "", dtRenglones.Rows(kCont).Item("lote")), _
-                                        .Item("codPRO"), dtRenglones.Rows(kCont).Item("COSTOTOT"), dtRenglones.Rows(kCont).Item("COSTOTOTDES"), 0.0#, dtRenglones.Rows(kCont).Item("COSTOTOT") - dtRenglones.Rows(kCont).Item("COSTOTOTDES"), _
+                                        InsertEditMERCASMovimientoInventario(MyConn, lblInfo, True, dtRenglones.Rows(kCont).Item("ITEM"), CDate(.Item("emision").ToString), "EN",
+                                        dtRenglones.Rows(kCont).Item("NUMCOM"), dtRenglones.Rows(kCont).Item("UNIDAD"), dtRenglones.Rows(kCont).Item("CANTIDAD"),
+                                        dtRenglones.Rows(kCont).Item("PESO"), Costo, Costo, "COM", dtRenglones.Rows(kCont).Item("NUMCOM"), IIf(IsDBNull(dtRenglones.Rows(kCont).Item("LOTE")), "", dtRenglones.Rows(kCont).Item("lote")),
+                                        .Item("codPRO"), dtRenglones.Rows(kCont).Item("COSTOTOT"), dtRenglones.Rows(kCont).Item("COSTOTOTDES"), 0.0#, dtRenglones.Rows(kCont).Item("COSTOTOT") - dtRenglones.Rows(kCont).Item("COSTOTOTDES"),
                                         "", .Item("almacen"), dtRenglones.Rows(kCont).Item("RENGLON"), jytsistema.sFechadeTrabajo)
 
                                     End If
                                 End If
-                                refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, CInt(iCont / dtEncab.Rows.Count * 100), _
+                                refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, CInt(iCont / dtEncab.Rows.Count * 100),
                                                               NumeroFactura & " : " & dtRenglones.Rows(kCont).Item("ITEM") & " " & dtRenglones.Rows(kCont).Item("DESCRIP")
  )
                             Next
                         End If
                     End If
                     If chkCxP.Checked = True Then
-                        If ft.DevuelveScalarEntero(MyConn, " SELECT count(*) from jsprotrapag where codpro = '" & _
-                                                 .Item("codpro") & "' and tipomov = 'FC' and origen = 'COM' and nummov = '" & _
-                                                 .Item("NUMCOM") & "' and numorg = '" & .Item("NUMCOM") & "' and id_emp = '" & _
+                        If ft.DevuelveScalarEntero(MyConn, " SELECT count(*) from jsprotrapag where codpro = '" &
+                                                 .Item("codpro") & "' and tipomov = 'FC' and origen = 'COM' and nummov = '" &
+                                                 .Item("NUMCOM") & "' and numorg = '" & .Item("NUMCOM") & "' and id_emp = '" &
                                                  jytsistema.WorkID & "'") = 0 Then
 
                             strTipo = "FC"
@@ -483,10 +476,10 @@ Public Class jsComProReconstruccionDeSaldos
                             sSigno = -1
 
 
-                            InsertEditCOMPRASCXP(MyConn, lblInfo, True, .Item("CODPRO"), strTipo, .Item("NUMCOM"), CDate(.Item("emision").ToString), ft.FormatoHora(Now()), _
-                                CDate(.Item("vence").ToString), "", strTipo1 & ": " & .Item("numfac"), sSigno * .Item("TOT_COM"), .Item("IMP_IVA"), _
-                                .Item("formapag"), .Item("numpag"), .Item("nompag"), "", "COM", "", "", "", .Item("CAJA"), .Item("NUMCOM"), "0", _
-                                "", jytsistema.sFechadeTrabajo, .Item("CODCON"), "", "", 0.0#, 0.0#, "", "", "", "", .Item("codven"), _
+                            InsertEditCOMPRASCXP(MyConn, lblInfo, True, .Item("CODPRO"), strTipo, .Item("NUMCOM"), CDate(.Item("emision").ToString), ft.FormatoHora(Now()),
+                                CDate(.Item("vence").ToString), "", strTipo1 & ": " & .Item("numfac"), sSigno * .Item("TOT_COM"), .Item("IMP_IVA"),
+                                .Item("formapag"), .Item("numpag"), .Item("nompag"), "", "COM", "", "", "", .Item("CAJA"), .Item("NUMCOM"), "0",
+                                "", jytsistema.sFechadeTrabajo, .Item("CODCON"), "", "", 0.0#, 0.0#, "", "", "", "", .Item("codven"),
                                 .Item("codven"), 0, sFOTipo, "0")
 
                             SaldoCxP(MyConn, lblInfo, .Item("codpro"))
@@ -517,8 +510,8 @@ Public Class jsComProReconstruccionDeSaldos
         refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, 100, " FACTURAS GASTOS ")
 
         ds = DataSetRequery(ds, " select * from jsproencgas where " _
-            & " emision >= '" & ft.FormatoFechaMySQL(CDate(txtFechaDesde.Text)) & "' and " _
-            & " emision <= '" & ft.FormatoFechaMySQL(CDate(txtFechaHasta.Text)) & "' and " _
+            & " emision >= '" & ft.FormatoFechaMySQL(txtFechaDesde.Value) & "' and " _
+            & " emision <= '" & ft.FormatoFechaMySQL(txtFechaHasta.Value) & "' and " _
             & IIf(txtProveedorDesde.Text <> "", " codpro >= '" & txtProveedorDesde.Text & "' and ", "") _
             & IIf(txtProveedorHasta.Text <> "", " codpro <= '" & txtProveedorHasta.Text & "' and ", "") _
             & " ID_EMP = '" & jytsistema.WorkID & "' " _
@@ -551,15 +544,15 @@ Public Class jsComProReconstruccionDeSaldos
                                     Costo = dtRenglones.Rows(kCont).Item("CANTIDAD") * UltimoCostoAFecha(MyConn, dtRenglones.Rows(kCont).Item("ITEM"), CDate(.Item("emision").ToString)) / Equivalencia(MyConn, dtRenglones.Rows(kCont).Item("ITEM"), dtRenglones.Rows(kCont).Item("UNIDAD"))
                                     If ft.DevuelveScalarCadena(MyConn, " select codart from jsmertramer where codart = '" & dtRenglones.Rows(kCont).Item("ITEM") & "' and tipomov = 'EN' AND ORIGEN = 'GAS' and numdoc = '" & .Item("NUMGAS") & "' and prov_cli = '" & .Item("CODPRO") & "' and asiento = '" & dtRenglones.Rows(kCont).Item("RENGLON") & dtRenglones.Rows(kCont).Item("ESTATUS") & "' and id_emp = '" & jytsistema.WorkID & "' ") <> 0 Then
 
-                                        InsertEditMERCASMovimientoInventario(MyConn, lblInfo, True, dtRenglones.Rows(kCont).Item("ITEM"), .Item("emision"), "EN", _
-                                        dtRenglones.Rows(kCont).Item("NUMGAS"), dtRenglones.Rows(kCont).Item("UNIDAD"), dtRenglones.Rows(kCont).Item("CANTIDAD"), _
-                                        dtRenglones.Rows(kCont).Item("PESO"), Costo, Costo, "GAS", dtRenglones.Rows(kCont).Item("NUMGAS"), IIf(IsDBNull(dtRenglones.Rows(kCont).Item("LOTE")), "", dtRenglones.Rows(kCont).Item("lote")), _
-                                        .Item("CODPRO"), dtRenglones.Rows(kCont).Item("COSTOTOT"), dtRenglones.Rows(kCont).Item("COSTOTOTDES"), 0.0#, dtRenglones.Rows(kCont).Item("COSTOTOT") - dtRenglones.Rows(kCont).Item("COSTOTOTDES"), _
+                                        InsertEditMERCASMovimientoInventario(MyConn, lblInfo, True, dtRenglones.Rows(kCont).Item("ITEM"), .Item("emision"), "EN",
+                                        dtRenglones.Rows(kCont).Item("NUMGAS"), dtRenglones.Rows(kCont).Item("UNIDAD"), dtRenglones.Rows(kCont).Item("CANTIDAD"),
+                                        dtRenglones.Rows(kCont).Item("PESO"), Costo, Costo, "GAS", dtRenglones.Rows(kCont).Item("NUMGAS"), IIf(IsDBNull(dtRenglones.Rows(kCont).Item("LOTE")), "", dtRenglones.Rows(kCont).Item("lote")),
+                                        .Item("CODPRO"), dtRenglones.Rows(kCont).Item("COSTOTOT"), dtRenglones.Rows(kCont).Item("COSTOTOTDES"), 0.0#, dtRenglones.Rows(kCont).Item("COSTOTOT") - dtRenglones.Rows(kCont).Item("COSTOTOTDES"),
                                         .Item("codven"), .Item("almacen"), dtRenglones.Rows(kCont).Item("RENGLON") & dtRenglones.Rows(kCont).Item("ESTATUS"), jytsistema.sFechadeTrabajo)
 
                                     End If
                                 End If
-                                refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, CInt(iCont / dtEncab.Rows.Count * 100), _
+                                refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, CInt(iCont / dtEncab.Rows.Count * 100),
                                          NumeroFactura & " : " & dtRenglones.Rows(kCont).Item("ITEM") & " " & dtRenglones.Rows(kCont).Item("DESCRIP"))
 
                             Next
@@ -576,7 +569,7 @@ Public Class jsComProReconstruccionDeSaldos
         txtProveedorHasta.Text = txtProveedorDesde.Text
     End Sub
 
-    Private Sub txtFechaDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtFechaDesde.TextChanged
-        txtFechaHasta.Text = txtFechaDesde.Text
+    Private Sub txtFechaDesde_ValueChanged(sender As Object, e As Events.DateTimeValueChangedEventArgs) Handles txtFechaDesde.ValueChanged
+        txtFechaHasta.Value = txtFechaDesde.Value
     End Sub
 End Class

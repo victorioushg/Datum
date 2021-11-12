@@ -13,6 +13,8 @@ Imports fTransport
 Imports System.Net.NetworkInformation
 Imports System.Management
 Imports Syncfusion.WinForms.Input
+Imports Syncfusion.WinForms.ListView
+Imports C1.Win.C1SuperTooltip
 
 Module FuncionesTransportables
 
@@ -103,6 +105,12 @@ Module FuncionesTransportables
         ft.Ejecutar_strSQL(MyConn, " DELETE FROM jsnomformula WHERE FORMULA = '" & nombreFuncion & "' ")
     End Sub
 
+    Public Function GetWorkCurrency(MyConn As MySqlConnection) As Moneda
+        Dim ds As New DataSet
+        Dim nTabla As String = "tblmoneda"
+        ds = DataSetRequeryPlus(ds, nTabla, MyConn, " select m.* from jsconcatmon m inner join jsconctaemp e on  (e.moneda = m.id) where e.id_emp = '" & jytsistema.WorkID & "' ")
+        Return ConvertDataTable(Of Moneda)(ds.Tables(nTabla)).FirstOrDefault()
+    End Function
 
 
 
@@ -120,34 +128,91 @@ Module FuncionesTransportables
             End If
         Next
     End Sub
-    'Public Sub ft.ActivarMenuBarra(MyConn As MySqlConnection, ds As DataSet, dt As DataTable, Region As String, _
-    '                         MenuBarra As ToolStrip, Usuario As String, Optional aObj As String() = Nothing)
+    Public Sub AsignarToolTipsMenuBarraToolStrip(menus As List(Of ToolStrip), Optional menuName As String = "")
 
-    '    For Each c As ToolStripItem In MenuBarra.Items
-    '        Dim nombreBoton As String = c.Name.Trim()
-    '        If dt Is Nothing Then
-    '            c.Enabled = False
-    '        Else
-    '            If dt.Rows.Count > 0 Then
-    '                c.Enabled = True
-    '                If nombreBoton.Substring(0, 5) = "btnAg" Then c.Enabled = UsuarioPuedeIncluir(MyConn, Region, Usuario)
-    '                If nombreBoton.Substring(0, 5) = "btnEd" Then c.Enabled = UsuarioPuedeModificar(MyConn, Region, Usuario)
-    '                If nombreBoton.Substring(0, 5) = "btnEl" Then c.Enabled = UsuarioPuedeEliminar(MyConn, Region, Usuario)
-    '            Else
-    '                c.Enabled = False
-    '                If nombreBoton.Substring(0, 5) = "btnAg" Then c.Enabled = UsuarioPuedeIncluir(MyConn, Region, Usuario)
-    '                If nombreBoton.Substring(0, 5) = "btnSa" Then c.Enabled = True
-    '            End If
+        Dim tt As New C1SuperTooltip()
+        For Each menu As ToolStrip In menus
+            For Each btn As ToolStripItem In menu.Items
+                Select Case btn.Name
+                    Case "btnAgregar"
+                        tt.SetToolTip(btn, "<B>Agregar</B> nuevo(a) " & menuName)
+                    Case "btnEditar"
+                        tt.SetToolTip(btn, "<B>Editar o mofificar</B> " & menuName)
+                    Case "btnEliminar"
+                        tt.SetToolTip(btn, "<B>Eliminar</B> " & menuName)
+                    Case "btnBuscar"
+                        tt.SetToolTip(btn, "<B>Buscar</B> " & menuName)
+                    Case "btnPrimero"
+                        tt.SetToolTip(btn, "ir a <B>primer(a)</B> " & menuName)
+                    Case "btnSiguiente"
+                        tt.SetToolTip(btn, "ir a <B>siguiente</B> " & menuName)
+                    Case "btnAnterior"
+                        tt.SetToolTip(btn, "ir a <B>anterior</B> " & menuName)
+                    Case "btnUltimo"
+                        tt.SetToolTip(btn, "ir a <B>último(a) </B> " & menuName)
+                    Case "btnImprimir"
+                        tt.SetToolTip(btn, "<B>Imprimir</B> " & menuName)
+                    Case "btnSalir"
+                        tt.SetToolTip(btn, "<B>Cerrar</B> esta ventana")
+                    Case "btnDuplicar"
+                        tt.SetToolTip(btn, "<B>Duplicar</B> este(a) " & menuName)
+                    Case "btnRecalcular"
+                        tt.SetToolTip(btn, "<B>Recalcular</B> este(a) " & menuName)
 
-    '            If nombreBoton = "lblTitulo" Then c.Enabled = True
-    '            If nombreBoton = "Items" Then c.Enabled = False
-    '            If Not aObj Is Nothing Then
-    '                If Array.IndexOf(aObj, nombreBoton) >= 0 Then c.Enabled = True
-    '            End If
-    '        End If
-    '    Next
+                    Case "btnAgregarMovimiento"
+                        'Menu barra renglón
+                        tt.SetToolTip(btn, "<B>Agregar</B> renglón en " & menuName)
+                    Case "btnAgregarServicio"
+                        'Menu barra renglón
+                        tt.SetToolTip(btn, "<B>Agregar</B> renglón de Servicios en " & menuName)
+                    Case "btnEditarMovimiento"
+                        tt.SetToolTip(btn, "<B>Editar</B> renglón en " & menuName)
+                    Case "btnEliminarMovimiento"
+                        tt.SetToolTip(btn, "<B>Eliminar</B> renglón en " & menuName)
+                    Case "btnBuscarMovimiento"
+                        tt.SetToolTip(btn, "<B>Buscar</B> un renglón en " & menuName)
+                    Case "btnPrimerMovimiento"
+                        tt.SetToolTip(btn, "ir a <B>primer</B> renglón en " & menuName)
+                    Case "btnAnteriorMovimiento"
+                        tt.SetToolTip(btn, "ir a <B>anterior</B> renglón en " & menuName)
+                    Case "btnSiguienteMovimiento"
+                        tt.SetToolTip(btn, "ir a renglón <B>siguiente </B> en " & menuName)
+                    Case "btnUltimoMovimiento"
+                        tt.SetToolTip(btn, "ir a <B>último</B> renglón de " & menuName)
+                    Case "btnPresupuesto"
+                        tt.SetToolTip(btn, "Traer <B>presupuesto</B> a " & menuName)
+                    Case "btnPrepedido"
+                        tt.SetToolTip(btn, "Traer <B>pre-pedido</B> a " & menuName)
+                    Case "btnPedido"
+                        tt.SetToolTip(btn, "Traer <B>pedido</B> a " & menuName)
+                    Case "btnTraerFacturas"
+                        tt.SetToolTip(btn, "Traer <B>Facturas</B> a " & menuName)
+                    Case "btnCortar"
+                        tt.SetToolTip(btn, "<B>Recortar precios</B> en " & menuName)
 
-    'End Sub
+                    Case "btnAgregaDescuento"
+                        'Menu Barra Descuento 
+                        tt.SetToolTip(btn, "<B>Agrega </B> descuento global a " & menuName)
+                    Case "btnEliminaDescuento"
+                        tt.SetToolTip(btn, "<B>Elimina</B> descuento global de " & menuName)
+
+                End Select
+            Next
+        Next
+
+    End Sub
+
+#End Region
+#Region "Controles"
+    Public Sub SetComboCurrency(currencyId As Integer, cmbMonedas As SfComboBox, Optional lblTotal As Label = Nothing)
+        currencyId = IIf(currencyId = 0, jytsistema.WorkCurrency.Id, currencyId)
+        Dim monedas As List(Of CambioMonedaPlus) = cmbMonedas.DataSource
+        Dim moneda = monedas.FirstOrDefault(Function(change) change.Moneda = currencyId)
+        cmbMonedas.SelectedValue = currencyId
+
+        If lblTotal IsNot Nothing Then lblTotal.Text = "TOTAL (" + moneda.CodigoIso + ") "
+
+    End Sub
 #End Region
 #Region "Syncfusion"
     Public Function SetSizeDateObjects(ByVal dates() As SfDateTimeEdit)
@@ -1119,43 +1184,43 @@ calculadoraErr:
                                                       & " id_emp = '" & jytsistema.WorkID & "'")
 
     End Function
-    Public Function SeleccionaFecha(FechaInicial As Date, ByVal ParamArray oObjetos() As Object) As String
+    'Public Function SeleccionaFecha(FechaInicial As Date, ByVal ParamArray oObjetos() As Object) As String
 
-        Dim oObjeto As Object
-        Dim nLeft As Integer = 0
-        Dim nTop As Integer = 0
-        For Each oObjeto In oObjetos
-            nLeft += oObjeto.left
-            nTop += oObjeto.top
-        Next
+    '    Dim oObjeto As Object
+    '    Dim nLeft As Integer = 0
+    '    Dim nTop As Integer = 0
+    '    For Each oObjeto In oObjetos
+    '        nLeft += oObjeto.left
+    '        nTop += oObjeto.top
+    '    Next
 
-        Dim f As New FechaSistema
-        f.Fecha = FechaInicial
-        f.Cargar(nLeft, nTop)
+    '    Dim f As New FechaSistema
+    '    f.Fecha = FechaInicial
+    '    f.Cargar(nLeft, nTop)
 
-        SeleccionaFecha = ft.FormatoFecha(f.Fecha)
-        f = Nothing
+    '    SeleccionaFecha = ft.FormatoFecha(f.Fecha)
+    '    f = Nothing
 
-    End Function
-    Public Function SeleccionaFechaPlus(ByVal FechaInicial As Date, FechaFinal As Date, PermiteFechaAnterior As Boolean,
-                                    ByVal ParamArray oObjetos() As Object) As String
+    'End Function
+    'Public Function SeleccionaFechaPlus(ByVal FechaInicial As Date, FechaFinal As Date, PermiteFechaAnterior As Boolean,
+    '                                ByVal ParamArray oObjetos() As Object) As String
 
-        Dim oObjeto As Object
-        Dim nLeft As Integer = 0
-        Dim nTop As Integer = 0
-        For Each oObjeto In oObjetos
-            nLeft += oObjeto.left
-            nTop += oObjeto.top
-        Next
+    '    Dim oObjeto As Object
+    '    Dim nLeft As Integer = 0
+    '    Dim nTop As Integer = 0
+    '    For Each oObjeto In oObjetos
+    '        nLeft += oObjeto.left
+    '        nTop += oObjeto.top
+    '    Next
 
-        Dim f As New FechaSistemaPlus
-        f.Fecha = FechaInicial
-        f.Cargar(FechaFinal, PermiteFechaAnterior, nLeft, nTop)
+    '    Dim f As New FechaSistemaPlus
+    '    f.Fecha = FechaInicial
+    '    f.Cargar(FechaFinal, PermiteFechaAnterior, nLeft, nTop)
 
-        SeleccionaFechaPlus = ft.FormatoFecha(f.Fecha)
-        f = Nothing
+    '    SeleccionaFechaPlus = ft.FormatoFecha(f.Fecha)
+    '    f = Nothing
 
-    End Function
+    'End Function
     Public Function FechaInicioEjercicio(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label) As Date
         If jytsistema.WorkExercise = "" Then
             Dim aFld() As String = {"id_emp"}
@@ -2080,7 +2145,7 @@ calculadoraErr:
                                 & " WHERE " _
                                 & " a." & CampoDocumento & " = '" & NumeroDocumento & "' AND " _
                                 & " a.id_emp = '" & jytsistema.WorkID & "' " _
-                                & " GROUP BY a." & CampoDocumento & ", a.iva")
+                                & " GROUP BY a.iva")
 
     End Sub
     Public Sub ActualizarRenglonesDocumento_NuevoIVA(ByVal MyConn As MySqlConnection, ByVal nTablaIVAMySQL As String, ByVal nTablaMySQL As String,

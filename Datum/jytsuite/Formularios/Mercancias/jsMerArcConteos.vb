@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Imports fTransport
 Public Class jsMerArcConteos
     Private Const sModulo As String = "Conteos de inventarios"
@@ -43,6 +44,9 @@ Public Class jsMerArcConteos
         Try
             myConn.Open()
 
+            Dim dates As SfDateTimeEdit() = {txtEmision}
+            SetSizeDateObjects(dates)
+
             ds = DataSetRequeryPlus(ds, nTabla, myConn, strSQL)
             dt = ds.Tables(nTabla)
 
@@ -75,7 +79,7 @@ Public Class jsMerArcConteos
                           btnEliminarMovimiento, btnBuscarMovimiento, btnPrimerMovimiento, btnAnteriorMovimiento, _
                           btnSiguienteMovimiento, btnUltimoMovimiento)
         'Encabezado
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnEmision, btnAlmacen)
+        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, txtEmision, btnAlmacen)
     End Sub
 
     Private Sub AsignaTXT(ByVal nRow As Long)
@@ -87,7 +91,7 @@ Public Class jsMerArcConteos
                 'Encabezado 
                 txtConteo.Text = ft.muestraCampoTexto(.Item("conmer"))
                 txtComentario.Text = ft.muestraCampoTexto(.Item("comentario"))
-                txtEmision.Text = ft.muestraCampoFecha(.Item("fechacon"))
+                txtEmision.Value = .Item("fechacon")
                 ft.RellenaCombo(aTipo, cmbEstatus, CInt(.Item("procesado").ToString))
                 txtAlmacen.Text = ft.muestraCampoTexto(.Item("almacen"))
                 txtFechaProceso.Text = IIf(.Item("procesado") = 0, "", ft.muestraCampoFecha(.Item("fechapro").ToString))
@@ -160,7 +164,6 @@ Public Class jsMerArcConteos
         End If
 
         ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtComentario, txtFechaProceso)
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Fecha, txtEmision)
         ft.iniciarTextoObjetos(Transportables.tipoDato.Entero, txtItems)
 
         ft.RellenaCombo(aTipo, cmbEstatus)
@@ -182,7 +185,7 @@ Public Class jsMerArcConteos
         grpAceptarSalir.Visible = True
 
         ft.habilitarObjetos(True, False, grpEncab, MenuBarraRenglon)
-        ft.habilitarObjetos(True, True, txtComentario, btnEmision, btnAlmacen, cmbCuenta)
+        ft.habilitarObjetos(True, True, txtComentario, txtEmision, btnAlmacen, cmbCuenta)
         If i_modo = movimiento.iAgregar Then cmbTipoUnidad.Enabled = True
 
         If dg.RowCount > 0 Then ft.EditarColumnasEnDataGridView(dg, aEditar)
@@ -522,10 +525,6 @@ Public Class jsMerArcConteos
         Dim f As New jsMerRepParametros
         f.Cargar(TipoCargaFormulario.iShowDialog, ReporteMercancias.cConteos, "Conteo de Mercancia", txtConteo.Text)
         f = Nothing
-    End Sub
-
-    Private Sub btnEmision_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEmision.Click
-        txtEmision.Text = SeleccionaFecha(CDate(txtEmision.Text), Me, sender)
     End Sub
 
     Private Sub txtAlmacen_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAlmacen.TextChanged

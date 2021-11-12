@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsVenProHistoricoClientes
     Private Const sModulo As String = "Subir/Bajar movimientos a/de histórico"
 
@@ -13,33 +15,35 @@ Public Class jsVenProHistoricoClientes
 
     Private ProcesoTipo As iProceso
 
-  
+
     Public Sub Cargar(ByVal MyCon As MySqlConnection, ByVal TipoProceso As Integer, Optional ByVal CodCliente As String = "")
 
         myConn = MyCon
         Me.Tag = sModulo
         ProcesoTipo = TipoProceso
 
+        Dim dates As SfDateTimeEdit() = {txtFechaProceso}
+        SetSizeDateObjects(dates)
+
         If TipoProceso = iProceso.Procesar Then
-            lblLeyenda.Text = " Mediante este proceso se pasan los movimientos YA cancelados a histórico, con lo cual " + vbCr + _
-                    " desaparecen del movimiento actual. " + vbCr + _
+            lblLeyenda.Text = " Mediante este proceso se pasan los movimientos YA cancelados a histórico, con lo cual " + vbCr +
+                    " desaparecen del movimiento actual. " + vbCr +
                     " "
-            ft.visualizarObjetos(False, lblFecha, txtFechaProceso, btnFecha)
+            ft.visualizarObjetos(False, lblFecha, txtFechaProceso)
 
         Else
-            lblLeyenda.Text = " Mediante este proceso se reversan los movimientos YA cancelados desde histórico. " + vbCr + _
-                    " Si prefiere puede indicar la fecha desde la cual desea que aparezcan los movimientos. " + vbCr + _
+            lblLeyenda.Text = " Mediante este proceso se reversan los movimientos YA cancelados desde histórico. " + vbCr +
+                    " Si prefiere puede indicar la fecha desde la cual desea que aparezcan los movimientos. " + vbCr +
                     " "
-            ft.visualizarObjetos(True, lblFecha, txtFechaProceso, btnFecha)
+            ft.visualizarObjetos(True, lblFecha, txtFechaProceso)
         End If
 
         If CodCliente <> "" Then ft.habilitarObjetos(False, True, txtClienteDesde, txtClienteHasta, btnClienteDesde, btnClienteHasta)
 
         txtClienteDesde.Text = CodCliente
-        txtFechaProceso.Text = ft.FormatoFecha(DateAdd(DateInterval.Month, -6, jytsistema.sFechadeTrabajo))
+        txtFechaProceso.Value = DateAdd(DateInterval.Month, -6, jytsistema.sFechadeTrabajo)
 
-        ft.habilitarObjetos(False, True, txtFechaProceso)
-        ft.mensajeEtiqueta(lblInfo, " ... ", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, " ... ", Transportables.tipoMensaje.iAyuda)
 
         Me.ShowDialog()
 
@@ -115,7 +119,7 @@ Public Class jsVenProHistoricoClientes
             For iCont = 0 To dtProcesar.Rows.Count - 1
                 With dtProcesar.Rows(iCont)
                     If CDbl(.Item("saldo")) = 0.0# Then
-                        ft.Ejecutar_strSQL(myconn, "UPDATE jsventracob SET HISTORICO = '1' " _
+                        ft.Ejecutar_strSQL(myConn, "UPDATE jsventracob SET HISTORICO = '1' " _
                           & " where CODCLI = '" & CodigoCliente & "' " _
                           & " and NUMMOV = '" & .Item("nummov") & "' " _
                           & " and EJERCICIO = '" & jytsistema.WorkExercise & "' " _
@@ -134,14 +138,14 @@ Public Class jsVenProHistoricoClientes
 
     Private Sub ReversarDeHistoricoCXC(ByVal CodigoCliente As String, ByVal FechaDesde As Date)
 
-        ft.Ejecutar_strSQL(myconn, "UPDATE jsventracob SET HISTORICO = '0' " _
+        ft.Ejecutar_strSQL(myConn, "UPDATE jsventracob SET HISTORICO = '0' " _
         & " where CODCLI = '" & CodigoCliente & "' " _
         & " and emision >= '" & ft.FormatoFechaMySQL(FechaDesde) & "' " _
         & " and HISTORICO = '1' " _
         & " and ID_EMP = '" & jytsistema.WorkID & "'")
 
 
-        ft.Ejecutar_strSQL(myconn, " update jsventracob a, (select nummov from jsventracob " _
+        ft.Ejecutar_strSQL(myConn, " update jsventracob a, (select nummov from jsventracob " _
                                         & "                      where historico = '0' and " _
                                         & "                      codcli = '" & CodigoCliente & "' and " _
                                         & "                      id_emp = '" & jytsistema.WorkID & "' group by nummov) b " _
@@ -153,10 +157,6 @@ Public Class jsVenProHistoricoClientes
         InsertarAuditoria(myConn, MovAud.iProcesar, sModulo, CodigoCliente & "REV")
 
 
-    End Sub
-
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFechaProceso.Text = SeleccionaFecha(CDate(txtFechaProceso.Text), btnFecha)
     End Sub
 
     Private Sub txtClienteDesde_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtClienteDesde.TextChanged

@@ -28,18 +28,14 @@ Partial Class jsVenProMercanciasEnDespachos
         Me.btnAsesorHasta = New System.Windows.Forms.Button()
         Me.btnAsesorDesde = New System.Windows.Forms.Button()
         Me.btnMercanciaDesde = New System.Windows.Forms.Button()
-        Me.btnFechaDesde = New System.Windows.Forms.Button()
         Me.btnMercanciaHasta = New System.Windows.Forms.Button()
         Me.txtAsesorHasta = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtMercanciaHasta = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.txtFechaDesde = New System.Windows.Forms.TextBox()
         Me.txtAsesorDesde = New System.Windows.Forms.TextBox()
-        Me.btnFechaHasta = New System.Windows.Forms.Button()
         Me.txtMercanciaDesde = New System.Windows.Forms.TextBox()
-        Me.txtFechaHasta = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCancel = New System.Windows.Forms.Button()
@@ -47,6 +43,8 @@ Partial Class jsVenProMercanciasEnDespachos
         Me.C1SuperTooltip1 = New C1.Win.C1SuperTooltip.C1SuperTooltip(Me.components)
         Me.Label3 = New System.Windows.Forms.Label()
         Me.C1PictureBox1 = New C1.Win.C1Input.C1PictureBox()
+        Me.txtFechaDesde = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaHasta = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpEncab.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -71,8 +69,8 @@ Partial Class jsVenProMercanciasEnDespachos
         Me.dg.AllowUserToResizeColumns = False
         Me.dg.AllowUserToResizeRows = False
         Me.dg.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dg.Location = New System.Drawing.Point(0, 184)
         Me.dg.Name = "dg"
@@ -83,24 +81,22 @@ Partial Class jsVenProMercanciasEnDespachos
         'grpEncab
         '
         Me.grpEncab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpEncab.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpEncab.Controls.Add(Me.txtFechaHasta)
+        Me.grpEncab.Controls.Add(Me.txtFechaDesde)
         Me.grpEncab.Controls.Add(Me.btnGo)
         Me.grpEncab.Controls.Add(Me.btnAsesorHasta)
         Me.grpEncab.Controls.Add(Me.btnAsesorDesde)
         Me.grpEncab.Controls.Add(Me.btnMercanciaDesde)
-        Me.grpEncab.Controls.Add(Me.btnFechaDesde)
         Me.grpEncab.Controls.Add(Me.btnMercanciaHasta)
         Me.grpEncab.Controls.Add(Me.txtAsesorHasta)
         Me.grpEncab.Controls.Add(Me.Label5)
         Me.grpEncab.Controls.Add(Me.Label4)
         Me.grpEncab.Controls.Add(Me.txtMercanciaHasta)
         Me.grpEncab.Controls.Add(Me.Label11)
-        Me.grpEncab.Controls.Add(Me.txtFechaDesde)
         Me.grpEncab.Controls.Add(Me.txtAsesorDesde)
-        Me.grpEncab.Controls.Add(Me.btnFechaHasta)
         Me.grpEncab.Controls.Add(Me.txtMercanciaDesde)
-        Me.grpEncab.Controls.Add(Me.txtFechaHasta)
         Me.grpEncab.Controls.Add(Me.Label2)
         Me.grpEncab.Location = New System.Drawing.Point(1, 54)
         Me.grpEncab.Name = "grpEncab"
@@ -113,7 +109,7 @@ Partial Class jsVenProMercanciasEnDespachos
         Me.btnGo.AutoSize = True
         Me.btnGo.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnGo.Image = CType(resources.GetObject("btnGo.Image"), System.Drawing.Image)
-        Me.btnGo.Location = New System.Drawing.Point(705, 86)
+        Me.btnGo.Location = New System.Drawing.Point(707, 86)
         Me.btnGo.Name = "btnGo"
         Me.btnGo.Size = New System.Drawing.Size(43, 38)
         Me.btnGo.TabIndex = 231
@@ -148,16 +144,6 @@ Partial Class jsVenProMercanciasEnDespachos
         Me.btnMercanciaDesde.TabIndex = 228
         Me.btnMercanciaDesde.Text = "•••"
         Me.btnMercanciaDesde.UseVisualStyleBackColor = True
-        '
-        'btnFechaDesde
-        '
-        Me.btnFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaDesde.Location = New System.Drawing.Point(578, 18)
-        Me.btnFechaDesde.Name = "btnFechaDesde"
-        Me.btnFechaDesde.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaDesde.TabIndex = 227
-        Me.btnFechaDesde.Text = "•••"
-        Me.btnFechaDesde.UseVisualStyleBackColor = True
         '
         'btnMercanciaHasta
         '
@@ -220,17 +206,6 @@ Partial Class jsVenProMercanciasEnDespachos
         Me.Label11.Text = "Asesor :"
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'txtFechaDesde
-        '
-        Me.txtFechaDesde.Enabled = False
-        Me.txtFechaDesde.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFechaDesde.Location = New System.Drawing.Point(467, 16)
-        Me.txtFechaDesde.MaxLength = 19
-        Me.txtFechaDesde.Name = "txtFechaDesde"
-        Me.txtFechaDesde.Size = New System.Drawing.Size(105, 22)
-        Me.txtFechaDesde.TabIndex = 206
-        Me.txtFechaDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'txtAsesorDesde
         '
         Me.txtAsesorDesde.Enabled = False
@@ -242,16 +217,6 @@ Partial Class jsVenProMercanciasEnDespachos
         Me.txtAsesorDesde.TabIndex = 204
         Me.txtAsesorDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'btnFechaHasta
-        '
-        Me.btnFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaHasta.Location = New System.Drawing.Point(723, 16)
-        Me.btnFechaHasta.Name = "btnFechaHasta"
-        Me.btnFechaHasta.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaHasta.TabIndex = 112
-        Me.btnFechaHasta.Text = "•••"
-        Me.btnFechaHasta.UseVisualStyleBackColor = True
-        '
         'txtMercanciaDesde
         '
         Me.txtMercanciaDesde.Enabled = False
@@ -261,17 +226,6 @@ Partial Class jsVenProMercanciasEnDespachos
         Me.txtMercanciaDesde.Name = "txtMercanciaDesde"
         Me.txtMercanciaDesde.Size = New System.Drawing.Size(105, 22)
         Me.txtMercanciaDesde.TabIndex = 5
-        '
-        'txtFechaHasta
-        '
-        Me.txtFechaHasta.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFechaHasta.Location = New System.Drawing.Point(615, 15)
-        Me.txtFechaHasta.MaxLength = 50
-        Me.txtFechaHasta.Multiline = True
-        Me.txtFechaHasta.Name = "txtFechaHasta"
-        Me.txtFechaHasta.Size = New System.Drawing.Size(102, 21)
-        Me.txtFechaHasta.TabIndex = 4
-        Me.txtFechaHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label2
         '
@@ -283,8 +237,8 @@ Partial Class jsVenProMercanciasEnDespachos
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(341, 63)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Proceso para cambiar las cantidades en pedidos . Por Período. Por Mercancia. Por " & _
-            "Fecha "
+        Me.Label2.Text = "Proceso para cambiar las cantidades en pedidos . Por Período. Por Mercancia. Por " &
+    "Fecha "
         '
         'grpAceptarSalir
         '
@@ -350,6 +304,30 @@ Partial Class jsVenProMercanciasEnDespachos
         Me.C1PictureBox1.TabIndex = 88
         Me.C1PictureBox1.TabStop = False
         '
+        'txtFechaDesde
+        '
+        Me.txtFechaDesde.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaDesde.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaDesde.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaDesde.Location = New System.Drawing.Point(467, 19)
+        Me.txtFechaDesde.Name = "txtFechaDesde"
+        Me.txtFechaDesde.Size = New System.Drawing.Size(119, 19)
+        Me.txtFechaDesde.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaDesde.TabIndex = 232
+        '
+        'txtFechaHasta
+        '
+        Me.txtFechaHasta.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaHasta.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaHasta.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaHasta.Location = New System.Drawing.Point(615, 19)
+        Me.txtFechaHasta.Name = "txtFechaHasta"
+        Me.txtFechaHasta.Size = New System.Drawing.Size(115, 19)
+        Me.txtFechaHasta.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaHasta.TabIndex = 233
+        '
         'jsVenProMercanciasEnDespachos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -380,15 +358,12 @@ Partial Class jsVenProMercanciasEnDespachos
     Friend WithEvents dg As System.Windows.Forms.DataGridView
     Friend WithEvents grpEncab As System.Windows.Forms.GroupBox
     Friend WithEvents txtMercanciaDesde As System.Windows.Forms.TextBox
-    Friend WithEvents txtFechaHasta As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
-    Friend WithEvents btnFechaHasta As System.Windows.Forms.Button
     Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents txtFechaDesde As System.Windows.Forms.TextBox
     Friend WithEvents txtAsesorDesde As System.Windows.Forms.TextBox
     Friend WithEvents txtMercanciaHasta As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
@@ -399,7 +374,8 @@ Partial Class jsVenProMercanciasEnDespachos
     Friend WithEvents btnAsesorHasta As System.Windows.Forms.Button
     Friend WithEvents btnAsesorDesde As System.Windows.Forms.Button
     Friend WithEvents btnMercanciaDesde As System.Windows.Forms.Button
-    Friend WithEvents btnFechaDesde As System.Windows.Forms.Button
     Friend WithEvents btnGo As System.Windows.Forms.Button
     Friend WithEvents C1PictureBox1 As C1.Win.C1Input.C1PictureBox
+    Friend WithEvents txtFechaHasta As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaDesde As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

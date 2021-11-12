@@ -31,17 +31,14 @@ Partial Class jsControlProConsecutivos
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmbContadores = New System.Windows.Forms.ComboBox()
-        Me.btnFechaDesde = New System.Windows.Forms.Button()
-        Me.txtFechaDesde = New System.Windows.Forms.TextBox()
-        Me.btnFechaHasta = New System.Windows.Forms.Button()
-        Me.txtFechaHasta = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.dg = New System.Windows.Forms.DataGridView()
         Me.btnImprimir = New System.Windows.Forms.Button()
         Me.dgFaltantes = New System.Windows.Forms.DataGridView()
         Me.btnGo = New System.Windows.Forms.Button()
         Me.lblCantidad = New System.Windows.Forms.Label()
+        Me.txtFechaDesde = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaHasta = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpCaja.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
         CType(Me.C1PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -175,65 +172,15 @@ Partial Class jsControlProConsecutivos
         Me.cmbContadores.Size = New System.Drawing.Size(148, 21)
         Me.cmbContadores.TabIndex = 135
         '
-        'btnFechaDesde
-        '
-        Me.btnFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaDesde.Location = New System.Drawing.Point(458, 169)
-        Me.btnFechaDesde.Name = "btnFechaDesde"
-        Me.btnFechaDesde.Size = New System.Drawing.Size(27, 20)
-        Me.btnFechaDesde.TabIndex = 139
-        Me.btnFechaDesde.Text = "···"
-        Me.btnFechaDesde.UseVisualStyleBackColor = True
-        '
-        'txtFechaDesde
-        '
-        Me.txtFechaDesde.BackColor = System.Drawing.Color.White
-        Me.txtFechaDesde.Enabled = False
-        Me.txtFechaDesde.Location = New System.Drawing.Point(376, 169)
-        Me.txtFechaDesde.Name = "txtFechaDesde"
-        Me.txtFechaDesde.Size = New System.Drawing.Size(79, 20)
-        Me.txtFechaDesde.TabIndex = 138
-        Me.txtFechaDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnFechaHasta
-        '
-        Me.btnFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaHasta.Location = New System.Drawing.Point(458, 190)
-        Me.btnFechaHasta.Name = "btnFechaHasta"
-        Me.btnFechaHasta.Size = New System.Drawing.Size(27, 20)
-        Me.btnFechaHasta.TabIndex = 141
-        Me.btnFechaHasta.Text = "···"
-        Me.btnFechaHasta.UseVisualStyleBackColor = True
-        '
-        'txtFechaHasta
-        '
-        Me.txtFechaHasta.BackColor = System.Drawing.Color.White
-        Me.txtFechaHasta.Enabled = False
-        Me.txtFechaHasta.Location = New System.Drawing.Point(376, 190)
-        Me.txtFechaHasta.Name = "txtFechaHasta"
-        Me.txtFechaHasta.Size = New System.Drawing.Size(79, 20)
-        Me.txtFechaHasta.TabIndex = 140
-        Me.txtFechaHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label2
         '
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(302, 166)
+        Me.Label2.Location = New System.Drawing.Point(295, 169)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(68, 20)
         Me.Label2.TabIndex = 142
-        Me.Label2.Text = "Desde"
+        Me.Label2.Text = "Periodo"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label4
-        '
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(302, 190)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(68, 20)
-        Me.Label4.TabIndex = 143
-        Me.Label4.Text = "hasta"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dg
         '
@@ -293,6 +240,30 @@ Partial Class jsControlProConsecutivos
         Me.lblCantidad.TabIndex = 148
         Me.lblCantidad.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'txtFechaDesde
+        '
+        Me.txtFechaDesde.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaDesde.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaDesde.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaDesde.Location = New System.Drawing.Point(369, 172)
+        Me.txtFechaDesde.Name = "txtFechaDesde"
+        Me.txtFechaDesde.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaDesde.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaDesde.TabIndex = 214
+        '
+        'txtFechaHasta
+        '
+        Me.txtFechaHasta.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaHasta.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaHasta.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaHasta.Location = New System.Drawing.Point(489, 172)
+        Me.txtFechaHasta.Name = "txtFechaHasta"
+        Me.txtFechaHasta.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaHasta.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaHasta.TabIndex = 215
+        '
         'jsControlProConsecutivos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -300,17 +271,14 @@ Partial Class jsControlProConsecutivos
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(732, 488)
         Me.ControlBox = False
+        Me.Controls.Add(Me.txtFechaHasta)
+        Me.Controls.Add(Me.txtFechaDesde)
         Me.Controls.Add(Me.lblCantidad)
         Me.Controls.Add(Me.btnGo)
         Me.Controls.Add(Me.dgFaltantes)
         Me.Controls.Add(Me.btnImprimir)
         Me.Controls.Add(Me.dg)
-        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.btnFechaHasta)
-        Me.Controls.Add(Me.txtFechaHasta)
-        Me.Controls.Add(Me.btnFechaDesde)
-        Me.Controls.Add(Me.txtFechaDesde)
         Me.Controls.Add(Me.cmbContadores)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.grpAceptarSalir)
@@ -345,15 +313,12 @@ Partial Class jsControlProConsecutivos
     Friend WithEvents lblLeyenda As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents cmbContadores As System.Windows.Forms.ComboBox
-    Friend WithEvents btnFechaDesde As System.Windows.Forms.Button
-    Friend WithEvents txtFechaDesde As System.Windows.Forms.TextBox
-    Friend WithEvents btnFechaHasta As System.Windows.Forms.Button
-    Friend WithEvents txtFechaHasta As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents dg As System.Windows.Forms.DataGridView
     Friend WithEvents btnImprimir As System.Windows.Forms.Button
     Friend WithEvents dgFaltantes As System.Windows.Forms.DataGridView
     Friend WithEvents btnGo As System.Windows.Forms.Button
     Friend WithEvents lblCantidad As System.Windows.Forms.Label
+    Friend WithEvents txtFechaDesde As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaHasta As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

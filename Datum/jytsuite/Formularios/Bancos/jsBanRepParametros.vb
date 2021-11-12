@@ -2,6 +2,8 @@ Imports MySql.Data.MySqlClient
 Imports System.IO
 Imports ReportesDeBancos
 Imports fTransport
+Imports Syncfusion.WinForms.Input
+
 Public Class jsBanRepParametros
 
     Private Const sModulo As String = "Reportes de Bancos"
@@ -33,8 +35,8 @@ Public Class jsBanRepParametros
         cHasta = 2
     End Enum
 
-    Public Sub Cargar(ByVal TipoCarga As Integer, ByVal numReporte As Integer, ByVal nomReporte As String, _
-                      Optional ByVal CodBanco As String = "", Optional ByVal numDocumento As String = "", _
+    Public Sub Cargar(ByVal TipoCarga As Integer, ByVal numReporte As Integer, ByVal nomReporte As String,
+                      Optional ByVal CodBanco As String = "", Optional ByVal numDocumento As String = "",
                       Optional ByVal Fecha As Date = #1/1/2009#, Optional nOrigen As String = "BAN")
 
 
@@ -49,6 +51,9 @@ Public Class jsBanRepParametros
         Origen = nOrigen
         Documento = numDocumento
         FechaParametro = Fecha
+
+        Dim dates As SfDateTimeEdit() = {txtPeriodoDesde, txtPeriodoHasta}
+        SetSizeDateObjects(dates)
 
         ft.RellenaCombo(aDesde, cmbOrdenDesde)
         ft.RellenaCombo(aHasta, cmbOrdenHasta)
@@ -76,7 +81,7 @@ Public Class jsBanRepParametros
                 Inicializar(ReporteNombre, False, False, False, False, vOrdenNombres, vOrdenCampos, vOrdenTipo, vOrdenLongitud, CodigoBanco)
                 bOrigenBancos = True
 
-            Case ReporteBancos.cDisponibilidad, ReporteBancos.cConciliacion, ReporteBancos.cEstadoCuenta, _
+            Case ReporteBancos.cDisponibilidad, ReporteBancos.cConciliacion, ReporteBancos.cEstadoCuenta,
                 ReporteBancos.cIDB, ReporteBancos.cListadoBancos, ReporteBancos.cChequesDevueltos
                 Dim vOrdenNombres() As String = {"Código Banco"}
                 Dim vOrdenCampos() As String = {"codban"}
@@ -176,9 +181,9 @@ Public Class jsBanRepParametros
                 Inicializar(ReporteNombre, True, False, True, True, vOrdenNombres, vOrdenCampos, vOrdenTipo, vOrdenLongitud, Documento)
         End Select
     End Sub
-    Private Sub Inicializar(ByVal nEtiqueta As String, ByVal TabOrden As Boolean, ByVal TabGrupo As Boolean, _
-        ByVal TabCriterio As Boolean, ByVal TabConstantes As Boolean, ByVal aNombreOrden() As String, _
-        ByVal aCampoOrden() As String, ByVal aTipoOrden() As String, ByVal aLongitudOrden() As Integer, _
+    Private Sub Inicializar(ByVal nEtiqueta As String, ByVal TabOrden As Boolean, ByVal TabGrupo As Boolean,
+        ByVal TabCriterio As Boolean, ByVal TabConstantes As Boolean, ByVal aNombreOrden() As String,
+        ByVal aCampoOrden() As String, ByVal aTipoOrden() As String, ByVal aLongitudOrden() As Integer,
         Optional ByVal CodBanco As String = "")
 
 
@@ -227,7 +232,7 @@ Public Class jsBanRepParametros
         VerCriterio_Caja(False)
 
         Select Case ReporteNumero
-            Case ReporteBancos.cFichaBanco, ReporteBancos.cSaldosMensuales, ReporteBancos.cIDBMes, _
+            Case ReporteBancos.cFichaBanco, ReporteBancos.cSaldosMensuales, ReporteBancos.cIDBMes,
                 ReporteBancos.cChequeDevuelto, ReporteBancos.cTicketDevuelto
 
             Case ReporteBancos.cMovimientoBanco
@@ -243,7 +248,7 @@ Public Class jsBanRepParametros
             Case ReporteBancos.cDisponibilidad
                 VerCriterio_Periodo(True, DesdeHasta.cHasta, TipoPeriodo.iDiario)
                 VerCriterio_TipoDocumento(False)
-            Case ReporteBancos.cEstadoCuenta, ReporteBancos.cIDB, ReporteBancos.cChequesDevueltos, _
+            Case ReporteBancos.cEstadoCuenta, ReporteBancos.cIDB, ReporteBancos.cChequesDevueltos,
                 ReporteBancos.cRemesasTickets
                 VerCriterio_Periodo(True, DesdeHasta.cDesdeHasta)
             Case ReporteBancos.cArqueoCajas
@@ -268,37 +273,37 @@ Public Class jsBanRepParametros
 
     Private Sub VerCriterio_Periodo(ByVal Ver As Boolean, ByVal CompletoDesdeHasta As Integer, Optional ByVal Periodo As TipoPeriodo = TipoPeriodo.iMensual)
         'CompletoDesdeHasta 0 = Complete , 1 = Desde , 2 = Hasta 
-        ft.visualizarObjetos(False, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta, btnPeriodoDesde, btnPeriodoHasta)
-        ft.habilitarObjetos(False, True, txtPeriodoDesde, txtPeriodoHasta)
+        ft.visualizarObjetos(False, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta)
+
         PeriodoTipo = Periodo
         If Ver Then
             Select Case CompletoDesdeHasta
                 Case 0
-                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta, btnPeriodoDesde, btnPeriodoHasta)
+                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta)
                 Case 1
-                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodo, txtPeriodoDesde, btnPeriodoDesde)
+                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodo, txtPeriodoDesde)
                 Case 2
-                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoHasta, btnPeriodoHasta)
+                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoHasta)
             End Select
         End If
 
 
         Select Case Periodo
             Case TipoPeriodo.iDiario
-                txtPeriodoDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtPeriodoHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoDesde.Value = jytsistema.sFechadeTrabajo
+                txtPeriodoHasta.Value = jytsistema.sFechadeTrabajo
             Case TipoPeriodo.iSemanal
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaSemana(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaSemana(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaSemana(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaSemana(jytsistema.sFechadeTrabajo)
             Case TipoPeriodo.iMensual
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaMes(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaMes(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaMes(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaMes(jytsistema.sFechadeTrabajo)
             Case TipoPeriodo.iAnual
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaAño(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaAño(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaAño(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaAño(jytsistema.sFechadeTrabajo)
             Case Else
-                txtPeriodoDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtPeriodoHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoDesde.Value = jytsistema.sFechadeTrabajo
+                txtPeriodoHasta.Value = jytsistema.sFechadeTrabajo
         End Select
 
     End Sub
@@ -390,8 +395,8 @@ Public Class jsBanRepParametros
     Private Sub TipoOrden(ByVal cTipo As String)
         Select Case vOrdenTipo(IndiceReporte)
             Case "D"
-                txtOrdenDesde.Text = ft.FormatoFecha(PrimerDiaMes(jytsistema.sFechadeTrabajo))
-                txtOrdenHasta.Text = ft.FormatoFecha(UltimoDiaMes(jytsistema.sFechadeTrabajo))
+                txtOrdenDesde.Text = PrimerDiaMes(jytsistema.sFechadeTrabajo)
+                txtOrdenHasta.Text = UltimoDiaMes(jytsistema.sFechadeTrabajo)
                 txtOrdenDesde.Enabled = False
                 txtOrdenHasta.Enabled = False
             Case Else
@@ -446,28 +451,28 @@ Public Class jsBanRepParametros
             Case ReporteBancos.cFichaBanco
                 nTabla = "dtBancosFicha"
                 oReporte = New rptBanBancosFicha
-                str = SeleccionBANBancos(CodigoBanco, CodigoBanco, CDate(txtPeriodoHasta.Text))
+                str = SeleccionBANBancos(CodigoBanco, CodigoBanco, txtPeriodoHasta.Value)
             Case ReporteBancos.cListadoBancos
                 nTabla = "dtBancosFicha"
                 oReporte = New rptBanBancosListado
-                str = SeleccionBANBancos(txtOrdenDesde.Text, txtOrdenHasta.Text, CDate(txtPeriodoHasta.Text))
+                str = SeleccionBANBancos(txtOrdenDesde.Text, txtOrdenHasta.Text, txtPeriodoHasta.Value)
             Case ReporteBancos.cMovimientoBanco
                 nTabla = "dtBancosMovimientos"
                 oReporte = New rptBanBancosMovimientos
-                str = SeleccionBANMovimientosBancos(CodigoBanco, CodigoBanco, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtTipDoc.Text, cadOrigen)
+                str = SeleccionBANMovimientosBancos(CodigoBanco, CodigoBanco, txtPeriodoDesde.Value, txtPeriodoHasta.Value, txtTipDoc.Text, cadOrigen)
             Case ReporteBancos.cMovimientoCaja
                 nTabla = "dtCajaMovimientos"
                 oReporte = New rptBanCajaMovimientos
-                str = SeleccionBANMovimientosCaja(CodigoBanco, CodigoBanco, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), cadOrigen, txtTipDoc.Text)
+                str = SeleccionBANMovimientosCaja(CodigoBanco, CodigoBanco, txtPeriodoDesde.Value, txtPeriodoHasta.Value, cadOrigen, txtTipDoc.Text)
             Case ReporteBancos.cArqueoCajas
                 nTabla = "dtCajaMovimientos"
                 oReporte = New rptBanCajaCierre
-                str = SeleccionBANMovimientosCaja(txtOrdenDesde.Text, txtOrdenHasta.Text, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), cadOrigen)
+                str = SeleccionBANMovimientosCaja(txtOrdenDesde.Text, txtOrdenHasta.Text, txtPeriodoDesde.Value, txtPeriodoHasta.Value, cadOrigen)
                 PresentaArbol = True
             Case ReporteBancos.cDisponibilidad
                 nTabla = "dtBancosFicha"
                 oReporte = New rptBanListadoBancos_Disponibilidad
-                str = SeleccionBANBancos(txtOrdenDesde.Text, txtOrdenHasta.Text, CDate(txtPeriodoHasta.Text), True)
+                str = SeleccionBANBancos(txtOrdenDesde.Text, txtOrdenHasta.Text, txtPeriodoHasta.Value, True)
             Case ReporteBancos.cConciliacion
                 nTabla = "dtConciliacion"
                 oReporte = New rptBanConciliacionBancaria
@@ -480,16 +485,16 @@ Public Class jsBanRepParametros
             Case ReporteBancos.cEstadoCuenta
                 nTabla = "dtEstadoCuenta"
                 oReporte = New rptBanEstadodeCuenta
-                str = SeleccionBANEstadoCuenta(CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtOrdenDesde.Text, txtOrdenHasta.Text)
+                str = SeleccionBANEstadoCuenta(txtPeriodoDesde.Value, txtPeriodoHasta.Value, txtOrdenDesde.Text, txtOrdenHasta.Text)
             Case ReporteBancos.cDepositos
                 nTabla = "dtDepositos"
                 oReporte = New rptBanDepositos
-                str = SeleccionBANDepositos(txtOrdenDesde.Text, txtOrdenHasta.Text, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), _
+                str = SeleccionBANDepositos(txtOrdenDesde.Text, txtOrdenHasta.Text, txtPeriodoDesde.Value, txtPeriodoHasta.Value,
                                             txtDocumentoDesde.Text, txtDocumentoHasta.Text, txtDepositoDesde.Text, txtDepositoHasta.Text)
             Case ReporteBancos.cIDB
                 nTabla = "dtIDB"
                 oReporte = New rptBanBancosIDB
-                str = SeleccionBANDebitoBancario(txtOrdenDesde.Text, txtOrdenHasta.Text, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text))
+                str = SeleccionBANDebitoBancario(txtOrdenDesde.Text, txtOrdenHasta.Text, txtPeriodoDesde.Value, txtPeriodoHasta.Value)
             Case ReporteBancos.cIDBMes
                 nTabla = "dtIDBMes"
                 oReporte = New rptBanBancosIDBMes
@@ -510,17 +515,17 @@ Public Class jsBanRepParametros
             Case ReporteBancos.cChequesDevueltos
                 nTabla = "dtChequesDevueltos"
                 oReporte = New rptBanChequesDevueltos
-                str = SeleccionBANChequesDevueltosBancos(txtOrdenDesde.Text, txtOrdenHasta.Text, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text))
+                str = SeleccionBANChequesDevueltosBancos(txtOrdenDesde.Text, txtOrdenHasta.Text, txtPeriodoDesde.Value, txtPeriodoHasta.Value)
                 PresentaArbol = True
             Case ReporteBancos.cRemesasTickets
                 nTabla = "dtRemesas"
                 oReporte = New rptBanRemesasCestaTicket
-                str = SeleccionBANRemesaCestaTicket(txtOrdenDesde.Text, txtOrdenHasta.Text, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), rdbDepositadas.Checked)
+                str = SeleccionBANRemesaCestaTicket(txtOrdenDesde.Text, txtOrdenHasta.Text, txtPeriodoDesde.Value, txtPeriodoHasta.Value, rdbDepositadas.Checked)
                 PresentaArbol = True
             Case ReporteBancos.cMovimientosPostDatados
                 nTabla = "dtNoDepositado"
                 oReporte = New rptBanCajaNoDepositada
-                str = SeleccionBANCajaNoDepositado(txtOrdenDesde.Text, txtOrdenHasta.Text, CDate(txtPeriodoDesde.Text), txtTipDoc.Text)
+                str = SeleccionBANCajaNoDepositado(txtOrdenDesde.Text, txtOrdenHasta.Text, txtPeriodoDesde.Value, txtTipDoc.Text)
             Case ReporteBancos.cComprobanteDeEgreso
                 nTabla = "dtComprobantePago"
                 If Origen = "BAN" Then
@@ -553,9 +558,9 @@ Public Class jsBanRepParametros
             Case ReporteBancos.cResumenReposicionSaldoCaja
                 nTabla = "dtDepositos"
                 oReporte = New rptBanReposisionSaldoCaja
-                str = SeleccionBANReposicionSaldoCaja(txtOrdenDesde.Text, txtOrdenHasta.Text, _
-                                                      txtCajaDesde.Text, txtCajaHasta.Text, _
-                                                      CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text))
+                str = SeleccionBANReposicionSaldoCaja(txtOrdenDesde.Text, txtOrdenHasta.Text,
+                                                      txtCajaDesde.Text, txtCajaHasta.Text,
+                                                      txtPeriodoDesde.Value, txtPeriodoHasta.Value)
 
             Case Else
                 oReporte = Nothing
@@ -566,7 +571,7 @@ Public Class jsBanRepParametros
             If dsBan.Tables(nTabla).Rows.Count > 0 Then
                 oReporte = PresentaReporte(oReporte, dsBan, nTabla)
                 r.CrystalReportViewer1.ReportSource = oReporte
-                r.CrystalReportViewer1.ToolPanelView = IIf(PresentaArbol, CrystalDecisions.Windows.Forms.ToolPanelViewType.GroupTree, _
+                r.CrystalReportViewer1.ToolPanelView = IIf(PresentaArbol, CrystalDecisions.Windows.Forms.ToolPanelViewType.GroupTree,
                                               CrystalDecisions.Windows.Forms.ToolPanelViewType.None)
                 r.CrystalReportViewer1.ShowGroupTreeButton = PresentaArbol
                 r.CrystalReportViewer1.Zoom(1)
@@ -574,7 +579,7 @@ Public Class jsBanRepParametros
                 r.Cargar(ReporteNombre)
                 DeshabilitarCursorEnEspera()
             Else
-                ft.MensajeCritico("No existe información que cumpla con estos criterios y/o constantes ")
+                ft.mensajeCritico("No existe información que cumpla con estos criterios y/o constantes ")
             End If
         End If
 
@@ -584,7 +589,7 @@ Public Class jsBanRepParametros
         oReporte = Nothing
 
     End Sub
-    Private Function PresentaReporte(ByVal oReporte As CrystalDecisions.CrystalReports.Engine.ReportClass, _
+    Private Function PresentaReporte(ByVal oReporte As CrystalDecisions.CrystalReports.Engine.ReportClass,
         ByVal ds As DataSet, ByVal nTabla As String) As CrystalDecisions.CrystalReports.Engine.ReportClass
 
         Dim rif As String
@@ -618,11 +623,11 @@ Public Class jsBanRepParametros
 
         Select Case ReporteNumero
             Case ReporteBancos.cDisponibilidad, ReporteBancos.cListadoBancos
-                oReporte.SetParameterValue("SaldoAl", " Saldo al " + txtPeriodoHasta.Text)
+                oReporte.SetParameterValue("SaldoAl", " Saldo al " + txtPeriodoHasta.Value)
             Case ReporteBancos.cConciliacion
                 oReporte.SetParameterValue("SaldoAl", " Saldo al " + ft.FormatoFecha(DateAdd(DateInterval.Day, -1, CDate("01/" + Format(cmbMes.SelectedIndex + 1, "00") + "/" + CStr(cmbAño.SelectedIndex + 2000)))))
             Case ReporteBancos.cEstadoCuenta
-                oReporte.SetParameterValue("SaldoAl", " Saldo al " + ft.FormatoFecha(DateAdd(DateInterval.Day, -1, CDate(txtPeriodoDesde.Text))))
+                oReporte.SetParameterValue("SaldoAl", " Saldo al " + ft.FormatoFecha(DateAdd(DateInterval.Day, -1, CDate(txtPeriodoDesde.Value.ToString))))
             Case ReporteBancos.cDepositos
                 oReporte.ReportDefinition.Sections("DetailSection1").SectionFormat.EnableSuppress = chkConsResumen.Checked
             Case ReporteBancos.cResumenReposicionSaldoCaja
@@ -631,8 +636,8 @@ Public Class jsBanRepParametros
             Case ReporteBancos.cChequeDevuelto
                 Dim myTextObjectOnReport As CrystalDecisions.CrystalReports.Engine.TextObject
                 myTextObjectOnReport = CType(oReporte.ReportDefinition.ReportObjects.Item("txtBloqueo"), CrystalDecisions.CrystalReports.Engine.TextObject)
-                If CDbl(IIf(ParametroPlus(MyConn, Gestion.iBancos, "VENPARAM03").ToString = "", "0", ParametroPlus(MyConn, Gestion.iBancos, "VENPARAM03").ToString)) > 0 Then
-                    If ds.Tables(nTabla).Rows(0).Item("chequesano") >= CInt(ParametroPlus(MyConn, Gestion.iBancos, "VENPARAM03")) Then
+                If CDbl(IIf(ParametroPlus(myConn, Gestion.iBancos, "VENPARAM03").ToString = "", "0", ParametroPlus(myConn, Gestion.iBancos, "VENPARAM03").ToString)) > 0 Then
+                    If ds.Tables(nTabla).Rows(0).Item("chequesano") >= CInt(ParametroPlus(myConn, Gestion.iBancos, "VENPARAM03")) Then
                         myTextObjectOnReport.Text = "Bloqueado"
                     Else
                         myTextObjectOnReport.Text = "OK!"
@@ -717,24 +722,8 @@ Public Class jsBanRepParametros
         PresentaReporte = oReporte
 
     End Function
-    Private Sub UbicacionDatosCheque()
 
-    End Sub
-    Private Sub btnPeriodoDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles btnPeriodoDesde.Click
-        txtPeriodoDesde.Text = SeleccionaFecha(CDate(txtPeriodoDesde.Text), Me, sender)
-    End Sub
-
-    Private Sub btnPeriodoHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles btnPeriodoHasta.Click
-        txtPeriodoHasta.Text = SeleccionaFecha(CDate(txtPeriodoHasta.Text), Me, sender)
-    End Sub
-
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
-
-    End Sub
-
-    Private Sub chkList_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkList.SelectedIndexChanged, _
+    Private Sub chkList_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkList.SelectedIndexChanged,
         chkList.DoubleClick
         Dim iCont As Integer
         txtTipDoc.Text = ""
@@ -746,7 +735,7 @@ Public Class jsBanRepParametros
     End Sub
     Private Function LineaCriterios() As String
         LineaCriterios = ""
-        If lblPeriodo.Visible Then LineaCriterios += "Período: " & IIf(lblPeriodoDesde.Visible, txtPeriodoDesde.Text, "") & IIf(lblPeriodoDesde.Visible AndAlso lblPeriodoHasta.Visible, "/", "") & IIf(lblPeriodoHasta.Visible, txtPeriodoHasta.Text, "")
+        If lblPeriodo.Visible Then LineaCriterios += "Período: " & IIf(lblPeriodoDesde.Visible, txtPeriodoDesde.Value, "") & IIf(lblPeriodoDesde.Visible AndAlso lblPeriodoHasta.Visible, "/", "") & IIf(lblPeriodoHasta.Visible, txtPeriodoHasta.Value, "")
         If lblTipodocumento.Visible Then LineaCriterios += " - " + " Tipo Documentos : " + txtTipDoc.Text
         If lblMesAño.Visible Then LineaCriterios += " Mes y Año " + cmbMes.Text + "/" + cmbAño.Text
         If lblDocumento.Visible Then LineaCriterios += " - " + " Documento : " + txtDocumentoDesde.Text + "/" + txtDocumentoHasta.Text
@@ -811,16 +800,16 @@ Public Class jsBanRepParametros
         If cmbOrdenDesde.Items.Count > 0 Then cmbOrdenDesde.SelectedIndex = cmbOrdenHasta.SelectedIndex
     End Sub
 
-    Private Sub txtPeriodoDesde_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPeriodoDesde.TextChanged
+    Private Sub txtPeriodoDesde_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Select Case PeriodoTipo
             Case TipoPeriodo.iDiario
-                txtPeriodoHasta.Text = txtPeriodoDesde.Text
+                txtPeriodoHasta.Value = txtPeriodoDesde.Value
             Case TipoPeriodo.iSemanal
-                txtPeriodoHasta.Text = ft.FormatoFecha(DateAdd(DateInterval.Day, 7, CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = DateAdd(DateInterval.Day, 7, CDate(txtPeriodoDesde.Value.ToString))
             Case TipoPeriodo.iMensual
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaMes(CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = UltimoDiaMes(txtPeriodoDesde.Value)
             Case TipoPeriodo.iAnual
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaAño(CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = UltimoDiaAño(txtPeriodoDesde.Value)
         End Select
     End Sub
 

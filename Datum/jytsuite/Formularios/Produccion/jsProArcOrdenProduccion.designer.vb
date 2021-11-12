@@ -27,14 +27,10 @@ Partial Class jsProArcOrdenProduccion
         Me.lblOrigen = New System.Windows.Forms.Label()
         Me.txtOrdenOrigen = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.txtEstimada = New System.Windows.Forms.TextBox()
-        Me.btnEstimada = New System.Windows.Forms.Button()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.cmbEstatus = New System.Windows.Forms.ComboBox()
-        Me.btnEmision = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtEmision = New System.Windows.Forms.TextBox()
         Me.txtDescripProduccion = New System.Windows.Forms.TextBox()
         Me.txtCodigo = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -90,6 +86,8 @@ Partial Class jsProArcOrdenProduccion
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtPesoTotal = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtEmision = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtEstimada = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         CType(Me.dgComponentes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpEncab.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -135,17 +133,15 @@ Partial Class jsProArcOrdenProduccion
         Me.grpEncab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpEncab.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpEncab.Controls.Add(Me.txtEstimada)
+        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.lblOrigen)
         Me.grpEncab.Controls.Add(Me.txtOrdenOrigen)
         Me.grpEncab.Controls.Add(Me.Label14)
-        Me.grpEncab.Controls.Add(Me.txtEstimada)
-        Me.grpEncab.Controls.Add(Me.btnEstimada)
         Me.grpEncab.Controls.Add(Me.Label11)
         Me.grpEncab.Controls.Add(Me.Label6)
         Me.grpEncab.Controls.Add(Me.cmbEstatus)
-        Me.grpEncab.Controls.Add(Me.btnEmision)
         Me.grpEncab.Controls.Add(Me.Label5)
-        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.txtDescripProduccion)
         Me.grpEncab.Controls.Add(Me.txtCodigo)
         Me.grpEncab.Controls.Add(Me.Label1)
@@ -179,33 +175,12 @@ Partial Class jsProArcOrdenProduccion
         'Label14
         '
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(438, 11)
+        Me.Label14.Location = New System.Drawing.Point(411, 13)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(134, 19)
         Me.Label14.TabIndex = 224
         Me.Label14.Text = "Terminación Estimada"
         Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtEstimada
-        '
-        Me.txtEstimada.Enabled = False
-        Me.txtEstimada.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEstimada.Location = New System.Drawing.Point(578, 11)
-        Me.txtEstimada.MaxLength = 5
-        Me.txtEstimada.Name = "txtEstimada"
-        Me.txtEstimada.Size = New System.Drawing.Size(87, 20)
-        Me.txtEstimada.TabIndex = 222
-        Me.txtEstimada.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnEstimada
-        '
-        Me.btnEstimada.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEstimada.Location = New System.Drawing.Point(671, 11)
-        Me.btnEstimada.Name = "btnEstimada"
-        Me.btnEstimada.Size = New System.Drawing.Size(25, 20)
-        Me.btnEstimada.TabIndex = 221
-        Me.btnEstimada.Text = "•••"
-        Me.btnEstimada.UseVisualStyleBackColor = True
         '
         'Label11
         '
@@ -237,16 +212,6 @@ Partial Class jsProArcOrdenProduccion
         Me.cmbEstatus.Size = New System.Drawing.Size(97, 21)
         Me.cmbEstatus.TabIndex = 198
         '
-        'btnEmision
-        '
-        Me.btnEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmision.Location = New System.Drawing.Point(392, 11)
-        Me.btnEmision.Name = "btnEmision"
-        Me.btnEmision.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmision.TabIndex = 112
-        Me.btnEmision.Text = "•••"
-        Me.btnEmision.UseVisualStyleBackColor = True
-        '
         'Label5
         '
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -256,17 +221,6 @@ Partial Class jsProArcOrdenProduccion
         Me.Label5.TabIndex = 11
         Me.Label5.Text = "Estatus"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtEmision
-        '
-        Me.txtEmision.Enabled = False
-        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmision.Location = New System.Drawing.Point(299, 11)
-        Me.txtEmision.MaxLength = 10
-        Me.txtEmision.Name = "txtEmision"
-        Me.txtEmision.Size = New System.Drawing.Size(87, 20)
-        Me.txtEmision.TabIndex = 5
-        Me.txtEmision.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtDescripProduccion
         '
@@ -753,6 +707,30 @@ Partial Class jsProArcOrdenProduccion
         Me.Label4.Text = "Kgr"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'txtEmision
+        '
+        Me.txtEmision.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmision.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmision.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmision.Location = New System.Drawing.Point(299, 13)
+        Me.txtEmision.Name = "txtEmision"
+        Me.txtEmision.Size = New System.Drawing.Size(114, 19)
+        Me.txtEmision.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmision.TabIndex = 227
+        '
+        'txtEstimada
+        '
+        Me.txtEstimada.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEstimada.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEstimada.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEstimada.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEstimada.Location = New System.Drawing.Point(551, 13)
+        Me.txtEstimada.Name = "txtEstimada"
+        Me.txtEstimada.Size = New System.Drawing.Size(114, 19)
+        Me.txtEstimada.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEstimada.TabIndex = 228
+        '
         'jsProArcOrdenProduccion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -798,7 +776,6 @@ Partial Class jsProArcOrdenProduccion
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents dgComponentes As System.Windows.Forms.DataGridView
     Friend WithEvents grpEncab As System.Windows.Forms.GroupBox
-    Friend WithEvents txtEmision As System.Windows.Forms.TextBox
     Friend WithEvents txtDescripProduccion As System.Windows.Forms.TextBox
     Friend WithEvents txtCodigo As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
@@ -840,15 +817,12 @@ Partial Class jsProArcOrdenProduccion
     Friend WithEvents ToolStripSeparator11 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents btnEmision As System.Windows.Forms.Button
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents cmbEstatus As System.Windows.Forms.ComboBox
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents btnDuplicar As System.Windows.Forms.ToolStripButton
     Friend WithEvents Label14 As System.Windows.Forms.Label
-    Friend WithEvents txtEstimada As System.Windows.Forms.TextBox
-    Friend WithEvents btnEstimada As System.Windows.Forms.Button
     Friend WithEvents tscmbUltimos As System.Windows.Forms.ToolStripComboBox
     Friend WithEvents btnRecalcular As System.Windows.Forms.ToolStripButton
     Friend WithEvents tbcOrden As C1.Win.C1Command.C1DockingTab
@@ -865,4 +839,6 @@ Partial Class jsProArcOrdenProduccion
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents txtPesoTotal As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents txtEstimada As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtEmision As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

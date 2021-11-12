@@ -23,6 +23,8 @@ Partial Class jsMerArcMercanciasMovimientos
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsMerArcMercanciasMovimientos))
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.grpTarjeta = New System.Windows.Forms.GroupBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.btnDescripcion = New System.Windows.Forms.Button()
         Me.btnLote = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtLote = New System.Windows.Forms.TextBox()
@@ -34,10 +36,8 @@ Partial Class jsMerArcMercanciasMovimientos
         Me.btnPesoCaptura = New System.Windows.Forms.Button()
         Me.lblPesoDes = New System.Windows.Forms.Label()
         Me.btnCantidadTC = New System.Windows.Forms.Button()
-        Me.btnFecha = New System.Windows.Forms.Button()
         Me.txtPesoTotal = New System.Windows.Forms.TextBox()
         Me.txtCostoPrecioTotal = New System.Windows.Forms.TextBox()
-        Me.txtFecha = New System.Windows.Forms.TextBox()
         Me.lblLote = New System.Windows.Forms.Label()
         Me.lblFactura = New System.Windows.Forms.Label()
         Me.lblPesoTotal = New System.Windows.Forms.Label()
@@ -57,8 +57,7 @@ Partial Class jsMerArcMercanciasMovimientos
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.C1SuperTooltip1 = New C1.Win.C1SuperTooltip.C1SuperTooltip(Me.components)
-        Me.btnDescripcion = New System.Windows.Forms.Button()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpTarjeta.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
         Me.SuspendLayout()
@@ -76,6 +75,7 @@ Partial Class jsMerArcMercanciasMovimientos
         'grpTarjeta
         '
         Me.grpTarjeta.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpTarjeta.Controls.Add(Me.txtFecha)
         Me.grpTarjeta.Controls.Add(Me.Label4)
         Me.grpTarjeta.Controls.Add(Me.btnDescripcion)
         Me.grpTarjeta.Controls.Add(Me.btnLote)
@@ -89,10 +89,8 @@ Partial Class jsMerArcMercanciasMovimientos
         Me.grpTarjeta.Controls.Add(Me.btnPesoCaptura)
         Me.grpTarjeta.Controls.Add(Me.lblPesoDes)
         Me.grpTarjeta.Controls.Add(Me.btnCantidadTC)
-        Me.grpTarjeta.Controls.Add(Me.btnFecha)
         Me.grpTarjeta.Controls.Add(Me.txtPesoTotal)
         Me.grpTarjeta.Controls.Add(Me.txtCostoPrecioTotal)
-        Me.grpTarjeta.Controls.Add(Me.txtFecha)
         Me.grpTarjeta.Controls.Add(Me.lblLote)
         Me.grpTarjeta.Controls.Add(Me.lblFactura)
         Me.grpTarjeta.Controls.Add(Me.lblPesoTotal)
@@ -113,6 +111,26 @@ Partial Class jsMerArcMercanciasMovimientos
         Me.grpTarjeta.Size = New System.Drawing.Size(538, 337)
         Me.grpTarjeta.TabIndex = 80
         Me.grpTarjeta.TabStop = False
+        '
+        'Label4
+        '
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(323, 99)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(135, 17)
+        Me.Label4.TabIndex = 62
+        Me.Label4.Text = "Comentario adicional :"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'btnDescripcion
+        '
+        Me.btnDescripcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDescripcion.Location = New System.Drawing.Point(463, 96)
+        Me.btnDescripcion.Name = "btnDescripcion"
+        Me.btnDescripcion.Size = New System.Drawing.Size(27, 20)
+        Me.btnDescripcion.TabIndex = 61
+        Me.btnDescripcion.Text = "···"
+        Me.btnDescripcion.UseVisualStyleBackColor = True
         '
         'btnLote
         '
@@ -217,16 +235,6 @@ Partial Class jsMerArcMercanciasMovimientos
         Me.btnCantidadTC.Text = "···"
         Me.btnCantidadTC.UseVisualStyleBackColor = True
         '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(279, 141)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(27, 20)
-        Me.btnFecha.TabIndex = 45
-        Me.btnFecha.Text = "···"
-        Me.btnFecha.UseVisualStyleBackColor = True
-        '
         'txtPesoTotal
         '
         Me.txtPesoTotal.Location = New System.Drawing.Point(137, 310)
@@ -242,14 +250,6 @@ Partial Class jsMerArcMercanciasMovimientos
         Me.txtCostoPrecioTotal.Size = New System.Drawing.Size(136, 20)
         Me.txtCostoPrecioTotal.TabIndex = 42
         Me.txtCostoPrecioTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtFecha
-        '
-        Me.txtFecha.Location = New System.Drawing.Point(137, 141)
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(136, 20)
-        Me.txtFecha.TabIndex = 38
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblLote
         '
@@ -431,25 +431,17 @@ Partial Class jsMerArcMercanciasMovimientos
         '
         Me.C1SuperTooltip1.Font = New System.Drawing.Font("Tahoma", 8.0!)
         '
-        'btnDescripcion
+        'txtFecha
         '
-        Me.btnDescripcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDescripcion.Location = New System.Drawing.Point(463, 96)
-        Me.btnDescripcion.Name = "btnDescripcion"
-        Me.btnDescripcion.Size = New System.Drawing.Size(27, 20)
-        Me.btnDescripcion.TabIndex = 61
-        Me.btnDescripcion.Text = "···"
-        Me.btnDescripcion.UseVisualStyleBackColor = True
-        '
-        'Label4
-        '
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(322, 99)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(135, 17)
-        Me.Label4.TabIndex = 62
-        Me.Label4.Text = "Comentario adicional :"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(137, 141)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(136, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 214
         '
         'jsMerArcMercanciasMovimientos
         '
@@ -491,7 +483,6 @@ Partial Class jsMerArcMercanciasMovimientos
     Friend WithEvents txtNumero As System.Windows.Forms.TextBox
     Friend WithEvents txtCantidad As System.Windows.Forms.TextBox
     Friend WithEvents txtCostoPrecio As System.Windows.Forms.TextBox
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
     Friend WithEvents lblLote As System.Windows.Forms.Label
     Friend WithEvents lblFactura As System.Windows.Forms.Label
     Friend WithEvents lblPesoTotal As System.Windows.Forms.Label
@@ -499,7 +490,6 @@ Partial Class jsMerArcMercanciasMovimientos
     Friend WithEvents txtPesoTotal As System.Windows.Forms.TextBox
     Friend WithEvents txtCostoPrecioTotal As System.Windows.Forms.TextBox
     Friend WithEvents btnCantidadTC As System.Windows.Forms.Button
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
     Friend WithEvents lblPesoDes As System.Windows.Forms.Label
     Friend WithEvents btnPesoCaptura As System.Windows.Forms.Button
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
@@ -513,4 +503,5 @@ Partial Class jsMerArcMercanciasMovimientos
     Friend WithEvents txtLote As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents btnDescripcion As System.Windows.Forms.Button
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

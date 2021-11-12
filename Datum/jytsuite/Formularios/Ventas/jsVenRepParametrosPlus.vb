@@ -2,6 +2,7 @@ Imports MySql.Data.MySqlClient
 Imports System.IO
 Imports ReportesDeVentas
 Imports CrystalDecisions.CrystalReports.Engine
+Imports Syncfusion.WinForms.Input
 Public Class jsVenRepParametrosPlus
 
     Private Const sModulo As String = "REPORTES"
@@ -80,6 +81,9 @@ Public Class jsVenRepParametrosPlus
 
         Me.Dock = DockStyle.Fill
         myConn.Open()
+
+        Dim dates As SfDateTimeEdit() = {txtPeriodoDesde, txtPeriodoHasta}
+        SetSizeDateObjects(dates)
 
         ReporteNumero = numReporte
         ReporteNombre = nomReporte
@@ -431,36 +435,35 @@ Public Class jsVenRepParametrosPlus
     End Sub
     Private Sub VerCriterio_Periodo(ByVal Ver As Boolean, ByVal CompletoDesdeHasta As Integer, Optional ByVal Periodo As TipoPeriodo = TipoPeriodo.iMensual)
         'CompletoDesdeHasta 0 = Complete , 1 = Desde , 2 = Hasta 
-        ft.visualizarObjetos(False, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta, btnPeriodoDesde, btnPeriodoHasta)
-        ft.habilitarObjetos(False, True, txtPeriodoDesde, txtPeriodoHasta)
+        ft.visualizarObjetos(False, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta)
         periodoTipo = Periodo
         If Ver Then
             Select Case CompletoDesdeHasta
                 Case 0
-                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta, btnPeriodoDesde, btnPeriodoHasta)
+                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta)
                 Case 1
-                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodo, txtPeriodoDesde, btnPeriodoDesde)
+                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodo, txtPeriodoDesde)
                 Case 2
-                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoHasta, btnPeriodoHasta)
+                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoHasta)
             End Select
         End If
-        ft.habilitarObjetos(False, True, txtPeriodoDesde, txtPeriodoHasta)
+
         Select Case Periodo
             Case TipoPeriodo.iDiario
-                txtPeriodoDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtPeriodoHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoDesde.Value = jytsistema.sFechadeTrabajo
+                txtPeriodoHasta.Value = jytsistema.sFechadeTrabajo
             Case TipoPeriodo.iSemanal
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaSemana(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaSemana(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaSemana(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaSemana(jytsistema.sFechadeTrabajo)
             Case TipoPeriodo.iMensual
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaMes(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaMes(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaMes(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaMes(jytsistema.sFechadeTrabajo)
             Case TipoPeriodo.iAnual
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaAño(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaAño(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaAño(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaAño(jytsistema.sFechadeTrabajo)
             Case Else
-                txtPeriodoDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtPeriodoHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoDesde.Value = jytsistema.sFechadeTrabajo
+                txtPeriodoHasta.Value = jytsistema.sFechadeTrabajo
         End Select
 
     End Sub
@@ -1250,28 +1253,14 @@ Public Class jsVenRepParametrosPlus
 
 
     End Function
-
-
-
-
-    Private Sub btnPeriodoDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles btnPeriodoDesde.Click
-        txtPeriodoDesde.Text = SeleccionaFecha(CDate(txtPeriodoDesde.Text), Me, grpCriterios, sender)
-    End Sub
-
-    Private Sub btnPeriodoHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles btnPeriodoHasta.Click
-        txtPeriodoHasta.Text = SeleccionaFecha(CDate(txtPeriodoHasta.Text), Me, grpCriterios, sender)
-    End Sub
-
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
-        lIMPIAR()
+        Limpiar()
     End Sub
     Private Sub Limpiar()
 
-        LimpiarTextos(lblCanalSeleccion, lblTipoNegocioSeleccion, lblzonaSeleccion, lblRutaSeleccion, lblAsesorSeleccion, _
-                    lblPaisSeleccion, lblEstadoSeleccion, lblMunicipioSeleccion, lblParroquiaSeleccion, lblCiudadSeleccion, lblBarrioSeleccion, _
-                    lblCategoriaSeleccion, lblMarcasSeleccion, lblDivisionesSeleccion, lblJerarquiasSeleccion, lblClienteSeleccion, lblMercanciaSeleccion, _
+        LimpiarTextos(lblCanalSeleccion, lblTipoNegocioSeleccion, lblzonaSeleccion, lblRutaSeleccion, lblAsesorSeleccion,
+                    lblPaisSeleccion, lblEstadoSeleccion, lblMunicipioSeleccion, lblParroquiaSeleccion, lblCiudadSeleccion, lblBarrioSeleccion,
+                    lblCategoriaSeleccion, lblMarcasSeleccion, lblDivisionesSeleccion, lblJerarquiasSeleccion, lblClienteSeleccion, lblMercanciaSeleccion,
                     lblNivel1Seleccion, lblNivel2Seleccion, lblNivel3Seleccion, lblNivel4Seleccion, lblNivel5Seleccion, lblNivel6Seleccion)
         LimpiarTextos(lblAlmacenSeleccion, lblClienteSeleccion, lblMercanciaSeleccion, lblTipoDocumentoSeleccion)
 
@@ -1320,7 +1309,7 @@ Public Class jsVenRepParametrosPlus
     Private Function LineaCriterios() As String
         LineaCriterios = ""
         If ReporteNumero = ReporteVentas.cLibroIVA Then
-            LineaCriterios = " - MES : " & UCase(Format(CDate(txtPeriodoDesde.Text), "MMMM")) & _
+            LineaCriterios = " - MES : " & UCase(Format(CDate(txtPeriodoDesde.Text), "MMMM")) &
                             " - AÑO : " & CDate(txtPeriodoHasta.Text).Year.ToString
         Else
             If lblPeriodo.Visible Then LineaCriterios += " - Período: " & IIf(lblPeriodoDesde.Visible, txtPeriodoDesde.Text, "") & IIf(lblPeriodoDesde.Visible AndAlso lblPeriodoHasta.Visible, "/", "") & IIf(lblPeriodoHasta.Visible, txtPeriodoHasta.Text, "")
@@ -1342,9 +1331,9 @@ Public Class jsVenRepParametrosPlus
         If lblTipo.Visible Then LineaConstantes += " - Tipo Cliente : " + aTipo(cmbTipo.SelectedIndex)
         If lblTipoMercancia.Visible Then LineaConstantes += " - Tipo Mercancía : " + aTipoMercancia(cmbTipoMercancias.SelectedIndex)
         If lblEstatus.Visible Then LineaConstantes += " - Estatus : " + IIf(OrigenReporte(ReporteNumero) = " VEN ", aEstatusClientes(cmbEstatus.SelectedIndex), aEstatusMercancias(cmbEstatus.SelectedIndex))
-        If lblLapso.Visible Then LineaConstantes += " - Lapsos: 1. " + txtDesde1.Text + "-" + txtHasta1.Text + _
-                                                    " 2. " + txtDesde2.Text + "-" + txtHasta2.Text + _
-                                                    " 3. " + txtDesde3.Text + "-" + txtHasta3.Text + _
+        If lblLapso.Visible Then LineaConstantes += " - Lapsos: 1. " + txtDesde1.Text + "-" + txtHasta1.Text +
+                                                    " 2. " + txtDesde2.Text + "-" + txtHasta2.Text +
+                                                    " 3. " + txtDesde3.Text + "-" + txtHasta3.Text +
                                                     " 4. " + txtDesde4.Text
         If lblConstanteVentas.Visible Then LineaConstantes += " - " + lblConstanteVentas.Text + txtConstanteVentas.Text
         If lblTipoReporte.Visible Then LineaConstantes += " - Tipo Reporte : " & aTipoReporte(cmbTipoReporte.SelectedIndex)
@@ -1370,7 +1359,7 @@ Public Class jsVenRepParametrosPlus
 
     Private Sub btnTipoNegocio_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTipoNegocio.Click
         If lblCanalSeleccion.Text.Trim = "" Then
-            ft.MensajeCritico("Debe indicar uno ó varios canales de distribución ")
+            ft.mensajeCritico("Debe indicar uno ó varios canales de distribución ")
         Else
             AbrirTabla("TIPOS DE NEGOCIO", "  select 0 sel,  codigo, descrip from jsvenlistip where " _
                                 & " ANTEC IN (" & lblCanalSeleccion.Text & ") AND " _
@@ -1454,7 +1443,7 @@ Public Class jsVenRepParametrosPlus
     End Sub
 
 
-    Private Sub CargarJerarquia(ByVal MyConn As MySqlConnection, ByVal ds As DataSet, ByVal TipoJerarquia As String, ByVal Nivel As Integer, _
+    Private Sub CargarJerarquia(ByVal MyConn As MySqlConnection, ByVal ds As DataSet, ByVal TipoJerarquia As String, ByVal Nivel As Integer,
                                     ByVal txtCodjer As TextBox)
 
         If TipoJerarquia <> "" Then
@@ -1486,7 +1475,7 @@ Public Class jsVenRepParametrosPlus
         Dim aFormato() As String = {"", "", ""}
 
         f.Seleccion = SubeSeleccion(lblSeleccion.Text)
-        f.Cargar(myConn, ds, Titulo, strSQL, _
+        f.Cargar(myConn, ds, Titulo, strSQL,
             {"sel.entero.1.0", "codigo.cadena.15.0", "descrip.cadena.150.0"}, aNombres, aCampos, aAnchos, aAlineacion, aFormato)
         lblSeleccion.Text = bajaSeleccion(f.Seleccion)
 
@@ -1504,16 +1493,16 @@ Public Class jsVenRepParametrosPlus
 
     End Sub
 
-    Private Sub txtPeriodoDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPeriodoDesde.TextChanged
+    Private Sub txtPeriodoDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPeriodoDesde.ValueChanged
         Select Case periodoTipo
             Case TipoPeriodo.iDiario
-                txtPeriodoHasta.Text = txtPeriodoDesde.Text
+                txtPeriodoHasta.Value = txtPeriodoDesde.Value
             Case TipoPeriodo.iSemanal
-                txtPeriodoHasta.Text = ft.FormatoFecha(DateAdd(DateInterval.Day, 7, CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = DateAdd(DateInterval.Day, 7, CDate(txtPeriodoDesde.Text))
             Case TipoPeriodo.iMensual
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaMes(CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = UltimoDiaMes(CDate(txtPeriodoDesde.Text))
             Case TipoPeriodo.iAnual
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaAño(CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = UltimoDiaAño(CDate(txtPeriodoDesde.Text))
         End Select
     End Sub
 

@@ -28,11 +28,11 @@ Partial Class jsVenProHistoricoClientes
         Me.lblProgreso = New System.Windows.Forms.Label()
         Me.pb = New System.Windows.Forms.ProgressBar()
         Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnOK = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.lblFecha = New System.Windows.Forms.Label()
-        Me.txtFechaProceso = New System.Windows.Forms.TextBox()
-        Me.btnFecha = New System.Windows.Forms.Button()
         Me.txtClienteDesde = New System.Windows.Forms.TextBox()
         Me.txtClienteHasta = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -41,9 +41,8 @@ Partial Class jsVenProHistoricoClientes
         Me.lblClienteHasta = New System.Windows.Forms.Label()
         Me.btnClienteDesde = New System.Windows.Forms.Button()
         Me.btnClienteHasta = New System.Windows.Forms.Button()
-        Me.btnCancel = New System.Windows.Forms.Button()
-        Me.btnOK = New System.Windows.Forms.Button()
         Me.C1PictureBox1 = New C1.Win.C1Input.C1PictureBox()
+        Me.txtFechaProceso = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpCaja.SuspendLayout()
         Me.grpTotales.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -137,6 +136,29 @@ Partial Class jsVenProHistoricoClientes
         Me.grpAceptarSalir.Size = New System.Drawing.Size(165, 30)
         Me.grpAceptarSalir.TabIndex = 85
         '
+        'btnCancel
+        '
+        Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnCancel.Image = Global.Datum.My.Resources.Resources.button_cancel
+        Me.btnCancel.Location = New System.Drawing.Point(85, 3)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(76, 24)
+        Me.btnCancel.TabIndex = 1
+        Me.btnCancel.Text = "Cancelar"
+        Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        '
+        'btnOK
+        '
+        Me.btnOK.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.btnOK.Image = Global.Datum.My.Resources.Resources.button_ok
+        Me.btnOK.Location = New System.Drawing.Point(3, 3)
+        Me.btnOK.Name = "btnOK"
+        Me.btnOK.Size = New System.Drawing.Size(76, 24)
+        Me.btnOK.TabIndex = 0
+        Me.btnOK.Text = "Aceptar"
+        Me.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        '
         'Label9
         '
         Me.Label9.BackColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(216, Byte), Integer), CType(CType(22, Byte), Integer))
@@ -172,25 +194,6 @@ Partial Class jsVenProHistoricoClientes
         Me.lblFecha.TabIndex = 89
         Me.lblFecha.Text = "Fecha :"
         Me.lblFecha.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtFechaProceso
-        '
-        Me.txtFechaProceso.Location = New System.Drawing.Point(116, 260)
-        Me.txtFechaProceso.MaxLength = 25
-        Me.txtFechaProceso.Name = "txtFechaProceso"
-        Me.txtFechaProceso.Size = New System.Drawing.Size(86, 20)
-        Me.txtFechaProceso.TabIndex = 90
-        Me.txtFechaProceso.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(202, 260)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(25, 20)
-        Me.btnFecha.TabIndex = 132
-        Me.btnFecha.Text = "•••"
-        Me.btnFecha.UseVisualStyleBackColor = True
         '
         'txtClienteDesde
         '
@@ -268,29 +271,6 @@ Partial Class jsVenProHistoricoClientes
         Me.btnClienteHasta.Text = "•••"
         Me.btnClienteHasta.UseVisualStyleBackColor = True
         '
-        'btnCancel
-        '
-        Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Image = Global.Datum.My.Resources.Resources.button_cancel
-        Me.btnCancel.Location = New System.Drawing.Point(85, 3)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(76, 24)
-        Me.btnCancel.TabIndex = 1
-        Me.btnCancel.Text = "Cancelar"
-        Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        '
-        'btnOK
-        '
-        Me.btnOK.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.btnOK.Image = Global.Datum.My.Resources.Resources.button_ok
-        Me.btnOK.Location = New System.Drawing.Point(3, 3)
-        Me.btnOK.Name = "btnOK"
-        Me.btnOK.Size = New System.Drawing.Size(76, 24)
-        Me.btnOK.TabIndex = 0
-        Me.btnOK.Text = "Aceptar"
-        Me.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        '
         'C1PictureBox1
         '
         Me.C1PictureBox1.Image = Global.Datum.My.Resources.Resources.banda_amarilla
@@ -301,6 +281,18 @@ Partial Class jsVenProHistoricoClientes
         Me.C1PictureBox1.TabIndex = 86
         Me.C1PictureBox1.TabStop = False
         '
+        'txtFechaProceso
+        '
+        Me.txtFechaProceso.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaProceso.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaProceso.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaProceso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaProceso.Location = New System.Drawing.Point(116, 260)
+        Me.txtFechaProceso.Name = "txtFechaProceso"
+        Me.txtFechaProceso.Size = New System.Drawing.Size(111, 19)
+        Me.txtFechaProceso.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaProceso.TabIndex = 214
+        '
         'jsVenProHistoricoClientes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -308,6 +300,7 @@ Partial Class jsVenProHistoricoClientes
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(732, 488)
         Me.ControlBox = False
+        Me.Controls.Add(Me.txtFechaProceso)
         Me.Controls.Add(Me.btnClienteHasta)
         Me.Controls.Add(Me.btnClienteDesde)
         Me.Controls.Add(Me.lblClienteHasta)
@@ -316,8 +309,6 @@ Partial Class jsVenProHistoricoClientes
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtClienteHasta)
         Me.Controls.Add(Me.txtClienteDesde)
-        Me.Controls.Add(Me.btnFecha)
-        Me.Controls.Add(Me.txtFechaProceso)
         Me.Controls.Add(Me.lblFecha)
         Me.Controls.Add(Me.grpAceptarSalir)
         Me.Controls.Add(Me.Label10)
@@ -354,8 +345,6 @@ Partial Class jsVenProHistoricoClientes
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents lblProgreso As System.Windows.Forms.Label
     Friend WithEvents lblFecha As System.Windows.Forms.Label
-    Friend WithEvents txtFechaProceso As System.Windows.Forms.TextBox
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
     Friend WithEvents txtClienteDesde As System.Windows.Forms.TextBox
     Friend WithEvents txtClienteHasta As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -364,4 +353,5 @@ Partial Class jsVenProHistoricoClientes
     Friend WithEvents lblClienteHasta As System.Windows.Forms.Label
     Friend WithEvents btnClienteDesde As System.Windows.Forms.Button
     Friend WithEvents btnClienteHasta As System.Windows.Forms.Button
+    Friend WithEvents txtFechaProceso As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

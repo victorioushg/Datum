@@ -2,7 +2,7 @@
 
 
 Module FuncionesImpresionFiscal
-    Private ft As New Transportables()
+    Public ft As New Transportables
     Public Sub ImprimirDevolucionFiscal(MyConn As MySqlConnection, numDevolucion As String)
 
         Select Case TipoImpresoraFiscal(MyConn, jytsistema.WorkBox)

@@ -20,29 +20,28 @@ Partial Class jsBanArcRemesasCestaTicket
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsBanArcRemesasCestaTicket))
-        Me.lblInfo = New System.Windows.Forms.Label
-        Me.lv = New System.Windows.Forms.ListView
-        Me.grpCaja = New System.Windows.Forms.GroupBox
-        Me.MenuComisiones = New System.Windows.Forms.ToolStrip
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton
-        Me.btnDocs = New System.Windows.Forms.ToolStripButton
-        Me.lblCaja = New System.Windows.Forms.Label
-        Me.lblTituloCaja = New System.Windows.Forms.Label
-        Me.txtRemesa = New System.Windows.Forms.TextBox
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.txtEmision = New System.Windows.Forms.TextBox
-        Me.btnEmision = New System.Windows.Forms.Button
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.grpTotales = New System.Windows.Forms.GroupBox
-        Me.txtTickets = New System.Windows.Forms.TextBox
-        Me.Label11 = New System.Windows.Forms.Label
-        Me.txtSaldoSel = New System.Windows.Forms.TextBox
-        Me.txtDocSel = New System.Windows.Forms.TextBox
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.btnOK = New System.Windows.Forms.Button
+        Me.lblInfo = New System.Windows.Forms.Label()
+        Me.lv = New System.Windows.Forms.ListView()
+        Me.grpCaja = New System.Windows.Forms.GroupBox()
+        Me.MenuComisiones = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.btnDocs = New System.Windows.Forms.ToolStripButton()
+        Me.lblCaja = New System.Windows.Forms.Label()
+        Me.lblTituloCaja = New System.Windows.Forms.Label()
+        Me.txtRemesa = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.grpTotales = New System.Windows.Forms.GroupBox()
+        Me.txtTickets = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.txtSaldoSel = New System.Windows.Forms.TextBox()
+        Me.txtDocSel = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnOK = New System.Windows.Forms.Button()
+        Me.txtEmision = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpCaja.SuspendLayout()
         Me.MenuComisiones.SuspendLayout()
         Me.grpTotales.SuspendLayout()
@@ -65,6 +64,7 @@ Partial Class jsBanArcRemesasCestaTicket
         Me.lv.CheckBoxes = True
         Me.lv.FullRowSelect = True
         Me.lv.GridLines = True
+        Me.lv.HideSelection = False
         Me.lv.Location = New System.Drawing.Point(-1, 91)
         Me.lv.Name = "lv"
         Me.lv.Size = New System.Drawing.Size(730, 264)
@@ -74,13 +74,12 @@ Partial Class jsBanArcRemesasCestaTicket
         '
         'grpCaja
         '
+        Me.grpCaja.Controls.Add(Me.txtEmision)
         Me.grpCaja.Controls.Add(Me.MenuComisiones)
         Me.grpCaja.Controls.Add(Me.lblCaja)
         Me.grpCaja.Controls.Add(Me.lblTituloCaja)
         Me.grpCaja.Controls.Add(Me.txtRemesa)
         Me.grpCaja.Controls.Add(Me.Label3)
-        Me.grpCaja.Controls.Add(Me.txtEmision)
-        Me.grpCaja.Controls.Add(Me.btnEmision)
         Me.grpCaja.Controls.Add(Me.Label5)
         Me.grpCaja.Location = New System.Drawing.Point(-1, -2)
         Me.grpCaja.Name = "grpCaja"
@@ -97,7 +96,7 @@ Partial Class jsBanArcRemesasCestaTicket
         Me.MenuComisiones.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.MenuComisiones.Location = New System.Drawing.Point(672, 57)
         Me.MenuComisiones.Name = "MenuComisiones"
-        Me.MenuComisiones.Size = New System.Drawing.Size(82, 27)
+        Me.MenuComisiones.Size = New System.Drawing.Size(51, 27)
         Me.MenuComisiones.TabIndex = 109
         Me.MenuComisiones.Text = "ToolStrip1"
         '
@@ -151,25 +150,6 @@ Partial Class jsBanArcRemesasCestaTicket
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "Nº remesa :"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtEmision
-        '
-        Me.txtEmision.Enabled = False
-        Me.txtEmision.Location = New System.Drawing.Point(431, 36)
-        Me.txtEmision.Name = "txtEmision"
-        Me.txtEmision.Size = New System.Drawing.Size(100, 20)
-        Me.txtEmision.TabIndex = 5
-        Me.txtEmision.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnEmision
-        '
-        Me.btnEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmision.Location = New System.Drawing.Point(537, 36)
-        Me.btnEmision.Name = "btnEmision"
-        Me.btnEmision.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmision.TabIndex = 104
-        Me.btnEmision.Text = "•••"
-        Me.btnEmision.UseVisualStyleBackColor = True
         '
         'Label5
         '
@@ -293,6 +273,18 @@ Partial Class jsBanArcRemesasCestaTicket
         Me.btnOK.Text = "Aceptar"
         Me.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         '
+        'txtEmision
+        '
+        Me.txtEmision.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmision.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmision.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmision.Location = New System.Drawing.Point(431, 37)
+        Me.txtEmision.Name = "txtEmision"
+        Me.txtEmision.Size = New System.Drawing.Size(114, 19)
+        Me.txtEmision.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmision.TabIndex = 214
+        '
         'jsBanArcRemesasCestaTicket
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -328,12 +320,10 @@ Partial Class jsBanArcRemesasCestaTicket
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents txtEmision As System.Windows.Forms.TextBox
     Friend WithEvents txtRemesa As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents txtSaldoSel As System.Windows.Forms.TextBox
     Friend WithEvents txtDocSel As System.Windows.Forms.TextBox
-    Friend WithEvents btnEmision As System.Windows.Forms.Button
     Friend WithEvents txtTickets As System.Windows.Forms.TextBox
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
@@ -343,4 +333,5 @@ Partial Class jsBanArcRemesasCestaTicket
     Friend WithEvents MenuComisiones As System.Windows.Forms.ToolStrip
     Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
     Friend WithEvents btnDocs As System.Windows.Forms.ToolStripButton
+    Friend WithEvents txtEmision As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

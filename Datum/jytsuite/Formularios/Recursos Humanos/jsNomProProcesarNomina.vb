@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsNomProProcesarNomina
     Private Const sModulo As String = "Procesar nómina"
     Private Const nTabla As String = "pronomina"
@@ -13,6 +14,8 @@ Public Class jsNomProProcesarNomina
     Public Sub Cargar(ByVal MyCon As MySqlConnection)
         myConn = MyCon
         Me.Tag = sModulo
+        Dim dates As SfDateTimeEdit() = {txtFechaDesde, txtFechaHasta}
+        SetSizeDateObjects(dates)
 
         lblLeyenda.Text = " Mediante este proceso se crea la nómina la cual pasa a histórico los conceptos antes definidos " + vbCr + _
                 " de la siguiente forma.  " + vbCr + _
@@ -26,8 +29,8 @@ Public Class jsNomProProcesarNomina
 
         ft.habilitarObjetos(False, True, txtNomina, cmbTipo)
 
-        txtFechaDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtFechaHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFechaDesde.Value = jytsistema.sFechadeTrabajo
+        txtFechaHasta.Value = jytsistema.sFechadeTrabajo
 
         Me.Show()
 
@@ -43,7 +46,7 @@ Public Class jsNomProProcesarNomina
 
     Private Sub jsNomProProcesarNomina_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        ft.habilitarObjetos(False, False, txtFechaDesde, txtFechaHasta)
+        ft.habilitarObjetos(True, False, txtFechaDesde, txtFechaHasta)
     End Sub
 
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
@@ -211,16 +214,8 @@ Public Class jsNomProProcesarNomina
                          CodigoContable, txtNomina.Text)
 
     End Sub
-    Private Sub btnFechaDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaDesde.Click
-        txtFechaDesde.Text = SeleccionaFecha(CDate(txtFechaDesde.Text), Me, btnFechaDesde)
-    End Sub
-
-    Private Sub btnFechaHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaHasta.Click
-        txtFechaHasta.Text = SeleccionaFecha(CDate(txtFechaHasta.Text), Me, btnFechaHasta)
-    End Sub
-
-    Private Sub txtFechaDesde_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaDesde.TextChanged
-        txtFechaHasta.Text = txtFechaDesde.Text
+    Private Sub txtFechaDesde_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaDesde.ValueChanged
+        txtFechaHasta.Value = txtFechaDesde.Value
     End Sub
 
     Private Sub cmbTipo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipo.SelectedIndexChanged
@@ -264,24 +259,24 @@ Public Class jsNomProProcesarNomina
         If dtNom.Rows.Count > 0 Then Fecha = DateAdd(DateInterval.Day, 1, CDate(dtNom.Rows(0).Item("hasta").ToString))
         Select Case TipoNomina
             Case 0 'Diaria
-                txtFechaDesde.Text = ft.FormatoFecha(Fecha)
-                txtFechaHasta.Text = ft.FormatoFecha(Fecha)
+                txtFechaDesde.Value = Fecha
+                txtFechaHasta.Value = Fecha
             Case 1 'Semanal
                 Dim DiaInicialSemana As Integer = CInt(ParametroPlus(MyConn, Gestion.iRecursosHumanos, "nomparam01")) + 1
-                txtFechaDesde.Text = ft.FormatoFecha(PrimerDiaSemana(Fecha, DiaInicialSemana))
-                txtFechaHasta.Text = ft.FormatoFecha(UltimoDiaSemana(Fecha, DiaInicialSemana))
+                txtFechaDesde.Value = PrimerDiaSemana(Fecha, DiaInicialSemana)
+                txtFechaHasta.Value = UltimoDiaSemana(Fecha, DiaInicialSemana)
             Case 2 'Quincenal
-                txtFechaDesde.Text = ft.FormatoFecha(PrimerDiaQuincena(Fecha))
-                txtFechaHasta.Text = ft.FormatoFecha(UltimoDiaQuincena(Fecha))
+                txtFechaDesde.Value = PrimerDiaQuincena(Fecha)
+                txtFechaHasta.Value = UltimoDiaQuincena(Fecha)
             Case 3 'Mensual
-                txtFechaDesde.Text = ft.FormatoFecha(PrimerDiaMes(Fecha))
-                txtFechaHasta.Text = ft.FormatoFecha(UltimoDiaMes(Fecha))
+                txtFechaDesde.Value = PrimerDiaMes(Fecha)
+                txtFechaHasta.Value = UltimoDiaMes(Fecha)
             Case 4 'Anual
-                txtFechaDesde.Text = ft.FormatoFecha(PrimerDiaAño(Fecha))
-                txtFechaHasta.Text = ft.FormatoFecha(UltimoDiaAño(Fecha))
+                txtFechaDesde.Value = PrimerDiaAño(Fecha)
+                txtFechaHasta.Value = UltimoDiaAño(Fecha)
             Case 5 'Eventual
-                txtFechaDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtFechaHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtFechaDesde.Value = jytsistema.sFechadeTrabajo
+                txtFechaHasta.Value = jytsistema.sFechadeTrabajo
         End Select
 
         dtNom.Dispose()

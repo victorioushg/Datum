@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsVenProPedidosFacturacion
 
     Private Const sModulo As String = "Procesar pedidos a facturación"
@@ -38,15 +39,22 @@ Public Class jsVenProPedidosFacturacion
     Public Sub Cargar(ByVal MyCon As MySqlConnection)
 
         MyConn = MyCon
+
+        Dim dates As SfDateTimeEdit() = {txtFecha, txtDesde, txtHasta}
+        SetSizeDateObjects(dates)
+
         IniciarTXT()
         Me.Show()
 
     End Sub
     Private Sub IniciarTXT()
 
-        ft.habilitarObjetos(False, True, txtFecha, txtDesde, txtHasta, txtItems, txtPesoPedidos, txtTotalpedidos)
+        ft.habilitarObjetos(False, True, txtItems, txtPesoPedidos, txtTotalpedidos)
 
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Fecha, txtFecha, txtDesde, txtHasta)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
+        txtDesde.Value = jytsistema.sFechadeTrabajo
+        txtHasta.Value = jytsistema.sFechadeTrabajo
+
         ft.RellenaCombo(aMetodo, cmbMetodo)
 
         IniciarCajas()
@@ -326,11 +334,11 @@ Public Class jsVenProPedidosFacturacion
         Dim sSigno As Integer = 1
 
         With dtFac.Rows(0)
-            InsertEditVENTASCXC(MyConn, lblInfo, True, .Item("codcli"), strTipo, numFactura, CDate(.Item("emision").ToString), ft.FormatoHora(Now()), _
-                CDate(.Item("vence").ToString), "", strTipo1 & ": " & numFactura, sSigno * .Item("tot_fac"), .Item("imp_iva"), _
-                .Item("formapag"), .Item("caja"), .Item("numpag"), .Item("nompag"), "", "FAC", numFactura, _
-                "0", "", jytsistema.sFechadeTrabajo, "", "", "", 0.0#, 0.0#, "", "", "", "", .Item("codven"), _
-                .Item("codven"), "0", sFOTipo, jytsistema.WorkDivition)
+            InsertEditVENTASCXC(MyConn, lblInfo, True, .Item("codcli"), strTipo, numFactura, CDate(.Item("emision").ToString), ft.FormatoHora(Now()),
+                CDate(.Item("vence").ToString), "", strTipo1 & ": " & numFactura, sSigno * .Item("tot_fac"), .Item("imp_iva"),
+                .Item("formapag"), .Item("caja"), .Item("numpag"), .Item("nompag"), "", "FAC", numFactura,
+                "0", "", jytsistema.sFechadeTrabajo, "", "", "", 0.0#, 0.0#, "", "", "", "", .Item("codven"),
+                .Item("codven"), "0", sFOTipo, jytsistema.WorkDivition, jytsistema.WorkCurrency.Id, DateTime.Now())
 
             SaldoCxC(MyConn, lblInfo, .Item("codcli"))
         End With
@@ -629,17 +637,7 @@ Public Class jsVenProPedidosFacturacion
         dtEncabPed = Nothing
 
     End Sub
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtFecha.Text), Me, btnFecha))
-    End Sub
-    Private Sub btnDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDesde.Click
-        txtDesde.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtDesde.Text), Me, sender))
-    End Sub
-    Private Sub btnHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHasta.Click
-        txtHasta.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtHasta.Text), Me, sender))
-    End Sub
-
-     Private Sub PedidosAsesores()
+    Private Sub PedidosAsesores()
 
         Dim iSel As Integer = 0
         strSQLAsesores = ""

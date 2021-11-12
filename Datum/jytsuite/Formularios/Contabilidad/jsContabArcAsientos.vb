@@ -1,5 +1,7 @@
 Imports MySql.Data.MySqlClient
 Imports fTransport
+Imports Syncfusion.WinForms.Input
+
 Public Class jsContabArcAsientos
     Private sModulo As String = "Asientos Contables "
     Private lRegion As String = ""
@@ -24,6 +26,10 @@ Public Class jsContabArcAsientos
 
         Me.Dock = DockStyle.Fill
         myConn = MyCon
+
+        Dim dates As SfDateTimeEdit() = {txtFecha}
+        SetSizeDateObjects(dates)
+
         TipoAsi = TipoAsiento
         sModulo += IIf(TipoAsiento = Asiento.iDiferido, " Diferidos ", " Actuales ")
         lRegion = IIf(TipoAsiento = Asiento.iDiferido, "RibbonButton2", "RibbonButton3")
@@ -39,8 +45,6 @@ Public Class jsContabArcAsientos
 
 
         Me.Tag = sModulo
-
-
 
         strSQL = " select * from jscotencasi " _
             & " Where " _
@@ -79,16 +83,16 @@ Public Class jsContabArcAsientos
 
     Private Sub AsignarTooltips()
 
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnAgregar, btnEditar, btnEliminar, btnBuscar, btnPrimero, btnSiguiente, btnAnterior, _
-                          btnUltimo, btnImprimir, btnSalir, btnAActual, btnDeActual, btnReconstruir, btnAgregarMovimiento, _
-                          btnEditarMovimiento, btnEliminarMovimiento, btnBuscarMovimiento, btnPrimerMovimiento, btnAnteriorMovimiento, _
+        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnAgregar, btnEditar, btnEliminar, btnBuscar, btnPrimero, btnSiguiente, btnAnterior,
+                          btnUltimo, btnImprimir, btnSalir, btnAActual, btnDeActual, btnReconstruir, btnAgregarMovimiento,
+                          btnEditarMovimiento, btnEliminarMovimiento, btnBuscarMovimiento, btnPrimerMovimiento, btnAnteriorMovimiento,
                           btnSiguienteMovimiento, btnUltimoMovimiento, btnSubir, btnBajar)
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnFecha)
+        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, txtFecha)
 
     End Sub
     Private Sub AsignaMov(ByVal nRow As Long, ByVal Actualiza As Boolean)
 
-        dtMovimientos = ft.MostrarFilaEnTabla(myConn, ds, nTablaMovimientos, strSQLMov, Me.BindingContext, MenuBarraRenglon, _
+        dtMovimientos = ft.MostrarFilaEnTabla(myConn, ds, nTablaMovimientos, strSQLMov, Me.BindingContext, MenuBarraRenglon,
                                dg, lRegion, jytsistema.sUsuario, nRow, Actualiza)
 
     End Sub
@@ -103,7 +107,7 @@ Public Class jsContabArcAsientos
                         'Asiento 
                         txtAsiento.Text = ft.muestraCampoTexto(.Item("asiento"))
                         txtDescripcion.Text = ft.muestraCampoTexto(.Item("descripcion"))
-                        txtFecha.Text = ft.muestraCampoFecha(.Item("fechasi"))
+                        txtFecha.Value = .Item("fechasi")
                         PlantillaOrigen = ft.muestraCampoTexto(.Item("plantilla_origen"))
                         AbrirMovimientos(.Item("asiento"))
                         CalculaTotales()
@@ -131,11 +135,11 @@ Public Class jsContabArcAsientos
 
         dtMovimientos = ft.AbrirDataTable(ds, nTablaMovimientos, myConn, strSQLMov)
 
-        Dim aCampos() As String = {"codcon.Código cuenta.150.I.", _
-                                   "descripcion.Descripción.250.I.", _
-                                   "referencia.Nº Referencia.200.I.", _
-                                   "concepto.Concepto.300.I.", _
-                                   "importe.Importe.160.D.Numero", _
+        Dim aCampos() As String = {"codcon.Código cuenta.150.I.",
+                                   "descripcion.Descripción.250.I.",
+                                   "referencia.Nº Referencia.200.I.",
+                                   "concepto.Concepto.300.I.",
+                                   "importe.Importe.160.D.Numero",
                                    "sada..100.I."}
 
         ft.IniciarTablaPlus(dg, dtMovimientos, aCampos)
@@ -158,7 +162,7 @@ Public Class jsContabArcAsientos
             txtAsiento.Text = ""
         End If
         txtDescripcion.Text = ""
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
         txtDebitos.Text = ft.FormatoNumero(0.0)
         txtCreditos.Text = ft.FormatoNumero(0.0)
         txtSaldos.Text = ft.FormatoNumero(0.0)
@@ -174,28 +178,28 @@ Public Class jsContabArcAsientos
     End Sub
     Private Sub ActivarMarco0()
 
-        Dim param As Integer = CInt(ParametroPlus(MyConn, Gestion.iContabilidad, "conparam04"))
+        Dim param As Integer = CInt(ParametroPlus(myConn, Gestion.iContabilidad, "conparam04"))
         grpAceptarSalir.Visible = True
         ft.habilitarObjetos(True, False, grpAceptarSalir, grpEncab)
-        ft.habilitarObjetos(True, True, txtDescripcion, btnFecha)
+        ft.habilitarObjetos(True, True, txtDescripcion, txtFecha)
         If param = 1 Then ft.habilitarObjetos(True, True, txtAsiento)
 
         MenuBarra.Enabled = False
         MenuBarraRenglon.Enabled = True
 
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
     End Sub
     Private Sub DesactivarMarco0()
 
         ft.habilitarObjetos(False, True, grpEncab, grpTotales)
-        ft.habilitarObjetos(False, True, txtAsiento, txtFecha, btnFecha, txtDescripcion, txtDebitos, txtCreditos, txtSaldos)
+        ft.habilitarObjetos(False, True, txtAsiento, txtFecha, txtDescripcion, txtDebitos, txtCreditos, txtSaldos)
 
         grpEncab.Enabled = False
         grpAceptarSalir.Visible = False
         MenuBarra.Enabled = True
         MenuBarraRenglon.Enabled = False
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
     End Sub
 
@@ -236,7 +240,6 @@ Public Class jsContabArcAsientos
 
         If CDate(txtFecha.Text) > FechaCierreEjercicio(myConn, lblInfo) Then
             ft.mensajeAdvertencia("Fecha Asiento mayor que fecha Cierre de ejercicio ...")
-            btnFecha.Focus()
             Return False
         End If
 
@@ -251,7 +254,7 @@ Public Class jsContabArcAsientos
         End If
 
         If i_modo = movimiento.iAgregar AndAlso CDate(txtFecha.Text) < FechaInicioEjercicio(myConn, lblInfo) Then
-            ft.mensajeAdvertencia("Fecha asiento menor que Fecha Inicio de ejercicio ..." & vbCrLf & _
+            ft.mensajeAdvertencia("Fecha asiento menor que Fecha Inicio de ejercicio ..." & vbCrLf &
                  " Este asiento se contabilizará como asiento de apertura")
         End If
 
@@ -278,14 +281,14 @@ Public Class jsContabArcAsientos
 
         End If
 
-        ft.Ejecutar_strSQL(myconn, " update jscotrenasi set asiento = '" & numAsiento & "' " _
+        ft.Ejecutar_strSQL(myConn, " update jscotrenasi set asiento = '" & numAsiento & "' " _
                             + " where " _
                             + " asiento = '" & txtAsiento.Text & "' and " _
                             + " ejercicio = '" & jytsistema.WorkExercise & "' and " _
                             + " id_emp = '" & jytsistema.WorkID & "' ")
 
-        InsertEditCONTABEncabezadoAsiento(myConn, lblInfo, Inserta, numAsiento, numAsiento, CDate(txtFecha.Text), _
-                                           txtDescripcion.Text, ValorNumero(txtDebitos.Text), _
+        InsertEditCONTABEncabezadoAsiento(myConn, lblInfo, Inserta, numAsiento, numAsiento, CDate(txtFecha.Text),
+                                           txtDescripcion.Text, ValorNumero(txtDebitos.Text),
                                            ValorNumero(txtCreditos.Text), TipoAsi, PlantillaOrigen)
 
         ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
@@ -297,26 +300,8 @@ Public Class jsContabArcAsientos
         ft.ActivarMenuBarra(myConn, ds, dt, lRegion, MenuBarra, jytsistema.sUsuario)
 
     End Sub
-    'Public Sub ActualizaCuentasSegunAsiento(MyConn As MySqlConnection, lblInfo As Label, numAsiento As String)
 
-    '    Dim dtMov As DataTable
-    '    Dim nTablaMov As String = "tblMov1"
-    '    ds = DataSetRequery(ds, " select * from jscotrenasi where asiento = '" & numAsiento & "' and id_emp = '" & jytsistema.WorkID & "' order by renglon ", _
-    '                         MyConn, nTablaMov, lblInfo)
-    '    dtMov = ds.Tables(nTablaMov)
-
-    '    If dtMov.Rows.Count > 0 Then
-    '        For Each nRow As DataRow In dtMov.Rows
-    '            With nRow
-    '                ActualizaSaldosCuentasContables(MyConn, lblInfo, .Item("codcon"), CDate(txtFecha.Text))
-    '            End With
-    '        Next
-    '    End If
-
-    'End Sub
-
-    Private Sub txtDescripcion_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDescripcion.GotFocus, _
-        btnFecha.GotFocus
+    Private Sub txtDescripcion_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDescripcion.GotFocus
         ft.colocaMensajeEnEtiqueta(sender, jytsistema.WorkLanguage, lblInfo)
 
     End Sub
@@ -410,7 +395,7 @@ Public Class jsContabArcAsientos
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
-    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick, _
+    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick,
        dg.CellMouseClick
         Me.BindingContext(ds, nTablaMovimientos).Position = e.RowIndex
         nPosicionEncab = e.RowIndex
@@ -489,7 +474,7 @@ Public Class jsContabArcAsientos
                     Dim CodigoEliminado As String
                     CodigoEliminado = .Item("codcon")
                     Dim aFld() As String = {"asiento", "renglon", "codcon", "referencia", "actual", "ejercicio", "id_emp"}
-                    Dim aNFld() As String = {.Item("asiento"), .Item("renglon"), .Item("codcon"), .Item("referencia"), .Item("actual"), jytsistema.WorkExercise, jytsistema.WorkID}
+                    Dim aNFld() As String = { .Item("asiento"), .Item("renglon"), .Item("codcon"), .Item("referencia"), .Item("actual"), jytsistema.WorkExercise, jytsistema.WorkID}
                     nPosicionRenglon = EliminarRegistros(myConn, lblInfo, ds, nTablaMovimientos, "jscotrenasi", strSQLMov, aFld, aNFld, nPosicionRenglon)
                     If dtMovimientos.Rows.Count > 0 Then ActualizaSaldosCuentasContables(myConn, lblInfo, CodigoEliminado, CDate(dt.Rows(nPosicionEncab).Item("fechasi").ToString))
                     InsertarAuditoria(myConn, MovAud.iEliminar, sModulo, CodigoEliminado)
@@ -540,7 +525,7 @@ Public Class jsContabArcAsientos
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
         Dim f As New jsContabRepParametros
-        f.Cargar(TipoCargaFormulario.iShowDialog, IIf(TipoAsi = Asiento.iDiferido, ReporteContabilidad.cPolizaDiferida, ReporteContabilidad.cPolizaActual), _
+        f.Cargar(TipoCargaFormulario.iShowDialog, IIf(TipoAsi = Asiento.iDiferido, ReporteContabilidad.cPolizaDiferida, ReporteContabilidad.cPolizaActual),
                  IIf(TipoAsi = Asiento.iDiferido, "Asiento Diferido", "Asiento Actual"), txtAsiento.Text)
         f = Nothing
     End Sub
@@ -556,11 +541,11 @@ Public Class jsContabArcAsientos
                     Dim afld() As String = {"asiento", "renglon", "ejercicio", "id_emp"}
                     Dim asFld() As String = {txtAsiento.Text, RenglonDestino, jytsistema.WorkExercise, jytsistema.WorkID}
                     If qFound(myConn, lblInfo, "jscotrenasi", afld, asFld) Then
-                        ft.Ejecutar_strSQL(myconn, " update jscotrenasi set renglon = 'XXXXX' where asiento = '" & txtAsiento.Text & "' and renglon = '" & RenglonDestino & "' and ejercicio = '" & jytsistema.WorkExercise & "' and id_emp = '" & jytsistema.WorkID & "'  ")
-                        ft.Ejecutar_strSQL(myconn, " update jscotrenasi set renglon = '" & RenglonDestino & "' where asiento = '" & txtAsiento.Text & "' and renglon = '" & dtMovimientos.Rows(nPosicionRenglon).Item("renglon") & "' and ejercicio = '" & jytsistema.WorkExercise & "' and id_emp = '" & jytsistema.WorkID & "'")
-                        ft.Ejecutar_strSQL(myconn, " update jscotrenasi set renglon = '" & dtMovimientos.Rows(nPosicionRenglon).Item("renglon") & "' where asiento = '" & txtAsiento.Text & "' and renglon = 'XXXXX' and ejercicio = '" & jytsistema.WorkExercise & "' and id_emp = '" & jytsistema.WorkID & "'")
+                        ft.Ejecutar_strSQL(myConn, " update jscotrenasi set renglon = 'XXXXX' where asiento = '" & txtAsiento.Text & "' and renglon = '" & RenglonDestino & "' and ejercicio = '" & jytsistema.WorkExercise & "' and id_emp = '" & jytsistema.WorkID & "'  ")
+                        ft.Ejecutar_strSQL(myConn, " update jscotrenasi set renglon = '" & RenglonDestino & "' where asiento = '" & txtAsiento.Text & "' and renglon = '" & dtMovimientos.Rows(nPosicionRenglon).Item("renglon") & "' and ejercicio = '" & jytsistema.WorkExercise & "' and id_emp = '" & jytsistema.WorkID & "'")
+                        ft.Ejecutar_strSQL(myConn, " update jscotrenasi set renglon = '" & dtMovimientos.Rows(nPosicionRenglon).Item("renglon") & "' where asiento = '" & txtAsiento.Text & "' and renglon = 'XXXXX' and ejercicio = '" & jytsistema.WorkExercise & "' and id_emp = '" & jytsistema.WorkID & "'")
                     Else
-                        ft.Ejecutar_strSQL(myconn, " update jscotrenasi set renglon = '" & RenglonDestino & "' where asiento = '" & txtAsiento.Text & "' and renglon = '" & dtMovimientos.Rows(nPosicionRenglon).Item("renglon") & "' and ejercicio = '" & jytsistema.WorkExercise & "' and id_emp = '" & jytsistema.WorkID & "'  ")
+                        ft.Ejecutar_strSQL(myConn, " update jscotrenasi set renglon = '" & RenglonDestino & "' where asiento = '" & txtAsiento.Text & "' and renglon = '" & dtMovimientos.Rows(nPosicionRenglon).Item("renglon") & "' and ejercicio = '" & jytsistema.WorkExercise & "' and id_emp = '" & jytsistema.WorkID & "'  ")
                     End If
                     nPosicionRenglon -= 1
                     AsignaMov(nPosicionRenglon, True)
@@ -581,11 +566,11 @@ Public Class jsContabArcAsientos
                     Dim afld() As String = {"asiento", "renglon", "ejercicio", "id_emp"}
                     Dim asFld() As String = {txtAsiento.Text, RenglonDestino, jytsistema.WorkExercise, jytsistema.WorkID}
                     If qFound(myConn, lblInfo, "jscotrenasi", afld, asFld) Then
-                        ft.Ejecutar_strSQL(myconn, " update jscotrenasi set renglon = 'XXXXX' where asiento = '" & txtAsiento.Text & "' and renglon = '" & RenglonDestino & "' and ejercicio = '" & jytsistema.WorkExercise & "' and id_emp = '" & jytsistema.WorkID & "'  ")
-                        ft.Ejecutar_strSQL(myconn, " update jscotrenasi set renglon = '" & RenglonDestino & "' where asiento = '" & txtAsiento.Text & "' and renglon = '" & dtMovimientos.Rows(nPosicionRenglon).Item("renglon") & "' and ejercicio = '" & jytsistema.WorkExercise & "' and id_emp = '" & jytsistema.WorkID & "'  ")
-                        ft.Ejecutar_strSQL(myconn, " update jscotrenasi set renglon = '" & dtMovimientos.Rows(nPosicionRenglon).Item("renglon") & "' where asiento = '" & txtAsiento.Text & "' and renglon = 'XXXXX' and ejercicio = '" & jytsistema.WorkExercise & "' and id_emp = '" & jytsistema.WorkID & "'  ")
+                        ft.Ejecutar_strSQL(myConn, " update jscotrenasi set renglon = 'XXXXX' where asiento = '" & txtAsiento.Text & "' and renglon = '" & RenglonDestino & "' and ejercicio = '" & jytsistema.WorkExercise & "' and id_emp = '" & jytsistema.WorkID & "'  ")
+                        ft.Ejecutar_strSQL(myConn, " update jscotrenasi set renglon = '" & RenglonDestino & "' where asiento = '" & txtAsiento.Text & "' and renglon = '" & dtMovimientos.Rows(nPosicionRenglon).Item("renglon") & "' and ejercicio = '" & jytsistema.WorkExercise & "' and id_emp = '" & jytsistema.WorkID & "'  ")
+                        ft.Ejecutar_strSQL(myConn, " update jscotrenasi set renglon = '" & dtMovimientos.Rows(nPosicionRenglon).Item("renglon") & "' where asiento = '" & txtAsiento.Text & "' and renglon = 'XXXXX' and ejercicio = '" & jytsistema.WorkExercise & "' and id_emp = '" & jytsistema.WorkID & "'  ")
                     Else
-                        ft.Ejecutar_strSQL(myconn, " update jscotrenasi set renglon = '" & RenglonDestino & "' where asiento = '" & txtAsiento.Text & "' and renglon = '" & dtMovimientos.Rows(nPosicionRenglon).Item("renglon") & "' and ejercicio = '" & jytsistema.WorkExercise & "' and id_emp = '" & jytsistema.WorkID & "'  ")
+                        ft.Ejecutar_strSQL(myConn, " update jscotrenasi set renglon = '" & RenglonDestino & "' where asiento = '" & txtAsiento.Text & "' and renglon = '" & dtMovimientos.Rows(nPosicionRenglon).Item("renglon") & "' and ejercicio = '" & jytsistema.WorkExercise & "' and id_emp = '" & jytsistema.WorkID & "'  ")
                     End If
                     nPosicionRenglon += 1
                     AsignaMov(nPosicionRenglon, True)
@@ -593,13 +578,9 @@ Public Class jsContabArcAsientos
             End If
         End If
     End Sub
-    Private Sub txtDebitos_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDebitos.TextChanged, _
+    Private Sub txtDebitos_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDebitos.TextChanged,
         txtCreditos.TextChanged
         txtSaldos.Text = ft.FormatoNumero(ValorNumero(txtDebitos.Text) + ValorNumero(txtCreditos.Text))
-    End Sub
-
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, btnFecha)
     End Sub
 
     Private Sub txtAsiento_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAsiento.TextChanged
@@ -621,7 +602,7 @@ Public Class jsContabArcAsientos
 
     Private Sub btnAActual_Click(sender As System.Object, e As System.EventArgs) Handles btnAActual.Click
         Dim AsientoActual As String = txtAsiento.Text
-       
+
         nPosicionEncab = Me.BindingContext(ds, nTabla).Position
 
         If ft.Pregunta("Desea pasar asiento a ACTUAL", sModulo) = Windows.Forms.DialogResult.Yes Then
@@ -688,12 +669,12 @@ Public Class jsContabArcAsientos
                     Dim lblp As New Label
                     Dim pb As New ProgressBar
 
-                    ft.Ejecutar_strSQL(myconn, " delete from jscotencasi " _
+                    ft.Ejecutar_strSQL(myConn, " delete from jscotencasi " _
                                    & " where " _
                                    & " asiento = '" & txtAsiento.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
 
-                    ft.Ejecutar_strSQL(myconn, " delete from jscotrenasi " _
+                    ft.Ejecutar_strSQL(myConn, " delete from jscotrenasi " _
                                    & " where " _
                                    & " asiento = '" & txtAsiento.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
 

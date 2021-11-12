@@ -1,6 +1,6 @@
 Imports MySql.Data.MySqlClient
 Imports Syncfusion.WinForms.Input
-Imports fTransport
+
 Public Class jsBanArcDepositarCajaPlus
     Private Const sModulo As String = "Depositar Caja"
     Private Const nTablaDepositos As String = "noDepositos"
@@ -37,7 +37,7 @@ Public Class jsBanArcDepositarCajaPlus
     Private BindingSource1 As New BindingSource
 
 
-    Private aSeleccion() As String = {"Ninguno", "Todos", "fecha", "FormaPago/Refer.Pago", "Fecha/FormaPago", _
+    Private aSeleccion() As String = {"Ninguno", "Todos", "fecha", "FormaPago/Refer.Pago", "Fecha/FormaPago",
                                       "Vendedor/Fecha/FormaPago", "Vendedor/Fecha/FormaPago/Refer.Pago"}
 
     Private aSel() As String = {"EF", "CH", "TA", "CT"}
@@ -49,7 +49,7 @@ Public Class jsBanArcDepositarCajaPlus
             n_Apuntador = value
         End Set
     End Property
-    Public Sub Depositar(ByVal MyCon As MySqlConnection, ByVal dsBan As DataSet, ByVal CodBanco As String, _
+    Public Sub Depositar(ByVal MyCon As MySqlConnection, ByVal dsBan As DataSet, ByVal CodBanco As String,
                          ByVal CodCaja As String, ByVal TipoDeposito As Integer, Optional ByVal Corredor As String = "")
 
         'TipoDeposito 0 = Efectivo, Cheques ; 1 = Tarjetas; 2 = Cheques de Alimentación 
@@ -285,7 +285,7 @@ Public Class jsBanArcDepositarCajaPlus
                  IIf(tDeposito = 2, "", Mid(lblCaja.Text, 1, 2)), txtConcepto.Text, ValorNumero(txtTotalDeposito.Text), "CAJ",
                  IIf(tDeposito = 2, txtNumControl.Text, ""), "", "", "0",
                  jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, fTipoOrigen, "", jytsistema.sFechadeTrabajo, "0",
-                 CodigoProveedor, "")
+                 CodigoProveedor, "", jytsistema.WorkCurrency.Id, DateTime.Now())
 
         If tDeposito <> 2 Then
 
@@ -744,7 +744,7 @@ Public Class jsBanArcDepositarCajaPlus
         If dg.CurrentCell.ColumnIndex = 0 Then
 
             If tDeposito <> 2 Then
-                ft.Ejecutar_strSQL(myconn, " update  " & tblCaja & " set sel  = " & CInt(dg.CurrentCell.Value) & " " _
+                ft.Ejecutar_strSQL(myConn, " update  " & tblCaja & " set sel  = " & CInt(dg.CurrentCell.Value) & " " _
                                 & " where " _
                                 & " fecha = '" & ft.FormatoFechaMySQL(dg.CurrentRow.Cells(1).Value.ToString) & "' and " _
                                 & " tipomov = '" & CStr(dg.CurrentRow.Cells(2).Value) & "' and " _
@@ -757,7 +757,7 @@ Public Class jsBanArcDepositarCajaPlus
                                 & " id_emp = '" & jytsistema.WorkID & "' ")
             Else
 
-                ft.Ejecutar_strSQL(myconn, " update  " & tblCaja & " set sel  = " & CInt(dg.CurrentCell.Value) & " " _
+                ft.Ejecutar_strSQL(myConn, " update  " & tblCaja & " set sel  = " & CInt(dg.CurrentCell.Value) & " " _
                                 & " where " _
                                 & " fechasobre = '" & ft.FormatoFechaMySQL(dg.CurrentRow.Cells(1).Value.ToString) & "' and " _
                                 & " numsobre = '" & CStr(dg.CurrentRow.Cells(2).Value) & "' and " _

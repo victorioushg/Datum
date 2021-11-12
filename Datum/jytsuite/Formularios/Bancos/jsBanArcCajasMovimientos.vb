@@ -1,5 +1,6 @@
 Imports MySql.Data.MySqlClient
 Imports Syncfusion.WinForms.Input
+
 Public Class jsBanArcCajasMovimientos
     Private Const sModulo As String = "Movimiento de caja"
     Private Const nTabla As String = "tarjetas"
@@ -153,7 +154,7 @@ Public Class jsBanArcCajasMovimientos
             InsertEditBANCOSRenglonCaja(MyConn, lblInfo, Insertar, CodigoCaja, Renglon, txtFecha.Value, "CAJ",
                  aTipoR(cmbTipo.SelectedIndex), txtDocumento.Text, aFormaPagR(cmbFormaPago.SelectedIndex),
                  txtDocPago.Text, txtRefPago.Text, IIf(cmbTipo.SelectedIndex = 0, 1, -1) * ValorNumero(txtImporte.Text), "", "", "", jytsistema.MyDate, 1,
-                 "", "", "", MyDate, "", "", "0")
+                 "", "", "", MyDate, "", "", "0", jytsistema.WorkCurrency.Id, DateTime.Now())
 
             InsertarAuditoria(MyConn, MovAud.iSalir, sModulo, CodigoCaja & " " & txtDocumento.Text)
             Me.Close()

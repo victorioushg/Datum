@@ -1,4 +1,12 @@
 Imports MySql.Data.MySqlClient
+Imports System.Net.Http
+Imports System.Net.Http.Headers
+Imports Newtonsoft.Json
+Imports Newtonsoft.Json.Linq
+Imports Newtonsoft.Json.Converters
+Imports Newtonsoft.Json.Serialization
+Imports System.Linq
+
 Public Class frmServidorValidacion
 
     Private Const sModulo As String = "Validacion Servidor"
@@ -6,12 +14,13 @@ Public Class frmServidorValidacion
     Private MyConn As New MySqlConnection
     Private dsLocal As New DataSet
     Private dtLocal As New DataTable
+    Private dt As New DataTable
     Private ft As New Transportables
 
     Private i_modo As Integer
     Private strPort As String = "port = 3306; "
-    Private licence_servers() As String = {"datum2online.ddns.net", _
-                                           "alimica.systes.net", _
+    Private licence_servers() As String = {"datum2online.ddns.net",
+                                           "alimica.systes.net",
                                            "casiano.systes.net"}
 
     Private strRemoteConection As String = "server=datum2online.ddns.net " _
@@ -19,14 +28,14 @@ Public Class frmServidorValidacion
                 + strPort _
                 + jytsistema.strCon
 
-    Private aTipoAplicacion() As String = {"Basica", _
-                                           "Normal", _
-                                           "Plus", _
-                                           "Plus Producción", _
-                                           "Plus Restaturant", _
-                                           "Plus Prensa", _
-                                           "Plus Farmacia", _
-                                           "Plus Clínicas", _
+    Private aTipoAplicacion() As String = {"Basica",
+                                           "Normal",
+                                           "Plus",
+                                           "Plus Producción",
+                                           "Plus Restaturant",
+                                           "Plus Prensa",
+                                           "Plus Farmacia",
+                                           "Plus Clínicas",
                                            "Plus Hotel/Spa"}
 
     Private aLicencia() As String = {"Inactiva", "Activa"}
@@ -37,7 +46,7 @@ Public Class frmServidorValidacion
 
         nEncryptWord = ft.getHardDrivesSerials()(0)
 
-        ft.habilitarObjetos(False, True, txtCodigoRemoto, txtNombreRemoto, cmbaplicacionRemoto, cmbLicenciaRemoto, _
+        ft.habilitarObjetos(False, True, txtCodigoRemoto, txtNombreRemoto, cmbaplicacionRemoto, cmbLicenciaRemoto,
                             txtNumLicenciaRemoto, txtMACRemoto, txtExpiracionRemoto)
 
         dtLocal = ft.AbrirDataTable(dsLocal, "tblServidorLocal", MyConn, " select * from datumreg where estacion = 0 ")
@@ -88,7 +97,7 @@ Public Class frmServidorValidacion
     End Sub
     Private Sub IniciarTxt()
 
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtCodigoLocal, txtCodigoRemoto, txtNombreLocal, _
+        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtCodigoLocal, txtCodigoRemoto, txtNombreLocal,
                                txtNombreRemoto, txtNumLicenciaLocal, txtNumLicenciaRemoto, txtMACRemoto)
 
         ft.RellenaCombo(aTipoAplicacion, cmbAplicacionLocal)
@@ -122,8 +131,8 @@ Public Class frmServidorValidacion
             Dim Insertar As Boolean = False
             If dtLocal.Rows.Count = 0 Then Insertar = True
 
-            InsertEditCONTROLLicencia(MyConn, lblInfo, Insertar, txtCodigoLocal.Text, txtNombreLocal.Text, _
-                                       cmbAplicacionLocal.SelectedIndex, cmbLicenciaLocal.SelectedIndex, txtNumLicenciaLocal.Text, _
+            InsertEditCONTROLLicencia(MyConn, lblInfo, Insertar, txtCodigoLocal.Text, txtNombreLocal.Text,
+                                       cmbAplicacionLocal.SelectedIndex, cmbLicenciaLocal.SelectedIndex, txtNumLicenciaLocal.Text,
                                        txtMACLocal.Text, Convert.ToDateTime(txtExpiracionLocal.Text), nEncryptWord)
             Me.Close()
         End If
@@ -133,13 +142,58 @@ Public Class frmServidorValidacion
         Me.Close()
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnHaciaRemoto.Click
-        txtCodigoRemoto.Text = txtCodigoLocal.Text
-        txtNombreRemoto.Text = txtNombreLocal.Text
-        cmbaplicacionRemoto.SelectedIndex = cmbAplicacionLocal.SelectedIndex
-        cmbLicenciaRemoto.SelectedIndex = cmbLicenciaLocal.SelectedIndex
-        txtNumLicenciaRemoto.Text = txtNumLicenciaLocal.Text
-        txtMACRemoto.Text = txtMACLocal.Text
-        txtExpiracionRemoto.Text = txtExpiracionLocal.Text
-    End Sub
+
+
+    Private Async Function btnHaciaRemoto_Click(sender As Object, e As EventArgs) As Threading.Tasks.Task Handles btnHaciaRemoto.Click
+
+        'Using client As New HttpClient()
+
+
+        '    Dim response As HttpResponseMessage = Await client.GetAsync("/WeatherForecast")
+
+
+        '    If (response.IsSuccessStatusCode = True) Then
+        '        Dim reports() = New WeatherForecast() {}
+        '        Dim rep As String = Await response.Content.ReadAsStringAsync()
+        '    End If
+        'End Using
+
+        'Using client As HttpClient = New HttpClient()
+        '    client.BaseAddress = New Uri("https://localhost:44356/")
+        '    client.DefaultRequestHeaders.Accept.Clear()
+        '    client.DefaultRequestHeaders.Accept.Add(New MediaTypeWithQualityHeaderValue("application/json"))
+        '    Dim str As String = String.Format("api/customer/all/{0}", jytsistema.WorkID)
+        '    Using response As HttpResponseMessage = Await client.GetAsync(str)
+        '        Using content As HttpContent = response.Content
+        '            ' Get contents of page as a String.
+        '            Dim result As String = Await content.ReadAsStringAsync()
+        '            ' If data exists, convert as a table
+        '            If result IsNot Nothing Then
+        '                'Dim res = JsonConvert.SerializeObject(JsonConvert.DeserializeObject(result)("result"))
+        '                ' DataTable
+        '                dt = JsonConvert.DeserializeObject(Of DataTable)(result)
+        '                ' IEnumarable 
+        '                Dim wl = JsonConvert.DeserializeObject(Of IEnumerable(Of Customer))(result)
+
+        '            End If
+        '        End Using
+        '    End Using
+        'End Using
+
+        Dim gnGet As GenericGet(Of Customer) = New GenericGet(Of Customer)()
+        Dim customers As List(Of Customer) = Await gnGet.GetList(String.Format("api/customer/all/{0}", jytsistema.WorkID))
+
+        Dim cust = customers.Where(Function(c) c.Codcli = "00000010")
+
+
+    End Function
+End Class
+
+Public Class WeatherForecast
+    <JsonProperty("date")>
+    Public Property RealDate() As DateTime?
+    Public Property TemperatureC() As Integer?
+    Public Property TemperatureF() As Integer?
+    Public Property Summary As String
+
 End Class

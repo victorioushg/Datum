@@ -690,10 +690,11 @@ Partial Class scrMain
         Me.RibbonSeparator73 = New C1.Win.C1Ribbon.RibbonSeparator()
         Me.RibbonButton309 = New C1.Win.C1Ribbon.RibbonButton()
         Me.RibbonButton310 = New C1.Win.C1Ribbon.RibbonButton()
-        Me.RibbonGroup28 = New C1.Win.C1Ribbon.RibbonGroup()
-        Me.RibbonMenu30 = New C1.Win.C1Ribbon.RibbonMenu()
         Me.RibbonSeparator74 = New C1.Win.C1Ribbon.RibbonSeparator()
         Me.RibbonButton65 = New C1.Win.C1Ribbon.RibbonButton()
+        Me.RibbonGroup28 = New C1.Win.C1Ribbon.RibbonGroup()
+        Me.RibbonMenu30 = New C1.Win.C1Ribbon.RibbonMenu()
+        Me.RibbonButton312 = New C1.Win.C1Ribbon.RibbonButton()
         CType(Me.C1Ribbon1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -1117,35 +1118,35 @@ Partial Class scrMain
         'BancosToolStripMenuItem2
         '
         Me.BancosToolStripMenuItem2.Name = "BancosToolStripMenuItem2"
-        Me.BancosToolStripMenuItem2.Size = New System.Drawing.Size(155, 22)
+        Me.BancosToolStripMenuItem2.Size = New System.Drawing.Size(156, 22)
         Me.BancosToolStripMenuItem2.Text = "Bancos"
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(152, 6)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(153, 6)
         '
         'CajaPrincipalToolStripMenuItem
         '
         Me.CajaPrincipalToolStripMenuItem.Name = "CajaPrincipalToolStripMenuItem"
-        Me.CajaPrincipalToolStripMenuItem.Size = New System.Drawing.Size(155, 22)
+        Me.CajaPrincipalToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
         Me.CajaPrincipalToolStripMenuItem.Text = "Caja principal"
         '
         'CajasAuxiliaresToolStripMenuItem
         '
         Me.CajasAuxiliaresToolStripMenuItem.Name = "CajasAuxiliaresToolStripMenuItem"
-        Me.CajasAuxiliaresToolStripMenuItem.Size = New System.Drawing.Size(155, 22)
+        Me.CajasAuxiliaresToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
         Me.CajasAuxiliaresToolStripMenuItem.Text = "Cajas Auxiliares"
         '
         'ToolStripMenuItem7
         '
         Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
-        Me.ToolStripMenuItem7.Size = New System.Drawing.Size(152, 6)
+        Me.ToolStripMenuItem7.Size = New System.Drawing.Size(153, 6)
         '
         'SalirToolStripMenuItem1
         '
         Me.SalirToolStripMenuItem1.Name = "SalirToolStripMenuItem1"
-        Me.SalirToolStripMenuItem1.Size = New System.Drawing.Size(155, 22)
+        Me.SalirToolStripMenuItem1.Size = New System.Drawing.Size(156, 22)
         '
         'ReportesToolStripMenuItem
         '
@@ -2298,8 +2299,8 @@ Partial Class scrMain
         Me.RibbonButton31.ID = "RibbonButton31"
         Me.RibbonButton31.Tag = "key402001"
         Me.RibbonButton31.Text = "Conciliar cuentas bancarias"
-        Me.RibbonButton31.ToolTip = "concilia los movimientos de las cuentas bancarias de la empresa originados en el " & _
-    "sistema contra los movimientos generados en los estados de cuenta respectivos em" & _
+        Me.RibbonButton31.ToolTip = "concilia los movimientos de las cuentas bancarias de la empresa originados en el " &
+    "sistema contra los movimientos generados en los estados de cuenta respectivos em" &
     "itidos por los bancos"
         '
         'RibbonMenu5
@@ -2347,7 +2348,7 @@ Partial Class scrMain
         Me.RibbonButton53.ID = "RibbonButton53"
         Me.RibbonButton53.Tag = "key402006"
         Me.RibbonButton53.Text = "Devolución de cheques de alimentación"
-        Me.RibbonButton53.ToolTip = "Devuelve cheque de alimentación falso/dañado/etc. a su origen causando las notas " & _
+        Me.RibbonButton53.ToolTip = "Devuelve cheque de alimentación falso/dañado/etc. a su origen causando las notas " &
     "de crédito respectivas"
         '
         'RibbonButton191
@@ -2355,7 +2356,7 @@ Partial Class scrMain
         Me.RibbonButton191.ID = "RibbonButton191"
         Me.RibbonButton191.Tag = "key402007"
         Me.RibbonButton191.Text = "Cheques de alimentación falsificados"
-        Me.RibbonButton191.ToolTip = "registra como falso el cheque de alimentación para que no pueda ser usado de nuev" & _
+        Me.RibbonButton191.ToolTip = "registra como falso el cheque de alimentación para que no pueda ser usado de nuev" &
     "o"
         '
         'RibbonButton192
@@ -2363,7 +2364,7 @@ Partial Class scrMain
         Me.RibbonButton192.ID = "RibbonButton192"
         Me.RibbonButton192.Tag = "key402008"
         Me.RibbonButton192.Text = "Anulación de cancelaciones a partir de un cheque de alimentación"
-        Me.RibbonButton192.ToolTip = "Anula una cancelación a partir de un cheque de alimentación utilizado en la misma" & _
+        Me.RibbonButton192.ToolTip = "Anula una cancelación a partir de un cheque de alimentación utilizado en la misma" &
     ""
         '
         'RibbonButton196
@@ -4724,6 +4725,7 @@ Partial Class scrMain
         Me.RibbonMenu28.Items.Add(Me.RibbonSeparator50)
         Me.RibbonMenu28.Items.Add(Me.RibbonButton184)
         Me.RibbonMenu28.Items.Add(Me.RibbonButton185)
+        Me.RibbonMenu28.Items.Add(Me.RibbonButton312)
         Me.RibbonMenu28.Items.Add(Me.RibbonButton197)
         Me.RibbonMenu28.SmallImage = CType(resources.GetObject("RibbonMenu28.SmallImage"), System.Drawing.Image)
         Me.RibbonMenu28.Text = "Archivos"
@@ -4892,9 +4894,9 @@ Partial Class scrMain
         'RibbonButton185
         '
         Me.RibbonButton185.ID = "RibbonButton185"
-        Me.RibbonButton185.SmallImage = CType(resources.GetObject("RibbonButton185.SmallImage"), System.Drawing.Image)
-        Me.RibbonButton185.Text = "Monedas y cambios"
-        Me.RibbonButton185.ToolTip = "Monedas y cambios"
+        Me.RibbonButton185.SmallImage = Global.Datum.My.Resources.Resources.UtilisateurSZ
+        Me.RibbonButton185.Text = "Cambio de Monedas"
+        Me.RibbonButton185.ToolTip = "Cambio de Monedas"
         '
         'RibbonButton197
         '
@@ -4963,6 +4965,15 @@ Partial Class scrMain
         Me.RibbonButton310.ID = "RibbonButton310"
         Me.RibbonButton310.Text = "Desbloquear módulos por períodos"
         '
+        'RibbonSeparator74
+        '
+        Me.RibbonSeparator74.ID = "RibbonSeparator74"
+        '
+        'RibbonButton65
+        '
+        Me.RibbonButton65.ID = "RibbonButton65"
+        Me.RibbonButton65.Text = "Reconversión Monetaria"
+        '
         'RibbonGroup28
         '
         Me.RibbonGroup28.ID = "RibbonGroup28"
@@ -4975,14 +4986,11 @@ Partial Class scrMain
         Me.RibbonMenu30.SmallImage = CType(resources.GetObject("RibbonMenu30.SmallImage"), System.Drawing.Image)
         Me.RibbonMenu30.Text = "Reportes"
         '
-        'RibbonSeparator74
+        'RibbonButton312
         '
-        Me.RibbonSeparator74.ID = "RibbonSeparator74"
-        '
-        'RibbonButton65
-        '
-        Me.RibbonButton65.ID = "RibbonButton65"
-        Me.RibbonButton65.Text = "Reconversión Monetaria"
+        Me.RibbonButton312.ID = "RibbonButton312"
+        Me.RibbonButton312.Text = "Monedas"
+        Me.RibbonButton312.ToolTip = "Monedas"
         '
         'scrMain
         '
@@ -5676,5 +5684,5 @@ End Sub
     Friend WithEvents RibbonButton311 As C1.Win.C1Ribbon.RibbonButton
     Friend WithEvents RibbonSeparator74 As C1.Win.C1Ribbon.RibbonSeparator
     Friend WithEvents RibbonButton65 As C1.Win.C1Ribbon.RibbonButton
-
+    Friend WithEvents RibbonButton312 As C1.Win.C1Ribbon.RibbonButton
 End Class

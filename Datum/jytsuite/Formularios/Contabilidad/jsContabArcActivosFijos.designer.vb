@@ -42,8 +42,6 @@ Partial Class jsContabArcActivosFijos
         Me.txtMoneda = New System.Windows.Forms.TextBox()
         Me.txtSerial = New System.Windows.Forms.TextBox()
         Me.txtGrupo = New System.Windows.Forms.TextBox()
-        Me.txtInicioValuacion = New System.Windows.Forms.TextBox()
-        Me.txtAdquisicion = New System.Windows.Forms.TextBox()
         Me.txtDescripcion = New System.Windows.Forms.TextBox()
         Me.lblEstatus = New System.Windows.Forms.Label()
         Me.lblTipo = New System.Windows.Forms.Label()
@@ -53,7 +51,6 @@ Partial Class jsContabArcActivosFijos
         Me.lblAdquisicion = New System.Windows.Forms.Label()
         Me.lblDescripcion = New System.Windows.Forms.Label()
         Me.lblIngreso = New System.Windows.Forms.Label()
-        Me.txtFecha = New System.Windows.Forms.TextBox()
         Me.lblCodigo = New System.Windows.Forms.Label()
         Me.txtCodigo = New System.Windows.Forms.TextBox()
         Me.dg = New System.Windows.Forms.DataGridView()
@@ -82,7 +79,6 @@ Partial Class jsContabArcActivosFijos
         Me.lblVida = New System.Windows.Forms.Label()
         Me.txtMeses = New System.Windows.Forms.TextBox()
         Me.txtAños = New System.Windows.Forms.TextBox()
-        Me.btnFechaAdquisicion = New System.Windows.Forms.Button()
         Me.lblDescripcionRepreciacion = New System.Windows.Forms.Label()
         Me.btnCuentaRepreciacion = New System.Windows.Forms.Button()
         Me.lblRepreciacion = New System.Windows.Forms.Label()
@@ -105,10 +101,11 @@ Partial Class jsContabArcActivosFijos
         Me.btnMoneda = New System.Windows.Forms.Button()
         Me.lblSerial = New System.Windows.Forms.Label()
         Me.lblDescripcionGrupo = New System.Windows.Forms.Label()
-        Me.btnInicioValuacion = New System.Windows.Forms.Button()
         Me.btnGrupo = New System.Windows.Forms.Button()
-        Me.btnIngreso = New System.Windows.Forms.Button()
         Me.C1DockingTabPage2 = New C1.Win.C1Command.C1DockingTabPage()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtAdquisicion = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtInicioValuacion = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.MenuBarra.SuspendLayout()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAceptarSalir.SuspendLayout()
@@ -325,26 +322,6 @@ Partial Class jsContabArcActivosFijos
         Me.txtGrupo.TabIndex = 47
         Me.txtGrupo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'txtInicioValuacion
-        '
-        Me.txtInicioValuacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtInicioValuacion.Location = New System.Drawing.Point(309, 188)
-        Me.txtInicioValuacion.MaxLength = 35
-        Me.txtInicioValuacion.Name = "txtInicioValuacion"
-        Me.txtInicioValuacion.Size = New System.Drawing.Size(77, 20)
-        Me.txtInicioValuacion.TabIndex = 45
-        Me.txtInicioValuacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'txtAdquisicion
-        '
-        Me.txtAdquisicion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAdquisicion.Location = New System.Drawing.Point(309, 166)
-        Me.txtAdquisicion.MaxLength = 35
-        Me.txtAdquisicion.Name = "txtAdquisicion"
-        Me.txtAdquisicion.Size = New System.Drawing.Size(77, 20)
-        Me.txtAdquisicion.TabIndex = 44
-        Me.txtAdquisicion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'txtDescripcion
         '
         Me.txtDescripcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -441,16 +418,6 @@ Partial Class jsContabArcActivosFijos
         Me.lblIngreso.TabIndex = 29
         Me.lblIngreso.Text = "Fecha"
         Me.lblIngreso.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtFecha
-        '
-        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFecha.Location = New System.Drawing.Point(87, 52)
-        Me.txtFecha.MaxLength = 19
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(92, 20)
-        Me.txtFecha.TabIndex = 28
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblCodigo
         '
@@ -636,6 +603,9 @@ Partial Class jsContabArcActivosFijos
         '
         'C1DockingTabPage1
         '
+        Me.C1DockingTabPage1.Controls.Add(Me.txtInicioValuacion)
+        Me.C1DockingTabPage1.Controls.Add(Me.txtAdquisicion)
+        Me.C1DockingTabPage1.Controls.Add(Me.txtFecha)
         Me.C1DockingTabPage1.Controls.Add(Me.lblTasa)
         Me.C1DockingTabPage1.Controls.Add(Me.txtTasa)
         Me.C1DockingTabPage1.Controls.Add(Me.lblSalvamento)
@@ -647,7 +617,6 @@ Partial Class jsContabArcActivosFijos
         Me.C1DockingTabPage1.Controls.Add(Me.lblVida)
         Me.C1DockingTabPage1.Controls.Add(Me.txtMeses)
         Me.C1DockingTabPage1.Controls.Add(Me.txtAños)
-        Me.C1DockingTabPage1.Controls.Add(Me.btnFechaAdquisicion)
         Me.C1DockingTabPage1.Controls.Add(Me.lblDescripcionRepreciacion)
         Me.C1DockingTabPage1.Controls.Add(Me.btnCuentaRepreciacion)
         Me.C1DockingTabPage1.Controls.Add(Me.lblRepreciacion)
@@ -673,26 +642,21 @@ Partial Class jsContabArcActivosFijos
         Me.C1DockingTabPage1.Controls.Add(Me.btnMoneda)
         Me.C1DockingTabPage1.Controls.Add(Me.lblSerial)
         Me.C1DockingTabPage1.Controls.Add(Me.lblDescripcionGrupo)
-        Me.C1DockingTabPage1.Controls.Add(Me.btnInicioValuacion)
         Me.C1DockingTabPage1.Controls.Add(Me.btnGrupo)
-        Me.C1DockingTabPage1.Controls.Add(Me.btnIngreso)
         Me.C1DockingTabPage1.Controls.Add(Me.lblCodigo)
         Me.C1DockingTabPage1.Controls.Add(Me.txtCodigo)
         Me.C1DockingTabPage1.Controls.Add(Me.txtMoneda)
-        Me.C1DockingTabPage1.Controls.Add(Me.txtFecha)
         Me.C1DockingTabPage1.Controls.Add(Me.txtSerial)
         Me.C1DockingTabPage1.Controls.Add(Me.lblIngreso)
         Me.C1DockingTabPage1.Controls.Add(Me.lblDescripcion)
         Me.C1DockingTabPage1.Controls.Add(Me.lblAdquisicion)
         Me.C1DockingTabPage1.Controls.Add(Me.txtDescripcion)
-        Me.C1DockingTabPage1.Controls.Add(Me.txtAdquisicion)
         Me.C1DockingTabPage1.Controls.Add(Me.lblValuacion)
         Me.C1DockingTabPage1.Controls.Add(Me.lblGrupo)
-        Me.C1DockingTabPage1.Controls.Add(Me.txtInicioValuacion)
         Me.C1DockingTabPage1.Controls.Add(Me.txtUbica)
         Me.C1DockingTabPage1.Controls.Add(Me.lblMoneda)
         Me.C1DockingTabPage1.Controls.Add(Me.txtGrupo)
-        Me.C1DockingTabPage1.Font = New System.Drawing.Font("Raleway Light", 8.249999!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.C1DockingTabPage1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.249999!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.C1DockingTabPage1.Location = New System.Drawing.Point(1, 24)
         Me.C1DockingTabPage1.Name = "C1DockingTabPage1"
         Me.C1DockingTabPage1.Size = New System.Drawing.Size(816, 353)
@@ -814,16 +778,6 @@ Partial Class jsContabArcActivosFijos
         Me.txtAños.Size = New System.Drawing.Size(43, 20)
         Me.txtAños.TabIndex = 141
         Me.txtAños.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnFechaAdquisicion
-        '
-        Me.btnFechaAdquisicion.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaAdquisicion.Location = New System.Drawing.Point(392, 166)
-        Me.btnFechaAdquisicion.Name = "btnFechaAdquisicion"
-        Me.btnFechaAdquisicion.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaAdquisicion.TabIndex = 140
-        Me.btnFechaAdquisicion.Text = "•••"
-        Me.btnFechaAdquisicion.UseVisualStyleBackColor = True
         '
         'lblDescripcionRepreciacion
         '
@@ -1052,16 +1006,6 @@ Partial Class jsContabArcActivosFijos
         Me.lblDescripcionGrupo.TabIndex = 118
         Me.lblDescripcionGrupo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'btnInicioValuacion
-        '
-        Me.btnInicioValuacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnInicioValuacion.Location = New System.Drawing.Point(392, 189)
-        Me.btnInicioValuacion.Name = "btnInicioValuacion"
-        Me.btnInicioValuacion.Size = New System.Drawing.Size(25, 20)
-        Me.btnInicioValuacion.TabIndex = 117
-        Me.btnInicioValuacion.Text = "•••"
-        Me.btnInicioValuacion.UseVisualStyleBackColor = True
-        '
         'btnGrupo
         '
         Me.btnGrupo.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1071,16 +1015,6 @@ Partial Class jsContabArcActivosFijos
         Me.btnGrupo.TabIndex = 116
         Me.btnGrupo.Text = "•••"
         Me.btnGrupo.UseVisualStyleBackColor = True
-        '
-        'btnIngreso
-        '
-        Me.btnIngreso.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnIngreso.Location = New System.Drawing.Point(180, 52)
-        Me.btnIngreso.Name = "btnIngreso"
-        Me.btnIngreso.Size = New System.Drawing.Size(25, 20)
-        Me.btnIngreso.TabIndex = 115
-        Me.btnIngreso.Text = "•••"
-        Me.btnIngreso.UseVisualStyleBackColor = True
         '
         'C1DockingTabPage2
         '
@@ -1094,12 +1028,48 @@ Partial Class jsContabArcActivosFijos
         Me.C1DockingTabPage2.Controls.Add(Me.txtCtaBan1)
         Me.C1DockingTabPage2.Controls.Add(Me.txtSaldo1)
         Me.C1DockingTabPage2.Controls.Add(Me.txtNombre1)
-        Me.C1DockingTabPage2.Font = New System.Drawing.Font("Raleway Light", 8.249999!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.C1DockingTabPage2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.249999!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.C1DockingTabPage2.Location = New System.Drawing.Point(1, 24)
         Me.C1DockingTabPage2.Name = "C1DockingTabPage2"
         Me.C1DockingTabPage2.Size = New System.Drawing.Size(816, 353)
         Me.C1DockingTabPage2.TabIndex = 1
         Me.C1DockingTabPage2.Text = "Movimientos"
+        '
+        'txtFecha
+        '
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(87, 52)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(118, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 214
+        '
+        'txtAdquisicion
+        '
+        Me.txtAdquisicion.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtAdquisicion.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtAdquisicion.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtAdquisicion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAdquisicion.Location = New System.Drawing.Point(309, 168)
+        Me.txtAdquisicion.Name = "txtAdquisicion"
+        Me.txtAdquisicion.Size = New System.Drawing.Size(118, 19)
+        Me.txtAdquisicion.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtAdquisicion.TabIndex = 215
+        '
+        'txtInicioValuacion
+        '
+        Me.txtInicioValuacion.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtInicioValuacion.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtInicioValuacion.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtInicioValuacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtInicioValuacion.Location = New System.Drawing.Point(309, 189)
+        Me.txtInicioValuacion.Name = "txtInicioValuacion"
+        Me.txtInicioValuacion.Size = New System.Drawing.Size(118, 19)
+        Me.txtInicioValuacion.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtInicioValuacion.TabIndex = 216
         '
         'jsContabArcActivosFijos
         '
@@ -1159,9 +1129,6 @@ Partial Class jsContabArcActivosFijos
     Friend WithEvents lblAdquisicion As System.Windows.Forms.Label
     Friend WithEvents lblDescripcion As System.Windows.Forms.Label
     Friend WithEvents lblIngreso As System.Windows.Forms.Label
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
-    Friend WithEvents txtInicioValuacion As System.Windows.Forms.TextBox
-    Friend WithEvents txtAdquisicion As System.Windows.Forms.TextBox
     Friend WithEvents txtDescripcion As System.Windows.Forms.TextBox
     Friend WithEvents lblEstatus As System.Windows.Forms.Label
     Friend WithEvents lblTipo As System.Windows.Forms.Label
@@ -1187,9 +1154,7 @@ Partial Class jsContabArcActivosFijos
     Friend WithEvents tbcActivos As C1.Win.C1Command.C1DockingTab
     Friend WithEvents C1DockingTabPage1 As C1.Win.C1Command.C1DockingTabPage
     Friend WithEvents C1DockingTabPage2 As C1.Win.C1Command.C1DockingTabPage
-    Friend WithEvents btnIngreso As System.Windows.Forms.Button
     Friend WithEvents btnGrupo As System.Windows.Forms.Button
-    Friend WithEvents btnInicioValuacion As System.Windows.Forms.Button
     Friend WithEvents lblDescripcionGrupo As System.Windows.Forms.Label
     Friend WithEvents lblSerial As System.Windows.Forms.Label
     Friend WithEvents lblDescripcionMoneda As System.Windows.Forms.Label
@@ -1212,7 +1177,6 @@ Partial Class jsContabArcActivosFijos
     Friend WithEvents btnCuentaActivos As System.Windows.Forms.Button
     Friend WithEvents lblActivoPasivo As System.Windows.Forms.Label
     Friend WithEvents txtActivo As System.Windows.Forms.TextBox
-    Friend WithEvents btnFechaAdquisicion As System.Windows.Forms.Button
     Friend WithEvents lblVida As System.Windows.Forms.Label
     Friend WithEvents txtMeses As System.Windows.Forms.TextBox
     Friend WithEvents txtAños As System.Windows.Forms.TextBox
@@ -1224,4 +1188,7 @@ Partial Class jsContabArcActivosFijos
     Friend WithEvents txtAdquisicionMonto As System.Windows.Forms.TextBox
     Friend WithEvents lblTasa As System.Windows.Forms.Label
     Friend WithEvents txtTasa As System.Windows.Forms.TextBox
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtInicioValuacion As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtAdquisicion As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

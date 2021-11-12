@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Imports System.IO
 Imports System.Text
 Public Class jsComProRetencionesIVA
@@ -18,24 +19,22 @@ Public Class jsComProRetencionesIVA
     Public Sub Cargar(ByVal MyCon As MySqlConnection)
 
         MyConn = MyCon
+        Dim dates As SfDateTimeEdit() = {txtFechaDesde, txtFechaHasta}
         IniciarTXT()
         Me.Show()
 
     End Sub
     Private Sub IniciarTXT()
 
-        ft.habilitarObjetos(False, True, txtFechaDesde, txtFechaHasta)
-        ft.habilitarObjetos(True, True, btnFechaDesde, btnFechaHasta)
-
-        txtFechaDesde.Text = ft.FormatoFecha(PrimerDiaMes(jytsistema.sFechadeTrabajo))
-        txtFechaHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFechaDesde.Value = PrimerDiaMes(jytsistema.sFechadeTrabajo)
+        txtFechaHasta.Value = jytsistema.sFechadeTrabajo
 
         txtRutaArchivo.Text = CamnioNombreArchivo()
 
 
     End Sub
     Private Function CamnioNombreArchivo() As String
-        Return CaminoArchivo & NombreArchivoBase & Format(CDate(txtFechaDesde.Text), "ddMMyy") & "_" & Format(CDate(txtFechaHasta.Text), "ddMMyy") & ".txt"
+        Return CaminoArchivo & NombreArchivoBase & Format(txtFechaDesde.Value, "ddMMyy") & "_" & Format(txtFechaHasta.Value, "ddMMyy") & ".txt"
     End Function
 
     Private Sub jsComProRetencionesIVA_FormClosed(sender As Object, e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
@@ -68,7 +67,7 @@ Public Class jsComProRetencionesIVA
 
 
 
-            strRetenciones = SeleccionCOMPRASListadoRetencionesIVA(CDate(txtFechaDesde.Text), CDate(txtFechaHasta.Text), "", "")
+            strRetenciones = SeleccionCOMPRASListadoRetencionesIVA(txtFechaDesde.Value, txtFechaHasta.Value, "", "")
             ds = DataSetRequery(ds, strRetenciones, MyConn, nTablaRetenciones, lblInfo)
             dtRetenciones = ds.Tables(nTablaRetenciones)
 
@@ -125,12 +124,6 @@ Public Class jsComProRetencionesIVA
 
     End Sub
 
-    Private Sub btnFechaDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaDesde.Click
-        txtFechaDesde.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtFechaDesde.Text), Me, btnFechaDesde))
-    End Sub
-    Private Sub btnFechaHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaHasta.Click
-        txtFechaHasta.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtFechaHasta.Text), Me, btnFechaHasta))
-    End Sub
     Private Sub btnClienteDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRutaArchivo.Click
         Dim ofd As New OpenFileDialog()
 
@@ -145,15 +138,11 @@ Public Class jsComProRetencionesIVA
 
         ofd = Nothing
     End Sub
-   
-   
-
-  
-    Private Sub txtFechaDesde_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaDesde.TextChanged
+    Private Sub txtFechaDesde_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaDesde.ValueChanged
         If txtFechaDesde.Text <> "" AndAlso txtFechaHasta.Text <> "" Then txtRutaArchivo.Text = CamnioNombreArchivo()
     End Sub
 
-    Private Sub txtFechaHasta_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaHasta.TextChanged
+    Private Sub txtFechaHasta_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaHasta.ValueChanged
         If txtFechaDesde.Text <> "" AndAlso txtFechaHasta.Text <> "" Then txtRutaArchivo.Text = CamnioNombreArchivo()
     End Sub
 End Class

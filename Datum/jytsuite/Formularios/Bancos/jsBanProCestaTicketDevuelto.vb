@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+Imports fTransport
 Public Class jsBanProCestaTicketDevuelto
     Private Const sModulo As String = "Devolución/Anulación/Eliminación canc.  de cesta ticket"
     Private Const nTabla As String = "tblct"
@@ -24,6 +26,9 @@ Public Class jsBanProCestaTicketDevuelto
         Me.Tag = sModulo
         myConn = MyCon
         Movimiento = TipoMovimiento
+
+        Dim dates As SfDateTimeEdit() = {txtFecha}
+        SetSizeDateObjects(dates)
 
         IniciarCorredores()
         IniciarTxt()
@@ -69,20 +74,20 @@ Public Class jsBanProCestaTicketDevuelto
             End If
 
         Next
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
 
     End Sub
     Private Sub OcultaTXTPorAnulacion()
 
-        ft.visualizarObjetos(False, txtFecha, btnFecha, btnImprimir, txtBanco, Label4, Label6, Label7, _
-                                Label14, Label13, Label15, Label8, Label11, Label12, _
-                                txtAsesor, txtCancelacion, txtCliente, txtDeposito, txtFechaDep, _
+        ft.visualizarObjetos(False, txtFecha, btnImprimir, txtBanco, Label4, Label6, Label7,
+                                Label14, Label13, Label15, Label8, Label11, Label12,
+                                txtAsesor, txtCancelacion, txtCliente, txtDeposito, txtFechaDep,
                                 txtFechaRemesa, txtRemesa)
     End Sub
     Private Sub OcultaTXTPorEliminacion()
 
-        ft.visualizarObjetos(False, txtFecha, btnFecha, btnImprimir, txtBanco, Label4, Label6, Label7, _
-                                Label14, Label13, Label15, _
+        ft.visualizarObjetos(False, txtFecha, btnImprimir, txtBanco, Label4, Label6, Label7,
+                                Label14, Label13, Label15,
                                 txtDeposito, txtFechaDep, txtFechaRemesa, txtRemesa)
     End Sub
     Private Sub IniciarCorredores()
@@ -154,14 +159,15 @@ Public Class jsBanProCestaTicketDevuelto
 
                 Dim Documento As String = Contador(myConn, lblInfo, Gestion.iVentas, "VENNUMNDB", "10")
 
-                InsertEditVENTASCXC(myConn, lblInfo, True, Split(txtCliente.Text, "  |  ").GetValue(0).ToString, "ND", Documento, CDate(txtFecha.Text), ft.FormatoHora(Now()), _
-                    CDate(txtFecha.Text), txtCheque.Text, "CHEQUE DE ALIMENTACION DEVUELTO", ValorDebitado, 0.0#, "", "", "", "", "", "BAN", _
-                    txtCheque.Text, "", "", jytsistema.sFechadeTrabajo, "", "", "", 0.0#, 0.0#, "", "", "", "", Mid(txtAsesor.Text, 1, 5), _
-                    Mid(txtAsesor.Text, 1, 5), "0", "0", jytsistema.WorkDivition)
+                InsertEditVENTASCXC(myConn, lblInfo, True, Split(txtCliente.Text, "  |  ").GetValue(0).ToString, "ND", Documento, txtFecha.Value, ft.FormatoHora(Now()),
+                    txtFecha.Value, txtCheque.Text, "CHEQUE DE ALIMENTACION DEVUELTO", ValorDebitado, 0.0#, "", "", "", "", "", "BAN",
+                    txtCheque.Text, "", "", jytsistema.sFechadeTrabajo, "", "", "", 0.0#, 0.0#, "", "", "", "", Mid(txtAsesor.Text, 1, 5),
+                    Mid(txtAsesor.Text, 1, 5), "0", "0", jytsistema.WorkDivition,
+                    jytsistema.WorkCurrency.Id, DateTime.Now())
 
 
                 '2. Coloca el cheque de alimentacion devuelto
-               
+
                 refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, 100, "2. Coloca el cheque devuelto")
                 ft.Ejecutar_strSQL(myconn, " update jsventabtic set condicion = 1 " _
                                 & " where  " _
@@ -224,9 +230,9 @@ Public Class jsBanProCestaTicketDevuelto
                 Dim aSBan() As String = {.Rows(0).Item("bancodep").ToString, jytsistema.WorkID}
                 txtBanco.Text = .Rows(0).Item("bancodep").ToString + "  |  " + qFoundAndSign(myConn, lblInfo, "jsbancatban", aCBan, aSBan, "nomban") + "  |  " + qFoundAndSign(myConn, lblInfo, "jsbancatban", aCBan, aSBan, "ctaban")
                 txtDeposito.Text = .Rows(0).Item("numdep")
-                txtFechaDep.Text = ft.FormatoFecha(CDate(.Rows(0).Item("fechadep").ToString))
+                txtFechaDep.Value = .Rows(0).Item("fechadep")
                 txtRemesa.Text = .Rows(0).Item("numsobre")
-                txtFechaRemesa.Text = ft.FormatoFecha(CDate(IIf(.Rows(0).Item("fechasobre").ToString = "00/00/0000", jytsistema.sFechadeTrabajo, .Rows(0).Item("fechasobre").ToString)))
+                txtFechaRemesa.Text = IIf(.Rows(0).Item("fechasobre").ToString = "00/00/0000", jytsistema.sFechadeTrabajo, .Rows(0).Item("fechasobre"))
                 txtCancelacion.Text = .Rows(0).Item("numcan")
                 ValorTicket = CDbl(.Rows(0).Item("monto"))
                 ValorDebitado = CDbl(.Rows(0).Item("monto")) - CDbl(.Rows(0).Item("comision"))
@@ -281,10 +287,6 @@ Public Class jsBanProCestaTicketDevuelto
 
         ft.enfocarTexto(txtCheque)
 
-    End Sub
-
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, btnFecha)
     End Sub
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click

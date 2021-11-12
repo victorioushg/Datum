@@ -47,8 +47,7 @@ Partial Class jsControlProCierreDiario
         Me.grpGestiones = New System.Windows.Forms.GroupBox()
         Me.lblUltimoCierre = New System.Windows.Forms.Label()
         Me.lblFechaCierre = New System.Windows.Forms.Label()
-        Me.btnFecha = New System.Windows.Forms.Button()
-        Me.txtFecha = New System.Windows.Forms.TextBox()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpCaja.SuspendLayout()
         Me.grpTotales.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -325,10 +324,9 @@ Partial Class jsControlProCierreDiario
         '
         'grpGestiones
         '
+        Me.grpGestiones.Controls.Add(Me.txtFecha)
         Me.grpGestiones.Controls.Add(Me.lblUltimoCierre)
         Me.grpGestiones.Controls.Add(Me.lblFechaCierre)
-        Me.grpGestiones.Controls.Add(Me.btnFecha)
-        Me.grpGestiones.Controls.Add(Me.txtFecha)
         Me.grpGestiones.Controls.Add(Me.chk)
         Me.grpGestiones.Controls.Add(Me.chk5)
         Me.grpGestiones.Controls.Add(Me.chk4)
@@ -351,7 +349,7 @@ Partial Class jsControlProCierreDiario
         'lblUltimoCierre
         '
         Me.lblUltimoCierre.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUltimoCierre.Location = New System.Drawing.Point(455, 111)
+        Me.lblUltimoCierre.Location = New System.Drawing.Point(490, 93)
         Me.lblUltimoCierre.Name = "lblUltimoCierre"
         Me.lblUltimoCierre.Size = New System.Drawing.Size(227, 20)
         Me.lblUltimoCierre.TabIndex = 146
@@ -369,25 +367,17 @@ Partial Class jsControlProCierreDiario
         Me.lblFechaCierre.Text = "Fecha de Cierre"
         Me.lblFechaCierre.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(685, 134)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(27, 20)
-        Me.btnFecha.TabIndex = 144
-        Me.btnFecha.Text = "···"
-        Me.btnFecha.UseVisualStyleBackColor = True
-        '
         'txtFecha
         '
-        Me.txtFecha.BackColor = System.Drawing.Color.White
-        Me.txtFecha.Enabled = False
-        Me.txtFecha.Location = New System.Drawing.Point(603, 134)
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(603, 137)
         Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(79, 20)
-        Me.txtFecha.TabIndex = 143
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtFecha.Size = New System.Drawing.Size(114, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 214
         '
         'jsControlProCierreDiario
         '
@@ -445,7 +435,6 @@ Partial Class jsControlProCierreDiario
     Friend WithEvents chk As System.Windows.Forms.CheckBox
     Friend WithEvents grpGestiones As System.Windows.Forms.GroupBox
     Friend WithEvents lblFechaCierre As System.Windows.Forms.Label
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
     Friend WithEvents lblUltimoCierre As System.Windows.Forms.Label
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

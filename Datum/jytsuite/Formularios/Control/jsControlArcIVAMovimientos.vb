@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsControlArcIVAMovimientos
 
     Private Const sModulo As String = "Movimiento impuesto al valor agregado"
@@ -43,11 +45,9 @@ Public Class jsControlArcIVAMovimientos
     Private Sub IniciarTXT()
 
         txtTasa.Text = "A"
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Numero, txtDesde, txtHasta, txtMonto, txtDesde_1, txtDesde_2, _
+        ft.iniciarTextoObjetos(Transportables.tipoDato.Numero, txtDesde, txtHasta, txtMonto, txtDesde_1, txtDesde_2,
                                txtHasta_1, txtHasta_2, txtMonto_1, txtMonto_2)
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-
-        ft.habilitarObjetos(False, True, txtFecha)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
 
     End Sub
 
@@ -66,7 +66,7 @@ Public Class jsControlArcIVAMovimientos
         With dtLocal.Rows(nPosicion)
 
             txtTasa.Text = ft.muestraCampoTexto(.Item("tipo"))
-            txtFecha.Text = ft.muestraCampoFecha(.Item("fecha"))
+            txtFecha.Value = .Item("fecha")
 
             txtDesde.Text = ft.muestraCampoNumero(.Item("desde"))
             txtHasta.Text = ft.muestraCampoNumero(.Item("hasta"))
@@ -79,12 +79,7 @@ Public Class jsControlArcIVAMovimientos
             txtDesde_2.Text = ft.muestraCampoNumero(.Item("desde_2"))
             txtHasta_2.Text = ft.muestraCampoNumero(.Item("hasta_2"))
             txtMonto_2.Text = ft.muestraCampoNumero(.Item("monto_2"))
-
-
         End With
-
-        ft.habilitarObjetos(False, True, txtTasa, txtFecha, btnFecha)
-
     End Sub
     Private Sub jsControlArcIVAMovimientos_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         dsLocal = Nothing
@@ -92,6 +87,8 @@ Public Class jsControlArcIVAMovimientos
     End Sub
 
     Private Sub jsControlArcIVAMovimientos_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Dim dates As SfDateTimeEdit() = {txtFecha}
+        SetSizeDateObjects(dates)
         InsertarAuditoria(MyConn, MovAud.ientrar, sModulo, txtTasa.Text)
     End Sub
 
@@ -106,7 +103,7 @@ Public Class jsControlArcIVAMovimientos
 
         If ft.DevuelveScalarEntero(MyConn, " select count(*) from jsconctaiva where " _
                                    & " tipo = '" & txtTasa.Text & "' and " _
-                                   & " fecha = '" & ft.FormatoFechaMySQL(CDate(txtFecha.Text)) & "' ") > 0 And _
+                                   & " fecha = '" & ft.FormatoFechaMySQL(CDate(txtFecha.Text)) & "' ") > 0 And
                                i_modo = movimiento.iAgregar Then
             ft.mensajeCritico("Ya existe esta tasa de iva para esta fecha...")
             ft.enfocarTexto(txtTasa)
@@ -180,9 +177,9 @@ Public Class jsControlArcIVAMovimientos
                 Insertar = True
 
             End If
-            InsertEditCONTROLIVA(MyConn, lblInfo, Insertar, txtTasa.Text, CDate(txtFecha.Text), _
-                                 ft.valorNumero(txtDesde.Text), ft.valorNumero(txtHasta.Text), ValorPorcentajeLargo(txtMonto.Text), _
-                                 ft.valorNumero(txtDesde_1.Text), ft.valorNumero(txtHasta_1.Text), ValorPorcentajeLargo(txtMonto_1.Text), _
+            InsertEditCONTROLIVA(MyConn, lblInfo, Insertar, txtTasa.Text, CDate(txtFecha.Text),
+                                 ft.valorNumero(txtDesde.Text), ft.valorNumero(txtHasta.Text), ValorPorcentajeLargo(txtMonto.Text),
+                                 ft.valorNumero(txtDesde_1.Text), ft.valorNumero(txtHasta_1.Text), ValorPorcentajeLargo(txtMonto_1.Text),
                                  ft.valorNumero(txtDesde_2.Text), ft.valorNumero(txtHasta_2.Text), ValorPorcentajeLargo(txtMonto_2.Text))
 
             TIPO = txtTasa.Text
@@ -201,11 +198,7 @@ Public Class jsControlArcIVAMovimientos
         e.Handled = ft.validaNumeroEnTextbox(e)
     End Sub
 
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, sender)
-    End Sub
-
-    Private Sub txtDesde_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDesde.KeyPress, txtHasta.KeyPress, _
+    Private Sub txtDesde_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDesde.KeyPress, txtHasta.KeyPress,
         txtMonto.KeyPress, txtDesde_1.KeyPress, txtHasta_1.KeyPress, txtDesde_2.KeyPress, txtDesde_2.KeyPress
         e.Handled = ft.validaNumeroEnTextbox(e)
     End Sub

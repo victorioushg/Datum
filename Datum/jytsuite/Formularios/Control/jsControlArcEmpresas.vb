@@ -37,6 +37,13 @@ Public Class jsControlArcEmpresas
             dt = ft.AbrirDataTable(ds, nTabla, myConn, strSQL)
             dtMonedas = ft.AbrirDataTable(ds, nTablaMonedas, myConn, strSqlCurrency)
 
+            cmbMonedas.DataSource = dtMonedas
+            cmbMonedas.DisplayMember = "PaisMoneda"
+            cmbMonedas.ValueMember = "ID"
+            cmbMonedas.Watermark = "Escoja una moneda"
+            cmbMonedas.AutoCompleteMode = AutoCompleteMode.Append
+            cmbMonedas.DropDownStyle = DropDownStyle.DropDown
+
             DesactivarMarco0()
             If dt.Rows.Count > 0 Then
                 nPosicionCat = 0
@@ -94,22 +101,9 @@ Public Class jsControlArcEmpresas
                 txtInicio.Text = ft.muestraCampoFecha(.Item("inicio"))
                 txtCierre.Text = ft.muestraCampoFecha(.Item("cierre"))
 
-                cmbMonedas.DataSource = dtMonedas
-                cmbMonedas.DisplayMember = "PaisMoneda"
-                cmbMonedas.ValueMember = "ID"
-                cmbMonedas.Watermark = "Escoja una moneda"
-                cmbMonedas.AutoCompleteMode = AutoCompleteMode.Append
-                cmbMonedas.DropDownStyle = DropDownStyle.DropDown
-
-                cmbCambio.DataSource = dtMonedas
-                cmbCambio.DisplayMember = "PaisMoneda"
-                cmbCambio.ValueMember = "ID"
-                cmbCambio.Watermark = "Escoja una moneda"
-                cmbCambio.AutoCompleteMode = AutoCompleteMode.Append
-                cmbCambio.DropDownStyle = DropDownStyle.DropDown
 
                 cmbMonedas.SelectedValue = .Item("Moneda")
-                cmbCambio.SelectedValue = .Item("MonedaCambio")
+                cmbMonedas.Refresh()
 
                 txtCILetraRep.Text = ft.muestraCampoTexto(.Item("rep_nacional"))
                 txtCIRep.Text = ft.muestraCampoTexto(.Item("rep_ci"))
@@ -310,7 +304,7 @@ Public Class jsControlArcEmpresas
             txtDirFiscalRep.Text, txtCiudadRep.Text, txtEstadoRep.Text, txtTelefonoRep.Text, txtFaxRep.Text,
             txtEmailRep.Text, txtCILetraGer.Text, txtCIGer.Text, txtNombreGer.Text, txtDirFiscalGer.Text,
             txtTelefonoGer.Text, txtCiudadGer.Text, txtEdoGer.Text, txtMovilGer.Text, txtemailGer.Text,
-            cmbCambio.SelectedValue.ToString(),
+            "0",
             cmbMonedas.SelectedValue.ToString())
 
 

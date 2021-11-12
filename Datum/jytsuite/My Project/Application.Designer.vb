@@ -24,7 +24,8 @@ Namespace My
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Public Sub New()
             MyBase.New(Global.Microsoft.VisualBasic.ApplicationServices.AuthenticationMode.Windows)
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzM0Njc2QDMxMzcyZTM0MmUzMGh4T3dyRG9xQlMvbXNnYVNmQ28yaXJ2bFU4dG00U0d2cVZlbVRuSWo5VVk9")
+            '' Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzM0Njc2QDMxMzcyZTM0MmUzMGh4T3dyRG9xQlMvbXNnYVNmQ28yaXJ2bFU4dG00U0d2cVZlbVRuSWo5VVk9")
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NTIwNDU4QDMxMzkyZTMzMmUzMFp2VHN5Yzd5NjY2R2NWb2RKS0VhbUxwV2toaDV2Q2Y2VWMyUzhRV0pWWDQ9;NTIwNDU5QDMxMzkyZTMzMmUzMER6WVp2UzB5dGVLZ2Zwdm9rS05VajNiNDlkQUFHaDNTblJ3UUt1S1hPV2c9;NTIwNDYwQDMxMzkyZTMzMmUzMEF0clJ4aGt5N1liK1FZNUoyYUwxUSt5eDdsN2trMS9vYTh2UFhhalR5bDQ9;NTIwNDYxQDMxMzkyZTMzMmUzMFQ4V3NuM2Rwa282NjllTFBRa2pTRkYwMnNqM0UyR0crUVV5Um4zUzQvUDA9")
             Me.IsSingleInstance = false
             Me.EnableVisualStyles = true
             Me.SaveMySettingsOnExit = true

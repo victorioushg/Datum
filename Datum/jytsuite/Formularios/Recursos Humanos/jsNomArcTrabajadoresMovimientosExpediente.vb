@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsNomArcTrabajadoresMovimientosExpediente
     Private Const sModulo As String = "Movimientos de expediente de trabajador"
     Private Const nTabla As String = "tbl_movtraexp"
@@ -25,7 +26,7 @@ Public Class jsNomArcTrabajadoresMovimientosExpediente
     Public Sub Agregar(ByVal MyCon As MySqlConnection, ByVal ds As DataSet, ByVal dt As DataTable, ByVal CodigoTrabajador As String)
         i_modo = movimiento.iAgregar
 
-        ft.habilitarObjetos(False, True, txtFecha, txtRetorno)
+        ft.habilitarObjetos(True, True, txtFecha, txtRetorno)
 
         MyConn = MyCon
         dsExp = ds
@@ -37,8 +38,8 @@ Public Class jsNomArcTrabajadoresMovimientosExpediente
     End Sub
     Private Sub IniciarTXT()
 
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtRetorno.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
+        txtRetorno.Value = jytsistema.sFechadeTrabajo
         txtComentario.Text = ""
         ft.RellenaCombo(aCausaExpedienteNomina, cmbCausa)
 
@@ -47,7 +48,7 @@ Public Class jsNomArcTrabajadoresMovimientosExpediente
     Public Sub Editar(ByVal MyCon As MySqlConnection, ByVal ds As DataSet, ByVal dt As DataTable, ByVal CodigoTrabajador As String)
         i_modo = movimiento.iEditar
 
-        ft.habilitarObjetos(False, True, txtFecha, btnFecha, txtRetorno, btnRetorno, cmbCausa)
+        ft.habilitarObjetos(False, True, txtFecha, txtRetorno, cmbCausa)
 
         MyConn = MyCon
         dsExp = ds
@@ -60,8 +61,8 @@ Public Class jsNomArcTrabajadoresMovimientosExpediente
     End Sub
     Private Sub AsignarTXT(ByVal nPosicion As Integer)
         With dtExp.Rows(nPosicion)
-            txtFecha.Text = ft.muestraCampoFecha(.Item("fecha"))
-            txtRetorno.Text = ft.muestraCampoFecha(.Item("fecha_fin"))
+            txtFecha.Value = .Item("fecha")
+            txtRetorno.Value = .Item("fecha_fin")
             txtComentario.Text = ft.muestraCampoTexto(.Item("comentario"))
             ft.RellenaCombo(aCausaExpedienteNomina, cmbCausa, .Item("causa"))
             lEstatus = .Item("estatus")
@@ -74,10 +75,12 @@ Public Class jsNomArcTrabajadoresMovimientosExpediente
 
     Private Sub jsNomArcTrabajadoresMovimientosExpediente_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         InsertarAuditoria(MyConn, MovAud.ientrar, sModulo, txtFecha.Text)
+        Dim dates As SfDateTimeEdit() = {txtFecha, txtRetorno}
+        SetSizeDateObjects(dates)
     End Sub
 
-    Private Sub txt_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtFecha.GotFocus, _
-        cmbCausa.GotFocus, txtComentario.GotFocus, btnFecha.GotFocus
+    Private Sub txt_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles _
+        cmbCausa.GotFocus, txtComentario.GotFocus
         Select Case sender.name
             Case "txtFecha", "btnFecha"
                 ft.mensajeEtiqueta(lblInfo, " Seleccione la fecha inicial para el movimiento en expediente ... ", Transportables.tipoMensaje.iInfo)
@@ -86,7 +89,7 @@ Public Class jsNomArcTrabajadoresMovimientosExpediente
             Case "txtComentario"
                 ft.mensajeEtiqueta(lblInfo, " Indique el comentario por el cual hace registro en el expediente del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "cmbCausa"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione la causa por la cual hace movimiento en expediente ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione la causa por la cual hace movimiento en expediente ...", Transportables.tipoMensaje.iInfo)
         End Select
 
     End Sub
@@ -95,13 +98,12 @@ Public Class jsNomArcTrabajadoresMovimientosExpediente
 
         If Trim(txtComentario.Text) = "" Then
             ft.mensajeAdvertencia("Debe indicar un comentario ...")
-            txtFecha.Focus()
+            txtComentario.Focus()
             Return False
         End If
 
         If CDate(txtRetorno.Text) < CDate(txtFecha.Text) Then
             ft.mensajeCritico("La fecha de retorno no puede ser menor que la fecha inicial...")
-            btnRetorno.Focus()
             Return False
         End If
 
@@ -117,7 +119,7 @@ Public Class jsNomArcTrabajadoresMovimientosExpediente
                 Insertar = True
                 Apuntador = dtExp.Rows.Count
             End If
-            InsertEditNOMINAExpedienteTrabajador(MyConn, lblInfo, Insertar, Codigo, CDate(txtFecha.Text), CDate(txtRetorno.Text), _
+            InsertEditNOMINAExpedienteTrabajador(MyConn, lblInfo, Insertar, Codigo, CDate(txtFecha.Text), CDate(txtRetorno.Text),
                                                  txtComentario.Text, cmbCausa.SelectedIndex, lEstatus)
             Me.Close()
         End If
@@ -128,22 +130,12 @@ Public Class jsNomArcTrabajadoresMovimientosExpediente
         Me.Close()
     End Sub
 
-    Private Sub btnIngreso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, sender)
-        txtRetorno.Text = txtFecha.Text
-    End Sub
-
-    Private Sub btnRetorno_Click(sender As Object, e As EventArgs) Handles btnRetorno.Click
-        txtRetorno.Text = SeleccionaFecha(CDate(txtRetorno.Text), Me, sender)
-    End Sub
-
-
     Private Sub cmbCausa_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbCausa.SelectedIndexChanged
         Select Case cmbCausa.SelectedIndex
             Case 0, 5, 6, 8, 9, 10, 11
-                ft.visualizarObjetos(False, lblRetorno, txtRetorno, btnRetorno)
+                ft.visualizarObjetos(False, lblRetorno, txtRetorno)
             Case Else
-                ft.visualizarObjetos(True, lblRetorno, txtRetorno, btnRetorno)
+                ft.visualizarObjetos(True, lblRetorno, txtRetorno)
         End Select
     End Sub
 

@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 
 Public Class jsMerArcTransferencias
     Private Const sModulo As String = "Transferencias y/o Consumos internos"
@@ -34,6 +35,8 @@ Public Class jsMerArcTransferencias
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
             dt = ds.Tables(nTabla)
 
+            Dim dates As SfDateTimeEdit() = {txtEmision}
+            SetSizeDateObjects(dates)
 
 
             DesactivarMarco0()
@@ -48,20 +51,20 @@ Public Class jsMerArcTransferencias
             AsignarTooltips()
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
-            ft.MensajeCritico("Error en conexión de base de datos: " & ex.Message)
+            ft.mensajeCritico("Error en conexión de base de datos: " & ex.Message)
         End Try
 
     End Sub
     Private Sub AsignarTooltips()
         'Menu Barra 
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnAgregar, btnEditar, btnEliminar, btnBuscar, btnPrimero, btnSiguiente, _
-                          btnAnterior, btnUltimo, btnImprimir, btnSalir, btnAgregarMovimiento, btnEditarMovimiento, _
-                          btnEliminarMovimiento, btnBuscarMovimiento, btnPrimerMovimiento, btnAnteriorMovimiento, _
+        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnAgregar, btnEditar, btnEliminar, btnBuscar, btnPrimero, btnSiguiente,
+                          btnAnterior, btnUltimo, btnImprimir, btnSalir, btnAgregarMovimiento, btnEditarMovimiento,
+                          btnEliminarMovimiento, btnBuscarMovimiento, btnPrimerMovimiento, btnAnteriorMovimiento,
                           btnSiguienteMovimiento, btnUltimoMovimiento)
     End Sub
 
     Private Sub AsignaMov(ByVal nRow As Long, ByVal Actualiza As Boolean)
-        dtRenglones = ft.MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, _
+        dtRenglones = ft.MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg,
                                               lRegion, jytsistema.sUsuario, nRow, Actualiza)
     End Sub
     Private Sub AsignaTXT(ByVal nRow As Long)
@@ -79,7 +82,7 @@ Public Class jsMerArcTransferencias
                 ft.RellenaCombo(aTipo, cmbTipo, .Item("tipo"))
                 txtComentario.Text = ft.muestraCampoTexto(.Item("comen"))
                 txtCausa.Text = ft.muestraCampoTexto(.Item("causa"))
-                txtEmision.Text = ft.muestraCampoFecha(.Item("emision"))
+                txtEmision.Value = .Item("emision")
                 txtAlmacenSalida.Text = ft.muestraCampoTexto(.Item("alm_sale"))
                 txtAlmacenEntrada.Text = ft.muestraCampoTexto(.Item("alm_entra"))
                 txtItems.Text = ft.muestraCampoEntero(.Item("items"))
@@ -104,12 +107,12 @@ Public Class jsMerArcTransferencias
 
         dtRenglones = ft.AbrirDataTable(ds, nTablaRenglones, myConn, strSQLMov)
 
-        Dim aCampos() As String = {"item.Item.70.I.", _
-                                   "descrip.Descripción.300.I.", _
-                                   "unidad.Unidad.45.C.", _
-                                   "cantidad.Cantidad.110.D.Cantidad", _
-                                   "costou.Costo Unitario.110.D.Numero", _
-                                   "totren.Costo Total.110.D.Numero", _
+        Dim aCampos() As String = {"item.Item.70.I.",
+                                   "descrip.Descripción.300.I.",
+                                   "unidad.Unidad.45.C.",
+                                   "cantidad.Cantidad.110.D.Cantidad",
+                                   "costou.Costo Unitario.110.D.Numero",
+                                   "totren.Costo Total.110.D.Numero",
                                    "sada..100.I."}
         ft.IniciarTablaPlus(dg, dtRenglones, aCampos)
         If dtRenglones.Rows.Count > 0 Then
@@ -128,7 +131,7 @@ Public Class jsMerArcTransferencias
 
         ft.RellenaCombo(aTipo, cmbTipo)
         txtComentario.Text = ""
-        txtEmision.Text = ft.FormatoFecha(sFechadeTrabajo)
+        txtEmision.Value = sFechadeTrabajo
         txtAlmacenSalida.Text = ""
         txtAlmacenEntrada.Text = ""
         txtCausa.Text = ""
@@ -149,13 +152,13 @@ Public Class jsMerArcTransferencias
         grpAceptarSalir.Visible = True
 
         ft.habilitarObjetos(True, False, grpEncab, grpTotales, MenuBarraRenglon)
-        ft.habilitarObjetos(True, True, txtComentario, btnEmision, btnAlmacenSalida, btnAlmacenEntrada, cmbTipo, _
+        ft.habilitarObjetos(True, True, txtComentario, txtEmision, btnAlmacenSalida, btnAlmacenEntrada, cmbTipo,
                          btnCausa)
         ft.habilitarObjetos(False, False, txtTotalCantidad, txtTotalCosto, txtTotalPeso)
 
         MenuBarra.Enabled = False
 
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
     End Sub
     Private Sub DesactivarMarco0()
@@ -172,7 +175,7 @@ Public Class jsMerArcTransferencias
         MenuBarraRenglon.Enabled = False
         MenuBarra.Enabled = True
 
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -230,7 +233,7 @@ Public Class jsMerArcTransferencias
             Return False
         End If
 
-        If CBool(ParametroPlus(myConn, Gestion.iMercancías, "MERTRAPA03")) And _
+        If CBool(ParametroPlus(myConn, Gestion.iMercancías, "MERTRAPA03")) And
             cmbTipo.SelectedIndex > 0 Then
             If txtCausa.Text.Trim = "" Then
                 ft.mensajeCritico("Debe indicar una causa para " & cmbTipo.Text)
@@ -251,12 +254,12 @@ Public Class jsMerArcTransferencias
             nPosicionEncab = ds.Tables(nTabla).Rows.Count
 
             CodigoTransferencia = Contador(myConn, lblInfo, Gestion.iMercancías, "INVNUMTRA", "01")
-            ft.Ejecutar_strSQL(myconn, " update jsmerrentra set numtra = '" & CodigoTransferencia & "' where numtra = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsmerrentra set numtra = '" & CodigoTransferencia & "' where numtra = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
         End If
 
-        InsertEditMERCASEncabezadoTransferencia(myConn, lblInfo, Inserta, CodigoTransferencia, CDate(txtEmision.Text), txtAlmacenSalida.Text, txtAlmacenEntrada.Text, _
-                                                 txtComentario.Text, txtCausa.Text, ValorNumero(txtTotalCosto.Text), ValorCantidad(txtTotalCantidad.Text), _
+        InsertEditMERCASEncabezadoTransferencia(myConn, lblInfo, Inserta, CodigoTransferencia, CDate(txtEmision.Text), txtAlmacenSalida.Text, txtAlmacenEntrada.Text,
+                                                 txtComentario.Text, txtCausa.Text, ValorNumero(txtTotalCosto.Text), ValorCantidad(txtTotalCantidad.Text),
                                                  ValorEntero(txtItems.Text), ValorCantidad(txtTotalPeso.Text), cmbTipo.SelectedIndex)
 
         ActualizarMovimientos(CodigoTransferencia)
@@ -301,15 +304,15 @@ Public Class jsMerArcTransferencias
             Dim strCausa As String = IIf(cmbTipo.SelectedIndex = 0, "TRANSFER.", IIf(cmbTipo.SelectedIndex = 1, "CONSUMO", "DESINCORP."))
             With dtRenglones.Rows(rCont)
 
-                InsertEditMERCASMovimientoInventario(myConn, lblInfo, True, .Item("item"), CDate(txtEmision.Text), _
-                    "SA", CodigoTransferencia, .Item("unidad"), .Item("cantidad"), .Item("peso"), _
-                    .Item("totren"), .Item("totren"), "TRF", CodigoTransferencia, .Item("lote"), _
+                InsertEditMERCASMovimientoInventario(myConn, lblInfo, True, .Item("item"), CDate(txtEmision.Text),
+                    "SA", CodigoTransferencia, .Item("unidad"), .Item("cantidad"), .Item("peso"),
+                    .Item("totren"), .Item("totren"), "TRF", CodigoTransferencia, .Item("lote"),
                    strCausa, 0.0, 0.0, 0.0, 0.0, "", txtAlmacenSalida.Text, .Item("renglon"), jytsistema.sFechadeTrabajo)
 
                 If cmbTipo.SelectedIndex = 0 Then _
-                    InsertEditMERCASMovimientoInventario(myConn, lblInfo, True, .Item("item"), CDate(txtEmision.Text), _
-                        "EN", CodigoTransferencia, .Item("unidad"), .Item("cantidad"), .Item("peso"), _
-                        .Item("totren"), .Item("totren"), "TRF", CodigoTransferencia, .Item("lote"), _
+                    InsertEditMERCASMovimientoInventario(myConn, lblInfo, True, .Item("item"), CDate(txtEmision.Text),
+                        "EN", CodigoTransferencia, .Item("unidad"), .Item("cantidad"), .Item("peso"),
+                        .Item("totren"), .Item("totren"), "TRF", CodigoTransferencia, .Item("lote"),
                          strCausa, 0.0, 0.0, 0.0, 0.0, "", txtAlmacenEntrada.Text, .Item("renglon"), jytsistema.sFechadeTrabajo)
 
             End With
@@ -318,7 +321,7 @@ Public Class jsMerArcTransferencias
     End Sub
 
     Private Sub txtNombre_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtComentario.GotFocus
-        ft.mensajeEtiqueta(lblInfo, " Indique el nombre de la caja ... ", Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, " Indique el nombre de la caja ... ", Transportables.tipoMensaje.iInfo)
     End Sub
 
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
@@ -515,10 +518,6 @@ Public Class jsMerArcTransferencias
         Dim f As New jsMerRepParametros
         f.Cargar(TipoCargaFormulario.iShowDialog, ReporteMercancias.cTransferencia, cmbTipo.Text.ToUpper(), txtCodigo.Text)
         '        f = Nothing
-    End Sub
-
-    Private Sub btnEmision_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEmision.Click
-        txtEmision.Text = SeleccionaFecha(CDate(txtEmision.Text), Me, sender)
     End Sub
 
     Private Sub btnAlmacenSalida_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAlmacenSalida.Click

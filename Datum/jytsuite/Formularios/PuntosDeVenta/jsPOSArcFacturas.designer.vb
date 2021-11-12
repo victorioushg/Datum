@@ -57,10 +57,8 @@ Partial Class jsPOSArcFacturas
         Me.btnAsesor = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.cmbTarifa = New System.Windows.Forms.ComboBox()
-        Me.btnEmision = New System.Windows.Forms.Button()
         Me.txtEstatus = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtEmision = New System.Windows.Forms.TextBox()
         Me.txtComentario = New System.Windows.Forms.TextBox()
         Me.txtCodigo = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -132,6 +130,7 @@ Partial Class jsPOSArcFacturas
         Me.Label9 = New System.Windows.Forms.Label()
         Me.txtTotal = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtEmision = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpEncab.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -179,6 +178,7 @@ Partial Class jsPOSArcFacturas
         Me.grpEncab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpEncab.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.GroupBox1)
         Me.grpEncab.Controls.Add(Me.grpDisponibilidad)
         Me.grpEncab.Controls.Add(Me.lblControl)
@@ -209,10 +209,8 @@ Partial Class jsPOSArcFacturas
         Me.grpEncab.Controls.Add(Me.btnAsesor)
         Me.grpEncab.Controls.Add(Me.Label6)
         Me.grpEncab.Controls.Add(Me.cmbTarifa)
-        Me.grpEncab.Controls.Add(Me.btnEmision)
         Me.grpEncab.Controls.Add(Me.txtEstatus)
         Me.grpEncab.Controls.Add(Me.Label5)
-        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.txtComentario)
         Me.grpEncab.Controls.Add(Me.txtCodigo)
         Me.grpEncab.Controls.Add(Me.Label3)
@@ -564,16 +562,6 @@ Partial Class jsPOSArcFacturas
         Me.cmbTarifa.Size = New System.Drawing.Size(42, 21)
         Me.cmbTarifa.TabIndex = 198
         '
-        'btnEmision
-        '
-        Me.btnEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmision.Location = New System.Drawing.Point(390, 12)
-        Me.btnEmision.Name = "btnEmision"
-        Me.btnEmision.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmision.TabIndex = 112
-        Me.btnEmision.Text = "•••"
-        Me.btnEmision.UseVisualStyleBackColor = True
-        '
         'txtEstatus
         '
         Me.txtEstatus.Enabled = False
@@ -594,17 +582,6 @@ Partial Class jsPOSArcFacturas
         Me.Label5.TabIndex = 11
         Me.Label5.Text = "Estatus"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtEmision
-        '
-        Me.txtEmision.Enabled = False
-        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmision.Location = New System.Drawing.Point(300, 12)
-        Me.txtEmision.MaxLength = 19
-        Me.txtEmision.Name = "txtEmision"
-        Me.txtEmision.Size = New System.Drawing.Size(87, 20)
-        Me.txtEmision.TabIndex = 5
-        Me.txtEmision.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtComentario
         '
@@ -1237,6 +1214,18 @@ Partial Class jsPOSArcFacturas
         Me.Label8.Text = "TOTAL Factura"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'txtEmision
+        '
+        Me.txtEmision.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmision.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmision.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmision.Location = New System.Drawing.Point(296, 13)
+        Me.txtEmision.Name = "txtEmision"
+        Me.txtEmision.Size = New System.Drawing.Size(114, 19)
+        Me.txtEmision.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmision.TabIndex = 235
+        '
         'jsPOSArcFacturas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1280,7 +1269,6 @@ Partial Class jsPOSArcFacturas
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents dg As System.Windows.Forms.DataGridView
     Friend WithEvents grpEncab As System.Windows.Forms.GroupBox
-    Friend WithEvents txtEmision As System.Windows.Forms.TextBox
     Friend WithEvents txtComentario As System.Windows.Forms.TextBox
     Friend WithEvents txtCodigo As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
@@ -1325,7 +1313,6 @@ Partial Class jsPOSArcFacturas
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
     Friend WithEvents txtEstatus As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents btnEmision As System.Windows.Forms.Button
     Friend WithEvents btnAsesor As System.Windows.Forms.Button
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents cmbTarifa As System.Windows.Forms.ComboBox
@@ -1389,4 +1376,5 @@ Partial Class jsPOSArcFacturas
     Friend WithEvents btnReconstruirIVA As System.Windows.Forms.ToolStripButton
     Friend WithEvents barraProgreso As System.Windows.Forms.ToolStripProgressBar
     Friend WithEvents lblProg As System.Windows.Forms.ToolStripLabel
+    Friend WithEvents txtEmision As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

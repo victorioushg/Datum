@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsMerArcEnvasesMovimientos
 
     Private Const sModulo As String = "Movimiento de envases"
@@ -79,11 +80,11 @@ Public Class jsMerArcEnvasesMovimientos
 
     End Sub
     Private Sub AsignarTooltips()
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnLote, btnAlmacen, btnFecha)
+        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnLote, btnAlmacen)
     End Sub
     Private Sub Habilitar()
-        ft.habilitarObjetos(False, True, txtFecha, txtAlmacen, txtNumero, txtCodigo, txtDescripcion)
-        If i_modo = movimiento.iEditar Then ft.habilitarObjetos(False, True, btnFecha, cmbTipo, cmbEstatus)
+        ft.habilitarObjetos(False, True, txtAlmacen, txtNumero, txtCodigo, txtDescripcion)
+        If i_modo = movimiento.iEditar Then ft.habilitarObjetos(False, True, txtFecha, cmbTipo, cmbEstatus)
     End Sub
     Private Sub IniciarTXT()
 
@@ -106,7 +107,7 @@ Public Class jsMerArcEnvasesMovimientos
             txtCodigo.Text = codEnvase
             txtDescripcion.Text = descripcionEnvase
 
-            txtFecha.Text = ft.muestraCampoFecha(.Item("fechamov"))
+            txtFecha.Value = .Item("fechamov")
             ft.RellenaCombo(aTipo, cmbTipo, ft.InArray(aTipoX, .Item("tipomov")))
             txtNumero.Text = ft.muestraCampoTexto(.Item("numdoc"))
 
@@ -128,6 +129,10 @@ Public Class jsMerArcEnvasesMovimientos
 
         InsertarAuditoria(MyConn, MovAud.ientrar, sModulo, txtCodigo.Text)
         ft.visualizarObjetos(False, lblLote, txtLote, btnLote)
+
+        Dim dates As SfDateTimeEdit() = {txtFecha}
+        SetSizeDateObjects(dates)
+
         CodigoArticulo = ft.DevuelveScalarCadena(MyConn, " select CODIGO_CONTENIDO from jsmercatenv where codenv = '" & codEnvase & "' and id_emp = '" & jytsistema.WorkID & "' ")
         SerialInterno = ft.DevuelveScalarCadena(MyConn, " select SERIAL_1 from jsmercatenv where codenv = '" & codEnvase & "' and id_emp = '" & jytsistema.WorkID & "' ")
         SerialExterno = ft.DevuelveScalarCadena(MyConn, " select SERIAL_2 from jsmercatenv where codenv = '" & codEnvase & "' and id_emp = '" & jytsistema.WorkID & "' ")
@@ -135,8 +140,8 @@ Public Class jsMerArcEnvasesMovimientos
 
     End Sub
 
-    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus, _
-        txtDescripcion.GotFocus, txtFecha.GotFocus, txtNumero.GotFocus, txtCantidad.GotFocus, btnFecha.GotFocus
+    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus,
+        txtDescripcion.GotFocus, txtNumero.GotFocus, txtCantidad.GotFocus
 
         Select Case sender.name
             Case "cmbUnidad"
@@ -205,13 +210,13 @@ Public Class jsMerArcEnvasesMovimientos
         Me.Close()
     End Sub
 
-    Private Sub txt_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.Click, _
+    Private Sub txt_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.Click,
         txtCantidad.Click
         Dim txt As TextBox = sender
         ft.enfocarTexto(txt)
     End Sub
 
-    
+
     Private Sub txtCantidad_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCantidad.KeyPress
         e.Handled = ft.validaNumeroEnTextbox(e)
     End Sub
@@ -221,10 +226,6 @@ Public Class jsMerArcEnvasesMovimientos
         f.Cargar(MyConn, TipoCargaFormulario.iShowDialog)
         txtAlmacen.Text = f.Seleccionado
         f = Nothing
-    End Sub
-
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, btnFecha)
     End Sub
 
 End Class

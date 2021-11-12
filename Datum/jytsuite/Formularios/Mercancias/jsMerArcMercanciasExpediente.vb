@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsMERArcMercanciasExpediente
 
     Private Const sModulo As String = "Movimientos EN EXPEDIENTE DE MERCANCIA"
@@ -33,13 +35,10 @@ Public Class jsMERArcMercanciasExpediente
         CodMERCANCIA = CodigoProveedor
         elEstatus = Estatus
 
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
         txtCausa.Text = "NOTA DE USUARIO"
         txtEstatus.Text = aCondicion(Estatus)
         txtComentario.Text = ""
-
-        ft.habilitarObjetos(False, True, txtFecha, txtCausa, txtEstatus)
-
 
         Me.ShowDialog()
     End Sub
@@ -50,6 +49,8 @@ Public Class jsMERArcMercanciasExpediente
 
 
     Private Sub jsMERArcMERCANCIAExpediente_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Dim dates As SfDateTimeEdit() = {txtFecha}
+        SetSizeDateObjects(dates)
         InsertarAuditoria(MyConn, MovAud.ientrar, sModulo, txtFecha.Text & txtEstatus.Text)
     End Sub
 
@@ -75,7 +76,7 @@ Public Class jsMERArcMercanciasExpediente
             If i_modo = movimiento.iAgregar Then
                 Insertar = True
             End If
-            InsertEditMERCASExpedienteMercancias(MyConn, lblInfo, Insertar, CodMERCANCIA, CDate(ft.FormatoFecha(txtFecha.Text) & " " & ft.FormatoHora(Now())), _
+            InsertEditMERCASExpedienteMercancias(MyConn, lblInfo, Insertar, CodMERCANCIA, CDate(txtFecha.Text & " " & ft.FormatoHora(Now())),
                                                txtComentario.Text, elEstatus, "", 1)
 
             InsertarAuditoria(MyConn, MovAud.iSalir, sModulo, txtFecha.Text & CodMERCANCIA)
@@ -91,10 +92,6 @@ Public Class jsMERArcMercanciasExpediente
 
     Private Sub txtComentario_GotFocus(sender As Object, e As System.EventArgs) Handles txtComentario.GotFocus
         ft.mensajeEtiqueta(lblInfo, "Indique un comentario válido...", Transportables.tipoMensaje.iAyuda)
-    End Sub
-
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtFecha.Text), Me, btnFecha))
     End Sub
 
 End Class

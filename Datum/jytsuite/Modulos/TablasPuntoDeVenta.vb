@@ -158,26 +158,28 @@ Module TablasPuntoDeVenta
         ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub InsertarModificarPOSEncabezadoPuntoDeVenta(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                                                    ByVal NumeroFactura As String, ByVal NumeroSerialFiscal As String, ByVal TipoDocumento As Integer, ByVal Emision As Date, _
-                                                    ByVal CodigoCliente As String, ByVal NombreCliente As String, ByVal RIF As String, ByVal NIT As String, ByVal Comentario As String, _
-                                                    ByVal Almacen As String, ByVal Vencimiento As Date, ByVal Referencia As String, _
-                                                    ByVal NumeroControlFiscal As String, ByVal VendedorDePiso As String, ByVal Items As Integer, _
-                                                    ByVal Cajas As Double, ByVal Kilos As Double, ByVal TotalNeto As Double, ByVal PorcentajeDescuento As Double, ByVal Descuento As Double, _
-                                                    ByVal Cargos As Double, ByVal ImporteIVA As Double, ByVal TotalFactura As Double, ByVal CondicionPago As Integer, ByVal TipoCredito As String, _
-                                                    ByVal ImporteEfectivo As Double, ByVal NumeroCheque As String, ByVal BancoCheque As String, ByVal ImporteCheque As Double, _
-                                                    ByVal NumeroTarjeta As String, ByVal CodigoTarjeta As String, ByVal ImporteTarjeta As Double, ByVal NumeroCestaTicket As String, _
-                                                    ByVal NombreCestaTicket As String, ByVal ImporteCestaTicket As Double, ByVal NumeroDeposito As String, ByVal BancoDeposito As String, _
-                                                    ByVal ImporteDeposito As Double, ByVal Asiento As String, ByVal FechaAsiento As Date, ByVal Estatus As Integer, ByVal Tarifa As String, _
-                                                    ByVal CodigoCaja As String, ByVal CodigoVendedor As String, ByVal Impresa As Integer)
+    Public Sub InsertarModificarPOSEncabezadoPuntoDeVenta(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                                                    ByVal NumeroFactura As String, ByVal NumeroSerialFiscal As String, ByVal TipoDocumento As Integer, ByVal Emision As Date,
+                                                    ByVal CodigoCliente As String, ByVal NombreCliente As String, ByVal RIF As String, ByVal NIT As String, ByVal Comentario As String,
+                                                    ByVal Almacen As String, ByVal Vencimiento As Date, ByVal Referencia As String,
+                                                    ByVal NumeroControlFiscal As String, ByVal VendedorDePiso As String, ByVal Items As Integer,
+                                                    ByVal Cajas As Double, ByVal Kilos As Double, ByVal TotalNeto As Double, ByVal PorcentajeDescuento As Double, ByVal Descuento As Double,
+                                                    ByVal Cargos As Double, ByVal ImporteIVA As Double, ByVal TotalFactura As Double, ByVal CondicionPago As Integer, ByVal TipoCredito As String,
+                                                    ByVal ImporteEfectivo As Double, ByVal NumeroCheque As String, ByVal BancoCheque As String, ByVal ImporteCheque As Double,
+                                                    ByVal NumeroTarjeta As String, ByVal CodigoTarjeta As String, ByVal ImporteTarjeta As Double, ByVal NumeroCestaTicket As String,
+                                                    ByVal NombreCestaTicket As String, ByVal ImporteCestaTicket As Double, ByVal NumeroDeposito As String, ByVal BancoDeposito As String,
+                                                    ByVal ImporteDeposito As Double, ByVal Asiento As String, ByVal FechaAsiento As Date, ByVal Estatus As Integer, ByVal Tarifa As String,
+                                                    ByVal CodigoCaja As String, ByVal CodigoVendedor As String, ByVal Impresa As Integer,
+                                                          ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
         Dim strSQL As String
-        Dim strSQLInicio As String
-        Dim strSQLFin As String
+        Dim strSQLInicio As String = ""
+        Dim strSQLFin As String = " "
 
         If Insertar Then
             strSQLInicio = " insert into jsvenencpos SET "
-            strSQL = ""
-            strSQLFin = " "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
+
 
         Else
             strSQLInicio = " UPDATE jsvenencpos SET "
@@ -235,7 +237,7 @@ Module TablasPuntoDeVenta
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
@@ -280,9 +282,9 @@ Module TablasPuntoDeVenta
         ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub InsertEditVentasFormaPago(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-    ByVal NumeroFactura As String, ByVal NumeroSerialFiscal As String, ByVal Origen As String, ByVal FormaPago As String, ByVal NumeroPago As String, _
-    ByVal NombrePago As String, ByVal Importe As Double, ByVal Vencimiento As Date)
+    Public Sub InsertEditVentasFormaPago(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+    ByVal NumeroFactura As String, ByVal NumeroSerialFiscal As String, ByVal Origen As String, ByVal FormaPago As String, ByVal NumeroPago As String,
+    ByVal NombrePago As String, ByVal Importe As Double, ByVal Vencimiento As Date, ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
         Dim strSQL As String
         Dim strSQLInicio As String
@@ -292,6 +294,8 @@ Module TablasPuntoDeVenta
             strSQLInicio = " insert into jsvenforpag SET "
             strSQL = ""
             strSQLFin = " "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
 
         Else
             strSQLInicio = " UPDATE jsvenforpag SET "
@@ -313,7 +317,7 @@ Module TablasPuntoDeVenta
         strSQL += ModificarDoble(Importe, "importe")
         strSQL += ModificarFecha(Vencimiento, "vence")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
@@ -448,10 +452,12 @@ Module TablasPuntoDeVenta
 
     End Sub
 
-    Public Sub InsertarModificarPOSWork(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                            ByVal CodigoCaja As String, ByVal FechaEmision As Date, ByVal Origen As String, ByVal TipoMovimiento As String, _
-                            ByVal NumeroFactura As String, ByVal NumeroSerialFiscal As String, ByVal FormaPago As String, ByVal NumeroPago As String, _
-                            ByVal NombrePago As String, ByVal Importe As Double, ByVal FechaVencimiento As Date, ByVal Cantidad As Integer, ByVal CodigoCajero As String)
+    Public Sub InsertarModificarPOSWork(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                            ByVal CodigoCaja As String, ByVal FechaEmision As Date, ByVal Origen As String, ByVal TipoMovimiento As String,
+                            ByVal NumeroFactura As String, ByVal NumeroSerialFiscal As String, ByVal FormaPago As String, ByVal NumeroPago As String,
+                            ByVal NombrePago As String, ByVal Importe As Double, ByVal FechaVencimiento As Date,
+                                        ByVal Cantidad As Integer, ByVal CodigoCajero As String,
+                                        ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
         Dim strSQL As String
         Dim strSQLInicio As String
@@ -461,6 +467,8 @@ Module TablasPuntoDeVenta
             strSQLInicio = " insert into jsventrapos SET "
             strSQL = ""
             strSQLFin = " "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
 
         Else
             strSQLInicio = " UPDATE jsventrapos SET "
@@ -492,7 +500,7 @@ Module TablasPuntoDeVenta
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 

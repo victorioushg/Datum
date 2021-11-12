@@ -37,14 +37,10 @@ Partial Class jsMerArcOfertas
         Me.chkC = New System.Windows.Forms.CheckBox()
         Me.chkB = New System.Windows.Forms.CheckBox()
         Me.chkA = New System.Windows.Forms.CheckBox()
-        Me.btnFechaHasta = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txtItems = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.btnFechaDEsde = New System.Windows.Forms.Button()
-        Me.txtFechaHasta = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtFechaDesde = New System.Windows.Forms.TextBox()
         Me.txtComentario = New System.Windows.Forms.TextBox()
         Me.txtOferta = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -87,6 +83,8 @@ Partial Class jsMerArcOfertas
         Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
         Me.C1SuperTooltip1 = New C1.Win.C1SuperTooltip.C1SuperTooltip(Me.components)
         Me.dgBonos = New System.Windows.Forms.DataGridView()
+        Me.txtFechaDesde = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaHasta = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpEncab.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -113,7 +111,7 @@ Partial Class jsMerArcOfertas
         Me.dg.AllowUserToResizeColumns = False
         Me.dg.AllowUserToResizeRows = False
         Me.dg.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -148,8 +146,10 @@ Partial Class jsMerArcOfertas
         'grpEncab
         '
         Me.grpEncab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpEncab.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpEncab.Controls.Add(Me.txtFechaHasta)
+        Me.grpEncab.Controls.Add(Me.txtFechaDesde)
         Me.grpEncab.Controls.Add(Me.Label3)
         Me.grpEncab.Controls.Add(Me.chkF)
         Me.grpEncab.Controls.Add(Me.chkE)
@@ -157,14 +157,10 @@ Partial Class jsMerArcOfertas
         Me.grpEncab.Controls.Add(Me.chkC)
         Me.grpEncab.Controls.Add(Me.chkB)
         Me.grpEncab.Controls.Add(Me.chkA)
-        Me.grpEncab.Controls.Add(Me.btnFechaHasta)
         Me.grpEncab.Controls.Add(Me.Label7)
         Me.grpEncab.Controls.Add(Me.txtItems)
         Me.grpEncab.Controls.Add(Me.Label6)
-        Me.grpEncab.Controls.Add(Me.btnFechaDEsde)
-        Me.grpEncab.Controls.Add(Me.txtFechaHasta)
         Me.grpEncab.Controls.Add(Me.Label4)
-        Me.grpEncab.Controls.Add(Me.txtFechaDesde)
         Me.grpEncab.Controls.Add(Me.txtComentario)
         Me.grpEncab.Controls.Add(Me.txtOferta)
         Me.grpEncab.Controls.Add(Me.Label2)
@@ -251,16 +247,6 @@ Partial Class jsMerArcOfertas
         Me.chkA.Text = "A"
         Me.chkA.UseVisualStyleBackColor = True
         '
-        'btnFechaHasta
-        '
-        Me.btnFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaHasta.Location = New System.Drawing.Point(725, 34)
-        Me.btnFechaHasta.Name = "btnFechaHasta"
-        Me.btnFechaHasta.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaHasta.TabIndex = 204
-        Me.btnFechaHasta.Text = "•••"
-        Me.btnFechaHasta.UseVisualStyleBackColor = True
-        '
         'Label7
         '
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -291,27 +277,6 @@ Partial Class jsMerArcOfertas
         Me.Label6.Text = "Desde :"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'btnFechaDEsde
-        '
-        Me.btnFechaDEsde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaDEsde.Location = New System.Drawing.Point(725, 13)
-        Me.btnFechaDEsde.Name = "btnFechaDEsde"
-        Me.btnFechaDEsde.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaDEsde.TabIndex = 112
-        Me.btnFechaDEsde.Text = "•••"
-        Me.btnFechaDEsde.UseVisualStyleBackColor = True
-        '
-        'txtFechaHasta
-        '
-        Me.txtFechaHasta.Enabled = False
-        Me.txtFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFechaHasta.Location = New System.Drawing.Point(632, 34)
-        Me.txtFechaHasta.MaxLength = 19
-        Me.txtFechaHasta.Name = "txtFechaHasta"
-        Me.txtFechaHasta.Size = New System.Drawing.Size(91, 20)
-        Me.txtFechaHasta.TabIndex = 6
-        Me.txtFechaHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label4
         '
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -321,17 +286,6 @@ Partial Class jsMerArcOfertas
         Me.Label4.TabIndex = 10
         Me.Label4.Text = "Hasta :"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtFechaDesde
-        '
-        Me.txtFechaDesde.Enabled = False
-        Me.txtFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFechaDesde.Location = New System.Drawing.Point(632, 13)
-        Me.txtFechaDesde.MaxLength = 19
-        Me.txtFechaDesde.Name = "txtFechaDesde"
-        Me.txtFechaDesde.Size = New System.Drawing.Size(91, 20)
-        Me.txtFechaDesde.TabIndex = 5
-        Me.txtFechaDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtComentario
         '
@@ -549,7 +503,7 @@ Partial Class jsMerArcOfertas
         'MenuBarraRenglon
         '
         Me.MenuBarraRenglon.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MenuBarraRenglon.AutoSize = False
         Me.MenuBarraRenglon.Dock = System.Windows.Forms.DockStyle.None
         Me.MenuBarraRenglon.ImageScalingSize = New System.Drawing.Size(32, 32)
@@ -676,8 +630,8 @@ Partial Class jsMerArcOfertas
         Me.dgBonos.AllowUserToResizeColumns = False
         Me.dgBonos.AllowUserToResizeRows = False
         Me.dgBonos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -708,6 +662,30 @@ Partial Class jsMerArcOfertas
         Me.dgBonos.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.dgBonos.Size = New System.Drawing.Size(755, 38)
         Me.dgBonos.TabIndex = 90
+        '
+        'txtFechaDesde
+        '
+        Me.txtFechaDesde.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaDesde.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaDesde.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaDesde.Location = New System.Drawing.Point(632, 13)
+        Me.txtFechaDesde.Name = "txtFechaDesde"
+        Me.txtFechaDesde.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaDesde.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaDesde.TabIndex = 214
+        '
+        'txtFechaHasta
+        '
+        Me.txtFechaHasta.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaHasta.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaHasta.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaHasta.Location = New System.Drawing.Point(632, 34)
+        Me.txtFechaHasta.Name = "txtFechaHasta"
+        Me.txtFechaHasta.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaHasta.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaHasta.TabIndex = 215
         '
         'jsMerArcOfertas
         '
@@ -743,7 +721,6 @@ Partial Class jsMerArcOfertas
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents dg As System.Windows.Forms.DataGridView
     Friend WithEvents grpEncab As System.Windows.Forms.GroupBox
-    Friend WithEvents txtFechaDesde As System.Windows.Forms.TextBox
     Friend WithEvents txtComentario As System.Windows.Forms.TextBox
     Friend WithEvents txtOferta As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -785,13 +762,10 @@ Partial Class jsMerArcOfertas
     Friend WithEvents btnUltimoMovimiento As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator11 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
-    Friend WithEvents txtFechaHasta As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents btnFechaDEsde As System.Windows.Forms.Button
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents txtItems As System.Windows.Forms.TextBox
-    Friend WithEvents btnFechaHasta As System.Windows.Forms.Button
     Friend WithEvents chkA As System.Windows.Forms.CheckBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents chkF As System.Windows.Forms.CheckBox
@@ -800,4 +774,6 @@ Partial Class jsMerArcOfertas
     Friend WithEvents chkC As System.Windows.Forms.CheckBox
     Friend WithEvents chkB As System.Windows.Forms.CheckBox
     Friend WithEvents dgBonos As System.Windows.Forms.DataGridView
+    Friend WithEvents txtFechaHasta As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaDesde As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsGenProNumerosControl
 
     Private Const sModulo As String = "Asignación y/o modificación de números de control"
@@ -23,6 +25,9 @@ Public Class jsGenProNumerosControl
         numGestion = GestionNum
         MyConn = MyCon
 
+        Dim dates As SfDateTimeEdit() = {txtDesde, txtHasta}
+        SetSizeDateObjects(dates)
+
         IniciarTXT()
         Me.Show()
 
@@ -41,9 +46,8 @@ Public Class jsGenProNumerosControl
                 Origen = "PVE"
         End Select
 
-        ft.habilitarObjetos(False, True, txtDesde, txtHasta)
-        txtDesde.Text = ft.FormatoFecha(PrimerDiaMes(jytsistema.sFechadeTrabajo))
-        txtHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtDesde.Value = PrimerDiaMes(jytsistema.sFechadeTrabajo)
+        txtHasta.Value = jytsistema.sFechadeTrabajo
 
         CrearTablaAleatoria()
         RellenaTablaAleatoria()
@@ -51,7 +55,7 @@ Public Class jsGenProNumerosControl
         Dim aCampos() As String = {"numdoc", "num_control", "prov_cli", "emision", "org", ""}
         Dim aNombres() As String = {"Documento", "N° de control", IIf(numGestion = Gestion.iCompras, "Proveedor", "Cliente"), "Fecha emisión", "Origen", ""}
         Dim aAnchos() As Integer = {120, 150, 120, 90, 50, 100}
-        Dim aAlineacion() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, _
+        Dim aAlineacion() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda,
                                         AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda}
         Dim aFormatos() As String = {"", "", "", sFormatoFechaCorta, "", ""}
 
@@ -81,7 +85,7 @@ Public Class jsGenProNumerosControl
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         dtNumerosControl.Dispose()
         dtNumerosControl = Nothing
-        ft.Ejecutar_strSQL(myconn, " drop temporary table " & TablaAleatoria)
+        ft.Ejecutar_strSQL(MyConn, " drop temporary table " & TablaAleatoria)
         Me.Close()
     End Sub
 
@@ -106,8 +110,8 @@ Public Class jsGenProNumerosControl
     Private Sub CrearTablaAleatoria()
 
         TablaAleatoria = "tbl" & ft.NumeroAleatorio(10000)
-        ft.Ejecutar_strSQL(myconn, " drop table if exists  " & TablaAleatoria)
-        Dim aCampos() As String = {"numdoc.cadena.15.0", "num_control.cadena.30.0", "prov_cli.cadena.20.0", "emision.fecha.0.0", "org.cadena.3.0", _
+        ft.Ejecutar_strSQL(MyConn, " drop table if exists  " & TablaAleatoria)
+        Dim aCampos() As String = {"numdoc.cadena.15.0", "num_control.cadena.30.0", "prov_cli.cadena.20.0", "emision.fecha.0.0", "org.cadena.3.0",
                                    "origen.cadena.3.0", "id_emp.cadena.2.0"}
 
         CrearTabla(MyConn, lblInfo, jytsistema.WorkDataBase, True, TablaAleatoria, aCampos, " numdoc, num_control, prov_cli, emision, id_emp ")
@@ -116,7 +120,7 @@ Public Class jsGenProNumerosControl
 
     Private Sub RellenaTablaAleatoria()
 
-        ft.Ejecutar_strSQL(myconn, " delete from " & TablaAleatoria & " ")
+        ft.Ejecutar_strSQL(MyConn, " delete from " & TablaAleatoria & " ")
 
         Select Case numGestion
             Case Gestion.iCompras
@@ -143,7 +147,7 @@ Public Class jsGenProNumerosControl
             & " a.EJERCICIO = '" & jytsistema.WorkExercise & "' AND " _
             & " a.ID_EMP = '" & jytsistema.WorkID & "' "
 
-        ft.Ejecutar_strSQL(myconn, " insert into  " & NombreTabla & " " _
+        ft.Ejecutar_strSQL(MyConn, " insert into  " & NombreTabla & " " _
             & strSQlFacturas)
 
     End Sub
@@ -210,15 +214,15 @@ Public Class jsGenProNumerosControl
            & " a.EJERCICIO = '" & jytsistema.WorkExercise & "' AND " _
            & " a.ID_EMP = '" & jytsistema.WorkID & "' "
 
-        ft.Ejecutar_strSQL(myconn, " replace into " & NombreTabla & " " _
+        ft.Ejecutar_strSQL(MyConn, " replace into " & NombreTabla & " " _
             & strSQlFacturas)
-        ft.Ejecutar_strSQL(myconn, " replace into " & NombreTabla & " " _
+        ft.Ejecutar_strSQL(MyConn, " replace into " & NombreTabla & " " _
             & strSQLNotasCredito)
-        ft.Ejecutar_strSQL(myconn, " replace into " & NombreTabla & " " _
+        ft.Ejecutar_strSQL(MyConn, " replace into " & NombreTabla & " " _
             & strSQLNotasDebito)
-        ft.Ejecutar_strSQL(myconn, " replace into " & NombreTabla & " " _
+        ft.Ejecutar_strSQL(MyConn, " replace into " & NombreTabla & " " _
             & strSQLNulas)
-        ft.Ejecutar_strSQL(myconn, " replace into " & NombreTabla & " " _
+        ft.Ejecutar_strSQL(MyConn, " replace into " & NombreTabla & " " _
             & strSQlFacturasPVE)
 
     End Sub
@@ -273,29 +277,29 @@ Public Class jsGenProNumerosControl
 
 
         If Tipo = 0 Then
-            ft.Ejecutar_strSQL(myconn, " insert into  " & NombreTabla & " " _
+            ft.Ejecutar_strSQL(MyConn, " insert into  " & NombreTabla & " " _
                 & strSQlFacturas)
-            ft.Ejecutar_strSQL(myconn, " insert into  " & NombreTabla & " " _
+            ft.Ejecutar_strSQL(MyConn, " insert into  " & NombreTabla & " " _
                 & strSQLNotasCredito)
 
-            ft.Ejecutar_strSQL(myconn, " insert into  " & NombreTabla & " " _
+            ft.Ejecutar_strSQL(MyConn, " insert into  " & NombreTabla & " " _
                 & strSQLNotasDebito)
 
         ElseIf Tipo = 1 Then
-            ft.Ejecutar_strSQL(myconn, " insert into  " & NombreTabla & " " _
+            ft.Ejecutar_strSQL(MyConn, " insert into  " & NombreTabla & " " _
                 & strSQLGastos)
             'ft.Ejecutar_strSQL ( myconn, " insert into  " & NombreTabla & " " _
             '    & strSQLGastosi)
         Else
-            ft.Ejecutar_strSQL(myconn, " insert into  " & NombreTabla & " " _
+            ft.Ejecutar_strSQL(MyConn, " insert into  " & NombreTabla & " " _
                 & strSQlFacturas)
-            ft.Ejecutar_strSQL(myconn, " insert ignore into  " & NombreTabla & " " _
+            ft.Ejecutar_strSQL(MyConn, " insert ignore into  " & NombreTabla & " " _
                 & strSQLGastos)
             'ft.Ejecutar_strSQL ( myconn, " insert into  " & NombreTabla & " " _
             '    & strSQLGastosi)
-            ft.Ejecutar_strSQL(myconn, " insert into  " & NombreTabla & " " _
+            ft.Ejecutar_strSQL(MyConn, " insert into  " & NombreTabla & " " _
                 & strSQLNotasCredito)
-            ft.Ejecutar_strSQL(myconn, " insert into  " & NombreTabla & " " _
+            ft.Ejecutar_strSQL(MyConn, " insert into  " & NombreTabla & " " _
                 & strSQLNotasDebito)
         End If
 
@@ -313,12 +317,6 @@ Public Class jsGenProNumerosControl
             Next
         End If
     End Sub
-    Private Sub btnDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDesde.Click
-        txtDesde.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtDesde.Text), Me, sender))
-    End Sub
-    Private Sub btnHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHasta.Click
-        txtHasta.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtHasta.Text), Me, sender))
-    End Sub
 
     Private Sub dg_CellEndEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) _
          Handles dg.CellEndEdit
@@ -327,36 +325,13 @@ Public Class jsGenProNumerosControl
 
     Private Sub dg_CellValidated(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dg.CellValidated
         If dg.CurrentCell.ColumnIndex = 1 Then
-
-            '            With dtNumerosControl.Rows(e.RowIndex)
-
-            '   Dim afld() As String = {"numdoc", "org", "origen", "id_emp"}
-            '   Dim aCam() As String = {.Item("numdoc"), .Item("org"), .Item("origen"), jytsistema.WorkID}
-
-            'If qFound(MyConn, lblInfo, "jsconnumcon", afld, aCam) Then
-
-            'ft.Ejecutar_strSQL ( myconn, " update jsconnumcon set num_control = '" & .Item("num_control") & "' where " _
-            '            & " numdoc = '" & .Item("numdoc") & "' and " _
-            '            & " org = '" & .Item("org") & "' and " _
-            '            & " origen = '" & .Item("origen") & "' and " _
-            '            & " id_emp = '" & jytsistema.WorkID & "' ")
-            '        Else
-
-            'ft.Ejecutar_strSQL ( myconn, " replace into jsconnumcon Values('" & .Item("numdoc") _
-            '               & "','" & .Item("num_control") & "','" & ft.FormatoFechaMySQL(CDate(.Item("emision").ToString)) & "','" _
-            '                & .Item("org") & "','" & Origen & "','" & jytsistema.WorkID & "')")
-
-            '        End If
-
-            '    End With
-
         End If
     End Sub
 
     Private Sub dg_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) _
            Handles dg.CellValidating
 
-        Dim headerText As String = _
+        Dim headerText As String =
             dg.Columns(e.ColumnIndex).HeaderText
 
         If Not headerText.Equals("N° de control") Then Return
@@ -387,11 +362,9 @@ Public Class jsGenProNumerosControl
         If CDate(txtDesde.Text) <= CDate(txtHasta.Text) Then
             RellenaTablaAleatoria()
         Else
-            ft.MensajeCritico("Fecha inicio período no válida...")
+            ft.mensajeCritico("Fecha inicio período no válida...")
         End If
     End Sub
-
-
     Private Sub btnAgregaEquivale_Click(sender As System.Object, e As System.EventArgs) Handles btnAgregaEquivale.Click
         Dim f As New jsGenProNumerosControlMovimientos
         f.num_Control = ""
@@ -432,19 +405,16 @@ Public Class jsGenProNumerosControl
                     End If
                 End If
             Else
-                ft.MensajeCritico("Numero de control no ELIMINABLE ")
+                ft.mensajeCritico("Numero de control no ELIMINABLE ")
             End If
-
-
         End If
     End Sub
 
     Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick, dg.CellMouseClick
-
         Me.BindingContext(ds, nTablaNumerosControl).Position = e.RowIndex
     End Sub
 
-    Private Sub txtDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtDesde.TextChanged
-        txtHasta.Text = txtDesde.Text
+    Private Sub txtDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtDesde.ValueChanged
+        txtHasta.Value = txtDesde.Value
     End Sub
 End Class

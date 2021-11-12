@@ -46,6 +46,13 @@ Partial Class jsBanRepParametros
         Me.lblOrdenDesde = New System.Windows.Forms.Label()
         Me.lblOrdenHasta = New System.Windows.Forms.Label()
         Me.grpCriterios = New System.Windows.Forms.GroupBox()
+        Me.txtPeriodoHasta = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtPeriodoDesde = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.lblCaja = New System.Windows.Forms.Label()
+        Me.txtCajaHasta = New System.Windows.Forms.TextBox()
+        Me.txtCajaDesde = New System.Windows.Forms.TextBox()
+        Me.lblCajaHasta = New System.Windows.Forms.Label()
+        Me.lblCajaDesde = New System.Windows.Forms.Label()
         Me.cmbOrigen = New System.Windows.Forms.ComboBox()
         Me.lblOrigenSeleccion = New System.Windows.Forms.Label()
         Me.btnOrigen = New System.Windows.Forms.Button()
@@ -68,10 +75,6 @@ Partial Class jsBanRepParametros
         Me.chkList = New System.Windows.Forms.CheckedListBox()
         Me.lblTipodocumento = New System.Windows.Forms.Label()
         Me.txtTipDoc = New System.Windows.Forms.TextBox()
-        Me.btnPeriodoHasta = New System.Windows.Forms.Button()
-        Me.btnPeriodoDesde = New System.Windows.Forms.Button()
-        Me.txtPeriodoHasta = New System.Windows.Forms.TextBox()
-        Me.txtPeriodoDesde = New System.Windows.Forms.TextBox()
         Me.lblPeriodoHasta = New System.Windows.Forms.Label()
         Me.lblPeriodoDesde = New System.Windows.Forms.Label()
         Me.lblPeriodo = New System.Windows.Forms.Label()
@@ -79,11 +82,6 @@ Partial Class jsBanRepParametros
         Me.lblNombreReporte = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lblInfo = New System.Windows.Forms.Label()
-        Me.lblCaja = New System.Windows.Forms.Label()
-        Me.txtCajaHasta = New System.Windows.Forms.TextBox()
-        Me.txtCajaDesde = New System.Windows.Forms.TextBox()
-        Me.lblCajaHasta = New System.Windows.Forms.Label()
-        Me.lblCajaDesde = New System.Windows.Forms.Label()
         Me.grpImprimirSalir.SuspendLayout()
         Me.grpConstantes.SuspendLayout()
         Me.grpOrden.SuspendLayout()
@@ -368,6 +366,8 @@ Partial Class jsBanRepParametros
         '
         Me.grpCriterios.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpCriterios.Controls.Add(Me.txtPeriodoHasta)
+        Me.grpCriterios.Controls.Add(Me.txtPeriodoDesde)
         Me.grpCriterios.Controls.Add(Me.lblCaja)
         Me.grpCriterios.Controls.Add(Me.txtCajaHasta)
         Me.grpCriterios.Controls.Add(Me.txtCajaDesde)
@@ -395,10 +395,6 @@ Partial Class jsBanRepParametros
         Me.grpCriterios.Controls.Add(Me.chkList)
         Me.grpCriterios.Controls.Add(Me.lblTipodocumento)
         Me.grpCriterios.Controls.Add(Me.txtTipDoc)
-        Me.grpCriterios.Controls.Add(Me.btnPeriodoHasta)
-        Me.grpCriterios.Controls.Add(Me.btnPeriodoDesde)
-        Me.grpCriterios.Controls.Add(Me.txtPeriodoHasta)
-        Me.grpCriterios.Controls.Add(Me.txtPeriodoDesde)
         Me.grpCriterios.Controls.Add(Me.lblPeriodoHasta)
         Me.grpCriterios.Controls.Add(Me.lblPeriodoDesde)
         Me.grpCriterios.Controls.Add(Me.lblPeriodo)
@@ -409,6 +405,80 @@ Partial Class jsBanRepParametros
         Me.grpCriterios.TabIndex = 2
         Me.grpCriterios.TabStop = False
         Me.grpCriterios.Text = " Criterios :"
+        '
+        'txtPeriodoHasta
+        '
+        Me.txtPeriodoHasta.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtPeriodoHasta.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtPeriodoHasta.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtPeriodoHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPeriodoHasta.Location = New System.Drawing.Point(474, 15)
+        Me.txtPeriodoHasta.Name = "txtPeriodoHasta"
+        Me.txtPeriodoHasta.Size = New System.Drawing.Size(126, 19)
+        Me.txtPeriodoHasta.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtPeriodoHasta.TabIndex = 215
+        Me.txtPeriodoHasta.Value = New Date(2021, 5, 2, 0, 0, 0, 0)
+        '
+        'txtPeriodoDesde
+        '
+        Me.txtPeriodoDesde.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtPeriodoDesde.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtPeriodoDesde.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtPeriodoDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPeriodoDesde.Location = New System.Drawing.Point(233, 16)
+        Me.txtPeriodoDesde.Name = "txtPeriodoDesde"
+        Me.txtPeriodoDesde.Size = New System.Drawing.Size(131, 19)
+        Me.txtPeriodoDesde.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtPeriodoDesde.TabIndex = 214
+        Me.txtPeriodoDesde.Value = New Date(2021, 5, 2, 0, 0, 0, 0)
+        '
+        'lblCaja
+        '
+        Me.lblCaja.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCaja.Location = New System.Drawing.Point(25, 125)
+        Me.lblCaja.Name = "lblCaja"
+        Me.lblCaja.Size = New System.Drawing.Size(136, 18)
+        Me.lblCaja.TabIndex = 178
+        Me.lblCaja.Text = "N° Caja :"
+        Me.lblCaja.Visible = False
+        '
+        'txtCajaHasta
+        '
+        Me.txtCajaHasta.Enabled = False
+        Me.txtCajaHasta.Location = New System.Drawing.Point(474, 121)
+        Me.txtCajaHasta.Name = "txtCajaHasta"
+        Me.txtCajaHasta.Size = New System.Drawing.Size(107, 20)
+        Me.txtCajaHasta.TabIndex = 177
+        Me.txtCajaHasta.Visible = False
+        '
+        'txtCajaDesde
+        '
+        Me.txtCajaDesde.Enabled = False
+        Me.txtCajaDesde.Location = New System.Drawing.Point(233, 121)
+        Me.txtCajaDesde.Name = "txtCajaDesde"
+        Me.txtCajaDesde.Size = New System.Drawing.Size(107, 20)
+        Me.txtCajaDesde.TabIndex = 176
+        Me.txtCajaDesde.Visible = False
+        '
+        'lblCajaHasta
+        '
+        Me.lblCajaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCajaHasta.Location = New System.Drawing.Point(423, 125)
+        Me.lblCajaHasta.Name = "lblCajaHasta"
+        Me.lblCajaHasta.Size = New System.Drawing.Size(47, 17)
+        Me.lblCajaHasta.TabIndex = 175
+        Me.lblCajaHasta.Text = "Hasta"
+        Me.lblCajaHasta.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblCajaDesde
+        '
+        Me.lblCajaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCajaDesde.Location = New System.Drawing.Point(167, 125)
+        Me.lblCajaDesde.Name = "lblCajaDesde"
+        Me.lblCajaDesde.Size = New System.Drawing.Size(60, 16)
+        Me.lblCajaDesde.TabIndex = 174
+        Me.lblCajaDesde.Text = "Desde"
+        Me.lblCajaDesde.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'cmbOrigen
         '
@@ -625,48 +695,6 @@ Partial Class jsBanRepParametros
         Me.txtTipDoc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtTipDoc.Visible = False
         '
-        'btnPeriodoHasta
-        '
-        Me.btnPeriodoHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPeriodoHasta.Location = New System.Drawing.Point(587, 14)
-        Me.btnPeriodoHasta.Name = "btnPeriodoHasta"
-        Me.btnPeriodoHasta.Size = New System.Drawing.Size(25, 20)
-        Me.btnPeriodoHasta.TabIndex = 115
-        Me.btnPeriodoHasta.Text = "•••"
-        Me.btnPeriodoHasta.UseVisualStyleBackColor = True
-        Me.btnPeriodoHasta.Visible = False
-        '
-        'btnPeriodoDesde
-        '
-        Me.btnPeriodoDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPeriodoDesde.Location = New System.Drawing.Point(341, 13)
-        Me.btnPeriodoDesde.Name = "btnPeriodoDesde"
-        Me.btnPeriodoDesde.Size = New System.Drawing.Size(25, 20)
-        Me.btnPeriodoDesde.TabIndex = 114
-        Me.btnPeriodoDesde.Text = "•••"
-        Me.btnPeriodoDesde.UseVisualStyleBackColor = True
-        Me.btnPeriodoDesde.Visible = False
-        '
-        'txtPeriodoHasta
-        '
-        Me.txtPeriodoHasta.Enabled = False
-        Me.txtPeriodoHasta.Location = New System.Drawing.Point(474, 15)
-        Me.txtPeriodoHasta.Name = "txtPeriodoHasta"
-        Me.txtPeriodoHasta.Size = New System.Drawing.Size(107, 20)
-        Me.txtPeriodoHasta.TabIndex = 112
-        Me.txtPeriodoHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.txtPeriodoHasta.Visible = False
-        '
-        'txtPeriodoDesde
-        '
-        Me.txtPeriodoDesde.Enabled = False
-        Me.txtPeriodoDesde.Location = New System.Drawing.Point(233, 14)
-        Me.txtPeriodoDesde.Name = "txtPeriodoDesde"
-        Me.txtPeriodoDesde.Size = New System.Drawing.Size(107, 20)
-        Me.txtPeriodoDesde.TabIndex = 111
-        Me.txtPeriodoDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.txtPeriodoDesde.Visible = False
-        '
         'lblPeriodoHasta
         '
         Me.lblPeriodoHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -750,54 +778,6 @@ Partial Class jsBanRepParametros
         Me.lblInfo.Size = New System.Drawing.Size(875, 44)
         Me.lblInfo.TabIndex = 91
         '
-        'lblCaja
-        '
-        Me.lblCaja.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCaja.Location = New System.Drawing.Point(25, 125)
-        Me.lblCaja.Name = "lblCaja"
-        Me.lblCaja.Size = New System.Drawing.Size(136, 18)
-        Me.lblCaja.TabIndex = 178
-        Me.lblCaja.Text = "N° Caja :"
-        Me.lblCaja.Visible = False
-        '
-        'txtCajaHasta
-        '
-        Me.txtCajaHasta.Enabled = False
-        Me.txtCajaHasta.Location = New System.Drawing.Point(474, 121)
-        Me.txtCajaHasta.Name = "txtCajaHasta"
-        Me.txtCajaHasta.Size = New System.Drawing.Size(107, 20)
-        Me.txtCajaHasta.TabIndex = 177
-        Me.txtCajaHasta.Visible = False
-        '
-        'txtCajaDesde
-        '
-        Me.txtCajaDesde.Enabled = False
-        Me.txtCajaDesde.Location = New System.Drawing.Point(233, 121)
-        Me.txtCajaDesde.Name = "txtCajaDesde"
-        Me.txtCajaDesde.Size = New System.Drawing.Size(107, 20)
-        Me.txtCajaDesde.TabIndex = 176
-        Me.txtCajaDesde.Visible = False
-        '
-        'lblCajaHasta
-        '
-        Me.lblCajaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCajaHasta.Location = New System.Drawing.Point(423, 125)
-        Me.lblCajaHasta.Name = "lblCajaHasta"
-        Me.lblCajaHasta.Size = New System.Drawing.Size(47, 17)
-        Me.lblCajaHasta.TabIndex = 175
-        Me.lblCajaHasta.Text = "Hasta"
-        Me.lblCajaHasta.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblCajaDesde
-        '
-        Me.lblCajaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCajaDesde.Location = New System.Drawing.Point(167, 125)
-        Me.lblCajaDesde.Name = "lblCajaDesde"
-        Me.lblCajaDesde.Size = New System.Drawing.Size(60, 16)
-        Me.lblCajaDesde.TabIndex = 174
-        Me.lblCajaDesde.Text = "Desde"
-        Me.lblCajaDesde.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
         'jsBanRepParametros
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -846,13 +826,9 @@ End Sub
     Friend WithEvents lblOrdenDesde As System.Windows.Forms.Label
     Friend WithEvents lblOrdenHasta As System.Windows.Forms.Label
     Friend WithEvents grpCriterios As System.Windows.Forms.GroupBox
-    Friend WithEvents txtPeriodoHasta As System.Windows.Forms.TextBox
-    Friend WithEvents txtPeriodoDesde As System.Windows.Forms.TextBox
     Friend WithEvents lblPeriodoHasta As System.Windows.Forms.Label
     Friend WithEvents lblPeriodoDesde As System.Windows.Forms.Label
     Friend WithEvents lblPeriodo As System.Windows.Forms.Label
-    Friend WithEvents btnPeriodoHasta As System.Windows.Forms.Button
-    Friend WithEvents btnPeriodoDesde As System.Windows.Forms.Button
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents lblNombreReporte As System.Windows.Forms.Label
     Friend WithEvents lblTipodocumento As System.Windows.Forms.Label
@@ -893,4 +869,6 @@ End Sub
     Friend WithEvents txtCajaDesde As System.Windows.Forms.TextBox
     Friend WithEvents lblCajaHasta As System.Windows.Forms.Label
     Friend WithEvents lblCajaDesde As System.Windows.Forms.Label
+    Friend WithEvents txtPeriodoHasta As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtPeriodoDesde As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

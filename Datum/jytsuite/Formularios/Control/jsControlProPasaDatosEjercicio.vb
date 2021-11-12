@@ -178,11 +178,7 @@ Public Class jsControlProPasaDatosEjercicio
     End Sub
     Private Sub procesarMercancias()
 
-        Dim pb As New Progress_Bar
-        pb.WindowTitle = "PROCESANDO MERCANCIAS..."
-        pb.TimeOut = 60
-        pb.CallerThreadSet = Threading.Thread.CurrentThread
-
+        Dim pb As New Progress_Bar("PROCESANDO MERCANCIAS...",,,,, Threading.Thread.CurrentThread)
 
         Dim dtMercancias As New DataTable
         dtMercancias = ft.AbrirDataTable(ds, "tblMercancias", myConn, " select * from jsmerctainv where id_emp = '" _

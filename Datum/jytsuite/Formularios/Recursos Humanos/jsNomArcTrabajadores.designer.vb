@@ -20,6 +20,20 @@ Partial Class jsNomArcTrabajadores
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsNomArcTrabajadores))
         Me.MenuBarra = New System.Windows.Forms.ToolStrip()
         Me.btnAgregar = New System.Windows.Forms.ToolStripButton()
@@ -48,8 +62,6 @@ Partial Class jsNomArcTrabajadores
         Me.txtBanco = New System.Windows.Forms.TextBox()
         Me.cmbCondicion = New System.Windows.Forms.ComboBox()
         Me.txtCtaBanco = New System.Windows.Forms.TextBox()
-        Me.btnFechaNacimiento = New System.Windows.Forms.Button()
-        Me.txtFechaNacimiento = New System.Windows.Forms.TextBox()
         Me.txtSSO = New System.Windows.Forms.TextBox()
         Me.txtEdad = New System.Windows.Forms.TextBox()
         Me.txtEstado = New System.Windows.Forms.TextBox()
@@ -86,6 +98,7 @@ Partial Class jsNomArcTrabajadores
         Me.C1SuperTooltip1 = New C1.Win.C1SuperTooltip.C1SuperTooltip(Me.components)
         Me.tbcTrabajadores = New C1.Win.C1Command.C1DockingTab()
         Me.C1DockingTabPage1 = New C1.Win.C1Command.C1DockingTabPage()
+        Me.txtFechaNacimiento = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.dgNominas = New System.Windows.Forms.DataGridView()
         Me.Label63 = New System.Windows.Forms.Label()
         Me.txtISLR = New System.Windows.Forms.TextBox()
@@ -100,13 +113,10 @@ Partial Class jsNomArcTrabajadores
         Me.Label37 = New System.Windows.Forms.Label()
         Me.cmbTipoNomina = New System.Windows.Forms.ComboBox()
         Me.grpTurno = New System.Windows.Forms.GroupBox()
-        Me.btnFechaTurno = New System.Windows.Forms.Button()
-        Me.txtFechaTurno = New System.Windows.Forms.TextBox()
+        Me.txtFechaDiaLibre = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.Label36 = New System.Windows.Forms.Label()
         Me.chkRotacion = New System.Windows.Forms.CheckBox()
         Me.Label33 = New System.Windows.Forms.Label()
-        Me.btnFechaDiaLibre = New System.Windows.Forms.Button()
-        Me.txtFechaDiaLibre = New System.Windows.Forms.TextBox()
         Me.Label32 = New System.Windows.Forms.Label()
         Me.Label31 = New System.Windows.Forms.Label()
         Me.cmbPeriodoDiaLibre = New System.Windows.Forms.ComboBox()
@@ -130,8 +140,6 @@ Partial Class jsNomArcTrabajadores
         Me.Label29 = New System.Windows.Forms.Label()
         Me.txtAntiguedad = New System.Windows.Forms.TextBox()
         Me.Label28 = New System.Windows.Forms.Label()
-        Me.btnIngreso = New System.Windows.Forms.Button()
-        Me.txtIngreso = New System.Windows.Forms.TextBox()
         Me.Label27 = New System.Windows.Forms.Label()
         Me.txtProfesion = New System.Windows.Forms.TextBox()
         Me.Label26 = New System.Windows.Forms.Label()
@@ -245,6 +253,8 @@ Partial Class jsNomArcTrabajadores
         Me.txtCodigoEquipamiento = New System.Windows.Forms.TextBox()
         Me.Label66 = New System.Windows.Forms.Label()
         Me.txtNombreEquipamiento = New System.Windows.Forms.TextBox()
+        Me.txtFechaTurno = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtIngreso = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.MenuBarra.SuspendLayout()
         CType(Me.dgTurnos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -350,7 +360,7 @@ Partial Class jsNomArcTrabajadores
         'Items
         '
         Me.Items.Enabled = False
-        Me.Items.Font = New System.Drawing.Font("Raleway", 8.249999!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Items.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.249999!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Items.Name = "Items"
         Me.Items.Size = New System.Drawing.Size(100, 39)
         Me.Items.Text = "0"
@@ -359,7 +369,7 @@ Partial Class jsNomArcTrabajadores
         'lblItems
         '
         Me.lblItems.AutoSize = False
-        Me.lblItems.Font = New System.Drawing.Font("Raleway", 8.249999!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblItems.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.249999!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblItems.Name = "lblItems"
         Me.lblItems.Size = New System.Drawing.Size(80, 22)
         Me.lblItems.Text = "de {0}"
@@ -441,7 +451,23 @@ Partial Class jsNomArcTrabajadores
         Me.dgTurnos.AllowUserToOrderColumns = True
         Me.dgTurnos.AllowUserToResizeColumns = False
         Me.dgTurnos.AllowUserToResizeRows = False
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgTurnos.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgTurnos.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgTurnos.Location = New System.Drawing.Point(120, 38)
         Me.dgTurnos.Name = "dgTurnos"
         Me.dgTurnos.ReadOnly = True
@@ -498,26 +524,6 @@ Partial Class jsNomArcTrabajadores
         Me.txtCtaBanco.Name = "txtCtaBanco"
         Me.txtCtaBanco.Size = New System.Drawing.Size(220, 20)
         Me.txtCtaBanco.TabIndex = 94
-        '
-        'btnFechaNacimiento
-        '
-        Me.btnFechaNacimiento.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaNacimiento.Location = New System.Drawing.Point(216, 118)
-        Me.btnFechaNacimiento.Name = "btnFechaNacimiento"
-        Me.btnFechaNacimiento.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaNacimiento.TabIndex = 93
-        Me.btnFechaNacimiento.Text = "•••"
-        Me.btnFechaNacimiento.UseVisualStyleBackColor = True
-        '
-        'txtFechaNacimiento
-        '
-        Me.txtFechaNacimiento.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFechaNacimiento.Location = New System.Drawing.Point(126, 118)
-        Me.txtFechaNacimiento.MaxLength = 15
-        Me.txtFechaNacimiento.Name = "txtFechaNacimiento"
-        Me.txtFechaNacimiento.Size = New System.Drawing.Size(86, 20)
-        Me.txtFechaNacimiento.TabIndex = 54
-        Me.txtFechaNacimiento.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtSSO
         '
@@ -784,7 +790,23 @@ Partial Class jsNomArcTrabajadores
         Me.dg.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dg.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.dg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dg.DefaultCellStyle = DataGridViewCellStyle4
         Me.dg.Location = New System.Drawing.Point(3, 57)
         Me.dg.Name = "dg"
         Me.dg.ReadOnly = True
@@ -852,7 +874,7 @@ Partial Class jsNomArcTrabajadores
         '
         Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Font = New System.Drawing.Font("Raleway Light", 8.249999!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.249999!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.Image = Global.Datum.My.Resources.Resources.button_cancel
         Me.btnCancel.Location = New System.Drawing.Point(85, 3)
         Me.btnCancel.Name = "btnCancel"
@@ -864,7 +886,7 @@ Partial Class jsNomArcTrabajadores
         'btnOK
         '
         Me.btnOK.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.btnOK.Font = New System.Drawing.Font("Raleway Light", 8.249999!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnOK.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.249999!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnOK.Image = Global.Datum.My.Resources.Resources.button_ok
         Me.btnOK.Location = New System.Drawing.Point(3, 3)
         Me.btnOK.Name = "btnOK"
@@ -902,6 +924,8 @@ Partial Class jsNomArcTrabajadores
         '
         'C1DockingTabPage1
         '
+        Me.C1DockingTabPage1.Controls.Add(Me.txtIngreso)
+        Me.C1DockingTabPage1.Controls.Add(Me.txtFechaNacimiento)
         Me.C1DockingTabPage1.Controls.Add(Me.cmbCondicion)
         Me.C1DockingTabPage1.Controls.Add(Me.dgNominas)
         Me.C1DockingTabPage1.Controls.Add(Me.Label63)
@@ -932,8 +956,6 @@ Partial Class jsNomArcTrabajadores
         Me.C1DockingTabPage1.Controls.Add(Me.Label29)
         Me.C1DockingTabPage1.Controls.Add(Me.txtAntiguedad)
         Me.C1DockingTabPage1.Controls.Add(Me.Label28)
-        Me.C1DockingTabPage1.Controls.Add(Me.btnIngreso)
-        Me.C1DockingTabPage1.Controls.Add(Me.txtIngreso)
         Me.C1DockingTabPage1.Controls.Add(Me.Label27)
         Me.C1DockingTabPage1.Controls.Add(Me.txtProfesion)
         Me.C1DockingTabPage1.Controls.Add(Me.Label26)
@@ -952,7 +974,6 @@ Partial Class jsNomArcTrabajadores
         Me.C1DockingTabPage1.Controls.Add(Me.Label20)
         Me.C1DockingTabPage1.Controls.Add(Me.txtID)
         Me.C1DockingTabPage1.Controls.Add(Me.Label1)
-        Me.C1DockingTabPage1.Controls.Add(Me.btnFechaNacimiento)
         Me.C1DockingTabPage1.Controls.Add(Me.txtCodigo)
         Me.C1DockingTabPage1.Controls.Add(Me.txtSSO)
         Me.C1DockingTabPage1.Controls.Add(Me.cmbTipoVivienda)
@@ -964,7 +985,6 @@ Partial Class jsNomArcTrabajadores
         Me.C1DockingTabPage1.Controls.Add(Me.Label4)
         Me.C1DockingTabPage1.Controls.Add(Me.txtNombre)
         Me.C1DockingTabPage1.Controls.Add(Me.txtPais)
-        Me.C1DockingTabPage1.Controls.Add(Me.txtFechaNacimiento)
         Me.C1DockingTabPage1.Controls.Add(Me.Label6)
         Me.C1DockingTabPage1.Controls.Add(Me.txtEdad)
         Me.C1DockingTabPage1.Controls.Add(Me.txtCiudad)
@@ -984,6 +1004,18 @@ Partial Class jsNomArcTrabajadores
         Me.C1DockingTabPage1.TabIndex = 0
         Me.C1DockingTabPage1.Text = "Trabajador"
         '
+        'txtFechaNacimiento
+        '
+        Me.txtFechaNacimiento.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaNacimiento.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaNacimiento.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaNacimiento.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaNacimiento.Location = New System.Drawing.Point(126, 119)
+        Me.txtFechaNacimiento.Name = "txtFechaNacimiento"
+        Me.txtFechaNacimiento.Size = New System.Drawing.Size(121, 19)
+        Me.txtFechaNacimiento.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaNacimiento.TabIndex = 215
+        '
         'dgNominas
         '
         Me.dgNominas.AllowUserToAddRows = False
@@ -991,7 +1023,23 @@ Partial Class jsNomArcTrabajadores
         Me.dgNominas.AllowUserToOrderColumns = True
         Me.dgNominas.AllowUserToResizeColumns = False
         Me.dgNominas.AllowUserToResizeRows = False
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgNominas.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.dgNominas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgNominas.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgNominas.Location = New System.Drawing.Point(595, 31)
         Me.dgNominas.Name = "dgNominas"
         Me.dgNominas.ReadOnly = True
@@ -1126,13 +1174,11 @@ Partial Class jsNomArcTrabajadores
         'grpTurno
         '
         Me.grpTurno.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.grpTurno.Controls.Add(Me.btnFechaTurno)
         Me.grpTurno.Controls.Add(Me.txtFechaTurno)
+        Me.grpTurno.Controls.Add(Me.txtFechaDiaLibre)
         Me.grpTurno.Controls.Add(Me.Label36)
         Me.grpTurno.Controls.Add(Me.chkRotacion)
         Me.grpTurno.Controls.Add(Me.Label33)
-        Me.grpTurno.Controls.Add(Me.btnFechaDiaLibre)
-        Me.grpTurno.Controls.Add(Me.txtFechaDiaLibre)
         Me.grpTurno.Controls.Add(Me.Label32)
         Me.grpTurno.Controls.Add(Me.Label31)
         Me.grpTurno.Controls.Add(Me.cmbPeriodoDiaLibre)
@@ -1147,25 +1193,17 @@ Partial Class jsNomArcTrabajadores
         Me.grpTurno.TabIndex = 169
         Me.grpTurno.TabStop = False
         '
-        'btnFechaTurno
+        'txtFechaDiaLibre
         '
-        Me.btnFechaTurno.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaTurno.Location = New System.Drawing.Point(213, 15)
-        Me.btnFechaTurno.Name = "btnFechaTurno"
-        Me.btnFechaTurno.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaTurno.TabIndex = 167
-        Me.btnFechaTurno.Text = "•••"
-        Me.btnFechaTurno.UseVisualStyleBackColor = True
-        '
-        'txtFechaTurno
-        '
-        Me.txtFechaTurno.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFechaTurno.Location = New System.Drawing.Point(242, 15)
-        Me.txtFechaTurno.MaxLength = 15
-        Me.txtFechaTurno.Name = "txtFechaTurno"
-        Me.txtFechaTurno.Size = New System.Drawing.Size(97, 20)
-        Me.txtFechaTurno.TabIndex = 166
-        Me.txtFechaTurno.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtFechaDiaLibre.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaDiaLibre.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaDiaLibre.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaDiaLibre.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaDiaLibre.Location = New System.Drawing.Point(529, 61)
+        Me.txtFechaDiaLibre.Name = "txtFechaDiaLibre"
+        Me.txtFechaDiaLibre.Size = New System.Drawing.Size(121, 19)
+        Me.txtFechaDiaLibre.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaDiaLibre.TabIndex = 214
         '
         'Label36
         '
@@ -1197,26 +1235,6 @@ Partial Class jsNomArcTrabajadores
         Me.Label33.TabIndex = 150
         Me.Label33.Text = "con día libre rotatorio automáticamente"
         Me.Label33.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'btnFechaDiaLibre
-        '
-        Me.btnFechaDiaLibre.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaDiaLibre.Location = New System.Drawing.Point(501, 59)
-        Me.btnFechaDiaLibre.Name = "btnFechaDiaLibre"
-        Me.btnFechaDiaLibre.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaDiaLibre.TabIndex = 149
-        Me.btnFechaDiaLibre.Text = "•••"
-        Me.btnFechaDiaLibre.UseVisualStyleBackColor = True
-        '
-        'txtFechaDiaLibre
-        '
-        Me.txtFechaDiaLibre.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFechaDiaLibre.Location = New System.Drawing.Point(529, 60)
-        Me.txtFechaDiaLibre.MaxLength = 15
-        Me.txtFechaDiaLibre.Name = "txtFechaDiaLibre"
-        Me.txtFechaDiaLibre.Size = New System.Drawing.Size(97, 20)
-        Me.txtFechaDiaLibre.TabIndex = 148
-        Me.txtFechaDiaLibre.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label32
         '
@@ -1437,10 +1455,10 @@ Partial Class jsNomArcTrabajadores
         'txtAntiguedad
         '
         Me.txtAntiguedad.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAntiguedad.Location = New System.Drawing.Point(691, 182)
+        Me.txtAntiguedad.Location = New System.Drawing.Point(692, 182)
         Me.txtAntiguedad.MaxLength = 15
         Me.txtAntiguedad.Name = "txtAntiguedad"
-        Me.txtAntiguedad.Size = New System.Drawing.Size(122, 20)
+        Me.txtAntiguedad.Size = New System.Drawing.Size(121, 20)
         Me.txtAntiguedad.TabIndex = 131
         Me.txtAntiguedad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -1454,26 +1472,6 @@ Partial Class jsNomArcTrabajadores
         Me.Label28.TabIndex = 130
         Me.Label28.Text = "CONDICION"
         Me.Label28.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'btnIngreso
-        '
-        Me.btnIngreso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnIngreso.Location = New System.Drawing.Point(660, 181)
-        Me.btnIngreso.Name = "btnIngreso"
-        Me.btnIngreso.Size = New System.Drawing.Size(25, 20)
-        Me.btnIngreso.TabIndex = 128
-        Me.btnIngreso.Text = "•••"
-        Me.btnIngreso.UseVisualStyleBackColor = True
-        '
-        'txtIngreso
-        '
-        Me.txtIngreso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtIngreso.Location = New System.Drawing.Point(573, 181)
-        Me.txtIngreso.MaxLength = 15
-        Me.txtIngreso.Name = "txtIngreso"
-        Me.txtIngreso.Size = New System.Drawing.Size(86, 20)
-        Me.txtIngreso.TabIndex = 127
-        Me.txtIngreso.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label27
         '
@@ -1924,7 +1922,23 @@ Partial Class jsNomArcTrabajadores
         Me.dgExpediente.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgExpediente.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.dgExpediente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgExpediente.DefaultCellStyle = DataGridViewCellStyle8
         Me.dgExpediente.Location = New System.Drawing.Point(3, 57)
         Me.dgExpediente.Name = "dgExpediente"
         Me.dgExpediente.ReadOnly = True
@@ -2593,7 +2607,23 @@ Partial Class jsNomArcTrabajadores
         Me.dgAsistencias.AllowUserToResizeRows = False
         Me.dgAsistencias.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgAsistencias.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle9
         Me.dgAsistencias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgAsistencias.DefaultCellStyle = DataGridViewCellStyle10
         Me.dgAsistencias.Location = New System.Drawing.Point(3, 57)
         Me.dgAsistencias.Name = "dgAsistencias"
         Me.dgAsistencias.ReadOnly = True
@@ -2665,7 +2695,23 @@ Partial Class jsNomArcTrabajadores
         Me.dgPrestamos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgPrestamos.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle11
         Me.dgPrestamos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgPrestamos.DefaultCellStyle = DataGridViewCellStyle12
         Me.dgPrestamos.Location = New System.Drawing.Point(3, 57)
         Me.dgPrestamos.Name = "dgPrestamos"
         Me.dgPrestamos.ReadOnly = True
@@ -2737,7 +2783,23 @@ Partial Class jsNomArcTrabajadores
         Me.dgEquipamiento.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgEquipamiento.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle13
         Me.dgEquipamiento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgEquipamiento.DefaultCellStyle = DataGridViewCellStyle14
         Me.dgEquipamiento.Location = New System.Drawing.Point(3, 57)
         Me.dgEquipamiento.Name = "dgEquipamiento"
         Me.dgEquipamiento.ReadOnly = True
@@ -2785,6 +2847,30 @@ Partial Class jsNomArcTrabajadores
         Me.txtNombreEquipamiento.Name = "txtNombreEquipamiento"
         Me.txtNombreEquipamiento.Size = New System.Drawing.Size(468, 20)
         Me.txtNombreEquipamiento.TabIndex = 53
+        '
+        'txtFechaTurno
+        '
+        Me.txtFechaTurno.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaTurno.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaTurno.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaTurno.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaTurno.Location = New System.Drawing.Point(217, 17)
+        Me.txtFechaTurno.Name = "txtFechaTurno"
+        Me.txtFechaTurno.Size = New System.Drawing.Size(121, 19)
+        Me.txtFechaTurno.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaTurno.TabIndex = 216
+        '
+        'txtIngreso
+        '
+        Me.txtIngreso.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtIngreso.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtIngreso.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtIngreso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtIngreso.Location = New System.Drawing.Point(573, 182)
+        Me.txtIngreso.Name = "txtIngreso"
+        Me.txtIngreso.Size = New System.Drawing.Size(113, 19)
+        Me.txtIngreso.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtIngreso.TabIndex = 217
         '
         'jsNomArcTrabajadores
         '
@@ -2883,14 +2969,12 @@ Partial Class jsNomArcTrabajadores
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents txtFechaNacimiento As System.Windows.Forms.TextBox
     Friend WithEvents txtSSO As System.Windows.Forms.TextBox
     Friend WithEvents txtEdad As System.Windows.Forms.TextBox
     Friend WithEvents txtEstado As System.Windows.Forms.TextBox
     Friend WithEvents txtemail As System.Windows.Forms.TextBox
     Friend WithEvents txtTelef2 As System.Windows.Forms.TextBox
     Friend WithEvents txtTelef1 As System.Windows.Forms.TextBox
-    Friend WithEvents btnFechaNacimiento As System.Windows.Forms.Button
     Friend WithEvents txtCtaBanco As System.Windows.Forms.TextBox
     Friend WithEvents cmbCondicion As System.Windows.Forms.ComboBox
     Friend WithEvents txtCodigo1 As System.Windows.Forms.TextBox
@@ -2934,8 +3018,6 @@ Partial Class jsNomArcTrabajadores
     Friend WithEvents txtProfesion As System.Windows.Forms.TextBox
     Friend WithEvents cmbFormapago As System.Windows.Forms.ComboBox
     Friend WithEvents txtNombreBanco As System.Windows.Forms.TextBox
-    Friend WithEvents btnIngreso As System.Windows.Forms.Button
-    Friend WithEvents txtIngreso As System.Windows.Forms.TextBox
     Friend WithEvents Label27 As System.Windows.Forms.Label
     Friend WithEvents Label29 As System.Windows.Forms.Label
     Friend WithEvents txtAntiguedad As System.Windows.Forms.TextBox
@@ -2947,8 +3029,6 @@ Partial Class jsNomArcTrabajadores
     Friend WithEvents txtDiasLibres As System.Windows.Forms.TextBox
     Friend WithEvents pctFoto As C1.Win.C1Input.C1PictureBox
     Friend WithEvents Label33 As System.Windows.Forms.Label
-    Friend WithEvents btnFechaDiaLibre As System.Windows.Forms.Button
-    Friend WithEvents txtFechaDiaLibre As System.Windows.Forms.TextBox
     Friend WithEvents btnG6 As System.Windows.Forms.Button
     Friend WithEvents Label34 As System.Windows.Forms.Label
     Friend WithEvents btnFoto As System.Windows.Forms.Button
@@ -2962,8 +3042,6 @@ Partial Class jsNomArcTrabajadores
     Friend WithEvents txtDescripcionCargo As System.Windows.Forms.TextBox
     Friend WithEvents btnCargos As System.Windows.Forms.Button
     Friend WithEvents chkRotacion As System.Windows.Forms.CheckBox
-    Friend WithEvents btnFechaTurno As System.Windows.Forms.Button
-    Friend WithEvents txtFechaTurno As System.Windows.Forms.TextBox
     Friend WithEvents Label36 As System.Windows.Forms.Label
     Friend WithEvents grpTurno As System.Windows.Forms.GroupBox
     Friend WithEvents grpPago As System.Windows.Forms.GroupBox
@@ -3068,4 +3146,8 @@ Partial Class jsNomArcTrabajadores
     Friend WithEvents txtCodigoEquipamiento As System.Windows.Forms.TextBox
     Friend WithEvents Label66 As System.Windows.Forms.Label
     Friend WithEvents txtNombreEquipamiento As System.Windows.Forms.TextBox
+    Friend WithEvents txtFechaDiaLibre As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaNacimiento As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaTurno As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtIngreso As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

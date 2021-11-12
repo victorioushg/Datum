@@ -1,4 +1,5 @@
 ﻿Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsComFormasPago
     Private Const sModulo As String = "Condiciones de Pago"
     Private MyConn As New MySqlConnection
@@ -108,6 +109,9 @@ Public Class jsComFormasPago
         NumeroDocumento = Documento
         TotalFactura = TotalAPagar
 
+        Dim dates As SfDateTimeEdit() = {txtVencimientoPago, txtVence}
+        SetSizeDateObjects(dates)
+
         IniciarCredito()
         IniciarContado()
 
@@ -121,14 +125,14 @@ Public Class jsComFormasPago
     End Sub
     Private Sub IniciarContado()
 
-        ft.habilitarObjetos(False, True, txtImporte, txtVencimientoPago)
+        ft.habilitarObjetos(False, True, txtImporte)
 
         ft.RellenaCombo(aFormaPagoCompras, cmbFP)
         txtNombrePago.Text = ""
         txtNumeroPago.Text = ""
         txtBeneficiario.Text = ""
         txtImporte.Text = ft.FormatoNumero(TotalFactura)
-        txtVencimientoPago.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtVencimientoPago.Value = jytsistema.sFechadeTrabajo
 
 
     End Sub
@@ -147,10 +151,8 @@ Public Class jsComFormasPago
     Private Sub IniciarCredito()
         Dim aCreadito() As String = {"VENCIMIENTO"}  ', "Giros"}
 
-        txtVence.Text = ft.FormatoFecha(Vencimiento)
+        txtVence.Value = Vencimiento
         ft.RellenaCombo(aCreadito, cmbCredito)
-
-        ft.habilitarObjetos(False, True, txtVence)
 
     End Sub
 
@@ -168,12 +170,6 @@ Public Class jsComFormasPago
         ft = Nothing
         dt = Nothing
         ds = Nothing
-    End Sub
-
-
-
-    Private Sub btnVence_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVence.Click
-        txtVence.Text = SeleccionaFecha(CDate(txtVence.Text), Me, btnVence)
     End Sub
 
     Private Sub cmbCredito_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCredito.SelectedIndexChanged
@@ -195,16 +191,16 @@ Public Class jsComFormasPago
             TipoCredito = cmbCredito.SelectedIndex
             CondicionPago = cmbCondicion.SelectedIndex
             If cmbCondicion.SelectedIndex = 0 Then    'credito 
-                Vencimiento = CDate(txtVence.Text)
+                Vencimiento = txtVence.Value
             Else
-                Vencimiento = CDate(txtVencimientoPago.Text)
+                Vencimiento = txtVencimientoPago.Value
             End If
             Caja = cmbCaja.SelectedValue
             FormaPago = aFormaPagoAbreviadaCompras(cmbFP.SelectedIndex)
             NombrePago = txtNombrePagoX.Text
             NumeroPago = txtNumeroPago.Text
             Beneficiario = txtBeneficiario.Text
-            FechaDocumentoPago = CDate(txtVencimientoPago.Text)
+            FechaDocumentoPago = txtVencimientoPago.Value
             scrMain.Focus()
         End If
     End Sub
@@ -258,23 +254,8 @@ Public Class jsComFormasPago
         txtNumeroPago.Text = ""
         txtBeneficiario.Text = ""
         txtImporte.Text = ft.FormatoNumero(TotalFactura)
-        txtVencimientoPago.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-
-        Select Case cmbFP.SelectedIndex
-            Case 2, 3
-
-                'Dim FP As String = aFormaPagoAbreviadaCompras(cmbFP.SelectedIndex)
-                'calculaIVAFacturasConCondicionEspecial(MyConn, nomTablaRenglones, nomTablaIVA, 0, NumeroDocumento, _
-                '                                        OrigenFactura, NumeroSerialFiscal, MontoRestante, FP)
-        End Select
+        txtVencimientoPago.Value = jytsistema.sFechadeTrabajo
 
     End Sub
 
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        Select Case aFormaPagoAbreviadaCompras(cmbFP.SelectedIndex)
-            Case "CH", "DP", "TR"
-                txtVencimientoPago.Text = SeleccionaFechaPlus(CDate(txtVencimientoPago.Text), CDate(txtVencimientoPago.Text), False, Me, btnFecha)
-        End Select
-
-    End Sub
 End Class

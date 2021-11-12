@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsVenProRelacionNotasCredito
     Private Const sModulo As String = "Relacion De NOTAS DE CREDITO"
     Private Const nTabla As String = "tblEncabRelacionNotasCredito"
@@ -35,6 +37,8 @@ Public Class jsVenProRelacionNotasCredito
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
             dt = ds.Tables(nTabla)
 
+            Dim dates As SfDateTimeEdit() = {txtEmision, txtFacturaDesde, txtFacturaHasta}
+            SetSizeDateObjects(dates)
 
 
             DesactivarMarco0()
@@ -49,7 +53,7 @@ Public Class jsVenProRelacionNotasCredito
             AsignarTooltips()
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
-            ft.MensajeCritico("Error en conexión de base de datos: " & ex.Message)
+            ft.mensajeCritico("Error en conexión de base de datos: " & ex.Message)
         End Try
 
     End Sub
@@ -105,17 +109,17 @@ Public Class jsVenProRelacionNotasCredito
                 With .Rows(nRow)
                     'Encabezado 
                     txtCodigo.Text = .Item("codigoguia")
-                    txtEmision.Text = ft.FormatoFecha(CDate(.Item("fechaguia").ToString))
+                    txtEmision.Value = CDate(.Item("fechaguia").ToString)
                     txtUsuario.Text = .Item("elaborador")
                     txtEstatus.Text = aEstatus(.Item("estatus"))
-                    txtComentario.Text = ft.MuestraCampoTexto(.Item("descripcion"))
+                    txtComentario.Text = ft.muestraCampoTexto(.Item("descripcion"))
                     txtReponsable.Text = .Item("responsable")
 
                     tslblPesoT.Text = ft.FormatoCantidad(.Item("totalkilos"))
                     txtTotal.Text = ft.FormatoNumero(.Item("totalguia"))
 
-                    txtFacturaDesde.Text = ft.FormatoFecha(CDate(.Item("emisionfac").ToString))
-                    txtFacturaHasta.Text = ft.FormatoFecha(CDate(.Item("hastafac").ToString))
+                    txtFacturaDesde.Value = CDate(.Item("emisionfac").ToString)
+                    txtFacturaHasta.Value = CDate(.Item("hastafac").ToString)
 
                     'Renglones
                     AsignarMovimientos(.Item("codigoguia"))
@@ -144,8 +148,8 @@ Public Class jsVenProRelacionNotasCredito
         Dim aCampos() As String = {"codigofac", "nomcli", "totalfac", "kilosfac", ""}
         Dim aNombres() As String = {"Número Nota Crédito", "Nombre Cliente", "Total Factura", "Peso Factura (Kgs)", ""}
         Dim aAnchos() As Integer = {150, 470, 120, 120, 100}
-        Dim aAlineacion() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, _
-                                       AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, _
+        Dim aAlineacion() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda,
+                                       AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha,
                                         AlineacionDataGrid.Izquierda}
 
         Dim aFormatos() As String = {"", "", sFormatoNumero, sFormatoCantidad, ""}
@@ -172,12 +176,12 @@ Public Class jsVenProRelacionNotasCredito
         txtComentario.Text = ""
         txtReponsable.Text = ""
         txtEstatus.Text = aEstatus(0)
-        txtEmision.Text = ft.FormatoFecha(sFechadeTrabajo)
+        txtEmision.Value = jytsistema.sFechadeTrabajo
         tslblPesoT.Text = ft.FormatoCantidad(0)
 
         txtTotal.Text = ft.FormatoNumero(0.0)
-        txtFacturaDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtFacturaHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFacturaDesde.Value = jytsistema.sFechadeTrabajo
+        txtFacturaHasta.Value = jytsistema.sFechadeTrabajo
 
 
         'Movimientos
@@ -191,24 +195,24 @@ Public Class jsVenProRelacionNotasCredito
         grpAceptarSalir.Visible = True
 
         ft.habilitarObjetos(True, False, grpEncab, grpTotales, MenuBarraRenglon)
-        ft.habilitarObjetos(True, True, txtComentario, txtReponsable, btnEmision, btnDesde, btnHasta)
+        ft.habilitarObjetos(True, True, txtComentario, txtReponsable, txtEmision, txtFacturaDesde, txtFacturaHasta)
         MenuBarra.Enabled = False
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
     End Sub
     Private Sub DesactivarMarco0()
 
         grpAceptarSalir.Visible = False
-        ft.habilitarObjetos(False, True, txtCodigo, txtEmision, btnEmision, txtUsuario, txtNombreUsuario, txtReponsable, _
-                        btnDesde, btnHasta, txtEstatus, _
-                        txtComentario, txtFacturaDesde, txtFacturaHasta)
+        ft.habilitarObjetos(False, True, txtCodigo, txtEmision, txtUsuario, txtNombreUsuario, txtReponsable,
+                        txtFacturaDesde, txtFacturaHasta, txtEstatus,
+                        txtComentario)
 
         ft.habilitarObjetos(False, True, txtTotal)
 
         MenuBarraRenglon.Enabled = False
         MenuBarra.Enabled = True
 
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -233,7 +237,7 @@ Public Class jsVenProRelacionNotasCredito
     End Sub
     Private Sub AgregaYCancela()
 
-        ft.Ejecutar_strSQL(myconn, " delete from jsvenrenrel where codigoguia = '" & txtCodigo.Text & "' and tipo = 1 and id_emp = '" & jytsistema.WorkID & "' ")
+        ft.Ejecutar_strSQL(myConn, " delete from jsvenrenrel where codigoguia = '" & txtCodigo.Text & "' and tipo = 1 and id_emp = '" & jytsistema.WorkID & "' ")
 
     End Sub
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
@@ -250,7 +254,7 @@ Public Class jsVenProRelacionNotasCredito
         End If
 
         If dtRenglones.Rows.Count = 0 Then
-            ft.MensajeCritico("Debe incluir al menos un ítem...")
+            ft.mensajeCritico("Debe incluir al menos un ítem...")
             Return False
         End If
 
@@ -267,16 +271,16 @@ Public Class jsVenProRelacionNotasCredito
             nPosicionEncab = ds.Tables(nTabla).Rows.Count
             Codigo = ft.autoCodigo(myConn, "codigoguia", "jsvenencrel", "Tipo.id_emp", "1." + jytsistema.WorkID, 8)
 
-            ft.Ejecutar_strSQL(myconn, " update jsvenrenrel set codigoguia = '" & Codigo & "' where codigoguia = '" & txtCodigo.Text & "' and tipo = '1' and  id_emp = '" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsvenrenrel set codigoguia = '" & Codigo & "' where codigoguia = '" & txtCodigo.Text & "' and tipo = '1' and  id_emp = '" & jytsistema.WorkID & "' ")
         End If
 
-        InsertEditVENTASEncabezadoRelacionDeFacturas(myConn, lblInfo, Inserta, Codigo, txtComentario.Text, jytsistema.sUsuario, txtReponsable.Text, _
-                                               CDate(txtEmision.Text), CDate(txtFacturaDesde.Text), CDate(txtFacturaHasta.Text), _
+        InsertEditVENTASEncabezadoRelacionDeFacturas(myConn, lblInfo, Inserta, Codigo, txtComentario.Text, jytsistema.sUsuario, txtReponsable.Text,
+                                               CDate(txtEmision.Text), CDate(txtFacturaDesde.Text), CDate(txtFacturaHasta.Text),
                                                dtRenglones.Rows.Count, CDbl(txtTotal.Text), CDbl(tslblPesoT.Text), 0, 0, 1)
 
 
 
-        ft.Ejecutar_strSQL(myconn, " UPDATE jsvenencncr a, jsvenrenrel b " _
+        ft.Ejecutar_strSQL(myConn, " UPDATE jsvenencncr a, jsvenrenrel b " _
                        & " SET a.relncr = b.codigoguia " _
                        & " WHERE " _
                        & " b.tipo = '1' AND " _
@@ -302,7 +306,7 @@ Public Class jsVenProRelacionNotasCredito
     End Sub
 
     Private Sub txtNombre_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtComentario.GotFocus
-        ft.mensajeEtiqueta(lblInfo, " Indique comentario ... ", Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, " Indique comentario ... ", Transportables.tipoMensaje.iInfo)
     End Sub
 
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
@@ -389,7 +393,7 @@ Public Class jsVenProRelacionNotasCredito
     End Sub
 
 
-    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick, _
+    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick,
        dg.CellMouseClick
         Me.BindingContext(ds, nTablaRenglones).Position = e.RowIndex
         MostrarItemsEnMenuBarra(MenuBarraRenglon, e.RowIndex, ds.Tables(nTablaRenglones).Rows.Count)
@@ -427,10 +431,10 @@ Public Class jsVenProRelacionNotasCredito
                     Dim aCamposDel() As String = {"codigoguia", "codigofac", "tipo", "id_emp"}
                     Dim aStringsDel() As String = {txtCodigo.Text, .Item("codigofac"), .Item("tipo"), jytsistema.WorkID}
 
-                    ft.Ejecutar_strSQL(myconn, " update jsvenencncr set relncr = '' where " _
+                    ft.Ejecutar_strSQL(myConn, " update jsvenencncr set relncr = '' where " _
                                    & " relncr = '" & txtCodigo.Text & "' and numncr = '" & .Item("codigofac") & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
-                    nPosicionRenglon = EliminarRegistros(myConn, lblInfo, ds, nTablaRenglones, "jsvenrenrel", strSQLMov, aCamposDel, aStringsDel, _
+                    nPosicionRenglon = EliminarRegistros(myConn, lblInfo, ds, nTablaRenglones, "jsvenrenrel", strSQLMov, aCamposDel, aStringsDel,
                                                   Me.BindingContext(ds, nTablaRenglones).Position, True)
 
 
@@ -465,10 +469,6 @@ Public Class jsVenProRelacionNotasCredito
         AsignaMov(Me.BindingContext(ds, nTablaRenglones).Position, False)
     End Sub
 
-    Private Sub btnEmision_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEmision.Click
-        txtEmision.Text = SeleccionaFecha(CDate(txtEmision.Text), Me, sender)
-    End Sub
-
 
     Private Sub txtUsuario_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtUsuario.TextChanged
         txtNombreUsuario.Text = ft.DevuelveScalarCadena(myConn, " select nombre from jsconctausu where id_user = '" & txtUsuario.Text & "' ")
@@ -476,17 +476,8 @@ Public Class jsVenProRelacionNotasCredito
 
 
     Private Sub btnCliente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        txtUsuario.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcli codigo, nombre descripcion, disponible, elt(estatus+1, 'Activo', 'Bloqueado', 'Inactivo', 'Desincorporado') estatus from jsvencatcli where estatus < 3 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Clientes", _
+        txtUsuario.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcli codigo, nombre descripcion, disponible, elt(estatus+1, 'Activo', 'Bloqueado', 'Inactivo', 'Desincorporado') estatus from jsvencatcli where estatus < 3 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Clientes",
                                             txtUsuario.Text)
-    End Sub
-
-
-    Private Sub btnDesde_Click(sender As System.Object, e As System.EventArgs) Handles btnDesde.Click
-        txtFacturaDesde.Text = SeleccionaFecha(CDate(txtFacturaDesde.Text), Me, sender)
-    End Sub
-
-    Private Sub btnHasta_Click(sender As System.Object, e As System.EventArgs) Handles btnHasta.Click
-        txtFacturaHasta.Text = SeleccionaFecha(CDate(txtFacturaHasta.Text), Me, sender)
     End Sub
 
     Private Sub RelaciónNotasDeCréditoToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RelaciónNotasDeCréditoToolStripMenuItem.Click
@@ -517,5 +508,5 @@ Public Class jsVenProRelacionNotasCredito
         End If
     End Sub
 
-  
+
 End Class

@@ -1,4 +1,5 @@
 ﻿Imports MySql.Data.MySqlClient
+Imports fTransport
 Public Class jsGenFormasPago
     Private Const sModulo As String = "Condiciones de Pago"
 
@@ -6,6 +7,7 @@ Public Class jsGenFormasPago
     Private ds As New DataSet
     Private dt As DataTable
     Private ft As New Transportables
+    Private pagosRecibidos As New List(Of FormaDePagoYMoneda)
 
     Private nTabla As String = "tblpagos"
     Private strSQL As String = ""
@@ -15,65 +17,25 @@ Public Class jsGenFormasPago
     Private nModulo As String = ""
     Private NumeroDocumento As String = ""
     Private TotalFactura As Double = 0.0
-    Private n_CondicionPago As Integer
-    Private n_TipoCredito As Integer
-    Private n_Vencimiento As Date = MyDate
-    Private n_Caja As String = ""
-    Private n_CondicionIVA As Boolean = False
     Private FacturaEnApartado As Boolean = False
     Private personaJuridica As Integer
     Private NumeroSerialFiscal As String = ""
     Private nomTablaIVA As String = ""
     Private nomTablaRenglones As String = ""
-    Public Property CondicionPago() As Integer
-        Get
-            Return n_CondicionPago
-        End Get
-        Set(ByVal value As Integer)
-            n_CondicionPago = value
-        End Set
-    End Property
-    Public Property TipoCredito() As Integer
-        Get
-            Return n_TipoCredito
-        End Get
-        Set(ByVal value As Integer)
-            n_TipoCredito = value
-        End Set
-    End Property
 
-    Public Property Vencimiento() As Date
-        Get
-            Return n_Vencimiento
-        End Get
-        Set(ByVal value As Date)
-            n_Vencimiento = value
-        End Set
-    End Property
-
-    Public Property Caja() As String
-        Get
-            Return n_Caja
-        End Get
-        Set(ByVal value As String)
-            n_Caja = value
-        End Set
-    End Property
-
-    Public Property condicionIVAPeriodoEspecial() As Boolean
-        Get
-            Return n_CondicionIVA
-        End Get
-        Set(ByVal value As Boolean)
-            n_CondicionIVA = value
-        End Set
-    End Property
+    Public Property CondicionPago As Integer
+    Public Property TipoCredito As Integer
+    Public Property Vencimiento As Date
+    Public Property Caja As String
+    Public Property condicionIVAPeriodoEspecial As Boolean
+    Public Property FechaDocumento As DateTime?
 
 
 
-    Public Sub Cargar(ByVal MyCon As MySqlConnection, ByVal ModuloOrigen As String, _
-                      ByVal Documento As String, ByVal PermiteSeleccionarCRCO As Boolean, ByVal TotalAPagar As Double, _
-                      Optional ByVal VerCajas As Boolean = False, Optional ByVal Apartado As Boolean = False, _
+    Public Sub Cargar(ByVal MyCon As MySqlConnection, ByVal ModuloOrigen As String,
+                      ByVal Documento As String, ByVal PermiteSeleccionarCRCO As Boolean,
+                      ByVal TotalAPagar As Double, ByVal Moneda As Integer,
+                      Optional ByVal VerCajas As Boolean = False, Optional ByVal Apartado As Boolean = False,
                       Optional TipoPersonaJuridica As Integer = 0)
 
         '0 = Juridica ; 1 = Natural
@@ -115,24 +77,46 @@ Public Class jsGenFormasPago
         AsignarTooltips()
         ft.habilitarObjetos(False, True, txtSubtotal, txtIVA, txtAPagar, txtEfectivo, txtCambio)
 
-        Dim aCampos() As String = {"formapag.Pago.80.I.", _
-                                   "numpag.Nº Pago.120.I.", _
-                                   "nompag.Nombre.120.I.", _
-                                   "importe.Importe.120.D.Numero", _
-                                   "vence.Vencimiento.120.C.Fecha"}
+        Dim aCampos() As String = {"FormaDePago.Pago.50.I.",
+                                   "NumeroDePago.Nº Pago.120.I.",
+                                   "NombreDePago.Nombre.120.I.",
+                                   "Importe.Importe.110.D.Numero",
+                                   "CodigoIso.moneda.60.C.",
+                                   "ImporteReal.Importe Real.110.D.Numero",
+                                   "vence.Vence.120.C.Fecha"}
 
-        strSQL = " select * from jsvenforpag " _
+        strSQL = " select a.formapag FormaDePago, a.numpag NumeroDePago, a.nompag NombreDePago, a.importe, a.vence, b.CodigoIso, b.UnidadMonetaria, b.Simbolo, b.Equivale,  " _
+            & " a.numfac NumeroFactura, a.origen, a.Currency, a.Currency_Date, a.numserial SerialCaja " _
+            & " from jsvenforpag a " _
+            & " Left join (" & SQLSelectCambiosYMonedas(IIf(FechaDocumento Is Nothing, jytsistema.sFechadeTrabajo, FechaDocumento)) & ") b " _
+            & " on ( a.currency = b.moneda ) " _
             & " where " _
             & " numfac = '" & NumeroDocumento & "' and " _
             & " origen = '" & nModulo & "' and " _
             & " id_emp = '" & jytsistema.WorkID & "' order by formapag "
 
+        pagosRecibidos = Lista(Of FormaDePagoYMoneda)(MyConn, strSQL)
         dt = ft.AbrirDataTable(ds, nTabla, MyConn, strSQL)
 
-        ft.IniciarTablaPlus(dg, dt, aCampos)
 
-        'txtAPagar.Text = ft.FormatoNumero(TotalFactura)
+        Dim impuestoIVA As Double = ft.DevuelveScalarDoble(MyConn, " select sum(impiva) from " & nomTablaIVA & " " _
+                                                               & " where " _
+                                                               & " numfac = '" & NumeroDocumento & "' and " _
+                                                               & " id_emp = '" & jytsistema.WorkID & "' ")
 
+        Dim netoFactura As Double = ft.DevuelveScalarDoble(MyConn, " select sum(baseiva) from " & nomTablaIVA & " " _
+                                                               & " where " _
+                                                               & " numfac = '" & NumeroDocumento & "' and " _
+                                                               & " id_emp = '" & jytsistema.WorkID & "' ")
+
+        txtIVA.Text = ft.FormatoNumero(impuestoIVA)
+        txtAPagar.Text = ft.FormatoNumero(netoFactura + impuestoIVA)
+        txtSubtotal.Text = ft.FormatoNumero(netoFactura + impuestoIVA)
+
+
+        dg.DataSource = pagosRecibidos
+
+        ft.IniciarTablaList(Of FormaDePagoYMoneda)(dg, pagosRecibidos, aCampos)
         CalculaTotales()
 
     End Sub
@@ -167,8 +151,8 @@ Public Class jsGenFormasPago
     End Sub
     Private Sub IniciarCredito()
         Dim aCreadito() As String = {"Vencimiento"}  ', "Giros"}
-
-        txtVence.Text = ft.FormatoFecha(Vencimiento)
+        txtVence.MinDateTime = jytsistema.sFechadeTrabajo
+        txtVence.Value = Vencimiento
         ft.RellenaCombo(aCreadito, cmbCredito)
 
     End Sub
@@ -193,7 +177,7 @@ Public Class jsGenFormasPago
             Case Keys.F4
                 If ValorNumero(txtDiferencia.Text) < 0 Then
                     Dim f As New jsGenFormasPagoMovimientoPlus
-                    f.Agregar(MyConn, ds, dt, NumeroDocumento, nModulo, Math.Abs(ValorNumero(txtDiferencia.Text)), personaJuridica, _
+                    f.Agregar(MyConn, ds, dt, NumeroDocumento, nModulo, Math.Abs(ValorNumero(txtDiferencia.Text)), personaJuridica,
                               nomTablaRenglones, nomTablaIVA)
                     ds = DataSetRequery(ds, strSQL, MyConn, nTabla, lblInfo)
                     If f.Apuntador >= 0 Then AsignaMov(f.Apuntador, True)
@@ -205,37 +189,21 @@ Public Class jsGenFormasPago
 
                     Dim aCamposDel() As String = {"numfac", "origen", "formapag", "numpag", "id_emp"}
                     With dt.Rows(Apuntador)
-                        Dim aStringsDel() As String = {.Item("numfac"), .Item("origen"), .Item("formapag"), .Item("numpag"), jytsistema.WorkID}
+                        Dim aStringsDel() As String = { .Item("numfac"), .Item("origen"), .Item("formapag"), .Item("numpag"), jytsistema.WorkID}
 
                         If ft.PreguntaEliminarRegistro() = Windows.Forms.DialogResult.Yes Then
-                            AsignaMov(EliminarRegistros(MyConn, lblInfo, ds, nTabla, "jsvenforpag", strSQL, aCamposDel, aStringsDel, _
+                            AsignaMov(EliminarRegistros(MyConn, lblInfo, ds, nTabla, "jsvenforpag", strSQL, aCamposDel, aStringsDel,
                                                      Apuntador, True), True)
                         End If
                     End With
                 End If
             Case Keys.Control + Keys.E
-                calculaIVAFacturasConCondicionEspecial(MyConn, nomTablaRenglones, nomTablaIVA, personaJuridica, NumeroDocumento, _
-                                                    nModulo, NumeroSerialFiscal, ft.valorNumero(txtAPagar.Text), "EF")
                 IncluirEfectivo()
-
         End Select
         CalculaTotales()
     End Sub
 
     Private Sub jsGenFormasPago_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
-    End Sub
-
-    Private Sub btnVence_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVence.Click
-
-        Dim FechaNueva As Date = CDate(SeleccionaFecha(CDate(txtVence.Text), Me, btnVence))
-        If ft.FormatoFechaMySQL(FechaNueva) > ft.FormatoFechaMySQL(Vencimiento) Then
-            txtVence.Text = ft.FormatoFecha(Vencimiento)
-        ElseIf ft.FormatoFechaMySQL(FechaNueva) < ft.FormatoFechaMySQL(jytsistema.sFechadeTrabajo) Then
-            txtVence.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        Else
-            txtVence.Text = ft.FormatoFecha(FechaNueva)
-        End If
 
     End Sub
 
@@ -247,105 +215,36 @@ Public Class jsGenFormasPago
 
     End Sub
 
-    Private Sub txtSubtotal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles _
-        txtSubtotal.TextChanged, txtAPagar.TextChanged
-
-        txtDiferencia.Text = ft.FormatoNumero(ValorNumero(txtSubtotal.Text) - ValorNumero(txtAPagar.Text))
-        txtDiferencia.ForeColor = IIf(ValorNumero(txtDiferencia.Text) >= 0, Color.Navy, Color.Red)
-
-        'Calcula total de pagos en efectivo
-        If NumeroDocumento <> "" AndAlso nModulo <> "" Then
-            Dim dtEF As DataTable
-            Dim nTablaEF As String = "tblEF"
-            ds = DataSetRequery(ds, " select formapag, IFNULL(SUM(IMPORTE),0) efectivo from jsvenforpag " _
-                                & " where " _
-                                & " numfac = '" & NumeroDocumento & "' and " _
-                                & " origen = '" & nModulo & "' and " _
-                                & " formapag = 'EF' and " _
-                                & " id_emp = '" & jytsistema.WorkID & "' ", MyConn, nTablaEF, lblInfo)
-            dtEF = ds.Tables(nTablaEF)
-            txtEfectivo.Text = ft.FormatoNumero(IIf(dtEF.Rows.Count > 0, IIf(IsDBNull(dtEF.Rows(0).Item("efectivo")), 0.0, dtEF.Rows(0).Item("efectivo")), 0.0))
-
-            dtEF = Nothing
-
-        End If
-    End Sub
     Private Sub CalculaTotales()
 
         If NumeroDocumento <> "" AndAlso nModulo <> "" Then
 
-            Dim subTotalPagos As Double = ft.DevuelveScalarDoble(MyConn, " select SUM(IMPORTE) from jsvenforpag " _
-                                & " where " _
-                                & " numfac = '" & NumeroDocumento & "' and " _
-                                & " origen = '" & nModulo & "' and " _
-                                & " id_emp = '" & jytsistema.WorkID & "' ")
+            Dim subTotalPagos As Decimal = pagosRecibidos.Sum(Function(p) p.ImporteReal)
+            txtRegistrado.Text = ft.FormatoNumero(subTotalPagos)
 
-            txtSubtotal.Text = ft.muestraCampoNumero(subTotalPagos)
+            Dim pagadoEnEfectivo As Decimal = pagosRecibidos.Where(Function(e) e.FormaDePago = "EF").Sum(Function(p) p.ImporteReal)
+            txtEfectivo.Text = ft.FormatoNumero(pagadoEnEfectivo)
 
-            Dim impuestoIVA As Double = ft.DevuelveScalarDoble(MyConn, " select sum(impiva) from " & nomTablaIVA & " " _
-                                                               & " where " _
-                                                               & " numfac = '" & NumeroDocumento & "' and " _
-                                                               & " id_emp = '" & jytsistema.WorkID & "' ")
-
-            Dim netoFactura As Double = ft.DevuelveScalarDoble(MyConn, " select sum(baseiva) from " & nomTablaIVA & " " _
-                                                               & " where " _
-                                                               & " numfac = '" & NumeroDocumento & "' and " _
-                                                               & " id_emp = '" & jytsistema.WorkID & "' ")
-
-            Dim porIVA As Double = ft.DevuelveScalarDoble(MyConn, " select poriva from " & nomTablaIVA & " " _
-                                                               & " where " _
-                                                               & " numfac = '" & NumeroDocumento & "' and " _
-                                                               & " tipoiva = 'A' and " _
-                                                               & " id_emp = '" & jytsistema.WorkID & "' ")
-            If porIVA = 0.0 Then
-                lblIVA.Text = " IVA"
-            Else
-                lblIVA.Text = " IVA (" & ft.muestraCampoNumero(porIVA) & "%)"
-            End If
-
-            txtIVA.Text = ft.muestraCampoNumero(impuestoIVA)
-            txtAPagar.Text = ft.muestraCampoNumero(netoFactura + impuestoIVA)
+            txtDiferencia.Text = ft.FormatoNumero(subTotalPagos - ValorNumero(txtAPagar.Text))
+            txtDiferencia.ForeColor = IIf(ValorNumero(txtDiferencia.Text) >= 0, Color.Navy, Color.Red)
 
         End If
     End Sub
-    'Private Sub CalculaIVA(formaDePago As String)
-
-    '    If cumpleCondicionesIVAEspecial(MyConn, personaJuridica, NumeroDocumento, nModulo, txtAPagar.Text, formaDePago) Then
-    '        ActualizarIVARenglonAlbaranPlus(MyConn, lblInfo, nomTablaIVA, nomTablaRenglones, "numfac", _
-    '                               NumeroDocumento, jytsistema.sFechadeTrabajo, "totrendes", _
-    '                               NumeroSerialFiscal)
-    '    Else
-    '        ActualizarIVARenglonAlbaran(MyConn, lblInfo, nomTablaIVA, nomTablaRenglones, "numfac", _
-    '                            NumeroDocumento, jytsistema.sFechadeTrabajo, "totrendes", _
-    '                            NumeroSerialFiscal)
-    '    End If
-
-    'End Sub
-
     Private Sub IncluirEfectivo()
 
-        If ft.DevuelveScalarEntero(MyConn, " select count(*) from jsvenforpag " _
-                                   & " where " _
-                                   & " numfac = '" & NumeroDocumento & "' and " _
-                                   & " origen = '" & nModulo & "' and  " _
-                                   & " formapag = 'EF' and " _
-                                   & " numpag = '' and  " _
-                                   & " nompag = '' and " _
-                                   & " id_emp = '" & jytsistema.WorkID & "' ") = 0 Then
-
-            Dim diferencia As Double = montoResidualFactura(MyConn, nomTablaIVA, NumeroDocumento, nModulo)    ' ft.valorNumero(txtSubtotal.Text) - ft.valorNumero(txtAPagar.Text)
-            If diferencia < 0 Then _
-            InsertEditVentasFormaPago(MyConn, lblInfo, True, NumeroDocumento, NumeroSerialFiscal, _
-                nModulo, "EF", "", "", Math.Abs(diferencia), _
-                jytsistema.sFechadeTrabajo)
+        Dim diferencia As Double = MontoResidualFactura()
+        If diferencia < 0 Then _
+            InsertEditVentasFormaPago(MyConn, lblInfo, True, NumeroDocumento, NumeroSerialFiscal,
+                nModulo, "EF", "", "", Math.Abs(diferencia),
+                jytsistema.sFechadeTrabajo, jytsistema.WorkCurrency.Id, DateTime.Now())
 
             AsignaMov(dt.Rows.Count, True)
-
-
-        End If
+        'End If
 
     End Sub
-
+    Private Function MontoResidualFactura() As Decimal
+        Return pagosRecibidos.Sum(Function(p) p.ImporteReal) - ValorNumero(txtAPagar.Text)
+    End Function
     Private Sub txtSuPago_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSuPago.KeyPress
         e.Handled = ft.validaNumeroEnTextbox(e)
     End Sub
@@ -354,29 +253,25 @@ Public Class jsGenFormasPago
         txtCambio.ForeColor = IIf(ValorNumero(txtCambio.Text) >= 0, Color.Green, Color.Red)
     End Sub
     Private Sub btnEfectivo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEfectivo.Click
-
-        calculaIVAFacturasConCondicionEspecial(MyConn, nomTablaRenglones, nomTablaIVA, personaJuridica, NumeroDocumento, _
-                                                    nModulo, NumeroSerialFiscal, ft.valorNumero(txtAPagar.Text), "EF")
         IncluirEfectivo()
         CalculaTotales()
-
     End Sub
 
 
     Private Sub AsignaMov(ByVal nRow As Long, ByVal Actualiza As Boolean)
-        If Actualiza Then ds = DataSetRequery(ds, strSQL, MyConn, nTabla, lblInfo)
-        Dim c As Integer = CInt(nRow)
-        If c >= 0 AndAlso dt.Rows.Count > 0 AndAlso c <= dt.Rows.Count - 1 Then
-            Me.BindingContext(ds, nTabla).Position = c
-            dg.Refresh()
-            dg.CurrentCell = dg(0, c)
+        If Actualiza Then
+            pagosRecibidos = Lista(Of FormaDePagoYMoneda)(MyConn, strSQL)
+            dg.DataSource = pagosRecibidos
         End If
-        MostrarItemsEnMenuBarra(MenuBarra, c, dt.Rows.Count)
+
+        dg.Rows().Item(nRow).Selected = True
+        MostrarItemsEnMenuBarra(MenuBarra, CInt(nRow), pagosRecibidos.Count)
+
 
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
-        'Eliminar pagos
+        'Todo eliminar pagos
         Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
@@ -385,39 +280,14 @@ Public Class jsGenFormasPago
             Me.DialogResult = System.Windows.Forms.DialogResult.OK
             TipoCredito = cmbCredito.SelectedIndex
             CondicionPago = cmbCondicion.SelectedIndex
-
-            Dim cantidadFP As Integer = ft.DevuelveScalarEntero(MyConn, " select count(*) from jsvenforpag " _
-                                            & " where " _
-                                            & " numfac = '" & NumeroDocumento & "' and " _
-                                            & " origen = '" & nModulo & "' and " _
-                                            & " formapag IN ('EF','CH','DP','CT') AND " _
-                                            & " id_emp = '" & jytsistema.WorkID & "' group by formapag ")
-
-            condicionIVAPeriodoEspecial = False
-
-            '0 = Juridica ; 1 = Natural
-
-            Dim porIVA As Double = ft.DevuelveScalarDoble(MyConn, "SELECT PORIVA " _
-                                                            & " FROM " & nomTablaIVA & " " _
-                                                            & " WHERE " _
-                                                            & " numfac = '" & NumeroDocumento & "' AND " _
-                                                            & " TIPOIVA = 'A' AND " _
-                                                            & " ID_EMP='" & jytsistema.WorkID & "'")
-
-            If TipoCredito = 0 And cantidadFP = 0 And personaJuridica = 1 And porIVA = 10.0 Then
-                condicionIVAPeriodoEspecial = True
-            End If
-
             scrMain.Focus()
-
         End If
     End Sub
     Private Function Validado() As Boolean
         If FacturaEnApartado Then
-
         Else
             If cmbCondicion.SelectedIndex = 1 Then 'CONTADO
-                If dt.Rows.Count <= 0 Then
+                If pagosRecibidos.Count <= 0 Then
                     ft.mensajeAdvertencia("Debe indicar al menos una forma de pago válida...")
                     Return False
                 End If
@@ -429,83 +299,64 @@ Public Class jsGenFormasPago
             End If
 
         End If
-
-
         Return True
     End Function
 
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
 
-        Dim diferencia As Double = montoResidualFactura(MyConn, nomTablaIVA, NumeroDocumento, nModulo)
+        Dim diferencia As Double = MontoResidualFactura()
         If diferencia < 0 Then
             Dim f As New jsGenFormasPagoMovimientoPlus
-
-            f.Agregar(MyConn, ds, dt, NumeroDocumento, nModulo, Math.Abs(diferencia), personaJuridica, _
+            f.Agregar(MyConn, ds, dt, NumeroDocumento, nModulo, Math.Abs(diferencia), personaJuridica,
                       nomTablaRenglones, nomTablaIVA)
-
-            ds = DataSetRequery(ds, strSQL, MyConn, nTabla, lblInfo)
             If f.Apuntador >= 0 Then AsignaMov(f.Apuntador, True)
             f = Nothing
         End If
         CalculaTotales()
+
     End Sub
 
     Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
-        If dt.Rows.Count > 0 Then
-            Dim Apuntador As Long = Me.BindingContext(ds, nTabla).Position
+        If pagosRecibidos.Count > 0 Then
 
-            With dt.Rows(Apuntador)
-                Dim aCamposDel() As String = {"numfac", "origen", "formapag", "numpag", "id_emp"}
-                Dim aStringsDel() As String = {.Item("numfac"), .Item("origen"), .Item("formapag"), .Item("numpag"), jytsistema.WorkID}
+            Dim Apuntador = dg.SelectedRows(0).Index
+            Dim data As FormaDePagoYMoneda = dg.Rows(Apuntador).DataBoundItem
 
-                If ft.PreguntaEliminarRegistro() = Windows.Forms.DialogResult.Yes Then
-                    AsignaMov(EliminarRegistros(MyConn, lblInfo, ds, nTabla, "jsvenforpag", strSQL, aCamposDel, aStringsDel, _
-                                             Apuntador, True), True)
-
-                    Dim cantidadFP As Integer = ft.DevuelveScalarEntero(MyConn, " select count(*) from jsvenforpag " _
-                                            & " where " _
-                                            & " numfac = '" & NumeroDocumento & "' and " _
-                                            & " origen = '" & nModulo & "' and " _
-                                            & " formapag IN ('EF','CH','DP','CT') AND " _
-                                            & " id_emp = '" & jytsistema.WorkID & "' group by formapag ")
-
-                    Dim fp As String = IIf(cantidadFP > 0, "EF", "TA")
-
-                    calculaIVAFacturasConCondicionEspecial(MyConn, nomTablaRenglones, nomTablaIVA, personaJuridica, NumeroDocumento, _
-                                                     nModulo, NumeroSerialFiscal, ft.valorNumero(txtAPagar.Text), fp)
-                End If
-
-            End With
+            Dim aCamposDel() As String = {"numfac", "origen", "formapag", "numpag", "Currency"}
+            Dim aStringsDel() As String = {data.NumeroFactura, data.Origen, data.FormaDePago, data.NumeroDePago, data.Currency}
+            If ft.PreguntaEliminarRegistro() = Windows.Forms.DialogResult.Yes Then
+                AsignaMov(EliminarRegistros(MyConn, lblInfo, ds, nTabla, "jsvenforpag", strSQL, aCamposDel, aStringsDel,
+                                         Apuntador, True), True)
+            End If
 
             CalculaTotales()
         End If
     End Sub
 
+
     Private Sub btnPrimero_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrimero.Click
-        Me.BindingContext(ds, nTabla).Position = 0
-        AsignaMov(Me.BindingContext(ds, nTabla).Position, False)
+        ' Dim selectedRowCount = dg.Rows.GetRowCount(DataGridViewElementStates.Selected)
+        Dim nRow As Integer = dg.Rows.GetFirstRow(DataGridViewElementStates.None)
+        AsignaMov(IIf(nRow < 0, 0, nRow), False)
     End Sub
 
     Private Sub btnAnterior_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAnterior.Click
-        Me.BindingContext(ds, nTabla).Position -= 1
-        AsignaMov(Me.BindingContext(ds, nTabla).Position, False)
+        Dim nRow As Integer = dg.Rows.GetPreviousRow(dg.CurrentRow.Index, DataGridViewElementStates.None)
+        AsignaMov(IIf(nRow < 0, 0, nRow), False)
     End Sub
 
     Private Sub btnSiguiente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSiguiente.Click
-        Me.BindingContext(ds, nTabla).Position += 1
-        AsignaMov(Me.BindingContext(ds, nTabla).Position, False)
+        Dim nRow As Integer = dg.Rows.GetNextRow(nRow, DataGridViewElementStates.None)
+        AsignaMov(IIf(nRow < 0, 0, nRow), False)
     End Sub
 
     Private Sub btnUltimo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUltimo.Click
-        Me.BindingContext(ds, nTabla).Position = ds.Tables(nTabla).Rows.Count - 1
-        AsignaMov(Me.BindingContext(ds, nTabla).Position, False)
+        Dim nRow As Integer = dg.Rows.GetLastRow(DataGridViewElementStates.None)
+        AsignaMov(IIf(nRow < 0, 0, nRow), False)
     End Sub
     Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles _
        dg.RowHeaderMouseClick, dg.CellMouseClick
-
-        Me.BindingContext(ds, nTabla).Position = e.RowIndex
         AsignaMov(e.RowIndex, False)
-
     End Sub
 
 End Class

@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsControlArcUTMovimientos
 
     Private Const sModulo As String = "Movimiento Unidad tributaria"
@@ -33,9 +35,7 @@ Public Class jsControlArcUTMovimientos
     Private Sub IniciarTXT()
 
         txtMonto.Text = ft.FormatoNumero(0.0)
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-
-        ft.habilitarObjetos(False, True, txtFecha)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
 
     End Sub
 
@@ -50,16 +50,11 @@ Public Class jsControlArcUTMovimientos
 
     End Sub
     Private Sub AsignarTXT(ByVal nPosicion As Integer)
-
         With dtLocal.Rows(nPosicion)
-
             txtMonto.Text = ft.FormatoNumero(.Item("monto"))
-            txtFecha.Text = ft.FormatoFecha(CDate(.Item("fecha").ToString))
+            txtFecha.Value = CDate(.Item("fecha").ToString)
 
         End With
-
-        ft.habilitarObjetos(False, True, txtFecha, btnFecha)
-
     End Sub
     Private Sub jsControlArcIVAMovimientos_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         ft = Nothing
@@ -68,7 +63,8 @@ Public Class jsControlArcUTMovimientos
     End Sub
 
     Private Sub jsControlArcIVAMovimientos_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        ft.habilitarObjetos(False, True, txtFecha)
+        Dim dates As SfDateTimeEdit() = {txtFecha}
+        SetSizeDateObjects(dates)
         InsertarAuditoria(MyConn, MovAud.ientrar, sModulo, txtFecha.Text)
     End Sub
 
@@ -113,8 +109,6 @@ Public Class jsControlArcUTMovimientos
         e.Handled = ft.validaNumeroEnTextbox(e)
     End Sub
 
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, sender)
-    End Sub
+
 
 End Class

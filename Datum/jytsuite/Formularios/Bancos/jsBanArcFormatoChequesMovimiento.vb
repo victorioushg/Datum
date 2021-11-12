@@ -113,10 +113,10 @@ Public Class jsBanArcFormatoChequesMovimiento
                 Insertar = True
                 Apuntador = dt.Rows.Count
             End If
-            InsertEditBANCOSPlantillaCheque(MyConn, lblInfo, Insertar, txtCodigo.Text, txtDescripcion.Text, _
-                 ft.FormatoEntero(txtMonto.Top * n_Y), ft.FormatoEntero(txtMonto.Left * n_X), ft.FormatoEntero(txtNombre.Top * n_Y), _
-                 ft.FormatoEntero(txtNombre.Left * n_X), ft.FormatoEntero(txtLetras.Top * n_Y), ft.FormatoEntero(txtLetras.Left * n_X), _
-                 ft.FormatoEntero(txtFecha.Top * n_Y), ft.FormatoEntero(txtFecha.Left * n_X), ft.FormatoEntero(txtEndosable.Top * n_Y), _
+            InsertEditBANCOSPlantillaCheque(MyConn, lblInfo, Insertar, txtCodigo.Text, txtDescripcion.Text,
+                 ft.FormatoEntero(txtMonto.Top * n_Y), ft.FormatoEntero(txtMonto.Left * n_X), ft.FormatoEntero(txtNombre.Top * n_Y),
+                 ft.FormatoEntero(txtNombre.Left * n_X), ft.FormatoEntero(txtLetras.Top * n_Y), ft.FormatoEntero(txtLetras.Left * n_X),
+                 ft.FormatoEntero(txtFecha.Top * n_Y), ft.FormatoEntero(txtFecha.Left * n_X), ft.FormatoEntero(txtEndosable.Top * n_Y),
                  ft.FormatoEntero(txtEndosable.Left * n_X))
 
             InsertarAuditoria(MyConn, MovAud.iSalir, sModulo, txtCodigo.Text)
@@ -125,33 +125,33 @@ Public Class jsBanArcFormatoChequesMovimiento
     End Sub
 
     Private Sub txtDescripcion_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDescripcion.GotFocus
-        ft.mensajeEtiqueta(lblInfo, "Indique descripción para esta plantilla (sug. use los nombres de los bancos que la usan) ...", Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, "Indique descripción para esta plantilla (sug. use los nombres de los bancos que la usan) ...", Transportables.tipoMensaje.iInfo)
     End Sub
 
-    Private Sub txtMontoTop_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtMonto.GotFocus, _
-         txtNombre.GotFocus, txtLetras.GotFocus, _
+    Private Sub txtMontoTop_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtMonto.GotFocus,
+         txtNombre.GotFocus, txtLetras.GotFocus,
           txtEndosable.GotFocus
-        ft.mensajeEtiqueta(lblInfo, "presione el botón izquierdo del ratón y presionado mueva a la el coordenada indicada ...", Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, "presione el botón izquierdo del ratón y presionado mueva a la el coordenada indicada ...", Transportables.tipoMensaje.iInfo)
     End Sub
 
-    Private Sub txtMontotop_MouseDown(ByVal sender As Object, ByVal e As  _
-    System.Windows.Forms.MouseEventArgs) Handles txtMonto.MouseDown, txtNombre.MouseDown, _
+    Private Sub txtMontotop_MouseDown(ByVal sender As Object, ByVal e As _
+    System.Windows.Forms.MouseEventArgs) Handles txtMonto.MouseDown, txtNombre.MouseDown,
         txtLetras.MouseDown, txtFecha.MouseDown, txtEndosable.MouseDown
 
         If e.Button = Windows.Forms.MouseButtons.Left Then
             sender.Capture = False
-            Dim msg As Message = _
-            Message.Create(sender.Handle, BUTTONDOWN, _
+            Dim msg As Message =
+            Message.Create(sender.Handle, BUTTONDOWN,
             New IntPtr(CAPTION), IntPtr.Zero)
             Me.DefWndProc(msg)
         End If
 
     End Sub
 
-    Private Sub txtMontoTop_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtMonto.MouseMove, _
+    Private Sub txtMontoTop_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtMonto.MouseMove,
         txtNombre.MouseMove, txtLetras.MouseMove, txtFecha.MouseMove, txtEndosable.MouseMove
         sender.Text = " (X, Y):(" & (sender.Left * n_X).ToString & "," & (sender.Top * n_Y).ToString & ")"
     End Sub
 
-    
+
 End Class

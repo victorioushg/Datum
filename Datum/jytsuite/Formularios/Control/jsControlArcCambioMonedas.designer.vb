@@ -23,8 +23,8 @@ Partial Class jsControlArcCambioMonedas
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsControlArcCambioMonedas))
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.C1SuperTooltip1 = New C1.Win.C1SuperTooltip.C1SuperTooltip(Me.components)
-        Me.SfDataGrid1 = New Syncfusion.WinForms.DataGrid.SfDataGrid()
-        CType(Me.SfDataGrid1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.dataGrid = New Syncfusion.WinForms.DataGrid.SfDataGrid()
+        CType(Me.dataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblInfo
@@ -41,24 +41,24 @@ Partial Class jsControlArcCambioMonedas
         '
         Me.C1SuperTooltip1.Font = New System.Drawing.Font("Tahoma", 8.0!)
         '
-        'SfDataGrid1
+        'dataGrid
         '
-        Me.SfDataGrid1.AccessibleName = "Table"
-        Me.SfDataGrid1.AllowGrouping = False
-        Me.SfDataGrid1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SfDataGrid1.Location = New System.Drawing.Point(0, 0)
-        Me.SfDataGrid1.Name = "SfDataGrid1"
-        Me.SfDataGrid1.Size = New System.Drawing.Size(686, 324)
-        Me.SfDataGrid1.TabIndex = 32
-        Me.SfDataGrid1.Text = "SfDataGrid1"
-        Me.SfDataGrid1.ThemeName = "Office2016DarkGray"
+        Me.dataGrid.AccessibleName = "Table"
+        Me.dataGrid.AllowGrouping = False
+        Me.dataGrid.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dataGrid.Location = New System.Drawing.Point(0, 0)
+        Me.dataGrid.Name = "dataGrid"
+        Me.dataGrid.Size = New System.Drawing.Size(686, 324)
+        Me.dataGrid.TabIndex = 32
+        Me.dataGrid.Text = "SfDataGrid1"
+        Me.dataGrid.ThemeName = "Office2016DarkGray"
         '
         'jsControlArcCambioMonedas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(686, 356)
-        Me.Controls.Add(Me.SfDataGrid1)
+        Me.Controls.Add(Me.dataGrid)
         Me.Controls.Add(Me.lblInfo)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -66,13 +66,13 @@ Partial Class jsControlArcCambioMonedas
         Me.Name = "jsControlArcCambioMonedas"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Monedas  y Cambios"
-        CType(Me.SfDataGrid1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Text = "Cambios de Moneda"
+        CType(Me.dataGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
-    Friend WithEvents SfDataGrid1 As Syncfusion.WinForms.DataGrid.SfDataGrid
+    Friend WithEvents dataGrid As Syncfusion.WinForms.DataGrid.SfDataGrid
     Friend WithEvents dg As DataGridView
 End Class

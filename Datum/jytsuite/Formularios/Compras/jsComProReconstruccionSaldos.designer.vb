@@ -22,30 +22,28 @@ Partial Class jsComProReconstruccionDeSaldos
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.txtProveedorHasta = New System.Windows.Forms.TextBox()
         Me.txtProveedorDesde = New System.Windows.Forms.TextBox()
-        Me.btnFechaDesde = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
-        Me.txtFechaDesde = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.btnProveedorDesde = New System.Windows.Forms.Button()
-        Me.btnFechaHasta = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.C1PictureBox1 = New C1.Win.C1Input.C1PictureBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.grpTotales = New System.Windows.Forms.GroupBox()
+        Me.pb2 = New System.Windows.Forms.ProgressBar()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.lblProgreso = New System.Windows.Forms.Label()
-        Me.txtFechaHasta = New System.Windows.Forms.TextBox()
         Me.btnProveedorHasta = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.chkMercancias = New System.Windows.Forms.CheckBox()
         Me.chkCxP = New System.Windows.Forms.CheckBox()
         Me.lblLeyenda = New System.Windows.Forms.Label()
-        Me.pb2 = New System.Windows.Forms.ProgressBar()
+        Me.txtFechaDesde = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaHasta = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpAceptarSalir.SuspendLayout()
         CType(Me.C1PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpTotales.SuspendLayout()
@@ -76,16 +74,6 @@ Partial Class jsComProReconstruccionDeSaldos
         Me.txtProveedorDesde.Name = "txtProveedorDesde"
         Me.txtProveedorDesde.Size = New System.Drawing.Size(110, 20)
         Me.txtProveedorDesde.TabIndex = 83
-        '
-        'btnFechaDesde
-        '
-        Me.btnFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaDesde.Location = New System.Drawing.Point(245, 139)
-        Me.btnFechaDesde.Name = "btnFechaDesde"
-        Me.btnFechaDesde.Size = New System.Drawing.Size(29, 20)
-        Me.btnFechaDesde.TabIndex = 105
-        Me.btnFechaDesde.Text = "•••"
-        Me.btnFechaDesde.UseVisualStyleBackColor = True
         '
         'Label3
         '
@@ -135,16 +123,6 @@ Partial Class jsComProReconstruccionDeSaldos
         Me.btnOK.Text = "Aceptar"
         Me.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         '
-        'txtFechaDesde
-        '
-        Me.txtFechaDesde.Enabled = False
-        Me.txtFechaDesde.Location = New System.Drawing.Point(129, 139)
-        Me.txtFechaDesde.MaxLength = 15
-        Me.txtFechaDesde.Name = "txtFechaDesde"
-        Me.txtFechaDesde.Size = New System.Drawing.Size(110, 20)
-        Me.txtFechaDesde.TabIndex = 124
-        Me.txtFechaDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label9
         '
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -163,16 +141,6 @@ Partial Class jsComProReconstruccionDeSaldos
         Me.btnProveedorDesde.TabIndex = 131
         Me.btnProveedorDesde.Text = "•••"
         Me.btnProveedorDesde.UseVisualStyleBackColor = True
-        '
-        'btnFechaHasta
-        '
-        Me.btnFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaHasta.Location = New System.Drawing.Point(405, 139)
-        Me.btnFechaHasta.Name = "btnFechaHasta"
-        Me.btnFechaHasta.Size = New System.Drawing.Size(29, 20)
-        Me.btnFechaHasta.TabIndex = 132
-        Me.btnFechaHasta.Text = "•••"
-        Me.btnFechaHasta.UseVisualStyleBackColor = True
         '
         'Label12
         '
@@ -227,6 +195,14 @@ Partial Class jsComProReconstruccionDeSaldos
         Me.grpTotales.TabIndex = 151
         Me.grpTotales.TabStop = False
         '
+        'pb2
+        '
+        Me.pb2.Location = New System.Drawing.Point(551, 8)
+        Me.pb2.Name = "pb2"
+        Me.pb2.Size = New System.Drawing.Size(170, 20)
+        Me.pb2.TabIndex = 159
+        Me.pb2.Visible = False
+        '
         'ProgressBar1
         '
         Me.ProgressBar1.Location = New System.Drawing.Point(9, 30)
@@ -252,16 +228,6 @@ Partial Class jsComProReconstruccionDeSaldos
         Me.lblProgreso.Size = New System.Drawing.Size(461, 20)
         Me.lblProgreso.TabIndex = 14
         Me.lblProgreso.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'txtFechaHasta
-        '
-        Me.txtFechaHasta.Enabled = False
-        Me.txtFechaHasta.Location = New System.Drawing.Point(289, 139)
-        Me.txtFechaHasta.MaxLength = 15
-        Me.txtFechaHasta.Name = "txtFechaHasta"
-        Me.txtFechaHasta.Size = New System.Drawing.Size(110, 20)
-        Me.txtFechaHasta.TabIndex = 152
-        Me.txtFechaHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'btnProveedorHasta
         '
@@ -319,17 +285,33 @@ Partial Class jsComProReconstruccionDeSaldos
         Me.lblLeyenda.Name = "lblLeyenda"
         Me.lblLeyenda.Size = New System.Drawing.Size(745, 61)
         Me.lblLeyenda.TabIndex = 158
-        Me.lblLeyenda.Text = "Este proceso reconstruye todos los movimientos de proveedores desde los diferente" & _
-    "s módulos del sistema, asi como también recalcula los Saldos de dichos proveedor" & _
+        Me.lblLeyenda.Text = "Este proceso reconstruye todos los movimientos de proveedores desde los diferente" &
+    "s módulos del sistema, asi como también recalcula los Saldos de dichos proveedor" &
     "es"
         '
-        'pb2
+        'txtFechaDesde
         '
-        Me.pb2.Location = New System.Drawing.Point(551, 8)
-        Me.pb2.Name = "pb2"
-        Me.pb2.Size = New System.Drawing.Size(170, 20)
-        Me.pb2.TabIndex = 159
-        Me.pb2.Visible = False
+        Me.txtFechaDesde.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaDesde.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaDesde.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaDesde.Location = New System.Drawing.Point(129, 140)
+        Me.txtFechaDesde.Name = "txtFechaDesde"
+        Me.txtFechaDesde.Size = New System.Drawing.Size(110, 19)
+        Me.txtFechaDesde.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaDesde.TabIndex = 214
+        '
+        'txtFechaHasta
+        '
+        Me.txtFechaHasta.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaHasta.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaHasta.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaHasta.Location = New System.Drawing.Point(289, 140)
+        Me.txtFechaHasta.Name = "txtFechaHasta"
+        Me.txtFechaHasta.Size = New System.Drawing.Size(110, 19)
+        Me.txtFechaHasta.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaHasta.TabIndex = 215
         '
         'jsComProReconstruccionDeSaldos
         '
@@ -339,23 +321,21 @@ Partial Class jsComProReconstruccionDeSaldos
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(748, 312)
         Me.ControlBox = False
+        Me.Controls.Add(Me.txtFechaHasta)
+        Me.Controls.Add(Me.txtFechaDesde)
         Me.Controls.Add(Me.lblLeyenda)
         Me.Controls.Add(Me.chkCxP)
         Me.Controls.Add(Me.chkMercancias)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnProveedorHasta)
-        Me.Controls.Add(Me.txtFechaHasta)
         Me.Controls.Add(Me.grpTotales)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label12)
-        Me.Controls.Add(Me.btnFechaHasta)
         Me.Controls.Add(Me.btnProveedorDesde)
         Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.txtFechaDesde)
         Me.Controls.Add(Me.grpAceptarSalir)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.btnFechaDesde)
         Me.Controls.Add(Me.txtProveedorDesde)
         Me.Controls.Add(Me.txtProveedorHasta)
         Me.Controls.Add(Me.lblInfo)
@@ -375,15 +355,12 @@ Partial Class jsComProReconstruccionDeSaldos
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents txtProveedorHasta As System.Windows.Forms.TextBox
     Friend WithEvents txtProveedorDesde As System.Windows.Forms.TextBox
-    Friend WithEvents btnFechaDesde As System.Windows.Forms.Button
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
-    Friend WithEvents txtFechaDesde As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents btnProveedorDesde As System.Windows.Forms.Button
-    Friend WithEvents btnFechaHasta As System.Windows.Forms.Button
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents C1PictureBox1 As C1.Win.C1Input.C1PictureBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
@@ -391,7 +368,6 @@ Partial Class jsComProReconstruccionDeSaldos
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents lblProgreso As System.Windows.Forms.Label
-    Friend WithEvents txtFechaHasta As System.Windows.Forms.TextBox
     Friend WithEvents btnProveedorHasta As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -399,4 +375,6 @@ Partial Class jsComProReconstruccionDeSaldos
     Friend WithEvents chkCxP As System.Windows.Forms.CheckBox
     Friend WithEvents lblLeyenda As System.Windows.Forms.Label
     Friend WithEvents pb2 As System.Windows.Forms.ProgressBar
+    Friend WithEvents txtFechaDesde As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaHasta As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

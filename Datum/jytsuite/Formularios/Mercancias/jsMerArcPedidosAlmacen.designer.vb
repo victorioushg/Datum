@@ -32,14 +32,10 @@ Partial Class jsMerArcPedidosAlmacen
         Me.txtNombreDestino = New System.Windows.Forms.TextBox()
         Me.btnDestino = New System.Windows.Forms.Button()
         Me.txtDestino = New System.Windows.Forms.TextBox()
-        Me.btnVence = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.btnEmision = New System.Windows.Forms.Button()
         Me.txtEstatus = New System.Windows.Forms.TextBox()
-        Me.txtVence = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtEmision = New System.Windows.Forms.TextBox()
         Me.txtComentario = New System.Windows.Forms.TextBox()
         Me.txtCodigo = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -90,6 +86,8 @@ Partial Class jsMerArcPedidosAlmacen
         Me.grpTotales = New System.Windows.Forms.GroupBox()
         Me.txtTotal = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtEmision = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtVence = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpEncab.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -130,6 +128,8 @@ Partial Class jsMerArcPedidosAlmacen
         Me.grpEncab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpEncab.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpEncab.Controls.Add(Me.txtVence)
+        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.txtNombreOrigen)
         Me.grpEncab.Controls.Add(Me.btnOrigen)
         Me.grpEncab.Controls.Add(Me.txtOrigen)
@@ -138,14 +138,10 @@ Partial Class jsMerArcPedidosAlmacen
         Me.grpEncab.Controls.Add(Me.txtNombreDestino)
         Me.grpEncab.Controls.Add(Me.btnDestino)
         Me.grpEncab.Controls.Add(Me.txtDestino)
-        Me.grpEncab.Controls.Add(Me.btnVence)
         Me.grpEncab.Controls.Add(Me.Label6)
-        Me.grpEncab.Controls.Add(Me.btnEmision)
         Me.grpEncab.Controls.Add(Me.txtEstatus)
-        Me.grpEncab.Controls.Add(Me.txtVence)
         Me.grpEncab.Controls.Add(Me.Label5)
         Me.grpEncab.Controls.Add(Me.Label4)
-        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.txtComentario)
         Me.grpEncab.Controls.Add(Me.txtCodigo)
         Me.grpEncab.Controls.Add(Me.Label2)
@@ -238,16 +234,6 @@ Partial Class jsMerArcPedidosAlmacen
         Me.txtDestino.TabIndex = 204
         Me.txtDestino.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'btnVence
-        '
-        Me.btnVence.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVence.Location = New System.Drawing.Point(569, 13)
-        Me.btnVence.Name = "btnVence"
-        Me.btnVence.Size = New System.Drawing.Size(25, 20)
-        Me.btnVence.TabIndex = 200
-        Me.btnVence.Text = "•••"
-        Me.btnVence.UseVisualStyleBackColor = True
-        '
         'Label6
         '
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -257,16 +243,6 @@ Partial Class jsMerArcPedidosAlmacen
         Me.Label6.TabIndex = 199
         Me.Label6.Text = "Emisión"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'btnEmision
-        '
-        Me.btnEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmision.Location = New System.Drawing.Point(390, 12)
-        Me.btnEmision.Name = "btnEmision"
-        Me.btnEmision.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmision.TabIndex = 112
-        Me.btnEmision.Text = "•••"
-        Me.btnEmision.UseVisualStyleBackColor = True
         '
         'txtEstatus
         '
@@ -278,17 +254,6 @@ Partial Class jsMerArcPedidosAlmacen
         Me.txtEstatus.Size = New System.Drawing.Size(89, 20)
         Me.txtEstatus.TabIndex = 7
         Me.txtEstatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'txtVence
-        '
-        Me.txtVence.Enabled = False
-        Me.txtVence.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtVence.Location = New System.Drawing.Point(476, 12)
-        Me.txtVence.MaxLength = 19
-        Me.txtVence.Name = "txtVence"
-        Me.txtVence.Size = New System.Drawing.Size(87, 20)
-        Me.txtVence.TabIndex = 6
-        Me.txtVence.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label5
         '
@@ -309,17 +274,6 @@ Partial Class jsMerArcPedidosAlmacen
         Me.Label4.TabIndex = 10
         Me.Label4.Text = "Entrega"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtEmision
-        '
-        Me.txtEmision.Enabled = False
-        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmision.Location = New System.Drawing.Point(300, 12)
-        Me.txtEmision.MaxLength = 19
-        Me.txtEmision.Name = "txtEmision"
-        Me.txtEmision.Size = New System.Drawing.Size(87, 20)
-        Me.txtEmision.TabIndex = 5
-        Me.txtEmision.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtComentario
         '
@@ -737,6 +691,30 @@ Partial Class jsMerArcPedidosAlmacen
         Me.Label8.Text = "TOTAL Orden de Pedido"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'txtEmision
+        '
+        Me.txtEmision.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmision.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmision.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmision.Location = New System.Drawing.Point(300, 13)
+        Me.txtEmision.Name = "txtEmision"
+        Me.txtEmision.Size = New System.Drawing.Size(114, 19)
+        Me.txtEmision.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmision.TabIndex = 214
+        '
+        'txtVence
+        '
+        Me.txtVence.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtVence.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtVence.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtVence.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtVence.Location = New System.Drawing.Point(476, 12)
+        Me.txtVence.Name = "txtVence"
+        Me.txtVence.Size = New System.Drawing.Size(114, 19)
+        Me.txtVence.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtVence.TabIndex = 215
+        '
         'jsMerArcPedidosAlmacen
         '
         Me.AcceptButton = Me.btnOK
@@ -773,7 +751,6 @@ Partial Class jsMerArcPedidosAlmacen
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents dg As System.Windows.Forms.DataGridView
     Friend WithEvents grpEncab As System.Windows.Forms.GroupBox
-    Friend WithEvents txtEmision As System.Windows.Forms.TextBox
     Friend WithEvents txtComentario As System.Windows.Forms.TextBox
     Friend WithEvents txtCodigo As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -816,11 +793,8 @@ Partial Class jsMerArcPedidosAlmacen
     Friend WithEvents ToolStripSeparator11 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
     Friend WithEvents txtEstatus As System.Windows.Forms.TextBox
-    Friend WithEvents txtVence As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents btnEmision As System.Windows.Forms.Button
-    Friend WithEvents btnVence As System.Windows.Forms.Button
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents txtNombreDestino As System.Windows.Forms.TextBox
@@ -839,4 +813,6 @@ Partial Class jsMerArcPedidosAlmacen
     Friend WithEvents btnOrigen As System.Windows.Forms.Button
     Friend WithEvents txtOrigen As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents txtVence As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtEmision As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

@@ -38,7 +38,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>http://localhost/Datum/</UpdateUrl>
     <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>2.8.13.%2a</ApplicationVersion>
+    <ApplicationVersion>2.9.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -112,6 +112,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="C1.Win.C1Chart.2, Version=2.0.20151.38, Culture=neutral, PublicKeyToken=a22e16972c085838, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\ComponentOne\C1.Win.C1Chart.2.dll</HintPath>
@@ -153,14 +156,29 @@
     <Reference Include="FP_AclasBixolon">
       <HintPath>..\..\Utilities\ReportesFiscales\ReportesAclasBixolon\FP_AclasBixolon\FP_AclasBixolon\bin\Debug\FP_AclasBixolon.dll</HintPath>
     </Reference>
-    <Reference Include="fTransport">
+    <Reference Include="fTransport, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\FuncionesTransportables\fTransport\fTransport\bin\Debug\fTransport.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.14.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.14.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.1.2.6\lib\net46\K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.Streams.1.2.6\lib\net46\K4os.Compression.LZ4.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Hash.xxHash.1.0.6\lib\net46\K4os.Hash.xxHash.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic.Compatibility" />
-    <Reference Include="MySql.Data, Version=8.0.18.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\MySQL\Connector.NET 6.9\Assemblies\v4.0\MySql.Data.dll</HintPath>
+    <Reference Include="MySql.Data, Version=8.0.27.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.27\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -194,36 +212,42 @@
       <HintPath>..\..\ReportesDeVentas\ReportesDeVentas\bin\Debug\ReportesDeVentas.dll</HintPath>
     </Reference>
     <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="Syncfusion.Core.WinForms, Version=17.4400.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Core.WinForms.17.4.0.47\lib\net40\Syncfusion.Core.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.Core.WinForms, Version=19.3460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Core.WinForms.19.3.0.47\lib\net46\Syncfusion.Core.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Data.WinForms, Version=17.4400.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Data.WinForms.17.4.0.47\lib\net40\Syncfusion.Data.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.Data.WinForms, Version=19.3460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Data.WinForms.19.3.0.47\lib\net46\Syncfusion.Data.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.DataSource.WinForms, Version=17.4400.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.DataSource.WinForms.17.4.0.47\lib\net40\Syncfusion.DataSource.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.DataSource.WinForms, Version=19.3460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.DataSource.WinForms.19.3.0.47\lib\net46\Syncfusion.DataSource.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.GridCommon.WinForms, Version=17.4400.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.GridCommon.WinForms.17.4.0.47\lib\net40\Syncfusion.GridCommon.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.GridCommon.WinForms, Version=19.3460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.GridCommon.WinForms.19.3.0.47\lib\net46\Syncfusion.GridCommon.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Licensing, Version=17.4400.0.47, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Licensing.17.4.0.47\lib\net40\Syncfusion.Licensing.dll</HintPath>
+    <Reference Include="Syncfusion.Licensing, Version=19.3460.0.47, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.19.3.0.47\lib\net46\Syncfusion.Licensing.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfDataGrid.WinForms, Version=17.4400.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.SfDataGrid.WinForms.17.4.0.47\lib\net40\Syncfusion.SfDataGrid.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.SfDataGrid.WinForms, Version=19.3460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfDataGrid.WinForms.19.3.0.47\lib\net46\Syncfusion.SfDataGrid.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfInput.WinForms, Version=17.4400.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.SfInput.WinForms.17.4.0.47\lib\net40\Syncfusion.SfInput.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.SfInput.WinForms, Version=19.3460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfInput.WinForms.19.3.0.47\lib\net46\Syncfusion.SfInput.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfListView.WinForms, Version=17.4400.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.SfListView.WinForms.17.4.0.47\lib\net40\Syncfusion.SfListView.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.SfListView.WinForms, Version=19.3460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfListView.WinForms.19.3.0.47\lib\net46\Syncfusion.SfListView.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Shared.Base, Version=17.4400.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Shared.Base.17.4.0.47\lib\net40\Syncfusion.Shared.Base.dll</HintPath>
+    <Reference Include="Syncfusion.Shared.Base, Version=19.3460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Shared.Base.19.3.0.47\lib\net46\Syncfusion.Shared.Base.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -235,8 +259,54 @@
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -249,9 +319,15 @@
     <Reference Include="TfhkaNet">
       <HintPath>..\..\Utilities\TFHKAnet\20160401\TfhkaNet.dll</HintPath>
     </Reference>
+    <Reference Include="Ubiety.Dns.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.27\lib\net452\Ubiety.Dns.Core.dll</HintPath>
+    </Reference>
     <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="ZstdNet, Version=1.4.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.27\lib\net452\ZstdNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="fTransport" />
@@ -608,6 +684,12 @@
     <Compile Include="Formularios\Control\jsControlArcAlmacenesEstantes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\Control\jsControlArcMonedas.Designer.vb">
+      <DependentUpon>jsControlArcMonedas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Control\jsControlArcMonedas.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Control\jsControlProReconversionMonetaria.designer.vb">
       <DependentUpon>jsControlProReconversionMonetaria.vb</DependentUpon>
     </Compile>
@@ -852,12 +934,6 @@
       <DependentUpon>FechaSistema.vb</DependentUpon>
     </Compile>
     <Compile Include="Formularios\FechaSistema.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Formularios\FechaSistemaPlus.designer.vb">
-      <DependentUpon>FechaSistemaPlus.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Formularios\FechaSistemaPlus.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\frmServidorValidacion.designer.vb">
@@ -2024,9 +2100,15 @@
     <Compile Include="Formularios\Ventas\jsVenRepParametros.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Models\Control\FormaDePago.vb" />
+    <Compile Include="Models\Control\Monedas.vb" />
     <Compile Include="Models\Control\CambioMoneda.vb" />
+    <Compile Include="Models\General\SimpleTable.vb" />
+    <Compile Include="Models\SalesAndAccountsReceivable\Customer.vb" />
     <Compile Include="Models\General\functionStructure.vb" />
     <Compile Include="Models\General\SimpleTableProperties.vb" />
+    <Compile Include="Models\SalesAndAccountsReceivable\SalesForce.vb" />
+    <Compile Include="Modulos\APITalker.vb" />
     <Compile Include="Modulos\ConsultasBancos.vb" />
     <Compile Include="Modulos\ConsultasCompras.vb" />
     <Compile Include="Modulos\ConsultasContabilidad.vb" />
@@ -2040,6 +2122,7 @@
     <Compile Include="Modulos\FuncionesCompras.vb" />
     <Compile Include="Modulos\FuncionesContabilidad.vb" />
     <Compile Include="Modulos\FuncionesControl.vb" />
+    <Compile Include="Modulos\FuncionesGenericas.vb" />
     <Compile Include="Modulos\FuncionesImpresionFacturasClientes.vb" />
     <Compile Include="Modulos\FuncionesImpresionFiscalAclas.vb" />
     <Compile Include="Modulos\FuncionesImpresionFiscalPnP.vb" />
@@ -2049,6 +2132,8 @@
     <Compile Include="Modulos\FuncionesReportesRAW.vb" />
     <Compile Include="Modulos\FuncionesTransportables.vb" />
     <Compile Include="Modulos\FuncionesVentas.vb" />
+    <Compile Include="Modulos\GenericGet.vb" />
+    <Compile Include="Modulos\JsonHelper.vb" />
     <Compile Include="Modulos\jytsistema.vb" />
     <Compile Include="Modulos\FuncionesReportesGraficos.vb" />
     <Compile Include="Modulos\FuncionesImpresionComandosESCEpsonP2.vb" />
@@ -3040,6 +3125,9 @@
       <DependentUpon>jsControlArcAlmacenesEstantes.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Control\jsControlArcMonedas.resx">
+      <DependentUpon>jsControlArcMonedas.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Control\jsControlProReconversionMonetaria.resx">
       <DependentUpon>jsControlProReconversionMonetaria.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -3202,9 +3290,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FechaSistema.resx">
       <DependentUpon>FechaSistema.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\FechaSistemaPlus.resx">
-      <DependentUpon>FechaSistemaPlus.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmServidorValidacion.resx">
       <DependentUpon>frmServidorValidacion.vb</DependentUpon>

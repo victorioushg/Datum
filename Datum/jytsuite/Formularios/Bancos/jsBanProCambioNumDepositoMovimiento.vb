@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports fTransport
 Public Class jsBanProCambioNumDepositoMovimiento
     Private Const sModulo As String = "Movimiento cambio número depósito "
 

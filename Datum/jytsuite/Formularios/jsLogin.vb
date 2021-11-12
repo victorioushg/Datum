@@ -1,6 +1,6 @@
 Imports MySql.Data.MySqlClient
 Imports Microsoft.Win32
-Imports fTransport
+
 Imports Syncfusion.Windows.Forms.Tools
 Imports Syncfusion.WinForms.Controls
 Imports System.Management
@@ -87,24 +87,25 @@ Public Class jsLogin
     End Function
 
     Private Function ServerCheck()
-        Dim MS As ManagementScope = New ManagementScope()
-        MS.Path.Server = "192.168.0.10" ' Registry.GetValue(jytsistema.DirReg, jytsistema.ClaveServidor, "").split(":")(0)
-        MS.Path.NamespacePath = "\root\default"  '' "\root\cimv2" 
-        MS.Options.EnablePrivileges = True
-        MS.Connect()
 
-        Dim mc As ManagementClass = New ManagementClass("stdRegProv")
-        mc.Scope = MS
+        ' Dim MS As ManagementScope = New ManagementScope()
+        ' MS.Path.Server = "192.168.0.10" ' Registry.GetValue(jytsistema.DirReg, jytsistema.ClaveServidor, "").split(":")(0)
+        ' MS.Path.NamespacePath = "\root\default"  '' "\root\cimv2" 
+        ' MS.Options.EnablePrivileges = True
+        ' MS.Connect()
 
-        Dim mbo As ManagementBaseObject
-        mbo = mc.GetMethodParameters("EnumValues")
+        ' Dim mc As ManagementClass = New ManagementClass("stdRegProv")
+        ' mc.Scope = MS
 
-        mbo.SetPropertyValue("sSubKeyName", "SOFTWARE\\VendorName\\Versions")
+        '        Dim mbo As ManagementBaseObject
+        '       mbo = mc.GetMethodParameters("EnumValues")
 
-        Dim subkeys As String() = mc.InvokeMethod("EnumValues", mbo, Nothing).Properties("sNames").Value
+        '       mbo.SetPropertyValue("sSubKeyName", "SOFTWARE\\VendorName\\Versions")
 
-        Dim mboS As ManagementBaseObject
-        Dim keyValue As String
+        '       Dim subkeys As String() = mc.InvokeMethod("EnumValues", mbo, Nothing).Properties("sNames").Value
+
+        '       Dim mboS As ManagementBaseObject
+        '      Dim keyValue As String
 
         'foreach(String strKey In subkeys)
         '{

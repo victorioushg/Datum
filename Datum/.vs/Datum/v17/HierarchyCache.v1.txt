@@ -1,0 +1,3587 @@
+﻿++Solution 'Datum' ‎(1 of 1 project)
+i:{00000000-0000-0000-0000-000000000000}:Datum.sln
+++Datum
+i:{00000000-0000-0000-0000-000000000000}:Datum
+++Service References
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\service references\
+++My Project
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\my project\
+++References
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++Datasets
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\datasets\
+++Formularios
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\
+++Models
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\models\
+++Control
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\models\control\
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\
+++CambioMoneda.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\models\control\cambiomoneda.vb
+++Monedas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\models\control\monedas.vb
+++Customer
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\models\customer\
+++General
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\models\general\
+++Modulos
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\
+++APITalker.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\apitalker.vb
+++ConsultasBancos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\consultasbancos.vb
+++ConsultasCompras.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\consultascompras.vb
+++ConsultasContabilidad.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\consultascontabilidad.vb
+++ConsultasGenerales.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\consultasgenerales.vb
+++ConsultasMedicionGerencial.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\consultasmediciongerencial.vb
+++ConsultasMercancias.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\consultasmercancias.vb
+++ConsultasPuntosdeVentas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\consultaspuntosdeventas.vb
+++ConsultasRecursosHumanos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\consultasrecursoshumanos.vb
+++ConsultasVentas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\consultasventas.vb
+++ConsultasVentasPlus.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\consultasventasplus.vb
+++FuncionesBancos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\funcionesbancos.vb
+++FuncionesCompras.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\funcionescompras.vb
+++FuncionesContabilidad.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\funcionescontabilidad.vb
+++FuncionesControl.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\funcionescontrol.vb
+++FuncionesGenericas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\funcionesgenericas.vb
+++FuncionesImpresionBematech.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\pos_datum\pos_datum\modulos\funcionesimpresionbematech.vb
+++FuncionesImpresionComandosESCEpsonP2.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\funcionesimpresioncomandosescepsonp2.vb
+++FuncionesImpresionFacturasClientes.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\funcionesimpresionfacturasclientes.vb
+++FuncionesImpresionFiscal.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\pos_datum\pos_datum\modulos\funcionesimpresionfiscal.vb
+++FuncionesImpresionFiscalAclas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\funcionesimpresionfiscalaclas.vb
+++FuncionesImpresionFiscalPnP.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\funcionesimpresionfiscalpnp.vb
+++FuncionesMercancias.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\funcionesmercancias.vb
+++FuncionesPuntosDeVenta.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\pos_datum\pos_datum\modulos\funcionespuntosdeventa.vb
+++FuncionesRecursosHumanos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\funcionesrecursoshumanos.vb
+++FuncionesReportesGraficos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\funcionesreportesgraficos.vb
+++FuncionesReportesRAW.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\funcionesreportesraw.vb
+++FuncionesTransportables.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\funcionestransportables.vb
+++FuncionesVentas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\funcionesventas.vb
+++GenericGet.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\genericget.vb
+++JsonHelper.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\jsonhelper.vb
+++jytsistema.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\jytsistema.vb
+++MyPrinter.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\myprinter.vb
+++TablaBaseDatos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\tablabasedatos.vb
+++TablasBancos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\tablasbancos.vb
+++TablasCompras.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\tablascompras.vb
+++TablasContabilidad.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\tablascontabilidad.vb
+++TablasControl.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\tablascontrol.vb
+++TablasMercancias.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\tablasmercancias.vb
+++TablasProduccion.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\tablasproduccion.vb
+++TablasPuntoDeVenta.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\tablaspuntodeventa.vb
+++TablasRecursosHumanos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\tablasrecursoshumanos.vb
+++TablasVentas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\modulos\tablasventas.vb
+++Reportes
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\
+++Resources
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\
+++22_16x16.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\22_16x16.png
+++22_32x32.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\22_32x32.png
+++59.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\59.png
+++72.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\72.png
+++89.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\89.png
+++Aactual.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\aactual.png
+++Abajo.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\abajo.png
+++Accesos.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\accesos.png
+++Aceptar.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\aceptar.png
+++Activos.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\activos.png
+++Activos1.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\activos1.png
+++Actualizar.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\actualizar.png
+++Adjunto.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\adjunto.png
+++Agregar.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\agregar.png
+++AgregarR.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\agregarr.png
+++AgregarServicio.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\agregarservicio.png
+++Almacen.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\almacen.png
+++Anterior.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\anterior.png
+++Apagar.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\apagar.png
+++Apagar_2.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\apagar_2.png
+++Apartados.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\apartados.png
+++Archivos.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\archivos.png
+++Arriba.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\arriba.png
+++Arrow - down.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\arrow - down.png
+++AsientosActuales.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\asientosactuales.png
+++AsientosDiferidos.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\asientosdiferidos.png
+++atach.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\atach.png
+++AvanceEfectivo.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\avanceefectivo.png
+++AvanceEfectivo1.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\avanceefectivo1.png
+++AvanceEfectivo2.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\avanceefectivo2.png
+++Ayuda.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\ayuda.png
+++bajar.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\bajar.png
+++Bancos.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\bancos.png
+++banda-amarilla.jpg
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\banda-amarilla.jpg
+++bandaazul.jpg
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\bandaazul.jpg
+++bandaazul1.jpg
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\bandaazul1.jpg
+++bullet_ball_green.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\bullet_ball_green.png
+++bullet_ball_green1.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\bullet_ball_green1.png
+++bullet_ball_yellow.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\bullet_ball_yellow.png
+++bullet_ball_yellow1.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\bullet_ball_yellow1.png
+++Buscar.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\buscar.png
+++button_cancel.ico
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\button_cancel.ico
+++button_ok.ico
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\button_ok.ico
+++CajaRegistradora1.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\cajaregistradora1.png
+++Cajas.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\cajas.png
+++Cajera.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\cajera.png
+++Calculadora.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\calculadora.png
+++Calendario.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\calendario.png
+++CambioUsuario.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\cambiousuario.png
+++Camembert.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\camembert.png
+++campos.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\campos.png
+++CanalesTipos.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\canalestipos.png
+++Cancelar.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\cancelar.png
+++Categorias.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\categorias.png
+++Clientes.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\clientes.png
+++Columnas.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\columnas.png
+++Conceptos.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\conceptos.png
+++Conceptos1.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\conceptos1.png
+++Constantes.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\constantes.png
+++Constantes1.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\constantes1.png
+++Consultas.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\consultas.png
+++conteoinventario.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\conteoinventario.png
+++CorredorCestaTicket.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\corredorcestaticket.png
+++Costos_produccion.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\costos_produccion.png
+++Cuentas.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\cuentas.png
+++cuotasmercancias.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\cuotasmercancias.png
+++DashBoard.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\dashboard.png
+++Datum_Blue.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\datum_blue.png
+++Datum_Verde.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\datum_verde.png
+++DefinicionBalances.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\definicionbalances.png
+++DepositarCestaTicket.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\depositarcestaticket.png
+++DepositarEfectivo.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\depositarefectivo.png
+++DepositarTarjetasCredito.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\depositartarjetascredito.png
+++Divisiones.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\divisiones.png
+++Download_fluo.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\download_fluo.png
+++Duplicar.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\duplicar.png
+++Duplicar1.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\duplicar1.png
+++Eliminar.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\eliminar.png
+++Envases.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\envases.png
+++estante.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\estante.png
+++EstructuraCargos.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\estructuracargos.png
+++Explosionar.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\explosionar.png
+++fabrica.jpg
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\fabrica.jpg
+++fabrica.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\fabrica.png
+++fabrica1.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\fabrica1.png
+++Facturas.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\facturas.png
+++FechaTrabajo.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\fechatrabajo.png
+++fondo-azul.jpg
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\fondo-azul.jpg
+++Formula.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\formula.png
+++Formulacion.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\formulacion.png
+++Formulas.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\formulas.png
+++forward.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\forward.png
+++golden_offer.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\golden_offer.png
+++GrupoVentas.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\grupoventas.png
+++Historico.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\historico.png
+++i_Advertencia.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\i_advertencia.png
+++i_Ayuda.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\i_ayuda.png
+++i_Error.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\i_error.png
+++i_Info.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\i_info.png
+++Image1.bmp
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\image1.bmp
+++Imprimir.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\imprimir.png
+++Información.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\información.png
+++Jerarquias.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\jerarquias.png
+++jytsuite.JPG
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\jytsuite.jpg
+++jytsuite1.jpg
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\jytsuite1.jpg
+++LogoJytsuite.JPG
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\logojytsuite.jpg
+++MapasAccesos.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\mapasaccesos.png
+++marcaNike.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\marcanike.png
+++Menos.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\menos.png
+++Mercas.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\mercas.png
+++Miscelaneos.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\miscelaneos.png
+++Modificar.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\modificar.png
+++nominas.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\nominas.png
+++NotasCredito.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\notascredito.png
+++NotasDebito.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\notasdebito.png
+++NotasEntrega.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\notasentrega.png
+++offer_50.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\offer_50.png
+++ordnen_produccion.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\ordnen_produccion.png
+++Parametros.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\parametros.png
+++Pedidos.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\pedidos.png
+++pinned.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\pinned.png
+++PlantillaAsiento.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\plantillaasiento.png
+++PoliciaISLR.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\policiaislr.png
+++PoliciaIVA.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\policiaiva.png
+++PreciosFuturos.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\preciosfuturos.png
+++PrePedidos.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\prepedidos.png
+++Presupuesto.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\presupuesto.png
+++Presupuestos.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\presupuestos.png
+++PreTransfers.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\pretransfers.png
+++Primero.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\primero.png
+++Probar.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\probar.png
+++Procesos.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\procesos.png
+++Proveedor1.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\proveedor1.png
+++Refresh.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\refresh.png
+++reiniciar.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\reiniciar.png
+++RemesasCestaTicket.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\remesascestaticket.png
+++Reportes.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\reportes.png
+++ReposicionCajas.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\reposicioncajas.png
+++restart.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\restart.png
+++RutasDespacho.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\rutasdespacho.png
+++RutasVisita.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\rutasvisita.png
+++seguimiento_produccion.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\seguimiento_produccion.png
+++seguir.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\seguir.png
+++seguir1.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\seguir1.png
+++Seleccionar.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\seleccionar.png
+++Servicios.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\servicios.png
+++Siguiente.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\siguiente.png
+++subir.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\subir.png
+++Supervisor1.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\supervisor1.png
+++tipCondicionpago.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\tipcondicionpago.png
+++tipoEstatusCliente.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\tipoestatuscliente.png
+++TrabajadorConcepto.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\trabajadorconcepto.png
+++Transferencias.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\transferencias.png
+++transportes.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\transportes.png
+++Turnos.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\turnos.png
+++Ultimo.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\ultimo.png
+++UnidadT.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\unidadt.png
+++unpinned.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\unpinned.png
+++Usuario.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\usuario.png
+++UtilisateurSZ.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\utilisateursz.png
+++Ventanas.jpg
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\ventanas.jpg
+++wait30.gif
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\wait30.gif
+++wait30trans.gif
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\wait30trans.gif
+++Workers.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\workers.png
+++WorkGroups.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\workgroups.png
+++yen.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\yen.png
+++Zonas.png
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\resources\zonas.png
+++app.config
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\app.config
+++ApplicationEvents.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\applicationevents.vb
+++LOGO.ico
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\logo.ico
+++MyExtendedBrowserControl.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\myextendedbrowsercontrol.vb
+++packages.config
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\packages.config
+++Progress_Bar.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\pos_datum\pos_datum\progress_bar.vb
+++Settings.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\settings.vb
+++Accessibility
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++C1.Win.C1Chart.2
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++C1.Win.C1Command.2
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++C1.Win.C1Input.2
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++C1.Win.C1List.2
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++C1.Win.C1Ribbon.2
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++C1.Win.C1SuperTooltip.2
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++C1.Win.C1TrueDBGrid.2
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++CrystalDecisions.CrystalReports.Engine
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++CrystalDecisions.ReportSource
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++CrystalDecisions.Shared
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++CrystalDecisions.Windows.Forms
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++FP_AclasBixolon
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++fTransport
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++Microsoft.CSharp
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++Microsoft.VisualBasic.Compatibility
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++MySql.Data
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++Newtonsoft.Json
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++PresentationCore
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++PresentationFramework
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++RawPrinterHeper
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++ReportesDeBancos
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++ReportesDeCompras
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++ReportesDeContabilidad
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++ReportesDeMedicionGerencial
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++ReportesDeMercancias
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++ReportesDeNomina
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++ReportesDePuntosDeVentas
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++ReportesDeVentas
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++stdole
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++Syncfusion.Core.WinForms
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++Syncfusion.Data.WinForms
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++Syncfusion.DataSource.WinForms
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++Syncfusion.GridCommon.WinForms
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++Syncfusion.Licensing
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++Syncfusion.SfDataGrid.WinForms
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++Syncfusion.SfInput.WinForms
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++Syncfusion.SfListView.WinForms
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++Syncfusion.Shared.Base
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.ComponentModel.Composition
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.ComponentModel.DataAnnotations
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.configuration
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Core
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Data
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Data.DataSetExtensions
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Deployment
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Design
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Drawing
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Drawing.Design
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.IO
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Management
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Net.Http
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Runtime
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Runtime.Serialization
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Security.Cryptography.Algorithms
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Security.Cryptography.Encoding
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Security.Cryptography.Primitives
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Security.Cryptography.X509Certificates
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Web
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Web.Services
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Windows.Forms
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Windows.Forms.DataVisualization
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Xaml
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++System.Xml
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++TfhkaNet
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++UIAutomationProvider
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++WindowsBase
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++WindowsFormsIntegration
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:
+++dsBancos.xsd
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\datasets\dsbancos.xsd
+++dsCompras.xsd
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\datasets\dscompras.xsd
+++dsContab.xsd
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\datasets\dscontab.xsd
+++dsControl.xsd
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\datasets\dscontrol.xsd
+++dsMercas.xsd
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\datasets\dsmercas.xsd
+++dsNomina.xsd
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\datasets\dsnomina.xsd
+++dsSIGME.xsd
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\datasets\dssigme.xsd
+++dsVentas.xsd
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\datasets\dsventas.xsd
+++dsVentasDos.Designer.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\datasets\dsventasdos.designer.vb
+++dsVentasDos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\datasets\dsventasdos.vb
+++dsVentasDos.xsd
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\datasets\dsventasdos.xsd
+++dsVentasPlus.xsd
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\datasets\dsventasplus.xsd
+++Bancos
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\
+++Compras
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\
+++Contabilidad
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\contabilidad\
+++MedicionGerencial
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mediciongerencial\
+++Mercancias
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\
+++Produccion
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\produccion\
+++PuntosDeVenta
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\puntosdeventa\
+++Recursos Humanos
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\
+++Ventas
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\
+++AcercaDe.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\acercade.vb
+++FechaSistema.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\fechasistema.vb
+++frmBuscar.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\frmbuscar.vb
+++frmEspere.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\frmespere.vb
+++frmServidor.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\frmservidor.vb
+++frmServidorValidacion.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\frmservidorvalidacion.vb
+++jsCambioEjercicio.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\jscambioejercicio.vb
+++jsGenCambioPrecioEnAlbaranes.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\jsgencambioprecioenalbaranes.vb
+++jsGenComentariosRenglones.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\jsgencomentariosrenglones.vb
+++jsGenConsultaRIF.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\jsgenconsultarif.vb
+++jsGenDescuentosCompras.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\jsgendescuentoscompras.vb
+++jsGenDescuentosComprasRenglon.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\jsgendescuentoscomprasrenglon.vb
+++jsGenDescuentosVentas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\jsgendescuentosventas.vb
+++jsGenFormasPago.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\jsgenformaspago.vb
+++jsGenFormasPagoMovimientoPlus.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\jsgenformaspagomovimientoplus.vb
+++jsGenIVAAlbaran.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\jsgenivaalbaran.vb
+++jsGenListadoSeleccion.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\jsgenlistadoseleccion.vb
+++jsGenProNumerosControl.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\jsgenpronumeroscontrol.vb
+++jsGenProNumerosControlMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\jsgenpronumeroscontrolmovimientos.vb
+++jsGenRenglonesMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\jsgenrenglonesmovimientos.vb
+++jsGenTablaArchivos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\jsgentablaarchivos.vb
+++jsGenTallasColores.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\jsgentallascolores.vb
+++jsLogin.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\jslogin.vb
+++scrMain.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\scrmain.vb
+++Customer.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\models\customer\customer.vb
+++functionStructure.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\models\general\functionstructure.vb
+++SimpleTableProperties.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\models\general\simpletableproperties.vb
+++ReportesBancos
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesbancos\
+++ReportesCompras
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportescompras\
+++ReportesContabilidad
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportescontabilidad\
+++ReportesMedicionGerencial
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\
+++ReportesMercancias
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\
+++ReportesNomina
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesnomina\
+++ReportesPuntosDeVenta
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportespuntosdeventa\
+++ReportesVentas
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesventas\
+++frmViewer.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\frmviewer.vb
+++Jytsuite_TemporaryKey.pfx
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\jytsuite_temporarykey.pfx
+++rpt.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\rpt.rpt
+++rptGENComentarios.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\rptgencomentarios.rpt
+++rptGENDescuentos.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\rptgendescuentos.rpt
+++rptGENFormaDePago.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\rptgenformadepago.rpt
+++rptGENIVA.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\rptgeniva.rpt
+++rptGENRelacionCT.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\rptgenrelacionct.rpt
+++rptGENTablaSimple.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\rptgentablasimple.rpt
+++rptGENTablaSimpleGrupoSubGrupo.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\rptgentablasimplegruposubgrupo.rpt
+++rptVentasAuditoriasClientes.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\rptventasauditoriasclientes.rpt
+++jsBanArcBancos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanarcbancos.vb
+++jsBanArcBancosMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanarcbancosmovimientos.vb
+++jsBanArcBancosMovimientosAsiento.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanarcbancosmovimientosasiento.vb
+++jsBanArcBancosMovimientosPlus.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanarcbancosmovimientosplus.vb
+++jsBanArcBancosTarjetas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanarcbancostarjetas.vb
+++jsBanArcCajas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanarccajas.vb
+++jsBanArcCajasAvanceEF.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanarccajasavanceef.vb
+++jsBanArcCajasMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanarccajasmovimientos.vb
+++jsBanArcDepositarCaja.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanarcdepositarcaja.vb
+++jsBanArcDepositarCajaPlus.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanarcdepositarcajaplus.vb
+++jsBanArcFormatoCheques.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanarcformatocheques.vb
+++jsBanArcFormatoChequesMovimiento.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanarcformatochequesmovimiento.vb
+++jsBanArcRemesasCestaTicket.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanarcremesascestaticket.vb
+++jsBanArcReposicionCaja.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanarcreposicioncaja.vb
+++jsBanArcReposicionCajaPlus.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanarcreposicioncajaplus.vb
+++jsBanProCambioNumDeposito.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanprocambionumdeposito.vb
+++jsBanProCambioNumDepositoMovimiento.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanprocambionumdepositomovimiento.vb
+++jsBanProCestaTicketDevuelto.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanprocestaticketdevuelto.vb
+++jsBanProChequeDevuelto.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanprochequedevuelto.vb
+++jsBanProConciliacionPlus.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanproconciliacionplus.vb
+++jsBanProDebitoBancario.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanprodebitobancario.vb
+++jsBanProListaCheques.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanprolistacheques.vb
+++jsBanProTransferencias.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanprotransferencias.vb
+++jsBanRepParametros.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\bancos\jsbanrepparametros.vb
+++jsComArcCompras.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomarccompras.vb
+++jsComArcGastos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomarcgastos.vb
+++jsComArcGrupoSubgrupo.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomarcgruposubgrupo.vb
+++jsComArcGrupoSubgrupoMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomarcgruposubgrupomovimientos.vb
+++jsComArcNotasCredito.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomarcnotascredito.vb
+++jsComArcNotasDebito.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomarcnotasdebito.vb
+++jsComArcOrdenesDeCompra.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomarcordenesdecompra.vb
+++jsComArcProveedores.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomarcproveedores.vb
+++jsComArcProveedoresCXP.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomarcproveedorescxp.vb
+++jsComArcProveedoresExpediente.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomarcproveedoresexpediente.vb
+++jsComArcRecepciones.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomarcrecepciones.vb
+++jsComArcUnidadCategoria.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomarcunidadcategoria.vb
+++jsComFormasPago.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomformaspago.vb
+++jsComProComprasInventario.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomprocomprasinventario.vb
+++jsComProComprasInventarioR.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomprocomprasinventarior.vb
+++jsComProHistoricoProveedores.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomprohistoricoproveedores.vb
+++jsComProProgramacionPago.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomproprogramacionpago.vb
+++jsComProProgramacionPagoMovimiento.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomproprogramacionpagomovimiento.vb
+++jsComProReconstruccionSaldos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomproreconstruccionsaldos.vb
+++jsComProRetencionesISLR.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomproretencionesislr.vb
+++jsComProRetencionesIVA.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomproretencionesiva.vb
+++jsComRepParametros.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\compras\jscomrepparametros.vb
+++jsContabArcActivosFijos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\contabilidad\jscontabarcactivosfijos.vb
+++jsContabArcAsientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\contabilidad\jscontabarcasientos.vb
+++jsContabArcAsientosMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\contabilidad\jscontabarcasientosmovimientos.vb
+++jsContabArcAsientosPlantilla.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\contabilidad\jscontabarcasientosplantilla.vb
+++jsContabArcAsientosPlantillaMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\contabilidad\jscontabarcasientosplantillamovimientos.vb
+++jsContabArcCuentas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\contabilidad\jscontabarccuentas.vb
+++jsContabArcCuentasMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\contabilidad\jscontabarccuentasmovimientos.vb
+++jsContabArcReglas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\contabilidad\jscontabarcreglas.vb
+++jsContabArcReglasMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\contabilidad\jscontabarcreglasmovimientos.vb
+++jsContabProApertura.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\contabilidad\jscontabproapertura.vb
+++jsContabProContabilizar.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\contabilidad\jscontabprocontabilizar.vb
+++jsContabProProcesaAsientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\contabilidad\jscontabproprocesaasientos.vb
+++jsContabProProcesarCuentas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\contabilidad\jscontabproprocesarcuentas.vb
+++jsContabProReversarAsientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\contabilidad\jscontabproreversarasientos.vb
+++jsContabRepParametros.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\contabilidad\jscontabrepparametros.vb
+++jsControlArcAccesos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcaccesos.vb
+++jsControlArcAccesosPlus.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcaccesosplus.vb
+++jsControlArcAlmacenes.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcalmacenes.vb
+++jsControlArcAlmacenesEstantes.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcalmacenesestantes.vb
+++jsControlArcAlmacenesMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcalmacenesmovimientos.vb
+++jsControlArcCalendario.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarccalendario.vb
+++jsControlArcCambioMonedas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarccambiomonedas.vb
+++jsControlArcCausasCreditos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarccausascreditos.vb
+++jsControlArcCausasCreditosMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarccausascreditosmovimientos.vb
+++jsControlArcCondicionesPagoCobros.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarccondicionespagocobros.vb
+++jsControlArcCondicionesPagoCobrosMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarccondicionespagocobrosmovimientos.vb
+++jsControlArcConjuntos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcconjuntos.vb
+++jsControlArcConjuntosMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcconjuntosmovimientos.vb
+++jsControlArcConjuntosMovimientosR.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcconjuntosmovimientosr.vb
+++jsControlArcContadores.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarccontadores.vb
+++jsControlArcCorredoresCestaTicket.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarccorredorescestaticket.vb
+++jsControlArcCorredoresCestaTicketMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarccorredorescestaticketmovimientos.vb
+++jsControlArcCorredoresCestaTicketMovimientosTipo.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarccorredorescestaticketmovimientostipo.vb
+++jsControlArcCorredoresCestaTicketMovimientosTipoComisiones.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarccorredorescestaticketmovimientostipocomisiones.vb
+++jsControlArcDivisiones.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcdivisiones.vb
+++jsControlArcDivisionesMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcdivisionesmovimientos.vb
+++jsControlArcEmpresas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcempresas.vb
+++jsControlArcImpresoraFiscal.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcimpresorafiscal.vb
+++jsControlArcImpresoraFiscalMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcimpresorafiscalmovimientos.vb
+++jsControlArcIVA.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarciva.vb
+++jsControlArcIVAMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcivamovimientos.vb
+++jsControlArcMapas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcmapas.vb
+++jsControlArcMonedas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcmonedas.vb
+++jsControlArcParametros.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcparametros.vb
+++jsControlArcParametrosMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcparametrosmovimientos.vb
+++jsControlArcRetencionesISLR.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcretencionesislr.vb
+++jsControlArcRetencionesISLRMovimiento.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcretencionesislrmovimiento.vb
+++jsControlArcRubrosSADA.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcrubrossada.vb
+++jsControlArcRubrosSADAMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcrubrossadamovimientos.vb
+++jsControlArcTablaSimple.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarctablasimple.vb
+++jsControlArcTablaSimpleMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarctablasimplemovimientos.vb
+++jsControlArcTablaSimpleSeleccion.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarctablasimpleseleccion.vb
+++jsControlArcTarjetas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarctarjetas.vb
+++jsControlArcTarjetasMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarctarjetasmovimientos.vb
+++jsControlArcTerritorio.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcterritorio.vb
+++jsControlArcTerritorioMovimiento.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcterritoriomovimiento.vb
+++jsControlArcTransportes.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarctransportes.vb
+++jsControlArcTransportesMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarctransportesmovimientos.vb
+++jsControlArcUsuarios.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcusuarios.vb
+++jsControlArcUsuariosMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcusuariosmovimientos.vb
+++jsControlArcUT.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcut.vb
+++jsControlArcUTMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolarcutmovimientos.vb
+++jsControlProCierreDiario.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolprocierrediario.vb
+++jsControlProCierreEjercicio.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolprocierreejercicio.vb
+++jsControlProConsecutivos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolproconsecutivos.vb
+++jsControlProPasaDatosEjercicio.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolpropasadatosejercicio.vb
+++jsControlProReconversionMonetaria.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolproreconversionmonetaria.vb
+++jsControlProVerificaBD.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\control\jscontrolproverificabd.vb
+++jsSIGMEArcDashBoard.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mediciongerencial\jssigmearcdashboard.vb
+++jsSIGMERepParametros.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mediciongerencial\jssigmerepparametros.vb
+++jsSIGMERepParametrosPlus.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mediciongerencial\jssigmerepparametrosplus.vb
+++jsMerArcComponentesCombo.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarccomponentescombo.vb
+++jsMerArcComponentesComboMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarccomponentescombomovimientos.vb
+++jsMerArcConteos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcconteos.vb
+++jsMerArcCuotasAnuales.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarccuotasanuales.vb
+++jsMerArcEnvases.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcenvases.vb
+++jsMerArcEnvasesMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcenvasesmovimientos.vb
+++jsMerArcJerarquias.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcjerarquias.vb
+++jsMerArcJerarquiasMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcjerarquiasmovimientos.vb
+++jsMerArcListaCostosPreciosNormal.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarclistacostospreciosnormal.vb
+++jsMerArcListaCostosPreciosSeleccionable.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarclistacostospreciosseleccionable.vb
+++jsMerArcListadoItemsEnCompras.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarclistadoitemsencompras.vb
+++jsMerArcListadoItemsEnFacturas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarclistadoitemsenfacturas.vb
+++jsMerArcLotesMercancia.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarclotesmercancia.vb
+++jsMerArcLotesMercanciaMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarclotesmercanciamovimientos.vb
+++jsMerArcMercancias.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcmercancias.vb
+++jsMerArcMercanciasEquivalencias.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcmercanciasequivalencias.vb
+++jsMerArcMercanciasExpediente.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcmercanciasexpediente.vb
+++jsMerArcMercanciasMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcmercanciasmovimientos.vb
+++jsMerArcOfertas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcofertas.vb
+++jsMerArcOfertasMovimiento.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcofertasmovimiento.vb
+++jsMerArcOfertasMovimientosBono.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcofertasmovimientosbono.vb
+++jsMerArcPedidosAlmacen.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcpedidosalmacen.vb
+++jsMerArcPreciosEspeciales.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcpreciosespeciales.vb
+++jsMerArcPreciosEspecialesMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcpreciosespecialesmovimientos.vb
+++jsMerArcPreciosFuturos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcpreciosfuturos.vb
+++jsMerArcPreciosFuturosMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcpreciosfuturosmovimientos.vb
+++jsMerArcServicios.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcservicios.vb
+++jsMerArcServiciosA.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcserviciosa.vb
+++jsMerArcServiciosMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarcserviciosmovimientos.vb
+++jsMerArcTransferencias.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerarctransferencias.vb
+++jsMerProCargarMercanciasConteo.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerprocargarmercanciasconteo.vb
+++jsMerProCargarMercanciasConteoDinamico.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerprocargarmercanciasconteodinamico.vb
+++jsMerProCombos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerprocombos.vb
+++jsMerProCombosReverso.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerprocombosreverso.vb
+++jsMerProCostos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerprocostos.vb
+++jsMerProCuotasCompras.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerprocuotascompras.vb
+++jsMerProCuotasMercancias.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerprocuotasmercancias.vb
+++jsMerProExistenciasAlmacen.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerproexistenciasalmacen.vb
+++jsMerProMercanciasDetallistas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerpromercanciasdetallistas.vb
+++jsMerProProcesarConteo.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerproprocesarconteo.vb
+++jsMerProReconstruirGananciasMercancias.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerproreconstruirgananciasmercancias.vb
+++jsMerProReconstruirMovimientosMercancias.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerproreconstruirmovimientosmercancias.vb
+++jsMerProReconstruirPreciosMercancias.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerproreconstruirpreciosmercancias.vb
+++jsMerProReversarConteo.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerproreversarconteo.vb
+++jsMerRepParametros.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\mercancias\jsmerrepparametros.vb
+++jsProArcCostosFijos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\produccion\jsproarccostosfijos.vb
+++jsProArcCostosFijosMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\produccion\jsproarccostosfijosmovimientos.vb
+++jsProArcFormulaciones.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\produccion\jsproarcformulaciones.vb
+++jsProArcFormulacionesRenglones.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\produccion\jsproarcformulacionesrenglones.vb
+++jsProArcOrdenProduccion.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\produccion\jsproarcordenproduccion.vb
+++jsProArcOrdenProduccionRenglones.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\produccion\jsproarcordenproduccionrenglones.vb
+++jsProArcSeguimientoProduccion.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\produccion\jsproarcseguimientoproduccion.vb
+++jsPOSArcCajas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\puntosdeventa\jsposarccajas.vb
+++jsPOSArcCajasMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\puntosdeventa\jsposarccajasmovimientos.vb
+++jsPOSArcCajeros.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\puntosdeventa\jsposarccajeros.vb
+++jsPOSArcCajerosMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\puntosdeventa\jsposarccajerosmovimientos.vb
+++jsPOSArcClientes.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\puntosdeventa\jsposarcclientes.vb
+++jsPOSArcClientesMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\puntosdeventa\jsposarcclientesmovimientos.vb
+++jsPOSArcFacturas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\puntosdeventa\jsposarcfacturas.vb
+++jsPOSArcPerfiles.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\puntosdeventa\jsposarcperfiles.vb
+++jsPOSArcPerfilesMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\puntosdeventa\jsposarcperfilesmovimientos.vb
+++jsPOSArcSupervisores.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\puntosdeventa\jsposarcsupervisores.vb
+++jsPOSArcSupervisorMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\puntosdeventa\jsposarcsupervisormovimientos.vb
+++jsPOSProCierre.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\puntosdeventa\jsposprocierre.vb
+++jsPOSProReprocesarMercancias.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\puntosdeventa\jsposproreprocesarmercancias.vb
+++jsPOSRepParametros.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\puntosdeventa\jsposrepparametros.vb
+++jsNomArcCargos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomarccargos.vb
+++jsNomArcCargosMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomarccargosmovimientos.vb
+++jsNomArcConceptos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomarcconceptos.vb
+++jsNomArcConceptosMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomarcconceptosmovimientos.vb
+++jsNomArcConstantes.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomarcconstantes.vb
+++jsNomArcConstantesMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomarcconstantesmovimientos.vb
+++jsNomArcGrupos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomarcgrupos.vb
+++jsNomArcGruposMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomarcgruposmovimientos.vb
+++jsNomArcNominas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomarcnominas.vb
+++jsNomArcNominasMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomarcnominasmovimientos.vb
+++jsNomArcTrabajadores.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomarctrabajadores.vb
+++jsNomArcTrabajadoresCuotas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomarctrabajadorescuotas.vb
+++jsNomArcTrabajadoresMovimientosAsistencia.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomarctrabajadoresmovimientosasistencia.vb
+++jsNomArcTrabajadoresMovimientosExpediente.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomarctrabajadoresmovimientosexpediente.vb
+++jsNomArcTrabajadoresXConcepto.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomarctrabajadoresxconcepto.vb
+++jsNomArcTurnosHorarios.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomarcturnoshorarios.vb
+++jsNomProArchivosTXT.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomproarchivostxt.vb
+++jsNomProProcesarNomina.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomproprocesarnomina.vb
+++jsNomProReProcesarConceptos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomproreprocesarconceptos.vb
+++jsNomProReversarNomina.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomproreversarnomina.vb
+++jsNomRepParametros.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\recursos humanos\jsnomrepparametros.vb
+++jsVenArcAsesores.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcasesores.vb
+++jsVenArcAsesoresDescuentos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcasesoresdescuentos.vb
+++jsVenArcAsesoresMovimientosPorcentajesComisionCob.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcasesoresmovimientosporcentajescomisioncob.vb
+++jsVenArcAsesoresMovimientosPorcentajesComisionCobJerarquias.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcasesoresmovimientosporcentajescomisioncobjerarquias.vb
+++jsVenArcCanalTiponegocio.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarccanaltiponegocio.vb
+++jsVenArcCanalTipoNegocioMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarccanaltiponegociomovimientos.vb
+++jsVenArcClientes.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcclientes.vb
+++jsVenArcClientesCIs.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcclientescis.vb
+++jsVenArcClientesCXCPlus.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcclientescxcplus.vb
+++jsVenArcClientesExpediente.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcclientesexpediente.vb
+++jsVenArcClientesSADA.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcclientessada.vb
+++jsVenArcClientesVisitas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcclientesvisitas.vb
+++jsVenArcCXCCestaTicket.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarccxccestaticket.vb
+++jsVenArcCXCCestaTicketValor.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarccxccestaticketvalor.vb
+++jsVenArcFacturas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcfacturas.vb
+++jsVenArcListaRenglonesFacturasCXC.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarclistarenglonesfacturascxc.vb
+++jsVenArcNotasCredito.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcnotascredito.vb
+++jsVenArcNotasDebito.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcnotasdebito.vb
+++jsVenArcNotasEntrega.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcnotasentrega.vb
+++jsVenArcPedidos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcpedidos.vb
+++jsVenArcPrePedidos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcprepedidos.vb
+++jsVenArcPresupuestos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcpresupuestos.vb
+++jsVenArcRutasDespacho.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcrutasdespacho.vb
+++jsVenArcRutasVisita.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcrutasvisita.vb
+++jsVenArcRutasVisitaMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcrutasvisitamovimientos.vb
+++jsVenArcValidacionControlDebitoCredito.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenarcvalidacioncontroldebitocredito.vb
+++jsVenProAnulacionDocumentos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenproanulaciondocumentos.vb
+++jsVenProBloqueoDeClientes.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenprobloqueodeclientes.vb
+++jsVenProCierreDiario.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenprocierrediario.vb
+++jsVenProCierreMensual.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenprocierremensual.vb
+++jsVenProCuotasAsesores.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenprocuotasasesores.vb
+++jsVenProGuiaDespacho.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenproguiadespacho.vb
+++jsVenProGuiaDespachoImpresion.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenproguiadespachoimpresion.vb
+++jsVenProGuiaDespachoMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenproguiadespachomovimientos.vb
+++jsVenProGuiaPedidos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenproguiapedidos.vb
+++jsVenProGuiaPedidosMovimientos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenproguiapedidosmovimientos.vb
+++jsVenProHistoricoClientes.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenprohistoricoclientes.vb
+++jsVenProLimiteCreditoClientes.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenprolimitecreditoclientes.vb
+++jsVenProMercanciasEnDespachos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenpromercanciasendespachos.vb
+++jsVenProNestleBPAID.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenpronestlebpaid.vb
+++jsVenProPedidosFacturacion.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenpropedidosfacturacion.vb
+++jsVenProPreCancelaciones.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenproprecancelaciones.vb
+++jsVenProPrepedidosPedidos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenproprepedidospedidos.vb
+++jsVenProReconstruccionSaldos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenproreconstruccionsaldos.vb
+++jsVenProRelacionFacturas.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenprorelacionfacturas.vb
+++jsVenProRelacionFacturasMovimientosPlus.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenprorelacionfacturasmovimientosplus.vb
+++jsVenProRelacionNotasCredito.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenprorelacionnotascredito.vb
+++jsVenProRelacionNotasCreditoImpresion.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenprorelacionnotascreditoimpresion.vb
+++jsVenProRelacionNotasCréditoMovimientosPlus.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenprorelacionnotascréditomovimientosplus.vb
+++jsVenRepParametros.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenrepparametros.vb
+++jsVenRepParametrosDos.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenrepparametrosdos.vb
+++jsVenRepParametrosPlus.vb
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\formularios\ventas\jsvenrepparametrosplus.vb
+++rptBanBancosMovimientos.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesbancos\rptbanbancosmovimientos.rpt
+++rptBanCajaMovimientos.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesbancos\rptbancajamovimientos.rpt
+++rptBanChequesDevueltos.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesbancos\rptbanchequesdevueltos.rpt
+++rptBanComprobanteEgreso.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesbancos\rptbancomprobanteegreso.rpt
+++rptBanComprobanteEgresoContable.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesbancos\rptbancomprobanteegresocontable.rpt
+++rptBanConciliacionBancaria.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesbancos\rptbanconciliacionbancaria.rpt
+++rptBanDepositos.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesbancos\rptbandepositos.rpt
+++rptBanEstadodeCuenta.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesbancos\rptbanestadodecuenta.rpt
+++rptBanReposisionSaldoCaja.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesbancos\rptbanreposisionsaldocaja.rpt
+++rptBanTransferencia.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesbancos\rptbantransferencia.rpt
+++rptComprasFichaProveedor.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportescompras\rptcomprasfichaproveedor.rpt
+++rptComprasLibroIVAGeneral.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportescompras\rptcompraslibroivageneral.rpt
+++rptComprasRecibo.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportescompras\rptcomprasrecibo.rpt
+++rptComprasRetencionISLR.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportescompras\rptcomprasretencionislr.rpt
+++rptComprasRetencionIVA.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportescompras\rptcomprasretencioniva.rpt
+++rptContabAsiento.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportescontabilidad\rptcontabasiento.rpt
+++rptContabBalanceComprobacion.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportescontabilidad\rptcontabbalancecomprobacion.rpt
+++rptContabBalanceGeneral.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportescontabilidad\rptcontabbalancegeneral.rpt
+++rptContabCuentas.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportescontabilidad\rptcontabcuentas.rpt
+++rptContabDiario.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportescontabilidad\rptcontabdiario.rpt
+++rptContabGananciasPerdidas.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportescontabilidad\rptcontabgananciasperdidas.rpt
+++rptContabMayorAnalitico.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportescontabilidad\rptcontabmayoranalitico.rpt
+++rptContabPlantillaAsiento.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportescontabilidad\rptcontabplantillaasiento.rpt
+++rptSIGMEActivacionMesMes0G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmeactivacionmesmes0g.rpt
+++rptSIGMEActivacionMesMes0GPlus.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmeactivacionmesmes0gplus.rpt
+++rptSIGMEActivacionMesMes1G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmeactivacionmesmes1g.rpt
+++rptSIGMEActivacionMesMes2G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmeactivacionmesmes2g.rpt
+++rptSIGMEActivacionMesMes3G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmeactivacionmesmes3g.rpt
+++rptSIGMEActivacionMesMes4G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmeactivacionmesmes4g.rpt
+++rptSIGMEComprasVentasComparativas.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmecomprasventascomparativas.rpt
+++rptSIGMEDescuentosAsesor0G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmedescuentosasesor0g.rpt
+++rptSIGMEDescuentosAsesor1G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmedescuentosasesor1g.rpt
+++rptSIGMEDescuentosAsesor2G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmedescuentosasesor2g.rpt
+++rptSIGMEDescuentosAsesor3G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmedescuentosasesor3g.rpt
+++rptSIGMEDescuentosAsesor4G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmedescuentosasesor4g.rpt
+++rptSIGMEDescuentosAsesorMes0G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmedescuentosasesormes0g.rpt
+++rptSIGMEDescuentosAsesorMes1G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmedescuentosasesormes1g.rpt
+++rptSIGMEDescuentosAsesorMes2G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmedescuentosasesormes2g.rpt
+++rptSIGMEDescuentosAsesorMes3G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmedescuentosasesormes3g.rpt
+++rptSIGMEDescuentosAsesorMes4G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmedescuentosasesormes4g.rpt
+++rptSIGMEDevolucionCausa0G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmedevolucioncausa0g.rpt
+++rptSIGMEDevolucionesAsesorMesMes0G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmedevolucionesasesormesmes0g.rpt
+++rptSIGMEDevolucionesAsesorMesMes1G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmedevolucionesasesormesmes1g.rpt
+++rptSIGMEDropSizeMesMes.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmedropsizemesmes.rpt
+++rptSIGMEGananciasCestaTicket.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmegananciascestaticket.rpt
+++rptSIGMEGananciasCestaTicketMesMes.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmegananciascestaticketmesmes.rpt
+++rptSIGMEGananciasFacturas0G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmegananciasfacturas0g.rpt
+++rptSIGMEGananciasFacturas1G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmegananciasfacturas1g.rpt
+++rptSIGMEGananciasFacturas2G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmegananciasfacturas2g.rpt
+++rptSIGMEGananciasFacturas3G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmegananciasfacturas3g.rpt
+++rptSIGMEGananciasFacturas4G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmegananciasfacturas4g.rpt
+++rptSIGMEGananciasItem0G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmegananciasitem0g.rpt
+++rptSIGMEGananciasItem1G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmegananciasitem1g.rpt
+++rptSIGMEGananciasItem2G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmegananciasitem2g.rpt
+++rptSIGMEGananciasItem3G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmegananciasitem3g.rpt
+++rptSIGMEGananciasItem4G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmegananciasitem4g.rpt
+++rptSIGMEGananciasItemMesMes0G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmegananciasitemmesmes0g.rpt
+++rptSIGMEGananciasItemMesMes1G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmegananciasitemmesmes1g.rpt
+++rptSIGMEGananciasItemMesMes2G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmegananciasitemmesmes2g.rpt
+++rptSIGMEGananciasItemMesMes3G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmegananciasitemmesmes3g.rpt
+++rptSIGMEIngresosAsesor0G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmeingresosasesor0g.rpt
+++rptSIGMEVentasComprasPorJerarquia.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmeventascomprasporjerarquia.rpt
+++rptSIGMEVentasMesMes0G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmeventasmesmes0g.rpt
+++rptSIGMEVentasMesMes1G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmediciongerencial\rptsigmeventasmesmes1g.rpt
+++rptMercanciaBarra.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciabarra.rpt
+++rptMercanciaBarraEstante.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciabarraestante.rpt
+++rptMercanciaBarraHabladorNevera.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciabarrahabladornevera.rpt
+++rptMercanciaBarraPequeña.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciabarrapequeña.rpt
+++rptMercanciaBarraPrecio.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciabarraprecio.rpt
+++rptMercanciaCatalogoSG.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciacatalogosg.rpt
+++rptMercanciaComprasMer0G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciacomprasmer0g.rpt
+++rptMercanciaComprasMer1G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciacomprasmer1g.rpt
+++rptMercanciaComprasMer2G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciacomprasmer2g.rpt
+++rptMercanciaComprasMer3G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciacomprasmer3g.rpt
+++rptMercanciaConteo.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaconteo.rpt
+++rptMercanciaEquivalencias1G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaequivalencias1g.rpt
+++rptMercanciaEquivalencias2G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaequivalencias2g.rpt
+++rptMercanciaEquivalencias3G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaequivalencias3g.rpt
+++rptMercanciaEquivalencias4G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaequivalencias4g.rpt
+++rptMercanciaEquivalenciasSG.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaequivalenciassg.rpt
+++rptMercanciaExistencias1G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaexistencias1g.rpt
+++rptMercanciaExistencias2G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaexistencias2g.rpt
+++rptMercanciaExistencias3G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaexistencias3g.rpt
+++rptMercanciaExistencias4G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaexistencias4g.rpt
+++rptMercanciaExistenciasSG.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaexistenciassg.rpt
+++rptMercanciaIventarioLegalSG.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaiventariolegalsg.rpt
+++rptMercanciaLeyDeCostos.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercancialeydecostos.rpt
+++rptMercanciaMovimiento0G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciamovimiento0g.rpt
+++rptMercanciaMovimiento1G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciamovimiento1g.rpt
+++rptMercanciaMovimiento2G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciamovimiento2g.rpt
+++rptMercanciaMovimiento3G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciamovimiento3g.rpt
+++rptMercanciaMovimiento4G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciamovimiento4g.rpt
+++rptMercanciaMovimientosResumen.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciamovimientosresumen.rpt
+++rptMercanciaPedidosAlmacen.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciapedidosalmacen.rpt
+++rptMercanciaPreciosEquivalentes0G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciapreciosequivalentes0g.rpt
+++rptMercanciaPreciosEquivalentes1G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciapreciosequivalentes1g.rpt
+++rptMercanciaPreciosEquivalentes2G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciapreciosequivalentes2g.rpt
+++rptMercanciaPreciosEquivalentes3G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciapreciosequivalentes3g.rpt
+++rptMercanciaPreciosEquivalentes4G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciapreciosequivalentes4g.rpt
+++rptMercanciaServicios.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaservicios.rpt
+++rptMercanciaServiciosMovimientos0G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaserviciosmovimientos0g.rpt
+++rptMercanciaTransferencia.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciatransferencia.rpt
+++rptMercanciaTransferencias0G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciatransferencias0g.rpt
+++rptMercanciaVentaPlanaHEINZ.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaventaplanaheinz.rpt
+++rptMercanciaVentasMerActG0.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaventasmeractg0.rpt
+++rptMercanciaVentasMerActG1.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaventasmeractg1.rpt
+++rptMercanciaVentasMerActG2.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaventasmeractg2.rpt
+++rptMercanciaVentasMerActG3.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaventasmeractg3.rpt
+++rptMercanciaVentasMerActG4.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaventasmeractg4.rpt
+++rptMercanciaVentasMerG0.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaventasmerg0.rpt
+++rptMercanciaVentasMerG1.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaventasmerg1.rpt
+++rptMercanciaVentasMerG2.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaventasmerg2.rpt
+++rptMercanciaVentasMerG3.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaventasmerg3.rpt
+++rptMercanciaVentasNetasMerG0.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaventasnetasmerg0.rpt
+++rptMercanciaVentasPlana.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesmercancias\rptmercanciaventasplana.rpt
+++rptPOSFacturas.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportespuntosdeventa\rptposfacturas.rpt
+++rptPOSReporteX.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportespuntosdeventa\rptposreportex.rpt
+++rptPOSReporteXPlus.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportespuntosdeventa\rptposreportexplus.rpt
+++rptVentasAsesor0G.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesventas\rptventasasesor0g.rpt
+++rptVentasLibroIVAGeneral.rpt
+i:{1c501ef5-f8ba-4704-8eba-0ad58ed15f85}:d:\desarrollo\proyectosdotnet\datum\datum\jytsuite\reportes\reportesventas\rptventaslibroivageneral.rpt
+++BemaFI32.dll
+++BemaFI32.ini
+++BEMAFI32_ES.chm
+++bin
+++Debug
+++Release
+++x86
+++app.publish
+++font
+++AxShockwaveFlashObjects.dll
+++C1.Win.C1Chart.2.dll
+++C1.Win.C1Command.2.dll
+++C1.Win.C1Input.2.dll
+++C1.Win.C1List.2.dll
+++C1.Win.C1Ribbon.2.dll
+++C1.Win.C1SuperTooltip.2.dll
+++C1.Win.C1TrueDBGrid.2.dll
+++CrystalDecisions.CrystalReports.Engine.dll
+++CrystalDecisions.ReportAppServer.ClientDoc.dll
+++CrystalDecisions.ReportAppServer.CommLayer.dll
+++CrystalDecisions.ReportAppServer.CommonControls.dll
+++CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+++CrystalDecisions.ReportAppServer.Controllers.dll
+++CrystalDecisions.ReportAppServer.CubeDefModel.dll
+++CrystalDecisions.ReportAppServer.DataDefModel.dll
+++CrystalDecisions.ReportAppServer.DataSetConversion.dll
+++CrystalDecisions.ReportAppServer.ObjectFactory.dll
+++CrystalDecisions.ReportAppServer.Prompting.dll
+++CrystalDecisions.ReportAppServer.ReportDefModel.dll
+++CrystalDecisions.ReportAppServer.XmlSerialize.dll
+++CrystalDecisions.ReportSource.dll
+++CrystalDecisions.Shared.dll
+++CrystalDecisions.Windows.Forms.dll
+++Datum.application
+++Datum.exe
+++Datum.exe.config
+++Datum.exe.manifest
+++Datum.pdb
+++Datum.xml
+++foto0000000001.jpg
+++FP_AclasBixolon.dll
+++FP_AclasBixolon.pdb
+++fTransport.dll
+++fTransport.pdb
+++logo01.jpg
+++logo03.jpg
+++logo04.jpg
+++MySql.Data.dll
+++MySql.Data.xml
+++Newtonsoft.Json.dll
+++Newtonsoft.Json.xml
+++RawPrinterHeper.dll
+++ReportesDeBancos.dll
+++ReportesDeBancos.pdb
+++ReportesDeBancos.xml
+++ReportesDeCompras.dll
+++ReportesDeCompras.pdb
+++ReportesDeCompras.xml
+++ReportesDeContabilidad.dll
+++ReportesDeContabilidad.pdb
+++ReportesDeContabilidad.xml
+++ReportesDeMedicionGerencial.dll
+++ReportesDeMedicionGerencial.pdb
+++ReportesDeMedicionGerencial.xml
+++ReportesDeMercancias.dll
+++ReportesDeMercancias.pdb
+++ReportesDeMercancias.xml
+++ReportesDeNomina.dll
+++ReportesDeNomina.pdb
+++ReportesDeNomina.xml
+++ReportesDePuntosDeVentas.dll
+++ReportesDePuntosDeVentas.pdb
+++ReportesDePuntosDeVentas.xml
+++ReportesDeVentas.dll
+++ReportesDeVentas.pdb
+++ReportesDeVentas.xml
+++ShockwaveFlashObjects.dll
+++stdole.dll
+++Syncfusion.Core.WinForms.dll
+++Syncfusion.Core.WinForms.xml
+++Syncfusion.Data.WinForms.dll
+++Syncfusion.Data.WinForms.xml
+++Syncfusion.DataSource.WinForms.dll
+++Syncfusion.DataSource.WinForms.xml
+++Syncfusion.GridCommon.WinForms.dll
+++Syncfusion.GridCommon.WinForms.xml
+++Syncfusion.Licensing.dll
+++Syncfusion.SfDataGrid.WinForms.dll
+++Syncfusion.SfDataGrid.WinForms.xml
+++Syncfusion.SfInput.WinForms.dll
+++Syncfusion.SfInput.WinForms.xml
+++Syncfusion.SfListView.WinForms.dll
+++Syncfusion.SfListView.WinForms.xml
+++Syncfusion.Shared.Base.dll
+++Syncfusion.Shared.Base.xml
+++TfhkaNet.dll
+++ClassDiagram1.cd
+++jsControlArcCausasCreditos.designer.vb
+++jsControlArcCausasCreditos.resx
+++jsLogin.designer.vb
+++jsLogin.resx
+++LOGO2.ico
+++obj
+++TempPE
+++.NETFramework,Version=v4.0.AssemblyAttributes.vb
+++.NETFramework,Version=v4.7.2.AssemblyAttributes.vb
+++Datum.AcercaDe.resources
+++datum.exe.licenses
+++Datum.FechaSistema.resources
+++Datum.frmBuscar.resources
+++Datum.frmEspere.resources
+++Datum.frmServidor.resources
+++Datum.frmServidorValidacion.resources
+++Datum.frmViewer.resources
+++Datum.jsBanArcBancos.resources
+++Datum.jsBanArcBancosMovimientos.resources
+++Datum.jsBanArcBancosMovimientosAsiento.resources
+++Datum.jsBanArcBancosMovimientosPlus.resources
+++Datum.jsBanArcBancosTarjetas.resources
+++Datum.jsBanArcCajas.resources
+++Datum.jsBanArcCajasAvanceEF.resources
+++Datum.jsBanArcCajasMovimientos.resources
+++Datum.jsBanArcDepositarCaja.resources
+++Datum.jsBanArcDepositarCajaPlus.resources
+++Datum.jsBanArcFormatoCheques.resources
+++Datum.jsBanArcFormatoChequesMovimiento.resources
+++Datum.jsBanArcRemesasCestaTicket.resources
+++Datum.jsBanArcReposicionCaja.resources
+++Datum.jsBanArcReposicionCajaPlus.resources
+++Datum.jsBanProCambioNumDeposito.resources
+++Datum.jsBanProCambioNumDepositoMovimiento.resources
+++Datum.jsBanProCestaTicketDevuelto.resources
+++Datum.jsBanProChequeDevuelto.resources
+++Datum.jsBanProConciliacionPlus.resources
+++Datum.jsBanProDebitoBancario.resources
+++Datum.jsBanProListaCheques.resources
+++Datum.jsBanProTransferencias.resources
+++Datum.jsBanRepParametros.resources
+++Datum.jsCambioEjercicio.resources
+++Datum.jsComArcCompras.resources
+++Datum.jsComArcGastos.resources
+++Datum.jsComArcGrupoSubgrupo.resources
+++Datum.jsComArcGrupoSubgrupoMovimientos.resources
+++Datum.jsComArcNotasCredito.resources
+++Datum.jsComArcNotasDebito.resources
+++Datum.jsComArcOrdenesDeCompra.resources
+++Datum.jsComArcProveedores.resources
+++Datum.jsComArcProveedoresCXP.resources
+++Datum.jsComArcProveedoresExpediente.resources
+++Datum.jsComArcRecepciones.resources
+++Datum.jsComArcUnidadCategoria.resources
+++Datum.jsComFormasPago.resources
+++Datum.jsComProComprasInventario.resources
+++Datum.jsComProComprasInventarioR.resources
+++Datum.jsComProHistoricoProveedores.resources
+++Datum.jsComProProgramacionPago.resources
+++Datum.jsComProProgramacionPagoMovimiento.resources
+++Datum.jsComProReconstruccionDeSaldos.resources
+++Datum.jsComProRetencionesISLR.resources
+++Datum.jsComProRetencionesIVA.resources
+++Datum.jsComRepParametros.resources
+++Datum.jsContabArcActivosFijos.resources
+++Datum.jsContabArcAsientos.resources
+++Datum.jsContabArcAsientosMovimientos.resources
+++Datum.jsContabArcAsientosPlantilla.resources
+++Datum.jsContabArcAsientosPlantillaMovimientos.resources
+++Datum.jsContabArcCuentas.resources
+++Datum.jsContabArcCuentasMovimientos.resources
+++Datum.jsContabArcReglas.resources
+++Datum.jsContabArcReglasMovimientos.resources
+++Datum.jsContabProApertura.resources
+++Datum.jsContabProContabilizar.resources
+++Datum.jsContabProProcesaAsientos.resources
+++Datum.jsContabProProcesarCuentas.resources
+++Datum.jsContabProReversaraAsientos.resources
+++Datum.jsContabRepParametros.resources
+++Datum.jsControlArcAccesos.resources
+++Datum.jsControlArcAccesosPlus.resources
+++Datum.jsControlArcAlmacenes.resources
+++Datum.jsControlArcAlmacenesEstantes.resources
+++Datum.jsControlArcAlmacenesMovimientos.resources
+++Datum.jsControlArcCalendario.resources
+++Datum.jsControlArcCambioMonedas.resources
+++Datum.jsControlArcCausasCreditos.resources
+++Datum.jsControlArcCausasCreditosMovimientos.resources
+++Datum.jsControlArcCondicionesPagoCobros.resources
+++Datum.jsControlArcCondicionesPagoCobrosMovimientos.resources
+++Datum.jsControlArcConjuntos.resources
+++Datum.jsControlArcConjuntosMovimientos.resources
+++Datum.jsControlArcConjuntosMovimientosR.resources
+++Datum.jsControlArcContadores.resources
+++Datum.jsControlArcCorredoresCestaTicket.resources
+++Datum.jsControlArcCorredoresCestaTicketMovimientos.resources
+++Datum.jsControlArcCorredoresCestaTicketMovimientosTipo.resources
+++Datum.jsControlArcCorredoresCestaTicketMovimientosTipoComisiones.resources
+++Datum.jsControlArcDivisiones.resources
+++Datum.jsControlArcDivisionesMovimientos.resources
+++Datum.jsControlArcEmpresas.resources
+++Datum.jsControlArcImpresoraFiscal.resources
+++Datum.jsControlArcImpresoraFiscalMovimientos.resources
+++Datum.jsControlArcIVA.resources
+++Datum.jsControlArcIVAMovimientos.resources
+++Datum.jsControlArcMapas.resources
+++Datum.jsControlArcMonedas.resources
+++Datum.jsControlArcParametros.resources
+++Datum.jsControlArcParametrosMovimientos.resources
+++Datum.jsControlArcRetencionesISLR.resources
+++Datum.jsControlArcRetencionesOSLRMovimiento.resources
+++Datum.jsControlArcRubrosSADA.resources
+++Datum.jsControlArcRubrosSADAMovimientos.resources
+++Datum.jsControlArcTablaSimple.resources
+++Datum.jsControlArcTablaSimpleMovimientos.resources
+++Datum.jsControlArcTablaSimpleSeleccion.resources
+++Datum.jsControlArcTarjetas.resources
+++Datum.jsControlArcTarjetasMovimientos.resources
+++Datum.jsControlArcTerritorio.resources
+++Datum.jsControlArcTerritorioMovimiento.resources
+++Datum.jsControlArcTransportes.resources
+++Datum.jsControlArcTransportesMovimientos.resources
+++Datum.jsControlArcUsuarios.resources
+++Datum.jsControlArcUsuariosMovimientos.resources
+++Datum.jsControlArcUT.resources
+++Datum.jsControlArcUTMovimientos.resources
+++Datum.jsControlProCierreDiario.resources
+++Datum.jsControlProCierreEjercicio.resources
+++Datum.jsControlProConsecutivos.resources
+++Datum.jsControlProPasaDatosEjercicio.resources
+++Datum.jsControlProReconversionMonetaria.resources
+++Datum.jsControlProVerificaBD.resources
+++Datum.jsGenArcDescuentosCompras.resources
+++Datum.jsGenCambioPrecioEnAlbaranes.resources
+++Datum.jsGenComentariosRenglones.resources
+++Datum.jsGenConsultaRIF.resources
+++Datum.jsGenDescuentosComprasRenglon.resources
+++Datum.jsGenDescuentosVentas.resources
+++Datum.jsGenFormasPago.resources
+++Datum.jsGenFormasPagoMovimientoPlus.resources
+++Datum.jsGenIVAAlbaran.resources
+++Datum.jsGenListadoSeleccion.resources
+++Datum.jsGenProNumerosControl.resources
+++Datum.jsGenProNumerosControlMovimientos.resources
+++Datum.jsGenRenglonesMovimientos.resources
+++Datum.jsGenTablaArchivos.resources
+++Datum.jsGenTallasColores.resources
+++Datum.jsLogin.resources
+++Datum.jsMerArcComponentesCombo.resources
+++Datum.jsMerArcComponentesComboMovimiento.resources
+++Datum.jsMerArcConteos.resources
+++Datum.jsMerArcCuotasAnuales.resources
+++Datum.jsMerArcEnvases.resources
+++Datum.jsMerArcEnvasesMovimientos.resources
+++Datum.jsMerArcJerarquias.resources
+++Datum.jsMerArcJerarquiasMovimientos.resources
+++Datum.jsMerArcListaCostosPreciosNormal.resources
+++Datum.jsMerArcListaCostosPreciosSelecionable.resources
+++Datum.jsMerArcListadoItemsEnCompras.resources
+++Datum.jsMerArcListadoItemsEnFacturas.resources
+++Datum.jsMerArcLotesMercancia.resources
+++Datum.jsMerArcLotesMercanciaMovimientos.resources
+++Datum.jsMerArcMercancias.resources
+++Datum.jsMerArcMercanciasEquivalencias.resources
+++Datum.jsMERArcMercanciasExpediente.resources
+++Datum.jsMerArcMercanciasMovimientos.resources
+++Datum.jsMerArcOfertas.resources
+++Datum.jsMerArcOfertasMovimiento.resources
+++Datum.jsMerArcOfertasMovimientosBono.resources
+++Datum.jsMerArcPedidosAlmacen.resources
+++Datum.jsMerArcPreciosEspeciales.resources
+++Datum.jsMerArcPreciosEspecialesMovimientos.resources
+++Datum.jsMerArcPreciosFuturos.resources
+++Datum.jsMerArcPreciosFuturosMovimientos.resources
+++Datum.jsMerArcServicios.resources
+++Datum.jsMerArcServiciosA.resources
+++Datum.jsMerArcServiciosMovimientos.resources
+++Datum.jsMerArcTransferencias.resources
+++Datum.jsMerProCargarMercanciasConteo.resources
+++Datum.jsMerProCargarMercanciasConteoDinamico.resources
+++Datum.jsMerProCombos.resources
+++Datum.jsMerProCombosReverso.resources
+++Datum.jsMerProCostos.resources
+++Datum.jsMerProCuotasCompras.resources
+++Datum.jsMerProCuotasMercancias.resources
+++Datum.jsMerProExistenciasAlmacen.resources
+++Datum.jsMerProMercanciasDetallistas.resources
+++Datum.jsMerProPROCESARConteo.resources
+++Datum.jsMerProReconstruirGananciasMercancias.resources
+++Datum.jsMerProReconstruirMovimientosMercancias.resources
+++Datum.jsMerProReconstruirPreciosMercancias.resources
+++Datum.jsMerProREVERSARConteo.resources
+++Datum.jsMerRepParametros.resources
+++Datum.jsNomArcCargos.resources
+++Datum.jsNomArcCargosMovimientos.resources
+++Datum.jsNomArcConceptos.resources
+++Datum.jsNomArcConceptosMovimientos.resources
+++Datum.jsNomArcConstantes.resources
+++Datum.jsNomArcConstantesMovimientos.resources
+++Datum.jsNomArcGrupos.resources
+++Datum.jsNomArcGruposMovimientos.resources
+++Datum.jsNomArcNominas.resources
+++Datum.jsNomArcNominasMovimientos.resources
+++Datum.jsNomArcTrabajadores.resources
+++Datum.jsNomArcTrabajadoresCuotas.resources
+++Datum.jsNomArcTrabajadoresMovimientosAsistencia.resources
+++Datum.jsNomArcTrabajadoresMovimientosExpediente.resources
+++Datum.jsNomArcTrabajadoresXConcepto.resources
+++Datum.jsNomArcTurnosHorarios.resources
+++Datum.jsNomProArchivosTXT.resources
+++Datum.jsNomProProcesarNomina.resources
+++Datum.jsNomProReProcesarConceptos.resources
+++Datum.jsNomProReversarNomina.resources
+++Datum.jsNomRepParametros.resources
+++Datum.jsPOSArcCajas.resources
+++Datum.jsPOSArcCajasMovimientos.resources
+++Datum.jsPOSArcCajeros.resources
+++Datum.jsPOSArcCajerosMovimientos.resources
+++Datum.jsPOSArcClientes.resources
+++Datum.jsPOSArcClientesMovimientos.resources
+++Datum.jsPOSArcFacturas.resources
+++Datum.jsPOSArcPerfiles.resources
+++Datum.jsPOSArcPerfilesMovimientos.resources
+++Datum.jsPOSArcSupervisores.resources
+++Datum.jsPOSArcSupervisorMovimientos.resources
+++Datum.jsPOSProCierre.resources
+++Datum.jsPOSProReprocesarmercancias.resources
+++Datum.jsPOSRepParametros.resources
+++Datum.jsProArcCostosFijos.resources
+++Datum.jsProArcCostosFijosMovimientos.resources
+++Datum.jsProArcFormulaciones.resources
+++Datum.jsProArcFormulacionesRenglones.resources
+++Datum.jsProArcOrdenProduccion.resources
+++Datum.jsProArcOrdenProduccionRenglones.resources
+++Datum.jsProArcSeguimientoProduccion.resources
+++Datum.jsSIGMEArcDashBoard.resources
+++Datum.jsSIGMERepParametros.resources
+++Datum.jsSIGMERepParametrosPlus.resources
+++Datum.jsVenArcAsesores.resources
+++Datum.jsVenArcAsesoresDescuentos.resources
+++Datum.jsVenArcAsesoresMovimientosPorcentajesComisionCob.resources
+++Datum.jsVenArcAsesoresMovimientosPorcentajesComisionCobJerarquias.resources
+++Datum.jsVenArcCanalTiponegocio.resources
+++Datum.jsVenArcCanalTipoNegocioMovimientos.resources
+++Datum.jsVenArcClientes.resources
+++Datum.jsVenArcClientesCIs.resources
+++Datum.jsVenArcClientesCXCPlus.resources
+++Datum.jsVenArcClientesExpediente.resources
+++Datum.jsVenArcClientesSADA.resources
+++Datum.jsVenArcClientesVisitas.resources
+++Datum.jsVenArcCXCCestaTicket.resources
+++Datum.jsVenArcCXCCestaTicketValor.resources
+++Datum.jsVenArcFacturas.resources
+++Datum.jsVenArcListaRenglonesFacturasCXC.resources
+++Datum.jsVenArcNotasCredito.resources
+++Datum.jsVenArcNotasDebito.resources
+++Datum.jsVenArcNotasEntrega.resources
+++Datum.jsVenArcPedidos.resources
+++Datum.jsVenArcPrePedidos.resources
+++Datum.jsVenArcPresupuestos.resources
+++Datum.jsVenArcRutasDespacho.resources
+++Datum.jsVenArcRutasVisita.resources
+++Datum.jsVenArcRutasVisitaMovimientos.resources
+++Datum.jsVenArcValidacionControlDebitoCredito.resources
+++Datum.jsVenProAnulacionDocumentos.resources
+++Datum.jsVenProBloqueoDeClientes.resources
+++Datum.jsVenProCierreDiario.resources
+++Datum.jsVenProCierreMensual.resources
+++Datum.jsVenProCuotasAsesores.resources
+++Datum.jsVenProGuiaDespacho.resources
+++Datum.jsVenProGuiaDespachoImpresion.resources
+++Datum.jsVenProGuiaDespachoMovimientos.resources
+++Datum.jsVenProGuiaPedidos.resources
+++Datum.jsVenProGuiaPedidosMovimientos.resources
+++Datum.jsVenProHistoricoClientes.resources
+++Datum.jsVenProLimiteCreditoClientes.resources
+++Datum.jsVenProMercanciasEnDespachos.resources
+++Datum.jsVenProNestleBPAID.resources
+++Datum.jsVenProPedidosFacturacion.resources
+++Datum.jsVenProPreCancelaciones.resources
+++Datum.jsVenProPrepedidosPedidos.resources
+++Datum.jsVenProReconstruccionDeSaldos.resources
+++Datum.jsVenProRelacionFacturas.resources
+++Datum.jsVenProRelacionFacturasMovimientosPlus.resources
+++Datum.jsVenProRelacionNotasCredito.resources
+++Datum.jsVenProRelacionNotasCreditoImpresion.resources
+++Datum.jsVenProRelacionNotasCreditoMovimientosPlus.resources
+++Datum.jsVenRepParametros.resources
+++Datum.jsVenRepParametrosDos.resources
+++Datum.jsVenRepParametrosPlus.resources
+++Datum.Resources.resources
+++Datum.scrMain.resources
+++Datum.TrustInfo.xml
+++Datum.vbproj.AssemblyReference.cache
+++Datum.vbproj.CopyComplete
+++Datum.vbproj.CoreCompileInputs.cache
+++Datum.vbproj.FileListAbsolute.txt
+++Datum.vbproj.GenerateResource.cache
+++Datum.vbproj.SuggestedBindingRedirects.cache
+++DesignTimeResolveAssemblyReferences.cache
+++DesignTimeResolveAssemblyReferencesInput.cache
+++Datum.vbprojAssemblyReference.cache
+++Datasets.dsBancos.Designer.vb.dll
+++Datasets.dsCompras.Designer.vb.dll
+++Datasets.dsContab.Designer.vb.dll
+++Datasets.dsControl.Designer.vb.dll
+++Datasets.dsMercas.Designer.vb.dll
+++Datasets.dsNomina.Designer.vb.dll
+++Datasets.dsSIGME.Designer.vb.dll
+++Datasets.dsVentas.Designer.vb.dll
+++Datasets.dsVentasDos.Designer.vb.dll
+++Datasets.dsVentasPlus.Designer.vb.dll
+++My Project.Resources.Designer.vb.dll
+++Reportes.ReportesBancos.rptBanBancosMovimientos.vb.dll
+++Reportes.ReportesBancos.rptBanCajaMovimientos.vb.dll
+++Reportes.ReportesBancos.rptBanChequesDevueltos.vb.dll
+++Reportes.ReportesBancos.rptBanComprobanteEgreso.vb.dll
+++Reportes.ReportesBancos.rptBanComprobanteEgresoContable.vb.dll
+++Reportes.ReportesBancos.rptBanConciliacionBancaria.vb.dll
+++Reportes.ReportesBancos.rptBanDepositos.vb.dll
+++Reportes.ReportesBancos.rptBanEstadodeCuenta.vb.dll
+++Reportes.ReportesBancos.rptBanReposisionSaldoCaja.vb.dll
+++Reportes.ReportesBancos.rptBanTransferencia.vb.dll
+++Reportes.ReportesCompras.rptComprasFichaProveedor.vb.dll
+++Reportes.ReportesCompras.rptComprasLibroIVAGeneral.vb.dll
+++Reportes.ReportesCompras.rptComprasRecibo.vb.dll
+++Reportes.ReportesCompras.rptComprasRetencionISLR.vb.dll
+++Reportes.ReportesCompras.rptComprasRetencionIVA.vb.dll
+++Reportes.ReportesContabilidad.rptContabAsiento.vb.dll
+++Reportes.ReportesContabilidad.rptContabBalanceComprobacion.vb.dll
+++Reportes.ReportesContabilidad.rptContabBalanceGeneral.vb.dll
+++Reportes.ReportesContabilidad.rptContabCuentas.vb.dll
+++Reportes.ReportesContabilidad.rptContabDiario.vb.dll
+++Reportes.ReportesContabilidad.rptContabGananciasPerdidas.vb.dll
+++Reportes.ReportesContabilidad.rptContabMayorAnalitico.vb.dll
+++Reportes.ReportesContabilidad.rptContabPlantillaAsiento.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEActivacionMesMes0G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEActivacionMesMes0GPlus.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEActivacionMesMes1G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEActivacionMesMes2G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEActivacionMesMes3G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEActivacionMesMes4G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEComprasVentasComparativas.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEDescuentosAsesor0G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEDescuentosAsesor1G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEDescuentosAsesor2G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEDescuentosAsesor3G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEDescuentosAsesor4G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEDescuentosAsesorMes0G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEDescuentosAsesorMes1G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEDescuentosAsesorMes2G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEDescuentosAsesorMes3G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEDescuentosAsesorMes4G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEDevolucionCausa0G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEDevolucionesAsesorMesMes0G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEDevolucionesAsesorMesMes1G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEDropSizeMesMes.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEGananciasCestaTicket.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEGananciasCestaTicketMesMes.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEGananciasFacturas0G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEGananciasFacturas1G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEGananciasFacturas2G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEGananciasFacturas3G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEGananciasFacturas4G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEGananciasItem0G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEGananciasItem1G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEGananciasItem2G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEGananciasItem3G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEGananciasItem4G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEGananciasItemMesMes0G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEGananciasItemMesMes1G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEGananciasItemMesMes2G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEGananciasItemMesMes3G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEIngresosAsesor0G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEVentasComprasPorJerarquia.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEVentasMesMes0G.vb.dll
+++Reportes.ReportesMedicionGerencial.rptSIGMEVentasMesMes1G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaBarra.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaBarraEstante.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaBarraHabladorNevera.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaBarraPequeña.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaBarraPrecio.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaCatalogoSG.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaComprasMer0G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaComprasMer1G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaComprasMer2G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaComprasMer3G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaConteo.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaEquivalencias1G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaEquivalencias2G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaEquivalencias3G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaEquivalencias4G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaEquivalenciasSG.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaExistencias1G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaExistencias2G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaExistencias3G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaExistencias4G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaExistenciasSG.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaIventarioLegalSG.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaLeyDeCostos.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaMovimiento0G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaMovimiento1G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaMovimiento2G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaMovimiento3G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaMovimiento4G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaMovimientosResumen.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaPedidosAlmacen.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaPreciosEquivalentes0G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaPreciosEquivalentes1G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaPreciosEquivalentes2G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaPreciosEquivalentes3G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaPreciosEquivalentes4G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaServicios.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaServiciosMovimientos0G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaTransferencia.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaTransferencias0G.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaVentaPlanaHEINZ.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaVentasMerActG0.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaVentasMerActG1.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaVentasMerActG2.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaVentasMerActG3.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaVentasMerActG4.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaVentasMerG0.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaVentasMerG1.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaVentasMerG2.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaVentasMerG3.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaVentasNetasMerG0.vb.dll
+++Reportes.ReportesMercancias.rptMercanciaVentasPlana.vb.dll
+++Reportes.ReportesNomina.rptNominaConceptoAcumulado.vb.dll
+++Reportes.ReportesNomina.rptNominaConceptos.vb.dll
+++Reportes.ReportesNomina.rptNominaConceptosMesaMes.vb.dll
+++Reportes.ReportesNomina.rptNominaConceptosXTrabajador.vb.dll
+++Reportes.ReportesNomina.rptNominaConceptosXTrabajadorMesaMes.vb.dll
+++Reportes.ReportesNomina.rptNominaConstantes.vb.dll
+++Reportes.ReportesNomina.rptNominaFichaTrabajador.vb.dll
+++Reportes.ReportesNomina.rptNominaFirmas.vb.dll
+++Reportes.ReportesNomina.rptNominaNomina.vb.dll
+++Reportes.ReportesNomina.rptNominaNominaResumen.vb.dll
+++Reportes.ReportesNomina.rptNominaPreNomina.vb.dll
+++Reportes.ReportesNomina.rptNominaRecibos.vb.dll
+++Reportes.ReportesNomina.rptNominaRegistroTrabajador.vb.dll
+++Reportes.ReportesNomina.rptNominaTrabajadores.vb.dll
+++Reportes.ReportesNomina.rptNominaTrabajadores1G.vb.dll
+++Reportes.ReportesPuntosDeVenta.rptPOSFacturas.vb.dll
+++Reportes.ReportesPuntosDeVenta.rptPOSReporteX.vb.dll
+++Reportes.ReportesPuntosDeVenta.rptPOSReporteXPlus.vb.dll
+++Reportes.ReportesVentas.rptVentasAsesor0G.vb.dll
+++Reportes.ReportesVentas.rptVentasLibroIVAGeneral.vb.dll
+++Reportes.rpt.vb.dll
+++Reportes.rptGENComentarios.vb.dll
+++Reportes.rptGENDescuentos.vb.dll
+++Reportes.rptGENFormaDePago.vb.dll
+++Reportes.rptGENIVA.vb.dll
+++Reportes.rptGENRelacionCT.vb.dll
+++Reportes.rptGENTablaSimple.vb.dll
+++Reportes.rptGENTablaSimpleGrupoSubGrupo.vb.dll
+++Reportes.rptVentasAuditoriasClientes.vb.dll
+++Datum.FechaSistemaPlus.resources
+++.NETFramework,Version=v4.5.AssemblyAttributes.vb
+++tfhkaif.dll
+++olddataset
+++dsVentas.vb
+++dsVentas.xsc
+++dsVentas.xss
+++dsVentasDos.xsc
+++dsVentasDos.xss
+++dsVentasPlus.xsc
+++dsVentasPlus.xss
+++dsBancos.Designer.vb
+++dsBancos.vb
+++dsBancos.xsc
+++dsBancos.xss
+++dsCompras.Designer.vb
+++dsCompras.vb
+++dsCompras.xsc
+++dsCompras.xss
+++dsContab.Designer.vb
+++dsContab.vb
+++dsContab.xsc
+++dsContab.xss
+++dsControl.Designer.vb
+++dsControl.xsc
+++dsControl.xss
+++dsMercancias.xsd
+++dsMercancias.vb
+++dsMercancias.xsc
+++dsMercancias.xss
+++dsMercancias.Designer.vb
+++dsMercas.Designer.vb
+++dsMercas.xsc
+++dsMercas.xss
+++dsNomina.Designer.vb
+++dsNomina.vb
+++dsNomina.xsc
+++dsNomina.xss
+++dsSIGME.Designer.vb
+++dsSIGME.vb
+++dsSIGME.xsc
+++dsSIGME.xss
+++dsVentas.Designer.vb
+++dsVentasPlus.Designer.vb
+++jsBanArcBancos (1).vb
+++jsBanArcBancos (2).vb
+++jsBanArcBancosMovimientosPlus (1).vb
+++jsBanArcCajas (1).vb
+++jsBanArcCajas (2).vb
+++jsBanArcFormatoCheques (1).vb
+++jsBanArcFormatoCheques (2).vb
+++jsBanProCambioNumDeposito (1).vb
+++jsBanProChequeDevuelto (1).vb
+++jsBanProConciliacion.vb
+++jsBanProListaCheques (1).vb
+++jsBanRepParametros (1).vb
+++jsBanArcBancos.designer.vb
+++jsBanArcBancos.resx
+++jsBanArcBancosMovimientos.designer.vb
+++jsBanArcBancosMovimientos.resx
+++jsBanArcBancosMovimientosAsiento.designer.vb
+++jsBanArcBancosMovimientosAsiento.resx
+++jsBanArcBancosMovimientosPlus.designer.vb
+++jsBanArcBancosMovimientosPlus.resx
+++jsBanArcBancosTarjetas.designer.vb
+++jsBanArcBancosTarjetas.resx
+++jsBanArcCajas.designer.vb
+++jsBanArcCajas.resx
+++jsBanArcCajasAvanceEF.designer.vb
+++jsBanArcCajasAvanceEF.resx
+++jsBanArcCajasMovimientos.designer.vb
+++jsBanArcCajasMovimientos.resx
+++jsBanArcDepositarCaja.designer.vb
+++jsBanArcDepositarCaja.resx
+++jsBanArcDepositarCajaPlus.designer.vb
+++jsBanArcDepositarCajaPlus.resx
+++jsBanArcFormatoCheques.designer.vb
+++jsBanArcFormatoCheques.resx
+++jsBanArcFormatoChequesMovimiento.designer.vb
+++jsBanArcFormatoChequesMovimiento.resx
+++jsBanArcRemesasCestaTicket.designer.vb
+++jsBanArcRemesasCestaTicket.resx
+++jsBanArcReposicionCaja.designer.vb
+++jsBanArcReposicionCaja.resx
+++jsBanArcReposicionCajaPlus.designer.vb
+++jsBanArcReposicionCajaPlus.resx
+++jsBanProCambioNumDeposito.designer.vb
+++jsBanProCambioNumDeposito.resx
+++jsBanProCambioNumDepositoMovimiento.designer.vb
+++jsBanProCambioNumDepositoMovimiento.resx
+++jsBanProCestaTicketDevuelto.designer.vb
+++jsBanProCestaTicketDevuelto.resx
+++jsBanProChequeDevuelto.designer.vb
+++jsBanProChequeDevuelto.resx
+++jsBanProConciliacion.designer.vb
+++jsBanProConciliacion.resx
+++jsBanProConciliacionPlus.designer.vb
+++jsBanProConciliacionPlus.resx
+++jsBanProDebitoBancario.designer.vb
+++jsBanProDebitoBancario.resx
+++jsBanProListaCheques.designer.vb
+++jsBanProListaCheques.resx
+++jsBanProTransferencias.designer.vb
+++jsBanProTransferencias.resx
+++jsBanRepParametros.designer.vb
+++jsBanRepParametros.resx
+++jsComArcCompras (1).vb
+++jsComArcCompras (2).vb
+++jsComArcCompras (3).vb
+++jsComArcGastos (1).vb
+++jsComArcGastos (2).vb
+++jsComArcGastos.designer (1).vb
+++jsComArcGrupoSubgrupo (1).vb
+++jsComArcNotasCredito (1).vb
+++jsComArcNotasCredito (2).vb
+++jsComArcNotasDebito (1).vb
+++jsComArcNotasDebito (2).vb
+++jsComArcOrdenesDeCompra (1).vb
+++jsComArcOrdenesDeCompra.designer (1).vb
+++jsComArcProveedores (1).vb
+++jsComArcProveedores (2).vb
+++jsComArcProveedores (3).vb
+++jsComArcProveedoresCXP (1).vb
+++jsComArcProveedoresCXP (2).vb
+++jsComArcProveedoresCXP (3).vb
+++jsComArcRecepciones (1).vb
+++jsComArcRecepciones (2).vb
+++jsComArcUnidadCategoria (1).vb
+++jsComArcUnidadCategoriaMovimientos.vb
+++jsComProComprasInventario (1).vb
+++jsComRepParametros (1).vb
+++jsComArcCompras.designer.vb
+++jsComArcCompras.resx
+++jsComArcGastos (1).resx
+++jsComArcGastos.designer.vb
+++jsComArcGastos.resx
+++jsComArcGrupoSubgrupo.designer.vb
+++jsComArcGrupoSubgrupo.resx
+++jsComArcGrupoSubgrupoMovimientos.designer.vb
+++jsComArcGrupoSubgrupoMovimientos.resx
+++jsComArcNotasCredito.designer.vb
+++jsComArcNotasCredito.resx
+++jsComArcNotasDebito.designer.vb
+++jsComArcNotasDebito.resx
+++jsComArcOrdenesDeCompra (1).resx
+++jsComArcOrdenesDeCompra.designer.vb
+++jsComArcOrdenesDeCompra.resx
+++jsComArcProveedores (1).resx
+++jsComArcProveedores.designer.vb
+++jsComArcProveedores.resx
+++jsComArcProveedoresCXP (1).resx
+++jsComArcProveedoresCXP.designer.vb
+++jsComArcProveedoresCXP.resx
+++jsComArcProveedoresExpediente.designer.vb
+++jsComArcProveedoresExpediente.resx
+++jsComArcRecepciones (1).resx
+++jsComArcRecepciones.designer.vb
+++jsComArcRecepciones.resx
+++jsComArcUnidadCategoria.designer.vb
+++jsComArcUnidadCategoria.resx
+++jsComArcUnidadCategoriaMovimientos.designer.vb
+++jsComArcUnidadCategoriaMovimientos.resx
+++jsComFormasPago.designer.vb
+++jsComFormasPago.resx
+++jsComProComprasInventario.designer.vb
+++jsComProComprasInventario.resx
+++jsComProComprasInventarioR.designer.vb
+++jsComProComprasInventarioR.resx
+++jsComProHistoricoProveedores.designer.vb
+++jsComProHistoricoProveedores.resx
+++jsComProProgramacionPago.designer.vb
+++jsComProProgramacionPago.resx
+++jsComProProgramacionPagoMovimiento.designer.vb
+++jsComProProgramacionPagoMovimiento.resx
+++jsComProReconstruccionSaldos.designer.vb
+++jsComProReconstruccionSaldos.resx
+++jsComProRetencionesISLR.designer.vb
+++jsComProRetencionesISLR.resx
+++jsComProRetencionesIVA.designer.vb
+++jsComProRetencionesIVA.resx
+++jsComRepParametros.designer.vb
+++jsComRepParametros.resx
+++jsContabArcActivosFijos (1).vb
+++jsContabArcActivosFijos.designer (1).vb
+++jsContabArcAsientos (1).vb
+++jsContabArcAsientos (2).vb
+++jsContabArcAsientos (3).vb
+++jsContabArcAsientos.designer (1).vb
+++jsContabArcAsientosPlantilla (1).vb
+++jsContabArcCuentas (1).vb
+++jsContabArcReglas (1).vb
+++jsContabProProcesaAsientos (1).vb
+++jsContabProReversarAsientos (1).vb
+++jsContabArcActivosFijos.designer.vb
+++jsContabArcActivosFijos.resx
+++jsContabArcAsientos (1).resx
+++jsContabArcAsientos.designer.vb
+++jsContabArcAsientos.resx
+++jsContabArcAsientosMovimientos.designer.vb
+++jsContabArcAsientosMovimientos.resx
+++jsContabArcAsientosPlantilla.designer.vb
+++jsContabArcAsientosPlantilla.resx
+++jsContabArcAsientosPlantillaMovimientos.designer.vb
+++jsContabArcAsientosPlantillaMovimientos.resx
+++jsContabArcCuentas.designer.vb
+++jsContabArcCuentas.resx
+++jsContabArcCuentasMovimientos.designer.vb
+++jsContabArcCuentasMovimientos.resx
+++jsContabArcReglas.Designer.vb
+++jsContabArcReglas.resx
+++jsContabArcReglasMovimientos.designer.vb
+++jsContabArcReglasMovimientos.resx
+++jsContabProApertura.designer.vb
+++jsContabProApertura.resx
+++jsContabProContabilizar.designer.vb
+++jsContabProContabilizar.resx
+++jsContabProProcesaAsientos.designer.vb
+++jsContabProProcesaAsientos.resx
+++jsContabProProcesarCuentas.designer.vb
+++jsContabProProcesarCuentas.resx
+++jsContabProReversarAsientos.designer.vb
+++jsContabProReversarAsientos.resx
+++jsContabRepParametros.designer.vb
+++jsContabRepParametros.resx
+++jsControlArcDivisiones.designer.vb
+++jsControlArcDivisiones.resx
+++jsControlArcAccesos (1).vb
+++jsControlArcAccesosPlus (1).vb
+++jsControlArcAccesosPlus (2).vb
+++jsControlArcAccesosPlus.Designer (1).vb
+++jsControlArcAlmacenes (1).vb
+++jsControlArcAlmacenes (2).vb
+++jsControlArcCalendario (1).vb
+++jsControlArcCausasCreditos (1).vb
+++jsControlArcCausasCreditos (2).vb
+++jsControlArcCondicionesPagoCobros (1).vb
+++jsControlArcConjuntos (1).vb
+++jsControlArcConjuntosMovimientos (1).vb
+++jsControlArcContadores (1).vb
+++jsControlArcCorredoresCestaTicket (1).vb
+++jsControlArcCorredoresCestaTicketMovimientosTipo (1).vb
+++jsControlArcDivisiones (1).vb
+++jsControlArcDivisiones (2).vb
+++jsControlArcEmpresas (1).vb
+++jsControlArcEmpresas (2).vb
+++jsControlArcImpresoraFiscal (1).vb
+++jsControlArcIVA (1).vb
+++jsControlArcIVA (2).vb
+++jsControlArcMapas (1).vb
+++jsControlArcMonedas (1).vb
+++jsControlArcParametros (1).vb
+++jsControlArcParametrosMovimientos (1).vb
+++jsControlArcRetencionesISLR (1).vb
+++jsControlArcRubrosSADA (1).vb
+++jsControlArcTablaSimple (1).vb
+++jsControlArcTablaSimple (2).vb
+++jsControlArcTablaSimple (3).vb
+++jsControlArcTarjetas (1).vb
+++jsControlArcTransportes (1).vb
+++jsControlArcUsuarios (1).vb
+++jsControlArcUsuarios (2).vb
+++jsControlArcUT (1).vb
+++jsControlProConsecutivos (1).vb
+++jsControlProVerificaBD (1).vb
+++jsControlProVerificaBD (2).vb
+++jsControlArcAccesos.Designer.vb
+++jsControlArcAccesos.resx
+++jsControlArcAccesosPlus.Designer.vb
+++jsControlArcAccesosPlus.resx
+++jsControlArcAlmacenes.designer.vb
+++jsControlArcAlmacenes.resx
+++jsControlArcAlmacenesEstantes.designer.vb
+++jsControlArcAlmacenesEstantes.resx
+++jsControlArcAlmacenesMovimientos.designer.vb
+++jsControlArcAlmacenesMovimientos.resx
+++jsControlArcCalendario.designer.vb
+++jsControlArcCalendario.resx
+++jsControlArcCambioMonedas.designer.vb
+++jsControlArcCambioMonedas.resx
+++jsControlArcCausasCreditosMovimientos.designer.vb
+++jsControlArcCausasCreditosMovimientos.resx
+++jsControlArcCondicionesPagoCobros.designer.vb
+++jsControlArcCondicionesPagoCobros.resx
+++jsControlArcCondicionesPagoCobrosMovimientos.designer.vb
+++jsControlArcCondicionesPagoCobrosMovimientos.resx
+++jsControlArcConjuntos.designer.vb
+++jsControlArcConjuntos.resx
+++jsControlArcConjuntosMovimientos.designer.vb
+++jsControlArcConjuntosMovimientos.resx
+++jsControlArcConjuntosMovimientosR.designer.vb
+++jsControlArcConjuntosMovimientosR.resx
+++jsControlArcContadores.designer.vb
+++jsControlArcContadores.resx
+++jsControlArcCorredoresCestaTicket.designer.vb
+++jsControlArcCorredoresCestaTicket.resx
+++jsControlArcCorredoresCestaTicketMovimientos.designer.vb
+++jsControlArcCorredoresCestaTicketMovimientos.resx
+++jsControlArcCorredoresCestaTicketMovimientosTipo.designer.vb
+++jsControlArcCorredoresCestaTicketMovimientosTipo.resx
+++jsControlArcCorredoresCestaTicketMovimientosTipoComisiones.designer.vb
+++jsControlArcCorredoresCestaTicketMovimientosTipoComisiones.resx
+++jsControlArcDivisionesMovimientos.designer.vb
+++jsControlArcDivisionesMovimientos.resx
+++jsControlArcEmpresas.designer.vb
+++jsControlArcEmpresas.resx
+++jsControlArcImpresoraFiscal.designer.vb
+++jsControlArcImpresoraFiscal.resx
+++jsControlArcImpresoraFiscalMovimientos.designer.vb
+++jsControlArcImpresoraFiscalMovimientos.resx
+++jsControlArcIVA.designer.vb
+++jsControlArcIVA.resx
+++jsControlArcIVAMovimientos.designer.vb
+++jsControlArcIVAMovimientos.resx
+++jsControlArcMapas.designer.vb
+++jsControlArcMapas.resx
+++jsControlArcMonedas.Designer.vb
+++jsControlArcMonedas.resx
+++jsControlArcParametros.designer.vb
+++jsControlArcParametros.resx
+++jsControlArcParametrosMovimientos.designer.vb
+++jsControlArcParametrosMovimientos.resx
+++jsControlArcRetencionesISLR.designer.vb
+++jsControlArcRetencionesISLR.resx
+++jsControlArcRetencionesISLRMovimiento.designer.vb
+++jsControlArcRetencionesISLRMovimiento.resx
+++jsControlArcRubrosSADA.designer.vb
+++jsControlArcRubrosSADA.resx
+++jsControlArcRubrosSADAMovimientos.designer.vb
+++jsControlArcRubrosSADAMovimientos.resx
+++jsControlArcTablaSimple.designer.vb
+++jsControlArcTablaSimple.resx
+++jsControlArcTablaSimpleMovimientos.designer.vb
+++jsControlArcTablaSimpleMovimientos.resx
+++jsControlArcTablaSimpleSeleccion.designer.vb
+++jsControlArcTablaSimpleSeleccion.resx
+++jsControlArcTarjetas.designer.vb
+++jsControlArcTarjetas.resx
+++jsControlArcTarjetasMovimientos.designer.vb
+++jsControlArcTarjetasMovimientos.resx
+++jsControlArcTerritorio.designer.vb
+++jsControlArcTerritorio.resx
+++jsControlArcTerritorioMovimiento.designer.vb
+++jsControlArcTerritorioMovimiento.resx
+++jsControlArcTransportes.designer.vb
+++jsControlArcTransportes.resx
+++jsControlArcTransportesMovimientos.designer.vb
+++jsControlArcTransportesMovimientos.resx
+++jsControlArcUsuarios.Designer.vb
+++jsControlArcUsuarios.resx
+++jsControlArcUsuariosMovimientos.designer.vb
+++jsControlArcUsuariosMovimientos.resx
+++jsControlArcUT.designer.vb
+++jsControlArcUT.resx
+++jsControlArcUTMovimientos.designer.vb
+++jsControlArcUTMovimientos.resx
+++jsControlProCierreDiario.designer.vb
+++jsControlProCierreDiario.resx
+++jsControlProCierreEjercicio.designer.vb
+++jsControlProCierreEjercicio.resx
+++jsControlProConsecutivos.designer.vb
+++jsControlProConsecutivos.resx
+++jsControlProPasaDatosEjercicio.designer.vb
+++jsControlProPasaDatosEjercicio.resx
+++jsControlProReconversionMonetaria.designer.vb
+++jsControlProReconversionMonetaria.resx
+++jsControlProVerificaBD.designer.vb
+++jsControlProVerificaBD.resx
+++jsSIGMERepParametros (1).vb
+++jsSIGMEArcDashBoard.designer.vb
+++jsSIGMEArcDashBoard.resx
+++jsSIGMERepParametros.designer.vb
+++jsSIGMERepParametros.resx
+++jsSIGMERepParametrosPlus.designer.vb
+++jsSIGMERepParametrosPlus.resx
+++jsMerArcComponentesCombo (1).vb
+++jsMerArcComponentesComboMovimientos (1).vb
+++jsMerArcConteos (1).vb
+++jsMerArcConteos (2).vb
+++jsMerArcCuotasAnuales (1).vb
+++jsMerArcCuotasAnuales (2).vb
+++jsMerArcEnvases (1).vb
+++jsMerArcEnvasesMovimientos (1).vb
+++jsMerArcJerarquias (1).vb
+++jsMerArcListaCostosPrecios.vb
+++jsMerArcListaCostosPreciosPlus (1).vb
+++jsMerArcListaCostosPreciosPlus.vb
+++jsMerArcListadoItemsEnCompras (1).vb
+++jsMerArcListadoItemsEnCompras (2).vb
+++jsMerArcListadoItemsEnFacturas (1).vb
+++jsMerArcListaSeleccionCostosPrecios.vb
+++jsMerArcLotesMercancia (1).vb
+++jsMerArcLotesMercancia (2).vb
+++jsMerArcMercancias (1).vb
+++jsMerArcMercancias (2).vb
+++jsMerArcMercancias (3).vb
+++jsMerArcMercancias.designer (1).vb
+++jsMerArcMercanciasMovimientos (1).vb
+++jsMerArcOfertas (1).vb
+++jsMerArcOfertasMovimiento (1).vb
+++jsMerArcOfertasMovimientosBono (1).vb
+++jsMerArcPreciosEspeciales (1).vb
+++jsMerArcPreciosEspeciales (2).vb
+++jsMerArcPreciosEspecialesMovimientos (1).vb
+++jsMerArcPreciosFuturos (1).vb
+++jsMerArcPreciosFuturosMovimientos (1).vb
+++jsMerArcServicios (1).vb
+++jsMerArcServiciosA (1).vb
+++jsMerArcServiciosA (2).vb
+++jsMerArcTransferencias (1).vb
+++jsMerArcTransferencias (2).vb
+++jsMerArcTransferencias (3).vb
+++jsMerArcTransferencias.designer (1).vb
+++jsMerArcTransferencias.designer (2).vb
+++jsMerProCargarMercanciasConteo (1).vb
+++jsMerProCombos (1).vb
+++jsMerProCuotasCompras (1).vb
+++jsMerProCuotasCompras (2).vb
+++jsMerProExistenciasAlmacen (1).vb
+++jsMerProMercanciasDetallistas (1).vb
+++jsMerProMercanciasDetallistas.designer (1).vb
+++jsMerProProcesarConteo (1).vb
+++jsMerRepParametros (1).vb
+++jsMerRepParametros (2).vb
+++jsMerRepParametros (3).vb
+++jsMerArcComponentesCombo.designer.vb
+++jsMerArcComponentesCombo.resx
+++jsMerArcComponentesComboMovimientos.designer.vb
+++jsMerArcComponentesComboMovimientos.resx
+++jsMerArcConteos.designer.vb
+++jsMerArcConteos.resx
+++jsMerArcCuotasAnuales.designer.vb
+++jsMerArcCuotasAnuales.resx
+++jsMerArcEnvases.designer.vb
+++jsMerArcEnvases.resx
+++jsMerArcEnvasesMovimientos.designer.vb
+++jsMerArcEnvasesMovimientos.resx
+++jsMerArcJerarquias.designer.vb
+++jsMerArcJerarquias.resx
+++jsMerArcJerarquiasMovimientos.designer.vb
+++jsMerArcJerarquiasMovimientos.resx
+++jsMerArcListaCostosPrecios.designer.vb
+++jsMerArcListaCostosPrecios.resx
+++jsMerArcListaCostosPreciosNormal.designer.vb
+++jsMerArcListaCostosPreciosNormal.resx
+++jsMerArcListaCostosPreciosPlus.designer.vb
+++jsMerArcListaCostosPreciosPlus.resx
+++jsMerArcListaCostosPreciosSeleccionable.designer.vb
+++jsMerArcListaCostosPreciosSeleccionable.resx
+++jsMerArcListadoItemsEnCompras.designer.vb
+++jsMerArcListadoItemsEnCompras.resx
+++jsMerArcListadoItemsEnFacturas.designer.vb
+++jsMerArcListadoItemsEnFacturas.resx
+++jsMerArcListaSeleccionCostosPrecios.designer.vb
+++jsMerArcListaSeleccionCostosPrecios.resx
+++jsMerArcLotesMercancia.designer.vb
+++jsMerArcLotesMercancia.resx
+++jsMerArcLotesMercanciaMovimientos.designer.vb
+++jsMerArcLotesMercanciaMovimientos.resx
+++jsMerArcMercancias.designer.vb
+++jsMerArcMercancias.resx
+++jsMerArcMercanciasEquivalencias.designer.vb
+++jsMerArcMercanciasEquivalencias.resx
+++jsMerArcMercanciasExpediente.designer.vb
+++jsMerArcMercanciasExpediente.resx
+++jsMerArcMercanciasMovimientos.designer.vb
+++jsMerArcMercanciasMovimientos.resx
+++jsMerArcOfertas.designer.vb
+++jsMerArcOfertas.resx
+++jsMerArcOfertasMovimiento.designer.vb
+++jsMerArcOfertasMovimiento.resx
+++jsMerArcOfertasMovimientosBono.designer.vb
+++jsMerArcOfertasMovimientosBono.resx
+++jsMerArcPedidosAlmacen.designer.vb
+++jsMerArcPedidosAlmacen.resx
+++jsMerArcPreciosEspeciales.designer.vb
+++jsMerArcPreciosEspeciales.resx
+++jsMerArcPreciosEspecialesMovimientos.designer.vb
+++jsMerArcPreciosEspecialesMovimientos.resx
+++jsMerArcPreciosFuturos.designer.vb
+++jsMerArcPreciosFuturos.resx
+++jsMerArcPreciosFuturosMovimientos.designer.vb
+++jsMerArcPreciosFuturosMovimientos.resx
+++jsMerArcServicios.designer.vb
+++jsMerArcServicios.resx
+++jsMerArcServiciosA.designer.vb
+++jsMerArcServiciosA.resx
+++jsMerArcServiciosMovimientos.designer.vb
+++jsMerArcServiciosMovimientos.resx
+++jsMerArcTransferencias.designer.vb
+++jsMerArcTransferencias.resx
+++jsMerProCargarMercanciasConteo.designer.vb
+++jsMerProCargarMercanciasConteo.resx
+++jsMerProCargarMercanciasConteoDinamico.designer.vb
+++jsMerProCargarMercanciasConteoDinamico.resx
+++jsMerProCombos.designer.vb
+++jsMerProCombos.resx
+++jsMerProCombosReverso.designer.vb
+++jsMerProCombosReverso.resx
+++jsMerProCostos.designer.vb
+++jsMerProCostos.resx
+++jsMerProCuotasCompras.designer.vb
+++jsMerProCuotasCompras.resx
+++jsMerProCuotasMercancias.designer.vb
+++jsMerProCuotasMercancias.resx
+++jsMerProExistenciasAlmacen.designer.vb
+++jsMerProExistenciasAlmacen.resx
+++jsMerProMercanciasDetallistas.designer.vb
+++jsMerProMercanciasDetallistas.resx
+++jsMerProProcesarConteo.designer.vb
+++jsMerProProcesarConteo.resx
+++jsMerProReconstruirGananciasMercancias.designer.vb
+++jsMerProReconstruirGananciasMercancias.resx
+++jsMerProReconstruirMovimientosMercancias.designer.vb
+++jsMerProReconstruirMovimientosMercancias.resx
+++jsMerProReconstruirPreciosMercancias.designer.vb
+++jsMerProReconstruirPreciosMercancias.resx
+++jsMerProReversarConteo.designer.vb
+++jsMerProReversarConteo.resx
+++jsMerRepParametros.designer.vb
+++jsMerRepParametros.resx
+++jsProArcFormulaciones (1).vb
+++jsProArcFormulacionesRenglones (1).vb
+++jsProArcCostosFijos.designer.vb
+++jsProArcCostosFijos.resx
+++jsProArcCostosFijosMovimientos.designer.vb
+++jsProArcCostosFijosMovimientos.resx
+++jsProArcFormulaciones.designer.vb
+++jsProArcFormulaciones.resx
+++jsProArcFormulacionesRenglones.designer.vb
+++jsProArcFormulacionesRenglones.resx
+++jsProArcOrdenProduccion.designer.vb
+++jsProArcOrdenProduccion.resx
+++jsProArcOrdenProduccionRenglones.designer.vb
+++jsProArcOrdenProduccionRenglones.resx
+++jsProArcSeguimientoProduccion.designer.vb
+++jsProArcSeguimientoProduccion.resx
+++jsPOSArcCajas (1).vb
+++jsPOSArcCajas (2).vb
+++jsPOSArcCajasMovimientos (1).vb
+++jsPOSArcCajeros (1).vb
+++jsPOSArcCajeros (2).vb
+++jsPOSArcClientes (1).vb
+++jsPOSArcFacturas (1).vb
+++jsPOSArcFacturas (2).vb
+++jsPOSArcPerfiles (1).vb
+++jsPOSArcSupervisores (1).vb
+++jsPOSRepParametros (1).vb
+++jsPOSArcCajas.designer.vb
+++jsPOSArcCajas.resx
+++jsPOSArcCajasMovimientos.designer.vb
+++jsPOSArcCajasMovimientos.resx
+++jsPOSArcCajeros.designer.vb
+++jsPOSArcCajeros.resx
+++jsPOSArcCajerosMovimientos.designer.vb
+++jsPOSArcCajerosMovimientos.resx
+++jsPOSArcClientes.designer.vb
+++jsPOSArcClientes.resx
+++jsPOSArcClientesMovimientos.designer.vb
+++jsPOSArcClientesMovimientos.resx
+++jsPOSArcFacturas.designer.vb
+++jsPOSArcFacturas.resx
+++jsPOSArcPerfiles.designer.vb
+++jsPOSArcPerfiles.resx
+++jsPOSArcPerfilesMovimientos.designer.vb
+++jsPOSArcPerfilesMovimientos.resx
+++jsPOSArcSupervisores.designer.vb
+++jsPOSArcSupervisores.resx
+++jsPOSArcSupervisorMovimientos.designer.vb
+++jsPOSArcSupervisorMovimientos.resx
+++jsPOSProCierre.designer.vb
+++jsPOSProCierre.resx
+++jsPOSProReprocesarMercancias.designer.vb
+++jsPOSProReprocesarMercancias.resx
+++jsPOSRepParametros.designer.vb
+++jsPOSRepParametros.resx
+++jsNomArcConceptos (1).vb
+++jsNomArcConceptos (2).vb
+++jsNomArcConstantes (1).vb
+++jsNomArcConstantes (2).vb
+++jsNomArcGrupos (1).vb
+++jsNomArcNominas (1).vb
+++jsNomArcTrabajadores (1).vb
+++jsNomArcTrabajadores (2).vb
+++jsNomArcTrabajadores.designer (1).vb
+++jsNomArcTrabajadoresCuotas (1).vb
+++jsNomArcTrabajadoresXConcepto (1).vb
+++jsNomArcTrabajadoresXConcepto (2).vb
+++jsNomArcCargos.designer.vb
+++jsNomArcCargos.resx
+++jsNomArcCargosMovimientos.designer.vb
+++jsNomArcCargosMovimientos.resx
+++jsNomArcConceptos.Designer.vb
+++jsNomArcConceptos.resx
+++jsNomArcConceptosMovimientos.designer.vb
+++jsNomArcConceptosMovimientos.resx
+++jsNomArcConstantes.Designer.vb
+++jsNomArcConstantes.resx
+++jsNomArcConstantesMovimientos.designer.vb
+++jsNomArcConstantesMovimientos.resx
+++jsNomArcGrupos.designer.vb
+++jsNomArcGrupos.resx
+++jsNomArcGruposMovimientos.designer.vb
+++jsNomArcGruposMovimientos.resx
+++jsNomArcNominas.designer.vb
+++jsNomArcNominas.resx
+++jsNomArcNominasMovimientos.designer.vb
+++jsNomArcNominasMovimientos.resx
+++jsNomArcTrabajadores.designer.vb
+++jsNomArcTrabajadores.resx
+++jsNomArcTrabajadoresCuotas.designer.vb
+++jsNomArcTrabajadoresCuotas.resx
+++jsNomArcTrabajadoresMovimientosAsistencia.designer.vb
+++jsNomArcTrabajadoresMovimientosAsistencia.resx
+++jsNomArcTrabajadoresMovimientosExpediente.designer.vb
+++jsNomArcTrabajadoresMovimientosExpediente.resx
+++jsNomArcTrabajadoresXConcepto.designer.vb
+++jsNomArcTrabajadoresXConcepto.resx
+++jsNomArcTurnosHorarios.designer.vb
+++jsNomArcTurnosHorarios.resx
+++jsNomProArchivosTXT.designer.vb
+++jsNomProArchivosTXT.resx
+++jsNomProProcesarNomina.designer.vb
+++jsNomProProcesarNomina.resx
+++jsNomProReProcesarConceptos.designer.vb
+++jsNomProReProcesarConceptos.resx
+++jsNomProReversarNomina.designer.vb
+++jsNomProReversarNomina.resx
+++jsNomRepParametros.designer.vb
+++jsNomRepParametros.resx
+++jsVenArcAsesores (1).vb
+++jsVenArcAsesores (2).vb
+++jsVenArcAsesores (3).vb
+++jsVenArcAsesores (4).vb
+++jsVenArcAsesores.designer (1).vb
+++jsVenArcAsesores.designer (2).vb
+++jsVenArcAsesoresCuotasMovimientos.vb
+++jsVenArcCanalTiponegocio (1).vb
+++jsVenArcClientes (1).vb
+++jsVenArcClientes (2).vb
+++jsVenArcClientes (3).vb
+++jsVenArcClientesCXC.vb
+++jsVenArcClientesCXCPlus (1).vb
+++jsVenArcClientesCXCPlus (2).vb
+++jsVenArcClientesSADA (1).vb
+++jsVenArcCXCCestaTicket (1).vb
+++jsVenArcFacturas (1).vb
+++jsVenArcFacturas (2).vb
+++jsVenArcFacturas (3).vb
+++jsVenArcFacturas.designer (1).vb
+++jsVenArcListaRenglonesFacturasCXC (1).vb
+++jsVenArcNotasCredito (1).vb
+++jsVenArcNotasDebito (1).vb
+++jsVenArcNotasEntrega (1).vb
+++jsVenArcNotasEntrega (2).vb
+++jsVenArcPedidos (1).vb
+++jsVenArcPedidos (2).vb
+++jsVenArcPedidos.designer (1).vb
+++jsVenArcPrePedidos (1).vb
+++jsVenArcPrePedidos (2).vb
+++jsVenArcPrePedidos.designer (1).vb
+++jsVenArcPresupuestos (1).vb
+++jsVenArcRutasDespacho (1).vb
+++jsVenArcRutasVisita (1).vb
+++jsVenArcRutasVisita (2).vb
+++jsVenProCierreDiario (1).vb
+++jsVenProCierreMensual (1).vb
+++jsVenProGuiaDespacho (1).vb
+++jsVenProGuiaDespachoMovimientos (1).vb
+++jsVenProGuiaPedidos (1).vb
+++jsVenProMercanciasEnDespachos (1).vb
+++jsVenProPedidosFacturacion (1).vb
+++jsVenProPedidosFacturacion (2).vb
+++jsVenProPrepedidosPedidos (1).vb
+++jsVenProPrepedidosPedidosX.vb
+++jsVenProRelacionFacturas (1).vb
+++jsVenProRelacionFacturasMovimientos.vb
+++jsVenProRelacionNotasCredito (1).vb
+++jsVenProRelacionNotasCredito (2).vb
+++jsVenProRelacionNotasCreditoMovimientos.vb
+++jsVenRepParametros (1).vb
+++jsVenRepParametrosDos (1).vb
+++jsVenRepParametrosDos (2).vb
+++jsVenRepParametrosDos.designer (1).vb
+++jsVenRepParametrosPlus (1).vb
+++jsVenArcAsesores (1).resx
+++jsVenArcAsesores.designer.vb
+++jsVenArcAsesores.resx
+++jsVenArcAsesoresCuotasMovimientos.designer.vb
+++jsVenArcAsesoresCuotasMovimientos.resx
+++jsVenArcAsesoresDescuentos.designer.vb
+++jsVenArcAsesoresDescuentos.resx
+++jsVenArcAsesoresMovimientosPorcentajesComisionCob.designer.vb
+++jsVenArcAsesoresMovimientosPorcentajesComisionCob.resx
+++jsVenArcAsesoresMovimientosPorcentajesComisionCobJerarquias.designer.vb
+++jsVenArcAsesoresMovimientosPorcentajesComisionCobJerarquias.resx
+++jsVenArcCanalTiponegocio.designer.vb
+++jsVenArcCanalTiponegocio.resx
+++jsVenArcCanalTipoNegocioMovimientos.designer.vb
+++jsVenArcCanalTipoNegocioMovimientos.resx
+++jsVenArcClientes (1).resx
+++jsVenArcClientes.designer.vb
+++jsVenArcClientes.resx
+++jsVenArcClientesCIs.designer.vb
+++jsVenArcClientesCIs.resx
+++jsVenArcClientesCXC.designer.vb
+++jsVenArcClientesCXC.resx
+++jsVenArcClientesCXCPlus.designer.vb
+++jsVenArcClientesCXCPlus.resx
+++jsVenArcClientesExpediente.designer.vb
+++jsVenArcClientesExpediente.resx
+++jsVenArcClientesSADA.designer.vb
+++jsVenArcClientesSADA.resx
+++jsVenArcClientesVisitas.designer.vb
+++jsVenArcClientesVisitas.resx
+++jsVenArcCXCCestaTicket.Designer.vb
+++jsVenArcCXCCestaTicket.resx
+++jsVenArcCXCCestaTicketValor.designer.vb
+++jsVenArcCXCCestaTicketValor.resx
+++jsVenArcFacturas (1).resx
+++jsVenArcFacturas.designer.vb
+++jsVenArcFacturas.resx
+++jsVenArcListaRenglonesFacturasCXC.designer.vb
+++jsVenArcListaRenglonesFacturasCXC.resx
+++jsVenArcNotasCredito.designer.vb
+++jsVenArcNotasCredito.resx
+++jsVenArcNotasDebito.designer.vb
+++jsVenArcNotasDebito.resx
+++jsVenArcNotasEntrega.designer.vb
+++jsVenArcNotasEntrega.resx
+++jsVenArcPedidos.designer.vb
+++jsVenArcPedidos.resx
+++jsVenArcPrePedidos.designer.vb
+++jsVenArcPrePedidos.resx
+++jsVenArcPresupuestos.designer.vb
+++jsVenArcPresupuestos.resx
+++jsVenArcRutasDespacho.designer.vb
+++jsVenArcRutasDespacho.resx
+++jsVenArcRutasVisita.designer.vb
+++jsVenArcRutasVisita.resx
+++jsVenArcRutasVisitaMovimientos.designer.vb
+++jsVenArcRutasVisitaMovimientos.resx
+++jsVenArcValidacionControlDebitoCredito.designer.vb
+++jsVenArcValidacionControlDebitoCredito.resx
+++jsVenProAnulacionDocumentos.designer.vb
+++jsVenProAnulacionDocumentos.resx
+++jsVenProBloqueoDeClientes.designer.vb
+++jsVenProBloqueoDeClientes.resx
+++jsVenProCierreDiario.designer.vb
+++jsVenProCierreDiario.resx
+++jsVenProCierreMensual.designer.vb
+++jsVenProCierreMensual.resx
+++jsVenProCuotasAsesores.designer.vb
+++jsVenProCuotasAsesores.resx
+++jsVenProGuiaDespacho.designer.vb
+++jsVenProGuiaDespacho.resx
+++jsVenProGuiaDespachoImpresion.designer.vb
+++jsVenProGuiaDespachoImpresion.resx
+++jsVenProGuiaDespachoMovimientos.designer.vb
+++jsVenProGuiaDespachoMovimientos.resx
+++jsVenProGuiaPedidos.designer.vb
+++jsVenProGuiaPedidos.resx
+++jsVenProGuiaPedidosMovimientos.designer.vb
+++jsVenProGuiaPedidosMovimientos.resx
+++jsVenProHistoricoClientes.designer.vb
+++jsVenProHistoricoClientes.resx
+++jsVenProLimiteCreditoClientes.designer.vb
+++jsVenProLimiteCreditoClientes.resx
+++jsVenProMercanciasEnDespachos.designer.vb
+++jsVenProMercanciasEnDespachos.resx
+++jsVenProNestleBPAID.designer.vb
+++jsVenProNestleBPAID.resx
+++jsVenProPedidosFacturacion.designer.vb
+++jsVenProPedidosFacturacion.resx
+++jsVenProPreCancelaciones.designer.vb
+++jsVenProPreCancelaciones.resx
+++jsVenProPrepedidosPedidos.designer.vb
+++jsVenProPrepedidosPedidos.resx
+++jsVenProPrepedidosPedidosX.designer.vb
+++jsVenProPrepedidosPedidosX.resx
+++jsVenProReconstruccionSaldos.designer.vb
+++jsVenProReconstruccionSaldos.resx
+++jsVenProRelacionFacturas.designer.vb
+++jsVenProRelacionFacturas.resx
+++jsVenProRelacionFacturasMovimientos.designer.vb
+++jsVenProRelacionFacturasMovimientos.resx
+++jsVenProRelacionFacturasMovimientosPlus.designer.vb
+++jsVenProRelacionFacturasMovimientosPlus.resx
+++jsVenProRelacionNotasCredito.designer.vb
+++jsVenProRelacionNotasCredito.resx
+++jsVenProRelacionNotasCreditoImpresion.designer.vb
+++jsVenProRelacionNotasCreditoImpresion.resx
+++jsVenProRelacionNotasCreditoMovimientos.designer.vb
+++jsVenProRelacionNotasCreditoMovimientos.resx
+++jsVenProRelacionNotasCréditoMovimientosPlus.designer.vb
+++jsVenProRelacionNotasCréditoMovimientosPlus.resx
+++jsVenRepParametros.designer.vb
+++jsVenRepParametros.resx
+++jsVenRepParametrosDos.designer.vb
+++jsVenRepParametrosDos.resx
+++jsVenRepParametrosPlus.designer.vb
+++jsVenRepParametrosPlus.resx
+++AcercaDe.designer.vb
+++AcercaDe.resx
+++FechaSistema.designer.vb
+++FechaSistema.resx
+++FechaSistemaPlus.vb
+++FechaSistemaPlus.designer.vb
+++FechaSistemaPlus.resx
+++frmBuscar (1).vb
+++frmBuscar.designer.vb
+++frmBuscar.resx
+++frmEspere.Designer.vb
+++frmEspere.resx
+++frmServidor.designer.vb
+++frmServidor.resx
+++frmServidorValidacion.designer.vb
+++frmServidorValidacion.resx
+++jsCambioEjercicio.designer.vb
+++jsCambioEjercicio.resx
+++jsGenCambioPrecioEnAlbaranes.designer.vb
+++jsGenCambioPrecioEnAlbaranes.resx
+++jsGenComentariosRenglones.designer.vb
+++jsGenComentariosRenglones.resx
+++jsGenConsultaRIF.designer.vb
+++jsGenConsultaRIF.resx
+++jsGenDescuentosCompras.designer.vb
+++jsGenDescuentosCompras.resx
+++jsGenDescuentosComprasRenglon (1).vb
+++jsGenDescuentosComprasRenglon.designer.vb
+++jsGenDescuentosComprasRenglon.resx
+++jsGenDescuentosVentas.designer.vb
+++jsGenDescuentosVentas.resx
+++jsGenFormasPago.Designer.vb
+++jsGenFormasPago.resx
+++jsGenFormasPagoMovimientoPlus.designer.vb
+++jsGenFormasPagoMovimientoPlus.resx
+++jsGenIVAAlbaran (1).vb
+++jsGenIVAAlbaran.designer.vb
+++jsGenIVAAlbaran.resx
+++jsGenListadoSeleccion (1).vb
+++jsGenListadoSeleccion.designer.vb
+++jsGenListadoSeleccion.resx
+++jsGenProNumerosControl (1).vb
+++jsGenProNumerosControl.designer.vb
+++jsGenProNumerosControl.resx
+++jsGenProNumerosControlMovimientos.designer.vb
+++jsGenProNumerosControlMovimientos.resx
+++jsGenRenglonesMovimientos (1).vb
+++jsGenRenglonesMovimientos (2).vb
+++jsGenRenglonesMovimientos.designer.vb
+++jsGenRenglonesMovimientos.resx
+++jsGenRenglonesMovimientosPlus (1).vb
+++jsGenRenglonesMovimientosPlus.vb
+++jsGenRenglonesMovimientosPlus.designer.vb
+++jsGenRenglonesMovimientosPlus.resx
+++jsGenTablaArchivos.designer.vb
+++jsGenTablaArchivos.resx
+++jsGenTallasColores (1).vb
+++jsGenTallasColores.designer.vb
+++jsGenTallasColores.resx
+++jsLogin (1).vb
+++scrMain (1).vb
+++scrMain (2).vb
+++scrMain.designer (1).vb
+++scrMain.designer.vb
+++scrMain.resx
+++ConsultasCompras (1).vb
+++ConsultasGenerales (1).vb
+++ConsultasMedicionGerencial (1).vb
+++ConsultasMercancias (1).vb
+++ConsultasMercancias (2).vb
+++ConsultasPuntosdeVentas (1).vb
+++ConsultasVentas (1).vb
+++ConsultasVentas (2).vb
+++FuncionesBancos (1).vb
+++FuncionesCompras (1).vb
+++FuncionesCompras (2).vb
+++FuncionesContabilidad (1).vb
+++FuncionesControl (1).vb
+++FuncionesControl (2).vb
+++FuncionesControl (3).vb
+++FuncionesControl[Conflict].vb
+++FuncionesImpresionFiscalAclas (1).vb
+++FuncionesMercancias (1).vb
+++FuncionesMercancias (2).vb
+++FuncionesReportesGraficos (1).vb
+++FuncionesTransportables (1).vb
+++FuncionesTransportables (2).vb
+++FuncionesVentas (1).vb
+++FuncionesVentas (2).vb
+++jytsistema (1).vb
+++jytsistema (2).vb
+++jytsistema (3).vb
+++jytsistema (4).vb
+++TablasCompras (1).vb
+++TablasCompras (2).vb
+++TablasControl (1).vb
+++TablasMercancias (1).vb
+++TablasMercancias (2).vb
+++TablasVentas (1).vb
+++app.manifest
+++Application.myapp
+++Application.Designer.vb
+++AssemblyInfo.vb
+++licenses.licx
+++Resources (1).resx
+++Resources (2).resx
+++Resources.Designer (1).vb
+++Resources.Designer (2).vb
+++Resources.resx
+++Resources.Designer.vb
+++Settings.settings
+++Settings.Designer.vb
+++rptBanBancosFicha.rpt
+++rptBanBancosFicha.vb
+++rptBanBancosIDB.rpt
+++rptBanBancosIDB.vb
+++rptBanBancosIDBMes.rpt
+++rptBanBancosIDBMes.vb
+++rptBanBancosListado (1).rpt
+++rptBanBancosListado.rpt
+++rptBanBancosListado.vb
+++rptBanCajaCierre (1).rpt
+++rptBanCajaCierre.rpt
+++rptBanCajaCierre.vb
+++rptBanCajaNoDepositada (1).vb
+++rptBanCajaNoDepositada.rpt
+++rptBanCajaNoDepositada.vb
+++rptBanComprobanteEgreso (1).vb
+++rptBanFormatoCheque.rpt
+++rptBanFormatoCheque.vb
+++rptBanListadoBancos_Disponibilidad.rpt
+++rptBanListadoBancos_Disponibilidad.vb
+++rptBanNotaChequeDevuelto (1).vb
+++rptBanNotaChequeDevuelto.rpt
+++rptBanNotaChequeDevuelto.vb
+++rptBanNotaTicketDevuelto.rpt
+++rptBanNotaTicketDevuelto.vb
+++rptBanRemesasCestaTicket.rpt
+++rptBanRemesasCestaTicket.vb
+++rptBanSaldosPorMes.rpt
+++rptBanSaldosPorMes.vb
+++rptBanBancosMovimientos.vb
+++rptBanCajaMovimientos.vb
+++rptBanChequesDevueltos.vb
+++rptBanComprobanteEgreso.vb
+++rptBanComprobanteEgresoContable.vb
+++rptBanConciliacionBancaria.vb
+++rptBanDepositos.vb
+++rptBanEstadodeCuenta.vb
+++rptBanReposisionSaldoCaja.vb
+++rptBanTransferencia.vb
+++rptComprasAuditoriasProveedores.rpt
+++rptComprasAuditoriasProveedores.vb
+++rptComprasCompra.rpt
+++rptComprasCompra.vb
+++rptComprasEstadodeCuentaProveedores0G.rpt
+++rptComprasEstadodeCuentaProveedores0G.vb
+++rptComprasGasto.rpt
+++rptComprasGasto.vb
+++rptComprasListadoDoc_Items0G.rpt
+++rptComprasListadoDoc_Items0G.vb
+++rptComprasListadoDoc_Items1G.rpt
+++rptComprasListadoDoc_Items1G.vb
+++rptComprasListadoDoc_Items2G.rpt
+++rptComprasListadoDoc_Items2G.vb
+++rptComprasListadoDocumentos0G.rpt
+++rptComprasListadoDocumentos0G.vb
+++rptComprasListadoDocumentos1G.rpt
+++rptComprasListadoDocumentos1G.vb
+++rptComprasListadoDocumentos2G.rpt
+++rptComprasListadoDocumentos2G.vb
+++rptComprasListadoDocumentos3G.rpt
+++rptComprasListadoDocumentos3G.vb
+++rptComprasMovimientosProveedores0G.rpt
+++rptComprasMovimientosProveedores0G.vb
+++rptComprasNotaCredito.rpt
+++rptComprasNotaCredito.vb
+++rptComprasNotaDebito.rpt
+++rptComprasNotaDebito.vb
+++rptComprasOrdenDeCompra.rpt
+++rptComprasOrdenDeCompra.vb
+++rptComprasProveedores0G.rpt
+++rptComprasProveedores0G.vb
+++rptComprasProveedores1G.rpt
+++rptComprasProveedores1G.vb
+++rptComprasProveedores2G.rpt
+++rptComprasProveedores2G.vb
+++rptComprasRecepcion.rpt
+++rptComprasRecepcion.vb
+++rptComprasRecibo (1).vb
+++rptComprasRetencionesISLR.rpt
+++rptComprasRetencionesISLR.vb
+++rptComprasRetencionesIVA.rpt
+++rptComprasRetencionesIVA.vb
+++rptComprasRetencionIVA (1).rpt
+++rptComprasSaldosProveedores0G.rpt
+++rptComprasSaldosProveedores0G.vb
+++rptComprasSaldosProveedores1G.rpt
+++rptComprasSaldosProveedores1G.vb
+++rptComprasSaldosProveedores2G.rpt
+++rptComprasSaldosProveedores2G.vb
+++rptComprasVencimientos.rpt
+++rptComprasVencimientos.vb
+++rptComprasVencimientosResumen.rpt
+++rptComprasVencimientosResumen.vb
+++rptComprasFichaProveedor.vb
+++rptComprasLibroIVAGeneral.vb
+++rptComprasRecibo.vb
+++rptComprasRetencionISLR.vb
+++rptComprasRetencionIVA.vb
+++rptContabPlantillaAsiento1.vb
+++rptContabReglas.rpt
+++rptContabReglas.vb
+++rptContabAsiento.vb
+++rptContabBalanceComprobacion.vb
+++rptContabBalanceGeneral.vb
+++rptContabCuentas.vb
+++rptContabDiario.vb
+++rptContabGananciasPerdidas.vb
+++rptContabMayorAnalitico.vb
+++rptContabPlantillaAsiento.vb
+++rptSIGMEComprasVentasComparativas (1).rpt
+++rptSIGMEComprasVentasComparativas (2).rpt
+++rptSIGMEDescuentosAsesorMes3G (1).vb
+++rptSIGMEGananciasFacturas0G (1).rpt
+++rptSIGMEGananciasFacturas4G (1).vb
+++rptSIGMEGananciasItem1G (1).vb
+++rptSIGMEGananciasItem3G (1).rpt
+++rptSIGMEVentasMesMes1G (1).rpt
+++rptSIGMEActivacionMesMes0G.vb
+++rptSIGMEActivacionMesMes0GPlus.vb
+++rptSIGMEActivacionMesMes1G.vb
+++rptSIGMEActivacionMesMes2G.vb
+++rptSIGMEActivacionMesMes3G.vb
+++rptSIGMEActivacionMesMes4G.vb
+++rptSIGMEComprasVentasComparativas.vb
+++rptSIGMEDescuentosAsesor0G.vb
+++rptSIGMEDescuentosAsesor1G.vb
+++rptSIGMEDescuentosAsesor2G.vb
+++rptSIGMEDescuentosAsesor3G.vb
+++rptSIGMEDescuentosAsesor4G.vb
+++rptSIGMEDescuentosAsesorMes0G.vb
+++rptSIGMEDescuentosAsesorMes1G.vb
+++rptSIGMEDescuentosAsesorMes2G.vb
+++rptSIGMEDescuentosAsesorMes3G.vb
+++rptSIGMEDescuentosAsesorMes4G.vb
+++rptSIGMEDevolucionCausa0G.vb
+++rptSIGMEDevolucionesAsesorMesMes0G.vb
+++rptSIGMEDevolucionesAsesorMesMes1G.vb
+++rptSIGMEDropSizeMesMes.vb
+++rptSIGMEGananciasCestaTicket.vb
+++rptSIGMEGananciasCestaTicketMesMes.vb
+++rptSIGMEGananciasFacturas0G.vb
+++rptSIGMEGananciasFacturas1G.vb
+++rptSIGMEGananciasFacturas2G.vb
+++rptSIGMEGananciasFacturas3G.vb
+++rptSIGMEGananciasFacturas4G.vb
+++rptSIGMEGananciasItem0G.vb
+++rptSIGMEGananciasItem1G.vb
+++rptSIGMEGananciasItem2G.vb
+++rptSIGMEGananciasItem3G.vb
+++rptSIGMEGananciasItem4G.vb
+++rptSIGMEGananciasItemMesMes0G.vb
+++rptSIGMEGananciasItemMesMes1G.vb
+++rptSIGMEGananciasItemMesMes2G.vb
+++rptSIGMEGananciasItemMesMes3G.vb
+++rptSIGMEIngresosAsesor0G.vb
+++rptSIGMEVentasComprasPorJerarquia.vb
+++rptSIGMEVentasMesMes0G.vb
+++rptSIGMEVentasMesMes1G.vb
+++rptMercanciaCatalogo1G.rpt
+++rptMercanciaCatalogo1G.vb
+++rptMercanciaCatalogo2G.rpt
+++rptMercanciaCatalogo2G.vb
+++rptMercanciaCatalogo3G.rpt
+++rptMercanciaCatalogo3G.vb
+++rptMercanciaCatalogo4G.rpt
+++rptMercanciaCatalogo4G.vb
+++rptMercanciaCatalogoSG (1).vb
+++rptMercanciaEquivalencias1G (1).vb
+++rptMercanciaEquivalencias2G (1).vb
+++rptMercanciaEquivalencias3G (1).vb
+++rptMercanciaEquivalencias4G (1).vb
+++rptMercanciaEquivalenciasSG (1).vb
+++rptMercanciaExistenciasSG (1).rpt
+++rptMercanciaExistenciasSG (1).vb
+++rptMercanciaFicha.rpt
+++rptMercanciaFicha.vb
+++rptMercanciaIventarioLegalSG (1).vb
+++rptMercanciaJerarquias.rpt
+++rptMercanciaJerarquias.vb
+++rptMercanciaLeyDeCostos (1).rpt
+++rptMercanciaMovimientoSG.rpt
+++rptMercanciaMovimientoSG.vb
+++rptMercanciaObsoleta1G.rpt
+++rptMercanciaObsoleta1G.vb
+++rptMercanciaObsoleta2G.rpt
+++rptMercanciaObsoleta2G.vb
+++rptMercanciaObsoleta3G.rpt
+++rptMercanciaObsoleta3G.vb
+++rptMercanciaObsoleta4G.rpt
+++rptMercanciaObsoleta4G.vb
+++rptMercanciaObsoletaSG.rpt
+++rptMercanciaObsoletaSG.vb
+++rptMercanciaOferta.rpt
+++rptMercanciaOferta.vb
+++rptMercanciaPrecios1G.rpt
+++rptMercanciaPrecios1G.vb
+++rptMercanciaPrecios2G.rpt
+++rptMercanciaPrecios2G.vb
+++rptMercanciaPrecios3G.rpt
+++rptMercanciaPrecios3G.vb
+++rptMercanciaPrecios4G.rpt
+++rptMercanciaPrecios4G.vb
+++rptMercanciaPreciosEquivalentes1G (1).rpt
+++rptMercanciaPreciosEspeciales.rpt
+++rptMercanciaPreciosEspeciales.vb
+++rptMercanciaPreciosEspeciales1.vb
+++rptMercanciaPreciosFuturos.rpt
+++rptMercanciaPreciosFuturos.vb
+++rptMercanciaPreciosFuturos1.vb
+++rptMercanciaPreciosSG.rpt
+++rptMercanciaPreciosSG.vb
+++rptMercanciaServicios (1).rpt
+++rptMercanciaServiciosMovimientos0G (1).vb
+++rptMercanciaTransferencia (1).vb
+++rptMercanciaVentaPlanaHEINZ (1).vb
+++rptMercanciaVentasMerG0 (1).rpt
+++rptMercanciaVentasMerG1 (1).rpt
+++rptMercanciaVentasMerG1 (1).vb
+++rptMercanciaVentasMerG2 (1).rpt
+++rptMercanciaVentasMerG3 (1).rpt
+++rptMercanciaVentasPorItemActMesMes0G.rpt
+++rptMercanciaVentasPorItemActMesMes0G.vb
+++rptMercanciaVentasPorItemActMesMes1G.rpt
+++rptMercanciaVentasPorItemActMesMes1G.vb
+++rptMercanciaVentasPorItemActMesMes2G.rpt
+++rptMercanciaVentasPorItemActMesMes2G.vb
+++rptVentasGuiaDespachoFacturas.rpt
+++rptVentasGuiaDespachoFacturas.vb
+++rptVentasLibroIVAGeneral.vb
+++rptMercanciaBarra.vb
+++rptMercanciaBarraEstante.vb
+++rptMercanciaBarraHabladorNevera.vb
+++rptMercanciaBarraPequeña.vb
+++rptMercanciaBarraPrecio.vb
+++rptMercanciaCatalogoSG.vb
+++rptMercanciaComprasMer0G.vb
+++rptMercanciaComprasMer1G.vb
+++rptMercanciaComprasMer2G.vb
+++rptMercanciaComprasMer3G.vb
+++rptMercanciaConteo.vb
+++rptMercanciaEquivalencias1G.vb
+++rptMercanciaEquivalencias2G.vb
+++rptMercanciaEquivalencias3G.vb
+++rptMercanciaEquivalencias4G.vb
+++rptMercanciaEquivalenciasSG.vb
+++rptMercanciaExistencias1G.vb
+++rptMercanciaExistencias2G.vb
+++rptMercanciaExistencias3G.vb
+++rptMercanciaExistencias4G.vb
+++rptMercanciaExistenciasSG.vb
+++rptMercanciaIventarioLegalSG.vb
+++rptMercanciaLeyDeCostos.vb
+++rptMercanciaMovimiento0G.vb
+++rptMercanciaMovimiento1G.vb
+++rptMercanciaMovimiento2G.vb
+++rptMercanciaMovimiento3G.vb
+++rptMercanciaMovimiento4G.vb
+++rptMercanciaMovimientosResumen.vb
+++rptMercanciaPedidosAlmacen.vb
+++rptMercanciaPreciosEquivalentes0G.vb
+++rptMercanciaPreciosEquivalentes1G.vb
+++rptMercanciaPreciosEquivalentes2G.vb
+++rptMercanciaPreciosEquivalentes3G.vb
+++rptMercanciaPreciosEquivalentes4G.vb
+++rptMercanciaServicios.vb
+++rptMercanciaServiciosMovimientos0G.vb
+++rptMercanciaTransferencia.vb
+++rptMercanciaTransferencias0G.vb
+++rptMercanciaVentaPlanaHEINZ.vb
+++rptMercanciaVentasMerActG0.vb
+++rptMercanciaVentasMerActG1.vb
+++rptMercanciaVentasMerActG2.vb
+++rptMercanciaVentasMerActG3.vb
+++rptMercanciaVentasMerActG4.vb
+++rptMercanciaVentasMerG0.vb
+++rptMercanciaVentasMerG1.vb
+++rptMercanciaVentasMerG2.vb
+++rptMercanciaVentasMerG3.vb
+++rptMercanciaVentasNetasMerG0.vb
+++rptMercanciaVentasPlana.vb
+++rptNominaConceptoAcumulado.rpt
+++rptNominaConceptoAcumulado.vb
+++rptNominaConceptos.rpt
+++rptNominaConceptos.vb
+++rptNominaConceptosMesaMes.rpt
+++rptNominaConceptosMesaMes.vb
+++rptNominaConceptosXTrabajador.rpt
+++rptNominaConceptosXTrabajador.vb
+++rptNominaConceptosXTrabajadorMesaMes.rpt
+++rptNominaConceptosXTrabajadorMesaMes.vb
+++rptNominaConstantes.rpt
+++rptNominaConstantes.vb
+++rptNominaFichaTrabajador (1).rpt
+++rptNominaFichaTrabajador.rpt
+++rptNominaFichaTrabajador.vb
+++rptNominaFirmas.rpt
+++rptNominaFirmas.vb
+++rptNominaNomina (1).vb
+++rptNominaNomina.rpt
+++rptNominaNomina.vb
+++rptNominaNominaResumen.rpt
+++rptNominaNominaResumen.vb
+++rptNominaPreNomina.rpt
+++rptNominaPreNomina.vb
+++rptNominaRecibos.rpt
+++rptNominaRecibos.vb
+++rptNominaRegistroTrabajador.rpt
+++rptNominaRegistroTrabajador.vb
+++rptNominaTrabajadores.rpt
+++rptNominaTrabajadores.vb
+++rptNominaTrabajadores1G.rpt
+++rptNominaTrabajadores1G.vb
+++rptPOSReporteXPl.us.rpt
+++rptPOSReporteXPl.us.vb
+++rptPOSFacturas.vb
+++rptPOSReporteX.vb
+++rptPOSReporteXPlus.vb
+++Copy of rptVentasNotasCredito0G.vb
+++rptGENRelacionCT.vb
+++rptPOSFacturas1.vb
+++rptVentasActivacionClientes0G.rpt
+++rptVentasActivacionClientes0G.vb
+++rptVentasActivacionClientes1G.rpt
+++rptVentasActivacionClientes1G.vb
+++rptVentasActivacionClientes2G.rpt
+++rptVentasActivacionClientes2G.vb
+++rptVentasActivacionClientes3G.rpt
+++rptVentasActivacionClientes3G.vb
+++rptVentasActivacionClientesMercancias0G.rpt
+++rptVentasActivacionClientesMercancias0G.vb
+++rptVentasActivacionesClientesMercancias0G (1).vb
+++rptVentasActivacionesClientesMercancias0G.rpt
+++rptVentasActivacionesClientesMercancias0G.vb
+++rptVentasActivacionesClientesMercancias1G (1).rpt
+++rptVentasActivacionesClientesMercancias1G (1).vb
+++rptVentasActivacionesClientesMercancias1G.rpt
+++rptVentasActivacionesClientesMercancias1G.vb
+++rptVentasActivacionesClientesMercancias2G (1).vb
+++rptVentasActivacionesClientesMercancias2G.rpt
+++rptVentasActivacionesClientesMercancias2G.vb
+++rptVentasActivacionesClientesMercancias3G (1).rpt
+++rptVentasActivacionesClientesMercancias3G (1).vb
+++rptVentasActivacionesClientesMercancias3G.rpt
+++rptVentasActivacionesClientesMercancias3G.vb
+++rptVentasActivacionesClientesMercanciasPLUS.rpt
+++rptVentasActivacionesClientesMercanciasPLUS.vb
+++rptVentasAuditoriasClientes (1).rpt
+++rptVentasAuditoriasClientes (1).vb
+++rptVentasAuditoriasClientes.vb
+++rptVentasBackorders0G.rpt
+++rptVentasBackorders0G.vb
+++rptVentasBackorders1G.rpt
+++rptVentasBackorders1G.vb
+++rptVentasBackorders2G.rpt
+++rptVentasBackorders2G.vb
+++rptVentasBackorders3G.rpt
+++rptVentasBackorders3G.vb
+++rptVentasBackorders4G.rpt
+++rptVentasBackorders4G.vb
+++rptVentasChequesDevueltos0G.rpt
+++rptVentasChequesDevueltos0G.vb
+++rptVentasChequesDevueltos1G.rpt
+++rptVentasChequesDevueltos1G.vb
+++rptVentasChequesDevueltos2G.rpt
+++rptVentasChequesDevueltos2G.vb
+++rptVentasChequesDevueltos3G.rpt
+++rptVentasChequesDevueltos3G.vb
+++rptVentasChequesDEvueltosMes0G.rpt
+++rptVentasChequesDEvueltosMes0G.vb
+++rptVentasChequesDEvueltosMes1G.rpt
+++rptVentasChequesDEvueltosMes1G.vb
+++rptVentasChequesDEvueltosMes2G.rpt
+++rptVentasChequesDEvueltosMes2G.vb
+++rptVentasChequesDEvueltosMes3G.rpt
+++rptVentasChequesDEvueltosMes3G.vb
+++rptVentasCierreDiario.rpt
+++rptVentasCierreDiario.vb
+++rptVentasCierreDiarioContado.rpt
+++rptVentasCierreDiarioContado.vb
+++rptVentasCierreDiarioCT.rpt
+++rptVentasCierreDiarioCT.vb
+++rptVentasClientes0G.rpt
+++rptVentasClientes0G.vb
+++rptVentasClientes1G.rpt
+++rptVentasClientes1G.vb
+++rptVentasClientes2G.rpt
+++rptVentasClientes2G.vb
+++rptVentasClientes3G.rpt
+++rptVentasClientes3G.vb
+++rptVentasClientesDivision0G (1).rpt
+++rptVentasClientesDivision0G (1).vb
+++rptVentasClientesDivision0G.rpt
+++rptVentasClientesDivision0G.vb
+++rptVentasClientesDivision1G.rpt
+++rptVentasClientesDivision1G.vb
+++rptVentasClientesDivision2G.rpt
+++rptVentasClientesDivision2G.vb
+++rptVentasClientesDivision3G.rpt
+++rptVentasClientesDivision3G.vb
+++rptVentasClientesDivision4G.rpt
+++rptVentasClientesDivision4G.vb
+++rptVentasClientesMesMes0G (1).vb
+++rptVentasClientesMesMes0G.rpt
+++rptVentasClientesMesMes0G.vb
+++rptVentasClientesSG.rpt
+++rptVentasClientesSG.vb
+++rptVentasCobranza (1).rpt
+++rptVentasCobranza (1).vb
+++rptVentasCobranza.rpt
+++rptVentasCobranza.vb
+++rptVentasCobranzaPlana.rpt
+++rptVentasCobranzaPlana.vb
+++rptVentasComisionesCobranza_Alimica (1).rpt
+++rptVentasComisionesCobranza_Alimica.rpt
+++rptVentasComisionesCobranza_Alimica.vb
+++rptVentasComisionesCobranza_Orlyzam (1).rpt
+++rptVentasComisionesCobranza_Orlyzam.rpt
+++rptVentasComisionesCobranza_Orlyzam.vb
+++rptVentasComisionesJerarquia.rpt
+++rptVentasComisionesJerarquia.vb
+++rptVentasComisionesJerarquiaFactura.rpt
+++rptVentasComisionesJerarquiaFactura.vb
+++rptVentasEstadodeCuentaClientes0G.rpt
+++rptVentasEstadodeCuentaClientes0G.vb
+++rptVentasFactura.rpt
+++rptVentasFactura.vb
+++rptVentasFacturacionMensual0G.rpt
+++rptVentasFacturacionMensual0G.vb
+++rptVentasFacturacionMensual1G.rpt
+++rptVentasFacturacionMensual1G.vb
+++rptVentasFacturacionMensual2G.rpt
+++rptVentasFacturacionMensual2G.vb
+++rptVentasFacturacionMensual3G.rpt
+++rptVentasFacturacionMensual3G.vb
+++rptVentasFacturas0G (1).rpt
+++rptVentasFacturas0G (1).vb
+++rptVentasFacturas0G.rpt
+++rptVentasFacturas0G.vb
+++rptVentasFacturas1G (1).rpt
+++rptVentasFacturas1G (1).vb
+++rptVentasFacturas1G.rpt
+++rptVentasFacturas1G.vb
+++rptVentasFacturas2G (1).rpt
+++rptVentasFacturas2G (1).vb
+++rptVentasFacturas2G.rpt
+++rptVentasFacturas2G.vb
+++rptVentasFacturas3G (1).rpt
+++rptVentasFacturas3G (1).vb
+++rptVentasFacturas3G.rpt
+++rptVentasFacturas3G.vb
+++rptVentasFichaCliente.rpt
+++rptVentasFichaCliente.vb
+++rptVentasGuiaCargaPedidosMercancias.rpt
+++rptVentasGuiaCargaPedidosMercancias.vb
+++rptVentasGuiaDespachoFacturas (1).rpt
+++rptVentasGuiaDespachoFacturas (1).vb
+++rptVentasGuiaDespachoMercancias (1).rpt
+++rptVentasGuiaDespachoMercancias (1).vb
+++rptVentasGuiaDespachoMercancias (2).vb
+++rptVentasGuiaDespachoMercancias.rpt
+++rptVentasGuiaDespachoMercancias.vb
+++rptVentasGuiaPedidos.rpt
+++rptVentasGuiaPedidos.vb
+++rptVentasGuiaPedidosMercancias.rpt
+++rptVentasGuiaPedidosMercancias.vb
+++rptVentasJerarquiaVendedor.rpt
+++rptVentasJerarquiaVendedor.vb
+++rptVentasLibroIVAGeneral (1).rpt
+++rptVentasLibroIVAGeneral (1).vb
+++rptVentasLibroIVAGeneral (2).rpt
+++rptVentasMovimientosClientes0G.rpt
+++rptVentasMovimientosClientes0G.vb
+++rptVentasMovimientosDocumentosG0.rpt
+++rptVentasMovimientosDocumentosG0.vb
+++rptVentasNotaCredito.rpt
+++rptVentasNotaCredito.vb
+++rptVentasNotaDebito.rpt
+++rptVentasNotaDebito.vb
+++rptVentasNotaDeEntrega.rpt
+++rptVentasNotaDeEntrega.vb
+++rptVentasNotasCredito0G.rpt
+++rptVentasNotasCredito0G.vb
+++rptVentasNotasCredito1G.rpt
+++rptVentasNotasCredito1G.vb
+++rptVentasNotasCredito2G.rpt
+++rptVentasNotasCredito2G.vb
+++rptVentasNotasCredito3G.rpt
+++rptVentasNotasCredito3G.vb
+++rptVentasPedido (1).vb
+++rptVentasPedido.rpt
+++rptVentasPedido.vb
+++rptVentasPedidosSinFacturar0G.rpt
+++rptVentasPedidosSinFacturar0G.vb
+++rptVentasPedidosVsEstatusCliente0G.rpt
+++rptVentasPedidosVsEstatusCliente0G.vb
+++rptVentasPedidosVsEstatusCliente1G.rpt
+++rptVentasPedidosVsEstatusCliente1G.vb
+++rptVentasPrePedido.rpt
+++rptVentasPrePedido.vb
+++rptVentasPrePedidos0G (1).rpt
+++rptVentasPrePedidos0G (1).vb
+++rptVentasPrePedidos0G.rpt
+++rptVentasPrePedidos0G.vb
+++rptVentasPrePedidos1G (1).rpt
+++rptVentasPrePedidos1G (1).vb
+++rptVentasPrePedidos1G.rpt
+++rptVentasPrePedidos1G.vb
+++rptVentasPrePedidos2G (1).rpt
+++rptVentasPrePedidos2G (1).vb
+++rptVentasPrePedidos2G.rpt
+++rptVentasPrePedidos2G.vb
+++rptVentasPrePedidos3G (1).rpt
+++rptVentasPrePedidos3G (1).vb
+++rptVentasPrePedidos3G.rpt
+++rptVentasPrePedidos3G.vb
+++rptVentasPrepedidosPesos0G.rpt
+++rptVentasPrepedidosPesos0G.vb
+++rptVentasPrepedidosPesos1G.rpt
+++rptVentasPrepedidosPesos1G.vb
+++rptVentasPrepedidosPesos2G.rpt
+++rptVentasPrepedidosPesos2G.vb
+++rptVentasPrepedidosPesos3G.rpt
+++rptVentasPrepedidosPesos3G.vb
+++rptVentasPresupuesto.rpt
+++rptVentasPresupuesto.vb
+++rptVentasRanking0G.rpt
+++rptVentasRanking0G.vb
+++rptVentasRanking1G.rpt
+++rptVentasRanking1G.vb
+++rptVentasRanking2G.rpt
+++rptVentasRanking2G.vb
+++rptVentasRanking3G.rpt
+++rptVentasRanking3G.vb
+++rptVentasRanking4G.rpt
+++rptVentasRanking4G.vb
+++rptVentasReciboCxC.rpt
+++rptVentasReciboCxC.vb
+++rptVentasRelacionDeFacturas (1).vb
+++rptVentasRelacionDeFacturas.rpt
+++rptVentasRelacionDeFacturas.vb
+++rptVentasRelacionNotasDeCredito.rpt
+++rptVentasRelacionNotasDeCredito.vb
+++rptVentasRetencionesIVAClientes.rpt
+++rptVentasRetencionesIVAClientes.vb
+++rptVentasRutas.rpt
+++rptVentasRutas.vb
+++rptVentasSaldos0G (1).vb
+++rptVentasSaldos0G.rpt
+++rptVentasSaldos0G.vb
+++rptVentasSaldos1G.rpt
+++rptVentasSaldos1G.vb
+++rptVentasSaldos2G.rpt
+++rptVentasSaldos2G.vb
+++rptVentasSaldos3G.rpt
+++rptVentasSaldos3G.vb
+++rptVentasSaldosPorDocumento.rpt
+++rptVentasSaldosPorDocumento.vb
+++rptVentasSaldosSG (1).rpt
+++rptVentasSaldosSG.rpt
+++rptVentasSaldosSG.vb
+++rptVentasVencimientos.rpt
+++rptVentasVencimientos.vb
+++rptVentasVencimientosResumen.rpt
+++rptVentasVencimientosResumen.vb
+++rptVentasVentasYActivacion0G (1).rpt
+++rptVentasVentasYActivacion0G (1).vb
+++rptVentasVentasYActivacion0G.rpt
+++rptVentasVentasYActivacion0G.vb
+++rptVentasVentasYActivacion1G (1).vb
+++rptVentasVentasYActivacion1G.rpt
+++rptVentasVentasYActivacion1G.vb
+++rptVentasVentasYActivacion2G (1).vb
+++rptVentasVentasYActivacion2G.rpt
+++rptVentasVentasYActivacion2G.vb
+++rptVentasVentasYActivacion3G (1).vb
+++rptVentasVentasYActivacion3G.rpt
+++rptVentasVentasYActivacion3G.vb
+++rptVentasVentasYActivacion4G (1).vb
+++rptVentasVentasYActivacion4G.rpt
+++rptVentasVentasYActivacion4G.vb
+++rptVentasVentasYActivacionPlus0G (1).rpt
+++rptVentasVentasYActivacionPlus0G (1).vb
+++rptVentasVentasYActivacionPlus0G.rpt
+++rptVentasVentasYActivacionPlus0G.vb
+++rptVentasVentasYActivacionPlus1G (1).vb
+++rptVentasVentasYActivacionPlus1G.rpt
+++rptVentasVentasYActivacionPlus1G.vb
+++rptVentasVentasYActivacionPlus2G (1).vb
+++rptVentasVentasYActivacionPlus2G.rpt
+++rptVentasVentasYActivacionPlus2G.vb
+++rptVentasVentasYActivacionPlus3G (1).vb
+++rptVentasVentasYActivacionPlus3G.rpt
+++rptVentasVentasYActivacionPlus3G.vb
+++rptVentasVentasYActivacionPlus4G (1).vb
+++rptVentasVentasYActivacionPlus4G.rpt
+++rptVentasVentasYActivacionPlus4G.vb
+++rptVentasAsesor0G.vb
+++frmViewer.designer.vb
+++frmViewer.resx
+++rpt (1).rpt
+++rpt.vb
+++rptGENComentarios.vb
+++rptGENDescuentos.vb
+++rptGENFormaDePago.vb
+++rptGENIVA.vb
+++rptGENTablaSimple.vb
+++rptGENTablaSimpleGrupoSubGrupo.vb
+++CajaRegistradora.png
+++CamionDeVenta.png
+++Carro.png
+++Datum_Azul.ico
+++Datum_RED.png
+++Datum_Yellow.png
+++Efectivo.png
+++Envases.ico
+++Estadistica1.png
+++Explosionar_2.png
+++Fabrica2.png
+++iconos_datum.zip
+++logoAzul.gif
+++logoAzul.jpg
+++logoAzul.png
+++Medidor.png
+++pretransfer.ico
+++Project12.ico
+++Project15.ico
+++Project8.ico
+++ret_islr.png
+++ret_iva.png

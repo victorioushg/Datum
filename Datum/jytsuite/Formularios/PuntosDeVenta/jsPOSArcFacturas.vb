@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsPOSArcFacturas
     Private Const sModulo As String = "Facturas"
     Private Const lRegion As String = "RibbonButton85"
@@ -63,7 +65,8 @@ Public Class jsPOSArcFacturas
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
             dt = ds.Tables(nTabla)
 
-
+            Dim dates As SfDateTimeEdit() = {txtEmision}
+            SetSizeDateObjects(dates)
 
             DesactivarMarco0()
             If dt.Rows.Count > 0 Then
@@ -77,7 +80,7 @@ Public Class jsPOSArcFacturas
             AsignarTooltips()
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
-            ft.MensajeCritico("Error en conexión de base de datos: " & ex.Message)
+            ft.mensajeCritico("Error en conexión de base de datos: " & ex.Message)
         End Try
 
     End Sub
@@ -150,27 +153,27 @@ Public Class jsPOSArcFacturas
                     End If
                     If ExisteCampo(myConn, lblInfo, jytsistema.WorkDataBase, "jsvenencpos", "numserial") Then
                         NUMEROSERIAL = .Item("NUMSERIAL")
-                        txtControl.Text = ft.MuestraCampoTexto(.Item("numserial"))
+                        txtControl.Text = ft.muestraCampoTexto(.Item("numserial"))
 
                     End If
 
 
-                    txtCodigo.Text = ft.MuestraCampoTexto(.Item("numfac"))
-                    txtEmision.Text = ft.FormatoFecha(CDate(.Item("emision").ToString))
+                    txtCodigo.Text = ft.muestraCampoTexto(.Item("numfac"))
+                    txtEmision.Value = CDate(.Item("emision").ToString)
                     txtVencimiento.Text = ft.FormatoFecha(CDate(.Item("vence").ToString))
 
 
 
                     txtEstatus.Text = aEstatus(.Item("estatus"))
-                    txtCliente.Text = ft.MuestraCampoTexto(.Item("codcli"))
-                    txtNombreCliente.Text = ft.MuestraCampoTexto(.Item("nomcli"))
-                    txtComentario.Text = ft.MuestraCampoTexto(.Item("comen"))
-                    txtAsesor.Text = ft.MuestraCampoTexto(.Item("codven"))
-                    txtCaja.Text = ft.MuestraCampoTexto(.Item("codcaj"))
-                    txtAlmacen.Text = ft.MuestraCampoTexto(.Item("almacen"))
+                    txtCliente.Text = ft.muestraCampoTexto(.Item("codcli"))
+                    txtNombreCliente.Text = ft.muestraCampoTexto(.Item("nomcli"))
+                    txtComentario.Text = ft.muestraCampoTexto(.Item("comen"))
+                    txtAsesor.Text = ft.muestraCampoTexto(.Item("codven"))
+                    txtCaja.Text = ft.muestraCampoTexto(.Item("codcaj"))
+                    txtAlmacen.Text = ft.muestraCampoTexto(.Item("almacen"))
                     ft.RellenaCombo(aTarifa, cmbTarifa, ft.InArray(aTarifa, .Item("tarifa")))
-                    txtReferencia.Text = ft.MuestraCampoTexto(.Item("refer"))
-                    txtCodigoContable.Text = ft.MuestraCampoTexto(.Item("codcon"))
+                    txtReferencia.Text = ft.muestraCampoTexto(.Item("refer"))
+                    txtCodigoContable.Text = ft.muestraCampoTexto(.Item("codcon"))
                     If txtControl.Text.Trim = "" Then
                         Dim nControl As String = ft.DevuelveScalarCadena(myConn, " select num_control from jsconnumcon " _
                                                                        & " where " _
@@ -223,12 +226,12 @@ Public Class jsPOSArcFacturas
                             & " id_emp = '" & jytsistema.WorkID & "' order by formapag "
 
         ds = DataSetRequery(ds, strSQLFP, myConn, nTablaFP, lblInfo)
-        dtfp = ds.Tables(nTablafp)
+        dtFP = ds.Tables(nTablaFP)
 
         Dim aC() As String = {"formapag", "numpag", "nompag", "importe", "vence"}
         Dim aN() As String = {"", "", "", "", ""}
         Dim aA() As Integer = {30, 90, 50, 70, 40}
-        Dim aL() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, _
+        Dim aL() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda,
                                         AlineacionDataGrid.Izquierda, AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro}
 
         Dim aFormatos() As String = {"", "", "", sFormatoNumero, sFormatoFechaCorta}
@@ -249,12 +252,12 @@ Public Class jsPOSArcFacturas
         Dim aCampos() As String = {"item", "descrip", "iva", "cantidad", "unidad", "precio", "des_art", "des_cli", "des_ofe", "totren", "estatus", ""}
         Dim aNombres() As String = {"Item", "Descripción", "IVA", "Cant.", "UND", "Precio Unitario", "Desc. Art.", "Desc. Cli.", "Desc. Ofe.", "Precio Total", "Tipo Renglon", ""}
         Dim aAnchos() As Integer = {70, 300, 30, 60, 45, 70, 50, 50, 50, 120, 70, 100}
-        Dim aAlineacion() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, _
-                                        AlineacionDataGrid.Centro, AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro, _
-                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, _
+        Dim aAlineacion() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda,
+                                        AlineacionDataGrid.Centro, AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro,
+                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha,
                                         AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda}
 
-        Dim aFormatos() As String = {"", "", "", sFormatoCantidad, "", sFormatoNumero, sFormatoNumero, sFormatoNumero, _
+        Dim aFormatos() As String = {"", "", "", sFormatoCantidad, "", sFormatoNumero, sFormatoNumero, sFormatoNumero,
                                      sFormatoNumero, sFormatoNumero, "", ""}
         IniciarTabla(dg, dtRenglones, aCampos, aNombres, aAnchos, aAlineacion, aFormatos)
         If dtRenglones.Rows.Count > 0 Then
@@ -277,7 +280,7 @@ Public Class jsPOSArcFacturas
         Dim aCampos() As String = {"tipoiva", "poriva", "baseiva", "impiva"}
         Dim aNombres() As String = {"", "", "", ""}
         Dim aAnchos() As Integer = {15, 45, 65, 60}
-        Dim aAlineacion() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Derecha, _
+        Dim aAlineacion() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Derecha,
                                         AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha}
 
         Dim aFormatos() As String = {"", sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero}
@@ -300,7 +303,7 @@ Public Class jsPOSArcFacturas
         Dim aCampos() As String = {"renglon", "pordes", "descuento"}
         Dim aNombres() As String = {"", "", ""}
         Dim aAnchos() As Integer = {60, 45, 60}
-        Dim aAlineacion() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Derecha, _
+        Dim aAlineacion() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Derecha,
                                         AlineacionDataGrid.Derecha}
 
         Dim aFormatos() As String = {"", sFormatoNumero, sFormatoNumero}
@@ -318,7 +321,7 @@ Public Class jsPOSArcFacturas
             txtCodigo.Text = ""
         End If
 
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtControl, txtCliente, txtNombreCliente, txtAsesor, txtNombreAsesor, txtComentario, txtCaja, _
+        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtControl, txtCliente, txtNombreCliente, txtAsesor, txtNombreAsesor, txtComentario, txtCaja,
                             txtAlmacen, txtReferencia, txtCodigoContable, txtVencimiento, txtCondicionPago)
 
         Dim nTransporte As String = ft.DevuelveScalarCadena(myConn, "SELECT codtra FROM jsconctatra WHERE id_emp = '" & jytsistema.WorkID & "' ORDER BY codtra LIMIT 1")
@@ -328,7 +331,7 @@ Public Class jsPOSArcFacturas
         If nAlmacen <> "0" Then txtAlmacen.Text = nAlmacen
 
         ft.RellenaCombo(aTarifa, cmbTarifa)
-        txtEmision.Text = ft.FormatoFecha(sFechadeTrabajo)
+        txtEmision.Value = sFechadeTrabajo
 
         txtEstatus.Text = aEstatus(0)
         tslblPesoT.Text = ft.FormatoCantidad(0)
@@ -356,21 +359,21 @@ Public Class jsPOSArcFacturas
         grpAceptarSalir.Visible = True
 
         ft.habilitarObjetos(True, False, grpEncab, grpTotales, MenuBarraRenglon, MenuDescuentos)
-        ft.habilitarObjetos(True, True, txtComentario, btnEmision, btnCliente, txtCliente, cmbTarifa, _
-                         btnAsesor, txtAsesor, txtCaja, btnTransporte, txtAlmacen, btnAlmacen, _
+        ft.habilitarObjetos(True, True, txtComentario, txtEmision, btnCliente, txtCliente, cmbTarifa,
+                         btnAsesor, txtAsesor, txtCaja, btnTransporte, txtAlmacen, btnAlmacen,
                          txtReferencia, btnCodigoContable)
 
         ft.visualizarObjetos(True, grpDisponibilidad)
         MenuBarra.Enabled = False
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
     End Sub
     Private Sub DesactivarMarco0()
 
         grpAceptarSalir.Visible = False
-        ft.habilitarObjetos(False, True, txtCodigo, txtEmision, btnEmision, txtControl, txtEstatus, _
-                txtCliente, txtNombreCliente, btnCliente, txtComentario, txtAsesor, btnAsesor, txtNombreAsesor, _
-                cmbTarifa, txtVencimiento, txtCondicionPago, txtCaja, txtAlmacen, btnTransporte, btnAlmacen, _
+        ft.habilitarObjetos(False, True, txtCodigo, txtEmision, txtControl, txtEstatus,
+                txtCliente, txtNombreCliente, btnCliente, txtComentario, txtAsesor, btnAsesor, txtNombreAsesor,
+                cmbTarifa, txtVencimiento, txtCondicionPago, txtCaja, txtAlmacen, btnTransporte, btnAlmacen,
                 txtNombreTransporte, txtNombreAlmacen, txtReferencia, txtCodigoContable, btnCodigoContable)
 
         ft.habilitarObjetos(False, True, txtDescuentos, txtCargos, MenuDescuentos, txtSubTotal, txtTotalIVA, txtTotal)
@@ -379,7 +382,7 @@ Public Class jsPOSArcFacturas
         MenuBarraRenglon.Enabled = False
         MenuBarra.Enabled = True
 
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -397,10 +400,10 @@ Public Class jsPOSArcFacturas
     End Sub
     Private Sub AgregaYCancela()
 
-        ft.Ejecutar_strSQL(myconn, " delete from jsvenrenpos where numfac = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
-        ft.Ejecutar_strSQL(myconn, " delete from jsvenivapos where numfac = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
-        ft.Ejecutar_strSQL(myconn, " delete from jsvendespos where numfac = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
-        ft.Ejecutar_strSQL(myconn, " delete from jsvenrencom where numdoc = '" & txtCodigo.Text & "' and origen = 'PVE' and id_emp = '" & jytsistema.WorkID & "' ")
+        ft.Ejecutar_strSQL(myConn, " delete from jsvenrenpos where numfac = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+        ft.Ejecutar_strSQL(myConn, " delete from jsvenivapos where numfac = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+        ft.Ejecutar_strSQL(myConn, " delete from jsvendespos where numfac = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+        ft.Ejecutar_strSQL(myConn, " delete from jsvenrencom where numdoc = '" & txtCodigo.Text & "' and origen = 'PVE' and id_emp = '" & jytsistema.WorkID & "' ")
 
     End Sub
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
@@ -410,7 +413,7 @@ Public Class jsPOSArcFacturas
             f.TipoCredito = TipoCredito
             f.Vencimiento = FechaVencimiento
             'f.Caja = Caja
-            f.Cargar(myConn, "PVE", txtCodigo.Text, IIf(i_modo = movimiento.iAgregar, True, False), ValorNumero(txtTotal.Text))
+            f.Cargar(myConn, "PVE", txtCodigo.Text, IIf(i_modo = movimiento.iAgregar, True, False), ValorNumero(txtTotal.Text), jytsistema.WorkCurrency.Id)
             If f.DialogResult = Windows.Forms.DialogResult.OK Then
                 CondicionDePago = f.CondicionPago
                 TipoCredito = f.TipoCredito
@@ -432,12 +435,12 @@ Public Class jsPOSArcFacturas
             f = Nothing
             'End If
         Else
-            If CBool(ParametroPlus(MyConn, Gestion.iVentas, "VENFACPA08")) Then
+            If CBool(ParametroPlus(myConn, Gestion.iVentas, "VENFACPA08")) Then
                 '1. Imprimir Nota de Entrega Fiscal
                 '2. Colocar Nota de Entrega como impresa
                 ImprimirFacturaGraficaPOS(myConn, lblInfo, ds, txtCodigo.Text)
             Else
-                ft.MensajeCritico("Impresión de FACTURA no permitida...")
+                ft.mensajeCritico("Impresión de FACTURA no permitida...")
             End If
         End If
 
@@ -446,28 +449,28 @@ Public Class jsPOSArcFacturas
 
 
         If txtNombreCliente.Text = "" Then
-            ft.MensajeCritico("Debe indicar un cliente válido...")
+            ft.mensajeCritico("Debe indicar un cliente válido...")
             Return False
         End If
 
         If txtNombreAsesor.Text = "" Then
-            ft.MensajeCritico("Debe indicar un nombre de Cajero válido...")
+            ft.mensajeCritico("Debe indicar un nombre de Cajero válido...")
             Return False
         End If
 
         If txtNombreTransporte.Text = "" Then
-            ft.MensajeCritico("Debe indicar una caja válida...")
+            ft.mensajeCritico("Debe indicar una caja válida...")
             Return False
         End If
 
         If txtNombreAlmacen.Text = "" Then
-            ft.MensajeCritico("Debe indicar un almacén válido...")
+            ft.mensajeCritico("Debe indicar un almacén válido...")
             Return False
         End If
 
 
         If dtRenglones.Rows.Count = 0 Then
-            ft.MensajeCritico("Debe incluir al menos un ítem...")
+            ft.mensajeCritico("Debe incluir al menos un ítem...")
             Return False
         End If
 
@@ -485,7 +488,7 @@ Public Class jsPOSArcFacturas
         ' End If
         '
         If dtRenglones.Rows.Count <= 0 Then
-            ft.MensajeCritico("Debe introducir por lo menos un ítem")
+            ft.mensajeCritico("Debe introducir por lo menos un ítem")
             Return False
         End If
 
@@ -510,11 +513,11 @@ Public Class jsPOSArcFacturas
             nPosicionEncab = ds.Tables(nTabla).Rows.Count
             Codigo = Contador(myConn, lblInfo, Gestion.iVentas, "VENNUMFAC", "08")
 
-            ft.Ejecutar_strSQL(myconn, " update jsvenrenpos set numfac = '" & Codigo & "' where numfac = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
-            ft.Ejecutar_strSQL(myconn, " update jsvenivapos set numfac = '" & Codigo & "' where numfac = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
-            ft.Ejecutar_strSQL(myconn, " update jsvendespos set numfac = '" & Codigo & "' where numfac = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
-            ft.Ejecutar_strSQL(myconn, " update jsvenrencom set numdoc = '" & Codigo & "' where numdoc = '" & txtCodigo.Text & "' and origen = 'PVE' and id_emp = '" & jytsistema.WorkID & "' ")
-            ft.Ejecutar_strSQL(myconn, " update jsvenforpag set numfac = '" & Codigo & "' where numfac = '" & txtCodigo.Text & "' and origen = 'PVE' and id_emp = '" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsvenrenpos set numfac = '" & Codigo & "' where numfac = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsvenivapos set numfac = '" & Codigo & "' where numfac = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsvendespos set numfac = '" & Codigo & "' where numfac = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsvenrencom set numdoc = '" & Codigo & "' where numdoc = '" & txtCodigo.Text & "' and origen = 'PVE' and id_emp = '" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsvenforpag set numfac = '" & Codigo & "' where numfac = '" & txtCodigo.Text & "' and origen = 'PVE' and id_emp = '" & jytsistema.WorkID & "' ")
 
         End If
 
@@ -550,7 +553,7 @@ Public Class jsPOSArcFacturas
     Private Sub ActualizarMovimientos(ByVal NumeroFactura As String)
         '
         '1.- Aplica Descuento Global sobre total Renglón con descuento "totrendes"
-        ft.Ejecutar_strSQL(myconn, " update jsvenrenpos set totrendes = totren - totren * " & ValorNumero(txtDescuentos.Text) / IIf(ValorNumero(txtSubTotal.Text) > 0, ValorNumero(txtSubTotal.Text), 1) & " " _
+        ft.Ejecutar_strSQL(myConn, " update jsvenrenpos set totrendes = totren - totren * " & ValorNumero(txtDescuentos.Text) / IIf(ValorNumero(txtSubTotal.Text) > 0, ValorNumero(txtSubTotal.Text), 1) & " " _
                                         & " where " _
                                         & " numfac = '" & NumeroFactura & "' and " _
                                         & " renglon > '' and " _
@@ -567,10 +570,10 @@ Public Class jsPOSArcFacturas
         For Each dtRow As DataRow In dtRenglones.Rows
             With dtRow
                 Dim CostoActual As Double = UltimoCostoAFecha(myConn, .Item("item"), CDate(txtEmision.Text)) / Equivalencia(myConn, .Item("item"), .Item("unidad"))
-                InsertEditMERCASMovimientoInventario(myConn, lblInfo, True, .Item("item"), CDate(txtEmision.Text), "SA", NumeroFactura, _
-                                                     .Item("unidad"), .Item("cantidad"), .Item("peso"), .Item("cantidad") * CostoActual, _
-                                                     .Item("cantidad") * CostoActual, "PVE", NumeroFactura, .Item("lote"), txtCliente.Text, _
-                                                     .Item("totren"), .Item("totrendes"), 0, .Item("totren") - .Item("totrendes"), txtAsesor.Text, _
+                InsertEditMERCASMovimientoInventario(myConn, lblInfo, True, .Item("item"), CDate(txtEmision.Text), "SA", NumeroFactura,
+                                                     .Item("unidad"), .Item("cantidad"), .Item("peso"), .Item("cantidad") * CostoActual,
+                                                     .Item("cantidad") * CostoActual, "PVE", NumeroFactura, .Item("lote"), txtCliente.Text,
+                                                     .Item("totren"), .Item("totrendes"), 0, .Item("totren") - .Item("totrendes"), txtAsesor.Text,
                                                      txtAlmacen.Text, .Item("renglon"), jytsistema.sFechadeTrabajo)
 
                 ActualizarExistenciasPlus(myConn, .Item("item"))
@@ -690,7 +693,7 @@ Public Class jsPOSArcFacturas
     End Sub
 
     Private Sub txtNombre_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtComentario.GotFocus
-        ft.mensajeEtiqueta(lblInfo, " Indique comentario ... ", Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, " Indique comentario ... ", Transportables.tipoMensaje.iInfo)
     End Sub
 
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
@@ -796,7 +799,7 @@ Public Class jsPOSArcFacturas
                 e.Value = aTipoRenglon(e.Value)
         End Select
     End Sub
-    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick, _
+    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick,
        dg.CellMouseClick
         Me.BindingContext(ds, nTablaRenglones).Position = e.RowIndex
         MostrarItemsEnMenuBarra(MenuBarraRenglon, e.RowIndex, ds.Tables(nTablaRenglones).Rows.Count)
@@ -809,7 +812,7 @@ Public Class jsPOSArcFacturas
         AbrirDescuentos(txtCodigo.Text)
         txtCargos.Text = ft.FormatoNumero(CalculaTotalRenglonesVentas(myConn, lblInfo, "jsvenrenpos", "numfac", "totren", txtCodigo.Text, 1))
         CalculaDescuentoEnRenglones()
-        CalculaTotalIVAVentas(myConn, lblInfo, "jsvendespos", "jsvenivapos", "jsvenrenpos", "numfac", txtCodigo.Text, "impiva", "totrendes", CDate(txtEmision.Text), "totren", _
+        CalculaTotalIVAVentas(myConn, lblInfo, "jsvendespos", "jsvenivapos", "jsvenrenpos", "numfac", txtCodigo.Text, "impiva", "totrendes", CDate(txtEmision.Text), "totren",
                               NUMEROSERIAL, TIPODOCUMENTO)
         AbrirIVA(txtCodigo.Text)
         txtTotal.Text = ft.FormatoNumero(ValorNumero(txtSubTotal.Text) - ValorNumero(txtDescuentos.Text) + ValorNumero(txtCargos.Text) + ValorNumero(txtTotalIVA.Text))
@@ -828,7 +831,7 @@ Public Class jsPOSArcFacturas
 
         CalculaDescuentoEnRenglonesPlus(NumeroFacturaPlus, subTotalPlus, DescuentosPlus)
 
-        CalculaTotalIVAVentas(myConn, lblInfo, "jsvendespos", "jsvenivapos", "jsvenrenpos", "numfac", NumeroFacturaPlus, "impiva", "totrendes", EmisionPlus, "totren", _
+        CalculaTotalIVAVentas(myConn, lblInfo, "jsvendespos", "jsvenivapos", "jsvenrenpos", "numfac", NumeroFacturaPlus, "impiva", "totrendes", EmisionPlus, "totren",
                               NumeroSerialPlus, TipoDocumentoPlus)
 
         Dim TotalIVAPlus As Double = ft.DevuelveScalarDoble(myConn, " select SUM(IMPIVA) from jsvenivapos where numfac = '" & NumeroFacturaPlus & "' and id_emp = '" & jytsistema.WorkID & "' group by numfac ")
@@ -836,7 +839,7 @@ Public Class jsPOSArcFacturas
         Dim totalPlus As Double = subTotalPlus - DescuentosPlus + CargosPlus + TotalIVAPlus
         Dim totalPesoPlus As Double = CalculaPesoDocumento(myConn, lblInfo, "jsvenrenpos", "peso", "numfac", NumeroFacturaPlus)
 
-        ft.Ejecutar_strSQL(myconn, " update jsvenencpos set tot_net = " & subTotalPlus & ", " _
+        ft.Ejecutar_strSQL(myConn, " update jsvenencpos set tot_net = " & subTotalPlus & ", " _
                                & " descuen = " & DescuentosPlus & ", " _
                                & " cargos = " & CargosPlus & ", " _
                                & " imp_iva = " & TotalIVAPlus & ", " _
@@ -849,7 +852,7 @@ Public Class jsPOSArcFacturas
 
     Private Sub ActualizaEncabezadoFactura()
 
-        ft.Ejecutar_strSQL(myconn, " update jsvenencpos set tot_net = " & ValorNumero(txtSubTotal.Text) & ", " _
+        ft.Ejecutar_strSQL(myConn, " update jsvenencpos set tot_net = " & ValorNumero(txtSubTotal.Text) & ", " _
                                & " descuen = " & ValorNumero(txtDescuentos.Text) & ", " _
                                & " cargos = " & ValorNumero(txtCargos.Text) & ", " _
                                & " imp_iva = " & ValorNumero(txtTotalIVA.Text) & ", " _
@@ -902,7 +905,7 @@ Public Class jsPOSArcFacturas
         If dtRenglones.Rows.Count > 0 Then
             Dim f As New jsGenRenglonesMovimientos
             f.Apuntador = Me.BindingContext(ds, nTablaRenglones).Position
-            f.Editar(myConn, ds, dtRenglones, "FAC", txtCodigo.Text, CDate(txtEmision.Text), txtAlmacen.Text, cmbTarifa.Text, txtCliente.Text, _
+            f.Editar(myConn, ds, dtRenglones, "FAC", txtCodigo.Text, CDate(txtEmision.Text), txtAlmacen.Text, cmbTarifa.Text, txtCliente.Text,
                      IIf(dtRenglones.Rows(Me.BindingContext(ds, nTablaRenglones).Position).Item("item").ToString.Substring(0, 1) = "$", True, False), , , , , , , , , txtAsesor.Text)
             ds = DataSetRequery(ds, strSQLMov, myConn, nTablaRenglones, lblInfo)
             AsignaMov(f.Apuntador, True)
@@ -935,7 +938,7 @@ Public Class jsPOSArcFacturas
                            & " origen = 'FAC' and item = '" & .Item("item") & "' and renglon = '" & .Item("renglon") & "' and " _
                            & " id_emp = '" & jytsistema.WorkID & "' ")
 
-                    nPosicionRenglon = EliminarRegistros(myConn, lblInfo, ds, nTablaRenglones, "jsvenrenpos", strSQLMov, aCamposDel, aStringsDel, _
+                    nPosicionRenglon = EliminarRegistros(myConn, lblInfo, ds, nTablaRenglones, "jsvenrenpos", strSQLMov, aCamposDel, aStringsDel,
                                                   Me.BindingContext(ds, nTablaRenglones).Position, True)
 
                     If dtRenglones.Rows.Count - 1 < nPosicionRenglon Then nPosicionRenglon = dtRenglones.Rows.Count - 1
@@ -983,18 +986,12 @@ Public Class jsPOSArcFacturas
         Imprimir()
     End Sub
 
-    Private Sub btnEmision_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEmision.Click
-        If CBool(ParametroPlus(MyConn, Gestion.iVentas, "VENFACPA03")) Then
-            txtEmision.Text = SeleccionaFecha(CDate(txtEmision.Text), Me, sender)
-        End If
-    End Sub
-
     Private Sub btnAsesor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsesor.Click
-        If CBool(ParametroPlus(MyConn, Gestion.iVentas, "VENFACPA09")) Then
-            txtAsesor.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codven codigo, CONCAT( apellidos, ', ', nombres) descripcion from jsvencatven where tipo = '" & TipoVendedor.iFuerzaventa & "'  and estatus = 1 and id_emp = '" & jytsistema.WorkID & "'  order by 1 ", "Asesores Comerciales", _
+        If CBool(ParametroPlus(myConn, Gestion.iVentas, "VENFACPA09")) Then
+            txtAsesor.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codven codigo, CONCAT( apellidos, ', ', nombres) descripcion from jsvencatven where tipo = '" & TipoVendedor.iFuerzaventa & "'  and estatus = 1 and id_emp = '" & jytsistema.WorkID & "'  order by 1 ", "Asesores Comerciales",
                                                txtAsesor.Text)
         Else
-            ft.MensajeCritico("Escogencia de asesor comercial no permitida...")
+            ft.mensajeCritico("Escogencia de asesor comercial no permitida...")
         End If
     End Sub
 
@@ -1011,7 +1008,7 @@ Public Class jsPOSArcFacturas
             'End If
 
 
-            MostrarDisponibilidad(myConn, lblInfo, txtCliente.Text, qFoundAndSign(myConn, lblInfo, "jsvencatcli", aFld, aStr, "rif"), _
+            MostrarDisponibilidad(myConn, lblInfo, txtCliente.Text, qFoundAndSign(myConn, lblInfo, "jsvencatcli", aFld, aStr, "rif"),
                             ds, dgDisponibilidad)
 
             Disponibilidad = ft.DevuelveScalarDoble(myConn, " select disponible from jsvencatcli where codcli = '" & txtCliente.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
@@ -1056,7 +1053,7 @@ Public Class jsPOSArcFacturas
             With dtDescuentos.Rows(nPosicionDescuento)
                 Dim aCamposDel() As String = {"numfac", "renglon", "id_emp"}
                 Dim aStringsDel() As String = {txtCodigo.Text, .Item("renglon"), jytsistema.WorkID}
-                nPosicionDescuento = EliminarRegistros(myConn, lblInfo, ds, nTablaDescuentos, "jsvendespos", strSQLDescuentos, aCamposDel, aStringsDel, _
+                nPosicionDescuento = EliminarRegistros(myConn, lblInfo, ds, nTablaDescuentos, "jsvendespos", strSQLDescuentos, aCamposDel, aStringsDel,
                                                       Me.BindingContext(ds, nTablaDescuentos).Position, True)
             End With
             CalculaTotales()
@@ -1064,7 +1061,7 @@ Public Class jsPOSArcFacturas
     End Sub
 
     Private Sub btnCliente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCliente.Click
-        txtCliente.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcli codigo, nombre descripcion, disponible, elt(estatus+1, 'Activo', 'Bloqueado', 'Inactivo', 'Desincorporado') estatus from jsvencatcli where estatus < 3 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Clientes", _
+        txtCliente.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcli codigo, nombre descripcion, disponible, elt(estatus+1, 'Activo', 'Bloqueado', 'Inactivo', 'Desincorporado') estatus from jsvencatcli where estatus < 3 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Clientes",
                                             txtCliente.Text)
     End Sub
 
@@ -1094,21 +1091,21 @@ Public Class jsPOSArcFacturas
     End Sub
 
     Private Sub btnTransporte_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTransporte.Click
-        txtCaja.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codtra codigo, nomtra descripcion from jsconctatra where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Transportes", _
+        txtCaja.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codtra codigo, nomtra descripcion from jsconctatra where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Transportes",
                                                txtCaja.Text)
     End Sub
 
     Private Sub btnAlmacen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAlmacen.Click
-        txtAlmacen.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codalm codigo, desalm descripcion from jsmercatalm where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Almacenes", _
+        txtAlmacen.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codalm codigo, desalm descripcion from jsmercatalm where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Almacenes",
                                             txtAlmacen.Text)
     End Sub
 
     Private Sub btnCodigoContable_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCodigoContable.Click
-        txtCodigoContable.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcon codigo, descripcion from jscotcatcon where marca = 0 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Cuentas Contables", _
+        txtCodigoContable.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcon codigo, descripcion from jscotcatcon where marca = 0 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Cuentas Contables",
                                                    txtCodigoContable.Text)
     End Sub
 
-    Private Sub dgDescuentos_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgDescuentos.RowHeaderMouseClick, _
+    Private Sub dgDescuentos_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgDescuentos.RowHeaderMouseClick,
         dgDescuentos.CellMouseClick
         Me.BindingContext(ds, nTablaDescuentos).Position = e.RowIndex
         nPosicionDescuento = e.RowIndex
@@ -1117,7 +1114,7 @@ Public Class jsPOSArcFacturas
     Private Sub btnReconstruirIVA_Click(sender As System.Object, e As System.EventArgs) Handles btnReconstruirIVA.Click
 
 
-        ft.Ejecutar_strSQL(myconn, " UPDATE jsvenencpos a, jsventracob b   " _
+        ft.Ejecutar_strSQL(myConn, " UPDATE jsvenencpos a, jsventracob b   " _
                        & " SET condpag = 0 " _
                        & " WHERE " _
                        & " a.condpag = 1 AND " _

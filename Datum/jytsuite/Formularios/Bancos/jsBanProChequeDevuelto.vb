@@ -1,5 +1,7 @@
 Imports MySql.Data.MySqlClient
 Imports Microsoft.Win32
+Imports Syncfusion.WinForms.Input
+Imports fTransport
 Public Class jsBanProChequeDevuelto
     Private Const sModulo As String = "Devolución de cheques de clientes"
     Private Const nTabla As String = "tblcheque"
@@ -18,6 +20,9 @@ Public Class jsBanProChequeDevuelto
         myConn = MyCon
         Me.Tag = sModulo
 
+        Dim dates As SfDateTimeEdit() = {txtFecha}
+        SetSizeDateObjects(dates)
+
         IniciarCausasDevolucion()
         IniciarTxt()
 
@@ -33,7 +38,7 @@ Public Class jsBanProChequeDevuelto
 
         ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtCheque, txtEstatus, txtMonto, txtBanco, txtDeposito, txtCliente,
                                 txtAsesor, txtCancelacion)
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
         dg.Rows.Clear()
 
     End Sub
@@ -63,7 +68,7 @@ Public Class jsBanProChequeDevuelto
     End Sub
     Private Function Validado() As Boolean
 
-        If FechaUltimoBloqueo(myConn, "jsbantraban") >= Convert.ToDateTime(txtFecha.Text) Then
+        If FechaUltimoBloqueo(myConn, "jsbantraban") >= txtFecha.Value Then
             ft.mensajeCritico("FECHA MENOR QUE ULTIMA FECHA DE CIERRE...")
             Return False
         End If
@@ -103,10 +108,11 @@ Public Class jsBanProChequeDevuelto
 
 
         '1. Nota débito en el banco depósito 
-        InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, CDate(txtFecha.Text), txtCheque.Text, _
-                    "ND", Mid(txtBanco.Text, 1, 5), "", "CHEQUE DEVUELTO", -1 * Math.Abs(CDbl(txtMonto.Text)), _
-                    "BAN", txtCheque.Text, "", "", "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, _
-                    "CH", "", jytsistema.sFechadeTrabajo, "0", CodigoCliente, Mid(txtAsesor.Text, 1, 5))
+        InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, txtFecha.Value, txtCheque.Text,
+                    "ND", Mid(txtBanco.Text, 1, 5), "", "CHEQUE DEVUELTO", -1 * Math.Abs(CDbl(txtMonto.Text)),
+                    "BAN", txtCheque.Text, "", "", "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo,
+                    "CH", "", jytsistema.sFechadeTrabajo, "0", CodigoCliente, Mid(txtAsesor.Text, 1, 5),
+                    jytsistema.WorkCurrency.Id, DateTime.Now())
 
         lblProgreso.Text = "1. Nota débito en el banco depósito"
         ProgressBar1.Value = 25
@@ -138,10 +144,10 @@ Public Class jsBanProChequeDevuelto
                 End If
             End While
 
-            InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, "ND", Documento, CDate(txtFecha.Text), ft.FormatoHora(Now()), _
-                CDate(txtFecha.Text), txtCheque.Text, "CHEQUE DEVUELTO", CDbl(txtMonto.Text), 0.0#, "", "", "", "", "", "BAN", _
-                txtCheque.Text, "", "", jytsistema.sFechadeTrabajo, "", "", "", 0.0#, 0.0#, "", "", "", "", Mid(txtAsesor.Text, 1, 5), _
-                Mid(txtAsesor.Text, 1, 5), "0", "0", CodigoDivision)
+            InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, "ND", Documento, txtFecha.Value, ft.FormatoHora(Now()),
+                txtFecha.Value, txtCheque.Text, "CHEQUE DEVUELTO", CDbl(txtMonto.Text), 0.0#, "", "", "", "", "", "BAN",
+                txtCheque.Text, "", "", jytsistema.sFechadeTrabajo, "", "", "", 0.0#, 0.0#, "", "", "", "", Mid(txtAsesor.Text, 1, 5),
+                Mid(txtAsesor.Text, 1, 5), "0", "0", CodigoDivision, jytsistema.WorkCurrency.Id, DateTime.Now())
 
             lblProgreso.Text = "3. Debito en CXC por el monto del cheque"
             ProgressBar1.Value = 75
@@ -164,9 +170,10 @@ Public Class jsBanProChequeDevuelto
                     End If
                 End While
 
-                InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, "ND", CDocumento, CDate(txtFecha.Text), ft.FormatoHora(Now()), _
-                CDate(txtFecha.Text), txtCheque.Text, "COMISION CHEQUE DEVUELTO y GASTOS ADM.", MontoComision, 0.0#, "", "", "", "", "", "BAN", _
-                txtCheque.Text, "", "", jytsistema.sFechadeTrabajo, "", "", "", 0.0#, 0.0#, "", "", "", "", Mid(txtAsesor.Text, 1, 5), Mid(txtAsesor.Text, 1, 5), "0", "0", CodigoDivision)
+                InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, "ND", CDocumento, txtFecha.Value, ft.FormatoHora(Now()),
+                txtFecha.Value, txtCheque.Text, "COMISION CHEQUE DEVUELTO y GASTOS ADM.", MontoComision, 0.0#, "", "", "", "", "", "BAN",
+                txtCheque.Text, "", "", jytsistema.sFechadeTrabajo, "", "", "", 0.0#, 0.0#, "", "", "", "",
+                Mid(txtAsesor.Text, 1, 5), Mid(txtAsesor.Text, 1, 5), "0", "0", CodigoDivision, jytsistema.WorkCurrency.Id, DateTime.Now())
 
                 ModificaEstatusCliente(myConn, CodigoCliente)
 
@@ -195,7 +202,7 @@ Public Class jsBanProChequeDevuelto
         Dim itemChequeDevuelto As String = ParametroPlus(MyConn, Gestion.iVentas, "VENPARAM31")
         Dim descripChequeDevuelto As String = ft.DevuelveScalarCadena(myConn, " SELECT desser from jsmercatser where codser = '" & itemChequeDevuelto & "' and id_emp = '" & jytsistema.WorkID & "' ")
         Dim ivaChequeDevuelto As String = ft.DevuelveScalarCadena(myConn, " SELECT tipoiva from jsmercatser where codser = '" & itemChequeDevuelto & "' and id_emp = '" & jytsistema.WorkID & "' ")
-        Dim porIVAChequeDevuelto As Double = PorcentajeIVA(myConn, lblInfo, CDate(txtFecha.Text), ivaChequeDevuelto)
+        Dim porIVAChequeDevuelto As Double = PorcentajeIVA(myConn, lblInfo, txtFecha.Value, ivaChequeDevuelto)
 
         numFactura = dg.Rows.Item(0).Cells("nummov").Value
 
@@ -204,7 +211,7 @@ Public Class jsBanProChequeDevuelto
                                             0.0, 0.0, 0.0, 0.0, 100, 0.0, 0.0, numFactura, "", 1, "", "1")
 
 
-        CalculaTotalIVAVentas(myConn, lblInfo, "", "jsvenivandb", "jsvenrenndb", "numndb", NumeroDebito, "impiva", "totrendes", CDate(txtFecha.Text), "totren")
+        CalculaTotalIVAVentas(myConn, lblInfo, "", "jsvenivandb", "jsvenrenndb", "numndb", NumeroDebito, "impiva", "totrendes", txtFecha.Value, "totren")
 
         Dim CodigoCliente As String = txtCliente.Text.Split("|")(0).Trim()
 
@@ -262,7 +269,7 @@ Public Class jsBanProChequeDevuelto
                 Dim itemComision As String = ParametroPlus(MyConn, Gestion.iVentas, "VENPARAM29")
                 Dim descripComision As String = ft.DevuelveScalarCadena(myConn, " SELECT desser from jsmercatser where codser = '" & itemComision & "' and id_emp = '" & jytsistema.WorkID & "' ")
                 Dim ivaComision As String = ft.DevuelveScalarCadena(myConn, " SELECT tipoiva from jsmercatser where codser = '" & itemComision & "' and id_emp = '" & jytsistema.WorkID & "' ")
-                Dim porIVaComision As Double = PorcentajeIVA(myConn, lblInfo, CDate(txtFecha.Text), ivaComision)
+                Dim porIVaComision As Double = PorcentajeIVA(myConn, lblInfo, txtFecha.Value, ivaComision)
 
                 InsertEditVENTASRenglonNOTASDEBITO(myConn, lblInfo, True, NumeroDebito, "00002", "$" & itemComision, _
                                            descripComision, ivaComision, "", "UND", 0.0, 1, 0.0, "", "0", _
@@ -270,7 +277,7 @@ Public Class jsBanProChequeDevuelto
                                            ImporteCheque * PorcentajeComision / 100, ImporteCheque * PorcentajeComision / 100, _
                                             numFactura, "", 1, "", "1")
 
-                CalculaTotalIVAVentas(myConn, lblInfo, "", "jsvenivandb", "jsvenrenndb", "numndb", NumeroDebito, "impiva", "totrendes", CDate(txtFecha.Text), "totren")
+                CalculaTotalIVAVentas(myConn, lblInfo, "", "jsvenivandb", "jsvenrenndb", "numndb", NumeroDebito, "impiva", "totrendes", txtFecha.Value, "totren")
 
                 MontoND += ImporteCheque * PorcentajeComision / 100
                 Impuesto += (ImporteCheque * PorcentajeComision / 100) * porIVaComision / 100
@@ -283,7 +290,7 @@ Public Class jsBanProChequeDevuelto
                 Dim itemGastos As String = ParametroPlus(MyConn, Gestion.iVentas, "VENPARAM30")
                 Dim descripGastos As String = ft.DevuelveScalarCadena(myConn, " SELECT desser from jsmercatser where codser = '" & itemGastos & "' and id_emp = '" & jytsistema.WorkID & "' ")
                 Dim ivaGastos As String = ft.DevuelveScalarCadena(myConn, " SELECT tipoiva from jsmercatser where codser = '" & itemGastos & "' and id_emp = '" & jytsistema.WorkID & "' ")
-                Dim porIVAGastos As Double = PorcentajeIVA(myConn, lblInfo, CDate(txtFecha.Text), ivaGastos)
+                Dim porIVAGastos As Double = PorcentajeIVA(myConn, lblInfo, txtFecha.Value, ivaGastos)
 
 
                 InsertEditVENTASRenglonNOTASDEBITO(myConn, lblInfo, True, NumeroDebito, "00002", "$" & itemGastos, _
@@ -294,7 +301,7 @@ Public Class jsBanProChequeDevuelto
 
 
 
-                CalculaTotalIVAVentas(myConn, lblInfo, "", "jsvenivandb", "jsvenrenndb", "numndb", NumeroDebito, "impiva", "totrendes", CDate(txtFecha.Text), "totren")
+                CalculaTotalIVAVentas(myConn, lblInfo, "", "jsvenivandb", "jsvenrenndb", "numndb", NumeroDebito, "impiva", "totrendes", txtFecha.Value, "totren")
                 MontoND += MontoGastosAdministrativos
                 Impuesto += MontoGastosAdministrativos * porIVAGastos / 100
 
@@ -303,22 +310,24 @@ Public Class jsBanProChequeDevuelto
         End If
 
         ''Insertar Encabezado
-        InsertEditVENTASEncabezadoNOTADEBITO(myConn, lblInfo, True, NumeroDebito, numFactura, CDate(txtFecha.Text), _
-                                        CodigoCliente, "CHEQUE DEVUELTO, COMISION CHEQUE DEVUELTO y GASTOS ADM.", txtAsesor.Text.Split("|")(0).Trim, "00001", "00001", "", "", "A", _
-                                        2, 0, 0.0, MontoND, Impuesto, MontoND + Impuesto, CDate(txtFecha.Text), 0, "", _
-                                        CDate(txtFecha.Text), 0, "")
+        InsertEditVENTASEncabezadoNOTADEBITO(myConn, lblInfo, True, NumeroDebito, numFactura, txtFecha.Value,
+                                        CodigoCliente, "CHEQUE DEVUELTO, COMISION CHEQUE DEVUELTO y GASTOS ADM.", txtAsesor.Text.Split("|")(0).Trim, "00001", "00001", "", "", "A",
+                                        2, 0, 0.0, MontoND, Impuesto, MontoND + Impuesto, txtFecha.Value, 0, "",
+                                        txtFecha.Value, 0, "", jytsistema.WorkCurrency.Id, DateTime.Now())
 
         ''Inserta la CXC
-        InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, "ND", NumeroDebito, CDate(txtFecha.Text), ft.FormatoHora(Now()), _
-                CDate(txtFecha.Text), txtCheque.Text, "COMISION CHEQUE DEVUELTO y GASTOS ADM.", MontoND + Impuesto, Impuesto, "", "", "", "", "", "BAN", _
-                txtCheque.Text, "", "", jytsistema.sFechadeTrabajo, "", "", "", 0.0#, 0.0#, "", "", "", "", Mid(txtAsesor.Text, 1, 5), Mid(txtAsesor.Text, 1, 5), "0", "0", CodigoDivision)
+        InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, "ND", NumeroDebito, txtFecha.Value, ft.FormatoHora(Now()),
+                txtFecha.Value, txtCheque.Text, "COMISION CHEQUE DEVUELTO y GASTOS ADM.", MontoND + Impuesto, Impuesto, "", "", "", "", "", "BAN",
+                txtCheque.Text, "", "", jytsistema.sFechadeTrabajo, "", "", "", 0.0#, 0.0#, "", "", "", "",
+                Mid(txtAsesor.Text, 1, 5), Mid(txtAsesor.Text, 1, 5), "0", "0", CodigoDivision,
+                jytsistema.WorkCurrency.Id, DateTime.Now())
 
         Dim NDChequeDevuelto As String = Contador(myConn, lblInfo, Gestion.iVentas, "VENNUMCHD", "14")
 
-        InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, "ND", NDChequeDevuelto, CDate(txtFecha.Text), ft.FormatoHora(Now()), _
-                        CDate(txtFecha.Text), txtCheque.Text, "CHEQUE DEVUELTO", CDbl(txtMonto.Text), 0.0#, "", "", "", "", "", "BAN", _
-                        txtCheque.Text, "", "", jytsistema.sFechadeTrabajo, "", "", "", 0.0#, 0.0#, "", "", "", "", Mid(txtAsesor.Text, 1, 5), _
-                        Mid(txtAsesor.Text, 1, 5), "0", "0", CodigoDivision)
+        InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, "ND", NDChequeDevuelto, txtFecha.Value, ft.FormatoHora(Now()),
+                        txtFecha.Value, txtCheque.Text, "CHEQUE DEVUELTO", CDbl(txtMonto.Text), 0.0#, "", "", "", "", "", "BAN",
+                        txtCheque.Text, "", "", jytsistema.sFechadeTrabajo, "", "", "", 0.0#, 0.0#, "", "", "", "", Mid(txtAsesor.Text, 1, 5),
+                        Mid(txtAsesor.Text, 1, 5), "0", "0", CodigoDivision, jytsistema.WorkCurrency.Id, DateTime.Now())
 
 
         ''Modifica Estatus de cliente
@@ -347,18 +356,18 @@ Public Class jsBanProChequeDevuelto
                             ImprimirNotaDebitoGrafica(myConn, lblInfo, ds, NumeroDebito)
                         Case 1 'FACTURA FISCAL PRE-IMPRESA
                         Case 2, 5, 6  'IMPRESORA FISCAL TIPO ACLAS/BIXOLON
-                            ImprimirNotaDebitoFiscalPP1F3(myConn, lblInfo, NumeroDebito, NumeroSERIALImpresoraFISCAL(myConn, lblInfo, jytsistema.WorkBox), _
-                                NombreDeCliente, CodigoDeCliente, ft.DevuelveScalarCadena(myConn, "Select RIF from jsvencatcli where codcli = '" & CodigoDeCliente & "' and id_emp = '" & jytsistema.WorkID & "'"), _
-                                ft.DevuelveScalarCadena(myConn, "Select DIRFISCAL from jsvencatcli where codcli = '" & CodigoDeCliente & "' and id_emp = '" & jytsistema.WorkID & "'"), _
-                                CDate(txtFecha.Text), "0", _
-                                CDate(txtFecha.Text), CodigoDeAsesor, NombreDeAsesor, nTipoImpreFiscal)
+                            ImprimirNotaDebitoFiscalPP1F3(myConn, lblInfo, NumeroDebito, NumeroSERIALImpresoraFISCAL(myConn, lblInfo, jytsistema.WorkBox),
+                                NombreDeCliente, CodigoDeCliente, ft.DevuelveScalarCadena(myConn, "Select RIF from jsvencatcli where codcli = '" & CodigoDeCliente & "' and id_emp = '" & jytsistema.WorkID & "'"),
+                                ft.DevuelveScalarCadena(myConn, "Select DIRFISCAL from jsvencatcli where codcli = '" & CodigoDeCliente & "' and id_emp = '" & jytsistema.WorkID & "'"),
+                                txtFecha.Value, "0",
+                                txtFecha.Value, CodigoDeAsesor, NombreDeAsesor, nTipoImpreFiscal)
                         Case 3 'IMPRESORA FISCAL TIPO BEMATECH
                         Case 4 'IMPRESORA FISCAL TIPO EPSON/PNP
-                            ImprimirNotaDebitoFiscalPnP(myConn, lblInfo, NumeroDebito, NombreDeCliente, CodigoDeCliente, _
-                                ft.DevuelveScalarCadena(myConn, "Select RIF from jsvencatcli where codcli = '" & CodigoDeCliente & "' and id_emp = '" & jytsistema.WorkID & "'"), _
-                                ft.DevuelveScalarCadena(myConn, "Select DIRFISCAL from jsvencatcli where codcli = '" & CodigoDeCliente & "' and id_emp = '" & jytsistema.WorkID & "'"), _
-                                CDate(txtFecha.Text), "0", _
-                                CDate(txtFecha.Text), CodigoDeAsesor, NombreDeAsesor)
+                            ImprimirNotaDebitoFiscalPnP(myConn, lblInfo, NumeroDebito, NombreDeCliente, CodigoDeCliente,
+                                ft.DevuelveScalarCadena(myConn, "Select RIF from jsvencatcli where codcli = '" & CodigoDeCliente & "' and id_emp = '" & jytsistema.WorkID & "'"),
+                                ft.DevuelveScalarCadena(myConn, "Select DIRFISCAL from jsvencatcli where codcli = '" & CodigoDeCliente & "' and id_emp = '" & jytsistema.WorkID & "'"),
+                                txtFecha.Value, "0",
+                                txtFecha.Value, CodigoDeAsesor, NombreDeAsesor)
 
                     End Select
                 End If
@@ -376,7 +385,7 @@ Public Class jsBanProChequeDevuelto
     Private Sub ImprimirComprobante()
         ' IMPRIMIR
         Dim f As New jsBanRepParametros
-        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteBancos.cChequeDevuelto, "Cheque Devuelto", CodigoCliente, txtCheque.Text, CDate(txtFecha.Text))
+        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteBancos.cChequeDevuelto, "Cheque Devuelto", CodigoCliente, txtCheque.Text, txtFecha.Value)
         f = Nothing
 
     End Sub
@@ -385,8 +394,8 @@ Public Class jsBanProChequeDevuelto
 
         ft.Ejecutar_strSQL(myconn, " update jsvencatcli set estatus = 1 where codcli = '" & CodigoCliente & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
-        ft.Ejecutar_strSQL(myconn, " insert into jsvenexpcli set codcli = '" & CodigoCliente & "' , " _
-                        & " fecha = '" & ft.FormatoFechaHoraMySQL(CDate(txtFecha.Text)) & "', " _
+        ft.Ejecutar_strSQL(myConn, " insert into jsvenexpcli set codcli = '" & CodigoCliente & "' , " _
+                        & " fecha = '" & ft.FormatoFechaHoraMySQL(txtFecha.Value) & "', " _
                         & " comentario = 'CHEQUE DEVUELTO', " _
                         & " condicion = '1', causa = '00002', tipocondicion = 0, id_emp = '" & jytsistema.WorkID & "'  ")
 
@@ -395,7 +404,7 @@ Public Class jsBanProChequeDevuelto
     Private Sub btnCheque_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCheque.Click
         Dim g As New jsBanProListaCheques
 
-        g.Cargar(myConn, CDate(txtFecha.Text))
+        g.Cargar(myConn, txtFecha.Value)
 
         txtMonto.Text = ft.FormatoNumero(g.Montocheque)
 
@@ -410,10 +419,6 @@ Public Class jsBanProChequeDevuelto
 
 
         g = Nothing
-    End Sub
-
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, btnFecha)
     End Sub
 
     Private Sub txtCheque_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCheque.TextChanged

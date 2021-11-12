@@ -23,33 +23,24 @@ Partial Class jsNomArcTrabajadoresMovimientosAsistencia
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.txtFechaEntrada = New System.Windows.Forms.TextBox()
         Me.grpConstante = New System.Windows.Forms.GroupBox()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.btnFecha = New System.Windows.Forms.Button()
-        Me.txtFecha = New System.Windows.Forms.TextBox()
         Me.mskTotal = New System.Windows.Forms.MaskedTextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.grpAsiste = New System.Windows.Forms.GroupBox()
-        Me.btnFechaSalida = New System.Windows.Forms.Button()
-        Me.btnFechaRetorno = New System.Windows.Forms.Button()
-        Me.btnFechaDescanso = New System.Windows.Forms.Button()
-        Me.txtFechaSalida = New System.Windows.Forms.TextBox()
-        Me.txtFechaRetorno = New System.Windows.Forms.TextBox()
-        Me.txtFechaDescanso = New System.Windows.Forms.TextBox()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.btnFechaEntrada = New System.Windows.Forms.Button()
-        Me.mskRetorno = New System.Windows.Forms.MaskedTextBox()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.mskDescanso = New System.Windows.Forms.MaskedTextBox()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.mskSalida = New System.Windows.Forms.MaskedTextBox()
+        Me.txtFechaSalida = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaRetorno = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaDescanso = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaEntrada = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.mskEntrada = New System.Windows.Forms.MaskedTextBox()
         Me.cmbTipoDia = New System.Windows.Forms.ComboBox()
         Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.grpConstante.SuspendLayout()
         Me.grpAsiste.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -68,7 +59,7 @@ Partial Class jsNomArcTrabajadoresMovimientosAsistencia
         'Label1
         '
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(47, 26)
+        Me.Label1.Location = New System.Drawing.Point(6, 35)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(94, 19)
         Me.Label1.TabIndex = 0
@@ -85,20 +76,11 @@ Partial Class jsNomArcTrabajadoresMovimientosAsistencia
         Me.Label7.Text = "Día :"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'txtFechaEntrada
-        '
-        Me.txtFechaEntrada.Location = New System.Drawing.Point(47, 51)
-        Me.txtFechaEntrada.Name = "txtFechaEntrada"
-        Me.txtFechaEntrada.Size = New System.Drawing.Size(94, 20)
-        Me.txtFechaEntrada.TabIndex = 12
-        Me.txtFechaEntrada.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'grpConstante
         '
         Me.grpConstante.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.grpConstante.Controls.Add(Me.Label3)
-        Me.grpConstante.Controls.Add(Me.btnFecha)
         Me.grpConstante.Controls.Add(Me.txtFecha)
+        Me.grpConstante.Controls.Add(Me.Label3)
         Me.grpConstante.Controls.Add(Me.mskTotal)
         Me.grpConstante.Controls.Add(Me.Label2)
         Me.grpConstante.Controls.Add(Me.grpAsiste)
@@ -111,6 +93,18 @@ Partial Class jsNomArcTrabajadoresMovimientosAsistencia
         Me.grpConstante.TabStop = False
         Me.grpConstante.Text = "Registro de Asistencia"
         '
+        'txtFecha
+        '
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(116, 32)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(114, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 214
+        '
         'Label3
         '
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -121,28 +115,10 @@ Partial Class jsNomArcTrabajadoresMovimientosAsistencia
         Me.Label3.Text = "Fecha "
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(212, 32)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(25, 20)
-        Me.btnFecha.TabIndex = 142
-        Me.btnFecha.Text = "•••"
-        Me.btnFecha.UseVisualStyleBackColor = True
-        '
-        'txtFecha
-        '
-        Me.txtFecha.Location = New System.Drawing.Point(112, 32)
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(94, 20)
-        Me.txtFecha.TabIndex = 141
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'mskTotal
         '
         Me.mskTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskTotal.Location = New System.Drawing.Point(358, 251)
+        Me.mskTotal.Location = New System.Drawing.Point(404, 249)
         Me.mskTotal.Mask = "00:00"
         Me.mskTotal.Name = "mskTotal"
         Me.mskTotal.Size = New System.Drawing.Size(42, 20)
@@ -153,7 +129,7 @@ Partial Class jsNomArcTrabajadoresMovimientosAsistencia
         'Label2
         '
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(251, 244)
+        Me.Label2.Location = New System.Drawing.Point(297, 242)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(101, 32)
         Me.Label2.TabIndex = 139
@@ -162,176 +138,82 @@ Partial Class jsNomArcTrabajadoresMovimientosAsistencia
         '
         'grpAsiste
         '
-        Me.grpAsiste.Controls.Add(Me.btnFechaSalida)
-        Me.grpAsiste.Controls.Add(Me.btnFechaRetorno)
-        Me.grpAsiste.Controls.Add(Me.btnFechaDescanso)
+        Me.grpAsiste.Controls.Add(Me.Label6)
+        Me.grpAsiste.Controls.Add(Me.Label5)
+        Me.grpAsiste.Controls.Add(Me.Label4)
         Me.grpAsiste.Controls.Add(Me.txtFechaSalida)
         Me.grpAsiste.Controls.Add(Me.txtFechaRetorno)
         Me.grpAsiste.Controls.Add(Me.txtFechaDescanso)
-        Me.grpAsiste.Controls.Add(Me.Label21)
-        Me.grpAsiste.Controls.Add(Me.btnFechaEntrada)
-        Me.grpAsiste.Controls.Add(Me.mskRetorno)
-        Me.grpAsiste.Controls.Add(Me.Label20)
         Me.grpAsiste.Controls.Add(Me.txtFechaEntrada)
         Me.grpAsiste.Controls.Add(Me.Label1)
-        Me.grpAsiste.Controls.Add(Me.mskDescanso)
-        Me.grpAsiste.Controls.Add(Me.Label19)
-        Me.grpAsiste.Controls.Add(Me.mskSalida)
         Me.grpAsiste.Controls.Add(Me.Label18)
-        Me.grpAsiste.Controls.Add(Me.mskEntrada)
         Me.grpAsiste.Location = New System.Drawing.Point(66, 58)
         Me.grpAsiste.Name = "grpAsiste"
         Me.grpAsiste.Size = New System.Drawing.Size(398, 183)
         Me.grpAsiste.TabIndex = 138
         Me.grpAsiste.TabStop = False
         '
-        'btnFechaSalida
-        '
-        Me.btnFechaSalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaSalida.Location = New System.Drawing.Point(147, 147)
-        Me.btnFechaSalida.Name = "btnFechaSalida"
-        Me.btnFechaSalida.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaSalida.TabIndex = 143
-        Me.btnFechaSalida.Text = "•••"
-        Me.btnFechaSalida.UseVisualStyleBackColor = True
-        '
-        'btnFechaRetorno
-        '
-        Me.btnFechaRetorno.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaRetorno.Location = New System.Drawing.Point(147, 115)
-        Me.btnFechaRetorno.Name = "btnFechaRetorno"
-        Me.btnFechaRetorno.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaRetorno.TabIndex = 142
-        Me.btnFechaRetorno.Text = "•••"
-        Me.btnFechaRetorno.UseVisualStyleBackColor = True
-        '
-        'btnFechaDescanso
-        '
-        Me.btnFechaDescanso.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaDescanso.Location = New System.Drawing.Point(147, 83)
-        Me.btnFechaDescanso.Name = "btnFechaDescanso"
-        Me.btnFechaDescanso.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaDescanso.TabIndex = 141
-        Me.btnFechaDescanso.Text = "•••"
-        Me.btnFechaDescanso.UseVisualStyleBackColor = True
-        '
         'txtFechaSalida
         '
-        Me.txtFechaSalida.Location = New System.Drawing.Point(47, 147)
+        Me.txtFechaSalida.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaSalida.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaSalida.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaSalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaSalida.Format = "dd-MM-yyyy hh:mm"
+        Me.txtFechaSalida.Location = New System.Drawing.Point(130, 129)
         Me.txtFechaSalida.Name = "txtFechaSalida"
-        Me.txtFechaSalida.Size = New System.Drawing.Size(94, 20)
-        Me.txtFechaSalida.TabIndex = 140
-        Me.txtFechaSalida.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtFechaSalida.Size = New System.Drawing.Size(250, 19)
+        Me.txtFechaSalida.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaSalida.TabIndex = 217
         '
         'txtFechaRetorno
         '
-        Me.txtFechaRetorno.Location = New System.Drawing.Point(47, 115)
+        Me.txtFechaRetorno.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaRetorno.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaRetorno.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaRetorno.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaRetorno.Format = "dd-MM-yyyy hh:mm"
+        Me.txtFechaRetorno.Location = New System.Drawing.Point(130, 104)
         Me.txtFechaRetorno.Name = "txtFechaRetorno"
-        Me.txtFechaRetorno.Size = New System.Drawing.Size(94, 20)
-        Me.txtFechaRetorno.TabIndex = 139
-        Me.txtFechaRetorno.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtFechaRetorno.Size = New System.Drawing.Size(250, 19)
+        Me.txtFechaRetorno.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaRetorno.TabIndex = 216
         '
         'txtFechaDescanso
         '
-        Me.txtFechaDescanso.Location = New System.Drawing.Point(47, 83)
+        Me.txtFechaDescanso.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaDescanso.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaDescanso.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaDescanso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaDescanso.Format = "dd-MM-yyyy hh:mm"
+        Me.txtFechaDescanso.Location = New System.Drawing.Point(130, 79)
         Me.txtFechaDescanso.Name = "txtFechaDescanso"
-        Me.txtFechaDescanso.Size = New System.Drawing.Size(94, 20)
-        Me.txtFechaDescanso.TabIndex = 138
-        Me.txtFechaDescanso.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtFechaDescanso.Size = New System.Drawing.Size(250, 19)
+        Me.txtFechaDescanso.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaDescanso.TabIndex = 215
         '
-        'Label21
+        'txtFechaEntrada
         '
-        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.Location = New System.Drawing.Point(185, 108)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(85, 32)
-        Me.Label21.TabIndex = 137
-        Me.Label21.Text = "Horas fin de descanso"
-        Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'btnFechaEntrada
-        '
-        Me.btnFechaEntrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaEntrada.Location = New System.Drawing.Point(147, 51)
-        Me.btnFechaEntrada.Name = "btnFechaEntrada"
-        Me.btnFechaEntrada.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaEntrada.TabIndex = 129
-        Me.btnFechaEntrada.Text = "•••"
-        Me.btnFechaEntrada.UseVisualStyleBackColor = True
-        '
-        'mskRetorno
-        '
-        Me.mskRetorno.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskRetorno.Location = New System.Drawing.Point(292, 115)
-        Me.mskRetorno.Mask = "00:00"
-        Me.mskRetorno.Name = "mskRetorno"
-        Me.mskRetorno.Size = New System.Drawing.Size(42, 20)
-        Me.mskRetorno.TabIndex = 136
-        Me.mskRetorno.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.mskRetorno.ValidatingType = GetType(Date)
-        '
-        'Label20
-        '
-        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(185, 76)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(85, 32)
-        Me.Label20.TabIndex = 135
-        Me.Label20.Text = "Horas inicio descanso"
-        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'mskDescanso
-        '
-        Me.mskDescanso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskDescanso.Location = New System.Drawing.Point(292, 83)
-        Me.mskDescanso.Mask = "00:00"
-        Me.mskDescanso.Name = "mskDescanso"
-        Me.mskDescanso.Size = New System.Drawing.Size(42, 20)
-        Me.mskDescanso.TabIndex = 134
-        Me.mskDescanso.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.mskDescanso.ValidatingType = GetType(Date)
-        '
-        'Label19
-        '
-        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(185, 140)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(85, 32)
-        Me.Label19.TabIndex = 133
-        Me.Label19.Text = "Horas de Salida"
-        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'mskSalida
-        '
-        Me.mskSalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskSalida.Location = New System.Drawing.Point(292, 147)
-        Me.mskSalida.Mask = "00:00"
-        Me.mskSalida.Name = "mskSalida"
-        Me.mskSalida.Size = New System.Drawing.Size(42, 20)
-        Me.mskSalida.TabIndex = 132
-        Me.mskSalida.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.mskSalida.ValidatingType = GetType(Date)
+        Me.txtFechaEntrada.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaEntrada.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaEntrada.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaEntrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaEntrada.Format = "dd-MM-yyyy hh:mm"
+        Me.txtFechaEntrada.Location = New System.Drawing.Point(130, 54)
+        Me.txtFechaEntrada.Name = "txtFechaEntrada"
+        Me.txtFechaEntrada.Size = New System.Drawing.Size(250, 19)
+        Me.txtFechaEntrada.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaEntrada.TabIndex = 214
         '
         'Label18
         '
         Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(185, 44)
+        Me.Label18.Location = New System.Drawing.Point(24, 54)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(85, 32)
+        Me.Label18.Size = New System.Drawing.Size(100, 19)
         Me.Label18.TabIndex = 131
-        Me.Label18.Text = "Horas de Entrada"
-        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'mskEntrada
-        '
-        Me.mskEntrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskEntrada.Location = New System.Drawing.Point(292, 51)
-        Me.mskEntrada.Mask = "00:00"
-        Me.mskEntrada.Name = "mskEntrada"
-        Me.mskEntrada.Size = New System.Drawing.Size(42, 20)
-        Me.mskEntrada.TabIndex = 130
-        Me.mskEntrada.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.mskEntrada.ValidatingType = GetType(Date)
+        Me.Label18.Text = "Entrada"
+        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'cmbTipoDia
         '
@@ -381,6 +263,36 @@ Partial Class jsNomArcTrabajadoresMovimientosAsistencia
         Me.btnOK.Text = "Aceptar"
         Me.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         '
+        'Label4
+        '
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(24, 79)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(100, 19)
+        Me.Label4.TabIndex = 218
+        Me.Label4.Text = "Descanso"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label5
+        '
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(24, 104)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(76, 19)
+        Me.Label5.TabIndex = 219
+        Me.Label5.Text = "Retorno"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label6
+        '
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(24, 129)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(100, 19)
+        Me.Label6.TabIndex = 220
+        Me.Label6.Text = "Salida"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'jsNomArcTrabajadoresMovimientosAsistencia
         '
         Me.AcceptButton = Me.btnOK
@@ -400,7 +312,6 @@ Partial Class jsNomArcTrabajadoresMovimientosAsistencia
         Me.grpConstante.ResumeLayout(False)
         Me.grpConstante.PerformLayout()
         Me.grpAsiste.ResumeLayout(False)
-        Me.grpAsiste.PerformLayout()
         Me.grpAceptarSalir.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -408,31 +319,22 @@ Partial Class jsNomArcTrabajadoresMovimientosAsistencia
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents txtFechaEntrada As System.Windows.Forms.TextBox
     Friend WithEvents grpConstante As System.Windows.Forms.GroupBox
     Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
     Friend WithEvents cmbTipoDia As System.Windows.Forms.ComboBox
-    Friend WithEvents btnFechaEntrada As System.Windows.Forms.Button
     Friend WithEvents grpAsiste As System.Windows.Forms.GroupBox
-    Friend WithEvents Label21 As System.Windows.Forms.Label
-    Friend WithEvents mskRetorno As System.Windows.Forms.MaskedTextBox
-    Friend WithEvents Label20 As System.Windows.Forms.Label
-    Friend WithEvents mskDescanso As System.Windows.Forms.MaskedTextBox
-    Friend WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents mskSalida As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label18 As System.Windows.Forms.Label
-    Friend WithEvents mskEntrada As System.Windows.Forms.MaskedTextBox
-    Friend WithEvents btnFechaSalida As System.Windows.Forms.Button
-    Friend WithEvents btnFechaRetorno As System.Windows.Forms.Button
-    Friend WithEvents btnFechaDescanso As System.Windows.Forms.Button
-    Friend WithEvents txtFechaSalida As System.Windows.Forms.TextBox
-    Friend WithEvents txtFechaRetorno As System.Windows.Forms.TextBox
-    Friend WithEvents txtFechaDescanso As System.Windows.Forms.TextBox
     Friend WithEvents mskTotal As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaSalida As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaRetorno As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaDescanso As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaEntrada As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label4 As Label
 End Class

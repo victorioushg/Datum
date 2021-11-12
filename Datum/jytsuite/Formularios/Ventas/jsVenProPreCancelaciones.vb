@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsVenProPreCancelaciones
 
     Private Const sModulo As String = "Procesar precancelaciones a cancelaciones"
@@ -51,6 +52,8 @@ Public Class jsVenProPreCancelaciones
         MyConn = MyCon
         IniciarTXT()
 
+        Dim dates As SfDateTimeEdit() = {txtFecha}
+        SetSizeDateObjects(dates)
 
         ds = DataSetRequery(ds, strAsesor, MyConn, nTablaAsesor, lblInfo)
         dtAsesor = ds.Tables(nTablaAsesor)
@@ -72,15 +75,15 @@ Public Class jsVenProPreCancelaciones
 
         ft.visualizarObjetos(False, chkCT, chkTA, chkDP, chkTR)
 
-        ft.habilitarObjetos(False, True, txtFecha, txtMEfectivo, txtMCheques, txtMTarjetas, txtMCupones, txtMDepositos, txtMTransfer, _
-                         txtMRetISLR, txtMRetIVA, txtCEfectivo, txtCCheques, txtCTarjetas, txtCCupones, txtCDepositos, txtCTransfer, _
+        ft.habilitarObjetos(False, True, txtMEfectivo, txtMCheques, txtMTarjetas, txtMCupones, txtMDepositos, txtMTransfer,
+                         txtMRetISLR, txtMRetIVA, txtCEfectivo, txtCCheques, txtCTarjetas, txtCCupones, txtCDepositos, txtCTransfer,
                          txtCRetISLR, txtCRetIVA, txtMTotal, txtCTotal)
 
         ft.habilitarObjetos(True, True, txtNumeroDeposito)
 
         txtNumeroDeposito.Text = ""
 
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
 
         chkEF.Checked = False
         chkCH.Checked = False
@@ -92,10 +95,10 @@ Public Class jsVenProPreCancelaciones
         chkIVA.Checked = False
 
 
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Numero, txtMEfectivo, txtMCheques, txtMTarjetas, txtMCupones, txtMDepositos, txtMTransfer, _
+        ft.iniciarTextoObjetos(Transportables.tipoDato.Numero, txtMEfectivo, txtMCheques, txtMTarjetas, txtMCupones, txtMDepositos, txtMTransfer,
                          txtMRetISLR, txtMRetIVA, txtMTotal)
 
-        ft.iniciarTextoObjetos(FormatoItemListView.iEntero, txtCEfectivo, txtCCheques, txtCTarjetas, txtCCupones, txtCDepositos, txtCTransfer, _
+        ft.iniciarTextoObjetos(FormatoItemListView.iEntero, txtCEfectivo, txtCCheques, txtCTarjetas, txtCCupones, txtCDepositos, txtCTransfer,
                          txtCRetISLR, txtCRetIVA, txtCTotal)
 
 
@@ -105,7 +108,7 @@ Public Class jsVenProPreCancelaciones
 
     Private Sub CargarCancelaciones()
 
-        If cmbAsesores.Items.Count > 0 And txtFecha.Text <> "" Then
+        If cmbAsesores.Items.Count > 0 Then
 
             Dim strFP As String = ""
 
@@ -165,12 +168,12 @@ Public Class jsVenProPreCancelaciones
         End If
 
         If txtNumeroDeposito.Text = "" AndAlso CBool(ParametroPlus(MyConn, Gestion.iVentas, "VENPARAM26")) Then
-            ft.MensajeCritico("Debe indicar un Número de depósito válido...")
+            ft.mensajeCritico("Debe indicar un Número de depósito válido...")
             Return False
         End If
 
         If ValorEntero(txtCTotal.Text) = 0 Then
-            ft.MensajeCritico("Debe seleccionar al menos un ítem...")
+            ft.mensajeCritico("Debe seleccionar al menos un ítem...")
             Return False
         End If
 
@@ -191,13 +194,13 @@ Public Class jsVenProPreCancelaciones
                         lblProgreso.Text = " Cobranza No. " & .Text
 
                         '1. Insertar en CXC
-                        InsertEditVENTASCXC(MyConn, lblInfo, True, .SubItems(1).Text, .SubItems(3).Text, .SubItems(2).Text, CDate(txtFecha.Text), _
-                                ft.FormatoHora(Now()), CDate(txtFecha.Text), .SubItems(6).Text, .SubItems(4).Text, ValorNumero(.SubItems(5).Text), _
-                                0.0, .SubItems(9).Text, cmbCaja.SelectedValue, .SubItems(7).Text, .SubItems(8).Text, "", "CXC", .SubItems(2).Text, _
-                                "0", "", jytsistema.sFechadeTrabajo, "", "0", "", 0.0, 0.0, .Text, "", "", _
-                                "", cmbAsesores.SelectedValue, cmbAsesores.SelectedValue, "0", _
-                                IIf(InStr("AB.CA.NC", .SubItems(3).Text) > 0, FOTipo.Credito, FOTipo.Debito), _
-                                jytsistema.WorkDivition)
+                        InsertEditVENTASCXC(MyConn, lblInfo, True, .SubItems(1).Text, .SubItems(3).Text, .SubItems(2).Text, CDate(txtFecha.Text),
+                                ft.FormatoHora(Now()), CDate(txtFecha.Text), .SubItems(6).Text, .SubItems(4).Text, ValorNumero(.SubItems(5).Text),
+                                0.0, .SubItems(9).Text, cmbCaja.SelectedValue, .SubItems(7).Text, .SubItems(8).Text, "", "CXC", .SubItems(2).Text,
+                                "0", "", jytsistema.sFechadeTrabajo, "", "0", "", 0.0, 0.0, .Text, "", "",
+                                "", cmbAsesores.SelectedValue, cmbAsesores.SelectedValue, "0",
+                                IIf(InStr("AB.CA.NC", .SubItems(3).Text) > 0, FOTipo.Credito, FOTipo.Debito),
+                                jytsistema.WorkDivition, jytsistema.WorkCurrency.Id, DateTime.Now())
 
                         '2. Insertar en CAJA y/o Banco
                         If .SubItems(9).Text = "CT" Then
@@ -214,11 +217,13 @@ Public Class jsVenProPreCancelaciones
                                 Dim fCont As Integer
                                 For fCont = 0 To dtCantidad.Rows.Count - 1
                                     With dtCantidad.Rows(fCont)
-                                        InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, cmbCaja.SelectedValue, UltimoCajaMasUno(MyConn, lblInfo, cmbCaja.SelectedValue), _
-                                                                    CDate(txtFecha.Text), "CXC", "EN", lvCobranza.Items(lvCont).SubItems(2).Text, _
-                                                                    "CT", lvCobranza.Items(lvCont).SubItems(7).Text, _
-                                                                    .Item("CORREDOR"), .Item("IMPORTE"), "", lvCobranza.Items(lvCont).SubItems(4).Text, "", jytsistema.sFechadeTrabajo, _
-                                                                    .Item("CANTIDAD"), "", "", "", jytsistema.sFechadeTrabajo, lvCobranza.Items(lvCont).SubItems(1).Text, cmbAsesores.SelectedValue, "1")
+                                        InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, cmbCaja.SelectedValue, UltimoCajaMasUno(MyConn, lblInfo, cmbCaja.SelectedValue),
+                                                                    CDate(txtFecha.Text), "CXC", "EN", lvCobranza.Items(lvCont).SubItems(2).Text,
+                                                                    "CT", lvCobranza.Items(lvCont).SubItems(7).Text,
+                                                                    .Item("CORREDOR"), .Item("IMPORTE"), "", lvCobranza.Items(lvCont).SubItems(4).Text, "", jytsistema.sFechadeTrabajo,
+                                                                    .Item("CANTIDAD"), "", "", "",
+                                                                    jytsistema.sFechadeTrabajo, lvCobranza.Items(lvCont).SubItems(1).Text,
+                                                                    cmbAsesores.SelectedValue, "1", jytsistema.WorkCurrency.Id, DateTime.Now())
 
                                     End With
                                 Next
@@ -227,18 +232,20 @@ Public Class jsVenProPreCancelaciones
                             dtCantidad = Nothing
 
                         Else
-                            InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, cmbCaja.SelectedValue, UltimoCajaMasUno(MyConn, lblInfo, cmbCaja.SelectedValue), _
-                                                        CDate(txtFecha.Text), "CXC", "EN", .Text, _
-                                                        .SubItems(9).Text, .SubItems(7).Text, .SubItems(8).Text, _
-                                                        Math.Abs(ValorNumero(.SubItems(5).Text)), "", .SubItems(4).Text, txtNumeroDeposito.Text, jytsistema.sFechadeTrabajo, 1, "", "", _
-                                                        "", jytsistema.sFechadeTrabajo, .SubItems(1).Text, cmbAsesores.SelectedValue, "1")
+                            InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, cmbCaja.SelectedValue, UltimoCajaMasUno(MyConn, lblInfo, cmbCaja.SelectedValue),
+                                                        CDate(txtFecha.Text), "CXC", "EN", .Text,
+                                                        .SubItems(9).Text, .SubItems(7).Text, .SubItems(8).Text,
+                                                        Math.Abs(ValorNumero(.SubItems(5).Text)), "", .SubItems(4).Text, txtNumeroDeposito.Text, jytsistema.sFechadeTrabajo, 1, "", "",
+                                                        "", jytsistema.sFechadeTrabajo, .SubItems(1).Text, cmbAsesores.SelectedValue, "1",
+                                                        jytsistema.WorkCurrency.Id, DateTime.Now())
 
                             '3. Insertar Deposito en bancos
                             If (.SubItems(9).Text = "EF" Or .SubItems(9).Text = "CH") AndAlso txtNumeroDeposito.Text.Trim() <> "" Then
-                                InsertEditBANCOSMovimientoBanco(MyConn, lblInfo, True, CDate(txtFecha.Text), txtNumeroDeposito.Text, "DP", cmbBancos.SelectedValue, _
-                                                                cmbCaja.SelectedValue, "DEPOSITO CAJA DE " & txtCTotal.Text & " DOCUMENTOS ", ValorNumero(txtMTotal.Text), _
-                                                                "CXC", txtNumeroDeposito.Text, "", "", "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, "CE", "", _
-                                                                jytsistema.sFechadeTrabajo, "0", "", cmbAsesores.SelectedValue)
+                                InsertEditBANCOSMovimientoBanco(MyConn, lblInfo, True, CDate(txtFecha.Text), txtNumeroDeposito.Text, "DP", cmbBancos.SelectedValue,
+                                                                cmbCaja.SelectedValue, "DEPOSITO CAJA DE " & txtCTotal.Text & " DOCUMENTOS ", ValorNumero(txtMTotal.Text),
+                                                                "CXC", txtNumeroDeposito.Text, "", "", "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, "CE", "",
+                                                                jytsistema.sFechadeTrabajo, "0", "", cmbAsesores.SelectedValue,
+                                                                jytsistema.WorkCurrency.Id, DateTime.Now())
                             End If
 
 
@@ -246,7 +253,7 @@ Public Class jsVenProPreCancelaciones
 
 
                         '4. Actualiza Historico a '1' = procesado en jsvencobrgv
-                        ft.Ejecutar_strSQL(myconn, " update jsvencobrgv set historico = '1' where codcli = '" & .SubItems(1).Text & "' and nummov = '" & .SubItems(2).Text & "' and comproba = '" & .Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                        ft.Ejecutar_strSQL(MyConn, " update jsvencobrgv set historico = '1' where codcli = '" & .SubItems(1).Text & "' and nummov = '" & .SubItems(2).Text & "' and comproba = '" & .Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
                     End If
 
@@ -264,12 +271,6 @@ Public Class jsVenProPreCancelaciones
         End If
 
     End Sub
-
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtFecha.Text), Me, btnFecha))
-    End Sub
-
-
     Private Sub lvPedidos_ItemChecked(ByVal sender As Object, ByVal e As System.Windows.Forms.ItemCheckedEventArgs) Handles lvCobranza.ItemChecked
 
         If e.Item.SubItems.Count > 4 Then
@@ -362,9 +363,8 @@ Public Class jsVenProPreCancelaciones
 
     End Sub
 
-    Private Sub chkEF_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkEF.CheckedChanged, chkCH.CheckedChanged, _
-        chkTA.CheckedChanged, chkCT.CheckedChanged, chkDP.CheckedChanged, chkTR.CheckedChanged, chkIVA.CheckedChanged, chkISLR.CheckedChanged, _
-        txtFecha.TextChanged, cmbAsesores.SelectedIndexChanged
+    Private Sub chkEF_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkEF.CheckedChanged, chkCH.CheckedChanged,
+        chkTA.CheckedChanged, chkCT.CheckedChanged, chkDP.CheckedChanged, chkTR.CheckedChanged, chkIVA.CheckedChanged, chkISLR.CheckedChanged, cmbAsesores.SelectedIndexChanged
 
         CargarCancelaciones()
 
@@ -407,7 +407,7 @@ Public Class jsVenProPreCancelaciones
                     'Modifica monto de cancelación Cesta Ticket
                     Dim row As DataRow = dtCxC.Select(" comproba = '" & .Text & "' and codcli = '" & .SubItems(1).Text & "' AND ID_EMP = '" & jytsistema.WorkID & "' ")(0)
                     row("importe") = -1 * Math.Abs(f.montoPago)
-                    ft.Ejecutar_strSQL(myconn, " update jsvencobrgv set importe = " & -1 * Math.Abs(f.montoPago) & " where comproba = '" & .Text & "' and  codcli = '" & .SubItems(1).Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                    ft.Ejecutar_strSQL(MyConn, " update jsvencobrgv set importe = " & -1 * Math.Abs(f.montoPago) & " where comproba = '" & .Text & "' and  codcli = '" & .SubItems(1).Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
                     CargarCancelaciones()
 

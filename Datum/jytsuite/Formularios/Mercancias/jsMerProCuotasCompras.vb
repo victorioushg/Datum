@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsMerProCuotasCompras
 
     Private Const sModulo As String = "Asignación de cuotas fijas a Asesores a partir de compras"
@@ -27,6 +28,9 @@ Public Class jsMerProCuotasCompras
 
         Me.Dock = DockStyle.Fill
         myConn = Mycon
+
+        Dim dates As SfDateTimeEdit() = {txtFechaDesde, txtFechaHasta}
+        SetSizeDateObjects(dates)
 
         IniciarPeriodo()
         ft.RellenaCombo(aAsignacion, cmbAsignacion)
@@ -88,18 +92,17 @@ Public Class jsMerProCuotasCompras
 
         If dt.Rows.Count > 0 Then
             Posicion = 0
-            ft.habilitarObjetos(False, True, btnFechaDesde, btnFechaHasta, cmbAsignacion, chkCuota)
+            ft.habilitarObjetos(False, True, txtFechaDesde, txtFechaHasta, cmbAsignacion, chkCuota)
         Else
-            ft.habilitarObjetos(True, True, btnFechaDesde, btnFechaHasta, cmbAsignacion, chkCuota)
+            ft.habilitarObjetos(True, True, txtFechaDesde, txtFechaHasta, cmbAsignacion, chkCuota)
         End If
 
         AsignaTXT(Posicion, True)
 
     End Sub
     Private Sub IniciarPeriodo()
-        ft.habilitarObjetos(False, True, txtFechaDesde, txtFechaHasta)
-        txtFechaDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtFechaHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFechaDesde.Value = jytsistema.sFechadeTrabajo
+        txtFechaHasta.Value = jytsistema.sFechadeTrabajo
 
     End Sub
     Private Sub IniciarCompras(FechaDesde As Date, FechaHasta As Date)
@@ -225,21 +228,13 @@ Public Class jsMerProCuotasCompras
             IniciarCuotas()
         Else
             dg.Columns.Clear()
-            ft.habilitarObjetos(True, True, btnFechaDesde, btnFechaHasta, cmbAsignacion, chkCuota)
+            ft.habilitarObjetos(True, True, txtFechaDesde, txtFechaHasta, cmbAsignacion, chkCuota)
         End If
 
     End Sub
 
-    Private Sub btnFechaDesde_Click(sender As System.Object, e As System.EventArgs) Handles btnFechaDesde.Click
-        txtFechaDesde.Text = SeleccionaFecha(CDate(txtFechaDesde.Text), Me, grp, btnFechaDesde)
-    End Sub
 
-    Private Sub btnFechaHasta_Click(sender As System.Object, e As System.EventArgs) Handles btnFechaHasta.Click
-        txtFechaHasta.Text = SeleccionaFecha(CDate(txtFechaHasta.Text), Me, grp, btnFechaHasta)
-    End Sub
-
-    Private Sub txtFechaDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtFechaDesde.TextChanged, _
-        txtFechaHasta.TextChanged
+    Private Sub txtFechaDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtFechaHasta.ValueChanged
         If txtFechaDesde.Text <> "" And txtFechaHasta.Text <> "" Then
             If CDate(txtFechaHasta.Text) >= CDate(txtFechaDesde.Text) Then
                 IniciarCompras(CDate(txtFechaDesde.Text), CDate(txtFechaHasta.Text))

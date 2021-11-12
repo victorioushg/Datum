@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsComArcGastos
     Private Const sModulo As String = "Gastos"
     Private Const lRegion As String = "RibbonButton58"
@@ -60,7 +62,8 @@ Public Class jsComArcGastos
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
             dt = ds.Tables(nTabla)
 
-
+            Dim dates As SfDateTimeEdit() = {txtEmision, txtEmisionIVA}
+            SetSizeDateObjects(dates)
 
             DesactivarMarco0()
             If dt.Rows.Count > 0 Then
@@ -74,7 +77,7 @@ Public Class jsComArcGastos
             AsignarTooltips()
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
-            ft.MensajeCritico("Error en conexión de base de datos: " & ex.Message)
+            ft.mensajeCritico("Error en conexión de base de datos: " & ex.Message)
         End Try
 
     End Sub
@@ -141,9 +144,9 @@ Public Class jsComArcGastos
                 txtCodigo.Text = ft.muestraCampoTexto(.Item("numgas"))
                 txtNumeroSerie.Text = ft.muestraCampoTexto(.Item("serie_numgas"))
                 NumeroDocumentoAnterior = .Item("numgas")
-                txtEmision.Text = ft.FormatoFecha(CDate(.Item("emision").ToString))
+                txtEmision.Value = .Item("emision")
                 txtVencimiento.Text = ft.FormatoFecha(CDate(.Item("vence").ToString))
-                txtEmisionIVA.Text = ft.FormatoFecha(CDate(.Item("emisioniva").ToString))
+                txtEmisionIVA.Value = .Item("emisioniva")
                 txtProveedor.Text = ft.muestraCampoTexto(.Item("codpro"))
                 CodigoProveedorAnterior = .Item("codpro")
                 txtRIF.Text = ft.muestraCampoTexto(.Item("rif"))
@@ -178,8 +181,8 @@ Public Class jsComArcGastos
                 CondicionDePago = .Item("condpag")
                 Dim FormaDePago As String = ""
                 If .Item("formapag").ToString.Trim() <> "" Then _
-                    FormaDePago = aFormaPago(ft.InArray(aFormaPagoAbreviada, .Item("FORMAPAG"))) & "  " & _
-                        .Item("NUMPAG") & " " & _
+                    FormaDePago = formasDePago.FirstOrDefault(Function(forma) forma.Value = .Item("FORMAPAG")).Text & "  " &
+                        .Item("NUMPAG") & " " &
                         IIf(.Item("nompag").ToString.Trim() <> "", ft.DevuelveScalarCadena(myConn, " SELECT NOMBAN from jsbancatban where codban = '" & .Item("nompag") & "' and id_emp = '" & jytsistema.WorkID & "' "), "")
 
                 txtCondicionPago.Text = IIf(.Item("condpag") = 0, "CREDITO", "CONTADO") _
@@ -214,12 +217,12 @@ Public Class jsComArcGastos
         Dim aCampos() As String = {"item", "descrip", "iva", "cantidad", "unidad", "costou", "des_art", "des_pro", "costotot", "estatus", ""}
         Dim aNombres() As String = {"Item", "Descripción", "IVA", "Cant.", "UND", "Costo Unitario", "Desc. Art.", "Desc. Prov.", "Costo Total", "Tipo Renglon", ""}
         Dim aAnchos() As Integer = {90, 300, 30, 70, 45, 100, 50, 50, 120, 60, 100}
-        Dim aAlineacion() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, _
-                                        AlineacionDataGrid.Centro, AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro, _
-                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, _
+        Dim aAlineacion() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda,
+                                        AlineacionDataGrid.Centro, AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro,
+                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha,
                                         AlineacionDataGrid.Derecha, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda}
 
-        Dim aFormatos() As String = {"", "", "", sFormatoCantidad, "", sFormatoNumero, sFormatoNumero, sFormatoNumero, _
+        Dim aFormatos() As String = {"", "", "", sFormatoCantidad, "", sFormatoNumero, sFormatoNumero, sFormatoNumero,
                                      sFormatoNumero, "", ""}
         IniciarTabla(dg, dtRenglones, aCampos, aNombres, aAnchos, aAlineacion, aFormatos)
         If dtRenglones.Rows.Count > 0 Then
@@ -243,7 +246,7 @@ Public Class jsComArcGastos
         Dim aCampos() As String = {"tipoiva", "poriva", "baseiva", "impiva"}
         Dim aNombres() As String = {"", "", "", ""}
         Dim aAnchos() As Integer = {15, 45, 95, 90}
-        Dim aAlineacion() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Derecha, _
+        Dim aAlineacion() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Derecha,
                                         AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha}
 
         Dim aFormatos() As String = {"", sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero}
@@ -267,7 +270,7 @@ Public Class jsComArcGastos
         Dim aCampos() As String = {"renglon", "pordes", "descuento"}
         Dim aNombres() As String = {"", "", ""}
         Dim aAnchos() As Integer = {60, 45, 60}
-        Dim aAlineacion() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Derecha, _
+        Dim aAlineacion() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Derecha,
                                         AlineacionDataGrid.Derecha}
 
         Dim aFormatos() As String = {"", sFormatoNumero, sFormatoNumero}
@@ -289,7 +292,7 @@ Public Class jsComArcGastos
         NumeroDocumentoAnterior = txtCodigo.Text
         CodigoProveedorAnterior = ""
 
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtControl, txtProveedor, txtNombreProveedor, txtRIF, txtZona, txtComentario, _
+        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtControl, txtProveedor, txtNombreProveedor, txtRIF, txtZona, txtComentario,
                             txtAlmacen, txtReferencia, txtCodigoContable, txtVencimiento, txtCondicionPago)
 
         ft.RellenaCombo(aTipoGasto, cmbTipoGasto)
@@ -297,8 +300,8 @@ Public Class jsComArcGastos
         Dim nAlmacen As String = ft.DevuelveScalarCadena(myConn, "SELECT codalm FROM jsmercatalm WHERE id_emp = '" & jytsistema.WorkID & "' ORDER BY codalm LIMIT 1")
         If nAlmacen <> "0" Then txtAlmacen.Text = nAlmacen
 
-        txtEmision.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtEmisionIVA.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtEmision.Value = jytsistema.sFechadeTrabajo
+        txtEmisionIVA.Value = jytsistema.sFechadeTrabajo
         tslblPesoT.Text = ft.FormatoCantidad(0)
         ft.iniciarTextoObjetos(Transportables.tipoDato.Numero, txtSubTotal, txtDescuentos, txtCargos, txtTotalIVA, txtTotalIVA)
         txtVencimiento.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
@@ -321,20 +324,20 @@ Public Class jsComArcGastos
         grpAceptarSalir.Visible = True
 
         ft.habilitarObjetos(True, False, grpEncab, grpTotales, MenuBarraRenglon, MenuDescuentos)
-        ft.habilitarObjetos(True, True, txtCodigo, txtNumeroSerie, txtComentario, btnEmision, btnProveedor, txtProveedor, btnEmisionIVA, _
-                         txtRIF, txtControl, txtZona, btnZona, btnEmision, txtAlmacen, btnAlmacen, _
+        ft.habilitarObjetos(True, True, txtCodigo, txtNumeroSerie, txtComentario, txtEmision, btnProveedor, txtProveedor, txtEmisionIVA,
+                         txtRIF, txtControl, txtZona, btnZona, txtAlmacen, btnAlmacen,
                          txtReferencia, btnCodigoContable, btnGrupoSubGrupo, cmbTipoGasto)
 
         MenuBarra.Enabled = False
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
     End Sub
     Private Sub DesactivarMarco0()
 
         grpAceptarSalir.Visible = False
-        ft.habilitarObjetos(False, True, txtCodigo, txtNumeroSerie, txtEmision, btnEmision, txtControl, txtEmisionIVA, btnEmisionIVA, _
-                txtProveedor, txtNombreProveedor, btnProveedor, txtComentario, txtRIF, txtZona, btnZona, txtNombreZona, _
-                txtVencimiento, txtCondicionPago, txtGrupo, txtSubgrupo, txtAlmacen, btnZona, btnAlmacen, _
+        ft.habilitarObjetos(False, True, txtCodigo, txtNumeroSerie, txtEmision, txtControl, txtEmisionIVA,
+                txtProveedor, txtNombreProveedor, btnProveedor, txtComentario, txtRIF, txtZona, btnZona, txtNombreZona,
+                txtVencimiento, txtCondicionPago, txtGrupo, txtSubgrupo, txtAlmacen, btnZona, btnAlmacen,
                 txtNombreAlmacen, txtReferencia, txtCodigoContable, btnCodigoContable, btnGrupoSubGrupo, cmbTipoGasto)
 
         ft.habilitarObjetos(False, True, txtDescuentos, txtCargos, MenuDescuentos, txtSubTotal, txtTotalIVA, txtTotal)
@@ -342,7 +345,7 @@ Public Class jsComArcGastos
         MenuBarraRenglon.Enabled = False
         MenuBarra.Enabled = True
 
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -372,10 +375,10 @@ Public Class jsComArcGastos
     End Sub
     Private Sub AgregaYCancela()
 
-        ft.Ejecutar_strSQL(myconn, " delete from jsprorengas where numgas = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
-        ft.Ejecutar_strSQL(myconn, " delete from jsproivagas where numgas = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
-        ft.Ejecutar_strSQL(myconn, " delete from jsprodesgas where numgas = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
-        ft.Ejecutar_strSQL(myconn, " delete from jsvenrencom where numdoc = '" & txtCodigo.Text & "' and origen = 'GAS' and id_emp = '" & jytsistema.WorkID & "' ")
+        ft.Ejecutar_strSQL(myConn, " delete from jsprorengas where numgas = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+        ft.Ejecutar_strSQL(myConn, " delete from jsproivagas where numgas = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+        ft.Ejecutar_strSQL(myConn, " delete from jsprodesgas where numgas = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+        ft.Ejecutar_strSQL(myConn, " delete from jsvenrencom where numdoc = '" & txtCodigo.Text & "' and origen = 'GAS' and id_emp = '" & jytsistema.WorkID & "' ")
 
     End Sub
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
@@ -383,13 +386,13 @@ Public Class jsComArcGastos
             Dim f As New jsComFormasPago
             f.CondicionPago = CondicionDePago
             f.TipoCredito = TipoCredito
-            f.Vencimiento = IIf(CondicionDePago = 0, FechaVencimiento, CDate(txtEmisionIVA.Text))
+            f.Vencimiento = IIf(CondicionDePago = 0, FechaVencimiento, txtEmisionIVA.Value)
             f.Caja = Caja
             f.FormaPago = FormaPago
 
 
-            f.Cargar(myConn, "GAS", NumeroDocumentoAnterior, _
-                     IIf(i_modo = movimiento.iAgregar, True, False), _
+            f.Cargar(myConn, "GAS", NumeroDocumentoAnterior,
+                     IIf(i_modo = movimiento.iAgregar, True, False),
                      ValorNumero(txtTotal.Text), True)
 
             If f.DialogResult = Windows.Forms.DialogResult.OK Then
@@ -411,42 +414,42 @@ Public Class jsComArcGastos
     Private Sub Imprimir()
 
         Dim f As New jsComRepParametros
-        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cGasto, "Gasto", _
-                 txtProveedor.Text, txtCodigo.Text, CDate(txtEmision.Text))
+        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cGasto, "Gasto",
+                 txtProveedor.Text, txtCodigo.Text, txtEmision.Value)
         f = Nothing
 
 
     End Sub
     Private Function Validado() As Boolean
 
-        If FechaUltimoBloqueo(myConn, "jsproencgas") >= Convert.ToDateTime(txtEmision.Text) Then
+        If FechaUltimoBloqueo(myConn, "jsproencgas") >= txtEmision.Value Then
             ft.mensajeCritico("FECHA MENOR QUE ULTIMA FECHA DE CIERRE...")
             Return False
         End If
 
         If txtCodigo.Text = "" Then
-            ft.MensajeCritico("Debe indicar un Número de Gasto válido...")
+            ft.mensajeCritico("Debe indicar un Número de Gasto válido...")
             Return False
         End If
 
         If txtNombreProveedor.Text = "" Then
-            ft.MensajeCritico("Debe indicar un proveedor válido...")
+            ft.mensajeCritico("Debe indicar un proveedor válido...")
             Return False
         End If
 
-        If ft.DevuelveScalarEntero(myConn, " select count(*) from jsproencgas where numgas = '" & txtCodigo.Text & "' and codpro = '" & txtProveedor.Text & "' and id_emp = '" & jytsistema.WorkID & "'  ") > 0 AndAlso _
+        If ft.DevuelveScalarEntero(myConn, " select count(*) from jsproencgas where numgas = '" & txtCodigo.Text & "' and codpro = '" & txtProveedor.Text & "' and id_emp = '" & jytsistema.WorkID & "'  ") > 0 AndAlso
             i_modo = movimiento.iAgregar Then
             ft.mensajeCritico("Número de gasto YA existe para este proveedor ...")
             Return False
         End If
 
         If txtSubgrupo.Text = "" Then
-            ft.MensajeCritico("Debe seleccionar SubGrupo de Gastos válido...")
+            ft.mensajeCritico("Debe seleccionar SubGrupo de Gastos válido...")
             Return False
         End If
 
         If txtGrupo.Text = "" Then
-            ft.MensajeCritico("Debe seleccionar Grupo de Gastos válido...")
+            ft.mensajeCritico("Debe seleccionar Grupo de Gastos válido...")
             Return False
         End If
 
@@ -463,7 +466,7 @@ Public Class jsComArcGastos
 
 
         If dtRenglones.Rows.Count = 0 Then
-            ft.MensajeCritico("Debe incluir al menos un ítem...")
+            ft.mensajeCritico("Debe incluir al menos un ítem...")
             Return False
         End If
 
@@ -480,10 +483,10 @@ Public Class jsComArcGastos
         Dim Inserta As Boolean = False
 
 
-        ft.Ejecutar_strSQL(myconn, " update jsprorengas set codpro = '" & txtProveedor.Text & "', numgas = '" & Codigo & "'  where codpro = '" & CodigoProveedorAnterior & "' and numgas = '" & NumeroDocumentoAnterior & "' and id_emp = '" & jytsistema.WorkID & "' ")
-        ft.Ejecutar_strSQL(myconn, " update jsproivagas set codpro = '" & txtProveedor.Text & "', numgas = '" & Codigo & "'  where codpro = '" & CodigoProveedorAnterior & "' and numgas = '" & NumeroDocumentoAnterior & "' and id_emp = '" & jytsistema.WorkID & "' ")
-        ft.Ejecutar_strSQL(myconn, " update jsprodesgas set codpro = '" & txtProveedor.Text & "', numgas = '" & Codigo & "'  where codpro = '" & CodigoProveedorAnterior & "' and numgas = '" & NumeroDocumentoAnterior & "' and id_emp = '" & jytsistema.WorkID & "' ")
-        ft.Ejecutar_strSQL(myconn, " update jsvenrencom set numdoc = '" & Codigo & "' where numdoc = '" & NumeroDocumentoAnterior & "' and origen = 'GAS' and id_emp = '" & jytsistema.WorkID & "' ")
+        ft.Ejecutar_strSQL(myConn, " update jsprorengas set codpro = '" & txtProveedor.Text & "', numgas = '" & Codigo & "'  where codpro = '" & CodigoProveedorAnterior & "' and numgas = '" & NumeroDocumentoAnterior & "' and id_emp = '" & jytsistema.WorkID & "' ")
+        ft.Ejecutar_strSQL(myConn, " update jsproivagas set codpro = '" & txtProveedor.Text & "', numgas = '" & Codigo & "'  where codpro = '" & CodigoProveedorAnterior & "' and numgas = '" & NumeroDocumentoAnterior & "' and id_emp = '" & jytsistema.WorkID & "' ")
+        ft.Ejecutar_strSQL(myConn, " update jsprodesgas set codpro = '" & txtProveedor.Text & "', numgas = '" & Codigo & "'  where codpro = '" & CodigoProveedorAnterior & "' and numgas = '" & NumeroDocumentoAnterior & "' and id_emp = '" & jytsistema.WorkID & "' ")
+        ft.Ejecutar_strSQL(myConn, " update jsvenrencom set numdoc = '" & Codigo & "' where numdoc = '" & NumeroDocumentoAnterior & "' and origen = 'GAS' and id_emp = '" & jytsistema.WorkID & "' ")
 
         If i_modo = movimiento.iAgregar Then
             Inserta = True
@@ -492,15 +495,15 @@ Public Class jsComArcGastos
 
         Dim porcentajeDescuento As Double = (1 - ValorNumero(txtDescuentos.Text) / ValorNumero(txtSubTotal.Text)) * 100
 
-        InsertEditCOMPRASEncabezadoGastos(myConn, lblInfo, Inserta, Codigo, txtNumeroSerie.Text, CDate(txtEmision.Text), CDate(txtEmisionIVA.Text), _
-                txtProveedor.Text, txtNombreProveedor.Text, txtRIF.Text, "", txtComentario.Text, txtReferencia.Text, txtAlmacen.Text, _
-                txtCodigoContable.Text, Grupo, SubGrupo, ValorNumero(txtSubTotal.Text), porcentajeDescuento, ValorNumero(txtDescuentos.Text), _
-                ValorNumero(txtCargos.Text), "", 0.0, 0.0, ValorNumero(txtTotalIVA.Text), 0.0, 0.0, "", jytsistema.sFechadeTrabajo, _
-                ValorNumero(txtTotal.Text), FechaVencimiento, CondicionDePago, TipoCredito, FormaPago, NumeroPago, NombrePago, _
-                Beneficiario, Caja, 0.0, "", 0, 0, 0.0, 0.0, "", jytsistema.sFechadeTrabajo, 0.0, "", jytsistema.sFechadeTrabajo, _
+        InsertEditCOMPRASEncabezadoGastos(myConn, lblInfo, Inserta, Codigo, txtNumeroSerie.Text, txtEmision.Value, txtEmisionIVA.Value,
+                txtProveedor.Text, txtNombreProveedor.Text, txtRIF.Text, "", txtComentario.Text, txtReferencia.Text, txtAlmacen.Text,
+                txtCodigoContable.Text, Grupo, SubGrupo, ValorNumero(txtSubTotal.Text), porcentajeDescuento, ValorNumero(txtDescuentos.Text),
+                ValorNumero(txtCargos.Text), "", 0.0, 0.0, ValorNumero(txtTotalIVA.Text), 0.0, 0.0, "", jytsistema.sFechadeTrabajo,
+                ValorNumero(txtTotal.Text), FechaVencimiento, CondicionDePago, TipoCredito, FormaPago, NumeroPago, NombrePago,
+                Beneficiario, Caja, 0.0, "", 0, 0, 0.0, 0.0, "", jytsistema.sFechadeTrabajo, 0.0, "", jytsistema.sFechadeTrabajo,
                 0.0, 0.0, "", "", "", txtZona.Text, cmbTipoGasto.SelectedIndex, Impresa, NumeroDocumentoAnterior, CodigoProveedorAnterior)
 
-        InsertEditCONTROLNumeroControl(myConn, Codigo, txtProveedor.Text, txtControl.Text, CDate(txtEmisionIVA.Text), "COM", "GAS")
+        InsertEditCONTROLNumeroControl(myConn, Codigo, txtProveedor.Text, txtControl.Text, txtEmisionIVA.Value, "COM", "GAS")
 
         ActualizarMovimientos(Codigo, txtProveedor.Text)
 
@@ -519,7 +522,7 @@ Public Class jsComArcGastos
     Private Sub ActualizarMovimientos(ByVal NumeroGasto As String, ByVal CodigoProveedor As String)
 
         '1.- Aplica Descuento Global sobre total Renglón con descuento "costototdes"
-        ft.Ejecutar_strSQL(myconn, " update jsprorengas set costototdes = costotot - costotot * " & ValorNumero(txtDescuentos.Text) / IIf(ValorNumero(txtSubTotal.Text) > 0, ValorNumero(txtSubTotal.Text), 1) & " " _
+        ft.Ejecutar_strSQL(myConn, " update jsprorengas set costototdes = costotot - costotot * " & ValorNumero(txtDescuentos.Text) / IIf(ValorNumero(txtSubTotal.Text) > 0, ValorNumero(txtSubTotal.Text), 1) & " " _
                                         & " where " _
                                         & " numgas = '" & NumeroGasto & "' and " _
                                         & " renglon > '' and " _
@@ -546,10 +549,10 @@ Public Class jsComArcGastos
         For Each dtRow As DataRow In dtRenglones.Rows
             With dtRow
                 If .Item("item").ToString.Substring(0, 1) <> "$" Then _
-                InsertEditMERCASMovimientoInventario(myConn, lblInfo, True, .Item("item"), CDate(txtEmision.Text), "EN", NumeroGasto, _
-                                                     .Item("unidad"), .Item("cantidad"), .Item("peso"), .Item("costotot"), _
-                                                     .Item("costototdes"), "GAS", NumeroGasto, .Item("lote"), txtProveedor.Text, _
-                                                     .Item("costotot"), .Item("costototdes"), 0, .Item("costotot") - .Item("costototdes"), txtZona.Text, _
+                InsertEditMERCASMovimientoInventario(myConn, lblInfo, True, .Item("item"), txtEmision.Value, "EN", NumeroGasto,
+                                                     .Item("unidad"), .Item("cantidad"), .Item("peso"), .Item("costotot"),
+                                                     .Item("costototdes"), "GAS", NumeroGasto, .Item("lote"), txtProveedor.Text,
+                                                     .Item("costotot"), .Item("costototdes"), 0, .Item("costotot") - .Item("costototdes"), txtZona.Text,
                                                      txtAlmacen.Text, .Item("renglon"), jytsistema.sFechadeTrabajo)
 
                 ActualizarExistenciasPlus(myConn, .Item("item"))
@@ -563,7 +566,7 @@ Public Class jsComArcGastos
 
         '5.- Actualizar CxP si es un Gasto a crédito
         If CondicionDePago = CondicionPago.iCredito Then
-            ft.Ejecutar_strSQL(myconn, " DELETE from jsprotrapag WHERE " _
+            ft.Ejecutar_strSQL(myConn, " DELETE from jsprotrapag WHERE " _
                                             & " TIPOMOV = 'FC' AND  " _
                                             & " codpro = '" & CodigoProveedorAnterior & "' and " _
                                             & " NUMMOV = '" & NumeroDocumentoAnterior & "' AND " _
@@ -571,12 +574,12 @@ Public Class jsComArcGastos
                                             & " EJERCICIO = '" & jytsistema.WorkExercise & "' AND " _
                                             & " ID_EMP = '" & jytsistema.WorkID & "'  ")
 
-            InsertEditCOMPRASCXP(myConn, lblInfo, True, CodigoProveedor, "FC", NumeroGasto, CDate(txtEmision.Text), ft.FormatoHora(Now), _
-                                FechaVencimiento, txtReferencia.Text, "Gasto N° : " & NumeroGasto, -1 * ValorNumero(txtTotal.Text), _
-                                ValorNumero(txtTotalIVA.Text), "", "", "", "", "GAS", "", "", "", Caja, NumeroGasto, "0", "", CDate(txtEmisionIVA.Text), _
+            InsertEditCOMPRASCXP(myConn, lblInfo, True, CodigoProveedor, "FC", NumeroGasto, txtEmision.Value, ft.FormatoHora(Now),
+                                FechaVencimiento, txtReferencia.Text, "Gasto N° : " & NumeroGasto, -1 * ValorNumero(txtTotal.Text),
+                                ValorNumero(txtTotalIVA.Text), "", "", "", "", "GAS", "", "", "", Caja, NumeroGasto, "0", "", txtEmisionIVA.Value,
                                 txtCodigoContable.Text, "", "", 0.0, 0.0, "", "", "", "", "", "", "0", "0", "0")
 
-            ft.Ejecutar_strSQL(myconn, " update jsprotrapag set nummov = '" & NumeroGasto & "', codpro = '" & CodigoProveedor & "' WHERE " _
+            ft.Ejecutar_strSQL(myConn, " update jsprotrapag set nummov = '" & NumeroGasto & "', codpro = '" & CodigoProveedor & "' WHERE " _
                                             & " TIPOMOV in ('AB', 'CA', 'NC') AND  " _
                                             & " codpro = '" & CodigoProveedorAnterior & "' and " _
                                             & " NUMMOV = '" & NumeroDocumentoAnterior & "' AND " _
@@ -586,7 +589,7 @@ Public Class jsComArcGastos
 
         Else '6.- Actualizar Caja y Bancos si es un Gasto a contado
             ' 6.1.- Elimina movimientos anteriores de caja y bancos
-            ft.Ejecutar_strSQL(myconn, "DELETE FROM jsbantracaj WHERE " _
+            ft.Ejecutar_strSQL(myConn, "DELETE FROM jsbantracaj WHERE " _
                         & " ORIGEN = 'GAS' AND " _
                         & " TIPOMOV = 'SA' AND " _
                         & " NUMMOV = '" & NumeroDocumentoAnterior & "' AND " _
@@ -594,7 +597,7 @@ Public Class jsComArcGastos
                         & " EJERCICIO = '" & jytsistema.WorkExercise & "' AND " _
                         & " ID_EMP = '" & jytsistema.WorkID & "'")
 
-            ft.Ejecutar_strSQL(myconn, "DELETE FROM jsbantraban WHERE " _
+            ft.Ejecutar_strSQL(myConn, "DELETE FROM jsbantraban WHERE " _
                         & " ORIGEN = 'GAS' AND " _
                         & " concepto = 'CANC. GASTO N° " & NumeroDocumentoAnterior & "' and " _
                         & " prov_cli = '" & CodigoProveedorAnterior & "' and " _
@@ -605,20 +608,20 @@ Public Class jsComArcGastos
             Select Case FormaPago
                 Case "EF"
 
-                    InsertEditBANCOSRenglonCaja(myConn, lblInfo, True, Caja, UltimoCajaMasUno(myConn, lblInfo, Caja), _
-                                                FechaDocumentoPago, "GAS", "SA", NumeroGasto, FormaPago, _
-                                                NumeroPago, NombrePago, -1 * ValorNumero(txtTotal.Text), txtCodigoContable.Text, _
-                                                "GASTO N° :" & NumeroGasto, "", jytsistema.sFechadeTrabajo, 1, "", 0, "", _
-                                                CDate(txtEmisionIVA.Text), CodigoProveedor, "", "1")
+                    InsertEditBANCOSRenglonCaja(myConn, lblInfo, True, Caja, UltimoCajaMasUno(myConn, lblInfo, Caja),
+                                                FechaDocumentoPago, "GAS", "SA", NumeroGasto, FormaPago,
+                                                NumeroPago, NombrePago, -1 * ValorNumero(txtTotal.Text), txtCodigoContable.Text,
+                                                "GASTO N° :" & NumeroGasto, "", jytsistema.sFechadeTrabajo, 1, "", 0, "",
+                                                txtEmisionIVA.Value, CodigoProveedor, "", "1", jytsistema.WorkCurrency.Id, DateTime.Now())
 
                     CalculaSaldoCajaPorFP(myConn, Caja, FormaPago, lblInfo)
 
                 Case "CH", "TA", "TR"
 
-                    InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, FechaDocumentoPago, NumeroPago, FormaPago, _
-                                                    NombrePago, "", "GASTO N° :" & txtCodigo.Text, -1 * ValorNumero(txtTotal.Text), "GAS", txtCodigo.Text, _
-                                                    Beneficiario, txtCodigo.Text, "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, "FC", _
-                                                    "", CDate(txtEmisionIVA.Text), "0", txtProveedor.Text, "")
+                    InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, FechaDocumentoPago, NumeroPago, FormaPago,
+                                                    NombrePago, "", "GASTO N° :" & txtCodigo.Text, -1 * ValorNumero(txtTotal.Text), "GAS", txtCodigo.Text,
+                                                    Beneficiario, txtCodigo.Text, "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, "FC",
+                                                    "", txtEmisionIVA.Value, "0", txtProveedor.Text, "", jytsistema.WorkCurrency.Id, DateTime.Now())
 
                     IncluirImpuestoDebitoBancario(myConn, lblInfo, IIf(FormaPago = "CH", FormaPago, "ND"), NombrePago, NumeroPago, FechaDocumentoPago, ValorNumero(txtTotal.Text))
 
@@ -635,7 +638,7 @@ Public Class jsComArcGastos
     End Sub
 
     Private Sub txtNombre_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtComentario.GotFocus
-        ft.mensajeEtiqueta(lblInfo, " Indique comentario ... ", Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, " Indique comentario ... ", Transportables.tipoMensaje.iInfo)
     End Sub
 
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
@@ -654,7 +657,7 @@ Public Class jsComArcGastos
                 ActivarMarco0()
             Else
                 With dt.Rows(nPosicionEncab)
-                    Dim aCamposAdicionales() As String = {"numgas|'" & txtCodigo.Text & "'", _
+                    Dim aCamposAdicionales() As String = {"numgas|'" & txtCodigo.Text & "'",
                                                       "codpro|'" & txtProveedor.Text & "'"}
                     If DocumentoBloqueado(myConn, "jsproencgas", aCamposAdicionales) Then
                         ft.mensajeCritico("DOCUMENTO BLOQUEADO. POR FAVOR VERIFIQUE...")
@@ -704,7 +707,7 @@ Public Class jsComArcGastos
             nPosicionEncab = Me.BindingContext(ds, nTabla).Position
 
             With dt.Rows(nPosicionEncab)
-                Dim aCamposAdicionales() As String = {"numgas|'" & txtCodigo.Text & "'", _
+                Dim aCamposAdicionales() As String = {"numgas|'" & txtCodigo.Text & "'",
                                                       "codpro|'" & txtProveedor.Text & "'"}
                 If DocumentoBloqueado(myConn, "jsproencgas", aCamposAdicionales) Then
                     ft.mensajeCritico("DOCUMENTO BLOQUEADO. POR FAVOR VERIFIQUE...")
@@ -737,7 +740,7 @@ Public Class jsComArcGastos
                                     If .Item("CONDPAG") = 1 And (.Item("FORMAPAG") = "CH" _
                                                                  Or .Item("FORMAPAG") = "TR" _
                                                                  Or .Item("FORMAPAG") = "TA") Then
-                                        EliminarImpuestoDebitoBancario(myConn, lblInfo, .Item("NOMPAG"), .Item("NUMPAG"), _
+                                        EliminarImpuestoDebitoBancario(myConn, lblInfo, .Item("NOMPAG"), .Item("NUMPAG"),
                                                                        CDate(.Item("VENCE1").ToString))
                                     End If
 
@@ -825,7 +828,7 @@ Public Class jsComArcGastos
                 e.Value = aTipoRenglon(e.Value)
         End Select
     End Sub
-    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick, _
+    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick,
        dg.CellMouseClick
         Me.BindingContext(ds, nTablaRenglones).Position = e.RowIndex
         MostrarItemsEnMenuBarra(MenuBarraRenglon, e.RowIndex, ds.Tables(nTablaRenglones).Rows.Count)
@@ -843,7 +846,7 @@ Public Class jsComArcGastos
 
             CalculaDescuentoEnRenglones()
 
-            CalculaTotalIVACompras(myConn, lblInfo, CodigoProveedorAnterior, "jsprodesgas", "jsproivagas", "jsprorengas", "numgas", NumeroDocumentoAnterior, "impiva", "costototdes", CDate(txtEmision.Text), "costotot")
+            CalculaTotalIVACompras(myConn, lblInfo, CodigoProveedorAnterior, "jsprodesgas", "jsproivagas", "jsprorengas", "numgas", NumeroDocumentoAnterior, "impiva", "costototdes", txtEmision.Value, "costotot")
 
             AbrirIVA(NumeroDocumentoAnterior, CodigoProveedorAnterior)
 
@@ -853,7 +856,7 @@ Public Class jsComArcGastos
         Else
 
             AbrirDescuentos(NumeroDocumentoAnterior, CodigoProveedorAnterior)
-            CalculaTotalIVACompras(myConn, lblInfo, CodigoProveedorAnterior, "jsprodesgas", "jsproivagas", "jsprorengas", "numgas", NumeroDocumentoAnterior, "impiva", "costototdes", CDate(txtEmision.Text), "costotot")
+            CalculaTotalIVACompras(myConn, lblInfo, CodigoProveedorAnterior, "jsprodesgas", "jsproivagas", "jsprorengas", "numgas", NumeroDocumentoAnterior, "impiva", "costototdes", txtEmision.Value, "costotot")
             AbrirIVA(NumeroDocumentoAnterior, CodigoProveedorAnterior)
             txtTotal.Text = ft.FormatoNumero(ValorNumero(txtSubTotal.Text) - ValorNumero(txtDescuentos.Text) + ValorNumero(txtCargos.Text) + ValorNumero(txtTotalIVA.Text))
             tslblPesoT.Text = ft.FormatoCantidad(CalculaPesoDocumento(myConn, lblInfo, "jsprorengas", "peso", "numgas", NumeroDocumentoAnterior))
@@ -878,7 +881,7 @@ Public Class jsComArcGastos
         If txtNombreProveedor.Text <> "" Then
             Dim f As New jsGenRenglonesMovimientos
             f.Apuntador = Me.BindingContext(ds, nTablaRenglones).Position
-            f.Agregar(myConn, ds, dtRenglones, "GAS", NumeroDocumentoAnterior, CDate(txtEmision.Text), txtAlmacen.Text, _
+            f.Agregar(myConn, ds, dtRenglones, "GAS", NumeroDocumentoAnterior, txtEmision.Value, txtAlmacen.Text,
                       , , , , , , , , , , txtProveedor.Text, , CodigoProveedorAnterior)
             nPosicionRenglon = f.Apuntador
             AsignarMovimientos(NumeroDocumentoAnterior, CodigoProveedorAnterior)
@@ -892,8 +895,8 @@ Public Class jsComArcGastos
         If dtRenglones.Rows.Count > 0 Then
             Dim f As New jsGenRenglonesMovimientos
             f.Apuntador = Me.BindingContext(ds, nTablaRenglones).Position
-            f.Editar(myConn, ds, dtRenglones, "GAS", NumeroDocumentoAnterior, CDate(txtEmision.Text), txtAlmacen.Text, , , _
-                     IIf(dtRenglones.Rows(Me.BindingContext(ds, nTablaRenglones).Position).Item("item").ToString.Substring(0, 1) = "$", True, False), _
+            f.Editar(myConn, ds, dtRenglones, "GAS", NumeroDocumentoAnterior, txtEmision.Value, txtAlmacen.Text, , ,
+                     IIf(dtRenglones.Rows(Me.BindingContext(ds, nTablaRenglones).Position).Item("item").ToString.Substring(0, 1) = "$", True, False),
                      , , , , , , , txtProveedor.Text, , CodigoProveedorAnterior)
             ds = DataSetRequery(ds, strSQLMov, myConn, nTablaRenglones, lblInfo)
             AsignaMov(f.Apuntador, True)
@@ -928,7 +931,7 @@ Public Class jsComArcGastos
                            & " origen = 'GAS' and item = '" & .Item("item") & "' and renglon = '" & .Item("renglon") & "' and " _
                            & " id_emp = '" & jytsistema.WorkID & "' ")
 
-                    nPosicionRenglon = EliminarRegistros(myConn, lblInfo, ds, nTablaRenglones, "jsprorengas", strSQLMov, aCamposDel, aStringsDel, _
+                    nPosicionRenglon = EliminarRegistros(myConn, lblInfo, ds, nTablaRenglones, "jsprorengas", strSQLMov, aCamposDel, aStringsDel,
                                                   Me.BindingContext(ds, nTablaRenglones).Position, True)
 
                     If dtRenglones.Rows.Count - 1 < nPosicionRenglon Then nPosicionRenglon = dtRenglones.Rows.Count - 1
@@ -976,12 +979,8 @@ Public Class jsComArcGastos
         Imprimir()
     End Sub
 
-    Private Sub btnEmision_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEmision.Click
-        txtEmision.Text = SeleccionaFecha(CDate(txtEmision.Text), Me, sender)
-    End Sub
-
     Private Sub btnAsesor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnZona.Click
-        txtZona.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descrip descripcion from jsconctatab where modulo = '" & FormatoTablaSimple(Modulo.iZonaProveedor) & "' and id_emp = '" & jytsistema.WorkID & "'  order by 1 ", "Zonas Proveedores", _
+        txtZona.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descrip descripcion from jsconctatab where modulo = '" & FormatoTablaSimple(Modulo.iZonaProveedor) & "' and id_emp = '" & jytsistema.WorkID & "'  order by 1 ", "Zonas Proveedores",
                                                 txtZona.Text)
     End Sub
 
@@ -994,7 +993,7 @@ Public Class jsComArcGastos
             Dim mTotalFac As Double = ValorNumero(txtTotal.Text)
             If i_modo = movimiento.iAgregar Then
                 mTotalFac = 0.0
-                FechaVencimiento = DateAdd(DateInterval.Day, DiasCreditoAlVencimiento(myConn, FormaDePagoCliente), CDate(txtEmision.Text))
+                FechaVencimiento = DateAdd(DateInterval.Day, DiasCreditoAlVencimiento(myConn, FormaDePagoCliente), CDate(txtEmision.Value.ToString))
                 CondicionDePago = CondicionPagoProveedorCliente(myConn, lblInfo, FormaDePagoCliente)
                 If qFound(myConn, lblInfo, "jsprocatpro", aFld, aStr) Then
                     txtZona.Text = qFoundAndSign(myConn, lblInfo, "jsprocatpro", aFld, aStr, "zona")
@@ -1017,7 +1016,7 @@ Public Class jsComArcGastos
 
     Private Sub btnAgregaDescuento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregaDescuento.Click
         Dim f As New jsGenArcDescuentosCompras
-        f.Agregar(myConn, ds, dtDescuentos, "jsprodesgas", "numgas", NumeroDocumentoAnterior, sModulo, CodigoProveedorAnterior, 1, CDate(txtEmision.Text), ValorNumero(txtSubTotal.Text))
+        f.Agregar(myConn, ds, dtDescuentos, "jsprodesgas", "numgas", NumeroDocumentoAnterior, sModulo, CodigoProveedorAnterior, 1, txtEmision.Value, ValorNumero(txtSubTotal.Text))
         CalculaTotales()
         f = Nothing
     End Sub
@@ -1026,14 +1025,14 @@ Public Class jsComArcGastos
             With dtDescuentos.Rows(nPosicionDescuento)
                 Dim aCamposDel() As String = {"numgas", "codpro", "renglon", "id_emp"}
                 Dim aStringsDel() As String = {NumeroDocumentoAnterior, CodigoProveedorAnterior, .Item("renglon"), jytsistema.WorkID}
-                nPosicionDescuento = EliminarRegistros(myConn, lblInfo, ds, nTablaDescuentos, "jsprodesgas", strSQLDescuentos, aCamposDel, aStringsDel, _
+                nPosicionDescuento = EliminarRegistros(myConn, lblInfo, ds, nTablaDescuentos, "jsprodesgas", strSQLDescuentos, aCamposDel, aStringsDel,
                                                       Me.BindingContext(ds, nTablaDescuentos).Position, True)
             End With
             CalculaTotales()
         End If
     End Sub
     Private Sub btnCliente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnProveedor.Click
-        txtProveedor.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codpro codigo, nombre descripcion, RIF from jsprocatpro where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Proveedores De Gastos/Compras", _
+        txtProveedor.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codpro codigo, nombre descripcion, RIF from jsprocatpro where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Proveedores De Gastos/Compras",
                                             txtProveedor.Text)
     End Sub
 
@@ -1043,7 +1042,7 @@ Public Class jsComArcGastos
         If txtNombreProveedor.Text <> "" Then
             Dim f As New jsGenRenglonesMovimientos
             f.Apuntador = Me.BindingContext(ds, nTablaRenglones).Position
-            f.Agregar(myConn, ds, dtRenglones, "GAS", NumeroDocumentoAnterior, CDate(txtEmision.Text), txtAlmacen.Text, , , True, , , , , , , , , , CodigoProveedorAnterior)
+            f.Agregar(myConn, ds, dtRenglones, "GAS", NumeroDocumentoAnterior, txtEmision.Value, txtAlmacen.Text, , , True, , , , , , , , , , CodigoProveedorAnterior)
             nPosicionRenglon = f.Apuntador
             AsignarMovimientos(NumeroDocumentoAnterior, CodigoProveedorAnterior)
             CalculaTotales()
@@ -1076,27 +1075,24 @@ Public Class jsComArcGastos
     End Sub
 
     Private Sub btnAlmacen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAlmacen.Click
-        txtAlmacen.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codalm codigo, desalm descripcion from jsmercatalm where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Almacenes", _
+        txtAlmacen.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codalm codigo, desalm descripcion from jsmercatalm where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Almacenes",
                                             txtAlmacen.Text)
     End Sub
 
     Private Sub btnCodigoContable_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCodigoContable.Click
-        txtCodigoContable.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcon codigo, descripcion from jscotcatcon where marca = 0 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Cuentas Contables", _
+        txtCodigoContable.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcon codigo, descripcion from jscotcatcon where marca = 0 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Cuentas Contables",
                                                    txtCodigoContable.Text)
     End Sub
 
-    Private Sub btnEmisionIVA_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEmisionIVA.Click
-        txtEmisionIVA.Text = SeleccionaFecha(CDate(txtEmisionIVA.Text), Me, sender)
-    End Sub
-
-    Private Sub dgDescuentos_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgDescuentos.RowHeaderMouseClick, _
+    Private Sub dgDescuentos_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgDescuentos.RowHeaderMouseClick,
       dgDescuentos.CellMouseClick
         Me.BindingContext(ds, nTablaDescuentos).Position = e.RowIndex
         nPosicionDescuento = e.RowIndex
     End Sub
 
-    Private Sub dgDescuentos_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgDescuentos.CellContentClick
 
+    Private Sub txtEmision_ValueChanged(sender As Object, e As Events.DateTimeValueChangedEventArgs) Handles txtEmision.ValueChanged
+        txtEmisionIVA.Value = txtEmision.Value
     End Sub
 
     Private Sub dg_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles dg.KeyUp
@@ -1112,7 +1108,4 @@ Public Class jsComArcGastos
         End Select
     End Sub
 
-    Private Sub txtEmision_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtEmision.TextChanged
-        txtEmisionIVA.Text = txtEmision.Text
-    End Sub
 End Class

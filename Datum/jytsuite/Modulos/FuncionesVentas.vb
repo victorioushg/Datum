@@ -1,4 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.ListView
+Imports Syncfusion.WinForms.ListView.Enums
+
 Module FuncionesVentas
 
     Private ft As New Transportables
@@ -10,7 +13,7 @@ Module FuncionesVentas
                 & " and EJERCICIO = '" & jytsistema.WorkExercise & "' " _
                 & " and ID_EMP = '" & jytsistema.WorkID & "' group by codcli ")
 
-        ft.Ejecutar_strSQL(myconn, " UPDATE jsvencatcli SET " _
+        ft.Ejecutar_strSQL(MyConn, " UPDATE jsvencatcli SET " _
             & " DISPONIBLE = LIMITECREDITO - " & SaldoCxC & ", " _
             & " SALDO = " & SaldoCxC _
             & " where codcli = '" & CodigoCliente & "' " _
@@ -18,7 +21,7 @@ Module FuncionesVentas
 
     End Function
 
-    Public Sub AjustarExistencias(MyConn As MySqlConnection, NumeroDocumento As String, lblInfo As Label, _
+    Public Sub AjustarExistencias(MyConn As MySqlConnection, NumeroDocumento As String, lblInfo As Label,
                                   Almacen As String, Campo As String, Tabla As String, Origen As String)
 
         'AJUSTAR POR EXISTENCIAS
@@ -59,7 +62,7 @@ Module FuncionesVentas
                             Dim DescuentoOferta As Double = IIf(MercanciaRegulada(MyConn, lblInfo, .Item("item")), 0.0, (TotalNetoRenglon - DescuentoArticulo - DescuentoCliente) * .Item("DES_OFE") / 100)
                             Dim TotalRenglon As Double = TotalNetoRenglon - DescuentoArticulo - DescuentoCliente - DescuentoOferta
 
-                            ft.Ejecutar_strSQL(myconn, " update " & Tabla & " set " _
+                            ft.Ejecutar_strSQL(MyConn, " update " & Tabla & " set " _
                                                         & " CANTIDAD = " & CantidadValida & ", " _
                                                         & " TOTREN = " & TotalRenglon & ", " _
                                                         & " TOTRENDES = " & TotalRenglon & ", " _
@@ -71,28 +74,28 @@ Module FuncionesVentas
                                                         & " estatus = '" & .Item("estatus") & "' and " _
                                                         & " id_emp = '" & jytsistema.WorkID & "' ")
                         Else
-                            ft.Ejecutar_strSQL(myconn, " delete from " & Tabla & " where  " _
+                            ft.Ejecutar_strSQL(MyConn, " delete from " & Tabla & " where  " _
                                            & " " & Campo & " = '" & NumeroDocumento & "' and  " _
                                            & " item = '" & .Item("item") & "' and " _
                                            & " renglon = '" & .Item("renglon") & "' and " _
                                            & " estatus = '" & .Item("estatus") & "' and " _
                                            & " id_emp = '" & jytsistema.WorkID & "' ")
 
-                            ft.Ejecutar_strSQL(myconn, " delete from jsvenrencom where numdoc = '" & NumeroDocumento & "' and " _
+                            ft.Ejecutar_strSQL(MyConn, " delete from jsvenrencom where numdoc = '" & NumeroDocumento & "' and " _
                                            & " origen = '" & Origen & "' and " _
                                            & " renglon = '" & .Item("renglon") & "' and " _
                                            & " id_emp = '" & jytsistema.WorkID & "' ")
 
                         End If
                     Else
-                        ft.Ejecutar_strSQL(myconn, " delete from " & Tabla & " where  " _
+                        ft.Ejecutar_strSQL(MyConn, " delete from " & Tabla & " where  " _
                                            & " " & Campo & " = '" & NumeroDocumento & "' and  " _
                                            & " item = '" & .Item("item") & "' and " _
                                            & " renglon = '" & .Item("renglon") & "' and " _
                                            & " estatus = '" & .Item("estatus") & "' and " _
                                            & " id_emp = '" & jytsistema.WorkID & "' ")
 
-                        ft.Ejecutar_strSQL(myconn, " delete from jsvenrencom where numdoc = '" & NumeroDocumento & "' and " _
+                        ft.Ejecutar_strSQL(MyConn, " delete from jsvenrencom where numdoc = '" & NumeroDocumento & "' and " _
                                        & " origen = '" & Origen & "' and " _
                                        & " renglon = '" & .Item("renglon") & "' and " _
                                        & " id_emp = '" & jytsistema.WorkID & "' ")
@@ -131,20 +134,21 @@ Module FuncionesVentas
                                                        MontoRestante As Double, formaDePago As String)
 
         Dim lblInfo As New Label
-        If cumpleCondicionesIVAEspecial(MyConn, personaJuridica, NumeroFactura, OrigenFactura, MontoRestante, formaDePago) Then
+        'If cumpleCondicionesIVAEspecial(MyConn, personaJuridica, NumeroFactura, OrigenFactura, MontoRestante, formaDePago) Then
 
-            ActualizarIVARenglonAlbaranPlus(MyConn, lblInfo, nomTablaIVA, nomTablaRenglones, "numfac", _
-                                   NumeroFactura, jytsistema.sFechadeTrabajo, "totrendes", _
-                                   NumeroSerialFiscal)
-        Else
-            ActualizarIVARenglonAlbaran(MyConn, lblInfo, nomTablaIVA, nomTablaRenglones, "numfac", _
+        '    ActualizarIVARenglonAlbaranPlus(MyConn, lblInfo, nomTablaIVA, nomTablaRenglones, "numfac", _
+        '                           NumeroFactura, jytsistema.sFechadeTrabajo, "totrendes", _
+        '                           NumeroSerialFiscal)
+        'Else
+        ActualizarIVARenglonAlbaran(MyConn, lblInfo, nomTablaIVA, nomTablaRenglones, "numfac", _
                                 NumeroFactura, jytsistema.sFechadeTrabajo, "totrendes", _
                                 NumeroSerialFiscal)
-        End If
+        'End If
 
     End Sub
 
-    Public Function montoResidualFactura(MyConn As MySqlConnection, nomTablaIVA As String, NumeroFactura As String, _
+    ' To Delete 
+    Public Function montoResidualFactura(MyConn As MySqlConnection, nomTablaIVA As String, NumeroFactura As String,
                                          OrigenFactura As String) As Double
 
         Dim totalAPagar As Double = ft.DevuelveScalarDoble(MyConn, " select sum(baseiva + impiva ) from " & nomTablaIVA & " " _
@@ -162,30 +166,31 @@ Module FuncionesVentas
 
     End Function
 
-    Public Function cumpleCondicionesIVAEspecial(MyConn As MySqlConnection, personaJuridica As Integer, _
-                                                 NumeroDocumento As String, nModulo As String, _
-                                                 totalAPagar As Double, formaDePago As String) As Boolean
+    ' To Delete 
+    'Public Function cumpleCondicionesIVAEspecial(MyConn As MySqlConnection, personaJuridica As Integer, _
+    '                                             NumeroDocumento As String, nModulo As String, _
+    '                                             totalAPagar As Double, formaDePago As String) As Boolean
 
-        ' 0 Persona Juridia ; 1 Persona Natural 
-        '///If personaJuridica = 0 Then Return False
+    '    ' 0 Persona Juridia ; 1 Persona Natural 
+    '    '///If personaJuridica = 0 Then Return False
 
-        '{"EF", "CH", "CT", "DP"}
-        Dim cantidadFP As Integer = ft.DevuelveScalarEntero(MyConn, " select count(*) from jsvenforpag " _
-            & " where " _
-            & " numfac = '" & NumeroDocumento & "' and " _
-            & " origen = '" & nModulo & "' and " _
-            & " formapag IN ('EF','CH','DP','CT') AND " _
-            & " id_emp = '" & jytsistema.WorkID & "' group by formapag ")
+    '    '{"EF", "CH", "CT", "DP"}
+    '    Dim cantidadFP As Integer = ft.DevuelveScalarEntero(MyConn, " select count(*) from jsvenforpag " _
+    '        & " where " _
+    '        & " numfac = '" & NumeroDocumento & "' and " _
+    '        & " origen = '" & nModulo & "' and " _
+    '        & " formapag IN ('EF','CH','DP','CT') AND " _
+    '        & " id_emp = '" & jytsistema.WorkID & "' group by formapag ")
 
-        'Existen más de una forma de pago diferente de TA o TR
-        If cantidadFP > 0 Then Return False
+    '    'Existen más de una forma de pago diferente de TA o TR
+    '    If cantidadFP > 0 Then Return False
 
-        If InStr("EF.CH.CT.DP", formaDePago) > 0 Then Return False
+    '    If InStr("EF.CH.CT.DP", formaDePago) > 0 Then Return False
 
-        Return True
+    '    Return True
 
 
-    End Function
+    'End Function
 
     Public Sub AjustarPorCuotaVendedor(MyConn As MySqlConnection, lblInfo As Label, NumeroDocumento As String, FechaDocumento As Date, _
                               Asesor As String, Campo As String, Tabla As String, Origen As String)
@@ -1656,6 +1661,55 @@ Module FuncionesVentas
         Return 0
 
     End Function
+
+    Public Function GetCustomersList(MyConn As MySqlConnection) As List(Of Customer)
+
+        Dim strSQL = " select c.codcli, c.nombre, c.disponible, elt(c.estatus+1, 'Activo', 'Bloqueado', 'Inactivo', 'Desincorporado') estatus, c.estatus codigoestatus,  " &
+            "c.tarifa, c.formapago, c.transporte, c.rif, c.dirfiscal, c.telef1, c.disponible, " &
+            " r.codven asesor " &
+            " from jsvencatcli c " &
+            " left join jsvenencrut r on ( c.ruta_visita = r.codrut and r.tipo = 0) " &
+            " where " &
+            " c.id_emp='" & jytsistema.WorkID & "' order by c.nombre "
+
+        Return Lista(Of Customer)(MyConn, strSQL)
+
+    End Function
+
+
+    Public Function GetSalesForce(MyConn As MySqlConnection) As List(Of SalesForce)
+
+        Dim strSQL = " select codven Codigo, Apellidos, Nombres  " &
+        " from jsvencatven " &
+        " where Tipo = '" & TipoVendedor.iFuerzaventa & "'  and " &
+        " estatus = 1 And id_emp = '" & jytsistema.WorkID & "'  order by Apellidos, Nombres "
+
+        Return Lista(Of SalesForce)(MyConn, strSQL)
+
+    End Function
+
+    Public Sub InitiateDropDownClientes(cmbCliente As SfComboBox, customerList As List(Of Customer))
+        cmbCliente.DataSource = customerList
+        cmbCliente.DisplayMember = "Nombre"
+        cmbCliente.ValueMember = "Codcli"
+        cmbCliente.Watermark = "Escriba y seleccione un cliente"
+        cmbCliente.AutoCompleteMode = AutoCompleteMode.Suggest
+        cmbCliente.DropDownStyle = DropDownStyle.DropDown
+        cmbCliente.AutoCompleteSuggestMode = AutoCompleteSuggestMode.Contains
+        cmbCliente.MaxDropDownItems = 10
+    End Sub
+
+    Public Sub InitiateDropDownAsesores(cmbAsesores As SfComboBox, advisorsList As List(Of SalesForce))
+        cmbAsesores.DataSource = advisorsList
+        cmbAsesores.DisplayMember = "NombreAsesor"
+        cmbAsesores.ValueMember = "Codigo"
+        cmbAsesores.AutoCompleteMode = AutoCompleteMode.Suggest
+        cmbAsesores.DropDownStyle = DropDownStyle.DropDown
+        cmbAsesores.AutoCompleteSuggestMode = AutoCompleteSuggestMode.Contains
+        cmbAsesores.MaxDropDownItems = 10
+
+    End Sub
+
 
 
 End Module

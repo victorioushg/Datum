@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports fTransport
 Public Class jsBanArcCajas
     Private Const sModulo As String = "Cajas"
     Private Const lRegion As String = ""

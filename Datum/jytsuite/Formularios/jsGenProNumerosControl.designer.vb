@@ -21,15 +21,10 @@ Partial Class jsGenProNumerosControl
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsGenProNumerosControl))
         Me.lblInfo = New System.Windows.Forms.Label()
-        Me.txtHasta = New System.Windows.Forms.TextBox()
-        Me.txtDesde = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.btnDesde = New System.Windows.Forms.Button()
-        Me.btnHasta = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.C1PictureBox1 = New C1.Win.C1Input.C1PictureBox()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -39,6 +34,8 @@ Partial Class jsGenProNumerosControl
         Me.btnEliminaEquivale = New System.Windows.Forms.ToolStripButton()
         Me.btnGo = New System.Windows.Forms.Button()
         Me.lbl = New System.Windows.Forms.Label()
+        Me.txtDesde = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtHasta = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpAceptarSalir.SuspendLayout()
         CType(Me.C1PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -55,32 +52,14 @@ Partial Class jsGenProNumerosControl
         Me.lblInfo.Size = New System.Drawing.Size(608, 31)
         Me.lblInfo.TabIndex = 80
         '
-        'txtHasta
-        '
-        Me.txtHasta.Enabled = False
-        Me.txtHasta.Location = New System.Drawing.Point(302, 93)
-        Me.txtHasta.Name = "txtHasta"
-        Me.txtHasta.Size = New System.Drawing.Size(85, 20)
-        Me.txtHasta.TabIndex = 82
-        Me.txtHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'txtDesde
-        '
-        Me.txtDesde.Location = New System.Drawing.Point(106, 93)
-        Me.txtDesde.MaxLength = 15
-        Me.txtDesde.Name = "txtDesde"
-        Me.txtDesde.Size = New System.Drawing.Size(85, 20)
-        Me.txtDesde.TabIndex = 83
-        Me.txtDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label3
         '
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(9, 93)
+        Me.Label3.Location = New System.Drawing.Point(47, 93)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(91, 15)
+        Me.Label3.Size = New System.Drawing.Size(53, 20)
         Me.Label3.TabIndex = 108
-        Me.Label3.Text = "Período desde"
+        Me.Label3.Text = "Período"
         '
         'grpAceptarSalir
         '
@@ -120,35 +99,6 @@ Partial Class jsGenProNumerosControl
         Me.btnOK.TabIndex = 0
         Me.btnOK.Text = "Aceptar"
         Me.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        '
-        'Label2
-        '
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(257, 93)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(39, 20)
-        Me.Label2.TabIndex = 117
-        Me.Label2.Text = "hasta"
-        '
-        'btnDesde
-        '
-        Me.btnDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDesde.Location = New System.Drawing.Point(197, 93)
-        Me.btnDesde.Name = "btnDesde"
-        Me.btnDesde.Size = New System.Drawing.Size(29, 20)
-        Me.btnDesde.TabIndex = 131
-        Me.btnDesde.Text = "•••"
-        Me.btnDesde.UseVisualStyleBackColor = True
-        '
-        'btnHasta
-        '
-        Me.btnHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnHasta.Location = New System.Drawing.Point(393, 93)
-        Me.btnHasta.Name = "btnHasta"
-        Me.btnHasta.Size = New System.Drawing.Size(29, 20)
-        Me.btnHasta.TabIndex = 132
-        Me.btnHasta.Text = "•••"
-        Me.btnHasta.UseVisualStyleBackColor = True
         '
         'Label12
         '
@@ -256,6 +206,30 @@ Partial Class jsGenProNumerosControl
         Me.lbl.TabIndex = 210
         Me.lbl.Text = "Período desde"
         '
+        'txtDesde
+        '
+        Me.txtDesde.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtDesde.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtDesde.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDesde.Location = New System.Drawing.Point(106, 93)
+        Me.txtDesde.Name = "txtDesde"
+        Me.txtDesde.Size = New System.Drawing.Size(114, 19)
+        Me.txtDesde.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtDesde.TabIndex = 214
+        '
+        'txtHasta
+        '
+        Me.txtHasta.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtHasta.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtHasta.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHasta.Location = New System.Drawing.Point(226, 93)
+        Me.txtHasta.Name = "txtHasta"
+        Me.txtHasta.Size = New System.Drawing.Size(114, 19)
+        Me.txtHasta.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtHasta.TabIndex = 215
+        '
         'jsGenProNumerosControl
         '
         Me.AcceptButton = Me.btnOK
@@ -264,19 +238,16 @@ Partial Class jsGenProNumerosControl
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(608, 474)
         Me.ControlBox = False
+        Me.Controls.Add(Me.txtHasta)
+        Me.Controls.Add(Me.txtDesde)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.lbl)
         Me.Controls.Add(Me.btnGo)
         Me.Controls.Add(Me.dg)
         Me.Controls.Add(Me.MenuEquivalencia)
         Me.Controls.Add(Me.Label13)
-        Me.Controls.Add(Me.btnHasta)
-        Me.Controls.Add(Me.btnDesde)
-        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.grpAceptarSalir)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.txtDesde)
-        Me.Controls.Add(Me.txtHasta)
         Me.Controls.Add(Me.lblInfo)
         Me.Controls.Add(Me.C1PictureBox1)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -284,6 +255,7 @@ Partial Class jsGenProNumerosControl
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Proceso Pre-Pedidos"
+        Me.Text = "/\"
         Me.grpAceptarSalir.ResumeLayout(False)
         CType(Me.C1PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).EndInit()
@@ -294,15 +266,10 @@ Partial Class jsGenProNumerosControl
 
     End Sub
     Friend WithEvents lblInfo As System.Windows.Forms.Label
-    Friend WithEvents txtHasta As System.Windows.Forms.TextBox
-    Friend WithEvents txtDesde As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents btnDesde As System.Windows.Forms.Button
-    Friend WithEvents btnHasta As System.Windows.Forms.Button
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents C1PictureBox1 As C1.Win.C1Input.C1PictureBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
@@ -312,4 +279,6 @@ Partial Class jsGenProNumerosControl
     Friend WithEvents btnEliminaEquivale As System.Windows.Forms.ToolStripButton
     Friend WithEvents btnGo As System.Windows.Forms.Button
     Friend WithEvents lbl As System.Windows.Forms.Label
+    Friend WithEvents txtDesde As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtHasta As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

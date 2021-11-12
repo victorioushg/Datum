@@ -34,8 +34,6 @@ Partial Class jsVenProCierreDiario
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtFechaProceso = New System.Windows.Forms.TextBox()
-        Me.btnFecha = New System.Windows.Forms.Button()
         Me.chk1 = New System.Windows.Forms.CheckBox()
         Me.chk2 = New System.Windows.Forms.CheckBox()
         Me.chk3 = New System.Windows.Forms.CheckBox()
@@ -45,6 +43,7 @@ Partial Class jsVenProCierreDiario
         Me.chk7 = New System.Windows.Forms.CheckBox()
         Me.chkCierre = New System.Windows.Forms.CheckBox()
         Me.chkSeleccionar = New System.Windows.Forms.CheckBox()
+        Me.txtFechaProceso = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpCaja.SuspendLayout()
         Me.grpTotales.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -207,25 +206,6 @@ Partial Class jsVenProCierreDiario
         Me.Label1.Text = "Fecha : "
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'txtFechaProceso
-        '
-        Me.txtFechaProceso.Location = New System.Drawing.Point(70, 260)
-        Me.txtFechaProceso.MaxLength = 25
-        Me.txtFechaProceso.Name = "txtFechaProceso"
-        Me.txtFechaProceso.Size = New System.Drawing.Size(86, 20)
-        Me.txtFechaProceso.TabIndex = 90
-        Me.txtFechaProceso.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(162, 260)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(25, 20)
-        Me.btnFecha.TabIndex = 132
-        Me.btnFecha.Text = "•••"
-        Me.btnFecha.UseVisualStyleBackColor = True
-        '
         'chk1
         '
         Me.chk1.AutoSize = True
@@ -325,6 +305,18 @@ Partial Class jsVenProCierreDiario
         Me.chkSeleccionar.Text = "Seleccionar/Deseleccionar"
         Me.chkSeleccionar.UseVisualStyleBackColor = True
         '
+        'txtFechaProceso
+        '
+        Me.txtFechaProceso.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaProceso.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaProceso.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaProceso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaProceso.Location = New System.Drawing.Point(83, 259)
+        Me.txtFechaProceso.Name = "txtFechaProceso"
+        Me.txtFechaProceso.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaProceso.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaProceso.TabIndex = 214
+        '
         'jsVenProCierreDiario
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -332,6 +324,7 @@ Partial Class jsVenProCierreDiario
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(732, 488)
         Me.ControlBox = False
+        Me.Controls.Add(Me.txtFechaProceso)
         Me.Controls.Add(Me.chkSeleccionar)
         Me.Controls.Add(Me.chkCierre)
         Me.Controls.Add(Me.chk7)
@@ -341,8 +334,6 @@ Partial Class jsVenProCierreDiario
         Me.Controls.Add(Me.chk3)
         Me.Controls.Add(Me.chk2)
         Me.Controls.Add(Me.chk1)
-        Me.Controls.Add(Me.btnFecha)
-        Me.Controls.Add(Me.txtFechaProceso)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.grpAceptarSalir)
         Me.Controls.Add(Me.Label10)
@@ -379,8 +370,6 @@ Partial Class jsVenProCierreDiario
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents lblProgreso As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents txtFechaProceso As System.Windows.Forms.TextBox
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
     Friend WithEvents chk1 As System.Windows.Forms.CheckBox
     Friend WithEvents chk2 As System.Windows.Forms.CheckBox
     Friend WithEvents chk3 As System.Windows.Forms.CheckBox
@@ -390,4 +379,5 @@ Partial Class jsVenProCierreDiario
     Friend WithEvents chk7 As System.Windows.Forms.CheckBox
     Friend WithEvents chkCierre As System.Windows.Forms.CheckBox
     Friend WithEvents chkSeleccionar As System.Windows.Forms.CheckBox
+    Friend WithEvents txtFechaProceso As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

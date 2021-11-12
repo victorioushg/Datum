@@ -24,18 +24,16 @@ Partial Class jsNomArcTrabajadoresMovimientosExpediente
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtFecha = New System.Windows.Forms.TextBox()
         Me.txtComentario = New System.Windows.Forms.TextBox()
         Me.grpConstante = New System.Windows.Forms.GroupBox()
         Me.btnAdjuntos = New System.Windows.Forms.Button()
         Me.lblRetorno = New System.Windows.Forms.Label()
-        Me.btnRetorno = New System.Windows.Forms.Button()
-        Me.txtRetorno = New System.Windows.Forms.TextBox()
-        Me.btnFecha = New System.Windows.Forms.Button()
         Me.cmbCausa = New System.Windows.Forms.ComboBox()
         Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
+        Me.txtRetorno = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpConstante.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
         Me.SuspendLayout()
@@ -80,14 +78,6 @@ Partial Class jsNomArcTrabajadoresMovimientosExpediente
         Me.Label8.Text = "Comentario"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'txtFecha
-        '
-        Me.txtFecha.Location = New System.Drawing.Point(136, 46)
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(105, 20)
-        Me.txtFecha.TabIndex = 12
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'txtComentario
         '
         Me.txtComentario.Location = New System.Drawing.Point(136, 88)
@@ -99,14 +89,12 @@ Partial Class jsNomArcTrabajadoresMovimientosExpediente
         'grpConstante
         '
         Me.grpConstante.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpConstante.Controls.Add(Me.txtFecha)
+        Me.grpConstante.Controls.Add(Me.txtRetorno)
         Me.grpConstante.Controls.Add(Me.btnAdjuntos)
         Me.grpConstante.Controls.Add(Me.lblRetorno)
-        Me.grpConstante.Controls.Add(Me.btnRetorno)
-        Me.grpConstante.Controls.Add(Me.txtRetorno)
-        Me.grpConstante.Controls.Add(Me.btnFecha)
         Me.grpConstante.Controls.Add(Me.cmbCausa)
         Me.grpConstante.Controls.Add(Me.txtComentario)
-        Me.grpConstante.Controls.Add(Me.txtFecha)
         Me.grpConstante.Controls.Add(Me.Label8)
         Me.grpConstante.Controls.Add(Me.Label7)
         Me.grpConstante.Controls.Add(Me.Label1)
@@ -136,34 +124,6 @@ Partial Class jsNomArcTrabajadoresMovimientosExpediente
         Me.lblRetorno.TabIndex = 132
         Me.lblRetorno.Text = "Retorno"
         Me.lblRetorno.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'btnRetorno
-        '
-        Me.btnRetorno.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRetorno.Location = New System.Drawing.Point(247, 67)
-        Me.btnRetorno.Name = "btnRetorno"
-        Me.btnRetorno.Size = New System.Drawing.Size(25, 20)
-        Me.btnRetorno.TabIndex = 131
-        Me.btnRetorno.Text = "•••"
-        Me.btnRetorno.UseVisualStyleBackColor = True
-        '
-        'txtRetorno
-        '
-        Me.txtRetorno.Location = New System.Drawing.Point(136, 67)
-        Me.txtRetorno.Name = "txtRetorno"
-        Me.txtRetorno.Size = New System.Drawing.Size(105, 20)
-        Me.txtRetorno.TabIndex = 130
-        Me.txtRetorno.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(247, 46)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(25, 20)
-        Me.btnFecha.TabIndex = 129
-        Me.btnFecha.Text = "•••"
-        Me.btnFecha.UseVisualStyleBackColor = True
         '
         'cmbCausa
         '
@@ -213,6 +173,30 @@ Partial Class jsNomArcTrabajadoresMovimientosExpediente
         Me.btnOK.Text = "Aceptar"
         Me.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         '
+        'txtRetorno
+        '
+        Me.txtRetorno.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtRetorno.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtRetorno.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtRetorno.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRetorno.Location = New System.Drawing.Point(136, 67)
+        Me.txtRetorno.Name = "txtRetorno"
+        Me.txtRetorno.Size = New System.Drawing.Size(114, 19)
+        Me.txtRetorno.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtRetorno.TabIndex = 214
+        '
+        'txtFecha
+        '
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(136, 47)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(114, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 215
+        '
         'jsNomArcTrabajadoresMovimientosExpediente
         '
         Me.AcceptButton = Me.btnOK
@@ -239,16 +223,14 @@ Partial Class jsNomArcTrabajadoresMovimientosExpediente
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
     Friend WithEvents txtComentario As System.Windows.Forms.TextBox
     Friend WithEvents grpConstante As System.Windows.Forms.GroupBox
     Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
     Friend WithEvents cmbCausa As System.Windows.Forms.ComboBox
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
-    Friend WithEvents btnRetorno As System.Windows.Forms.Button
-    Friend WithEvents txtRetorno As System.Windows.Forms.TextBox
     Friend WithEvents lblRetorno As System.Windows.Forms.Label
     Friend WithEvents btnAdjuntos As System.Windows.Forms.Button
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtRetorno As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

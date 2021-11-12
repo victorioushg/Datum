@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports fTransport
 Public Class jsBanArcBancosMovimientosAsiento
     Private Const sModulo As String = "Movimiento Asiento Contable (Bancos)"
 

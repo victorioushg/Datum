@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsContabArcCuentas
     Private Const sModulo As String = "Cuentas Contables"
     Private Const lRegion As String = "RibbonButton1"
@@ -33,11 +35,15 @@ Public Class jsContabArcCuentas
         Me.Tag = sModulo
         Try
             myConn.Open()
+
+            Dim dates As SfDateTimeEdit() = {txtDesde, txtHasta}
+            SetSizeDateObjects(dates)
+
             tbcCuentas.SelectedTab = C1DockingTabPage1
             IniciarCuentas()
 
-            txtDesde.Text = ft.FormatoFecha(PrimerDia)
-            txtHasta.Text = ft.FormatoFecha(UltimoDia)
+            txtDesde.Value = PrimerDia
+            txtHasta.Value = UltimoDia
 
             If dt.Rows.Count > 0 Then
                 nPosicionCat = 0
@@ -50,7 +56,7 @@ Public Class jsContabArcCuentas
             AsignarTooltips()
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
-            ft.MensajeCritico("Error en conexión de base de datos: " & ex.Message)
+            ft.mensajeCritico("Error en conexión de base de datos: " & ex.Message)
         End Try
 
     End Sub
@@ -474,21 +480,15 @@ Public Class jsContabArcCuentas
         End Select
     End Sub
 
-    Private Sub txtDesde_TextChanged(sender As Object, e As EventArgs) Handles txtDesde.TextChanged
-        txtHasta.Text = txtDesde.Text
+    Private Sub txtDesde_TextChanged(sender As Object, e As EventArgs) Handles txtDesde.ValueChanged
+        txtHasta.Value = txtDesde.Value
     End Sub
-    Private Sub txtHasta_TextChanged(sender As Object, e As EventArgs) Handles txtHasta.TextChanged
+    Private Sub txtHasta_TextChanged(sender As Object, e As EventArgs) Handles txtHasta.ValueChanged
         If tbcCuentas.SelectedIndex = 1 Then _
             AbrirMovimientoCuenta(txtCodigo.Text, Convert.ToDateTime(txtDesde.Text), Convert.ToDateTime(txtHasta.Text))
     End Sub
 
-    Private Sub btnDesde_Click(sender As Object, e As EventArgs) Handles btnDesde.Click
-        txtDesde.Text = SeleccionaFecha(Convert.ToDateTime(txtDesde.Text), Me, tbcCuentas, btnDesde)
-    End Sub
 
-    Private Sub btnHasta_Click(sender As Object, e As EventArgs) Handles btnHasta.Click
-        txtHasta.Text = SeleccionaFecha(Convert.ToDateTime(txtHasta.Text), Me, tbcCuentas, btnHasta)
-    End Sub
 
-   
+
 End Class

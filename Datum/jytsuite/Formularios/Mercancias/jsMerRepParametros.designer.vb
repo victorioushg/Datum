@@ -142,6 +142,12 @@ Partial Class jsMerRepParametros
         Me.txtOrdenHasta = New System.Windows.Forms.TextBox()
         Me.txtOrdenDesde = New System.Windows.Forms.TextBox()
         Me.grpCriterios = New System.Windows.Forms.GroupBox()
+        Me.btnCausaHasta = New System.Windows.Forms.Button()
+        Me.btnCausaDesde = New System.Windows.Forms.Button()
+        Me.txtCausaHasta = New System.Windows.Forms.TextBox()
+        Me.lblCausaHasta = New System.Windows.Forms.Label()
+        Me.lblCausaDesde = New System.Windows.Forms.Label()
+        Me.txtCausaDesde = New System.Windows.Forms.TextBox()
         Me.txtOrigenHasta = New System.Windows.Forms.TextBox()
         Me.lblOrigenHasta = New System.Windows.Forms.Label()
         Me.lblOrigenDesde = New System.Windows.Forms.Label()
@@ -179,22 +185,14 @@ Partial Class jsMerRepParametros
         Me.btnAsesorDesde = New System.Windows.Forms.Button()
         Me.txtAsesorHasta = New System.Windows.Forms.TextBox()
         Me.txtAsesorDesde = New System.Windows.Forms.TextBox()
-        Me.btnPeriodoHasta = New System.Windows.Forms.Button()
-        Me.btnPeriodoDesde = New System.Windows.Forms.Button()
-        Me.txtPeriodoHasta = New System.Windows.Forms.TextBox()
-        Me.txtPeriodoDesde = New System.Windows.Forms.TextBox()
         Me.lblPeriodoHasta = New System.Windows.Forms.Label()
         Me.lblPeriodo = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.lblNombreReporte = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lblInfo = New System.Windows.Forms.Label()
-        Me.btnCausaHasta = New System.Windows.Forms.Button()
-        Me.btnCausaDesde = New System.Windows.Forms.Button()
-        Me.txtCausaHasta = New System.Windows.Forms.TextBox()
-        Me.lblCausaHasta = New System.Windows.Forms.Label()
-        Me.lblCausaDesde = New System.Windows.Forms.Label()
-        Me.txtCausaDesde = New System.Windows.Forms.TextBox()
+        Me.txtPeriodoDesde = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtPeriodoHasta = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpImprimirSalir.SuspendLayout()
         Me.grpConstantes.SuspendLayout()
         Me.grpGrupos.SuspendLayout()
@@ -1512,6 +1510,8 @@ Partial Class jsMerRepParametros
         '
         Me.grpCriterios.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpCriterios.Controls.Add(Me.txtPeriodoHasta)
+        Me.grpCriterios.Controls.Add(Me.txtPeriodoDesde)
         Me.grpCriterios.Controls.Add(Me.btnCausaHasta)
         Me.grpCriterios.Controls.Add(Me.btnCausaDesde)
         Me.grpCriterios.Controls.Add(Me.txtCausaHasta)
@@ -1555,10 +1555,6 @@ Partial Class jsMerRepParametros
         Me.grpCriterios.Controls.Add(Me.btnAsesorDesde)
         Me.grpCriterios.Controls.Add(Me.txtAsesorHasta)
         Me.grpCriterios.Controls.Add(Me.txtAsesorDesde)
-        Me.grpCriterios.Controls.Add(Me.btnPeriodoHasta)
-        Me.grpCriterios.Controls.Add(Me.btnPeriodoDesde)
-        Me.grpCriterios.Controls.Add(Me.txtPeriodoHasta)
-        Me.grpCriterios.Controls.Add(Me.txtPeriodoDesde)
         Me.grpCriterios.Controls.Add(Me.lblPeriodoHasta)
         Me.grpCriterios.Controls.Add(Me.lblPeriodo)
         Me.grpCriterios.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1568,6 +1564,71 @@ Partial Class jsMerRepParametros
         Me.grpCriterios.TabIndex = 2
         Me.grpCriterios.TabStop = False
         Me.grpCriterios.Text = " Criterios :"
+        '
+        'btnCausaHasta
+        '
+        Me.btnCausaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCausaHasta.Location = New System.Drawing.Point(934, 9)
+        Me.btnCausaHasta.Name = "btnCausaHasta"
+        Me.btnCausaHasta.Size = New System.Drawing.Size(25, 20)
+        Me.btnCausaHasta.TabIndex = 161
+        Me.btnCausaHasta.Text = "•••"
+        Me.btnCausaHasta.UseVisualStyleBackColor = True
+        Me.btnCausaHasta.Visible = False
+        '
+        'btnCausaDesde
+        '
+        Me.btnCausaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCausaDesde.Location = New System.Drawing.Point(736, 10)
+        Me.btnCausaDesde.Name = "btnCausaDesde"
+        Me.btnCausaDesde.Size = New System.Drawing.Size(25, 20)
+        Me.btnCausaDesde.TabIndex = 160
+        Me.btnCausaDesde.Text = "•••"
+        Me.btnCausaDesde.UseVisualStyleBackColor = True
+        Me.btnCausaDesde.Visible = False
+        '
+        'txtCausaHasta
+        '
+        Me.txtCausaHasta.Enabled = False
+        Me.txtCausaHasta.Location = New System.Drawing.Point(821, 10)
+        Me.txtCausaHasta.MaxLength = 15
+        Me.txtCausaHasta.Name = "txtCausaHasta"
+        Me.txtCausaHasta.Size = New System.Drawing.Size(107, 20)
+        Me.txtCausaHasta.TabIndex = 159
+        Me.txtCausaHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtCausaHasta.Visible = False
+        '
+        'lblCausaHasta
+        '
+        Me.lblCausaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCausaHasta.Location = New System.Drawing.Point(771, 10)
+        Me.lblCausaHasta.Name = "lblCausaHasta"
+        Me.lblCausaHasta.Size = New System.Drawing.Size(47, 17)
+        Me.lblCausaHasta.TabIndex = 158
+        Me.lblCausaHasta.Text = "Hasta"
+        Me.lblCausaHasta.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblCausaDesde
+        '
+        Me.lblCausaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCausaDesde.Location = New System.Drawing.Point(521, 12)
+        Me.lblCausaDesde.Name = "lblCausaDesde"
+        Me.lblCausaDesde.Size = New System.Drawing.Size(97, 19)
+        Me.lblCausaDesde.TabIndex = 157
+        Me.lblCausaDesde.Text = "Causa desde :"
+        Me.lblCausaDesde.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.lblCausaDesde.Visible = False
+        '
+        'txtCausaDesde
+        '
+        Me.txtCausaDesde.Enabled = False
+        Me.txtCausaDesde.Location = New System.Drawing.Point(624, 10)
+        Me.txtCausaDesde.MaxLength = 15
+        Me.txtCausaDesde.Name = "txtCausaDesde"
+        Me.txtCausaDesde.Size = New System.Drawing.Size(107, 20)
+        Me.txtCausaDesde.TabIndex = 156
+        Me.txtCausaDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtCausaDesde.Visible = False
         '
         'txtOrigenHasta
         '
@@ -1615,7 +1676,7 @@ Partial Class jsMerRepParametros
         'lblAño
         '
         Me.lblAño.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAño.Location = New System.Drawing.Point(6, 11)
+        Me.lblAño.Location = New System.Drawing.Point(680, 34)
         Me.lblAño.Name = "lblAño"
         Me.lblAño.Size = New System.Drawing.Size(134, 19)
         Me.lblAño.TabIndex = 151
@@ -1628,7 +1689,7 @@ Partial Class jsMerRepParametros
         Me.cmbAño.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbAño.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbAño.FormattingEnabled = True
-        Me.cmbAño.Location = New System.Drawing.Point(170, 10)
+        Me.cmbAño.Location = New System.Drawing.Point(821, 34)
         Me.cmbAño.Margin = New System.Windows.Forms.Padding(1)
         Me.cmbAño.Name = "cmbAño"
         Me.cmbAño.Size = New System.Drawing.Size(74, 21)
@@ -1968,48 +2029,6 @@ Partial Class jsMerRepParametros
         Me.txtAsesorDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtAsesorDesde.Visible = False
         '
-        'btnPeriodoHasta
-        '
-        Me.btnPeriodoHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPeriodoHasta.Location = New System.Drawing.Point(481, 10)
-        Me.btnPeriodoHasta.Name = "btnPeriodoHasta"
-        Me.btnPeriodoHasta.Size = New System.Drawing.Size(25, 20)
-        Me.btnPeriodoHasta.TabIndex = 115
-        Me.btnPeriodoHasta.Text = "•••"
-        Me.btnPeriodoHasta.UseVisualStyleBackColor = True
-        Me.btnPeriodoHasta.Visible = False
-        '
-        'btnPeriodoDesde
-        '
-        Me.btnPeriodoDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPeriodoDesde.Location = New System.Drawing.Point(283, 10)
-        Me.btnPeriodoDesde.Name = "btnPeriodoDesde"
-        Me.btnPeriodoDesde.Size = New System.Drawing.Size(25, 20)
-        Me.btnPeriodoDesde.TabIndex = 114
-        Me.btnPeriodoDesde.Text = "•••"
-        Me.btnPeriodoDesde.UseVisualStyleBackColor = True
-        Me.btnPeriodoDesde.Visible = False
-        '
-        'txtPeriodoHasta
-        '
-        Me.txtPeriodoHasta.Enabled = False
-        Me.txtPeriodoHasta.Location = New System.Drawing.Point(369, 10)
-        Me.txtPeriodoHasta.Name = "txtPeriodoHasta"
-        Me.txtPeriodoHasta.Size = New System.Drawing.Size(107, 20)
-        Me.txtPeriodoHasta.TabIndex = 112
-        Me.txtPeriodoHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.txtPeriodoHasta.Visible = False
-        '
-        'txtPeriodoDesde
-        '
-        Me.txtPeriodoDesde.Enabled = False
-        Me.txtPeriodoDesde.Location = New System.Drawing.Point(171, 10)
-        Me.txtPeriodoDesde.Name = "txtPeriodoDesde"
-        Me.txtPeriodoDesde.Size = New System.Drawing.Size(107, 20)
-        Me.txtPeriodoDesde.TabIndex = 111
-        Me.txtPeriodoDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.txtPeriodoDesde.Visible = False
-        '
         'lblPeriodoHasta
         '
         Me.lblPeriodoHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -2084,70 +2103,29 @@ Partial Class jsMerRepParametros
         Me.lblInfo.Size = New System.Drawing.Size(974, 44)
         Me.lblInfo.TabIndex = 91
         '
-        'btnCausaHasta
+        'txtPeriodoDesde
         '
-        Me.btnCausaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCausaHasta.Location = New System.Drawing.Point(934, 9)
-        Me.btnCausaHasta.Name = "btnCausaHasta"
-        Me.btnCausaHasta.Size = New System.Drawing.Size(25, 20)
-        Me.btnCausaHasta.TabIndex = 161
-        Me.btnCausaHasta.Text = "•••"
-        Me.btnCausaHasta.UseVisualStyleBackColor = True
-        Me.btnCausaHasta.Visible = False
+        Me.txtPeriodoDesde.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtPeriodoDesde.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtPeriodoDesde.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtPeriodoDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPeriodoDesde.Location = New System.Drawing.Point(173, 10)
+        Me.txtPeriodoDesde.Name = "txtPeriodoDesde"
+        Me.txtPeriodoDesde.Size = New System.Drawing.Size(135, 19)
+        Me.txtPeriodoDesde.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtPeriodoDesde.TabIndex = 214
         '
-        'btnCausaDesde
+        'txtPeriodoHasta
         '
-        Me.btnCausaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCausaDesde.Location = New System.Drawing.Point(736, 10)
-        Me.btnCausaDesde.Name = "btnCausaDesde"
-        Me.btnCausaDesde.Size = New System.Drawing.Size(25, 20)
-        Me.btnCausaDesde.TabIndex = 160
-        Me.btnCausaDesde.Text = "•••"
-        Me.btnCausaDesde.UseVisualStyleBackColor = True
-        Me.btnCausaDesde.Visible = False
-        '
-        'txtCausaHasta
-        '
-        Me.txtCausaHasta.Enabled = False
-        Me.txtCausaHasta.Location = New System.Drawing.Point(821, 10)
-        Me.txtCausaHasta.MaxLength = 15
-        Me.txtCausaHasta.Name = "txtCausaHasta"
-        Me.txtCausaHasta.Size = New System.Drawing.Size(107, 20)
-        Me.txtCausaHasta.TabIndex = 159
-        Me.txtCausaHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.txtCausaHasta.Visible = False
-        '
-        'lblCausaHasta
-        '
-        Me.lblCausaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCausaHasta.Location = New System.Drawing.Point(771, 10)
-        Me.lblCausaHasta.Name = "lblCausaHasta"
-        Me.lblCausaHasta.Size = New System.Drawing.Size(47, 17)
-        Me.lblCausaHasta.TabIndex = 158
-        Me.lblCausaHasta.Text = "Hasta"
-        Me.lblCausaHasta.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblCausaDesde
-        '
-        Me.lblCausaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCausaDesde.Location = New System.Drawing.Point(521, 12)
-        Me.lblCausaDesde.Name = "lblCausaDesde"
-        Me.lblCausaDesde.Size = New System.Drawing.Size(97, 19)
-        Me.lblCausaDesde.TabIndex = 157
-        Me.lblCausaDesde.Text = "Causa desde :"
-        Me.lblCausaDesde.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.lblCausaDesde.Visible = False
-        '
-        'txtCausaDesde
-        '
-        Me.txtCausaDesde.Enabled = False
-        Me.txtCausaDesde.Location = New System.Drawing.Point(624, 10)
-        Me.txtCausaDesde.MaxLength = 15
-        Me.txtCausaDesde.Name = "txtCausaDesde"
-        Me.txtCausaDesde.Size = New System.Drawing.Size(107, 20)
-        Me.txtCausaDesde.TabIndex = 156
-        Me.txtCausaDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.txtCausaDesde.Visible = False
+        Me.txtPeriodoHasta.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtPeriodoHasta.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtPeriodoHasta.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtPeriodoHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPeriodoHasta.Location = New System.Drawing.Point(369, 11)
+        Me.txtPeriodoHasta.Name = "txtPeriodoHasta"
+        Me.txtPeriodoHasta.Size = New System.Drawing.Size(137, 19)
+        Me.txtPeriodoHasta.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtPeriodoHasta.TabIndex = 215
         '
         'jsMerRepParametros
         '
@@ -2203,12 +2181,8 @@ Partial Class jsMerRepParametros
     Friend WithEvents txtOrdenHasta As System.Windows.Forms.TextBox
     Friend WithEvents txtOrdenDesde As System.Windows.Forms.TextBox
     Friend WithEvents grpCriterios As System.Windows.Forms.GroupBox
-    Friend WithEvents txtPeriodoHasta As System.Windows.Forms.TextBox
-    Friend WithEvents txtPeriodoDesde As System.Windows.Forms.TextBox
     Friend WithEvents lblPeriodoHasta As System.Windows.Forms.Label
     Friend WithEvents lblPeriodo As System.Windows.Forms.Label
-    Friend WithEvents btnPeriodoHasta As System.Windows.Forms.Button
-    Friend WithEvents btnPeriodoDesde As System.Windows.Forms.Button
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents lblNombreReporte As System.Windows.Forms.Label
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
@@ -2365,4 +2339,6 @@ Partial Class jsMerRepParametros
     Friend WithEvents lblCausaHasta As System.Windows.Forms.Label
     Friend WithEvents lblCausaDesde As System.Windows.Forms.Label
     Friend WithEvents txtCausaDesde As System.Windows.Forms.TextBox
+    Friend WithEvents txtPeriodoHasta As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtPeriodoDesde As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

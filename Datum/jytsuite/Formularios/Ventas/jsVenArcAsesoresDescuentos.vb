@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsVenArcAsesoresDescuentos
     Private Const sModulo As String = "Movimientos Descuentos de Asesores Comerciales"
 
@@ -41,8 +42,8 @@ Public Class jsVenArcAsesoresDescuentos
         txtCodigo.Text = ft.autoCodigo(MyConn, "coddes", "jsconcatdes", "codven.tipo.id_emp", CodVendedor + ".0." + jytsistema.WorkID, 5)
         txtDescripcion.Text = ""
         txtPorcentaje.Text = ft.FormatoNumero(0.0)
-        txtFechaDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtFechaHasta.Text = ft.FormatoFecha(UltimoDiaAño(jytsistema.sFechadeTrabajo))
+        txtFechaDesde.Value = jytsistema.sFechadeTrabajo
+        txtFechaHasta.Value = UltimoDiaAño(jytsistema.sFechadeTrabajo)
 
     End Sub
 
@@ -67,8 +68,8 @@ Public Class jsVenArcAsesoresDescuentos
             txtCodigo.Text = .Item("coddes")
             txtDescripcion.Text = .Item("descrip")
             txtPorcentaje.Text = ft.FormatoNumero(.Item("pordes"))
-            txtFechaDesde.Text = ft.FormatoFecha(CDate(.Item("inicio").ToString))
-            txtFechaHasta.Text = ft.FormatoFecha(CDate(.Item("FIN").ToString))
+            txtFechaDesde.Value = CDate(.Item("inicio").ToString)
+            txtFechaHasta.Value = CDate(.Item("FIN").ToString)
         End With
     End Sub
 
@@ -79,7 +80,9 @@ Public Class jsVenArcAsesoresDescuentos
     End Sub
 
     Private Sub jsVenArcAsesoresDescuentos_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        ft.habilitarObjetos(False, True, txtCodigo, txtFechaDesde, txtFechaHasta)
+        Dim dates As SfDateTimeEdit() = {txtFechaDesde, txtFechaHasta}
+        SetSizeDateObjects(dates)
+        ft.habilitarObjetos(True, True, txtCodigo, txtFechaDesde, txtFechaHasta)
         btnOK.Image = ImageList1.Images(0)
         btnCancel.Image = ImageList1.Images(1)
     End Sub
@@ -138,16 +141,6 @@ Public Class jsVenArcAsesoresDescuentos
     Private Sub btnCancel_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
-
-
-    Private Sub btnFechaDesde_Click(sender As System.Object, e As System.EventArgs) Handles btnFechaDesde.Click
-        txtFechaDesde.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtFechaDesde.Text), Me, btnFechaDesde))
-    End Sub
-
-    Private Sub btnFechaHasta_Click(sender As System.Object, e As System.EventArgs) Handles btnFechaHasta.Click
-        txtFechaHasta.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtFechaHasta.Text), Me, btnFechaHasta))
-    End Sub
-
     Private Sub txtPorcentaje_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtPorcentaje.KeyPress
         e.Handled = ft.validaNumeroEnTextbox(e)
     End Sub

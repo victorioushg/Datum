@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsMerArcPreciosFuturosMovimientos
 
     Private Const sModulo As String = "Movimiento de lista de precios a futuro"
@@ -54,14 +56,13 @@ Public Class jsMerArcPreciosFuturosMovimientos
     End Sub
     Private Sub AsignarTooltips()
         'Menu Barra 
-        C1SuperTooltip1.SetToolTip(btnFecha, "<B>Seleccionar fecha</B> movimiento de precio a futuro ...")
+        C1SuperTooltip1.SetToolTip(txtFecha, "<B>Seleccionar fecha</B> movimiento de precio a futuro ...")
         C1SuperTooltip1.SetToolTip(btnCodigo, "<B>Selecciona mercancia</B> para este movimiento ...")
 
     End Sub
     Private Sub Habilitar()
-        ft.habilitarObjetos(False, True, txtUnidad, txtDescripcion, txtFecha)
         If i_modo = movimiento.iEditar Then _
-            ft.habilitarObjetos(False, True, btnCodigo, cmbTarifa, btnFecha)
+            ft.habilitarObjetos(False, True, btnCodigo, cmbTarifa, txtFecha)
     End Sub
     Private Sub IniciarTXT()
 
@@ -71,7 +72,7 @@ Public Class jsMerArcPreciosFuturosMovimientos
         ft.RellenaCombo(aTarifa, cmbTarifa)
         txtPrecio.Text = 0.0
         txtDescuento.Text = 0.0
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
 
     End Sub
     Private Sub AsignarTXT(ByVal nPosicion As Integer)
@@ -83,36 +84,38 @@ Public Class jsMerArcPreciosFuturosMovimientos
             ft.RellenaCombo(aTarifa, cmbTarifa, ft.InArray(aTarifa, .Item("tipoprecio")))
             txtPrecio.Text = ft.muestraCampoNumero(.Item("monto"))
             txtDescuento.Text = ft.muestraCampoNumero(.Item("des_art"))
-            txtFecha.Text = ft.muestraCampoFecha(.Item("fecha").ToString)
+            txtFecha.Value = .Item("fecha")
 
         End With
     End Sub
 
     Private Sub jsMerArcPreciosFuturosMovimientos_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
-        ft = Nothing '
+        ft = Nothing
     End Sub
 
     Private Sub jsMerArcPreciosFuturosMovimientos_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Dim dates As SfDateTimeEdit() = {txtFecha}
+        SetSizeDateObjects(dates)
         InsertarAuditoria(MyConn, MovAud.ientrar, sModulo, txtCodigo.Text)
     End Sub
 
-    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus, _
-        txtDescripcion.GotFocus, txtUnidad.GotFocus, txtPrecio.GotFocus, txtFecha.GotFocus, _
+    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus,
+        txtDescripcion.GotFocus, txtUnidad.GotFocus, txtPrecio.GotFocus,
         btnCodigo.GotFocus
 
         Select Case sender.name
             Case "txtCodigo"
-                ft.mensajeEtiqueta(lblInfo, "Indique el codigo de la mercancía...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, "Indique el codigo de la mercancía...", Transportables.tipoMensaje.iInfo)
             Case "cmbTarifa"
-                ft.mensajeEtiqueta(lblInfo, "Seleccione la tarifa de precio de mercancía", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, "Seleccione la tarifa de precio de mercancía", Transportables.tipoMensaje.iInfo)
             Case "txtPrecio"
-                ft.mensajeEtiqueta(lblInfo, "Indique el precio de la mercancía... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, "Indique el precio de la mercancía... ", Transportables.tipoMensaje.iInfo)
             Case "txtDescuento"
-                ft.mensajeEtiqueta(lblInfo, "Indique el descuento de la mercancía...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, "Indique el descuento de la mercancía...", Transportables.tipoMensaje.iInfo)
             Case "btnFecha"
-                ft.mensajeEtiqueta(lblInfo, "Seleccione la fecha para la cual este precio sera efectivo... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, "Seleccione la fecha para la cual este precio sera efectivo... ", Transportables.tipoMensaje.iInfo)
             Case "btnCodigo"
-                ft.mensajeEtiqueta(lblInfo, "Seleccione la mercancía a cambiar el precio ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, "Seleccione la mercancía a cambiar el precio ...", Transportables.tipoMensaje.iInfo)
         End Select
 
     End Sub
@@ -144,7 +147,7 @@ Public Class jsMerArcPreciosFuturosMovimientos
                 Apuntador = dtLocal.Rows.Count
             End If
 
-            InsertEditMERCASPrecioFuturo(MyConn, lblInfo, Insertar, CDate(txtFecha.Text), txtCodigo.Text, _
+            InsertEditMERCASPrecioFuturo(MyConn, lblInfo, Insertar, CDate(txtFecha.Text), txtCodigo.Text,
                         cmbTarifa.Text, CDbl(txtPrecio.Text), CDbl(txtDescuento.Text), 0)
 
             InsertarAuditoria(MyConn, MovAud.iSalir, sModulo, txtCodigo.Text)
@@ -157,14 +160,13 @@ Public Class jsMerArcPreciosFuturosMovimientos
         Me.Close()
     End Sub
 
-    Private Sub txt_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.Click, _
-        txtFecha.Click
+    Private Sub txt_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.Click
         Dim txt As TextBox = sender
         ft.enfocarTexto(txt)
     End Sub
 
 
-    Private Sub txtCantidad_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPrecio.KeyPress, _
+    Private Sub txtCantidad_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPrecio.KeyPress,
         txtDescuento.KeyPress
         e.Handled = ft.validaNumeroEnTextbox(e)
     End Sub
@@ -183,7 +185,4 @@ Public Class jsMerArcPreciosFuturosMovimientos
         f = Nothing
     End Sub
 
-    Private Sub btnFecha_Click(sender As System.Object, e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, btnFecha)
-    End Sub
 End Class

@@ -24,17 +24,16 @@ Partial Class jsVenArcClientesCXCPlus
         Me.cmbTipo = New System.Windows.Forms.ComboBox()
         Me.lbl = New System.Windows.Forms.Label()
         Me.grpRetencionISLR = New System.Windows.Forms.GroupBox()
+        Me.txtFechaRetISLR = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.btnServicios = New System.Windows.Forms.Button()
         Me.btnAsesorRetISLR = New System.Windows.Forms.Button()
         Me.Label39 = New System.Windows.Forms.Label()
         Me.txtAsesorRetISLR = New System.Windows.Forms.TextBox()
-        Me.btnFechaRetISLR = New System.Windows.Forms.Button()
         Me.Label31 = New System.Windows.Forms.Label()
         Me.txtRetencionISLR = New System.Windows.Forms.TextBox()
         Me.txtPorcentajeRetISLR = New System.Windows.Forms.TextBox()
         Me.txtImporteBaseRetISLR = New System.Windows.Forms.TextBox()
         Me.txtNumeroRetISLR = New System.Windows.Forms.TextBox()
-        Me.txtFechaRetISLR = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
@@ -46,6 +45,8 @@ Partial Class jsVenArcClientesCXCPlus
         Me.Label23 = New System.Windows.Forms.Label()
         Me.lvRetISLR = New System.Windows.Forms.ListView()
         Me.grpRetencionIVA = New System.Windows.Forms.GroupBox()
+        Me.txtFechaRecepcionRetIVA = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaComprobanteRetIVA = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblLeyendaIVA = New System.Windows.Forms.Label()
         Me.Label36 = New System.Windows.Forms.Label()
@@ -57,28 +58,22 @@ Partial Class jsVenArcClientesCXCPlus
         Me.Label27 = New System.Windows.Forms.Label()
         Me.txtNumeroRetIVA = New System.Windows.Forms.TextBox()
         Me.Label25 = New System.Windows.Forms.Label()
-        Me.btnFechaRecepcionRetIVA = New System.Windows.Forms.Button()
-        Me.txtFechaRecepcionRetIVA = New System.Windows.Forms.TextBox()
-        Me.btnFechaComprobanteRetIVA = New System.Windows.Forms.Button()
         Me.Label35 = New System.Windows.Forms.Label()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.txtPorcentajeRetIVA = New System.Windows.Forms.TextBox()
-        Me.txtFechaComprobanteRetIVA = New System.Windows.Forms.TextBox()
         Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.grpDebitos = New System.Windows.Forms.GroupBox()
+        Me.txtVenceDB = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtEmisionDB = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.Label37 = New System.Windows.Forms.Label()
         Me.btnAsesor = New System.Windows.Forms.Button()
         Me.txtAsesor = New System.Windows.Forms.TextBox()
-        Me.btnVenceDB = New System.Windows.Forms.Button()
-        Me.btnEmisionDB = New System.Windows.Forms.Button()
         Me.txtReferDB = New System.Windows.Forms.TextBox()
         Me.txtImporteDB = New System.Windows.Forms.TextBox()
         Me.txtConceptoDB = New System.Windows.Forms.TextBox()
-        Me.txtVenceDB = New System.Windows.Forms.TextBox()
-        Me.txtEmisionDB = New System.Windows.Forms.TextBox()
         Me.txtDocumentoDB = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -88,6 +83,7 @@ Partial Class jsVenArcClientesCXCPlus
         Me.Label16 = New System.Windows.Forms.Label()
         Me.grpCreditos = New System.Windows.Forms.GroupBox()
         Me.grptextos = New System.Windows.Forms.GroupBox()
+        Me.txtEmisionCR = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpPago = New System.Windows.Forms.GroupBox()
         Me.cmbNombrePago = New System.Windows.Forms.ComboBox()
         Me.Label21 = New System.Windows.Forms.Label()
@@ -106,7 +102,6 @@ Partial Class jsVenArcClientesCXCPlus
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtNomPagCR = New System.Windows.Forms.TextBox()
         Me.txtNumPagCR = New System.Windows.Forms.TextBox()
-        Me.cmbFPCR = New System.Windows.Forms.ComboBox()
         Me.cmbCajaCR = New System.Windows.Forms.ComboBox()
         Me.txtImporteCRAjustado = New System.Windows.Forms.TextBox()
         Me.Label33 = New System.Windows.Forms.Label()
@@ -125,9 +120,7 @@ Partial Class jsVenArcClientesCXCPlus
         Me.txtImporteCR = New System.Windows.Forms.TextBox()
         Me.txtReferenciaCR = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.btnEmisionCR = New System.Windows.Forms.Button()
         Me.txtConceptoCR = New System.Windows.Forms.TextBox()
-        Me.txtEmisionCR = New System.Windows.Forms.TextBox()
         Me.txtDocumentoCR = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
@@ -140,6 +133,7 @@ Partial Class jsVenArcClientesCXCPlus
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.lv = New System.Windows.Forms.ListView()
+        Me.cmbFPCR = New Syncfusion.WinForms.ListView.SfComboBox()
         Me.grpCaja.SuspendLayout()
         Me.grpRetencionISLR.SuspendLayout()
         Me.grpTotalISLR.SuspendLayout()
@@ -153,6 +147,7 @@ Partial Class jsVenArcClientesCXCPlus
         Me.grpPago.SuspendLayout()
         Me.grpCRCO.SuspendLayout()
         Me.grpTotales.SuspendLayout()
+        CType(Me.cmbFPCR, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'grpCaja
@@ -189,17 +184,16 @@ Partial Class jsVenArcClientesCXCPlus
         '
         'grpRetencionISLR
         '
+        Me.grpRetencionISLR.Controls.Add(Me.txtFechaRetISLR)
         Me.grpRetencionISLR.Controls.Add(Me.btnServicios)
         Me.grpRetencionISLR.Controls.Add(Me.btnAsesorRetISLR)
         Me.grpRetencionISLR.Controls.Add(Me.Label39)
         Me.grpRetencionISLR.Controls.Add(Me.txtAsesorRetISLR)
-        Me.grpRetencionISLR.Controls.Add(Me.btnFechaRetISLR)
         Me.grpRetencionISLR.Controls.Add(Me.Label31)
         Me.grpRetencionISLR.Controls.Add(Me.txtRetencionISLR)
         Me.grpRetencionISLR.Controls.Add(Me.txtPorcentajeRetISLR)
         Me.grpRetencionISLR.Controls.Add(Me.txtImporteBaseRetISLR)
         Me.grpRetencionISLR.Controls.Add(Me.txtNumeroRetISLR)
-        Me.grpRetencionISLR.Controls.Add(Me.txtFechaRetISLR)
         Me.grpRetencionISLR.Controls.Add(Me.Label29)
         Me.grpRetencionISLR.Controls.Add(Me.Label28)
         Me.grpRetencionISLR.Controls.Add(Me.Label26)
@@ -212,6 +206,18 @@ Partial Class jsVenArcClientesCXCPlus
         Me.grpRetencionISLR.TabIndex = 105
         Me.grpRetencionISLR.TabStop = False
         Me.grpRetencionISLR.Text = " Retención ISLR"
+        '
+        'txtFechaRetISLR
+        '
+        Me.txtFechaRetISLR.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaRetISLR.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaRetISLR.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaRetISLR.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaRetISLR.Location = New System.Drawing.Point(366, 259)
+        Me.txtFechaRetISLR.Name = "txtFechaRetISLR"
+        Me.txtFechaRetISLR.Size = New System.Drawing.Size(112, 19)
+        Me.txtFechaRetISLR.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaRetISLR.TabIndex = 215
         '
         'btnServicios
         '
@@ -253,16 +259,6 @@ Partial Class jsVenArcClientesCXCPlus
         Me.txtAsesorRetISLR.Size = New System.Drawing.Size(86, 20)
         Me.txtAsesorRetISLR.TabIndex = 121
         Me.txtAsesorRetISLR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnFechaRetISLR
-        '
-        Me.btnFechaRetISLR.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaRetISLR.Location = New System.Drawing.Point(453, 258)
-        Me.btnFechaRetISLR.Name = "btnFechaRetISLR"
-        Me.btnFechaRetISLR.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaRetISLR.TabIndex = 120
-        Me.btnFechaRetISLR.Text = "•••"
-        Me.btnFechaRetISLR.UseVisualStyleBackColor = True
         '
         'Label31
         '
@@ -312,16 +308,6 @@ Partial Class jsVenArcClientesCXCPlus
         Me.txtNumeroRetISLR.Name = "txtNumeroRetISLR"
         Me.txtNumeroRetISLR.Size = New System.Drawing.Size(175, 20)
         Me.txtNumeroRetISLR.TabIndex = 95
-        '
-        'txtFechaRetISLR
-        '
-        Me.txtFechaRetISLR.BackColor = System.Drawing.Color.MintCream
-        Me.txtFechaRetISLR.ForeColor = System.Drawing.Color.Navy
-        Me.txtFechaRetISLR.Location = New System.Drawing.Point(366, 259)
-        Me.txtFechaRetISLR.Name = "txtFechaRetISLR"
-        Me.txtFechaRetISLR.Size = New System.Drawing.Size(86, 20)
-        Me.txtFechaRetISLR.TabIndex = 93
-        Me.txtFechaRetISLR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label29
         '
@@ -434,6 +420,8 @@ Partial Class jsVenArcClientesCXCPlus
         '
         'grpRetencionIVA
         '
+        Me.grpRetencionIVA.Controls.Add(Me.txtFechaRecepcionRetIVA)
+        Me.grpRetencionIVA.Controls.Add(Me.txtFechaComprobanteRetIVA)
         Me.grpRetencionIVA.Controls.Add(Me.GroupBox1)
         Me.grpRetencionIVA.Controls.Add(Me.dgRetIVA)
         Me.grpRetencionIVA.Controls.Add(Me.Label30)
@@ -442,19 +430,39 @@ Partial Class jsVenArcClientesCXCPlus
         Me.grpRetencionIVA.Controls.Add(Me.Label27)
         Me.grpRetencionIVA.Controls.Add(Me.txtNumeroRetIVA)
         Me.grpRetencionIVA.Controls.Add(Me.Label25)
-        Me.grpRetencionIVA.Controls.Add(Me.btnFechaRecepcionRetIVA)
-        Me.grpRetencionIVA.Controls.Add(Me.txtFechaRecepcionRetIVA)
-        Me.grpRetencionIVA.Controls.Add(Me.btnFechaComprobanteRetIVA)
         Me.grpRetencionIVA.Controls.Add(Me.Label35)
         Me.grpRetencionIVA.Controls.Add(Me.Label34)
         Me.grpRetencionIVA.Controls.Add(Me.txtPorcentajeRetIVA)
-        Me.grpRetencionIVA.Controls.Add(Me.txtFechaComprobanteRetIVA)
         Me.grpRetencionIVA.Location = New System.Drawing.Point(4, 55)
         Me.grpRetencionIVA.Name = "grpRetencionIVA"
         Me.grpRetencionIVA.Size = New System.Drawing.Size(927, 394)
         Me.grpRetencionIVA.TabIndex = 104
         Me.grpRetencionIVA.TabStop = False
         Me.grpRetencionIVA.Text = " Retención IVA"
+        '
+        'txtFechaRecepcionRetIVA
+        '
+        Me.txtFechaRecepcionRetIVA.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaRecepcionRetIVA.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaRecepcionRetIVA.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaRecepcionRetIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaRecepcionRetIVA.Location = New System.Drawing.Point(688, 73)
+        Me.txtFechaRecepcionRetIVA.Name = "txtFechaRecepcionRetIVA"
+        Me.txtFechaRecepcionRetIVA.Size = New System.Drawing.Size(126, 19)
+        Me.txtFechaRecepcionRetIVA.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaRecepcionRetIVA.TabIndex = 215
+        '
+        'txtFechaComprobanteRetIVA
+        '
+        Me.txtFechaComprobanteRetIVA.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaComprobanteRetIVA.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaComprobanteRetIVA.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaComprobanteRetIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaComprobanteRetIVA.Location = New System.Drawing.Point(688, 52)
+        Me.txtFechaComprobanteRetIVA.Name = "txtFechaComprobanteRetIVA"
+        Me.txtFechaComprobanteRetIVA.Size = New System.Drawing.Size(126, 19)
+        Me.txtFechaComprobanteRetIVA.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaComprobanteRetIVA.TabIndex = 214
         '
         'GroupBox1
         '
@@ -579,35 +587,6 @@ Partial Class jsVenArcClientesCXCPlus
         Me.Label25.Text = "Fecha recepción de retención :"
         Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'btnFechaRecepcionRetIVA
-        '
-        Me.btnFechaRecepcionRetIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaRecepcionRetIVA.Location = New System.Drawing.Point(688, 73)
-        Me.btnFechaRecepcionRetIVA.Name = "btnFechaRecepcionRetIVA"
-        Me.btnFechaRecepcionRetIVA.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaRecepcionRetIVA.TabIndex = 119
-        Me.btnFechaRecepcionRetIVA.Text = "•••"
-        Me.btnFechaRecepcionRetIVA.UseVisualStyleBackColor = True
-        '
-        'txtFechaRecepcionRetIVA
-        '
-        Me.txtFechaRecepcionRetIVA.Location = New System.Drawing.Point(719, 73)
-        Me.txtFechaRecepcionRetIVA.MaxLength = 19
-        Me.txtFechaRecepcionRetIVA.Name = "txtFechaRecepcionRetIVA"
-        Me.txtFechaRecepcionRetIVA.Size = New System.Drawing.Size(95, 20)
-        Me.txtFechaRecepcionRetIVA.TabIndex = 118
-        Me.txtFechaRecepcionRetIVA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnFechaComprobanteRetIVA
-        '
-        Me.btnFechaComprobanteRetIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaComprobanteRetIVA.Location = New System.Drawing.Point(688, 52)
-        Me.btnFechaComprobanteRetIVA.Name = "btnFechaComprobanteRetIVA"
-        Me.btnFechaComprobanteRetIVA.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaComprobanteRetIVA.TabIndex = 117
-        Me.btnFechaComprobanteRetIVA.Text = "•••"
-        Me.btnFechaComprobanteRetIVA.UseVisualStyleBackColor = True
-        '
         'Label35
         '
         Me.Label35.BackColor = System.Drawing.Color.Transparent
@@ -638,15 +617,6 @@ Partial Class jsVenArcClientesCXCPlus
         Me.txtPorcentajeRetIVA.Size = New System.Drawing.Size(126, 20)
         Me.txtPorcentajeRetIVA.TabIndex = 110
         Me.txtPorcentajeRetIVA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtFechaComprobanteRetIVA
-        '
-        Me.txtFechaComprobanteRetIVA.Location = New System.Drawing.Point(719, 52)
-        Me.txtFechaComprobanteRetIVA.MaxLength = 19
-        Me.txtFechaComprobanteRetIVA.Name = "txtFechaComprobanteRetIVA"
-        Me.txtFechaComprobanteRetIVA.Size = New System.Drawing.Size(95, 20)
-        Me.txtFechaComprobanteRetIVA.TabIndex = 109
-        Me.txtFechaComprobanteRetIVA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'grpAceptarSalir
         '
@@ -698,16 +668,15 @@ Partial Class jsVenArcClientesCXCPlus
         '
         'grpDebitos
         '
+        Me.grpDebitos.Controls.Add(Me.grpCreditos)
+        Me.grpDebitos.Controls.Add(Me.txtVenceDB)
+        Me.grpDebitos.Controls.Add(Me.txtEmisionDB)
         Me.grpDebitos.Controls.Add(Me.Label37)
         Me.grpDebitos.Controls.Add(Me.btnAsesor)
         Me.grpDebitos.Controls.Add(Me.txtAsesor)
-        Me.grpDebitos.Controls.Add(Me.btnVenceDB)
-        Me.grpDebitos.Controls.Add(Me.btnEmisionDB)
         Me.grpDebitos.Controls.Add(Me.txtReferDB)
         Me.grpDebitos.Controls.Add(Me.txtImporteDB)
         Me.grpDebitos.Controls.Add(Me.txtConceptoDB)
-        Me.grpDebitos.Controls.Add(Me.txtVenceDB)
-        Me.grpDebitos.Controls.Add(Me.txtEmisionDB)
         Me.grpDebitos.Controls.Add(Me.txtDocumentoDB)
         Me.grpDebitos.Controls.Add(Me.Label5)
         Me.grpDebitos.Controls.Add(Me.Label4)
@@ -721,6 +690,30 @@ Partial Class jsVenArcClientesCXCPlus
         Me.grpDebitos.TabIndex = 88
         Me.grpDebitos.TabStop = False
         Me.grpDebitos.Text = "Débitos"
+        '
+        'txtVenceDB
+        '
+        Me.txtVenceDB.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtVenceDB.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtVenceDB.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtVenceDB.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtVenceDB.Location = New System.Drawing.Point(184, 57)
+        Me.txtVenceDB.Name = "txtVenceDB"
+        Me.txtVenceDB.Size = New System.Drawing.Size(126, 19)
+        Me.txtVenceDB.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtVenceDB.TabIndex = 216
+        '
+        'txtEmisionDB
+        '
+        Me.txtEmisionDB.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmisionDB.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmisionDB.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmisionDB.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmisionDB.Location = New System.Drawing.Point(184, 37)
+        Me.txtEmisionDB.Name = "txtEmisionDB"
+        Me.txtEmisionDB.Size = New System.Drawing.Size(126, 19)
+        Me.txtEmisionDB.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmisionDB.TabIndex = 215
         '
         'Label37
         '
@@ -752,26 +745,6 @@ Partial Class jsVenArcClientesCXCPlus
         Me.txtAsesor.TabIndex = 107
         Me.txtAsesor.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'btnVenceDB
-        '
-        Me.btnVenceDB.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVenceDB.Location = New System.Drawing.Point(296, 57)
-        Me.btnVenceDB.Name = "btnVenceDB"
-        Me.btnVenceDB.Size = New System.Drawing.Size(25, 20)
-        Me.btnVenceDB.TabIndex = 106
-        Me.btnVenceDB.Text = "•••"
-        Me.btnVenceDB.UseVisualStyleBackColor = True
-        '
-        'btnEmisionDB
-        '
-        Me.btnEmisionDB.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmisionDB.Location = New System.Drawing.Point(296, 36)
-        Me.btnEmisionDB.Name = "btnEmisionDB"
-        Me.btnEmisionDB.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmisionDB.TabIndex = 105
-        Me.btnEmisionDB.Text = "•••"
-        Me.btnEmisionDB.UseVisualStyleBackColor = True
-        '
         'txtReferDB
         '
         Me.txtReferDB.Location = New System.Drawing.Point(184, 78)
@@ -798,24 +771,6 @@ Partial Class jsVenArcClientesCXCPlus
         Me.txtConceptoDB.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtConceptoDB.Size = New System.Drawing.Size(533, 61)
         Me.txtConceptoDB.TabIndex = 38
-        '
-        'txtVenceDB
-        '
-        Me.txtVenceDB.Enabled = False
-        Me.txtVenceDB.Location = New System.Drawing.Point(184, 57)
-        Me.txtVenceDB.Name = "txtVenceDB"
-        Me.txtVenceDB.Size = New System.Drawing.Size(106, 20)
-        Me.txtVenceDB.TabIndex = 37
-        Me.txtVenceDB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'txtEmisionDB
-        '
-        Me.txtEmisionDB.Enabled = False
-        Me.txtEmisionDB.Location = New System.Drawing.Point(184, 36)
-        Me.txtEmisionDB.Name = "txtEmisionDB"
-        Me.txtEmisionDB.Size = New System.Drawing.Size(106, 20)
-        Me.txtEmisionDB.TabIndex = 36
-        Me.txtEmisionDB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtDocumentoDB
         '
@@ -896,15 +851,16 @@ Partial Class jsVenArcClientesCXCPlus
         Me.grpCreditos.Controls.Add(Me.grptextos)
         Me.grpCreditos.Controls.Add(Me.grpTotales)
         Me.grpCreditos.Controls.Add(Me.lv)
-        Me.grpCreditos.Location = New System.Drawing.Point(132, 55)
+        Me.grpCreditos.Location = New System.Drawing.Point(23, 27)
         Me.grpCreditos.Name = "grpCreditos"
-        Me.grpCreditos.Size = New System.Drawing.Size(913, 400)
+        Me.grpCreditos.Size = New System.Drawing.Size(925, 400)
         Me.grpCreditos.TabIndex = 91
         Me.grpCreditos.TabStop = False
         Me.grpCreditos.Text = "Créditos"
         '
         'grptextos
         '
+        Me.grptextos.Controls.Add(Me.txtEmisionCR)
         Me.grptextos.Controls.Add(Me.grpPago)
         Me.grptextos.Controls.Add(Me.txtImporteCRAjustado)
         Me.grptextos.Controls.Add(Me.Label33)
@@ -921,9 +877,7 @@ Partial Class jsVenArcClientesCXCPlus
         Me.grptextos.Controls.Add(Me.txtImporteCR)
         Me.grptextos.Controls.Add(Me.txtReferenciaCR)
         Me.grptextos.Controls.Add(Me.Label10)
-        Me.grptextos.Controls.Add(Me.btnEmisionCR)
         Me.grptextos.Controls.Add(Me.txtConceptoCR)
-        Me.grptextos.Controls.Add(Me.txtEmisionCR)
         Me.grptextos.Controls.Add(Me.txtDocumentoCR)
         Me.grptextos.Controls.Add(Me.Label15)
         Me.grptextos.Controls.Add(Me.Label17)
@@ -934,8 +888,21 @@ Partial Class jsVenArcClientesCXCPlus
         Me.grptextos.TabIndex = 85
         Me.grptextos.TabStop = False
         '
+        'txtEmisionCR
+        '
+        Me.txtEmisionCR.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmisionCR.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmisionCR.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmisionCR.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmisionCR.Location = New System.Drawing.Point(85, 37)
+        Me.txtEmisionCR.Name = "txtEmisionCR"
+        Me.txtEmisionCR.Size = New System.Drawing.Size(126, 19)
+        Me.txtEmisionCR.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmisionCR.TabIndex = 215
+        '
         'grpPago
         '
+        Me.grpPago.Controls.Add(Me.cmbFPCR)
         Me.grpPago.Controls.Add(Me.cmbNombrePago)
         Me.grpPago.Controls.Add(Me.Label21)
         Me.grpPago.Controls.Add(Me.Label20)
@@ -953,7 +920,6 @@ Partial Class jsVenArcClientesCXCPlus
         Me.grpPago.Controls.Add(Me.Label8)
         Me.grpPago.Controls.Add(Me.txtNomPagCR)
         Me.grpPago.Controls.Add(Me.txtNumPagCR)
-        Me.grpPago.Controls.Add(Me.cmbFPCR)
         Me.grpPago.Controls.Add(Me.cmbCajaCR)
         Me.grpPago.Location = New System.Drawing.Point(524, 8)
         Me.grpPago.Name = "grpPago"
@@ -1123,16 +1089,6 @@ Partial Class jsVenArcClientesCXCPlus
         Me.txtNumPagCR.Name = "txtNumPagCR"
         Me.txtNumPagCR.Size = New System.Drawing.Size(122, 20)
         Me.txtNumPagCR.TabIndex = 106
-        '
-        'cmbFPCR
-        '
-        Me.cmbFPCR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbFPCR.FormattingEnabled = True
-        Me.cmbFPCR.Location = New System.Drawing.Point(112, 33)
-        Me.cmbFPCR.Margin = New System.Windows.Forms.Padding(1)
-        Me.cmbFPCR.Name = "cmbFPCR"
-        Me.cmbFPCR.Size = New System.Drawing.Size(148, 21)
-        Me.cmbFPCR.TabIndex = 105
         '
         'cmbCajaCR
         '
@@ -1307,16 +1263,6 @@ Partial Class jsVenArcClientesCXCPlus
         Me.Label10.Text = "Importe en emision :"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'btnEmisionCR
-        '
-        Me.btnEmisionCR.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmisionCR.Location = New System.Drawing.Point(195, 35)
-        Me.btnEmisionCR.Name = "btnEmisionCR"
-        Me.btnEmisionCR.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmisionCR.TabIndex = 104
-        Me.btnEmisionCR.Text = "•••"
-        Me.btnEmisionCR.UseVisualStyleBackColor = True
-        '
         'txtConceptoCR
         '
         Me.txtConceptoCR.Location = New System.Drawing.Point(298, 16)
@@ -1325,15 +1271,6 @@ Partial Class jsVenArcClientesCXCPlus
         Me.txtConceptoCR.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtConceptoCR.Size = New System.Drawing.Size(220, 112)
         Me.txtConceptoCR.TabIndex = 6
-        '
-        'txtEmisionCR
-        '
-        Me.txtEmisionCR.Enabled = False
-        Me.txtEmisionCR.Location = New System.Drawing.Point(85, 36)
-        Me.txtEmisionCR.Name = "txtEmisionCR"
-        Me.txtEmisionCR.Size = New System.Drawing.Size(108, 20)
-        Me.txtEmisionCR.TabIndex = 5
-        Me.txtEmisionCR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtDocumentoCR
         '
@@ -1460,6 +1397,26 @@ Partial Class jsVenArcClientesCXCPlus
         Me.lv.UseCompatibleStateImageBehavior = False
         Me.lv.View = System.Windows.Forms.View.Details
         '
+        'cmbFPCR
+        '
+        Me.cmbFPCR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbFPCR.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbFPCR.DisplayMember = "nombre"
+        Me.cmbFPCR.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbFPCR.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbFPCR.Location = New System.Drawing.Point(111, 34)
+        Me.cmbFPCR.Name = "cmbFPCR"
+        Me.cmbFPCR.Size = New System.Drawing.Size(274, 19)
+        Me.cmbFPCR.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.cmbFPCR.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbFPCR.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbFPCR.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbFPCR.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbFPCR.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbFPCR.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbFPCR.TabIndex = 222
+        Me.cmbFPCR.ValueMember = "codcli"
+        '
         'jsVenArcClientesCXCPlus
         '
         Me.AcceptButton = Me.btnOK
@@ -1469,13 +1426,12 @@ Partial Class jsVenArcClientesCXCPlus
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(921, 479)
         Me.ControlBox = False
-        Me.Controls.Add(Me.grpRetencionIVA)
-        Me.Controls.Add(Me.grpRetencionISLR)
         Me.Controls.Add(Me.grpAceptarSalir)
         Me.Controls.Add(Me.lblInfo)
         Me.Controls.Add(Me.grpCaja)
-        Me.Controls.Add(Me.grpCreditos)
         Me.Controls.Add(Me.grpDebitos)
+        Me.Controls.Add(Me.grpRetencionIVA)
+        Me.Controls.Add(Me.grpRetencionISLR)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "jsVenArcClientesCXCPlus"
@@ -1505,6 +1461,7 @@ Partial Class jsVenArcClientesCXCPlus
         Me.grpCRCO.PerformLayout()
         Me.grpTotales.ResumeLayout(False)
         Me.grpTotales.PerformLayout()
+        CType(Me.cmbFPCR, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1525,12 +1482,8 @@ Partial Class jsVenArcClientesCXCPlus
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents txtImporteDB As System.Windows.Forms.TextBox
     Friend WithEvents txtConceptoDB As System.Windows.Forms.TextBox
-    Friend WithEvents txtVenceDB As System.Windows.Forms.TextBox
-    Friend WithEvents txtEmisionDB As System.Windows.Forms.TextBox
     Friend WithEvents txtDocumentoDB As System.Windows.Forms.TextBox
     Friend WithEvents txtReferDB As System.Windows.Forms.TextBox
-    Friend WithEvents btnVenceDB As System.Windows.Forms.Button
-    Friend WithEvents btnEmisionDB As System.Windows.Forms.Button
     Friend WithEvents lv As System.Windows.Forms.ListView
     Friend WithEvents grpTotales As System.Windows.Forms.GroupBox
     Friend WithEvents txtSaldoSel As System.Windows.Forms.TextBox
@@ -1543,7 +1496,6 @@ Partial Class jsVenArcClientesCXCPlus
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents btnEmisionCR As System.Windows.Forms.Button
     Friend WithEvents txtConceptoCR As System.Windows.Forms.TextBox
-    Friend WithEvents txtEmisionCR As System.Windows.Forms.TextBox
     Friend WithEvents txtDocumentoCR As System.Windows.Forms.TextBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents Label17 As System.Windows.Forms.Label
@@ -1556,7 +1508,6 @@ Partial Class jsVenArcClientesCXCPlus
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents txtNomPagCR As System.Windows.Forms.TextBox
     Friend WithEvents txtNumPagCR As System.Windows.Forms.TextBox
-    Friend WithEvents cmbFPCR As System.Windows.Forms.ComboBox
     Friend WithEvents cmbCajaCR As System.Windows.Forms.ComboBox
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
@@ -1586,7 +1537,6 @@ Partial Class jsVenArcClientesCXCPlus
     Friend WithEvents Label24 As System.Windows.Forms.Label
     Friend WithEvents Label28 As System.Windows.Forms.Label
     Friend WithEvents Label29 As System.Windows.Forms.Label
-    Friend WithEvents txtFechaRetISLR As System.Windows.Forms.TextBox
     Friend WithEvents txtImporteBaseRetISLR As System.Windows.Forms.TextBox
     Friend WithEvents txtNumeroRetISLR As System.Windows.Forms.TextBox
     Friend WithEvents txtPorcentajeRetISLR As System.Windows.Forms.TextBox
@@ -1594,11 +1544,9 @@ Partial Class jsVenArcClientesCXCPlus
     Friend WithEvents Label31 As System.Windows.Forms.Label
     Friend WithEvents txtTotalRetIVA As System.Windows.Forms.TextBox
     Friend WithEvents txtPorcentajeRetIVA As System.Windows.Forms.TextBox
-    Friend WithEvents txtFechaComprobanteRetIVA As System.Windows.Forms.TextBox
     Friend WithEvents Label36 As System.Windows.Forms.Label
     Friend WithEvents Label35 As System.Windows.Forms.Label
     Friend WithEvents Label34 As System.Windows.Forms.Label
-    Friend WithEvents btnFechaComprobanteRetIVA As System.Windows.Forms.Button
     Friend WithEvents Label37 As System.Windows.Forms.Label
     Friend WithEvents btnAsesor As System.Windows.Forms.Button
     Friend WithEvents txtAsesor As System.Windows.Forms.TextBox
@@ -1608,9 +1556,6 @@ Partial Class jsVenArcClientesCXCPlus
     Friend WithEvents Label27 As System.Windows.Forms.Label
     Friend WithEvents txtNumeroRetIVA As System.Windows.Forms.TextBox
     Friend WithEvents Label25 As System.Windows.Forms.Label
-    Friend WithEvents btnFechaRecepcionRetIVA As System.Windows.Forms.Button
-    Friend WithEvents txtFechaRecepcionRetIVA As System.Windows.Forms.TextBox
-    Friend WithEvents btnFechaRetISLR As System.Windows.Forms.Button
     Friend WithEvents lblLeyendaIVA As System.Windows.Forms.Label
     Friend WithEvents Label30 As System.Windows.Forms.Label
     Friend WithEvents btnAsesorRetIVA As System.Windows.Forms.Button
@@ -1628,4 +1573,11 @@ Partial Class jsVenArcClientesCXCPlus
     Friend WithEvents Label32 As Label
     Friend WithEvents txtImporteCRAjustado As TextBox
     Friend WithEvents Label33 As Label
+    Friend WithEvents txtFechaComprobanteRetIVA As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaRecepcionRetIVA As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaRetISLR As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtVenceDB As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtEmisionDB As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtEmisionCR As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents cmbFPCR As Syncfusion.WinForms.ListView.SfComboBox
 End Class

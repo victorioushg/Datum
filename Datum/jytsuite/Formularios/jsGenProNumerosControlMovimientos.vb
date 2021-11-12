@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsGenProNumerosControlMovimientos
     Private Const sModulo As String = "Número de control anulado"
 
@@ -39,9 +41,8 @@ Public Class jsGenProNumerosControlMovimientos
     End Sub
     Private Sub IniciarTXT()
         ft.habilitarObjetos(True, True, txtNumeroControl)
-        ft.habilitarObjetos(False, True, txtFecha)
         txtNumeroControl.Text = ""
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
     End Sub
 
     Private Sub jsGenProNumerosControlMovimientos_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
@@ -51,12 +52,14 @@ Public Class jsGenProNumerosControlMovimientos
     End Sub
 
     Private Sub jsGenProNumerosControlMovimientos_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Dim dates As SfDateTimeEdit() = {txtFecha}
+        SetSizeDateObjects(dates)
         btnOK.Image = ImageList1.Images(0)
         btnCancel.Image = ImageList1.Images(1)
     End Sub
 
     Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtNumeroControl.GotFocus
-        ft.mensajeEtiqueta(lblInfo, "Indique el Número de Control Anulado...", Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, "Indique el Número de Control Anulado...", Transportables.tipoMensaje.iInfo)
     End Sub
 
     Private Function Validado() As Boolean
@@ -68,7 +71,7 @@ Public Class jsGenProNumerosControlMovimientos
             Dim aCam() As String = {"num_control", "id_emp", "org", "origen"}
             Dim aStr() As String = {txtNumeroControl.Text, jytsistema.WorkID, "CON", Origen}
             If qFound(MyConn, lblInfo, "jsconnumcon", aCam, aStr) Then
-                ft.MensajeCritico("Número de Control YA está ANULADO ")
+                ft.mensajeCritico("Número de Control YA está ANULADO ")
                 ft.enfocarTexto(txtNumeroControl)
                 Exit Function
             End If
@@ -82,7 +85,7 @@ Public Class jsGenProNumerosControlMovimientos
             Dim Insertar As Boolean = False
             If i_modo = movimiento.iAgregar Then
 
-                ft.Ejecutar_strSQL(myconn, "INSERT INTO jsconnumcon " _
+                ft.Ejecutar_strSQL(MyConn, "INSERT INTO jsconnumcon " _
                          & " set " _
                          & " numdoc = '" & txtNumeroControl.Text & "',   " _
                          & " num_control = '" & txtNumeroControl.Text & "',  " _
@@ -101,9 +104,5 @@ Public Class jsGenProNumerosControlMovimientos
 
     Private Sub btnCancel_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
-    End Sub
-
-    Private Sub btnDescripcion_Click(sender As System.Object, e As System.EventArgs) Handles btnDescripcion.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, sender)
     End Sub
 End Class

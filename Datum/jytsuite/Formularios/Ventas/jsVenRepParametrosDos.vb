@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Imports System.IO
 Imports ReportesDeVentas
 Public Class jsVenRepParametrosDos
@@ -56,6 +57,9 @@ Public Class jsVenRepParametrosDos
 
         Me.Dock = DockStyle.Fill
         myConn.Open()
+
+        Dim dates As SfDateTimeEdit() = {txtPeriodoDesde, txtPeriodoHasta}
+        SetSizeDateObjects(dates)
 
         ReporteNumero = numReporte
         ReporteNombre = nomReporte
@@ -265,36 +269,36 @@ Public Class jsVenRepParametrosDos
 
     Private Sub VerCriterio_Periodo(ByVal Ver As Boolean, ByVal CompletoDesdeHasta As Integer, Optional ByVal Periodo As TipoPeriodo = TipoPeriodo.iMensual)
         'CompletoDesdeHasta 0 = Complete , 1 = Desde , 2 = Hasta 
-        ft.visualizarObjetos(False, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta, btnPeriodoDesde, btnPeriodoHasta)
-        ft.habilitarObjetos(False, True, txtPeriodoDesde, txtPeriodoHasta)
+        ft.visualizarObjetos(False, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta)
+
         periodoTipo = Periodo
         If Ver Then
             Select Case CompletoDesdeHasta
                 Case 0
-                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta, btnPeriodoDesde, btnPeriodoHasta)
+                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta)
                 Case 1
-                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodo, txtPeriodoDesde, btnPeriodoDesde)
+                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodo, txtPeriodoDesde)
                 Case 2
-                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoHasta, btnPeriodoHasta)
+                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoHasta)
             End Select
         End If
         ft.habilitarObjetos(False, True, txtPeriodoDesde, txtPeriodoHasta)
         Select Case Periodo
             Case TipoPeriodo.iDiario
-                txtPeriodoDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtPeriodoHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoDesde.Value = jytsistema.sFechadeTrabajo
+                txtPeriodoHasta.Value = jytsistema.sFechadeTrabajo
             Case TipoPeriodo.iSemanal
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaSemana(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaSemana(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaSemana(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaSemana(jytsistema.sFechadeTrabajo)
             Case TipoPeriodo.iMensual
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaMes(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaMes(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaMes(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaMes(jytsistema.sFechadeTrabajo)
             Case TipoPeriodo.iAnual
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaAño(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaAño(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaAño(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaAño(jytsistema.sFechadeTrabajo)
             Case Else
-                txtPeriodoDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtPeriodoHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoDesde.Value = jytsistema.sFechadeTrabajo
+                txtPeriodoHasta.Value = jytsistema.sFechadeTrabajo
         End Select
 
     End Sub
@@ -1165,24 +1169,12 @@ Public Class jsVenRepParametrosDos
                 GruposCantidad = 0
         End Select
     End Function
-
-
-    Private Sub btnPeriodoDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles btnPeriodoDesde.Click
-        txtPeriodoDesde.Text = SeleccionaFecha(CDate(txtPeriodoDesde.Text), Me, grpCriterios, sender)
-    End Sub
-
-    Private Sub btnPeriodoHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles btnPeriodoHasta.Click
-        txtPeriodoHasta.Text = SeleccionaFecha(CDate(txtPeriodoHasta.Text), Me, grpCriterios, sender)
-    End Sub
-
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
         LimpiarOrden()
         LimpiarGrupos()
     End Sub
     Private Sub LimpiarGrupos()
-        LimpiarTextos(txtCanalDesde, txtCanalHasta, txtRutaDesde, txtRutaHasta, txtAsesorDesde, txtPais, txtAsesorHasta, _
+        LimpiarTextos(txtCanalDesde, txtCanalHasta, txtRutaDesde, txtRutaHasta, txtAsesorDesde, txtPais, txtAsesorHasta,
             txtEstado, txtMunicipio, txtZonaDesde, txtZonaHasta, txtTipoNegocioDesde, txtTipoNegocioHasta)
     End Sub
     Private Sub LimpiarOrden()
@@ -1226,7 +1218,7 @@ Public Class jsVenRepParametrosDos
     Private Function LineaCriterios() As String
         LineaCriterios = ""
         If ReporteNumero = ReporteVentas.cLibroIVA Then
-            LineaCriterios = "MES : " & UCase(Format(CDate(txtPeriodoDesde.Text), "MMMM")) & _
+            LineaCriterios = "MES : " & UCase(Format(CDate(txtPeriodoDesde.Text), "MMMM")) &
                             " - AÑO : " & CDate(txtPeriodoHasta.Text).Year.ToString
         Else
             If lblPeriodo.Visible Then LineaCriterios += "Período: " & IIf(lblPeriodoDesde.Visible, txtPeriodoDesde.Text, "") & IIf(lblPeriodoDesde.Visible AndAlso lblPeriodoHasta.Visible, "/", "") & IIf(lblPeriodoHasta.Visible, txtPeriodoHasta.Text, "")
@@ -1264,9 +1256,9 @@ Public Class jsVenRepParametrosDos
         If LineaConstantes <> "" Then LineaConstantes += " - "
         If lblEstatus.Visible Then LineaConstantes += " Estatus Clientes : " + aEstatus(cmbEstatus.SelectedIndex)
         If LineaConstantes <> "" Then LineaConstantes += " - "
-        If lblLapso.Visible Then LineaConstantes += " Lapsos: 1. " + txtDesde1.Text + "-" + txtHasta1.Text + _
-                                                    " 2. " + txtDesde2.Text + "-" + txtHasta2.Text + _
-                                                    " 3. " + txtDesde3.Text + "-" + txtHasta3.Text + _
+        If lblLapso.Visible Then LineaConstantes += " Lapsos: 1. " + txtDesde1.Text + "-" + txtHasta1.Text +
+                                                    " 2. " + txtDesde2.Text + "-" + txtHasta2.Text +
+                                                    " 3. " + txtDesde3.Text + "-" + txtHasta3.Text +
                                                     " 4. " + txtDesde4.Text
         If lblConstanteVentas.Visible Then LineaConstantes += " - Ventas mayores a " & txtConstanteVentas.Text & " " & cmbTipoReporte.SelectedText
         If LineaConstantes <> "" Then LineaConstantes += " - "
@@ -1296,13 +1288,13 @@ Public Class jsVenRepParametrosDos
 
     Private Sub cmbCXCAgrupadorPor_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCXCAgrupadorPor.SelectedIndexChanged
 
-        ft.visualizarObjetos(False, lblGrupoDesde, lblGrupoHasta, lblCanal, lblTipoNegocio, lblZona, lblRuta, lblAsesor, lblTerritorio, _
-                            txtCanalDesde, btnCanalDesde, txtCanalHasta, btnCanalHasta, _
-                            txtTipoNegocioDesde, btnTipoNegocioDesde, txtTipoNegocioHasta, btnTipoNegocioHasta, _
-                            txtZonaDesde, btnZonaDesde, txtZonaHasta, btnZonaHasta, _
-                            txtRutaDesde, btnRutaDesde, txtRutaHasta, btnRutaHasta, _
-                            txtAsesorDesde, btnAsesorDesde, txtAsesorHasta, btnAsesorHasta, _
-                            txtPais, btnPais, txtEstado, btnEstado, txtMunicipio, btnMunicipio, _
+        ft.visualizarObjetos(False, lblGrupoDesde, lblGrupoHasta, lblCanal, lblTipoNegocio, lblZona, lblRuta, lblAsesor, lblTerritorio,
+                            txtCanalDesde, btnCanalDesde, txtCanalHasta, btnCanalHasta,
+                            txtTipoNegocioDesde, btnTipoNegocioDesde, txtTipoNegocioHasta, btnTipoNegocioHasta,
+                            txtZonaDesde, btnZonaDesde, txtZonaHasta, btnZonaHasta,
+                            txtRutaDesde, btnRutaDesde, txtRutaHasta, btnRutaHasta,
+                            txtAsesorDesde, btnAsesorDesde, txtAsesorHasta, btnAsesorHasta,
+                            txtPais, btnPais, txtEstado, btnEstado, txtMunicipio, btnMunicipio,
                             txtParroquia, btnParroquia, txtCiudad, btnCiudad, txtBarrio, btnBarrio)
         LimpiarGrupos()
         Select Case cmbCXCAgrupadorPor.SelectedIndex
@@ -1366,7 +1358,7 @@ Public Class jsVenRepParametrosDos
 
     Private Sub VerTerritorio()
         ft.visualizarObjetos(True, lblGrupoDesde, lblGrupoHasta)
-        ft.visualizarObjetos(True, lblTerritorio, txtPais, btnPais, txtEstado, btnEstado, _
+        ft.visualizarObjetos(True, lblTerritorio, txtPais, btnPais, txtEstado, btnEstado,
                             txtMunicipio, btnMunicipio, txtParroquia, btnParroquia, txtCiudad, btnCiudad, txtBarrio, btnBarrio)
         ft.habilitarObjetos(False, True, txtPais, txtEstado, txtMunicipio, txtParroquia, txtCiudad, txtBarrio)
     End Sub
@@ -1384,7 +1376,7 @@ Public Class jsVenRepParametrosDos
 
     Private Sub VerJerarquias()
         ft.visualizarObjetos(True, lblGrupoDesde, lblGrupoHasta)
-        ft.visualizarObjetos(True, lblJerarquias, txtTipoJerarquia, btnTipoJerarquia, txtCodjer1, btnCodjer1, _
+        ft.visualizarObjetos(True, lblJerarquias, txtTipoJerarquia, btnTipoJerarquia, txtCodjer1, btnCodjer1,
                             txtCodjer2, btnCodjer2, txtCodjer3, btnCodjer3, txtCodjer4, btnCodjer4, txtCodjer5, btnCodjer5, txtCodjer6, btnCodjer6)
         ft.habilitarObjetos(False, True, txtTipoJerarquia, txtCodjer1, txtCodjer2, txtCodjer3, txtCodjer4, txtCodjer5, txtCodjer6)
     End Sub
@@ -1418,22 +1410,22 @@ Public Class jsVenRepParametrosDos
     End Sub
 
     Private Sub btnCanalDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCanalDesde.Click
-        txtCanalDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, "select codigo, descrip descripcion from jsvenliscan where id_emp = '" & jytsistema.WorkID & "' order by 1", "Canales", _
+        txtCanalDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, "select codigo, descrip descripcion from jsvenliscan where id_emp = '" & jytsistema.WorkID & "' order by 1", "Canales",
                                                txtCanalDesde.Text)
     End Sub
 
     Private Sub btnCanalHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCanalHasta.Click
-        txtCanalHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, "select codigo, descrip descripcion from jsvenliscan where id_emp = '" & jytsistema.WorkID & "' order by 1", "Canales", _
+        txtCanalHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, "select codigo, descrip descripcion from jsvenliscan where id_emp = '" & jytsistema.WorkID & "' order by 1", "Canales",
                                                txtCanalHasta.Text)
     End Sub
 
     Private Sub btnTipoNegocioDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTipoNegocioDesde.Click
-        txtTipoNegocioDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, "select codigo, descrip descripcion from jsvenlistip where id_emp = '" & jytsistema.WorkID & "' order by 1", "Tipos de Negocio", _
+        txtTipoNegocioDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, "select codigo, descrip descripcion from jsvenlistip where id_emp = '" & jytsistema.WorkID & "' order by 1", "Tipos de Negocio",
                                                      txtTipoNegocioDesde.Text)
     End Sub
 
     Private Sub btnTipoNegocioHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTipoNegocioHasta.Click
-        txtTipoNegocioHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, "select codigo, descrip descripcion from jsvenlistip where id_emp = '" & jytsistema.WorkID & "' order by 1", "Tipos de Negocio", _
+        txtTipoNegocioHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, "select codigo, descrip descripcion from jsvenlistip where id_emp = '" & jytsistema.WorkID & "' order by 1", "Tipos de Negocio",
                                                      txtTipoNegocioHasta.Text)
     End Sub
 
@@ -1509,7 +1501,7 @@ Public Class jsVenRepParametrosDos
         txtClienteHasta.Text = txtClienteDesde.Text
     End Sub
 
-    Private Sub chkList_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkList.SelectedIndexChanged, _
+    Private Sub chkList_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkList.SelectedIndexChanged,
          chkList.DoubleClick
         Dim iCont As Integer
         txtTipDoc.Text = ""
@@ -1522,11 +1514,11 @@ Public Class jsVenRepParametrosDos
 
 
     Private Sub cmbMERAgrupadoPor_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cmbMERAgrupadoPor.SelectedIndexChanged
-        ft.visualizarObjetos(False, lblGrupoDesde, lblGrupoHasta, lblCategoria, lblMarcas, lblDivisiones, lblJerarquias, _
-                         txtCategoriaDesde, btnCategoriaDesde, txtCategoriaHasta, btnCategoriaHasta, _
-                         txtMarcaDesde, btnMarcaDesde, txtMarcaHasta, btnMarcaHasta, _
-                         txtDivisionDesde, btnDivisionDesde, txtDivisionHasta, btnDivisionHasta, _
-                         txtTipoJerarquia, btnTipoJerarquia, txtCodjer1, btnCodjer1, txtCodjer2, btnCodjer2, _
+        ft.visualizarObjetos(False, lblGrupoDesde, lblGrupoHasta, lblCategoria, lblMarcas, lblDivisiones, lblJerarquias,
+                         txtCategoriaDesde, btnCategoriaDesde, txtCategoriaHasta, btnCategoriaHasta,
+                         txtMarcaDesde, btnMarcaDesde, txtMarcaHasta, btnMarcaHasta,
+                         txtDivisionDesde, btnDivisionDesde, txtDivisionHasta, btnDivisionHasta,
+                         txtTipoJerarquia, btnTipoJerarquia, txtCodjer1, btnCodjer1, txtCodjer2, btnCodjer2,
                          txtCodjer3, btnCodjer3, txtCodjer4, btnCodjer4, txtCodjer5, btnCodjer5, txtCodjer6, btnCodjer6)
         LimpiarGrupos()
         Select Case cmbMERAgrupadoPor.SelectedIndex
@@ -1619,10 +1611,10 @@ Public Class jsVenRepParametrosDos
     End Sub
 
     Private Sub btnTipoJerarquia_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTipoJerarquia.Click
-        txtTipoJerarquia.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT tipjer codigo, descrip descripcion FROM jsmerencjer WHERE  id_emp  = '" & jytsistema.WorkID & "' order by 1 ", " Tipo de Jerarquía", _
+        txtTipoJerarquia.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT tipjer codigo, descrip descripcion FROM jsmerencjer WHERE  id_emp  = '" & jytsistema.WorkID & "' order by 1 ", " Tipo de Jerarquía",
                                                   txtTipoJerarquia.Text)
     End Sub
-    Private Sub CargarJerarquia(ByVal MyConn As MySqlConnection, ByVal ds As DataSet, ByVal TipoJerarquia As String, ByVal Nivel As Integer, _
+    Private Sub CargarJerarquia(ByVal MyConn As MySqlConnection, ByVal ds As DataSet, ByVal TipoJerarquia As String, ByVal Nivel As Integer,
                                     ByVal txtCodjer As TextBox)
 
         If TipoJerarquia <> "" Then
@@ -1665,12 +1657,12 @@ Public Class jsVenRepParametrosDos
     End Sub
 
     Private Sub btnMercanciaDesde_Click(sender As System.Object, e As System.EventArgs) Handles btnMercanciaDesde.Click
-        txtMercanciaDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codart codigo, nomart descripcion from jsmerctainv where estatus = 1 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Mercancías", _
+        txtMercanciaDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codart codigo, nomart descripcion from jsmerctainv where estatus = 1 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Mercancías",
                                                   txtMercanciaDesde.Text)
     End Sub
 
     Private Sub btnMercanciaHasta_Click(sender As System.Object, e As System.EventArgs) Handles btnMercanciaHasta.Click
-        txtMercanciaHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codart codigo, nomart descripcion from jsmerctainv where estatus = 1 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Mercancías", _
+        txtMercanciaHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codart codigo, nomart descripcion from jsmerctainv where estatus = 1 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Mercancías",
                                                   txtMercanciaHasta.Text)
     End Sub
 
@@ -1702,22 +1694,22 @@ Public Class jsVenRepParametrosDos
         txtAlmacenHasta.Text = txtAlmacenDesde.Text
     End Sub
 
-    Private Sub txtDesde1_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDesde1.KeyPress, txtDesde2.KeyPress, _
+    Private Sub txtDesde1_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDesde1.KeyPress, txtDesde2.KeyPress,
         txtDesde3.KeyPress, txtDesde4.KeyPress, txtHasta1.KeyPress, txtHasta2.KeyPress, txtHasta3.KeyPress, txtPrimeros.KeyPress
         e.Handled = ft.validaNumeroEnTextbox(e)
     End Sub
 
 
-    Private Sub txtPeriodoDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPeriodoDesde.TextChanged
-        Select Case PeriodoTipo
+    Private Sub txtPeriodoDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPeriodoDesde.ValueChanged
+        Select Case periodoTipo
             Case TipoPeriodo.iDiario
-                txtPeriodoHasta.Text = txtPeriodoDesde.Text
+                txtPeriodoHasta.Value = txtPeriodoDesde.Value
             Case TipoPeriodo.iSemanal
-                txtPeriodoHasta.Text = ft.FormatoFecha(DateAdd(DateInterval.Day, 7, CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = DateAdd(DateInterval.Day, 7, CDate(txtPeriodoDesde.Text))
             Case TipoPeriodo.iMensual
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaMes(CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = UltimoDiaMes(CDate(txtPeriodoDesde.Text))
             Case TipoPeriodo.iAnual
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaAño(CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = UltimoDiaAño(CDate(txtPeriodoDesde.Text))
         End Select
     End Sub
 

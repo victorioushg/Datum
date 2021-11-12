@@ -21,7 +21,6 @@ Partial Class jsControlProVerificaBD
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsControlProVerificaBD))
         Me.lblInfo = New System.Windows.Forms.Label()
-        Me.grpCaja = New System.Windows.Forms.GroupBox()
         Me.lblLeyenda = New System.Windows.Forms.Label()
         Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCancel = New System.Windows.Forms.Button()
@@ -29,24 +28,9 @@ Partial Class jsControlProVerificaBD
         Me.C1PictureBox1 = New C1.Win.C1Input.C1PictureBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.chk1 = New System.Windows.Forms.CheckBox()
-        Me.chk2 = New System.Windows.Forms.CheckBox()
-        Me.chk3 = New System.Windows.Forms.CheckBox()
-        Me.chk4 = New System.Windows.Forms.CheckBox()
-        Me.chk5 = New System.Windows.Forms.CheckBox()
-        Me.chk6 = New System.Windows.Forms.CheckBox()
-        Me.chk7 = New System.Windows.Forms.CheckBox()
-        Me.chk8 = New System.Windows.Forms.CheckBox()
-        Me.chk9 = New System.Windows.Forms.CheckBox()
-        Me.chk10 = New System.Windows.Forms.CheckBox()
-        Me.chk11 = New System.Windows.Forms.CheckBox()
-        Me.chk12 = New System.Windows.Forms.CheckBox()
-        Me.chk = New System.Windows.Forms.CheckBox()
-        Me.grpGestiones = New System.Windows.Forms.GroupBox()
-        Me.grpCaja.SuspendLayout()
+        Me.lvApps = New Syncfusion.WinForms.ListView.SfListView()
         Me.grpAceptarSalir.SuspendLayout()
         CType(Me.C1PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.grpGestiones.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblInfo
@@ -59,25 +43,15 @@ Partial Class jsControlProVerificaBD
         Me.lblInfo.Size = New System.Drawing.Size(566, 27)
         Me.lblInfo.TabIndex = 80
         '
-        'grpCaja
-        '
-        Me.grpCaja.BackColor = System.Drawing.SystemColors.Control
-        Me.grpCaja.Controls.Add(Me.lblLeyenda)
-        Me.grpCaja.Location = New System.Drawing.Point(1, 58)
-        Me.grpCaja.Name = "grpCaja"
-        Me.grpCaja.Size = New System.Drawing.Size(730, 149)
-        Me.grpCaja.TabIndex = 82
-        Me.grpCaja.TabStop = False
-        '
         'lblLeyenda
         '
         Me.lblLeyenda.BackColor = System.Drawing.Color.White
         Me.lblLeyenda.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblLeyenda.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblLeyenda.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(71, Byte), Integer), CType(CType(182, Byte), Integer))
-        Me.lblLeyenda.Location = New System.Drawing.Point(12, 15)
+        Me.lblLeyenda.Location = New System.Drawing.Point(1, 65)
         Me.lblLeyenda.Name = "lblLeyenda"
-        Me.lblLeyenda.Size = New System.Drawing.Size(707, 126)
+        Me.lblLeyenda.Size = New System.Drawing.Size(368, 47)
         Me.lblLeyenda.TabIndex = 90
         Me.lblLeyenda.Text = " "
         '
@@ -89,7 +63,7 @@ Partial Class jsControlProVerificaBD
         Me.grpAceptarSalir.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.grpAceptarSalir.Controls.Add(Me.btnCancel, 1, 0)
         Me.grpAceptarSalir.Controls.Add(Me.btnOK, 0, 0)
-        Me.grpAceptarSalir.Location = New System.Drawing.Point(569, 390)
+        Me.grpAceptarSalir.Location = New System.Drawing.Point(207, 390)
         Me.grpAceptarSalir.Name = "grpAceptarSalir"
         Me.grpAceptarSalir.RowCount = 1
         Me.grpAceptarSalir.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -155,202 +129,40 @@ Partial Class jsControlProVerificaBD
         Me.Label10.Text = "Datum"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'chk1
+        'lvApps
         '
-        Me.chk1.AutoSize = True
-        Me.chk1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chk1.Location = New System.Drawing.Point(28, 45)
-        Me.chk1.Name = "chk1"
-        Me.chk1.Size = New System.Drawing.Size(96, 17)
-        Me.chk1.TabIndex = 90
-        Me.chk1.Text = "Contabilidad"
-        Me.chk1.UseVisualStyleBackColor = True
-        '
-        'chk2
-        '
-        Me.chk2.AutoSize = True
-        Me.chk2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chk2.Location = New System.Drawing.Point(28, 68)
-        Me.chk2.Name = "chk2"
-        Me.chk2.Size = New System.Drawing.Size(112, 17)
-        Me.chk2.TabIndex = 91
-        Me.chk2.Text = "Bancos y cajas"
-        Me.chk2.UseVisualStyleBackColor = True
-        '
-        'chk3
-        '
-        Me.chk3.AutoSize = True
-        Me.chk3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chk3.Location = New System.Drawing.Point(28, 91)
-        Me.chk3.Name = "chk3"
-        Me.chk3.Size = New System.Drawing.Size(135, 17)
-        Me.chk3.TabIndex = 92
-        Me.chk3.Text = "Recursos Humanos"
-        Me.chk3.UseVisualStyleBackColor = True
-        '
-        'chk4
-        '
-        Me.chk4.AutoSize = True
-        Me.chk4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chk4.Location = New System.Drawing.Point(28, 114)
-        Me.chk4.Name = "chk4"
-        Me.chk4.Size = New System.Drawing.Size(236, 17)
-        Me.chk4.TabIndex = 93
-        Me.chk4.Text = "Compras, gastos y cuentas por pagar"
-        Me.chk4.UseVisualStyleBackColor = True
-        '
-        'chk5
-        '
-        Me.chk5.AutoSize = True
-        Me.chk5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chk5.Location = New System.Drawing.Point(28, 137)
-        Me.chk5.Name = "chk5"
-        Me.chk5.Size = New System.Drawing.Size(186, 17)
-        Me.chk5.TabIndex = 94
-        Me.chk5.Text = "Ventas y cuentas por cobrar"
-        Me.chk5.UseVisualStyleBackColor = True
-        '
-        'chk6
-        '
-        Me.chk6.AutoSize = True
-        Me.chk6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chk6.Location = New System.Drawing.Point(276, 47)
-        Me.chk6.Name = "chk6"
-        Me.chk6.Size = New System.Drawing.Size(125, 17)
-        Me.chk6.TabIndex = 95
-        Me.chk6.Text = "Puntos de ventas"
-        Me.chk6.UseVisualStyleBackColor = True
-        '
-        'chk7
-        '
-        Me.chk7.AutoSize = True
-        Me.chk7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chk7.Location = New System.Drawing.Point(276, 70)
-        Me.chk7.Name = "chk7"
-        Me.chk7.Size = New System.Drawing.Size(93, 17)
-        Me.chk7.TabIndex = 96
-        Me.chk7.Text = "Mercancías"
-        Me.chk7.UseVisualStyleBackColor = True
-        '
-        'chk8
-        '
-        Me.chk8.AutoSize = True
-        Me.chk8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chk8.Location = New System.Drawing.Point(276, 93)
-        Me.chk8.Name = "chk8"
-        Me.chk8.Size = New System.Drawing.Size(90, 17)
-        Me.chk8.TabIndex = 97
-        Me.chk8.Text = "Producción"
-        Me.chk8.UseVisualStyleBackColor = True
-        '
-        'chk9
-        '
-        Me.chk9.AutoSize = True
-        Me.chk9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chk9.Location = New System.Drawing.Point(276, 116)
-        Me.chk9.Name = "chk9"
-        Me.chk9.Size = New System.Drawing.Size(133, 17)
-        Me.chk9.TabIndex = 98
-        Me.chk9.Text = "Medición gerencial"
-        Me.chk9.UseVisualStyleBackColor = True
-        '
-        'chk10
-        '
-        Me.chk10.AutoSize = True
-        Me.chk10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chk10.Location = New System.Drawing.Point(276, 137)
-        Me.chk10.Name = "chk10"
-        Me.chk10.Size = New System.Drawing.Size(142, 17)
-        Me.chk10.TabIndex = 99
-        Me.chk10.Text = "Control de gestiones"
-        Me.chk10.UseVisualStyleBackColor = True
-        '
-        'chk11
-        '
-        Me.chk11.AutoSize = True
-        Me.chk11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chk11.Location = New System.Drawing.Point(461, 47)
-        Me.chk11.Name = "chk11"
-        Me.chk11.Size = New System.Drawing.Size(183, 17)
-        Me.chk11.TabIndex = 100
-        Me.chk11.Text = "Funciones y procedimientos"
-        Me.chk11.UseVisualStyleBackColor = True
-        '
-        'chk12
-        '
-        Me.chk12.AutoSize = True
-        Me.chk12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chk12.Location = New System.Drawing.Point(461, 70)
-        Me.chk12.Name = "chk12"
-        Me.chk12.Size = New System.Drawing.Size(78, 17)
-        Me.chk12.TabIndex = 101
-        Me.chk12.Text = "Servicios"
-        Me.chk12.UseVisualStyleBackColor = True
-        '
-        'chk
-        '
-        Me.chk.AutoSize = True
-        Me.chk.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chk.Location = New System.Drawing.Point(28, 22)
-        Me.chk.Name = "chk"
-        Me.chk.Size = New System.Drawing.Size(61, 17)
-        Me.chk.TabIndex = 102
-        Me.chk.Text = "Todos"
-        Me.chk.UseVisualStyleBackColor = True
-        '
-        'grpGestiones
-        '
-        Me.grpGestiones.Controls.Add(Me.chk11)
-        Me.grpGestiones.Controls.Add(Me.chk)
-        Me.grpGestiones.Controls.Add(Me.chk5)
-        Me.grpGestiones.Controls.Add(Me.chk12)
-        Me.grpGestiones.Controls.Add(Me.chk4)
-        Me.grpGestiones.Controls.Add(Me.chk10)
-        Me.grpGestiones.Controls.Add(Me.chk3)
-        Me.grpGestiones.Controls.Add(Me.chk6)
-        Me.grpGestiones.Controls.Add(Me.chk2)
-        Me.grpGestiones.Controls.Add(Me.chk9)
-        Me.grpGestiones.Controls.Add(Me.chk1)
-        Me.grpGestiones.Controls.Add(Me.chk7)
-        Me.grpGestiones.Controls.Add(Me.chk8)
-        Me.grpGestiones.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpGestiones.Location = New System.Drawing.Point(3, 213)
-        Me.grpGestiones.Name = "grpGestiones"
-        Me.grpGestiones.Size = New System.Drawing.Size(728, 169)
-        Me.grpGestiones.TabIndex = 103
-        Me.grpGestiones.TabStop = False
-        Me.grpGestiones.Text = "Sistemas y/o gestiones"
+        Me.lvApps.AccessibleName = "ScrollControl"
+        Me.lvApps.Location = New System.Drawing.Point(-1, 115)
+        Me.lvApps.Name = "lvApps"
+        Me.lvApps.Size = New System.Drawing.Size(369, 272)
+        Me.lvApps.TabIndex = 91
         '
         'jsControlProVerificaBD
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(732, 418)
+        Me.ClientSize = New System.Drawing.Size(370, 418)
         Me.ControlBox = False
-        Me.Controls.Add(Me.grpGestiones)
+        Me.Controls.Add(Me.lvApps)
         Me.Controls.Add(Me.grpAceptarSalir)
+        Me.Controls.Add(Me.lblLeyenda)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.C1PictureBox1)
         Me.Controls.Add(Me.lblInfo)
-        Me.Controls.Add(Me.grpCaja)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "jsControlProVerificaBD"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Conciliación bancaria"
-        Me.grpCaja.ResumeLayout(False)
         Me.grpAceptarSalir.ResumeLayout(False)
         CType(Me.C1PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.grpGestiones.ResumeLayout(False)
-        Me.grpGestiones.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents lblInfo As System.Windows.Forms.Label
-    Friend WithEvents grpCaja As System.Windows.Forms.GroupBox
     Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
@@ -358,18 +170,5 @@ Partial Class jsControlProVerificaBD
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents lblLeyenda As System.Windows.Forms.Label
-    Friend WithEvents chk1 As System.Windows.Forms.CheckBox
-    Friend WithEvents chk2 As System.Windows.Forms.CheckBox
-    Friend WithEvents chk3 As System.Windows.Forms.CheckBox
-    Friend WithEvents chk4 As System.Windows.Forms.CheckBox
-    Friend WithEvents chk5 As System.Windows.Forms.CheckBox
-    Friend WithEvents chk6 As System.Windows.Forms.CheckBox
-    Friend WithEvents chk7 As System.Windows.Forms.CheckBox
-    Friend WithEvents chk8 As System.Windows.Forms.CheckBox
-    Friend WithEvents chk9 As System.Windows.Forms.CheckBox
-    Friend WithEvents chk10 As System.Windows.Forms.CheckBox
-    Friend WithEvents chk11 As System.Windows.Forms.CheckBox
-    Friend WithEvents chk12 As System.Windows.Forms.CheckBox
-    Friend WithEvents chk As System.Windows.Forms.CheckBox
-    Friend WithEvents grpGestiones As System.Windows.Forms.GroupBox
+    Friend WithEvents lvApps As Syncfusion.WinForms.ListView.SfListView
 End Class

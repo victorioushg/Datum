@@ -1,17 +1,21 @@
 ﻿Imports MySql.Data.MySqlClient
-Module TablasVentas
-    Private ft As New Transportables
+Imports fTransport
+Public Module TablasVentas
 
-    Public Sub InsertEditVENTASCXC(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, ByVal CodigoCliente As String, _
-    ByVal TipoMovimiento As String, ByVal NumeroMovimiento As String, ByVal FechaEmision As Date, ByVal Hora As String, _
-    ByVal FechaVencimiento As Date, ByVal Referencia As String, ByVal Concepto As String, ByVal Importe As Double, _
-    ByVal ImporteIVA As Double, ByVal FormaPago As String, ByVal CajaPago As String, ByVal NumeroPago As String, _
-    ByVal NombrePago As String, ByVal Beneficiario As String, ByVal Origen As String, ByVal NumeroOrigen As String, _
-    ByVal MultiCancelacion As String, ByVal Asiento As String, ByVal FechaAsiento As Date, ByVal CodigoContable As String, _
-    ByVal Multidocumento As String, ByVal TipoDocumentoCancelado As String, ByVal Interes As Double, _
-    ByVal Capital As Double, ByVal Comprobante As String, ByVal Banco As String, ByVal CuentaBancaria As String, _
-    ByVal Remesa As String, ByVal CodigoVendedor As String, ByVal CodigoCobrador As String, ByVal Historico As String, _
-    ByVal DebitoCredito As String, ByVal Division As String)
+
+    Public ft As New Transportables
+
+    Public Sub InsertEditVENTASCXC(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, ByVal CodigoCliente As String,
+    ByVal TipoMovimiento As String, ByVal NumeroMovimiento As String, ByVal FechaEmision As Date, ByVal Hora As String,
+    ByVal FechaVencimiento As Date, ByVal Referencia As String, ByVal Concepto As String, ByVal Importe As Double,
+    ByVal ImporteIVA As Double, ByVal FormaPago As String, ByVal CajaPago As String, ByVal NumeroPago As String,
+    ByVal NombrePago As String, ByVal Beneficiario As String, ByVal Origen As String, ByVal NumeroOrigen As String,
+    ByVal MultiCancelacion As String, ByVal Asiento As String, ByVal FechaAsiento As Date, ByVal CodigoContable As String,
+    ByVal Multidocumento As String, ByVal TipoDocumentoCancelado As String, ByVal Interes As Double,
+    ByVal Capital As Double, ByVal Comprobante As String, ByVal Banco As String, ByVal CuentaBancaria As String,
+    ByVal Remesa As String, ByVal CodigoVendedor As String, ByVal CodigoCobrador As String, ByVal Historico As String,
+    ByVal DebitoCredito As String, ByVal Division As String,
+                                   ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
         Dim strSQL As String
         Dim strSQLInicio As String
@@ -28,7 +32,8 @@ Module TablasVentas
             strSQLInicio = " insert into jsventracob SET "
             strSQL = ""
             strSQLFin = " "
-
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
 
         Else
             Dim strHORA As String = ""
@@ -86,13 +91,14 @@ Module TablasVentas
         strSQL = strSQL & ModificarCadena(Division, "division")
         strSQL = strSQL & ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub InsertEditVENTASCancelacion(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-   ByVal CodigoCliente As String, ByVal TipoMovimiento As String, ByVal NumeroMovimiento As String, _
-   ByVal Emision As Date, ByVal Referencia As String, ByVal Concepto As String, ByVal Importe As Double, _
-   ByVal Comprobante As String, ByVal CodigoVendedor As String)
+    Public Sub InsertEditVENTASCancelacion(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+   ByVal CodigoCliente As String, ByVal TipoMovimiento As String, ByVal NumeroMovimiento As String,
+   ByVal Emision As Date, ByVal Referencia As String, ByVal Concepto As String, ByVal Importe As Double,
+   ByVal Comprobante As String, ByVal CodigoVendedor As String,
+                                           ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
 
         Dim strSQL As String = ""
@@ -101,6 +107,8 @@ Module TablasVentas
 
         If Insertar Then
             strSQLInicio = " insert into jsventracobcan SET "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsventracobcan set "
             strSQLFin = " WHERE " _
@@ -122,19 +130,19 @@ Module TablasVentas
         strSQL += ModificarCadena(CodigoVendedor, "codven")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
 
-    Public Sub InsertEditVENTASVendedor(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-    ByVal CodigoVendedor As String, ByVal Cargo As String, ByVal Apellidos As String, ByVal Nombres As String, _
-    ByVal Direccion As String, ByVal Telefono As String, ByVal Celular As String, ByVal email As String, _
-    ByVal Fianza As Double, ByVal Tipo As String, ByVal Zona As String, ByVal Estructura As String, _
-    ByVal clave As String, ByVal Ingreso As Date, ByVal CarteraClientes As Integer, ByVal CarteraArticulos As Integer, _
-    ByVal CarteraMarcas As Integer, ByVal ListaA As Integer, ByVal ListaB As Integer, ByVal ListaC As Integer, _
-    ByVal ListaD As Integer, ByVal ListaE As Integer, ByVal ListaF As Integer, ByVal FactorCuota As Double, _
-    ByVal Estatus As Integer, ByVal Division As String, ByVal Supervisor As String, ByVal ComisionVenta As Double, _
+    Public Sub InsertEditVENTASVendedor(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+    ByVal CodigoVendedor As String, ByVal Cargo As String, ByVal Apellidos As String, ByVal Nombres As String,
+    ByVal Direccion As String, ByVal Telefono As String, ByVal Celular As String, ByVal email As String,
+    ByVal Fianza As Double, ByVal Tipo As String, ByVal Zona As String, ByVal Estructura As String,
+    ByVal clave As String, ByVal Ingreso As Date, ByVal CarteraClientes As Integer, ByVal CarteraArticulos As Integer,
+    ByVal CarteraMarcas As Integer, ByVal ListaA As Integer, ByVal ListaB As Integer, ByVal ListaC As Integer,
+    ByVal ListaD As Integer, ByVal ListaE As Integer, ByVal ListaF As Integer, ByVal FactorCuota As Double,
+    ByVal Estatus As Integer, ByVal Division As String, ByVal Supervisor As String, ByVal ComisionVenta As Double,
     ByVal ComisionCobranza As Double, Clase As Integer)
 
         ' Tipo : Asesor Fuerza Venta = 0 ; Cajero = 1 ;  Todos = 2 ;  Repuestos = 3 ; Servicios = 4
@@ -190,13 +198,13 @@ Module TablasVentas
         strSQL += ModificarDoble(ComisionCobranza, "COM_COB")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditVENTASEncabezadoGuiaDespacho(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                            ByVal CodigoGuia As String, ByVal Descripcion As String, ByVal Elaborador As String, ByVal Transporte As String, _
-                            ByVal FechaGuia As Date, ByVal FEchaDesde As Date, ByVal FechaHasta As Date, ByVal Items As Integer, _
+    Public Sub InsertEditVENTASEncabezadoGuiaDespacho(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                            ByVal CodigoGuia As String, ByVal Descripcion As String, ByVal Elaborador As String, ByVal Transporte As String,
+                            ByVal FechaGuia As Date, ByVal FEchaDesde As Date, ByVal FechaHasta As Date, ByVal Items As Integer,
                             ByVal TotalGuia As Double, ByVal TotalKilos As Double, Estatus As Integer, Impresa As Integer)
 
         Dim strSQL As String = ""
@@ -227,13 +235,13 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditVENTASEncabezadoGuiaPedidos(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                            ByVal CodigoGuia As String, ByVal Descripcion As String, ByVal Elaborador As String, ByVal Transporte As String, _
-                            ByVal FechaGuia As Date, ByVal FEchaDesde As Date, ByVal FechaHasta As Date, ByVal Items As Integer, _
+    Public Sub InsertEditVENTASEncabezadoGuiaPedidos(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                            ByVal CodigoGuia As String, ByVal Descripcion As String, ByVal Elaborador As String, ByVal Transporte As String,
+                            ByVal FechaGuia As Date, ByVal FEchaDesde As Date, ByVal FechaHasta As Date, ByVal Items As Integer,
                             ByVal TotalGuia As Double, ByVal TotalKilos As Double, ByVal Estatus As Integer, ByVal Impresa As Integer)
 
         Dim strSQL As String = ""
@@ -264,13 +272,13 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditVENTASEncabezadoRelacionDeFacturas(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                            ByVal CodigoGuia As String, ByVal Descripcion As String, ByVal Elaborador As String, ByVal Responsable As String, _
-                            ByVal FechaGuia As Date, ByVal FEchaDesde As Date, ByVal FechaHasta As Date, ByVal Items As Integer, _
+    Public Sub InsertEditVENTASEncabezadoRelacionDeFacturas(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                            ByVal CodigoGuia As String, ByVal Descripcion As String, ByVal Elaborador As String, ByVal Responsable As String,
+                            ByVal FechaGuia As Date, ByVal FEchaDesde As Date, ByVal FechaHasta As Date, ByVal Items As Integer,
                             ByVal TotalGuia As Double, ByVal TotalKilos As Double, Estatus As Integer, Impresa As Integer, Tipo As Integer)
 
         Dim strSQL As String = ""
@@ -303,12 +311,12 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditVENTASRenglonGuiaDespacho(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                            ByVal CodigoGuia As String, ByVal CodigoFactura As String, ByVal Emision As Date, ByVal CodigoCliente As String, _
+    Public Sub InsertEditVENTASRenglonGuiaDespacho(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                            ByVal CodigoGuia As String, ByVal CodigoFactura As String, ByVal Emision As Date, ByVal CodigoCliente As String,
                             ByVal NombreCliente As String, ByVal CodigoAsesor As String, ByVal KilosFactura As Double, TotalFactura As Double)
 
         Dim strSQL As String = ""
@@ -337,12 +345,12 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditVENTASRenglonGuiaPedidos(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                           ByVal CodigoGuia As String, ByVal CodigoFactura As String, ByVal Emision As Date, ByVal CodigoCliente As String, _
+    Public Sub InsertEditVENTASRenglonGuiaPedidos(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                           ByVal CodigoGuia As String, ByVal CodigoFactura As String, ByVal Emision As Date, ByVal CodigoCliente As String,
                            ByVal NombreCliente As String, ByVal CodigoAsesor As String, ByVal KilosFactura As Double, ByVal TotalFactura As Double)
 
         Dim strSQL As String = ""
@@ -371,13 +379,13 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditVENTASRenglonRelacionDeFacturas(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                            ByVal CodigoGuia As String, ByVal CodigoFactura As String, ByVal Emision As Date, ByVal CodigoCliente As String, _
-                            ByVal NombreCliente As String, ByVal CodigoAsesor As String, ByVal KilosFactura As Double, TotalFactura As Double, _
+    Public Sub InsertEditVENTASRenglonRelacionDeFacturas(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                            ByVal CodigoGuia As String, ByVal CodigoFactura As String, ByVal Emision As Date, ByVal CodigoCliente As String,
+                            ByVal NombreCliente As String, ByVal CodigoAsesor As String, ByVal KilosFactura As Double, TotalFactura As Double,
                             Tipo As Integer)
 
         Dim strSQL As String = ""
@@ -408,13 +416,13 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditVENTASEncabezadoRuta(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                            ByVal CodigoRuta As String, ByVal NombreRuta As String, ByVal Comentario As String, ByVal CodigoZona As String, _
-                            ByVal CodigoVendedor As String, ByVal CodigoCobrador As String, ByVal Dia As Integer, ByVal Condicion As Integer, _
+    Public Sub InsertEditVENTASEncabezadoRuta(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                            ByVal CodigoRuta As String, ByVal NombreRuta As String, ByVal Comentario As String, ByVal CodigoZona As String,
+                            ByVal CodigoVendedor As String, ByVal CodigoCobrador As String, ByVal Dia As Integer, ByVal Condicion As Integer,
                             ByVal CodigoTrabajador As String, ByVal Tipo As Char, ByVal Items As Integer, ByVal Division As String)
 
         Dim strSQL As String = ""
@@ -445,15 +453,17 @@ Module TablasVentas
         strSQL += ModificarCadena(Division, "division")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditVENTASEncabezadoPresupuesto(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                                ByVal NumeroPresupuesto As String, ByVal EMISION As Date, ByVal VENCE As Date, ByVal CodigoCliente As String, _
-                                ByVal Comentario As String, ByVal CodigoVendedor As String, ByVal Tarifa As String, ByVal TotalNeto As Double, _
-                                ByVal Descuento As Double, ByVal Cargos As Double, _
-                                ByVal ImpuestoIVA As Double, ByVal TotalPresupuesto As Double, ByVal ESTATUS As String, ByVal ITEMS As Integer, _
+    Public Sub InsertEditVENTASEncabezadoPresupuesto(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                                ByVal NumeroPresupuesto As String, ByVal EMISION As Date, ByVal VENCE As Date, ByVal CodigoCliente As String,
+                                ByVal Comentario As String, ByVal CodigoVendedor As String, ByVal Tarifa As String, ByVal TotalNeto As Double,
+                                ByVal Descuento As Double, ByVal Cargos As Double,
+                                ByVal ImpuestoIVA As Double, ByVal TotalPresupuesto As Double,
+                                ByVal Currency As Integer, ByVal CurrencyDate As DateTime,
+                                ByVal ESTATUS As String, ByVal ITEMS As Integer,
                                 ByVal Cajas As Double, ByVal KILOS As Double, ByVal IMPRESA As Integer)
 
         Dim strSQL As String = ""
@@ -462,6 +472,8 @@ Module TablasVentas
 
         If Insertar Then
             strSQLInicio = " insert into jsvenenccot SET "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsvenenccot SET "
             strSQLFin = " WHERE " _
@@ -489,23 +501,24 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub InsertEditVENTASEncabezadoPedido(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                               ByVal NumeroPedido As String, ByVal EMISION As Date, ByVal Entrega As Date, ByVal CodigoCliente As String, _
-                               ByVal Comentario As String, ByVal CodigoVendedor As String, ByVal Tarifa As String, ByVal TotalNeto As Double, _
-                               ByVal PorcentajeDescuento As Double, ByVal Descuento As Double, ByVal Cargos As Double, _
-                               ByVal ImpuestoIVA As Double, ByVal TotalPrePedido As Double, _
-                               ByVal Vencimiento As Date, _
-                               ByVal PorcentajeDescuento1 As Double, ByVal PorcentajeDescuento2 As Double, ByVal PorcentajeDescuento3 As Double, ByVal PorcentajeDescuento4 As Double, _
-                               ByVal Descuento1 As Double, ByVal Descuento2 As Double, ByVal Descuento3 As Double, ByVal Descuento4 As Double, _
-                               ByVal Vencimiento1 As Date, ByVal Vencimiento2 As Date, ByVal Vencimiento3 As Date, ByVal Vencimiento4 As Date, _
-                               ByVal ESTATUS As String, ByVal ITEMS As Integer, ByVal Cajas As Double, ByVal KILOS As Double, _
-                               ByVal CondicionDePago As Integer, ByVal TipoCredito As Integer, _
-                               ByVal FormaDePago As String, ByVal NumeroDePago As String, ByVal NombreDePago As String, _
-                               ByVal Abono As Double, ByVal Serie As String, ByVal NumGiros As Integer, ByVal PeriodoEntreGiros As Integer, _
-                               ByVal Interes As Double, ByVal PorcentajeInteres As Double, ByVal IMPRESA As Integer)
+    Public Sub InsertEditVENTASEncabezadoPedido(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                               ByVal NumeroPedido As String, ByVal EMISION As Date, ByVal Entrega As Date, ByVal CodigoCliente As String,
+                               ByVal Comentario As String, ByVal CodigoVendedor As String, ByVal Tarifa As String, ByVal TotalNeto As Double,
+                               ByVal PorcentajeDescuento As Double, ByVal Descuento As Double, ByVal Cargos As Double,
+                               ByVal ImpuestoIVA As Double, ByVal TotalPrePedido As Double,
+                               ByVal Vencimiento As Date,
+                               ByVal PorcentajeDescuento1 As Double, ByVal PorcentajeDescuento2 As Double, ByVal PorcentajeDescuento3 As Double, ByVal PorcentajeDescuento4 As Double,
+                               ByVal Descuento1 As Double, ByVal Descuento2 As Double, ByVal Descuento3 As Double, ByVal Descuento4 As Double,
+                               ByVal Vencimiento1 As Date, ByVal Vencimiento2 As Date, ByVal Vencimiento3 As Date, ByVal Vencimiento4 As Date,
+                               ByVal ESTATUS As String, ByVal ITEMS As Integer, ByVal Cajas As Double, ByVal KILOS As Double,
+                               ByVal CondicionDePago As Integer, ByVal TipoCredito As Integer,
+                               ByVal FormaDePago As String, ByVal NumeroDePago As String, ByVal NombreDePago As String,
+                               ByVal Abono As Double, ByVal Serie As String, ByVal NumGiros As Integer, ByVal PeriodoEntreGiros As Integer,
+                               ByVal Interes As Double, ByVal PorcentajeInteres As Double, ByVal IMPRESA As Integer,
+                                                ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
         Dim strSQL As String = ""
         Dim strSQLInicio As String = ""
@@ -513,6 +526,8 @@ Module TablasVentas
 
         If Insertar Then
             strSQLInicio = " insert into jsvenencped SET "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsvenencped SET "
             strSQLFin = " WHERE " _
@@ -565,23 +580,24 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub InsertEditVENTASEncabezadoPrePedido(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                               ByVal NumeroPrePedido As String, ByVal EMISION As Date, ByVal Entrega As Date, ByVal CodigoCliente As String, _
-                               ByVal Comentario As String, ByVal CodigoVendedor As String, ByVal Tarifa As String, ByVal TotalNeto As Double, _
-                               ByVal PorcentajeDescuento As Double, ByVal Descuento As Double, ByVal Cargos As Double, _
-                               ByVal ImpuestoIVA As Double, ByVal TotalPrePedido As Double, _
-                               ByVal Vencimiento As Date, _
-                               ByVal PorcentajeDescuento1 As Double, ByVal PorcentajeDescuento2 As Double, ByVal PorcentajeDescuento3 As Double, ByVal PorcentajeDescuento4 As Double, _
-                               ByVal Descuento1 As Double, ByVal Descuento2 As Double, ByVal Descuento3 As Double, ByVal Descuento4 As Double, _
-                               ByVal Vencimiento1 As Date, ByVal Vencimiento2 As Date, ByVal Vencimiento3 As Date, ByVal Vencimiento4 As Date, _
-                               ByVal ESTATUS As String, ByVal ITEMS As Integer, ByVal Cajas As Double, ByVal KILOS As Double, _
-                               ByVal CondicionDePago As Integer, ByVal TipoCredito As Integer, _
-                               ByVal FormaDePago As String, ByVal NumeroDePago As String, ByVal NombreDePago As String, _
-                               ByVal Abono As Double, ByVal Serie As String, ByVal NumGiros As Integer, ByVal PeriodoEntreGiros As Integer, _
-                               ByVal Interes As Double, ByVal PorcentajeInteres As Double, ByVal IMPRESA As Integer)
+    Public Sub InsertEditVENTASEncabezadoPrePedido(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                               ByVal NumeroPrePedido As String, ByVal EMISION As Date, ByVal Entrega As Date, ByVal CodigoCliente As String,
+                               ByVal Comentario As String, ByVal CodigoVendedor As String, ByVal Tarifa As String, ByVal TotalNeto As Double,
+                               ByVal PorcentajeDescuento As Double, ByVal Descuento As Double, ByVal Cargos As Double,
+                               ByVal ImpuestoIVA As Double, ByVal TotalPrePedido As Double,
+                               ByVal Vencimiento As Date,
+                               ByVal PorcentajeDescuento1 As Double, ByVal PorcentajeDescuento2 As Double, ByVal PorcentajeDescuento3 As Double, ByVal PorcentajeDescuento4 As Double,
+                               ByVal Descuento1 As Double, ByVal Descuento2 As Double, ByVal Descuento3 As Double, ByVal Descuento4 As Double,
+                               ByVal Vencimiento1 As Date, ByVal Vencimiento2 As Date, ByVal Vencimiento3 As Date, ByVal Vencimiento4 As Date,
+                               ByVal ESTATUS As String, ByVal ITEMS As Integer, ByVal Cajas As Double, ByVal KILOS As Double,
+                               ByVal CondicionDePago As Integer, ByVal TipoCredito As Integer,
+                               ByVal FormaDePago As String, ByVal NumeroDePago As String, ByVal NombreDePago As String,
+                               ByVal Abono As Double, ByVal Serie As String, ByVal NumGiros As Integer, ByVal PeriodoEntreGiros As Integer,
+                               ByVal Interes As Double, ByVal PorcentajeInteres As Double, ByVal IMPRESA As Integer,
+                                                   ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
         Dim strSQL As String = ""
         Dim strSQLInicio As String = ""
@@ -589,6 +605,8 @@ Module TablasVentas
 
         If Insertar Then
             strSQLInicio = " insert into jsvenencpedrgv SET "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsvenencpedrgv SET "
             strSQLFin = " WHERE " _
@@ -641,32 +659,33 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub InsertEditVENTASEncabezadoNotaEntrega(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                               ByVal NumeroNotaEntrega As String, ByVal EMISION As Date, ByVal CodigoCliente As String, _
-                               ByVal Comentario As String, ByVal CodigoVendedor As String, ByVal Almacen As String, ByVal Transporte As String, _
-                               ByVal Vencimiento As Date, ByVal Referencia As String, ByVal CodigoContable As String, ByVal Items As Integer, ByVal Cajas As Integer, _
-                               ByVal KILOS As Double, ByVal TotalNeto As Double, _
-                               ByVal PorcentajeDescuento As Double, ByVal PorcentajeDescuento1 As Double, ByVal PorcentajeDescuento2 As Double, _
-                               ByVal PorcentajeDescuento3 As Double, ByVal PorcentajeDescuento4 As Double, ByVal Descuento As Double, _
-                               ByVal Descuento1 As Double, ByVal Descuento2 As Double, ByVal Descuento3 As Double, ByVal Descuento4 As Double, _
-                               ByVal Cargos As Double, ByVal Cargos1 As Double, ByVal Cargos2 As Double, ByVal Cargos3 As Double, ByVal Cargos4 As Double, _
-                               ByVal TotalFactura1 As Double, ByVal TotalFactura2 As Double, ByVal TotalFactura3 As Double, ByVal TotalFactura4 As Double, _
-                               ByVal Vencimiento1 As Date, ByVal Vencimiento2 As Date, ByVal Vencimiento3 As Date, ByVal Vencimiento4 As Date, _
-                               ByVal CondicionDePago As Integer, ByVal TipoCredito As Integer, _
-                               ByVal FormaDePago As String, ByVal NumeroDePago As String, ByVal NombreDePago As String, ByVal Caja As String, _
-                               ByVal ImporteEfectivo As Double, ByVal NumeroCheque As String, ByVal BancoCheque As String, ByVal ImporteCheque As Double, _
-                               ByVal NumeroTarjeta As String, ByVal CodigoTarjeta As String, ByVal ImporteTarjeta As Double, _
-                               ByVal NumeroCestaTicket As String, ByVal NombreCestaTicket As String, ByVal ImporteCestaTicket As Double, _
-                               ByVal NumeroDeposito As String, ByVal BancoDeposito As String, ByVal ImporteDeposito As Double, _
-                               ByVal Abono As Double, ByVal Serie As String, ByVal NumGiros As Integer, ByVal PeriodoEntreGiros As Integer, _
-                               ByVal Interes As Double, ByVal PorcentajeInteres As Double, ByVal Asiento As String, ByVal FechaAsiento As Date, _
-                               ByVal BaseIVA As Double, ByVal PorcentajeIVA As Double, ByVal ImpuestoIVA As Double, ByVal ImpuestoICS As Double, _
-                               ByVal TipoFactura As Integer, ByVal Tipo As Integer, ByVal TotalFactura As Double, ByVal ESTATUS As String, _
-                               ByVal Tarifa As String, ByVal NumeroCXC As String, ByVal OtraCXC As String, ByVal OtroCliente As String, _
-                               ByVal RelacionGuia As String, ByVal RelacionFacturas As String, ByVal IMPRESA As Integer)
+    Public Sub InsertEditVENTASEncabezadoNotaEntrega(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                               ByVal NumeroNotaEntrega As String, ByVal EMISION As Date, ByVal CodigoCliente As String,
+                               ByVal Comentario As String, ByVal CodigoVendedor As String, ByVal Almacen As String, ByVal Transporte As String,
+                               ByVal Vencimiento As Date, ByVal Referencia As String, ByVal CodigoContable As String, ByVal Items As Integer, ByVal Cajas As Integer,
+                               ByVal KILOS As Double, ByVal TotalNeto As Double,
+                               ByVal PorcentajeDescuento As Double, ByVal PorcentajeDescuento1 As Double, ByVal PorcentajeDescuento2 As Double,
+                               ByVal PorcentajeDescuento3 As Double, ByVal PorcentajeDescuento4 As Double, ByVal Descuento As Double,
+                               ByVal Descuento1 As Double, ByVal Descuento2 As Double, ByVal Descuento3 As Double, ByVal Descuento4 As Double,
+                               ByVal Cargos As Double, ByVal Cargos1 As Double, ByVal Cargos2 As Double, ByVal Cargos3 As Double, ByVal Cargos4 As Double,
+                               ByVal TotalFactura1 As Double, ByVal TotalFactura2 As Double, ByVal TotalFactura3 As Double, ByVal TotalFactura4 As Double,
+                               ByVal Vencimiento1 As Date, ByVal Vencimiento2 As Date, ByVal Vencimiento3 As Date, ByVal Vencimiento4 As Date,
+                               ByVal CondicionDePago As Integer, ByVal TipoCredito As Integer,
+                               ByVal FormaDePago As String, ByVal NumeroDePago As String, ByVal NombreDePago As String, ByVal Caja As String,
+                               ByVal ImporteEfectivo As Double, ByVal NumeroCheque As String, ByVal BancoCheque As String, ByVal ImporteCheque As Double,
+                               ByVal NumeroTarjeta As String, ByVal CodigoTarjeta As String, ByVal ImporteTarjeta As Double,
+                               ByVal NumeroCestaTicket As String, ByVal NombreCestaTicket As String, ByVal ImporteCestaTicket As Double,
+                               ByVal NumeroDeposito As String, ByVal BancoDeposito As String, ByVal ImporteDeposito As Double,
+                               ByVal Abono As Double, ByVal Serie As String, ByVal NumGiros As Integer, ByVal PeriodoEntreGiros As Integer,
+                               ByVal Interes As Double, ByVal PorcentajeInteres As Double, ByVal Asiento As String, ByVal FechaAsiento As Date,
+                               ByVal BaseIVA As Double, ByVal PorcentajeIVA As Double, ByVal ImpuestoIVA As Double, ByVal ImpuestoICS As Double,
+                               ByVal TipoFactura As Integer, ByVal Tipo As Integer, ByVal TotalFactura As Double, ByVal ESTATUS As String,
+                               ByVal Tarifa As String, ByVal NumeroCXC As String, ByVal OtraCXC As String, ByVal OtroCliente As String,
+                               ByVal RelacionGuia As String, ByVal RelacionFacturas As String, ByVal IMPRESA As Integer,
+                                                     ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
         Dim strSQL As String = ""
         Dim strSQLInicio As String = ""
@@ -674,6 +693,8 @@ Module TablasVentas
 
         If Insertar Then
             strSQLInicio = " insert into jsvenencnot SET "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsvenencnot SET "
             strSQLFin = " WHERE " _
@@ -763,33 +784,34 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditVENTASEncabezadoFactura(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                               ByVal NumeroFactura As String, ByVal EMISION As Date, ByVal CodigoCliente As String, _
-                               ByVal Comentario As String, ByVal CodigoVendedor As String, ByVal Almacen As String, ByVal Transporte As String, _
-                               ByVal Vencimiento As Date, ByVal Referencia As String, ByVal CodigoContable As String, ByVal Items As Integer, ByVal Cajas As Integer, _
-                               ByVal KILOS As Double, ByVal TotalNeto As Double, _
-                               ByVal PorcentajeDescuento As Double, ByVal PorcentajeDescuento1 As Double, ByVal PorcentajeDescuento2 As Double, _
-                               ByVal PorcentajeDescuento3 As Double, ByVal PorcentajeDescuento4 As Double, ByVal Descuento As Double, _
-                               ByVal Descuento1 As Double, ByVal Descuento2 As Double, ByVal Descuento3 As Double, ByVal Descuento4 As Double, _
-                               ByVal Cargos As Double, ByVal Cargos1 As Double, ByVal Cargos2 As Double, ByVal Cargos3 As Double, ByVal Cargos4 As Double, _
-                               ByVal TotalFactura1 As Double, ByVal TotalFactura2 As Double, ByVal TotalFactura3 As Double, ByVal TotalFactura4 As Double, _
-                               ByVal Vencimiento1 As Date, ByVal Vencimiento2 As Date, ByVal Vencimiento3 As Date, ByVal Vencimiento4 As Date, _
-                               ByVal CondicionDePago As Integer, ByVal TipoCredito As Integer, _
-                               ByVal FormaDePago As String, ByVal NumeroDePago As String, ByVal NombreDePago As String, ByVal Caja As String, _
-                               ByVal ImporteEfectivo As Double, ByVal NumeroCheque As String, ByVal BancoCheque As String, ByVal ImporteCheque As Double, _
-                               ByVal NumeroTarjeta As String, ByVal CodigoTarjeta As String, ByVal ImporteTarjeta As Double, _
-                               ByVal NumeroCestaTicket As String, ByVal NombreCestaTicket As String, ByVal ImporteCestaTicket As Double, _
-                               ByVal NumeroDeposito As String, ByVal BancoDeposito As String, ByVal ImporteDeposito As Double, _
-                               ByVal Abono As Double, ByVal Serie As String, ByVal NumGiros As Integer, ByVal PeriodoEntreGiros As Integer, _
-                               ByVal Interes As Double, ByVal PorcentajeInteres As Double, ByVal Asiento As String, ByVal FechaAsiento As Date, _
-                               ByVal BaseIVA As Double, ByVal PorcentajeIVA As Double, ByVal ImpuestoIVA As Double, ByVal ImpuestoICS As Double, _
-                               ByVal TipoFactura As Integer, ByVal Tipo As Integer, ByVal TotalFactura As Double, ByVal ESTATUS As String, _
-                               ByVal Tarifa As String, ByVal NumeroCXC As String, ByVal OtraCXC As String, ByVal OtroCliente As String, _
-                               ByVal RelacionGuia As String, ByVal RelacionFacturas As String, ByVal IMPRESA As Integer)
+    Public Sub InsertEditVENTASEncabezadoFactura(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                               ByVal NumeroFactura As String, ByVal EMISION As Date, ByVal CodigoCliente As String,
+                               ByVal Comentario As String, ByVal CodigoVendedor As String, ByVal Almacen As String, ByVal Transporte As String,
+                               ByVal Vencimiento As Date, ByVal Referencia As String, ByVal CodigoContable As String, ByVal Items As Integer, ByVal Cajas As Integer,
+                               ByVal KILOS As Double, ByVal TotalNeto As Double,
+                               ByVal PorcentajeDescuento As Double, ByVal PorcentajeDescuento1 As Double, ByVal PorcentajeDescuento2 As Double,
+                               ByVal PorcentajeDescuento3 As Double, ByVal PorcentajeDescuento4 As Double, ByVal Descuento As Double,
+                               ByVal Descuento1 As Double, ByVal Descuento2 As Double, ByVal Descuento3 As Double, ByVal Descuento4 As Double,
+                               ByVal Cargos As Double, ByVal Cargos1 As Double, ByVal Cargos2 As Double, ByVal Cargos3 As Double, ByVal Cargos4 As Double,
+                               ByVal TotalFactura1 As Double, ByVal TotalFactura2 As Double, ByVal TotalFactura3 As Double, ByVal TotalFactura4 As Double,
+                               ByVal Vencimiento1 As Date, ByVal Vencimiento2 As Date, ByVal Vencimiento3 As Date, ByVal Vencimiento4 As Date,
+                               ByVal CondicionDePago As Integer, ByVal TipoCredito As Integer,
+                               ByVal FormaDePago As String, ByVal NumeroDePago As String, ByVal NombreDePago As String, ByVal Caja As String,
+                               ByVal ImporteEfectivo As Double, ByVal NumeroCheque As String, ByVal BancoCheque As String, ByVal ImporteCheque As Double,
+                               ByVal NumeroTarjeta As String, ByVal CodigoTarjeta As String, ByVal ImporteTarjeta As Double,
+                               ByVal NumeroCestaTicket As String, ByVal NombreCestaTicket As String, ByVal ImporteCestaTicket As Double,
+                               ByVal NumeroDeposito As String, ByVal BancoDeposito As String, ByVal ImporteDeposito As Double,
+                               ByVal Abono As Double, ByVal Serie As String, ByVal NumGiros As Integer, ByVal PeriodoEntreGiros As Integer,
+                               ByVal Interes As Double, ByVal PorcentajeInteres As Double, ByVal Asiento As String, ByVal FechaAsiento As Date,
+                               ByVal BaseIVA As Double, ByVal PorcentajeIVA As Double, ByVal ImpuestoIVA As Double, ByVal ImpuestoICS As Double,
+                               ByVal TipoFactura As Integer, ByVal Tipo As Integer, ByVal TotalFactura As Double, ByVal ESTATUS As String,
+                               ByVal Tarifa As String, ByVal NumeroCXC As String, ByVal OtraCXC As String, ByVal OtroCliente As String,
+                               ByVal RelacionGuia As String, ByVal RelacionFacturas As String, ByVal IMPRESA As Integer,
+                                                 ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
         Dim strSQL As String = ""
         Dim strSQLInicio As String = ""
@@ -797,6 +819,8 @@ Module TablasVentas
 
         If Insertar Then
             strSQLInicio = " insert into jsvenencfac SET "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsvenencfac SET "
             strSQLFin = " WHERE " _
@@ -886,19 +910,20 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditVENTASEncabezadoNotaCredito(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                              ByVal NumeroNotaCredito As String, ByVal NumeroFactura As String, ByVal EMISION As Date, ByVal FechaIVA As Date, _
-                              ByVal CodigoCliente As String, ByVal Comentario As String, ByVal CodigoVendedor As String, ByVal Almacen As String, ByVal Transporte As String, _
-                              ByVal Referencia As String, ByVal CodigoContable As String, ByVal Tarifa As String, ByVal Items As Integer, _
-                              ByVal Cajas As Integer, ByVal KILOS As Double, ByVal TotalNeto As Double, ByVal ImporteIVA As Double, ByVal ImporteICS As Double, _
-                              ByVal TotalNotaCredito As Double, ByVal Vencimiento As Date, ByVal CondicionDePago As Integer, ByVal TipoCredito As Integer, _
-                              ByVal FormaDePago As String, ByVal NumeroDePago As String, ByVal NombreDePago As String, ByVal Beneficiario As String, _
-                              ByVal Caja As String, ByVal Origen As String, ByVal Estatus As Integer, ByVal Asiento As String, ByVal FechaAsiento As Date, _
-                              ByVal Impresa As Integer, ByVal RelacionFacturas As String, ByVal RelacionNotasCredito As String)
+    Public Sub InsertEditVENTASEncabezadoNotaCredito(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                              ByVal NumeroNotaCredito As String, ByVal NumeroFactura As String, ByVal EMISION As Date, ByVal FechaIVA As Date,
+                              ByVal CodigoCliente As String, ByVal Comentario As String, ByVal CodigoVendedor As String, ByVal Almacen As String, ByVal Transporte As String,
+                              ByVal Referencia As String, ByVal CodigoContable As String, ByVal Tarifa As String, ByVal Items As Integer,
+                              ByVal Cajas As Integer, ByVal KILOS As Double, ByVal TotalNeto As Double, ByVal ImporteIVA As Double, ByVal ImporteICS As Double,
+                              ByVal TotalNotaCredito As Double, ByVal Vencimiento As Date, ByVal CondicionDePago As Integer, ByVal TipoCredito As Integer,
+                              ByVal FormaDePago As String, ByVal NumeroDePago As String, ByVal NombreDePago As String, ByVal Beneficiario As String,
+                              ByVal Caja As String, ByVal Origen As String, ByVal Estatus As Integer, ByVal Asiento As String, ByVal FechaAsiento As Date,
+                              ByVal Impresa As Integer, ByVal RelacionFacturas As String, ByVal RelacionNotasCredito As String,
+                                                     ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
         Dim strSQL As String = ""
         Dim strSQLInicio As String = ""
@@ -906,6 +931,8 @@ Module TablasVentas
 
         If Insertar Then
             strSQLInicio = " insert into jsvenencncr SET "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsvenencncr SET "
             strSQLFin = " WHERE " _
@@ -950,17 +977,18 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditVENTASEncabezadoNOTADEBITO(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                              ByVal NumeroNotaDebito As String, ByVal NumeroFactura As String, ByVal EMISION As Date, _
-                              ByVal CodigoCliente As String, ByVal Comentario As String, ByVal CodigoVendedor As String, ByVal Almacen As String, ByVal Transporte As String, _
-                              ByVal Referencia As String, ByVal CodigoContable As String, ByVal Tarifa As String, ByVal Items As Integer, _
-                              ByVal Cajas As Integer, ByVal KILOS As Double, ByVal TotalNeto As Double, ByVal ImporteIVA As Double, _
-                              ByVal TotalNotaDebito As Double, ByVal Vencimiento As Date, ByVal Estatus As Integer, ByVal Asiento As String, ByVal FechaAsiento As Date, _
-                              ByVal Impresa As Integer, ByVal RelacionFacturas As String)
+    Public Sub InsertEditVENTASEncabezadoNOTADEBITO(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                              ByVal NumeroNotaDebito As String, ByVal NumeroFactura As String, ByVal EMISION As Date,
+                              ByVal CodigoCliente As String, ByVal Comentario As String, ByVal CodigoVendedor As String, ByVal Almacen As String, ByVal Transporte As String,
+                              ByVal Referencia As String, ByVal CodigoContable As String, ByVal Tarifa As String, ByVal Items As Integer,
+                              ByVal Cajas As Integer, ByVal KILOS As Double, ByVal TotalNeto As Double, ByVal ImporteIVA As Double,
+                              ByVal TotalNotaDebito As Double, ByVal Vencimiento As Date, ByVal Estatus As Integer, ByVal Asiento As String, ByVal FechaAsiento As Date,
+                              ByVal Impresa As Integer, ByVal RelacionFacturas As String,
+                                                    ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
         Dim strSQL As String = ""
         Dim strSQLInicio As String = ""
@@ -968,6 +996,8 @@ Module TablasVentas
 
         If Insertar Then
             strSQLInicio = " insert into jsvenencndb SET "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsvenencndb SET "
             strSQLFin = " WHERE " _
@@ -1001,12 +1031,12 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub InsertEditVENTASRenglonRuta(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                                ByVal CodigoRuta As String, ByVal Numero As Integer, ByVal Cliente As String, ByVal NombreCliente As String, _
-                                ByVal Tipo As Integer, ByVal Aceptado As Integer, ByVal Division As String, _
+    Public Sub InsertEditVENTASRenglonRuta(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                                ByVal CodigoRuta As String, ByVal Numero As Integer, ByVal Cliente As String, ByVal NombreCliente As String,
+                                ByVal Tipo As Integer, ByVal Aceptado As Integer, ByVal Division As String,
                                 ByVal Condicion As Integer)
 
         Dim strSQL As String = ""
@@ -1035,14 +1065,14 @@ Module TablasVentas
         strSQL += ModificarEntero(Condicion, "condicion")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub IncluyendoRenglonRuta(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Numero As Integer, _
-                                        ByVal CodigoRuta As String, ByVal Tipo As String, ByVal Division As String, _
+    Public Sub IncluyendoRenglonRuta(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Numero As Integer,
+                                        ByVal CodigoRuta As String, ByVal Tipo As String, ByVal Division As String,
                                         ByVal Condicion As Integer)
 
-        ft.Ejecutar_strSQL(myconn, "UPDATE jsvenrenrut SET " _
+        ft.Ejecutar_strSQL(MyConn, "UPDATE jsvenrenrut SET " _
             & " NUMERO = NUMERO + 1 WHERE " _
             & " NUMERO >= " & Numero & " AND " _
             & " CODRUT = '" & CodigoRuta & "' AND " _
@@ -1053,11 +1083,11 @@ Module TablasVentas
 
 
     End Sub
-    Public Sub ModificandoRenglonRuta(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal NumeroActual As Integer, ByVal NuevoNumero As Integer, _
+    Public Sub ModificandoRenglonRuta(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal NumeroActual As Integer, ByVal NuevoNumero As Integer,
         ByVal CodigoRuta As String, ByVal Tipo As String, ByVal Division As String, ByVal Condicion As Integer)
 
         If NumeroActual > NuevoNumero Then
-            ft.Ejecutar_strSQL(myconn, "UPDATE jsvenrenrut SET " _
+            ft.Ejecutar_strSQL(MyConn, "UPDATE jsvenrenrut SET " _
                     & " NUMERO = NUMERO + 1 WHERE " _
                     & " NUMERO >= " & NuevoNumero & " AND " _
                     & " NUMERO < " & NumeroActual & " AND " _
@@ -1068,7 +1098,7 @@ Module TablasVentas
                     & " ID_EMP = '" & jytsistema.WorkID & "' ")
 
         ElseIf NumeroActual < NuevoNumero Then
-            ft.Ejecutar_strSQL(myconn, "UPDATE jsvenrenrut SET " _
+            ft.Ejecutar_strSQL(MyConn, "UPDATE jsvenrenrut SET " _
                     & " NUMERO = NUMERO - 1 WHERE " _
                     & " NUMERO > " & NumeroActual & " AND " _
                     & " NUMERO <= " & NuevoNumero & " AND " _
@@ -1081,10 +1111,10 @@ Module TablasVentas
 
     End Sub
 
-    Public Sub EliminandoRenglonRuta(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Numero As Integer, _
+    Public Sub EliminandoRenglonRuta(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Numero As Integer,
         ByVal CodigoRuta As String, ByVal Tipo As String, ByVal Division As String, ByVal Condicion As Integer)
 
-        ft.Ejecutar_strSQL(myconn, "UPDATE jsvenrenrut SET " _
+        ft.Ejecutar_strSQL(MyConn, "UPDATE jsvenrenrut SET " _
                     & " NUMERO = NUMERO - 1 WHERE " _
                     & " NUMERO > " & Numero & " AND " _
                     & " CODRUT = '" & CodigoRuta & "' AND " _
@@ -1095,11 +1125,11 @@ Module TablasVentas
 
     End Sub
 
-    Public Sub InsertEditVENTASRenglonPresupuesto(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                                ByVal NumeroPresupuesto As String, ByVal Renglon As String, ByVal Item As String, ByVal Descripcion As String, _
-                                ByVal IVA As String, ByVal ICS As String, ByVal Unidad As String, ByVal Bultos As Double, ByVal Cantidad As Double, _
-                                ByVal CantidadTransito As Double, ByVal Peso As Double, ByVal Estatus As Integer, ByVal Precio As Double, _
-                                ByVal DescuentoCliente As Double, ByVal DescuentoArticulo As Double, ByVal DescuentoOferta As Double, _
+    Public Sub InsertEditVENTASRenglonPresupuesto(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                                ByVal NumeroPresupuesto As String, ByVal Renglon As String, ByVal Item As String, ByVal Descripcion As String,
+                                ByVal IVA As String, ByVal ICS As String, ByVal Unidad As String, ByVal Bultos As Double, ByVal Cantidad As Double,
+                                ByVal CantidadTransito As Double, ByVal Peso As Double, ByVal Estatus As Integer, ByVal Precio As Double,
+                                ByVal DescuentoCliente As Double, ByVal DescuentoArticulo As Double, ByVal DescuentoOferta As Double,
                                 ByVal TotalRenglon As Double, ByVal TotalRenglonConDescuento As Double, ByVal Aceptado As String, ByVal Editable As Integer)
 
         Dim strSQL As String = ""
@@ -1141,16 +1171,16 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub InsertEditVENTASRenglonPrePedidos(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                                ByVal NumeroPrePedido As String, ByVal Renglon As String, ByVal Item As String, ByVal Descripcion As String, _
-                                ByVal IVA As String, ByVal ICS As String, ByVal Unidad As String, ByVal Bultos As Double, ByVal Cantidad As Double, _
-                                ByVal CantidadTransito As Double, ByVal Inventario As Double, ByVal Sugerido As Double, ByVal Refuerzo As Integer, _
-                                ByVal Peso As Double, ByVal Lote As String, ByVal Estatus As Integer, ByVal Precio As Double, _
-                                ByVal DescuentoCliente As Double, ByVal DescuentoArticulo As Double, ByVal DescuentoOferta As Double, _
-                                ByVal TotalRenglon As Double, ByVal TotalRenglonDescuento As Double, ByVal NumeroPresupuesto As String, _
+    Public Sub InsertEditVENTASRenglonPrePedidos(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                                ByVal NumeroPrePedido As String, ByVal Renglon As String, ByVal Item As String, ByVal Descripcion As String,
+                                ByVal IVA As String, ByVal ICS As String, ByVal Unidad As String, ByVal Bultos As Double, ByVal Cantidad As Double,
+                                ByVal CantidadTransito As Double, ByVal Inventario As Double, ByVal Sugerido As Double, ByVal Refuerzo As Integer,
+                                ByVal Peso As Double, ByVal Lote As String, ByVal Estatus As Integer, ByVal Precio As Double,
+                                ByVal DescuentoCliente As Double, ByVal DescuentoArticulo As Double, ByVal DescuentoOferta As Double,
+                                ByVal TotalRenglon As Double, ByVal TotalRenglonDescuento As Double, ByVal NumeroPresupuesto As String,
                                 ByVal RenglonPresupuesto As String, ByVal CodigoContable As String, ByVal Aceptado As String, ByVal Editable As Integer)
 
         Dim strSQL As String = ""
@@ -1199,16 +1229,16 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub InsertEditVENTASRenglonPedidos(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                               ByVal NumeroPedido As String, ByVal Renglon As String, ByVal Item As String, ByVal Descripcion As String, _
-                               ByVal IVA As String, ByVal ICS As String, ByVal Unidad As String, ByVal Bultos As Double, ByVal Cantidad As Double, _
-                               ByVal CantidadTransito As Double, ByVal Inventario As Double, ByVal Sugerido As Double, ByVal Refuerzo As Integer, _
-                               ByVal Peso As Double, ByVal Lote As String, ByVal Estatus As Integer, ByVal Precio As Double, _
-                               ByVal DescuentoCliente As Double, ByVal DescuentoArticulo As Double, ByVal DescuentoOferta As Double, _
-                               ByVal TotalRenglon As Double, ByVal TotalRenglonDescuento As Double, ByVal NumeroPresupuesto As String, _
+    Public Sub InsertEditVENTASRenglonPedidos(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                               ByVal NumeroPedido As String, ByVal Renglon As String, ByVal Item As String, ByVal Descripcion As String,
+                               ByVal IVA As String, ByVal ICS As String, ByVal Unidad As String, ByVal Bultos As Double, ByVal Cantidad As Double,
+                               ByVal CantidadTransito As Double, ByVal Inventario As Double, ByVal Sugerido As Double, ByVal Refuerzo As Integer,
+                               ByVal Peso As Double, ByVal Lote As String, ByVal Estatus As Integer, ByVal Precio As Double,
+                               ByVal DescuentoCliente As Double, ByVal DescuentoArticulo As Double, ByVal DescuentoOferta As Double,
+                               ByVal TotalRenglon As Double, ByVal TotalRenglonDescuento As Double, ByVal NumeroPresupuesto As String,
                                ByVal RenglonPresupuesto As String, ByVal CodigoContable As String, ByVal Aceptado As String, ByVal Editable As Integer)
 
         Dim strSQL As String = ""
@@ -1257,19 +1287,19 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditVENTASRenglonNotasEntrega(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                              ByVal NumeroNotaEntrega As String, ByVal Renglon As String, ByVal Item As String, ByVal Descripcion As String, _
-                              ByVal IVA As String, ByVal ICS As String, ByVal Unidad As String, ByVal Bultos As Double, ByVal Cantidad As Double, _
-                              ByVal Inventario As Double, ByVal Sugerido As Double, ByVal Refuerzo As Integer, ByVal Color As String, ByVal Sabor As String, _
-                              ByVal Peso As Double, ByVal Lote As String, ByVal Estatus As Integer, ByVal Precio As Double, _
-                              ByVal DescuentoCliente As Double, ByVal DescuentoArticulo As Double, ByVal DescuentoOferta As Double, _
-                              ByVal TotalRenglon As Double, ByVal TotalRenglonDescuento As Double, ByVal NumeroPresupuesto As String, _
-                              ByVal RenglonPresupuesto As String, ByVal NumeroPedido As String, ByVal RenglonPedido As String, _
-                              ByVal FacturaDevolucion As String, ByVal CausaDevolucion As String, ByVal CodigoContable As String, _
+    Public Sub InsertEditVENTASRenglonNotasEntrega(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                              ByVal NumeroNotaEntrega As String, ByVal Renglon As String, ByVal Item As String, ByVal Descripcion As String,
+                              ByVal IVA As String, ByVal ICS As String, ByVal Unidad As String, ByVal Bultos As Double, ByVal Cantidad As Double,
+                              ByVal Inventario As Double, ByVal Sugerido As Double, ByVal Refuerzo As Integer, ByVal Color As String, ByVal Sabor As String,
+                              ByVal Peso As Double, ByVal Lote As String, ByVal Estatus As Integer, ByVal Precio As Double,
+                              ByVal DescuentoCliente As Double, ByVal DescuentoArticulo As Double, ByVal DescuentoOferta As Double,
+                              ByVal TotalRenglon As Double, ByVal TotalRenglonDescuento As Double, ByVal NumeroPresupuesto As String,
+                              ByVal RenglonPresupuesto As String, ByVal NumeroPedido As String, ByVal RenglonPedido As String,
+                              ByVal FacturaDevolucion As String, ByVal CausaDevolucion As String, ByVal CodigoContable As String,
                               ByVal Aceptado As String, ByVal Editable As Integer)
 
         Dim strSQL As String = ""
@@ -1323,19 +1353,19 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub InsertEditVENTASRenglonFactura(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                              ByVal NumeroFactura As String, ByVal Renglon As String, ByVal Item As String, ByVal Descripcion As String, _
-                              ByVal IVA As String, ByVal ICS As String, ByVal Unidad As String, ByVal Bultos As Double, ByVal Cantidad As Double, _
-                              ByVal Inventario As Double, ByVal Sugerido As Double, ByVal Refuerzo As Integer, ByVal Color As String, ByVal Sabor As String, _
-                              ByVal Peso As Double, ByVal Lote As String, ByVal Estatus As Integer, ByVal Precio As Double, _
-                              ByVal DescuentoCliente As Double, ByVal DescuentoArticulo As Double, ByVal DescuentoOferta As Double, _
-                              ByVal TotalRenglon As Double, ByVal TotalRenglonDescuento As Double, ByVal NumeroPresupuesto As String, _
-                              ByVal RenglonPresupuesto As String, ByVal NumeroPedido As String, ByVal RenglonPedido As String, _
-                              ByVal NumeroNotaEntrega As String, ByVal RenglonNotaEntrega As String, _
-                              ByVal FacturaDevolucion As String, ByVal CausaDevolucion As String, ByVal CodigoContable As String, _
+    Public Sub InsertEditVENTASRenglonFactura(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                              ByVal NumeroFactura As String, ByVal Renglon As String, ByVal Item As String, ByVal Descripcion As String,
+                              ByVal IVA As String, ByVal ICS As String, ByVal Unidad As String, ByVal Bultos As Double, ByVal Cantidad As Double,
+                              ByVal Inventario As Double, ByVal Sugerido As Double, ByVal Refuerzo As Integer, ByVal Color As String, ByVal Sabor As String,
+                              ByVal Peso As Double, ByVal Lote As String, ByVal Estatus As Integer, ByVal Precio As Double,
+                              ByVal DescuentoCliente As Double, ByVal DescuentoArticulo As Double, ByVal DescuentoOferta As Double,
+                              ByVal TotalRenglon As Double, ByVal TotalRenglonDescuento As Double, ByVal NumeroPresupuesto As String,
+                              ByVal RenglonPresupuesto As String, ByVal NumeroPedido As String, ByVal RenglonPedido As String,
+                              ByVal NumeroNotaEntrega As String, ByVal RenglonNotaEntrega As String,
+                              ByVal FacturaDevolucion As String, ByVal CausaDevolucion As String, ByVal CodigoContable As String,
                               ByVal Aceptado As String, ByVal Editable As Integer)
 
         Dim strSQL As String = ""
@@ -1391,16 +1421,16 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditVENTASRenglonNotaDeCredito(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                              ByVal NumeroNotaDeCredito As String, ByVal Renglon As String, ByVal Item As String, ByVal Descripcion As String, _
-                              ByVal IVA As String, ByVal ICS As String, ByVal Unidad As String, ByVal Bultos As Double, ByVal Cantidad As Double, _
-                              ByVal Peso As Double, ByVal Lote As String, ByVal Estatus As Integer, ByVal Precio As Double, _
-                              ByVal DescuentoCliente As Double, ByVal DescuentoArticulo As Double, ByVal DescuentoOferta As Double, ByVal PorcentajeAceptacion As Double, _
-                              ByVal TotalRenglon As Double, ByVal TotalRenglonDescuento As Double, ByVal NumeroFactura As String, _
+    Public Sub InsertEditVENTASRenglonNotaDeCredito(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                              ByVal NumeroNotaDeCredito As String, ByVal Renglon As String, ByVal Item As String, ByVal Descripcion As String,
+                              ByVal IVA As String, ByVal ICS As String, ByVal Unidad As String, ByVal Bultos As Double, ByVal Cantidad As Double,
+                              ByVal Peso As Double, ByVal Lote As String, ByVal Estatus As Integer, ByVal Precio As Double,
+                              ByVal DescuentoCliente As Double, ByVal DescuentoArticulo As Double, ByVal DescuentoOferta As Double, ByVal PorcentajeAceptacion As Double,
+                              ByVal TotalRenglon As Double, ByVal TotalRenglonDescuento As Double, ByVal NumeroFactura As String,
                               ByVal CodigoContable As String, ByVal Editable As Integer, ByVal CausaDevolucion As String,
                               ByVal Aceptado As String)
 
@@ -1447,17 +1477,17 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub InsertEditVENTASRenglonNOTASDEBITO(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                             ByVal NumeroNotaDebito As String, ByVal Renglon As String, ByVal Item As String, ByVal Descripcion As String, _
-                             ByVal IVA As String, ByVal ICS As String, ByVal Unidad As String, ByVal Bultos As Double, ByVal Cantidad As Double, _
-                             ByVal Peso As Double, ByVal Lote As String, ByVal Estatus As Integer, ByVal Precio As Double, _
-                             ByVal DescuentoCliente As Double, ByVal DescuentoArticulo As Double, ByVal DescuentoOferta As Double, _
-                             ByVal PorcentajeAceptacion As Double, _
-                             ByVal TotalRenglon As Double, ByVal TotalRenglonDescuento As Double, ByVal NumeroFactura As String, _
-                             ByVal RenglonFacturaCodigoContable As String, ByVal Editable As Integer, ByVal CausaDebito As String, _
+    Public Sub InsertEditVENTASRenglonNOTASDEBITO(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                             ByVal NumeroNotaDebito As String, ByVal Renglon As String, ByVal Item As String, ByVal Descripcion As String,
+                             ByVal IVA As String, ByVal ICS As String, ByVal Unidad As String, ByVal Bultos As Double, ByVal Cantidad As Double,
+                             ByVal Peso As Double, ByVal Lote As String, ByVal Estatus As Integer, ByVal Precio As Double,
+                             ByVal DescuentoCliente As Double, ByVal DescuentoArticulo As Double, ByVal DescuentoOferta As Double,
+                             ByVal PorcentajeAceptacion As Double,
+                             ByVal TotalRenglon As Double, ByVal TotalRenglonDescuento As Double, ByVal NumeroFactura As String,
+                             ByVal RenglonFacturaCodigoContable As String, ByVal Editable As Integer, ByVal CausaDebito As String,
                              ByVal Aceptado As String)
 
         Dim strSQL As String = ""
@@ -1503,12 +1533,12 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub InsertEditVENTASIVA(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                                        ByVal NombreTablaEnBaseDatos As String, ByVal CampoDocumento As String, _
-                                        ByVal NumeroDocumento As String, ByVal TipoIVA As String, ByVal PorcentajeIVA As Double, _
+    Public Sub InsertEditVENTASIVA(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                                        ByVal NombreTablaEnBaseDatos As String, ByVal CampoDocumento As String,
+                                        ByVal NumeroDocumento As String, ByVal TipoIVA As String, ByVal PorcentajeIVA As Double,
                                         ByVal BaseImponible As Double, ByVal ImpuestoIVA As Double)
 
         Dim strSQL As String = ""
@@ -1532,30 +1562,30 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditVENTASCliente(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-            ByVal CodigoCliente As String, ByVal Nombre As String, ByVal Categoria As String, ByVal Unidad As String, ByVal Rif As String, _
-            ByVal Nit As String, ByVal CI As String, ByVal Alterno As String, ByVal DireccionFiscal As String, ByVal PaisFiscal As Integer, _
-            ByVal EstadoFiscal As Integer, ByVal Municipiofiscal As Integer, ByVal ParroquiaFiscal As Integer, ByVal CiudadFiscal As Integer, ByVal BarrioFiscal As Integer, _
-            ByVal ZipFiscal As String, ByVal DireccionDespacho As String, ByVal PaisDespacho As Integer, _
-            ByVal EstadoDespacho As Integer, ByVal MunicipioDespacho As Integer, ByVal ParroquiaDespacho As Integer, ByVal CiudadDespacho As Integer, ByVal BarrioDespacho As Integer, _
-            ByVal ZipDespacho As String, ByVal CodigoGeografico As Integer, ByVal email1 As String, ByVal email2 As String, ByVal email3 As String, ByVal email4 As String, _
-            ByVal Telefono1 As String, ByVal Telefono2 As String, ByVal Telefono3 As String, ByVal Fax As String, ByVal Gerente As String, _
-            ByVal TelefonoGerente As String, ByVal Contacto As String, ByVal TelefonoContacto As String, ByVal LimiteCredito As Double, _
-            ByVal Disponible As Double, ByVal DescuentoCliente As Double, ByVal DescuentoPP1 As Double, ByVal DescuentoPP2 As Double, _
-            ByVal DescuentoPP3 As Double, ByVal DescuentoPP4 As Double, ByVal DesdePP1 As Integer, ByVal DesdePP2 As Integer, _
-            ByVal DesdePP3 As Integer, ByVal DesdePP4 As Integer, ByVal HastaPP1 As Integer, ByVal HastaPP2 As Integer, ByVal HastaPP3 As Integer, _
-            ByVal HastaPP4 As Integer, ByVal Saldo As Double, ByVal RegimenIVA As String, ByVal Tarifa As String, _
-            ByVal ListaDePrecios As String, ByVal FormaDePago As String, ByVal FechaIngreso As Date, _
-            ByVal CodigoContable As String, ByVal CodigoCreacion As Integer, ByVal Estatus As Integer, ByVal RequisitoRIF As Integer, _
-            ByVal RequisitoNIT As Integer, ByVal RequisitoRecibo As Integer, ByVal RequisitoCI As Integer, ByVal RequisitoRegistro As Integer, _
-            ByVal RequisitoRegistroActual As Integer, ByVal RequisitoReferenciaBanco As Integer, ByVal RequisitoReferComercio As Integer, _
-            ByVal FrecuenciaVisita As Integer, ByVal FechaUltimaVisita As Date, ByVal InicioVisitas As Date, ByVal Merchandising As Integer, _
-            ByVal PermiteChequesDevueltos As Integer, ByVal DiaDePago As Integer, ByVal HoraDePago As String, ByVal HoraAPago As String, _
-            ByVal Ranking As Integer, ByVal FechaRanking As Date, ByVal Comentario As String, ByVal TipoContribuyente As Integer, _
+    Public Sub InsertEditVENTASCliente(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+            ByVal CodigoCliente As String, ByVal Nombre As String, ByVal Categoria As String, ByVal Unidad As String, ByVal Rif As String,
+            ByVal Nit As String, ByVal CI As String, ByVal Alterno As String, ByVal DireccionFiscal As String, ByVal PaisFiscal As Integer,
+            ByVal EstadoFiscal As Integer, ByVal Municipiofiscal As Integer, ByVal ParroquiaFiscal As Integer, ByVal CiudadFiscal As Integer, ByVal BarrioFiscal As Integer,
+            ByVal ZipFiscal As String, ByVal DireccionDespacho As String, ByVal PaisDespacho As Integer,
+            ByVal EstadoDespacho As Integer, ByVal MunicipioDespacho As Integer, ByVal ParroquiaDespacho As Integer, ByVal CiudadDespacho As Integer, ByVal BarrioDespacho As Integer,
+            ByVal ZipDespacho As String, ByVal CodigoGeografico As Integer, ByVal email1 As String, ByVal email2 As String, ByVal email3 As String, ByVal email4 As String,
+            ByVal Telefono1 As String, ByVal Telefono2 As String, ByVal Telefono3 As String, ByVal Fax As String, ByVal Gerente As String,
+            ByVal TelefonoGerente As String, ByVal Contacto As String, ByVal TelefonoContacto As String, ByVal LimiteCredito As Double,
+            ByVal Disponible As Double, ByVal DescuentoCliente As Double, ByVal DescuentoPP1 As Double, ByVal DescuentoPP2 As Double,
+            ByVal DescuentoPP3 As Double, ByVal DescuentoPP4 As Double, ByVal DesdePP1 As Integer, ByVal DesdePP2 As Integer,
+            ByVal DesdePP3 As Integer, ByVal DesdePP4 As Integer, ByVal HastaPP1 As Integer, ByVal HastaPP2 As Integer, ByVal HastaPP3 As Integer,
+            ByVal HastaPP4 As Integer, ByVal Saldo As Double, ByVal RegimenIVA As String, ByVal Tarifa As String,
+            ByVal ListaDePrecios As String, ByVal FormaDePago As String, ByVal FechaIngreso As Date,
+            ByVal CodigoContable As String, ByVal CodigoCreacion As Integer, ByVal Estatus As Integer, ByVal RequisitoRIF As Integer,
+            ByVal RequisitoNIT As Integer, ByVal RequisitoRecibo As Integer, ByVal RequisitoCI As Integer, ByVal RequisitoRegistro As Integer,
+            ByVal RequisitoRegistroActual As Integer, ByVal RequisitoReferenciaBanco As Integer, ByVal RequisitoReferComercio As Integer,
+            ByVal FrecuenciaVisita As Integer, ByVal FechaUltimaVisita As Date, ByVal InicioVisitas As Date, ByVal Merchandising As Integer,
+            ByVal PermiteChequesDevueltos As Integer, ByVal DiaDePago As Integer, ByVal HoraDePago As String, ByVal HoraAPago As String,
+            ByVal Ranking As Integer, ByVal FechaRanking As Date, ByVal Comentario As String, ByVal TipoContribuyente As Integer,
             ByVal Share As Integer)
 
         Dim strSQL As String = ""
@@ -1656,13 +1686,13 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditVENTASDescuento(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                                       ByVal NombreTablaEnBD As String, ByVal NombreCampoDocumentoEnBD As String, _
-                                       ByVal NumeroDocumento As String, ByVal numRenglon As String, ByVal DescripcionDescuento As String, _
+    Public Sub InsertEditVENTASDescuento(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                                       ByVal NombreTablaEnBD As String, ByVal NombreCampoDocumentoEnBD As String,
+                                       ByVal NumeroDocumento As String, ByVal numRenglon As String, ByVal DescripcionDescuento As String,
                                        ByVal PorcentajeDescuento As Double, ByVal MontoDescuento As Double)
 
         Dim strSQL As String = ""
@@ -1688,12 +1718,12 @@ Module TablasVentas
         strSQL += ModificarCadena(jytsistema.WorkExercise, "ejercicio")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub InsertEditVENTASComentarioRenglon(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                                       ByVal NumeroDocumento As String, ByVal Origen As String, _
-                                       ByVal Item As String, ByVal numRenglon As String, _
+    Public Sub InsertEditVENTASComentarioRenglon(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                                       ByVal NumeroDocumento As String, ByVal Origen As String,
+                                       ByVal Item As String, ByVal numRenglon As String,
                                        ByVal Comentario As String)
 
         Dim strSQL As String = ""
@@ -1719,11 +1749,11 @@ Module TablasVentas
         strSQL += ModificarCadena(Comentario, "comentario")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub InsertEditVENTASCanaldistribucionTiponegocio(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                                       ByVal Codigo As String, ByVal Descripcion As String, _
+    Public Sub InsertEditVENTASCanaldistribucionTiponegocio(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                                       ByVal Codigo As String, ByVal Descripcion As String,
                                        ByVal Antecesor As String, ByVal nomTabla As String)
 
         Dim strSQL As String = ""
@@ -1744,11 +1774,11 @@ Module TablasVentas
         If Antecesor <> "" Then strSQL += ModificarCadena(Antecesor, "antec")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub InsertEditVENTASAsociado(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                                        ByVal CodigoCliente As String, ByVal Nacionalidad As String, ByVal CedulaIdentidad As String, _
+    Public Sub InsertEditVENTASAsociado(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                                        ByVal CodigoCliente As String, ByVal Nacionalidad As String, ByVal CedulaIdentidad As String,
                                         ByVal NombreAsociado As String, ByVal Expediente As String)
 
         Dim strSQL As String = ""
@@ -1773,12 +1803,12 @@ Module TablasVentas
         strSQL += ModificarCadena(Expediente, "expediente")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditVENTASClientesVisitasDespachosPagos(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                                       ByVal CodigoCliente As String, ByVal Dia As Integer, ByVal desde As String, ByVal Hasta As String, _
+    Public Sub InsertEditVENTASClientesVisitasDespachosPagos(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                                       ByVal CodigoCliente As String, ByVal Dia As Integer, ByVal desde As String, ByVal Hasta As String,
                                        ByVal Desdepm As String, ByVal Hastapm As String, ByVal Tipo As Integer, ByVal Division As String)
 
         Dim strSQL As String = ""
@@ -1806,13 +1836,13 @@ Module TablasVentas
         strSQL += ModificarCadena(Division, "division")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditVENTASExpedienteCliente(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                        ByVal CodigoCliente As String, ByVal FechaMovimiento As Date, _
-                        ByVal Comentario As String, Condicion As Integer, Causa As String, _
+    Public Sub InsertEditVENTASExpedienteCliente(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                        ByVal CodigoCliente As String, ByVal FechaMovimiento As Date,
+                        ByVal Comentario As String, Condicion As Integer, Causa As String,
                         ByVal TipoCondicion As Integer)
 
         Dim strSQL As String = ""
@@ -1836,13 +1866,13 @@ Module TablasVentas
         strSQL += ModificarEntero(TipoCondicion, "tipocondicion")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditVENTASDescuentosAsesores(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                        ByVal CodigoDescuento As String, Descripcion As String, PorcentajeDescuento As Double, _
-                        ByVal FechaInicio As Date, FechaFinal As Date, CodigoVendedor As String, _
+    Public Sub InsertEditVENTASDescuentosAsesores(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                        ByVal CodigoDescuento As String, Descripcion As String, PorcentajeDescuento As Double,
+                        ByVal FechaInicio As Date, FechaFinal As Date, CodigoVendedor As String,
                         TipoVendedor As Integer)
 
         Dim strSQL As String = ""
@@ -1869,14 +1899,14 @@ Module TablasVentas
         strSQL += ModificarEntero(TipoVendedor, "tipo")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
 
 
     Public Sub insertEditVentasCuotasMercancias(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal CodigoAsesor As String)
-        ft.Ejecutar_strSQL(myconn, " replace into jsvencuoart " _
+        ft.Ejecutar_strSQL(MyConn, " replace into jsvencuoart " _
                        & " SELECT '" & CodigoAsesor & "', a.codart, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, '', a.id_emp " _
                        & " FROM jsmerctainv a " _
                        & " WHERE " _
@@ -1884,8 +1914,8 @@ Module TablasVentas
     End Sub
 
 
-    Public Sub InsertEditVENTASComisionesJerarquias(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                        ByVal CodigoVendedor As String, CodigoJerarquia As String, Porcentaje_Cuota As Double, _
+    Public Sub InsertEditVENTASComisionesJerarquias(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                        ByVal CodigoVendedor As String, CodigoJerarquia As String, Porcentaje_Cuota As Double,
                         TipoFactor As Integer)
 
         Dim strSQL As String = ""
@@ -1909,11 +1939,11 @@ Module TablasVentas
         strSQL += ModificarEntero(TipoFactor, "tipo")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub InsertEditVENTASComisionesCobranza(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-                        ByVal CodigoVendedor As String, Desde As Integer, Hasta As Integer, Porcentaje_Cobranza As Double, _
+    Public Sub InsertEditVENTASComisionesCobranza(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                        ByVal CodigoVendedor As String, Desde As Integer, Hasta As Integer, Porcentaje_Cobranza As Double,
                         Optional CodigoJerarquia As String = "XX")
 
         Dim strSQL As String = ""
@@ -1939,7 +1969,7 @@ Module TablasVentas
         strSQL += ModificarDoble(Porcentaje_Cobranza, "por_cobranza")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 

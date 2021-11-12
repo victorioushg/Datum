@@ -21,10 +21,8 @@ Partial Class jsBanArcReposicionCaja
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsBanArcReposicionCaja))
         Me.lblInfo = New System.Windows.Forms.Label()
-        Me.txtFecha = New System.Windows.Forms.TextBox()
         Me.txtBeneficiario = New System.Windows.Forms.TextBox()
         Me.txtImporte = New System.Windows.Forms.TextBox()
-        Me.btnFecha = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.lblImporteReporsicion = New System.Windows.Forms.Label()
@@ -44,13 +42,13 @@ Partial Class jsBanArcReposicionCaja
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cmbSeleccion = New System.Windows.Forms.ComboBox()
-        Me.txtFechaSeleccion = New System.Windows.Forms.TextBox()
-        Me.btnFechaSeleccion = New System.Windows.Forms.Button()
         Me.btnGo = New System.Windows.Forms.Button()
         Me.cmbFormaPago = New System.Windows.Forms.ComboBox()
         Me.cmbTipo = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtDocumento = New System.Windows.Forms.TextBox()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaSeleccion = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpAceptarSalir.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -62,15 +60,6 @@ Partial Class jsBanArcReposicionCaja
         Me.lblInfo.Name = "lblInfo"
         Me.lblInfo.Size = New System.Drawing.Size(726, 27)
         Me.lblInfo.TabIndex = 80
-        '
-        'txtFecha
-        '
-        Me.txtFecha.Enabled = False
-        Me.txtFecha.Location = New System.Drawing.Point(102, 49)
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(98, 20)
-        Me.txtFecha.TabIndex = 82
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtBeneficiario
         '
@@ -89,16 +78,6 @@ Partial Class jsBanArcReposicionCaja
         Me.txtImporte.Size = New System.Drawing.Size(135, 20)
         Me.txtImporte.TabIndex = 86
         Me.txtImporte.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(206, 49)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(29, 20)
-        Me.btnFecha.TabIndex = 105
-        Me.btnFecha.Text = "•••"
-        Me.btnFecha.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -173,6 +152,7 @@ Partial Class jsBanArcReposicionCaja
         Me.lv.CheckBoxes = True
         Me.lv.FullRowSelect = True
         Me.lv.GridLines = True
+        Me.lv.HideSelection = False
         Me.lv.Location = New System.Drawing.Point(-1, 154)
         Me.lv.Name = "lv"
         Me.lv.Size = New System.Drawing.Size(913, 240)
@@ -295,25 +275,6 @@ Partial Class jsBanArcReposicionCaja
         Me.cmbSeleccion.Size = New System.Drawing.Size(133, 21)
         Me.cmbSeleccion.TabIndex = 127
         '
-        'txtFechaSeleccion
-        '
-        Me.txtFechaSeleccion.Enabled = False
-        Me.txtFechaSeleccion.Location = New System.Drawing.Point(102, 128)
-        Me.txtFechaSeleccion.Name = "txtFechaSeleccion"
-        Me.txtFechaSeleccion.Size = New System.Drawing.Size(98, 20)
-        Me.txtFechaSeleccion.TabIndex = 128
-        Me.txtFechaSeleccion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnFechaSeleccion
-        '
-        Me.btnFechaSeleccion.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaSeleccion.Location = New System.Drawing.Point(206, 128)
-        Me.btnFechaSeleccion.Name = "btnFechaSeleccion"
-        Me.btnFechaSeleccion.Size = New System.Drawing.Size(29, 20)
-        Me.btnFechaSeleccion.TabIndex = 129
-        Me.btnFechaSeleccion.Text = "•••"
-        Me.btnFechaSeleccion.UseVisualStyleBackColor = True
-        '
         'btnGo
         '
         Me.btnGo.AutoSize = True
@@ -363,6 +324,30 @@ Partial Class jsBanArcReposicionCaja
         Me.txtDocumento.Size = New System.Drawing.Size(118, 20)
         Me.txtDocumento.TabIndex = 133
         '
+        'txtFecha
+        '
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(102, 52)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(114, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 214
+        '
+        'txtFechaSeleccion
+        '
+        Me.txtFechaSeleccion.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaSeleccion.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaSeleccion.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaSeleccion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaSeleccion.Location = New System.Drawing.Point(102, 129)
+        Me.txtFechaSeleccion.Name = "txtFechaSeleccion"
+        Me.txtFechaSeleccion.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaSeleccion.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaSeleccion.TabIndex = 215
+        '
         'jsBanArcReposicionCaja
         '
         Me.AcceptButton = Me.btnOK
@@ -371,13 +356,13 @@ Partial Class jsBanArcReposicionCaja
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(915, 431)
         Me.ControlBox = False
+        Me.Controls.Add(Me.txtFechaSeleccion)
+        Me.Controls.Add(Me.txtFecha)
         Me.Controls.Add(Me.cmbFormaPago)
         Me.Controls.Add(Me.cmbTipo)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.txtDocumento)
         Me.Controls.Add(Me.btnGo)
-        Me.Controls.Add(Me.btnFechaSeleccion)
-        Me.Controls.Add(Me.txtFechaSeleccion)
         Me.Controls.Add(Me.cmbSeleccion)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label9)
@@ -395,10 +380,8 @@ Partial Class jsBanArcReposicionCaja
         Me.Controls.Add(Me.lblImporteReporsicion)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.btnFecha)
         Me.Controls.Add(Me.txtImporte)
         Me.Controls.Add(Me.txtBeneficiario)
-        Me.Controls.Add(Me.txtFecha)
         Me.Controls.Add(Me.lblInfo)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Name = "jsBanArcReposicionCaja"
@@ -412,10 +395,8 @@ Partial Class jsBanArcReposicionCaja
 
     End Sub
     Friend WithEvents lblInfo As System.Windows.Forms.Label
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
     Friend WithEvents txtBeneficiario As System.Windows.Forms.TextBox
     Friend WithEvents txtImporte As System.Windows.Forms.TextBox
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents lblImporteReporsicion As System.Windows.Forms.Label
@@ -435,11 +416,11 @@ Partial Class jsBanArcReposicionCaja
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents cmbSeleccion As System.Windows.Forms.ComboBox
-    Friend WithEvents txtFechaSeleccion As System.Windows.Forms.TextBox
-    Friend WithEvents btnFechaSeleccion As System.Windows.Forms.Button
     Friend WithEvents btnGo As System.Windows.Forms.Button
     Friend WithEvents cmbFormaPago As System.Windows.Forms.ComboBox
     Friend WithEvents cmbTipo As System.Windows.Forms.ComboBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents txtDocumento As System.Windows.Forms.TextBox
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaSeleccion As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

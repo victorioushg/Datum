@@ -1,6 +1,8 @@
 Imports MySql.Data.MySqlClient
 Imports System.IO
 Imports ReportesDeMedicionGerencial
+Imports Syncfusion.WinForms.Input
+
 Public Class jsSIGMERepParametros
 
     Private Const sModulo As String = "Reportes de Medición gerencial"
@@ -21,16 +23,16 @@ Public Class jsSIGMERepParametros
     Private IndiceReporte As Integer
     Private strIndiceReporte As String
 
-    Private vMERAgrupadoPor() As String = {"Ninguno", "Categorías", "Marcas", "Jerarquía", "División", "Mix", _
-        "Categorías & Marcas", "División & Categorías &  Marcas", _
-        "Categorías & Jerarquías", _
-        "División & Jerarquía", "Mix & Categorías & Marcas", "Mix & Jerarquías", _
+    Private vMERAgrupadoPor() As String = {"Ninguno", "Categorías", "Marcas", "Jerarquía", "División", "Mix",
+        "Categorías & Marcas", "División & Categorías &  Marcas",
+        "Categorías & Jerarquías",
+        "División & Jerarquía", "Mix & Categorías & Marcas", "Mix & Jerarquías",
         "Mix & División", "Mix & División & Categorías & Marcas", "Mix & División & Jerarquías"}
 
-    Private aMERAgrupadoPor() As String = {"", "categoria", "marca", "tipjer", "division", "mix", _
-                                        "categoria, marca", "division, categoria, marca", _
-                                        "categoria, tipjer", "division, tipjer", _
-                                        "mix, categoria, marca", "mix, tipjer", "mix, division", _
+    Private aMERAgrupadoPor() As String = {"", "categoria", "marca", "tipjer", "division", "mix",
+                                        "categoria, marca", "division, categoria, marca",
+                                        "categoria, tipjer", "division, tipjer",
+                                        "mix, categoria, marca", "mix, tipjer", "mix, division",
                                         "mix, division, categoria, marca", "mix, division, tipjer"}
     Private vMERAgrupadoPorR() As String = {"Ninguno", "Categorías", "Marcas", "Jerarquía", "División", "Mix"}
     Private aMERAgrupadoPorR() As String = {"", "categoria", "marca", "tipjer", "division", "mix"}
@@ -45,21 +47,21 @@ Public Class jsSIGMERepParametros
     Private aTipoReporte() As String = {"Unidad Venta (UV) ", "Kilogramos (UMP)", "Ventas (BsF)", "Cajas (UMS)", "Costos (BsF)"}
     Private aTarifa() As String = {"A", "B", "C", "D", "E", "F"}
     Private aTerritorio() As String = {"Barrio/Urbanización/Sector", "Ciudad/Pueblo/Aldea", "Parroquia/Comunidad", "Municipio/Región", "Estado/Provincia/Departamento", "País"}
-    Private vVENAgrupadoPor() As String = {"Ninguno", "Canal de Distribución", "Tipo de Negocio", "Zona", "Ruta", _
-                                           "Asesor Comercial", "Canal & Tipo Negocio", "Zona & Ruta", _
-                                           "Asesor & Canal", "Asesor & Tipo de Negocio", "Asesor & Canal & Tipo de negocio", _
+    Private vVENAgrupadoPor() As String = {"Ninguno", "Canal de Distribución", "Tipo de Negocio", "Zona", "Ruta",
+                                           "Asesor Comercial", "Canal & Tipo Negocio", "Zona & Ruta",
+                                           "Asesor & Canal", "Asesor & Tipo de Negocio", "Asesor & Canal & Tipo de negocio",
                                            "Asesor & Zona", "Asesor & ruta", "Asesor & Zona & Ruta", "Territorio"}
-    Private aVENAgrupadoPor() As String = {"", "canal", "tiponegocio", "zona", "ruta", "asesor", "canal, tiponegocio", _
-                                           "zona, ruta", "asesor, canal", "asesor, tiponegocio", "asesor, canal, tiponegocio", _
+    Private aVENAgrupadoPor() As String = {"", "canal", "tiponegocio", "zona", "ruta", "asesor", "canal, tiponegocio",
+                                           "zona, ruta", "asesor, canal", "asesor, tiponegocio", "asesor, canal, tiponegocio",
                                            "asesor, zona", "asesor, ruta", "asesor, zona, ruta", "territorio"}
     Private vCOMAgrupadoPor() As String = {"Ninguno", "Categorías", "Unidades de Negocio", "Categorías & Unidades"}
     Private aCOMAgrupadoPor() As String = {"", "categoriaprov", "unidadnegocioprov", "categoriaprov, unidadnegocioprov"}
-    Private aAño() As Object = {2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, _
+    Private aAño() As Object = {2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020,
                                   2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030}
 
     Private periodoTipo As TipoPeriodo
-    Public Sub Cargar(ByVal TipoCarga As Integer, ByVal numReporte As Integer, ByVal nomReporte As String, _
-                      Optional ByVal CodMercancia As String = "", Optional ByVal numDocumento As String = "", _
+    Public Sub Cargar(ByVal TipoCarga As Integer, ByVal numReporte As Integer, ByVal nomReporte As String,
+                      Optional ByVal CodMercancia As String = "", Optional ByVal numDocumento As String = "",
                       Optional ByVal Fecha As Date = #1/1/2009#)
 
 
@@ -67,6 +69,9 @@ Public Class jsSIGMERepParametros
         Me.Dock = DockStyle.Fill
         myConn = New MySqlConnection(jytsistema.strConn)
         myConn.Open()
+
+        Dim dates As SfDateTimeEdit() = {txtPeriodoDesde, txtPeriodoHasta}
+        SetSizeDateObjects(dates)
 
         ReporteNumero = numReporte
         ReporteNombre = nomReporte
@@ -170,9 +175,9 @@ Public Class jsSIGMERepParametros
 
         End Select
     End Sub
-    Private Sub Inicializar(ByVal nEtiqueta As String, ByVal TabOrden As Boolean, ByVal TabGrupo As Boolean, _
-        ByVal TabCriterio As Boolean, ByVal TabConstantes As Boolean, ByVal aNombreOrden() As String, _
-        ByVal aCampoOrden() As String, ByVal aTipoOrden() As String, ByVal aLongitudOrden() As Integer, _
+    Private Sub Inicializar(ByVal nEtiqueta As String, ByVal TabOrden As Boolean, ByVal TabGrupo As Boolean,
+        ByVal TabCriterio As Boolean, ByVal TabConstantes As Boolean, ByVal aNombreOrden() As String,
+        ByVal aCampoOrden() As String, ByVal aTipoOrden() As String, ByVal aLongitudOrden() As Integer,
         Optional ByVal Trabajador As String = "")
 
         HabilitarTabs(TabOrden, TabGrupo, TabCriterio, TabConstantes)
@@ -215,16 +220,16 @@ Public Class jsSIGMERepParametros
             Case Else
                 ft.RellenaCombo(vMERAgrupadoPor, cmbMERAgrupadoPor)
         End Select
-        
+
         ft.RellenaCombo(vVENAgrupadoPor, cmbVenAgrupadoPor)
         ft.RellenaCombo(vCOMAgrupadoPor, cmbCOMAgrupadoPor)
 
         ft.habilitarObjetos(False, False, TabPageVentas, TabPageCompras)
 
         Select Case ReporteNumero
-            Case ReporteMedicionGerencial.cGananciasPorFactura, ReporteMedicionGerencial.cGananciasPorItem, _
-                ReporteMedicionGerencial.cGananciasItemMesMes, ReporteMedicionGerencial.cVentasComparativasMesMes, _
-                ReporteMedicionGerencial.cActivacionClientesMesMes, ReporteMedicionGerencial.cDescuentosAsesor, _
+            Case ReporteMedicionGerencial.cGananciasPorFactura, ReporteMedicionGerencial.cGananciasPorItem,
+                ReporteMedicionGerencial.cGananciasItemMesMes, ReporteMedicionGerencial.cVentasComparativasMesMes,
+                ReporteMedicionGerencial.cActivacionClientesMesMes, ReporteMedicionGerencial.cDescuentosAsesor,
                 ReporteMedicionGerencial.cDescuentosAsesorMesMes
                 ft.habilitarObjetos(True, False, TabPageVentas)
             Case ReporteMedicionGerencial.cComprasComparativasMesMes
@@ -274,37 +279,36 @@ Public Class jsSIGMERepParametros
     Private Sub VerCriterio_Periodo(ByVal Ver As Boolean, ByVal CompletoDesdeHasta As Integer, Optional ByVal Periodo As TipoPeriodo = TipoPeriodo.iMensual)
         'CompletoDesdeHasta 0 = Complete , 1 = Desde , 2 = Hasta 
         periodoTipo = Periodo
-        ft.visualizarObjetos(False, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta, btnPeriodoDesde, btnPeriodoHasta)
-        ft.habilitarObjetos(False, True, txtPeriodoDesde, txtPeriodoHasta)
+        ft.visualizarObjetos(False, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta)
         If Ver Then
 
             Select Case CompletoDesdeHasta
                 Case 0
-                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta, btnPeriodoDesde, btnPeriodoHasta)
+                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta)
                 Case 1
-                    ft.visualizarObjetos(Ver, lblPeriodo, txtPeriodoDesde, btnPeriodoDesde)
+                    ft.visualizarObjetos(Ver, lblPeriodo, txtPeriodoDesde)
                 Case 2
-                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoHasta, btnPeriodoHasta)
+                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoHasta)
             End Select
         End If
 
 
         Select Case Periodo
             Case TipoPeriodo.iDiario
-                txtPeriodoDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtPeriodoHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoDesde.Value = jytsistema.sFechadeTrabajo
+                txtPeriodoHasta.Value = jytsistema.sFechadeTrabajo
             Case TipoPeriodo.iSemanal
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaSemana(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaSemana(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaSemana(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaSemana(jytsistema.sFechadeTrabajo)
             Case TipoPeriodo.iMensual
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaMes(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaMes(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaMes(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaMes(jytsistema.sFechadeTrabajo)
             Case TipoPeriodo.iAnual
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaAño(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaAño(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaAño(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaAño(jytsistema.sFechadeTrabajo)
             Case Else
-                txtPeriodoDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtPeriodoHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoDesde.Value = jytsistema.sFechadeTrabajo
+                txtPeriodoHasta.Value = jytsistema.sFechadeTrabajo
         End Select
 
     End Sub
@@ -348,7 +352,7 @@ Public Class jsSIGMERepParametros
         ValoresInicialesConstantes()
 
         verConstante_Resumen(False)
-        VerConstante_ResumenMercas(False)
+        verConstante_ResumenMercas(False)
         VerConstante_Tarifas(False)
         VerConstante_Tarifa(False)
         VerConstante_peso(False)
@@ -490,12 +494,12 @@ Public Class jsSIGMERepParametros
                     Case Else
                         oReporte = New rptSIGMEDescuentosAsesorMes0G
                 End Select
-                str = SeleccionSIGMEDescuentos(myConn, lblInfo, CDate("01/01/" & (cmbAño.SelectedIndex + 2000).ToString), CDate("31/12/" & (cmbAño.SelectedIndex + 2000).ToString), txtOrdenDesde.Text, txtOrdenHasta.Text, _
-                                            vOrdenCampos(cmbOrdenadoPor.SelectedIndex), txtProvCliDesde.Text, txtProvCliHasta.Text, txtCategoriaDesde.Text, txtCategoriaHasta.Text, _
-                                            txtMarcaDesde.Text, txtMarcaHasta.Text, txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, _
-                                            txtCodjer5.Text, txtCodjer6.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, _
-                                            txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text, _
-                                            txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, txtCiudad.Text, txtBarrio.Text, _
+                str = SeleccionSIGMEDescuentos(myConn, lblInfo, CDate("01/01/" & (cmbAño.SelectedIndex + 2000).ToString), CDate("31/12/" & (cmbAño.SelectedIndex + 2000).ToString), txtOrdenDesde.Text, txtOrdenHasta.Text,
+                                            vOrdenCampos(cmbOrdenadoPor.SelectedIndex), txtProvCliDesde.Text, txtProvCliHasta.Text, txtCategoriaDesde.Text, txtCategoriaHasta.Text,
+                                            txtMarcaDesde.Text, txtMarcaHasta.Text, txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text,
+                                            txtCodjer5.Text, txtCodjer6.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text,
+                                            txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text,
+                                            txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, txtCiudad.Text, txtBarrio.Text,
                                             False, cmbTipoReporte.SelectedIndex)
 
             Case ReporteMedicionGerencial.cDescuentosAsesor
@@ -515,12 +519,12 @@ Public Class jsSIGMERepParametros
                     Case Else
                         oReporte = New rptSIGMEDescuentosAsesor0G
                 End Select
-                str = SeleccionSIGMEDescuentos(myConn, lblInfo, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtOrdenDesde.Text, txtOrdenHasta.Text, _
-                                            vOrdenCampos(cmbOrdenadoPor.SelectedIndex), txtProvCliDesde.Text, txtProvCliHasta.Text, txtCategoriaDesde.Text, txtCategoriaHasta.Text, _
-                                            txtMarcaDesde.Text, txtMarcaHasta.Text, txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, _
-                                            txtCodjer5.Text, txtCodjer6.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, _
-                                            txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text, _
-                                            txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, txtCiudad.Text, txtBarrio.Text, _
+                str = SeleccionSIGMEDescuentos(myConn, lblInfo, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtOrdenDesde.Text, txtOrdenHasta.Text,
+                                            vOrdenCampos(cmbOrdenadoPor.SelectedIndex), txtProvCliDesde.Text, txtProvCliHasta.Text, txtCategoriaDesde.Text, txtCategoriaHasta.Text,
+                                            txtMarcaDesde.Text, txtMarcaHasta.Text, txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text,
+                                            txtCodjer5.Text, txtCodjer6.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text,
+                                            txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text,
+                                            txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, txtCiudad.Text, txtBarrio.Text,
                                             False, cmbTipoReporte.SelectedIndex)
 
             Case ReporteMedicionGerencial.cVentasComprasExistenciasMesMes
@@ -535,45 +539,45 @@ Public Class jsSIGMERepParametros
             Case ReporteMedicionGerencial.cGananciasCestaTicket
                 nTabla = "dtGananciaCestaticket"
                 oReporte = New rptSIGMEGananciasCestaTicket
-                str = SeleccionSIGMEGananciaCestaTicketEnPeriodo(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, _
+                str = SeleccionSIGMEGananciaCestaTicketEnPeriodo(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text,
                                                                  CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text))
             Case ReporteMedicionGerencial.cDropSizeMesMes
                 nTabla = "dtDropSize"
                 oReporte = New rptSIGMEDropSizeMesMes
-                str = SeleccionSIGMEDropSize(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, _
-                                             txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, _
-                                             txtProvCliDesde.Text, txtProvCliHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, _
-                                             txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text, _
-                                             txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, txtCiudad.Text, txtBarrio.Text, _
+                str = SeleccionSIGMEDropSize(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text,
+                                             txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text,
+                                             txtProvCliDesde.Text, txtProvCliHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text,
+                                             txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text,
+                                             txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, txtCiudad.Text, txtBarrio.Text,
                                              cmbAño.SelectedIndex + 2000)
 
             Case ReporteMedicionGerencial.cIngresosPorAsesor
                 nTabla = "dtIngresosAsesor"
                 oReporte = New rptSIGMEIngresosAsesor0G
-                str = SeleccionSIGMEIngresosporAsesoryForma(myConn, lblInfo, txtAsesorDesde.Text, txtAsesorHasta.Text, _
+                str = SeleccionSIGMEIngresosporAsesoryForma(myConn, lblInfo, txtAsesorDesde.Text, txtAsesorHasta.Text,
                                                              CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text))
             Case ReporteMedicionGerencial.cComprasComparativasMesMes
 
                 nTabla = "dtComprasVentasComparativas"
                 oReporte = New rptSIGMEComprasVentasComparativas
-                str = SeleccionSIGMEComprasComparativasMesMes(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, _
-                                                              txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, _
-                                                              txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text, _
-                                                              txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, _
-                                                              txtDivisionHasta.Text, txtProvCliDesde.Text, txtProvCliHasta.Text, _
-                                                              txtCategoriaProveedorDesde.Text, txtCategoriaProveedorHasta.Text, txtUnidadProveedorDesde.Text, _
+                str = SeleccionSIGMEComprasComparativasMesMes(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text,
+                                                              txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text,
+                                                              txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text,
+                                                              txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text,
+                                                              txtDivisionHasta.Text, txtProvCliDesde.Text, txtProvCliHasta.Text,
+                                                              txtCategoriaProveedorDesde.Text, txtCategoriaProveedorHasta.Text, txtUnidadProveedorDesde.Text,
                                                               txtUnidadProveedorHasta.Text, cmbTipoReporte.SelectedIndex)
 
             Case ReporteMedicionGerencial.cVentasComparativasMesMes
                 nTabla = "dtComprasVentasComparativas"
                 oReporte = New rptSIGMEComprasVentasComparativas
-                str = SeleccionSIGMEVentasComparativasMesMes(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, txtTipoJerarquia.Text, _
-                                                             txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, _
-                                                             txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, _
-                                                             txtProvCliDesde.Text, txtProvCliHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, _
-                                                             txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, _
-                                                             txtRutaDesde.Text, txtRutaHasta.Text, txtAsesorRDesde.Text, txtAsesorRHasta.Text, _
-                                                             txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, txtCiudad.Text, txtBarrio.Text, _
+                str = SeleccionSIGMEVentasComparativasMesMes(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, txtTipoJerarquia.Text,
+                                                             txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text,
+                                                             txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text,
+                                                             txtProvCliDesde.Text, txtProvCliHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text,
+                                                             txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text,
+                                                             txtRutaDesde.Text, txtRutaHasta.Text, txtAsesorRDesde.Text, txtAsesorRHasta.Text,
+                                                             txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, txtCiudad.Text, txtBarrio.Text,
                                                              cmbTipoReporte.SelectedIndex)
             Case ReporteMedicionGerencial.cVentasMesMesAsesor
                 nTabla = "dtVentasMesMes"
@@ -585,8 +589,8 @@ Public Class jsSIGMERepParametros
                     Case Else
                         oReporte = New rptSIGMEVentasMesMes0G
                 End Select
-                str = SeleccionSIGMEVentasMesMes(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, txtTipoJerarquia.Text, _
-                                                             txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, _
+                str = SeleccionSIGMEVentasMesMes(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, txtTipoJerarquia.Text,
+                                                             txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text,
                                                              cmbAño.SelectedIndex + 2000,
                                                              cmbMERAgrupadoPor.Text, cmbTipoReporte.SelectedIndex)
 
@@ -600,8 +604,8 @@ Public Class jsSIGMERepParametros
                     Case Else
                         oReporte = New rptSIGMEDevolucionesAsesorMesMes0G
                 End Select
-                str = SeleccionSIGMEDevolucionesMesMes(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, txtTipoJerarquia.Text, _
-                                                             txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, _
+                str = SeleccionSIGMEDevolucionesMesMes(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, txtTipoJerarquia.Text,
+                                                             txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text,
                                                              cmbAño.SelectedIndex + 2000,
                                                              cmbMERAgrupadoPor.Text, cmbTipoReporte.SelectedIndex)
 
@@ -625,15 +629,15 @@ Public Class jsSIGMERepParametros
                 End Select
 
                 str = SeleccionSIGMEGananciasBrutasFacturas(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex),
-                                             txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, _
-                                            txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text, _
-                                            txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, _
-                                            txtDivisionHasta.Text, cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex, _
-                                            cmbRegulada.SelectedIndex, txtCanalDesde.Text, txtCanalHasta.Text, txtTipoNegocioDesde.Text, _
-                                            txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text, _
-                                            txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, _
-                                            txtCiudad.Text, txtBarrio.Text, 0, 0, CDate(txtPeriodoDesde.Text), _
-                                            CDate(txtPeriodoHasta.Text), txtAlmacenDesde.Text, txtAlmacenHasta.Text, _
+                                             txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text,
+                                            txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text,
+                                            txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text,
+                                            txtDivisionHasta.Text, cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex,
+                                            cmbRegulada.SelectedIndex, txtCanalDesde.Text, txtCanalHasta.Text, txtTipoNegocioDesde.Text,
+                                            txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text,
+                                            txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text,
+                                            txtCiudad.Text, txtBarrio.Text, 0, 0, CDate(txtPeriodoDesde.Text),
+                                            CDate(txtPeriodoHasta.Text), txtAlmacenDesde.Text, txtAlmacenHasta.Text,
                                             txtProvCliDesde.Text, txtProvCliHasta.Text, chkConsResumen.Checked, False)
 
 
@@ -655,12 +659,12 @@ Public Class jsSIGMERepParametros
                         oReporte = New rptSIGMEGananciasItem0G
                 End Select
 
-                str = SeleccionSIGMEGananciasBrutasItem(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), _
-                                                        txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, _
-                                                        txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text, _
-                                                        txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, _
-                                                        txtCiudad.Text, txtBarrio.Text, txtCategoriaDesde.Text, txtCategoriaHasta.Text, _
-                                                        txtMarcaDesde.Text, txtMarcaHasta.Text, txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, _
+                str = SeleccionSIGMEGananciasBrutasItem(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text),
+                                                        txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text,
+                                                        txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text,
+                                                        txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text,
+                                                        txtCiudad.Text, txtBarrio.Text, txtCategoriaDesde.Text, txtCategoriaHasta.Text,
+                                                        txtMarcaDesde.Text, txtMarcaHasta.Text, txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text,
                                                         txtDivisionDesde.Text, txtDivisionHasta.Text, False)
 
             Case ReporteMedicionGerencial.cGananciasItemMesMes
@@ -681,13 +685,13 @@ Public Class jsSIGMERepParametros
                         oReporte = New rptSIGMEGananciasItemMesMes0G
                 End Select
 
-                str = SeleccionSIGMEGananciasBrutasMesMes(myConn, lblInfo, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), _
-                                                            txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, _
-                                                            txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, _
-                                                            txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text, _
-                                                            txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, _
-                                                            txtCiudad.Text, txtBarrio.Text, txtCategoriaDesde.Text, txtCategoriaHasta.Text, _
-                                                            txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, _
+                str = SeleccionSIGMEGananciasBrutasMesMes(myConn, lblInfo, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text),
+                                                            txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text,
+                                                            txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text,
+                                                            txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text,
+                                                            txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text,
+                                                            txtCiudad.Text, txtBarrio.Text, txtCategoriaDesde.Text, txtCategoriaHasta.Text,
+                                                            txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text,
                                                             CamposEnGrupos())
 
             Case ReporteMedicionGerencial.cActivacionClientesMesMes
@@ -708,9 +712,9 @@ Public Class jsSIGMERepParametros
                         oReporte = New rptSIGMEActivacionMesMes0G
                 End Select
 
-                str = SeleccionSIGMEActivacion(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, "codart", txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text, txtCategoriaHasta.Text, _
-                                                            txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, _
-                                                            txtRutaDesde.Text, txtRutaHasta.Text, txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtCiudad.Text, txtMunicipio.Text, txtParroquia.Text, txtBarrio.Text, _
+                str = SeleccionSIGMEActivacion(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, "codart", txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text, txtCategoriaHasta.Text,
+                                                            txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text,
+                                                            txtRutaDesde.Text, txtRutaHasta.Text, txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtCiudad.Text, txtMunicipio.Text, txtParroquia.Text, txtBarrio.Text,
                                                              , , , , CamposEnGrupos())
 
 
@@ -723,7 +727,7 @@ Public Class jsSIGMERepParametros
             If dsSIGME.Tables(nTabla).Rows.Count > 0 Then
                 oReporte = PresentaReporte(oReporte, dsSIGME, nTabla)
                 r.CrystalReportViewer1.ReportSource = oReporte
-                r.CrystalReportViewer1.ToolPanelView = IIf(PresentaArbol, CrystalDecisions.Windows.Forms.ToolPanelViewType.GroupTree, _
+                r.CrystalReportViewer1.ToolPanelView = IIf(PresentaArbol, CrystalDecisions.Windows.Forms.ToolPanelViewType.GroupTree,
                                               CrystalDecisions.Windows.Forms.ToolPanelViewType.None)
                 r.CrystalReportViewer1.ShowGroupTreeButton = PresentaArbol
                 r.CrystalReportViewer1.Zoom(1)
@@ -731,7 +735,7 @@ Public Class jsSIGMERepParametros
                 r.Cargar(ReporteNombre)
                 DeshabilitarCursorEnEspera()
             Else
-                ft.MensajeCritico("No existe información que cumpla con estos criterios y/o constantes ")
+                ft.mensajeCritico("No existe información que cumpla con estos criterios y/o constantes ")
             End If
         End If
 
@@ -1307,15 +1311,6 @@ Public Class jsSIGMERepParametros
                 GruposCantidad = 0
         End Select
     End Function
-    Private Sub btnPeriodoDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles btnPeriodoDesde.Click
-        txtPeriodoDesde.Text = SeleccionaFecha(CDate(txtPeriodoDesde.Text), Me, sender)
-    End Sub
-
-    Private Sub btnPeriodoHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles btnPeriodoHasta.Click
-        txtPeriodoHasta.Text = SeleccionaFecha(CDate(txtPeriodoHasta.Text), Me, sender)
-    End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
         LimpiarOrden()
@@ -1325,12 +1320,12 @@ Public Class jsSIGMERepParametros
         LimpiarCriterios()
     End Sub
     Private Sub LimpiarGrupos()
-        LimpiarTextos(txtCategoriaDesde, txtCategoriaHasta, txtCodjer1, txtCodjer2, txtCodjer3, txtCodjer4, _
+        LimpiarTextos(txtCategoriaDesde, txtCategoriaHasta, txtCodjer1, txtCodjer2, txtCodjer3, txtCodjer4,
             txtCodjer5, txtCodjer6, txtDivisionDesde, txtDivisionHasta, txtMarcaDesde, txtMarcaHasta)
     End Sub
     Private Sub LimpiarGruposVentas()
-        LimpiarTextos(txtCanalDesde, txtCanalHasta, txtTipoNegocioDesde, txtTipoNegocioHasta, txtZonaDesde, txtZonaHasta, _
-            txtRutaDesde, txtRutaHasta, txtPais, txtEstado, txtMunicipio, txtParroquia, txtCiudad, txtBarrio, _
+        LimpiarTextos(txtCanalDesde, txtCanalHasta, txtTipoNegocioDesde, txtTipoNegocioHasta, txtZonaDesde, txtZonaHasta,
+            txtRutaDesde, txtRutaHasta, txtPais, txtEstado, txtMunicipio, txtParroquia, txtCiudad, txtBarrio,
             txtAsesorRDesde, txtAsesorRHasta)
     End Sub
     Private Sub LimpiarGruposCompras()
@@ -1340,7 +1335,7 @@ Public Class jsSIGMERepParametros
         LimpiarTextos(txtOrdenDesde, txtOrdenHasta)
     End Sub
     Private Sub LimpiarCriterios()
-        LimpiarTextos(txtAsesorDesde, txtAsesorHasta, txtAlmacenDesde, txtAlmacenHasta, txtProvCliDesde, _
+        LimpiarTextos(txtAsesorDesde, txtAsesorHasta, txtAlmacenDesde, txtAlmacenHasta, txtProvCliDesde,
                       txtProvCliHasta, txtDocumentoDesde, txtDocumentoHasta, txtLoteDesde, txtLoteHasta)
     End Sub
 
@@ -1418,11 +1413,11 @@ Public Class jsSIGMERepParametros
 
     Private Sub cmbMERAgrupadorPor_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbMERAgrupadoPor.SelectedIndexChanged
 
-        ft.visualizarObjetos(False, lblGrupoDesde, lblGrupoHasta, lblCategoria, lblMarcas, lblDivisiones, lblJerarquias, _
-                            txtCategoriaDesde, btnCategoriaDesde, txtCategoriaHasta, btnCategoriaHasta, _
-                            txtMarcaDesde, btnMarcaDesde, txtMarcaHasta, btnMarcaHasta, _
-                            txtDivisionDesde, btnDivisionDesde, txtDivisionHasta, btnDivisionHasta, _
-                            txtTipoJerarquia, btnTipoJerarquia, txtCodjer1, btnCodjer1, txtCodjer2, btnCodjer2, _
+        ft.visualizarObjetos(False, lblGrupoDesde, lblGrupoHasta, lblCategoria, lblMarcas, lblDivisiones, lblJerarquias,
+                            txtCategoriaDesde, btnCategoriaDesde, txtCategoriaHasta, btnCategoriaHasta,
+                            txtMarcaDesde, btnMarcaDesde, txtMarcaHasta, btnMarcaHasta,
+                            txtDivisionDesde, btnDivisionDesde, txtDivisionHasta, btnDivisionHasta,
+                            txtTipoJerarquia, btnTipoJerarquia, txtCodjer1, btnCodjer1, txtCodjer2, btnCodjer2,
                             txtCodjer3, btnCodjer3, txtCodjer4, btnCodjer4, txtCodjer5, btnCodjer5, txtCodjer6, btnCodjer6)
         LimpiarGrupos()
         Select Case cmbMERAgrupadoPor.Text
@@ -1475,13 +1470,13 @@ Public Class jsSIGMERepParametros
     End Sub
     Private Sub cmbVENAgrupadorPor_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbVenAgrupadoPor.SelectedIndexChanged
 
-        ft.visualizarObjetos(False, Label7, Label8, Label9, Label11, Label1, Label2, Label3, Label4, Label5, Label6, _
-                          txtCanalDesde, btnCanalDesde, txtCanalHasta, btnCanalHasta, _
-                          txtTipoNegocioDesde, btnTipoNegocioDesde, txtTipoNegocioHasta, btnTipoNegocioHasta, _
-                          txtZonaDesde, btnZonaDesde, txtZonaHasta, btnZonaHasta, _
-                          txtRutaDesde, btnRutaDesde, txtRutaHasta, btnRutaHasta, _
-                          txtAsesorRDesde, btnAsesorRDesde, txtAsesorRHasta, btnAsesorRHasta, _
-                          txtPais, txtEstado, txtMunicipio, txtParroquia, txtCiudad, txtBarrio, _
+        ft.visualizarObjetos(False, Label7, Label8, Label9, Label11, Label1, Label2, Label3, Label4, Label5, Label6,
+                          txtCanalDesde, btnCanalDesde, txtCanalHasta, btnCanalHasta,
+                          txtTipoNegocioDesde, btnTipoNegocioDesde, txtTipoNegocioHasta, btnTipoNegocioHasta,
+                          txtZonaDesde, btnZonaDesde, txtZonaHasta, btnZonaHasta,
+                          txtRutaDesde, btnRutaDesde, txtRutaHasta, btnRutaHasta,
+                          txtAsesorRDesde, btnAsesorRDesde, txtAsesorRHasta, btnAsesorRHasta,
+                          txtPais, txtEstado, txtMunicipio, txtParroquia, txtCiudad, txtBarrio,
                           btnPais, btnEstado, btnMunicipio, btnParroquia, btnCiudad, btnBarrio)
 
 
@@ -1577,7 +1572,7 @@ Public Class jsSIGMERepParametros
     End Sub
     Private Sub VerJerarquias()
         ft.visualizarObjetos(True, lblGrupoDesde, lblGrupoHasta)
-        ft.visualizarObjetos(True, lblJerarquias, txtTipoJerarquia, btnTipoJerarquia, txtCodjer1, btnCodjer1, _
+        ft.visualizarObjetos(True, lblJerarquias, txtTipoJerarquia, btnTipoJerarquia, txtCodjer1, btnCodjer1,
                             txtCodjer2, btnCodjer2, txtCodjer3, btnCodjer3, txtCodjer4, btnCodjer4, txtCodjer5, btnCodjer5, txtCodjer6, btnCodjer6)
         ft.habilitarObjetos(False, True, txtTipoJerarquia, txtCodjer1, txtCodjer2, txtCodjer3, txtCodjer4, txtCodjer5, txtCodjer6)
     End Sub
@@ -1641,10 +1636,10 @@ Public Class jsSIGMERepParametros
     End Sub
 
     Private Sub btnTipoJerarquia_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTipoJerarquia.Click
-        txtTipoJerarquia.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT tipjer codigo, descrip descripcion FROM jsmerencjer WHERE  id_emp  = '" & jytsistema.WorkID & "' order by 1 ", " Tipo de Jerarquía", _
+        txtTipoJerarquia.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT tipjer codigo, descrip descripcion FROM jsmerencjer WHERE  id_emp  = '" & jytsistema.WorkID & "' order by 1 ", " Tipo de Jerarquía",
                                                   txtTipoJerarquia.Text)
     End Sub
-    Private Sub CargarJerarquia(ByVal MyConn As MySqlConnection, ByVal ds As DataSet, ByVal TipoJerarquia As String, ByVal Nivel As Integer, _
+    Private Sub CargarJerarquia(ByVal MyConn As MySqlConnection, ByVal ds As DataSet, ByVal TipoJerarquia As String, ByVal Nivel As Integer,
                                     ByVal txtCodjer As TextBox)
 
         If TipoJerarquia <> "" Then
@@ -1695,11 +1690,11 @@ Public Class jsSIGMERepParametros
     End Sub
 
     Private Sub btnAsesorDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsesorDesde.Click
-        txtAsesorDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codven codigo, concat(apellidos, ', ', nombres) descripcion FROM jsvencatven WHERE tipo = '" & TipoVendedor.iFuerzaventa & "'  and estatus = 1 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Asesores Comerciales", _
+        txtAsesorDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codven codigo, concat(apellidos, ', ', nombres) descripcion FROM jsvencatven WHERE tipo = '" & TipoVendedor.iFuerzaventa & "'  and estatus = 1 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Asesores Comerciales",
                                                 txtAsesorDesde.Text)
     End Sub
     Private Sub btnAsesorHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsesorHasta.Click
-        txtAsesorHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codven codigo, concat(apellidos, ', ', nombres) descripcion FROM jsvencatven WHERE tipo = '" & TipoVendedor.iFuerzaventa & "'  and estatus = 1 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Asesores Comerciales", _
+        txtAsesorHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codven codigo, concat(apellidos, ', ', nombres) descripcion FROM jsvencatven WHERE tipo = '" & TipoVendedor.iFuerzaventa & "'  and estatus = 1 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Asesores Comerciales",
                                                 txtAsesorHasta.Text)
     End Sub
 
@@ -1723,19 +1718,19 @@ Public Class jsSIGMERepParametros
 
     Private Sub btnProvCliDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnProvCliDesde.Click
         If ReporteNumero = ReporteMedicionGerencial.cComprasComparativasMesMes Then
-            txtProvCliDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codpro codigo, nombre descripcion from jsprocatpro where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Proveedores", _
+            txtProvCliDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codpro codigo, nombre descripcion from jsprocatpro where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Proveedores",
                                                      txtProvCliDesde.Text)
         Else
-            txtProvCliDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcli codigo, nombre descripcion from jsvencatcli where estatus < 3 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Clientes", _
+            txtProvCliDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcli codigo, nombre descripcion from jsvencatcli where estatus < 3 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Clientes",
                                                      txtProvCliDesde.Text)
         End If
     End Sub
     Private Sub btnProvCliHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnProvCliHasta.Click
         If ReporteNumero = ReporteMedicionGerencial.cComprasComparativasMesMes Then
-            txtProvCliHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codpro codigo, nombre descripcion from jsprocatpro where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Proveedores", _
+            txtProvCliHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codpro codigo, nombre descripcion from jsprocatpro where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Proveedores",
                                                              txtProvCliHasta.Text)
         Else
-            txtProvCliHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcli codigo, nombre descripcion from jsvencatcli where estatus < 3 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Clientes", _
+            txtProvCliHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcli codigo, nombre descripcion from jsvencatcli where estatus < 3 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Clientes",
                                                 txtProvCliHasta.Text)
         End If
     End Sub
@@ -1745,22 +1740,22 @@ Public Class jsSIGMERepParametros
     End Sub
 
     Private Sub btnCanalDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCanalDesde.Click
-        txtCanalDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descrip descripcion from jsvenliscan where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Canal de Distribución", _
+        txtCanalDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descrip descripcion from jsvenliscan where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Canal de Distribución",
                                                txtCanalDesde.Text)
     End Sub
 
     Private Sub btnCanalHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCanalHasta.Click
-        txtCanalHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descrip descripcion from jsvenliscan where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Canal de Distribución", _
+        txtCanalHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descrip descripcion from jsvenliscan where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Canal de Distribución",
                                                txtCanalHasta.Text)
     End Sub
 
     Private Sub btnTipoNegocioDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTipoNegocioDesde.Click
-        txtTipoNegocioDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descrip descripcion from jsvenlistip where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Tipo de Negocio", _
+        txtTipoNegocioDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descrip descripcion from jsvenlistip where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Tipo de Negocio",
                                                      txtTipoNegocioDesde.Text)
     End Sub
 
     Private Sub btnTipoNegocioHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTipoNegocioHasta.Click
-        txtTipoNegocioHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descrip descripcion from jsvenlistip where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Tipo de Negocio", _
+        txtTipoNegocioHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descrip descripcion from jsvenlistip where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Tipo de Negocio",
                                                      txtTipoNegocioHasta.Text)
     End Sub
 
@@ -1781,22 +1776,22 @@ Public Class jsSIGMERepParametros
     End Sub
 
     Private Sub btnRutaDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRutaDesde.Click
-        txtRutaDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codrut codigo, nomrut descripcion FROM jsvenencrut WHERE tipo = 0 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Rutas de Visita", _
+        txtRutaDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codrut codigo, nomrut descripcion FROM jsvenencrut WHERE tipo = 0 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Rutas de Visita",
                                               txtRutaDesde.Text)
     End Sub
 
     Private Sub btnRutaHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRutaHasta.Click
-        txtRutaHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codrut codigo, nomrut descripcion FROM jsvenencrut WHERE tipo = 0 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Rutas de Visita", _
+        txtRutaHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codrut codigo, nomrut descripcion FROM jsvenencrut WHERE tipo = 0 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Rutas de Visita",
                                               txtRutaHasta.Text)
     End Sub
 
     Private Sub btnAsesorRDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsesorRDesde.Click
-        txtAsesorRDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codven codigo, concat(apellidos, ', ', nombres) descripcion FROM jsvencatven WHERE tipo = '" & TipoVendedor.iFuerzaventa & "' and estatus = 1 and clase = 0 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Asesores Comerciales", _
+        txtAsesorRDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codven codigo, concat(apellidos, ', ', nombres) descripcion FROM jsvencatven WHERE tipo = '" & TipoVendedor.iFuerzaventa & "' and estatus = 1 and clase = 0 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Asesores Comerciales",
                                                  txtAsesorRDesde.Text)
     End Sub
 
     Private Sub btnAsesorRHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsesorRHasta.Click
-        txtAsesorRHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codven codigo, concat(apellidos, ', ', nombres) descripcion FROM jsvencatven WHERE tipo = '" & TipoVendedor.iFuerzaventa & "' and estatus = 1 and clase = 0 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Asesores Comerciales", _
+        txtAsesorRHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codven codigo, concat(apellidos, ', ', nombres) descripcion FROM jsvencatven WHERE tipo = '" & TipoVendedor.iFuerzaventa & "' and estatus = 1 and clase = 0 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Asesores Comerciales",
                                                  txtAsesorRHasta.Text)
     End Sub
 
@@ -1826,39 +1821,39 @@ Public Class jsSIGMERepParametros
     End Sub
 
     Private Sub btnPais_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPais.Click
-        txtPais.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 0 and id_emp = '" & jytsistema.WorkID & "' order by 1", "Paises", _
+        txtPais.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 0 and id_emp = '" & jytsistema.WorkID & "' order by 1", "Paises",
                                          txtPais.Text)
     End Sub
 
     Private Sub btnEstado_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEstado.Click
         If txtPais.Text <> "" Then _
-            txtEstado.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 1 and antecesor = " & txtPais.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Estados", _
+            txtEstado.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 1 and antecesor = " & txtPais.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Estados",
                 txtEstado.Text)
 
     End Sub
 
     Private Sub btnMunicipio_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMunicipio.Click
         If txtEstado.Text <> "" Then _
-            txtMunicipio.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 2 and antecesor = " & txtEstado.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Municipios", _
+            txtMunicipio.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 2 and antecesor = " & txtEstado.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Municipios",
                 txtMunicipio.Text)
 
     End Sub
 
     Private Sub btnParroquia_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnParroquia.Click
         If txtMunicipio.Text <> "" Then _
-            txtParroquia.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 2 and antecesor = " & txtMunicipio.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Parroquias", _
+            txtParroquia.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 2 and antecesor = " & txtMunicipio.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Parroquias",
                 txtParroquia.Text)
     End Sub
 
     Private Sub btnCiudad_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCiudad.Click
         If txtParroquia.Text <> "" Then _
-                    txtCiudad.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 3 and antecesor = " & txtParroquia.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Ciudades", _
+                    txtCiudad.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 3 and antecesor = " & txtParroquia.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Ciudades",
                         txtCiudad.Text)
     End Sub
 
     Private Sub btnBarrio_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBarrio.Click
         If txtCiudad.Text <> "" Then _
-                    txtBarrio.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 4 and antecesor = " & txtCiudad.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Barrios", _
+                    txtBarrio.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 4 and antecesor = " & txtCiudad.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Barrios",
                         txtBarrio.Text)
     End Sub
 
@@ -1879,8 +1874,8 @@ Public Class jsSIGMERepParametros
     End Sub
 
     Private Sub cmbCOMAgrupadoPor_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCOMAgrupadoPor.SelectedIndexChanged
-        ft.visualizarObjetos(False, lblGrupoProveedorDesde, lblGrupoProveedorHasta, lblCategoriaProveedor, lblUnidadProveedor, _
-                           txtCategoriaProveedorDesde, btnCategoriaProveedorDesde, txtCategoriaProveedorHasta, btnCategoriaProveedorHasta, _
+        ft.visualizarObjetos(False, lblGrupoProveedorDesde, lblGrupoProveedorHasta, lblCategoriaProveedor, lblUnidadProveedor,
+                           txtCategoriaProveedorDesde, btnCategoriaProveedorDesde, txtCategoriaProveedorHasta, btnCategoriaProveedorHasta,
                            txtUnidadProveedorDesde, btnUnidadProveedorDesde, txtUnidadProveedorHasta, btnUNidadProveedorHasta)
         LimpiarGrupos()
         Select Case cmbCOMAgrupadoPor.SelectedIndex
@@ -1908,16 +1903,16 @@ Public Class jsSIGMERepParametros
         ft.habilitarObjetos(False, True, txtUnidadProveedorDesde, txtUnidadProveedorHasta)
     End Sub
 
-    Private Sub txtPeriodoDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPeriodoDesde.TextChanged
-        Select Case PeriodoTipo
+    Private Sub txtPeriodoDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPeriodoDesde.ValueChanged
+        Select Case periodoTipo
             Case TipoPeriodo.iDiario
-                txtPeriodoHasta.Text = txtPeriodoDesde.Text
+                txtPeriodoHasta.Value = txtPeriodoDesde.Value
             Case TipoPeriodo.iSemanal
-                txtPeriodoHasta.Text = ft.FormatoFecha(DateAdd(DateInterval.Day, 7, CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = DateAdd(DateInterval.Day, 7, CDate(txtPeriodoDesde.Text))
             Case TipoPeriodo.iMensual
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaMes(CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = UltimoDiaMes(CDate(txtPeriodoDesde.Text))
             Case TipoPeriodo.iAnual
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaAño(CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = UltimoDiaAño(CDate(txtPeriodoDesde.Text))
         End Select
     End Sub
 End Class

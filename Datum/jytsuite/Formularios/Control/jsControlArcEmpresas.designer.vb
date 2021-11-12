@@ -49,6 +49,8 @@ Partial Class jsControlArcEmpresas
         Me.txtCodigo = New System.Windows.Forms.TextBox()
         Me.txtNombre = New System.Windows.Forms.TextBox()
         Me.grpEmpresa = New System.Windows.Forms.GroupBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.cmbCambio = New Syncfusion.WinForms.ListView.SfComboBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.cmbMonedas = New Syncfusion.WinForms.ListView.SfComboBox()
         Me.pctLogo = New C1.Win.C1Input.C1PictureBox()
@@ -132,16 +134,14 @@ Partial Class jsControlArcEmpresas
         Me.Label41 = New System.Windows.Forms.Label()
         Me.txtNombreGer = New System.Windows.Forms.TextBox()
         Me.Label42 = New System.Windows.Forms.Label()
-        Me.cmbCambio = New Syncfusion.WinForms.ListView.SfComboBox()
-        Me.Label18 = New System.Windows.Forms.Label()
         Me.MenuBarra.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
         Me.grpEmpresa.SuspendLayout()
+        CType(Me.cmbCambio, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cmbMonedas, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pctLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpRepresentante.SuspendLayout()
         Me.grpGerente.SuspendLayout()
-        CType(Me.cmbCambio, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuBarra
@@ -424,21 +424,43 @@ Partial Class jsControlArcEmpresas
         Me.grpEmpresa.TabStop = False
         Me.grpEmpresa.Text = " Empresa "
         '
+        'Label18
+        '
+        Me.Label18.Location = New System.Drawing.Point(499, 214)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(84, 29)
+        Me.Label18.TabIndex = 145
+        Me.Label18.Text = "Moneda cambio por defecto"
+        Me.Label18.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.Label18.Visible = False
+        '
+        'cmbCambio
+        '
+        Me.cmbCambio.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbCambio.DropDownStyle = Syncfusion.WinForms.ListView.Enums.DropDownStyle.DropDownList
+        Me.cmbCambio.Location = New System.Drawing.Point(595, 214)
+        Me.cmbCambio.Name = "cmbCambio"
+        Me.cmbCambio.Size = New System.Drawing.Size(219, 29)
+        Me.cmbCambio.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbCambio.TabIndex = 144
+        Me.cmbCambio.Visible = False
+        '
         'Label16
         '
         Me.Label16.Location = New System.Drawing.Point(499, 179)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(84, 29)
         Me.Label16.TabIndex = 143
-        Me.Label16.Text = "Moneda Vigente"
+        Me.Label16.Text = "Moneda por defecto"
         Me.Label16.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'cmbMonedas
         '
+        Me.cmbMonedas.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
         Me.cmbMonedas.DropDownStyle = Syncfusion.WinForms.ListView.Enums.DropDownStyle.DropDownList
         Me.cmbMonedas.Location = New System.Drawing.Point(595, 179)
         Me.cmbMonedas.Name = "cmbMonedas"
-        Me.cmbMonedas.Size = New System.Drawing.Size(219, 29)
+        Me.cmbMonedas.Size = New System.Drawing.Size(219, 25)
         Me.cmbMonedas.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.cmbMonedas.TabIndex = 142
         '
@@ -1134,24 +1156,6 @@ Partial Class jsControlArcEmpresas
         Me.Label42.Text = "Nombre"
         Me.Label42.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'cmbCambio
-        '
-        Me.cmbCambio.DropDownStyle = Syncfusion.WinForms.ListView.Enums.DropDownStyle.DropDownList
-        Me.cmbCambio.Location = New System.Drawing.Point(595, 214)
-        Me.cmbCambio.Name = "cmbCambio"
-        Me.cmbCambio.Size = New System.Drawing.Size(219, 29)
-        Me.cmbCambio.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.cmbCambio.TabIndex = 144
-        '
-        'Label18
-        '
-        Me.Label18.Location = New System.Drawing.Point(499, 214)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(84, 29)
-        Me.Label18.TabIndex = 145
-        Me.Label18.Text = "Moneda cambio por defecto"
-        Me.Label18.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
         'jsControlArcEmpresas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1176,13 +1180,13 @@ Partial Class jsControlArcEmpresas
         Me.grpAceptarSalir.ResumeLayout(False)
         Me.grpEmpresa.ResumeLayout(False)
         Me.grpEmpresa.PerformLayout()
+        CType(Me.cmbCambio, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cmbMonedas, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pctLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpRepresentante.ResumeLayout(False)
         Me.grpRepresentante.PerformLayout()
         Me.grpGerente.ResumeLayout(False)
         Me.grpGerente.PerformLayout()
-        CType(Me.cmbCambio, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

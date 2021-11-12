@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports fTransport
 Public Class jsBanProCambioNumDeposito
     Private Const sModulo As String = "Listado de depósitos temporales"
     Private Const lRegion As String = ""

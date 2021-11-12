@@ -20,11 +20,9 @@ Partial Class jsVenProPreCancelaciones
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblInfo = New System.Windows.Forms.Label()
-        Me.btnFecha = New System.Windows.Forms.Button()
         Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
-        Me.txtFecha = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.lvCobranza = New System.Windows.Forms.ListView()
         Me.txtMCheques = New System.Windows.Forms.TextBox()
@@ -79,6 +77,7 @@ Partial Class jsVenProPreCancelaciones
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cmbBancos = New System.Windows.Forms.ComboBox()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpAceptarSalir.SuspendLayout()
         CType(Me.C1PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpTotales.SuspendLayout()
@@ -93,16 +92,6 @@ Partial Class jsVenProPreCancelaciones
         Me.lblInfo.Name = "lblInfo"
         Me.lblInfo.Size = New System.Drawing.Size(1116, 26)
         Me.lblInfo.TabIndex = 80
-        '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(215, 93)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(29, 20)
-        Me.btnFecha.TabIndex = 105
-        Me.btnFecha.Text = "•••"
-        Me.btnFecha.UseVisualStyleBackColor = True
         '
         'grpAceptarSalir
         '
@@ -143,16 +132,6 @@ Partial Class jsVenProPreCancelaciones
         Me.btnOK.Text = "Aceptar"
         Me.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         '
-        'txtFecha
-        '
-        Me.txtFecha.Enabled = False
-        Me.txtFecha.Location = New System.Drawing.Point(124, 90)
-        Me.txtFecha.MaxLength = 15
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(85, 20)
-        Me.txtFecha.TabIndex = 124
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label9
         '
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -170,6 +149,7 @@ Partial Class jsVenProPreCancelaciones
         Me.lvCobranza.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvCobranza.FullRowSelect = True
         Me.lvCobranza.GridLines = True
+        Me.lvCobranza.HideSelection = False
         Me.lvCobranza.Location = New System.Drawing.Point(3, 159)
         Me.lvCobranza.Name = "lvCobranza"
         Me.lvCobranza.Size = New System.Drawing.Size(851, 260)
@@ -706,6 +686,18 @@ Partial Class jsVenProPreCancelaciones
         Me.cmbBancos.Size = New System.Drawing.Size(332, 21)
         Me.cmbBancos.TabIndex = 202
         '
+        'txtFecha
+        '
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(124, 91)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(114, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 214
+        '
         'jsVenProPreCancelaciones
         '
         Me.AcceptButton = Me.btnOK
@@ -714,6 +706,7 @@ Partial Class jsVenProPreCancelaciones
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1116, 512)
         Me.ControlBox = False
+        Me.Controls.Add(Me.txtFecha)
         Me.Controls.Add(Me.cmbBancos)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label8)
@@ -765,9 +758,7 @@ Partial Class jsVenProPreCancelaciones
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.lvCobranza)
         Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.txtFecha)
         Me.Controls.Add(Me.grpAceptarSalir)
-        Me.Controls.Add(Me.btnFecha)
         Me.Controls.Add(Me.lblInfo)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Name = "jsVenProPreCancelaciones"
@@ -782,11 +773,9 @@ Partial Class jsVenProPreCancelaciones
 
     End Sub
     Friend WithEvents lblInfo As System.Windows.Forms.Label
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
     Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents lvCobranza As System.Windows.Forms.ListView
     Friend WithEvents txtMCheques As System.Windows.Forms.TextBox
@@ -841,4 +830,5 @@ Partial Class jsVenProPreCancelaciones
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents cmbBancos As System.Windows.Forms.ComboBox
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

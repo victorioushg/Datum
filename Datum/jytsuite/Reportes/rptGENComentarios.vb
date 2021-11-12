@@ -45,7 +45,7 @@ Public Class rptGENComentarios
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "ReportesGenerales.rptGENComentarios.rpt"
+            Return "Datum.rptGENComentarios.rpt"
         End Get
         Set
             'Do nothing

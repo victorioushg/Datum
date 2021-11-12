@@ -45,8 +45,6 @@ Partial Class jsBanProChequeDevuelto
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnCheque = New System.Windows.Forms.Button()
         Me.txtCheque = New System.Windows.Forms.TextBox()
-        Me.btnFecha = New System.Windows.Forms.Button()
-        Me.txtFecha = New System.Windows.Forms.TextBox()
         Me.cmbCausa = New System.Windows.Forms.ComboBox()
         Me.lblcuenta = New System.Windows.Forms.Label()
         Me.grpTotales = New System.Windows.Forms.GroupBox()
@@ -61,6 +59,7 @@ Partial Class jsBanProChequeDevuelto
         Me.lblLeyenda = New System.Windows.Forms.Label()
         Me.grpLeyenda = New System.Windows.Forms.GroupBox()
         Me.C1PictureBox1 = New C1.Win.C1Input.C1PictureBox()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpCaja.SuspendLayout()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpTotales.SuspendLayout()
@@ -81,6 +80,7 @@ Partial Class jsBanProChequeDevuelto
         'grpCaja
         '
         Me.grpCaja.BackColor = System.Drawing.SystemColors.Control
+        Me.grpCaja.Controls.Add(Me.txtFecha)
         Me.grpCaja.Controls.Add(Me.Label14)
         Me.grpCaja.Controls.Add(Me.txtBancoEmisor)
         Me.grpCaja.Controls.Add(Me.Label13)
@@ -104,8 +104,6 @@ Partial Class jsBanProChequeDevuelto
         Me.grpCaja.Controls.Add(Me.Label1)
         Me.grpCaja.Controls.Add(Me.btnCheque)
         Me.grpCaja.Controls.Add(Me.txtCheque)
-        Me.grpCaja.Controls.Add(Me.btnFecha)
-        Me.grpCaja.Controls.Add(Me.txtFecha)
         Me.grpCaja.Controls.Add(Me.cmbCausa)
         Me.grpCaja.Controls.Add(Me.lblcuenta)
         Me.grpCaja.Location = New System.Drawing.Point(2, 152)
@@ -167,9 +165,9 @@ Partial Class jsBanProChequeDevuelto
         '
         Me.txtCancelacion.BackColor = System.Drawing.Color.White
         Me.txtCancelacion.Enabled = False
-        Me.txtCancelacion.Location = New System.Drawing.Point(703, 48)
+        Me.txtCancelacion.Location = New System.Drawing.Point(688, 48)
         Me.txtCancelacion.Name = "txtCancelacion"
-        Me.txtCancelacion.Size = New System.Drawing.Size(99, 20)
+        Me.txtCancelacion.Size = New System.Drawing.Size(114, 20)
         Me.txtCancelacion.TabIndex = 135
         Me.txtCancelacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -348,26 +346,6 @@ Partial Class jsBanProChequeDevuelto
         Me.txtCheque.TabIndex = 118
         Me.txtCheque.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(808, 10)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(25, 20)
-        Me.btnFecha.TabIndex = 117
-        Me.btnFecha.Text = "•••"
-        Me.btnFecha.UseVisualStyleBackColor = True
-        '
-        'txtFecha
-        '
-        Me.txtFecha.BackColor = System.Drawing.Color.White
-        Me.txtFecha.Enabled = False
-        Me.txtFecha.Location = New System.Drawing.Point(703, 9)
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(99, 20)
-        Me.txtFecha.TabIndex = 115
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'cmbCausa
         '
         Me.cmbCausa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -526,6 +504,19 @@ Partial Class jsBanProChequeDevuelto
         Me.C1PictureBox1.TabIndex = 86
         Me.C1PictureBox1.TabStop = False
         '
+        'txtFecha
+        '
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(688, 11)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(114, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 214
+        Me.txtFecha.Value = New Date(2021, 5, 2, 0, 0, 0, 0)
+        '
         'jsBanProChequeDevuelto
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -573,10 +564,8 @@ Partial Class jsBanProChequeDevuelto
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Friend WithEvents lblLeyenda As System.Windows.Forms.Label
     Friend WithEvents grpLeyenda As System.Windows.Forms.GroupBox
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
     Friend WithEvents btnCheque As System.Windows.Forms.Button
     Friend WithEvents txtCheque As System.Windows.Forms.TextBox
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
@@ -598,4 +587,5 @@ Partial Class jsBanProChequeDevuelto
     Friend WithEvents txtAsesor As System.Windows.Forms.TextBox
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents txtBancoEmisor As System.Windows.Forms.TextBox
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

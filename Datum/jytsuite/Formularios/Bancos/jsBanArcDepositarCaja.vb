@@ -1,5 +1,6 @@
 Imports MySql.Data.MySqlClient
 Imports Syncfusion.WinForms.Input
+
 Public Class jsBanArcDepositarCaja
     Private Const sModulo As String = "Depositar Caja"
     Private Const nTablaDepositos As String = "noDepositos"
@@ -39,7 +40,7 @@ Public Class jsBanArcDepositarCaja
             n_Apuntador = value
         End Set
     End Property
-    Public Sub Depositar(ByVal MyCon As MySqlConnection, ByVal dsBan As DataSet, ByVal CodBanco As String, _
+    Public Sub Depositar(ByVal MyCon As MySqlConnection, ByVal dsBan As DataSet, ByVal CodBanco As String,
                          ByVal CodCaja As String, ByVal TipoDeposito As Integer, Optional ByVal Corredor As String = "")
         myConn = MyCon
         ds = dsBan
@@ -126,7 +127,7 @@ Public Class jsBanArcDepositarCaja
         txtAjustes.Text = ft.FormatoNumero(0.0)
 
     End Sub
-    Private Sub Verlinea(ByVal Tickets As Boolean, ByVal Ajustes As Boolean, ByVal Comision As Boolean, _
+    Private Sub Verlinea(ByVal Tickets As Boolean, ByVal Ajustes As Boolean, ByVal Comision As Boolean,
         ByVal ISLR As Boolean, ByVal Cargos As Boolean, ByVal IVA As Boolean)
         Label11.Visible = Tickets : txtTickets.Visible = Tickets : Label10.Visible = Tickets : txtNumControl.Visible = Tickets
         Label13.Visible = Ajustes : txtAjustes.Visible = Ajustes : txtAjustes.Enabled = True
@@ -335,7 +336,7 @@ Public Class jsBanArcDepositarCaja
                  IIf(tDeposito = 2, "", Mid(lblCaja.Text, 1, 2)), txtConcepto.Text, ValorNumero(txtTotalDeposito.Text), "CAJ",
                  IIf(tDeposito = 2, txtNumControl.Text, ""), "", "", "0",
                  jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, fTipoOrigen, "", jytsistema.sFechadeTrabajo, "0",
-                 CodigoProveedor, "")
+                 CodigoProveedor, "", jytsistema.WorkCurrency.Id, DateTime.Now())
 
         If tDeposito <> 2 Then
             For iCont = 0 To lv.Items.Count - 1
@@ -508,12 +509,12 @@ Public Class jsBanArcDepositarCaja
         ft.mensajeEtiqueta(lblInfo, "seleccione la fecha de emisión de este depósito...", Transportables.tipoMensaje.iInfo)
     End Sub
     Private Sub txtNumControl_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtNumControl.GotFocus
-        ft.mensajeEtiqueta(lblInfo, "Indique el Nº de Control ...", Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, "Indique el Nº de Control ...", Transportables.tipoMensaje.iInfo)
     End Sub
-    Private Sub txtAjustes_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAjustes.TextChanged, _
+    Private Sub txtAjustes_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAjustes.TextChanged,
         txtComision.TextChanged, txtCargos.TextChanged, txtISRL.TextChanged, txtIVA.TextChanged, txtSaldoSel.TextChanged
 
-        txtTotalDeposito.Text = ft.FormatoNumero(ValorNumero(txtSaldoSel.Text) + ValorNumero(txtAjustes.Text) + ValorNumero(txtComision.Text) + _
+        txtTotalDeposito.Text = ft.FormatoNumero(ValorNumero(txtSaldoSel.Text) + ValorNumero(txtAjustes.Text) + ValorNumero(txtComision.Text) +
             ValorNumero(txtCargos.Text) + ValorNumero(txtISRL.Text) + ValorNumero(txtIVA.Text))
 
     End Sub
@@ -589,7 +590,7 @@ Public Class jsBanArcDepositarCaja
 
     Private Sub txtBuscar_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtBuscar.TextChanged
         ' 
-        Dim foundItem As ListViewItem = _
+        Dim foundItem As ListViewItem =
             lv.FindItemWithText(txtBuscar.Text, True, 0)
 
         If (foundItem IsNot Nothing) Then

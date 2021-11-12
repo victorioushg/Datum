@@ -125,8 +125,6 @@ Partial Class jsMerArcMercancias
         Me.cmbTipo = New System.Windows.Forms.ComboBox()
         Me.Label65 = New System.Windows.Forms.Label()
         Me.Label64 = New System.Windows.Forms.Label()
-        Me.btnIngreso = New System.Windows.Forms.Button()
-        Me.txtIngreso = New System.Windows.Forms.TextBox()
         Me.Label63 = New System.Windows.Forms.Label()
         Me.cmbCondicion = New System.Windows.Forms.ComboBox()
         Me.Label62 = New System.Windows.Forms.Label()
@@ -357,6 +355,7 @@ Partial Class jsMerArcMercancias
         Me.Label48 = New System.Windows.Forms.Label()
         Me.Label49 = New System.Windows.Forms.Label()
         Me.Label50 = New System.Windows.Forms.Label()
+        Me.txtIngreso = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.MenuBarra.SuspendLayout()
         CType(Me.dgEqu, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1343,6 +1342,7 @@ Partial Class jsMerArcMercancias
         'grpOtros
         '
         Me.grpOtros.BackColor = System.Drawing.Color.Transparent
+        Me.grpOtros.Controls.Add(Me.txtIngreso)
         Me.grpOtros.Controls.Add(Me.btnFoto)
         Me.grpOtros.Controls.Add(Me.pctFoto)
         Me.grpOtros.Controls.Add(Me.btnCombo)
@@ -1355,8 +1355,6 @@ Partial Class jsMerArcMercancias
         Me.grpOtros.Controls.Add(Me.cmbTipo)
         Me.grpOtros.Controls.Add(Me.Label65)
         Me.grpOtros.Controls.Add(Me.Label64)
-        Me.grpOtros.Controls.Add(Me.btnIngreso)
-        Me.grpOtros.Controls.Add(Me.txtIngreso)
         Me.grpOtros.Controls.Add(Me.Label63)
         Me.grpOtros.Controls.Add(Me.cmbCondicion)
         Me.grpOtros.Controls.Add(Me.Label62)
@@ -1491,25 +1489,6 @@ Partial Class jsMerArcMercancias
         Me.Label64.TabIndex = 195
         Me.Label64.Text = "Tipo"
         Me.Label64.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'btnIngreso
-        '
-        Me.btnIngreso.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnIngreso.Location = New System.Drawing.Point(155, 110)
-        Me.btnIngreso.Name = "btnIngreso"
-        Me.btnIngreso.Size = New System.Drawing.Size(25, 20)
-        Me.btnIngreso.TabIndex = 194
-        Me.btnIngreso.Text = "•••"
-        Me.btnIngreso.UseVisualStyleBackColor = True
-        '
-        'txtIngreso
-        '
-        Me.txtIngreso.Location = New System.Drawing.Point(70, 110)
-        Me.txtIngreso.MaxLength = 25
-        Me.txtIngreso.Name = "txtIngreso"
-        Me.txtIngreso.Size = New System.Drawing.Size(79, 20)
-        Me.txtIngreso.TabIndex = 193
-        Me.txtIngreso.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label63
         '
@@ -3994,6 +3973,18 @@ Partial Class jsMerArcMercancias
         Me.Label50.Text = "¿Regulada?"
         Me.Label50.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'txtIngreso
+        '
+        Me.txtIngreso.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtIngreso.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtIngreso.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtIngreso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtIngreso.Location = New System.Drawing.Point(70, 110)
+        Me.txtIngreso.Name = "txtIngreso"
+        Me.txtIngreso.Size = New System.Drawing.Size(114, 19)
+        Me.txtIngreso.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtIngreso.TabIndex = 214
+        '
         'jsMerArcMercancias
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4286,8 +4277,6 @@ Partial Class jsMerArcMercancias
     Friend WithEvents cmbTipo As System.Windows.Forms.ComboBox
     Friend WithEvents Label65 As System.Windows.Forms.Label
     Friend WithEvents Label64 As System.Windows.Forms.Label
-    Friend WithEvents btnIngreso As System.Windows.Forms.Button
-    Friend WithEvents txtIngreso As System.Windows.Forms.TextBox
     Friend WithEvents Label63 As System.Windows.Forms.Label
     Friend WithEvents cmbCondicion As System.Windows.Forms.ComboBox
     Friend WithEvents Label62 As System.Windows.Forms.Label
@@ -4457,4 +4446,5 @@ Partial Class jsMerArcMercancias
     Friend WithEvents txtCodigoEnvase As System.Windows.Forms.TextBox
     Friend WithEvents Label121 As System.Windows.Forms.Label
     Friend WithEvents txtNombreEnvase As System.Windows.Forms.TextBox
+    Friend WithEvents txtIngreso As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

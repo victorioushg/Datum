@@ -24,18 +24,19 @@ Partial Class jsMerArcTransferencias
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.dg = New System.Windows.Forms.DataGridView()
         Me.grpEncab = New System.Windows.Forms.GroupBox()
+        Me.lblCausa = New System.Windows.Forms.Label()
+        Me.btnCausa = New System.Windows.Forms.Button()
+        Me.txtCausa = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txtItems = New System.Windows.Forms.TextBox()
         Me.btnAlmacenEntrada = New System.Windows.Forms.Button()
         Me.btnAlmacenSalida = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.cmbTipo = New System.Windows.Forms.ComboBox()
-        Me.btnEmision = New System.Windows.Forms.Button()
         Me.txtAlmacenEntrada = New System.Windows.Forms.TextBox()
         Me.txtAlmacenSalida = New System.Windows.Forms.TextBox()
         Me.lblAlmacenEntrada = New System.Windows.Forms.Label()
         Me.lblAlmacenSalida = New System.Windows.Forms.Label()
-        Me.txtEmision = New System.Windows.Forms.TextBox()
         Me.txtComentario = New System.Windows.Forms.TextBox()
         Me.txtCodigo = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -86,9 +87,7 @@ Partial Class jsMerArcTransferencias
         Me.Label9 = New System.Windows.Forms.Label()
         Me.txtTotalCosto = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtCausa = New System.Windows.Forms.TextBox()
-        Me.btnCausa = New System.Windows.Forms.Button()
-        Me.lblCausa = New System.Windows.Forms.Label()
+        Me.txtEmision = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpEncab.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -129,6 +128,7 @@ Partial Class jsMerArcTransferencias
         Me.grpEncab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpEncab.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.lblCausa)
         Me.grpEncab.Controls.Add(Me.btnCausa)
         Me.grpEncab.Controls.Add(Me.txtCausa)
@@ -138,12 +138,10 @@ Partial Class jsMerArcTransferencias
         Me.grpEncab.Controls.Add(Me.btnAlmacenSalida)
         Me.grpEncab.Controls.Add(Me.Label6)
         Me.grpEncab.Controls.Add(Me.cmbTipo)
-        Me.grpEncab.Controls.Add(Me.btnEmision)
         Me.grpEncab.Controls.Add(Me.txtAlmacenEntrada)
         Me.grpEncab.Controls.Add(Me.txtAlmacenSalida)
         Me.grpEncab.Controls.Add(Me.lblAlmacenEntrada)
         Me.grpEncab.Controls.Add(Me.lblAlmacenSalida)
-        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.txtComentario)
         Me.grpEncab.Controls.Add(Me.txtCodigo)
         Me.grpEncab.Controls.Add(Me.Label3)
@@ -154,6 +152,37 @@ Partial Class jsMerArcTransferencias
         Me.grpEncab.Size = New System.Drawing.Size(754, 126)
         Me.grpEncab.TabIndex = 85
         Me.grpEncab.TabStop = False
+        '
+        'lblCausa
+        '
+        Me.lblCausa.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCausa.Location = New System.Drawing.Point(558, 100)
+        Me.lblCausa.Name = "lblCausa"
+        Me.lblCausa.Size = New System.Drawing.Size(66, 19)
+        Me.lblCausa.TabIndex = 206
+        Me.lblCausa.Text = "Causa :"
+        Me.lblCausa.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'btnCausa
+        '
+        Me.btnCausa.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCausa.Location = New System.Drawing.Point(723, 100)
+        Me.btnCausa.Name = "btnCausa"
+        Me.btnCausa.Size = New System.Drawing.Size(25, 20)
+        Me.btnCausa.TabIndex = 205
+        Me.btnCausa.Text = "•••"
+        Me.btnCausa.UseVisualStyleBackColor = True
+        '
+        'txtCausa
+        '
+        Me.txtCausa.Enabled = False
+        Me.txtCausa.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCausa.Location = New System.Drawing.Point(630, 100)
+        Me.txtCausa.MaxLength = 19
+        Me.txtCausa.Name = "txtCausa"
+        Me.txtCausa.Size = New System.Drawing.Size(87, 20)
+        Me.txtCausa.TabIndex = 204
+        Me.txtCausa.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label7
         '
@@ -215,16 +244,6 @@ Partial Class jsMerArcTransferencias
         Me.cmbTipo.Size = New System.Drawing.Size(118, 21)
         Me.cmbTipo.TabIndex = 198
         '
-        'btnEmision
-        '
-        Me.btnEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmision.Location = New System.Drawing.Point(723, 37)
-        Me.btnEmision.Name = "btnEmision"
-        Me.btnEmision.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmision.TabIndex = 112
-        Me.btnEmision.Text = "•••"
-        Me.btnEmision.UseVisualStyleBackColor = True
-        '
         'txtAlmacenEntrada
         '
         Me.txtAlmacenEntrada.Enabled = False
@@ -266,17 +285,6 @@ Partial Class jsMerArcTransferencias
         Me.lblAlmacenSalida.TabIndex = 10
         Me.lblAlmacenSalida.Text = "Almacén  salida :"
         Me.lblAlmacenSalida.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtEmision
-        '
-        Me.txtEmision.Enabled = False
-        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmision.Location = New System.Drawing.Point(630, 37)
-        Me.txtEmision.MaxLength = 19
-        Me.txtEmision.Name = "txtEmision"
-        Me.txtEmision.Size = New System.Drawing.Size(87, 20)
-        Me.txtEmision.TabIndex = 5
-        Me.txtEmision.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtComentario
         '
@@ -711,36 +719,17 @@ Partial Class jsMerArcTransferencias
         Me.Label8.Text = "Total Costo"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'txtCausa
+        'txtEmision
         '
-        Me.txtCausa.Enabled = False
-        Me.txtCausa.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCausa.Location = New System.Drawing.Point(630, 100)
-        Me.txtCausa.MaxLength = 19
-        Me.txtCausa.Name = "txtCausa"
-        Me.txtCausa.Size = New System.Drawing.Size(87, 20)
-        Me.txtCausa.TabIndex = 204
-        Me.txtCausa.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnCausa
-        '
-        Me.btnCausa.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCausa.Location = New System.Drawing.Point(723, 100)
-        Me.btnCausa.Name = "btnCausa"
-        Me.btnCausa.Size = New System.Drawing.Size(25, 20)
-        Me.btnCausa.TabIndex = 205
-        Me.btnCausa.Text = "•••"
-        Me.btnCausa.UseVisualStyleBackColor = True
-        '
-        'lblCausa
-        '
-        Me.lblCausa.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCausa.Location = New System.Drawing.Point(558, 100)
-        Me.lblCausa.Name = "lblCausa"
-        Me.lblCausa.Size = New System.Drawing.Size(66, 19)
-        Me.lblCausa.TabIndex = 206
-        Me.lblCausa.Text = "Causa :"
-        Me.lblCausa.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.txtEmision.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmision.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmision.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmision.Location = New System.Drawing.Point(630, 37)
+        Me.txtEmision.Name = "txtEmision"
+        Me.txtEmision.Size = New System.Drawing.Size(118, 19)
+        Me.txtEmision.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmision.TabIndex = 214
         '
         'jsMerArcTransferencias
         '
@@ -777,7 +766,6 @@ Partial Class jsMerArcTransferencias
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents dg As System.Windows.Forms.DataGridView
     Friend WithEvents grpEncab As System.Windows.Forms.GroupBox
-    Friend WithEvents txtEmision As System.Windows.Forms.TextBox
     Friend WithEvents txtComentario As System.Windows.Forms.TextBox
     Friend WithEvents txtCodigo As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
@@ -824,7 +812,6 @@ Partial Class jsMerArcTransferencias
     Friend WithEvents txtAlmacenSalida As System.Windows.Forms.TextBox
     Friend WithEvents lblAlmacenEntrada As System.Windows.Forms.Label
     Friend WithEvents lblAlmacenSalida As System.Windows.Forms.Label
-    Friend WithEvents btnEmision As System.Windows.Forms.Button
     Friend WithEvents btnAlmacenEntrada As System.Windows.Forms.Button
     Friend WithEvents btnAlmacenSalida As System.Windows.Forms.Button
     Friend WithEvents Label6 As System.Windows.Forms.Label
@@ -842,4 +829,5 @@ Partial Class jsMerArcTransferencias
     Friend WithEvents lblCausa As System.Windows.Forms.Label
     Friend WithEvents btnCausa As System.Windows.Forms.Button
     Friend WithEvents txtCausa As System.Windows.Forms.TextBox
+    Friend WithEvents txtEmision As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

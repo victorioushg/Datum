@@ -35,8 +35,6 @@ Partial Class jsComFormasPago
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtBeneficiario = New System.Windows.Forms.TextBox()
         Me.btnNombrePago = New System.Windows.Forms.Button()
-        Me.btnFecha = New System.Windows.Forms.Button()
-        Me.txtVencimientoPago = New System.Windows.Forms.TextBox()
         Me.txtImporte = New System.Windows.Forms.TextBox()
         Me.txtNombrePago = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -52,15 +50,15 @@ Partial Class jsComFormasPago
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.grpVencimiento = New System.Windows.Forms.GroupBox()
-        Me.btnVence = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtVence = New System.Windows.Forms.TextBox()
         Me.cmbCredito = New System.Windows.Forms.ComboBox()
         Me.grpCondicion = New System.Windows.Forms.GroupBox()
         Me.lblCaja = New System.Windows.Forms.Label()
         Me.cmbCaja = New System.Windows.Forms.ComboBox()
         Me.cmbCondicion = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
+        Me.txtVencimientoPago = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtVence = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpAceptarSalir.SuspendLayout()
         Me.grpContado.SuspendLayout()
         Me.grpTarjeta.SuspendLayout()
@@ -141,7 +139,7 @@ Partial Class jsComFormasPago
         'grpContado
         '
         Me.grpContado.Controls.Add(Me.grpTarjeta)
-        Me.grpContado.Location = New System.Drawing.Point(139, 108)
+        Me.grpContado.Location = New System.Drawing.Point(71, 108)
         Me.grpContado.Name = "grpContado"
         Me.grpContado.Size = New System.Drawing.Size(560, 238)
         Me.grpContado.TabIndex = 109
@@ -151,11 +149,10 @@ Partial Class jsComFormasPago
         'grpTarjeta
         '
         Me.grpTarjeta.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpTarjeta.Controls.Add(Me.txtVencimientoPago)
         Me.grpTarjeta.Controls.Add(Me.Label2)
         Me.grpTarjeta.Controls.Add(Me.txtBeneficiario)
         Me.grpTarjeta.Controls.Add(Me.btnNombrePago)
-        Me.grpTarjeta.Controls.Add(Me.btnFecha)
-        Me.grpTarjeta.Controls.Add(Me.txtVencimientoPago)
         Me.grpTarjeta.Controls.Add(Me.txtImporte)
         Me.grpTarjeta.Controls.Add(Me.txtNombrePago)
         Me.grpTarjeta.Controls.Add(Me.Label5)
@@ -203,26 +200,6 @@ Partial Class jsComFormasPago
         Me.btnNombrePago.TabIndex = 121
         Me.btnNombrePago.Text = "•••"
         Me.btnNombrePago.UseVisualStyleBackColor = True
-        '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(240, 180)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(34, 23)
-        Me.btnFecha.TabIndex = 120
-        Me.btnFecha.Text = "•••"
-        Me.btnFecha.UseVisualStyleBackColor = True
-        '
-        'txtVencimientoPago
-        '
-        Me.txtVencimientoPago.BackColor = System.Drawing.Color.White
-        Me.txtVencimientoPago.Font = New System.Drawing.Font("Consolas", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtVencimientoPago.Location = New System.Drawing.Point(280, 179)
-        Me.txtVencimientoPago.Name = "txtVencimientoPago"
-        Me.txtVencimientoPago.Size = New System.Drawing.Size(257, 30)
-        Me.txtVencimientoPago.TabIndex = 22
-        Me.txtVencimientoPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtImporte
         '
@@ -337,10 +314,9 @@ Partial Class jsComFormasPago
         '
         'grpCredito
         '
-        Me.grpCredito.Controls.Add(Me.grpGiros)
-        Me.grpCredito.Controls.Add(Me.grpVencimiento)
         Me.grpCredito.Controls.Add(Me.cmbCredito)
-        Me.grpCredito.Location = New System.Drawing.Point(25, 130)
+        Me.grpCredito.Controls.Add(Me.grpVencimiento)
+        Me.grpCredito.Location = New System.Drawing.Point(1, 97)
         Me.grpCredito.Name = "grpCredito"
         Me.grpCredito.Size = New System.Drawing.Size(560, 216)
         Me.grpCredito.TabIndex = 110
@@ -352,7 +328,7 @@ Partial Class jsComFormasPago
         Me.grpGiros.Controls.Add(Me.Label9)
         Me.grpGiros.Controls.Add(Me.TextBox1)
         Me.grpGiros.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpGiros.Location = New System.Drawing.Point(81, 80)
+        Me.grpGiros.Location = New System.Drawing.Point(56, 33)
         Me.grpGiros.Name = "grpGiros"
         Me.grpGiros.Size = New System.Drawing.Size(546, 159)
         Me.grpGiros.TabIndex = 113
@@ -385,25 +361,15 @@ Partial Class jsComFormasPago
         '
         'grpVencimiento
         '
-        Me.grpVencimiento.Controls.Add(Me.btnVence)
-        Me.grpVencimiento.Controls.Add(Me.Label8)
+        Me.grpVencimiento.Controls.Add(Me.grpGiros)
         Me.grpVencimiento.Controls.Add(Me.txtVence)
+        Me.grpVencimiento.Controls.Add(Me.Label8)
         Me.grpVencimiento.Location = New System.Drawing.Point(14, 57)
         Me.grpVencimiento.Name = "grpVencimiento"
         Me.grpVencimiento.Size = New System.Drawing.Size(546, 159)
         Me.grpVencimiento.TabIndex = 112
         Me.grpVencimiento.TabStop = False
         Me.grpVencimiento.Text = "Vencimiento"
-        '
-        'btnVence
-        '
-        Me.btnVence.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVence.Location = New System.Drawing.Point(475, 37)
-        Me.btnVence.Name = "btnVence"
-        Me.btnVence.Size = New System.Drawing.Size(34, 16)
-        Me.btnVence.TabIndex = 120
-        Me.btnVence.Text = "•••"
-        Me.btnVence.UseVisualStyleBackColor = True
         '
         'Label8
         '
@@ -416,18 +382,6 @@ Partial Class jsComFormasPago
         Me.Label8.TabIndex = 109
         Me.Label8.Text = "Con vencimiento al : "
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtVence
-        '
-        Me.txtVence.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.txtVence.Enabled = False
-        Me.txtVence.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtVence.ForeColor = System.Drawing.Color.Gray
-        Me.txtVence.Location = New System.Drawing.Point(272, 16)
-        Me.txtVence.Name = "txtVence"
-        Me.txtVence.Size = New System.Drawing.Size(197, 32)
-        Me.txtVence.TabIndex = 108
-        Me.txtVence.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'cmbCredito
         '
@@ -497,6 +451,32 @@ Partial Class jsComFormasPago
         Me.Label15.Text = "CONDICION DE PAGO"
         Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'txtVencimientoPago
+        '
+        Me.txtVencimientoPago.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtVencimientoPago.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtVencimientoPago.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtVencimientoPago.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtVencimientoPago.Location = New System.Drawing.Point(280, 179)
+        Me.txtVencimientoPago.Name = "txtVencimientoPago"
+        Me.txtVencimientoPago.Size = New System.Drawing.Size(256, 27)
+        Me.txtVencimientoPago.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtVencimientoPago.TabIndex = 214
+        Me.txtVencimientoPago.Value = New Date(2021, 5, 2, 0, 0, 0, 0)
+        '
+        'txtVence
+        '
+        Me.txtVence.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtVence.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtVence.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtVence.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtVence.Location = New System.Drawing.Point(272, 16)
+        Me.txtVence.Name = "txtVence"
+        Me.txtVence.Size = New System.Drawing.Size(262, 37)
+        Me.txtVence.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtVence.TabIndex = 214
+        Me.txtVence.Value = New Date(2021, 5, 2, 0, 0, 0, 0)
+        '
         'jsComFormasPago
         '
         Me.AcceptButton = Me.btnOK
@@ -506,8 +486,8 @@ Partial Class jsComFormasPago
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(561, 385)
         Me.ControlBox = False
-        Me.Controls.Add(Me.grpContado)
         Me.Controls.Add(Me.grpCredito)
+        Me.Controls.Add(Me.grpContado)
         Me.Controls.Add(Me.grpAceptarSalir)
         Me.Controls.Add(Me.grpCondicion)
         Me.Controls.Add(Me.lblInfo)
@@ -523,7 +503,6 @@ Partial Class jsComFormasPago
         Me.grpGiros.ResumeLayout(False)
         Me.grpGiros.PerformLayout()
         Me.grpVencimiento.ResumeLayout(False)
-        Me.grpVencimiento.PerformLayout()
         Me.grpCondicion.ResumeLayout(False)
         Me.grpCondicion.PerformLayout()
         Me.ResumeLayout(False)
@@ -543,8 +522,6 @@ Partial Class jsComFormasPago
     Friend WithEvents cmbCredito As System.Windows.Forms.ComboBox
     Friend WithEvents grpVencimiento As System.Windows.Forms.GroupBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents txtVence As System.Windows.Forms.TextBox
-    Friend WithEvents btnVence As System.Windows.Forms.Button
     Friend WithEvents grpGiros As System.Windows.Forms.GroupBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
@@ -553,8 +530,6 @@ Partial Class jsComFormasPago
     Friend WithEvents grpTarjeta As System.Windows.Forms.GroupBox
     Friend WithEvents txtNombrePagoX As System.Windows.Forms.TextBox
     Friend WithEvents btnNombrePago As System.Windows.Forms.Button
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
-    Friend WithEvents txtVencimientoPago As System.Windows.Forms.TextBox
     Friend WithEvents txtImporte As System.Windows.Forms.TextBox
     Friend WithEvents txtNombrePago As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
@@ -566,4 +541,6 @@ Partial Class jsComFormasPago
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents txtBeneficiario As System.Windows.Forms.TextBox
+    Friend WithEvents txtVencimientoPago As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtVence As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

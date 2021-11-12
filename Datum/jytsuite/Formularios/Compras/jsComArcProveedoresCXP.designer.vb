@@ -29,7 +29,6 @@ Partial Class jsComArcProveedoresCXP
         Me.Label37 = New System.Windows.Forms.Label()
         Me.lblLeyendaISLR = New System.Windows.Forms.Label()
         Me.cmbConceptoRetISLR = New System.Windows.Forms.ComboBox()
-        Me.btnFechaRetISLR = New System.Windows.Forms.Button()
         Me.Label31 = New System.Windows.Forms.Label()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.txtMinimoRetISLR = New System.Windows.Forms.TextBox()
@@ -39,7 +38,6 @@ Partial Class jsComArcProveedoresCXP
         Me.txtPorcentajeRetISLR = New System.Windows.Forms.TextBox()
         Me.txtAcumuladoSinRetISLR = New System.Windows.Forms.TextBox()
         Me.txtPorcentajeMontoBaseRetISLR = New System.Windows.Forms.TextBox()
-        Me.txtFechaRetISLR = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.Label27 = New System.Windows.Forms.Label()
@@ -58,7 +56,6 @@ Partial Class jsComArcProveedoresCXP
         Me.txtCodigoContableIVA = New System.Windows.Forms.TextBox()
         Me.Label39 = New System.Windows.Forms.Label()
         Me.lblLeyendaIVA = New System.Windows.Forms.Label()
-        Me.btnFechaRetIVA = New System.Windows.Forms.Button()
         Me.Label36 = New System.Windows.Forms.Label()
         Me.Label35 = New System.Windows.Forms.Label()
         Me.Label34 = New System.Windows.Forms.Label()
@@ -66,7 +63,6 @@ Partial Class jsComArcProveedoresCXP
         Me.Label32 = New System.Windows.Forms.Label()
         Me.txtRetIVA = New System.Windows.Forms.TextBox()
         Me.txtPorRetIVA = New System.Windows.Forms.TextBox()
-        Me.txtFechaRetIVA = New System.Windows.Forms.TextBox()
         Me.txtSaldoRetIVA = New System.Windows.Forms.TextBox()
         Me.dgRetIVA = New System.Windows.Forms.DataGridView()
         Me.lvRetIVA = New System.Windows.Forms.ListView()
@@ -78,13 +74,9 @@ Partial Class jsComArcProveedoresCXP
         Me.btnCodigoContableDebitos = New System.Windows.Forms.Button()
         Me.txtCodigoContableDebitos = New System.Windows.Forms.TextBox()
         Me.Label38 = New System.Windows.Forms.Label()
-        Me.btnVenceDB = New System.Windows.Forms.Button()
-        Me.btnEmisionDB = New System.Windows.Forms.Button()
         Me.txtReferDB = New System.Windows.Forms.TextBox()
         Me.txtImporteDB = New System.Windows.Forms.TextBox()
         Me.txtConceptoDB = New System.Windows.Forms.TextBox()
-        Me.txtVenceDB = New System.Windows.Forms.TextBox()
-        Me.txtEmisionDB = New System.Windows.Forms.TextBox()
         Me.txtDocumentoDB = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -128,9 +120,7 @@ Partial Class jsComArcProveedoresCXP
         Me.txtImporteCR = New System.Windows.Forms.TextBox()
         Me.txtReferenciaCR = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.btnEmisionCR = New System.Windows.Forms.Button()
         Me.txtConceptoCR = New System.Windows.Forms.TextBox()
-        Me.txtEmisionCR = New System.Windows.Forms.TextBox()
         Me.txtDocumentoCR = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
@@ -141,6 +131,11 @@ Partial Class jsComArcProveedoresCXP
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.lv = New System.Windows.Forms.ListView()
+        Me.txtEmisionCR = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtEmisionDB = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtVenceDB = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaRetISLR = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaRetIVA = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpCaja.SuspendLayout()
         Me.grpRetencionISLR.SuspendLayout()
         Me.grpTotalISLR.SuspendLayout()
@@ -188,12 +183,12 @@ Partial Class jsComArcProveedoresCXP
         '
         'grpRetencionISLR
         '
+        Me.grpRetencionISLR.Controls.Add(Me.txtFechaRetISLR)
         Me.grpRetencionISLR.Controls.Add(Me.btnCodigoContableISLR)
         Me.grpRetencionISLR.Controls.Add(Me.txtCodigoContableISLR)
         Me.grpRetencionISLR.Controls.Add(Me.Label37)
         Me.grpRetencionISLR.Controls.Add(Me.lblLeyendaISLR)
         Me.grpRetencionISLR.Controls.Add(Me.cmbConceptoRetISLR)
-        Me.grpRetencionISLR.Controls.Add(Me.btnFechaRetISLR)
         Me.grpRetencionISLR.Controls.Add(Me.Label31)
         Me.grpRetencionISLR.Controls.Add(Me.Label30)
         Me.grpRetencionISLR.Controls.Add(Me.txtMinimoRetISLR)
@@ -203,7 +198,6 @@ Partial Class jsComArcProveedoresCXP
         Me.grpRetencionISLR.Controls.Add(Me.txtPorcentajeRetISLR)
         Me.grpRetencionISLR.Controls.Add(Me.txtAcumuladoSinRetISLR)
         Me.grpRetencionISLR.Controls.Add(Me.txtPorcentajeMontoBaseRetISLR)
-        Me.grpRetencionISLR.Controls.Add(Me.txtFechaRetISLR)
         Me.grpRetencionISLR.Controls.Add(Me.Label29)
         Me.grpRetencionISLR.Controls.Add(Me.Label28)
         Me.grpRetencionISLR.Controls.Add(Me.Label27)
@@ -265,16 +259,6 @@ Partial Class jsComArcProveedoresCXP
         Me.cmbConceptoRetISLR.Name = "cmbConceptoRetISLR"
         Me.cmbConceptoRetISLR.Size = New System.Drawing.Size(613, 18)
         Me.cmbConceptoRetISLR.TabIndex = 204
-        '
-        'btnFechaRetISLR
-        '
-        Me.btnFechaRetISLR.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaRetISLR.Location = New System.Drawing.Point(297, 204)
-        Me.btnFechaRetISLR.Name = "btnFechaRetISLR"
-        Me.btnFechaRetISLR.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaRetISLR.TabIndex = 203
-        Me.btnFechaRetISLR.Text = "•••"
-        Me.btnFechaRetISLR.UseVisualStyleBackColor = True
         '
         'Label31
         '
@@ -365,16 +349,6 @@ Partial Class jsComArcProveedoresCXP
         Me.txtPorcentajeMontoBaseRetISLR.Size = New System.Drawing.Size(86, 20)
         Me.txtPorcentajeMontoBaseRetISLR.TabIndex = 95
         Me.txtPorcentajeMontoBaseRetISLR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtFechaRetISLR
-        '
-        Me.txtFechaRetISLR.BackColor = System.Drawing.Color.MintCream
-        Me.txtFechaRetISLR.ForeColor = System.Drawing.Color.Navy
-        Me.txtFechaRetISLR.Location = New System.Drawing.Point(205, 204)
-        Me.txtFechaRetISLR.Name = "txtFechaRetISLR"
-        Me.txtFechaRetISLR.Size = New System.Drawing.Size(86, 20)
-        Me.txtFechaRetISLR.TabIndex = 93
-        Me.txtFechaRetISLR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label29
         '
@@ -506,6 +480,7 @@ Partial Class jsComArcProveedoresCXP
         Me.lvRetISLR.CheckBoxes = True
         Me.lvRetISLR.FullRowSelect = True
         Me.lvRetISLR.GridLines = True
+        Me.lvRetISLR.HideSelection = False
         Me.lvRetISLR.Location = New System.Drawing.Point(3, 13)
         Me.lvRetISLR.MultiSelect = False
         Me.lvRetISLR.Name = "lvRetISLR"
@@ -516,11 +491,11 @@ Partial Class jsComArcProveedoresCXP
         '
         'grpRetencionIVA
         '
+        Me.grpRetencionIVA.Controls.Add(Me.txtFechaRetIVA)
         Me.grpRetencionIVA.Controls.Add(Me.btnCodigoContableIVA)
         Me.grpRetencionIVA.Controls.Add(Me.txtCodigoContableIVA)
         Me.grpRetencionIVA.Controls.Add(Me.Label39)
         Me.grpRetencionIVA.Controls.Add(Me.lblLeyendaIVA)
-        Me.grpRetencionIVA.Controls.Add(Me.btnFechaRetIVA)
         Me.grpRetencionIVA.Controls.Add(Me.Label36)
         Me.grpRetencionIVA.Controls.Add(Me.Label35)
         Me.grpRetencionIVA.Controls.Add(Me.Label34)
@@ -528,7 +503,6 @@ Partial Class jsComArcProveedoresCXP
         Me.grpRetencionIVA.Controls.Add(Me.Label32)
         Me.grpRetencionIVA.Controls.Add(Me.txtRetIVA)
         Me.grpRetencionIVA.Controls.Add(Me.txtPorRetIVA)
-        Me.grpRetencionIVA.Controls.Add(Me.txtFechaRetIVA)
         Me.grpRetencionIVA.Controls.Add(Me.txtSaldoRetIVA)
         Me.grpRetencionIVA.Controls.Add(Me.dgRetIVA)
         Me.grpRetencionIVA.Controls.Add(Me.lvRetIVA)
@@ -575,16 +549,6 @@ Partial Class jsComArcProveedoresCXP
         Me.lblLeyendaIVA.Size = New System.Drawing.Size(472, 65)
         Me.lblLeyendaIVA.TabIndex = 118
         Me.lblLeyendaIVA.Text = "Totales discriminados por tipo de iva"
-        '
-        'btnFechaRetIVA
-        '
-        Me.btnFechaRetIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaRetIVA.Location = New System.Drawing.Point(699, 313)
-        Me.btnFechaRetIVA.Name = "btnFechaRetIVA"
-        Me.btnFechaRetIVA.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaRetIVA.TabIndex = 117
-        Me.btnFechaRetIVA.Text = "•••"
-        Me.btnFechaRetIVA.UseVisualStyleBackColor = True
         '
         'Label36
         '
@@ -659,15 +623,6 @@ Partial Class jsComArcProveedoresCXP
         Me.txtPorRetIVA.TabIndex = 110
         Me.txtPorRetIVA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'txtFechaRetIVA
-        '
-        Me.txtFechaRetIVA.Location = New System.Drawing.Point(730, 313)
-        Me.txtFechaRetIVA.MaxLength = 19
-        Me.txtFechaRetIVA.Name = "txtFechaRetIVA"
-        Me.txtFechaRetIVA.Size = New System.Drawing.Size(95, 20)
-        Me.txtFechaRetIVA.TabIndex = 109
-        Me.txtFechaRetIVA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'txtSaldoRetIVA
         '
         Me.txtSaldoRetIVA.Location = New System.Drawing.Point(699, 278)
@@ -697,6 +652,7 @@ Partial Class jsComArcProveedoresCXP
         Me.lvRetIVA.CheckBoxes = True
         Me.lvRetIVA.FullRowSelect = True
         Me.lvRetIVA.GridLines = True
+        Me.lvRetIVA.HideSelection = False
         Me.lvRetIVA.Location = New System.Drawing.Point(4, 13)
         Me.lvRetIVA.Name = "lvRetIVA"
         Me.lvRetIVA.Size = New System.Drawing.Size(821, 127)
@@ -754,16 +710,14 @@ Partial Class jsComArcProveedoresCXP
         '
         'grpDebitos
         '
+        Me.grpDebitos.Controls.Add(Me.txtVenceDB)
+        Me.grpDebitos.Controls.Add(Me.txtEmisionDB)
         Me.grpDebitos.Controls.Add(Me.btnCodigoContableDebitos)
         Me.grpDebitos.Controls.Add(Me.txtCodigoContableDebitos)
         Me.grpDebitos.Controls.Add(Me.Label38)
-        Me.grpDebitos.Controls.Add(Me.btnVenceDB)
-        Me.grpDebitos.Controls.Add(Me.btnEmisionDB)
         Me.grpDebitos.Controls.Add(Me.txtReferDB)
         Me.grpDebitos.Controls.Add(Me.txtImporteDB)
         Me.grpDebitos.Controls.Add(Me.txtConceptoDB)
-        Me.grpDebitos.Controls.Add(Me.txtVenceDB)
-        Me.grpDebitos.Controls.Add(Me.txtEmisionDB)
         Me.grpDebitos.Controls.Add(Me.txtDocumentoDB)
         Me.grpDebitos.Controls.Add(Me.Label5)
         Me.grpDebitos.Controls.Add(Me.Label4)
@@ -781,7 +735,7 @@ Partial Class jsComArcProveedoresCXP
         'btnCodigoContableDebitos
         '
         Me.btnCodigoContableDebitos.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCodigoContableDebitos.Location = New System.Drawing.Point(434, 185)
+        Me.btnCodigoContableDebitos.Location = New System.Drawing.Point(434, 198)
         Me.btnCodigoContableDebitos.Name = "btnCodigoContableDebitos"
         Me.btnCodigoContableDebitos.Size = New System.Drawing.Size(25, 20)
         Me.btnCodigoContableDebitos.TabIndex = 129
@@ -790,7 +744,7 @@ Partial Class jsComArcProveedoresCXP
         '
         'txtCodigoContableDebitos
         '
-        Me.txtCodigoContableDebitos.Location = New System.Drawing.Point(185, 185)
+        Me.txtCodigoContableDebitos.Location = New System.Drawing.Point(185, 198)
         Me.txtCodigoContableDebitos.Name = "txtCodigoContableDebitos"
         Me.txtCodigoContableDebitos.Size = New System.Drawing.Size(243, 20)
         Me.txtCodigoContableDebitos.TabIndex = 128
@@ -805,46 +759,26 @@ Partial Class jsComArcProveedoresCXP
         Me.Label38.Text = "Cta. Con.:"
         Me.Label38.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'btnVenceDB
-        '
-        Me.btnVenceDB.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVenceDB.Location = New System.Drawing.Point(296, 57)
-        Me.btnVenceDB.Name = "btnVenceDB"
-        Me.btnVenceDB.Size = New System.Drawing.Size(25, 20)
-        Me.btnVenceDB.TabIndex = 106
-        Me.btnVenceDB.Text = "•••"
-        Me.btnVenceDB.UseVisualStyleBackColor = True
-        '
-        'btnEmisionDB
-        '
-        Me.btnEmisionDB.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmisionDB.Location = New System.Drawing.Point(296, 36)
-        Me.btnEmisionDB.Name = "btnEmisionDB"
-        Me.btnEmisionDB.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmisionDB.TabIndex = 105
-        Me.btnEmisionDB.Text = "•••"
-        Me.btnEmisionDB.UseVisualStyleBackColor = True
-        '
         'txtReferDB
         '
-        Me.txtReferDB.Location = New System.Drawing.Point(184, 78)
+        Me.txtReferDB.Location = New System.Drawing.Point(184, 84)
         Me.txtReferDB.MaxLength = 15
         Me.txtReferDB.Name = "txtReferDB"
-        Me.txtReferDB.Size = New System.Drawing.Size(106, 20)
+        Me.txtReferDB.Size = New System.Drawing.Size(114, 20)
         Me.txtReferDB.TabIndex = 40
         '
         'txtImporteDB
         '
-        Me.txtImporteDB.Location = New System.Drawing.Point(184, 163)
+        Me.txtImporteDB.Location = New System.Drawing.Point(184, 176)
         Me.txtImporteDB.MaxLength = 17
         Me.txtImporteDB.Name = "txtImporteDB"
-        Me.txtImporteDB.Size = New System.Drawing.Size(106, 20)
+        Me.txtImporteDB.Size = New System.Drawing.Size(114, 20)
         Me.txtImporteDB.TabIndex = 39
         Me.txtImporteDB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtConceptoDB
         '
-        Me.txtConceptoDB.Location = New System.Drawing.Point(184, 99)
+        Me.txtConceptoDB.Location = New System.Drawing.Point(184, 109)
         Me.txtConceptoDB.MaxLength = 150
         Me.txtConceptoDB.Multiline = True
         Me.txtConceptoDB.Name = "txtConceptoDB"
@@ -852,30 +786,12 @@ Partial Class jsComArcProveedoresCXP
         Me.txtConceptoDB.Size = New System.Drawing.Size(533, 61)
         Me.txtConceptoDB.TabIndex = 38
         '
-        'txtVenceDB
-        '
-        Me.txtVenceDB.Enabled = False
-        Me.txtVenceDB.Location = New System.Drawing.Point(184, 57)
-        Me.txtVenceDB.Name = "txtVenceDB"
-        Me.txtVenceDB.Size = New System.Drawing.Size(106, 20)
-        Me.txtVenceDB.TabIndex = 37
-        Me.txtVenceDB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'txtEmisionDB
-        '
-        Me.txtEmisionDB.Enabled = False
-        Me.txtEmisionDB.Location = New System.Drawing.Point(184, 36)
-        Me.txtEmisionDB.Name = "txtEmisionDB"
-        Me.txtEmisionDB.Size = New System.Drawing.Size(106, 20)
-        Me.txtEmisionDB.TabIndex = 36
-        Me.txtEmisionDB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'txtDocumentoDB
         '
         Me.txtDocumentoDB.Location = New System.Drawing.Point(184, 15)
         Me.txtDocumentoDB.MaxLength = 15
         Me.txtDocumentoDB.Name = "txtDocumentoDB"
-        Me.txtDocumentoDB.Size = New System.Drawing.Size(106, 20)
+        Me.txtDocumentoDB.Size = New System.Drawing.Size(114, 20)
         Me.txtDocumentoDB.TabIndex = 35
         '
         'Label5
@@ -958,6 +874,7 @@ Partial Class jsComArcProveedoresCXP
         '
         'grptextos
         '
+        Me.grptextos.Controls.Add(Me.txtEmisionCR)
         Me.grptextos.Controls.Add(Me.lblDescripCausaNotaCredito)
         Me.grptextos.Controls.Add(Me.lblNotaCredito)
         Me.grptextos.Controls.Add(Me.btnCausaNotaCredito)
@@ -969,9 +886,7 @@ Partial Class jsComArcProveedoresCXP
         Me.grptextos.Controls.Add(Me.txtImporteCR)
         Me.grptextos.Controls.Add(Me.txtReferenciaCR)
         Me.grptextos.Controls.Add(Me.Label10)
-        Me.grptextos.Controls.Add(Me.btnEmisionCR)
         Me.grptextos.Controls.Add(Me.txtConceptoCR)
-        Me.grptextos.Controls.Add(Me.txtEmisionCR)
         Me.grptextos.Controls.Add(Me.txtDocumentoCR)
         Me.grptextos.Controls.Add(Me.Label15)
         Me.grptextos.Controls.Add(Me.Label17)
@@ -1320,16 +1235,6 @@ Partial Class jsComArcProveedoresCXP
         Me.Label10.Text = "Importe:"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'btnEmisionCR
-        '
-        Me.btnEmisionCR.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmisionCR.Location = New System.Drawing.Point(195, 35)
-        Me.btnEmisionCR.Name = "btnEmisionCR"
-        Me.btnEmisionCR.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmisionCR.TabIndex = 104
-        Me.btnEmisionCR.Text = "•••"
-        Me.btnEmisionCR.UseVisualStyleBackColor = True
-        '
         'txtConceptoCR
         '
         Me.txtConceptoCR.Location = New System.Drawing.Point(85, 102)
@@ -1338,15 +1243,6 @@ Partial Class jsComArcProveedoresCXP
         Me.txtConceptoCR.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtConceptoCR.Size = New System.Drawing.Size(342, 44)
         Me.txtConceptoCR.TabIndex = 6
-        '
-        'txtEmisionCR
-        '
-        Me.txtEmisionCR.Enabled = False
-        Me.txtEmisionCR.Location = New System.Drawing.Point(85, 36)
-        Me.txtEmisionCR.Name = "txtEmisionCR"
-        Me.txtEmisionCR.Size = New System.Drawing.Size(108, 20)
-        Me.txtEmisionCR.TabIndex = 5
-        Me.txtEmisionCR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtDocumentoCR
         '
@@ -1443,12 +1339,78 @@ Partial Class jsComArcProveedoresCXP
         Me.lv.CheckBoxes = True
         Me.lv.FullRowSelect = True
         Me.lv.GridLines = True
+        Me.lv.HideSelection = False
         Me.lv.Location = New System.Drawing.Point(4, 13)
         Me.lv.Name = "lv"
         Me.lv.Size = New System.Drawing.Size(815, 127)
         Me.lv.TabIndex = 82
         Me.lv.UseCompatibleStateImageBehavior = False
         Me.lv.View = System.Windows.Forms.View.Details
+        '
+        'txtEmisionCR
+        '
+        Me.txtEmisionCR.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmisionCR.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmisionCR.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmisionCR.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmisionCR.Location = New System.Drawing.Point(85, 37)
+        Me.txtEmisionCR.Name = "txtEmisionCR"
+        Me.txtEmisionCR.Size = New System.Drawing.Size(108, 19)
+        Me.txtEmisionCR.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmisionCR.TabIndex = 214
+        Me.txtEmisionCR.Value = New Date(2021, 5, 6, 0, 0, 0, 0)
+        '
+        'txtEmisionDB
+        '
+        Me.txtEmisionDB.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmisionDB.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmisionDB.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmisionDB.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmisionDB.Location = New System.Drawing.Point(184, 37)
+        Me.txtEmisionDB.Name = "txtEmisionDB"
+        Me.txtEmisionDB.Size = New System.Drawing.Size(114, 19)
+        Me.txtEmisionDB.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmisionDB.TabIndex = 214
+        Me.txtEmisionDB.Value = New Date(2021, 5, 6, 0, 0, 0, 0)
+        '
+        'txtVenceDB
+        '
+        Me.txtVenceDB.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtVenceDB.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtVenceDB.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtVenceDB.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtVenceDB.Location = New System.Drawing.Point(184, 59)
+        Me.txtVenceDB.Name = "txtVenceDB"
+        Me.txtVenceDB.Size = New System.Drawing.Size(114, 19)
+        Me.txtVenceDB.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtVenceDB.TabIndex = 215
+        Me.txtVenceDB.Value = New Date(2021, 5, 6, 0, 0, 0, 0)
+        '
+        'txtFechaRetISLR
+        '
+        Me.txtFechaRetISLR.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaRetISLR.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaRetISLR.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaRetISLR.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaRetISLR.Location = New System.Drawing.Point(205, 203)
+        Me.txtFechaRetISLR.Name = "txtFechaRetISLR"
+        Me.txtFechaRetISLR.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaRetISLR.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaRetISLR.TabIndex = 214
+        Me.txtFechaRetISLR.Value = New Date(2021, 5, 6, 0, 0, 0, 0)
+        '
+        'txtFechaRetIVA
+        '
+        Me.txtFechaRetIVA.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaRetIVA.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaRetIVA.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaRetIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaRetIVA.Location = New System.Drawing.Point(699, 314)
+        Me.txtFechaRetIVA.Name = "txtFechaRetIVA"
+        Me.txtFechaRetIVA.Size = New System.Drawing.Size(126, 19)
+        Me.txtFechaRetIVA.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaRetIVA.TabIndex = 214
+        Me.txtFechaRetIVA.Value = New Date(2021, 5, 6, 0, 0, 0, 0)
         '
         'jsComArcProveedoresCXP
         '
@@ -1459,13 +1421,13 @@ Partial Class jsComArcProveedoresCXP
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(828, 460)
         Me.ControlBox = False
-        Me.Controls.Add(Me.grpCreditos)
         Me.Controls.Add(Me.grpRetencionIVA)
         Me.Controls.Add(Me.grpRetencionISLR)
+        Me.Controls.Add(Me.grpDebitos)
+        Me.Controls.Add(Me.grpCreditos)
         Me.Controls.Add(Me.grpAceptarSalir)
         Me.Controls.Add(Me.lblInfo)
         Me.Controls.Add(Me.grpCaja)
-        Me.Controls.Add(Me.grpDebitos)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "jsComArcProveedoresCXP"
@@ -1513,12 +1475,8 @@ Partial Class jsComArcProveedoresCXP
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents txtImporteDB As System.Windows.Forms.TextBox
     Friend WithEvents txtConceptoDB As System.Windows.Forms.TextBox
-    Friend WithEvents txtVenceDB As System.Windows.Forms.TextBox
-    Friend WithEvents txtEmisionDB As System.Windows.Forms.TextBox
     Friend WithEvents txtDocumentoDB As System.Windows.Forms.TextBox
     Friend WithEvents txtReferDB As System.Windows.Forms.TextBox
-    Friend WithEvents btnVenceDB As System.Windows.Forms.Button
-    Friend WithEvents btnEmisionDB As System.Windows.Forms.Button
     Friend WithEvents lv As System.Windows.Forms.ListView
     Friend WithEvents grpTotales As System.Windows.Forms.GroupBox
     Friend WithEvents txtSaldoSel As System.Windows.Forms.TextBox
@@ -1529,9 +1487,7 @@ Partial Class jsComArcProveedoresCXP
     Friend WithEvents txtImporteCR As System.Windows.Forms.TextBox
     Friend WithEvents txtReferenciaCR As System.Windows.Forms.TextBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents btnEmisionCR As System.Windows.Forms.Button
     Friend WithEvents txtConceptoCR As System.Windows.Forms.TextBox
-    Friend WithEvents txtEmisionCR As System.Windows.Forms.TextBox
     Friend WithEvents txtDocumentoCR As System.Windows.Forms.TextBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents Label17 As System.Windows.Forms.Label
@@ -1577,7 +1533,6 @@ Partial Class jsComArcProveedoresCXP
     Friend WithEvents Label27 As System.Windows.Forms.Label
     Friend WithEvents Label28 As System.Windows.Forms.Label
     Friend WithEvents Label29 As System.Windows.Forms.Label
-    Friend WithEvents txtFechaRetISLR As System.Windows.Forms.TextBox
     Friend WithEvents txtAcumuladoSinRetISLR As System.Windows.Forms.TextBox
     Friend WithEvents txtPorcentajeMontoBaseRetISLR As System.Windows.Forms.TextBox
     Friend WithEvents txtSustraendoRetISLR As System.Windows.Forms.TextBox
@@ -1591,13 +1546,11 @@ Partial Class jsComArcProveedoresCXP
     Friend WithEvents txtSaldoRetIVA As System.Windows.Forms.TextBox
     Friend WithEvents txtRetIVA As System.Windows.Forms.TextBox
     Friend WithEvents txtPorRetIVA As System.Windows.Forms.TextBox
-    Friend WithEvents txtFechaRetIVA As System.Windows.Forms.TextBox
     Friend WithEvents Label33 As System.Windows.Forms.Label
     Friend WithEvents Label32 As System.Windows.Forms.Label
     Friend WithEvents Label36 As System.Windows.Forms.Label
     Friend WithEvents Label35 As System.Windows.Forms.Label
     Friend WithEvents Label34 As System.Windows.Forms.Label
-    Friend WithEvents btnFechaRetIVA As System.Windows.Forms.Button
     Friend WithEvents lblLeyendaIVA As System.Windows.Forms.Label
     Friend WithEvents btnFechaRetISLR As System.Windows.Forms.Button
     Friend WithEvents cmbConceptoRetISLR As System.Windows.Forms.ComboBox
@@ -1617,4 +1570,9 @@ Partial Class jsComArcProveedoresCXP
     Friend WithEvents lblNotaCredito As System.Windows.Forms.Label
     Friend WithEvents btnCausaNotaCredito As System.Windows.Forms.Button
     Friend WithEvents txtCausaNotaCredito As System.Windows.Forms.TextBox
+    Friend WithEvents txtVenceDB As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtEmisionDB As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtEmisionCR As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaRetIVA As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaRetISLR As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

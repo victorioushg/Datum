@@ -1,6 +1,8 @@
 Imports MySql.Data.MySqlClient
 Imports Syncfusion.WinForms.Input
 Imports Syncfusion.WinForms.ListView
+Imports Syncfusion.WinForms.ListView.Enums
+
 Public Class jsVenArcPresupuestos
     Private Const sModulo As String = "Presupuestos"
     Private Const lRegion As String = "RibbonButton81"
@@ -19,28 +21,28 @@ Public Class jsVenArcPresupuestos
     Private dtRenglones As New DataTable
     Private dtIVA As New DataTable
     Private dtDescuentos As New DataTable
-    Private dtClientes As New DataTable
-    Private dtAsesores As New DataTable
     Private ft As New Transportables
+
+    Private interchangeList As New List(Of CambioMonedaPlus)
+    Private customerList As New List(Of Customer)
+    Private advisorsList As New List(Of SalesForce)
+    Private cliente As New Customer()
+    Private asesor As New SalesForce()
 
     Private i_modo As Integer
     Private nPosicionEncab As Long, nPosicionRenglon As Long, nPosicionDescuento As Long
     Private aEstatus() As String = {"Tránsito", "Procesado"}
     Private aTarifa() As String = {"A", "B", "C", "D", "E", "F"}
     Private MontoParaDescuento As Double = 0.0
+
     Private strSQL As String = " select a.* from jsvenenccot a " _
             & " where " _
             & " a.emision >= '" & ft.FormatoFechaMySQL(DateAdd("m", -24, jytsistema.sFechadeTrabajo)) & "' and " _
             & " a.emision <= '" & ft.FormatoFechaMySQL(jytsistema.sFechadeTrabajo) & "' and " _
             & " a.id_emp = '" & jytsistema.WorkID & "' order by a.numcot"
 
-    Private strSQLCliente = " select codcli, nombre, disponible, elt(estatus+1, 'Activo', 'Bloqueado', 'Inactivo', 'Desincorporado') estatus " &
-        " from jsvencatcli where estatus < 3 And id_emp = '" & jytsistema.WorkID & "' order by 1 "
-    Private strSQLAsesor = " select codven, CONCAT( apellidos, ', ', nombres) nombre from jsvencatven where tipo = '" & TipoVendedor.iFuerzaventa &
-        "' and estatus = 1  and id_emp = '" & jytsistema.WorkID & "'  order by 1 "
 
     Private Impresa As Integer
-
     Private Sub jsVenArcPresupuestos_FormClosed(sender As Object, e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         ft = Nothing
     End Sub
@@ -49,26 +51,14 @@ Public Class jsVenArcPresupuestos
         Me.Dock = DockStyle.Fill
         Try
             myConn.Open()
-
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
-            ds = DataSetRequery(ds, strSQLCliente, myConn, "tabla_clientes", lblInfo)
-            ds = DataSetRequery(ds, strSQLAsesor, myConn, "tabla_asesores", lblInfo)
 
-            dt = ds.Tables(nTabla)
-            dtClientes = ds.Tables("tabla_clientes")
-            dtAsesores = ds.Tables("tabla_asesores")
+            interchangeList = GetListaDeMonedasyCambios(myConn, jytsistema.sFechadeTrabajo)
+            customerList = GetCustomersList(myConn)
+            advisorsList = GetSalesForce(myConn)
 
-            ''Clientes
-            sfCBCliente.DisplayMember = "nombre"
-            sfCBCliente.ValueMember = "codcli"
-            sfCBCliente.DataSource = dtClientes
+            IniciarControles()
 
-            ''Asesores 
-            sfCBAsesores.DisplayMember = "nombre"
-            sfCBAsesores.ValueMember = "codven"
-            sfCBAsesores.DataSource = dtAsesores
-
-            DesactivarMarco0()
             If dt.Rows.Count > 0 Then
                 nPosicionEncab = dt.Rows.Count - 1
                 Me.BindingContext(ds, nTabla).Position = nPosicionEncab
@@ -78,46 +68,29 @@ Public Class jsVenArcPresupuestos
             End If
             ft.ActivarMenuBarra(myConn, ds, dt, lRegion, MenuBarra, jytsistema.sUsuario)
 
-            Dim dates As SfDateTimeEdit() = {txtEmision, txtVence}
-            SetSizeDateObjects(dates)
-
-            AsignarTooltips()
-
         Catch ex As MySql.Data.MySqlClient.MySqlException
             ft.mensajeCritico("Error en conexión de base de datos: " & ex.Message)
         End Try
 
     End Sub
+    Private Sub IniciarControles()
+
+        '' Clientes
+        InitiateDropDownClientes(cmbCliente, customerList)
+        ''Asesores 
+        InitiateDropDownAsesores(cmbAsesores, advisorsList)
+        '' Monedas
+        InitiateDropDownInterchangeCurrency(cmbMonedas, interchangeList)
+
+        DesactivarMarco0()
+        Dim dates As SfDateTimeEdit() = {txtEmision, txtVence}
+        SetSizeDateObjects(dates)
+        AsignarTooltips()
+
+    End Sub
     Private Sub AsignarTooltips()
-        'Menu Barra 
-        C1SuperTooltip1.SetToolTip(btnAgregar, "<B>Agregar</B> nuevo presupuesto")
-        C1SuperTooltip1.SetToolTip(btnEditar, "<B>Editar o mofificar</B> presupuesto")
-        C1SuperTooltip1.SetToolTip(btnEliminar, "<B>Eliminar</B> Presupuesto")
-        C1SuperTooltip1.SetToolTip(btnBuscar, "<B>Buscar</B> Presupuesto")
-        C1SuperTooltip1.SetToolTip(btnPrimero, "ir a la <B>primer</B> Presupuesto")
-        C1SuperTooltip1.SetToolTip(btnSiguiente, "ir a presupuesto <B>siguiente</B>")
-        C1SuperTooltip1.SetToolTip(btnAnterior, "ir a presupuesto <B>anterior</B>")
-        C1SuperTooltip1.SetToolTip(btnUltimo, "ir a la <B>último presupuesto</B>")
-        C1SuperTooltip1.SetToolTip(btnImprimir, "<B>Imprimir</B> Presupuesto")
-        C1SuperTooltip1.SetToolTip(btnSalir, "<B>Cerrar</B> esta ventana")
-        C1SuperTooltip1.SetToolTip(btnDuplicar, "<B>Duplicar</B> este presupuesto")
-
-        'Menu barra renglón
-        C1SuperTooltip1.SetToolTip(btnAgregarMovimiento, "<B>Agregar</B> renglón en Presupuesto")
-        C1SuperTooltip1.SetToolTip(btnEditarMovimiento, "<B>Editar</B> renglón en Presupuesto")
-        C1SuperTooltip1.SetToolTip(btnEliminarMovimiento, "<B>Eliminar</B> renglón en Presupuesto")
-        C1SuperTooltip1.SetToolTip(btnBuscarMovimiento, "<B>Buscar</B> un renglón en Presupuesto")
-        C1SuperTooltip1.SetToolTip(btnPrimerMovimiento, "ir al <B>primer</B> renglón en Presupuesto")
-        C1SuperTooltip1.SetToolTip(btnAnteriorMovimiento, "ir al <B>anterior</B> renglón en Presupuesto")
-        C1SuperTooltip1.SetToolTip(btnSiguienteMovimiento, "ir al renglón <B>siguiente </B> en Presupuesto")
-        C1SuperTooltip1.SetToolTip(btnUltimoMovimiento, "ir al <B>último</B> renglón de la Presupuesto")
-
-        'Menu Barra Descuento 
-        C1SuperTooltip1.SetToolTip(btnAgregaDescuento, "<B>Agrega </B> descuento global a presupuesto")
-        C1SuperTooltip1.SetToolTip(btnEliminaDescuento, "<B>Elimina</B> descuento global de Presupuesto")
-
-
-
+        Dim menus As New List(Of ToolStrip) From {MenuBarra, MenuBarraRenglon, MenuDescuentos}
+        AsignarToolTipsMenuBarraToolStrip(menus, "Presupuesto")
     End Sub
 
     Private Sub AsignaMov(ByVal nRow As Long, ByVal Actualiza As Boolean)
@@ -132,7 +105,7 @@ Public Class jsVenArcPresupuestos
         End If
 
         ft.ActivarMenuBarra(myConn, ds, dtRenglones, lRegion, MenuBarraRenglon, jytsistema.sUsuario)
-        ft.habilitarObjetos(IIf(dtRenglones.Rows.Count > 0, False, True), True, sfCBCliente)
+        ft.habilitarObjetos(IIf(dtRenglones.Rows.Count > 0, False, True), True, cmbCliente)
 
     End Sub
     Private Sub AsignaTXT(ByVal nRow As Long)
@@ -150,9 +123,9 @@ Public Class jsVenArcPresupuestos
                 txtEmision.Value = .Item("emision")
                 txtVence.Text = .Item("vence")
                 txtEstatus.Text = aEstatus(.Item("estatus"))
-                sfCBCliente.SelectedValue = .Item("codcli")
+                cmbCliente.SelectedValue = .Item("codcli")
                 txtComentario.Text = ft.muestraCampoTexto(.Item("comen"))
-                sfCBAsesores.SelectedValue = .Item("codven")
+                cmbAsesores.SelectedValue = .Item("codven")
                 ft.RellenaCombo(aTarifa, cmbTarifa, ft.InArray(aTarifa, .Item("tarifa")))
 
                 tslblPesoT.Text = ft.FormatoCantidad(.Item("kilos"))
@@ -163,9 +136,9 @@ Public Class jsVenArcPresupuestos
                 txtTotalIVA.Text = ft.FormatoNumero(.Item("imp_iva"))
                 txtTotal.Text = ft.FormatoNumero(.Item("tot_cot"))
 
+                SetComboCurrency(.Item("Currency"), cmbMonedas, lblTotal)
 
                 Impresa = .Item("impresa")
-
                 'Renglones
                 AsignarMovimientos(.Item("numcot"))
 
@@ -175,6 +148,7 @@ Public Class jsVenArcPresupuestos
             End With
         End With
     End Sub
+
     Private Sub AsignarMovimientos(ByVal NumeroPresupuesto As String)
         strSQLMov = "select * from jsvenrencot " _
                             & " where " _
@@ -215,8 +189,8 @@ Public Class jsVenArcPresupuestos
             txtCodigo.Text = ""
         End If
 
-        sfCBCliente.SelectedValue = Nothing
-        sfCBAsesores.SelectedValue = Nothing
+        cmbCliente.SelectedValue = Nothing
+        cmbAsesores.SelectedValue = Nothing
         ft.RellenaCombo(aTarifa, cmbTarifa)
         txtComentario.Text = ""
         txtEmision.Value = sFechadeTrabajo
@@ -230,23 +204,23 @@ Public Class jsVenArcPresupuestos
         txtTotalIVA.Text = ft.FormatoNumero(0.0)
         txtTotal.Text = ft.FormatoNumero(0.0)
 
+        SetComboCurrency(0, cmbMonedas, lblTotal)
+
         Impresa = 0
 
         'Movimientos
         MostrarItemsEnMenuBarra(MenuBarraRenglon, 0, 0)
         AsignarMovimientos(txtCodigo.Text)
         CalculaTotales()
-
-
     End Sub
     Private Sub ActivarMarco0()
 
         grpAceptarSalir.Visible = True
-
         ft.habilitarObjetos(True, False, grpEncab, grpTotales, MenuBarraRenglon, MenuDescuentos)
-        ft.habilitarObjetos(True, True, txtComentario, txtEmision, txtVence, sfCBCliente, cmbTarifa, sfCBAsesores)
-        If Not CBool(ParametroPlus(myConn, Gestion.iVentas, "VENCOTPA09")) Then ft.habilitarObjetos(False, True, sfCBAsesores)
-
+        ft.habilitarObjetos(True, True, txtComentario, txtEmision, txtVence, cmbCliente, cmbTarifa, cmbAsesores)
+        If Not CBool(ParametroPlus(myConn, Gestion.iVentas, "VENCOTPA09")) And cmbAsesores.SelectedValue <> Nothing Then
+            ft.habilitarObjetos(False, True, cmbAsesores)
+        End If
 
         MenuBarra.Enabled = False
         ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
@@ -256,7 +230,7 @@ Public Class jsVenArcPresupuestos
 
         grpAceptarSalir.Visible = False
         ft.habilitarObjetos(False, True, txtCodigo, txtEmision, txtVence, txtEstatus,
-                sfCBCliente, txtComentario, sfCBAsesores, cmbTarifa, txtTotalCambioEmision, txtTotalActual)
+                cmbCliente, txtComentario, cmbAsesores, cmbMonedas, cmbTarifa)
 
         ft.habilitarObjetos(False, True, txtDescuentos, txtCargos, MenuDescuentos, txtSubTotal, txtTotalIVA, txtTotal)
 
@@ -306,12 +280,12 @@ Public Class jsVenArcPresupuestos
             Return False
         End If
 
-        If sfCBCliente.SelectedValue = Nothing Then
+        If cmbCliente.SelectedValue = Nothing Then
             ft.mensajeCritico("Debe indicar un cliente válido...")
             Return False
         End If
 
-        If sfCBAsesores.SelectedValue = Nothing Then
+        If cmbAsesores.SelectedValue = Nothing Then
             ft.mensajeCritico("Debe indicar un nombre de Asesor válido...")
             Return False
         End If
@@ -345,9 +319,10 @@ Public Class jsVenArcPresupuestos
         End If
 
         InsertEditVENTASEncabezadoPresupuesto(myConn, lblInfo, Inserta, Codigo, txtEmision.Value, txtVence.Value,
-                                               sfCBCliente.SelectedValue, txtComentario.Text, sfCBAsesores.SelectedValue, cmbTarifa.Text,
+                                               cmbCliente.SelectedValue, txtComentario.Text, cmbAsesores.SelectedValue, cmbTarifa.Text,
                                                ValorNumero(txtSubTotal.Text), ValorNumero(txtDescuentos.Text), ValorNumero(txtCargos.Text),
                                                ValorNumero(txtTotalIVA.Text), ValorNumero(txtTotal.Text),
+                                               cmbMonedas.SelectedValue, DateTime.Now,
                                                ft.InArray(aEstatus, txtEstatus.Text), dtRenglones.Rows.Count,
                                                0.0, ValorCantidad(tslblPesoT.Text), Impresa)
 
@@ -360,6 +335,7 @@ Public Class jsVenArcPresupuestos
         AsignaTXT(nPosicionEncab)
         DesactivarMarco0()
         ft.ActivarMenuBarra(myConn, ds, dt, lRegion, MenuBarra, jytsistema.sUsuario)
+
 
     End Sub
     Private Sub ActualizarMovimientos(ByVal NumeroPresupuesto As String)
@@ -393,13 +369,13 @@ Public Class jsVenArcPresupuestos
         nPosicionEncab = Me.BindingContext(ds, nTabla).Position
         ActivarMarco0()
         IniciarDocumento(True)
-        ft.habilitarObjetos(IIf(dtRenglones.Rows.Count > 0, False, True), True, sfCBCliente)
+        ft.habilitarObjetos(IIf(dtRenglones.Rows.Count > 0, False, True), True, cmbCliente)
     End Sub
 
     Private Sub btnEditar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditar.Click
 
         Dim aCamposAdicionales() As String = {"numcot|'" & txtCodigo.Text & "'",
-                                              "codcli|'" & sfCBCliente.SelectedValue & "'"}
+                                              "codcli|'" & cmbCliente.SelectedValue & "'"}
         If DocumentoBloqueado(myConn, "jsvenenccot", aCamposAdicionales) Then
             ft.mensajeCritico("DOCUMENTO BLOQUEADO. POR FAVOR VERIFIQUE...")
         Else
@@ -408,7 +384,7 @@ Public Class jsVenArcPresupuestos
                 i_modo = movimiento.iEditar
                 nPosicionEncab = Me.BindingContext(ds, nTabla).Position
                 ActivarMarco0()
-                ft.habilitarObjetos(IIf(dtRenglones.Rows.Count > 0, False, True), True, sfCBCliente)
+                ft.habilitarObjetos(IIf(dtRenglones.Rows.Count > 0, False, True), True, cmbCliente)
             Else
                 ft.mensajeCritico("Edición de presupuesto no permitida...")
             End If
@@ -420,7 +396,7 @@ Public Class jsVenArcPresupuestos
     Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
 
         Dim aCamposAdicionales() As String = {"numcot|'" & txtCodigo.Text & "'",
-                                             "codcli|'" & sfCBCliente.SelectedValue & "'"}
+                                             "codcli|'" & cmbCliente.SelectedValue & "'"}
         If DocumentoBloqueado(myConn, "jsvenenccot", aCamposAdicionales) Then
             ft.mensajeCritico("DOCUMENTO BLOQUEADO. POR FAVOR VERIFIQUE...")
         Else
@@ -519,8 +495,6 @@ Public Class jsVenArcPresupuestos
 
         tslblPesoT.Text = ft.FormatoCantidad(CalculaPesoDocumento(myConn, lblInfo, "jsvenrencot", "peso", "numcot", txtCodigo.Text))
 
-        MostrarTotalesCambioMoneda(myConn, txtEmision.Value, txtTotal, txtTotalCambioEmision, txtTotalActual)
-
     End Sub
 
     Private Sub CalculaDescuentoEnRenglones()
@@ -540,10 +514,10 @@ Public Class jsVenArcPresupuestos
 
 
     Private Sub btnAgregarMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarMovimiento.Click
-        If sfCBCliente.SelectedValue <> "" Then
+        If cmbCliente.SelectedValue <> "" Then
             Dim f As New jsGenRenglonesMovimientos
             f.Apuntador = Me.BindingContext(ds, nTablaRenglones).Position
-            f.Agregar(myConn, ds, dtRenglones, "COT", txtCodigo.Text, txtEmision.Value, , cmbTarifa.Text, sfCBCliente.SelectedValue, , , , , , , , , , sfCBAsesores.SelectedValue)
+            f.Agregar(myConn, ds, dtRenglones, "COT", txtCodigo.Text, txtEmision.Value, , cmbTarifa.Text, cmbCliente.SelectedValue, , , , , , , , , , cmbAsesores.SelectedValue)
             ds = DataSetRequery(ds, strSQLMov, myConn, nTablaRenglones, lblInfo)
             AsignaMov(f.Apuntador, True)
             CalculaTotales()
@@ -556,8 +530,8 @@ Public Class jsVenArcPresupuestos
         If dtRenglones.Rows.Count > 0 Then
             Dim f As New jsGenRenglonesMovimientos
             f.Apuntador = Me.BindingContext(ds, nTablaRenglones).Position
-            f.Editar(myConn, ds, dtRenglones, "COT", txtCodigo.Text, txtEmision.Value, , cmbTarifa.Text, sfCBCliente.SelectedValue,
-                     IIf(dtRenglones.Rows(Me.BindingContext(ds, nTablaRenglones).Position).Item("item").ToString.Substring(0, 1) = "$", True, False), , , , , , , , , sfCBAsesores.SelectedValue)
+            f.Editar(myConn, ds, dtRenglones, "COT", txtCodigo.Text, txtEmision.Value, , cmbTarifa.Text, cmbCliente.SelectedValue,
+                     IIf(dtRenglones.Rows(Me.BindingContext(ds, nTablaRenglones).Position).Item("item").ToString.Substring(0, 1) = "$", True, False), , , , , , , , , cmbAsesores.SelectedValue)
             ds = DataSetRequery(ds, strSQLMov, myConn, nTablaRenglones, lblInfo)
             AsignaMov(f.Apuntador, True)
             CalculaTotales()
@@ -652,28 +626,14 @@ Public Class jsVenArcPresupuestos
 
     End Sub
 
-    Private Sub sfCBCliente_SelectedIndexChanged(sender As Object, e As EventArgs) Handles sfCBCliente.SelectedIndexChanged
-
-        If i_modo = movimiento.iAgregar Then
-
-            sfCBAsesores.SelectedValue = ft.DevuelveScalarCadena(myConn, "SELECT b.codven " _
-                                                                   & " FROM jsvenrenrut a  " _
-                                                                   & " LEFT JOIN jsvenencrut b ON (a.codrut = b.codrut AND a.tipo = b.tipo AND a.id_emp = b.id_emp) " _
-                                                                   & " WHERE " _
-                                                                   & " a.tipo = '0' AND " _
-                                                                   & " a.cliente = '" & sfCBCliente.SelectedValue & "' AND " _
-                                                                   & " a.id_emp = '" & jytsistema.WorkID & "' ")
-        End If
-
-    End Sub
 
     Private Sub btnAgregaDescuento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregaDescuento.Click
-        If sfCBCliente.SelectedValue <> "" Then
-            If ClienteFacturaAPartirDeCostos(myConn, lblInfo, sfCBCliente.SelectedValue) Then
+        If cmbCliente.SelectedValue <> "" Then
+            If ClienteFacturaAPartirDeCostos(myConn, lblInfo, cmbCliente.SelectedValue) Then
                 ft.mensajeCritico("DESCUENTOS NO PERMITIDOS")
             Else
                 Dim f As New jsGenDescuentosVentas
-                f.Agregar(myConn, ds, dtDescuentos, "jsvendescot", "numcot", txtCodigo.Text, sModulo, sfCBAsesores.SelectedValue, 0,
+                f.Agregar(myConn, ds, dtDescuentos, "jsvendescot", "numcot", txtCodigo.Text, sModulo, cmbAsesores.SelectedValue, 0,
                           txtEmision.Value, ValorNumero(txtSubTotal.Text))
                 CalculaTotales()
                 f = Nothing
@@ -692,10 +652,10 @@ Public Class jsVenArcPresupuestos
         End If
     End Sub
     Private Sub btnAgregarServicio_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarServicio.Click
-        If sfCBCliente.SelectedValue <> "" Then
+        If cmbCliente.SelectedValue <> "" Then
             Dim f As New jsGenRenglonesMovimientos
             f.Apuntador = Me.BindingContext(ds, nTablaRenglones).Position
-            f.Agregar(myConn, ds, dtRenglones, "COT", txtCodigo.Text, txtEmision.Value, , cmbTarifa.Text, sfCBCliente.SelectedValue, True)
+            f.Agregar(myConn, ds, dtRenglones, "COT", txtCodigo.Text, txtEmision.Value, , cmbTarifa.Text, cmbCliente.SelectedValue, True)
             ds = DataSetRequery(ds, strSQLMov, myConn, nTablaRenglones, lblInfo)
             AsignaMov(f.Apuntador, True)
             CalculaTotales()
@@ -713,7 +673,6 @@ Public Class jsVenArcPresupuestos
         nPosicionDescuento = e.RowIndex
     End Sub
 
-
     Private Sub dg_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles dg.KeyUp
         Select Case e.KeyCode
             Case Keys.Down
@@ -727,6 +686,7 @@ Public Class jsVenArcPresupuestos
         End Select
     End Sub
 
+
     Private Sub ToolStripButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCortar.Click
         If dtRenglones.Rows.Count > 0 Then
             nPosicionRenglon = Me.BindingContext(ds, nTablaRenglones).Position
@@ -735,7 +695,7 @@ Public Class jsVenArcPresupuestos
                 f.NuevoPrecio = .Item("precio")
                 Dim PrecioAnterior As Double = f.NuevoPrecio
 
-                f.Cambiar(myConn, ds, dtRenglones, txtCodigo.Text, sfCBCliente.SelectedValue, .Item("renglon"), .Item("item"), .Item("unidad"), .Item("cantidad"), .Item("precio"))
+                f.Cambiar(myConn, ds, dtRenglones, txtCodigo.Text, cmbCliente.SelectedValue, .Item("renglon"), .Item("item"), .Item("unidad"), .Item("cantidad"), .Item("precio"))
                 If f.NuevoPrecio <> PrecioAnterior Then
                     ft.Ejecutar_strSQL(myConn, " update jsvenrencot " _
                                    & " set precio = " & f.NuevoPrecio & ", " _
@@ -756,4 +716,14 @@ Public Class jsVenArcPresupuestos
             End With
         End If
     End Sub
+
+    Private Sub cmbCliente_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbCliente.SelectedValueChanged
+        cliente = cmbCliente.SelectedItem
+        If i_modo = movimiento.iAgregar And cmbCliente.SelectedIndex >= 0 Then cmbAsesores.SelectedValue = cliente.Asesor
+    End Sub
+    Private Sub cmbAsesores_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAsesores.SelectedIndexChanged
+        asesor = cmbAsesores.SelectedItem
+    End Sub
+
+
 End Class

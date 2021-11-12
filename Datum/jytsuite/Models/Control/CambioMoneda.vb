@@ -1,54 +1,47 @@
 ﻿Public Class CambioMoneda
 
-	Private _fecha As Date
-	Private _moneda As String
-	Private _equivale As Double
-	'Private _id_emp As String
+    Public Property Fecha() As DateTime
+    Public Property Moneda() As Integer
+    Public Property Equivale() As Double
 
-	Public Property Fecha() As Date
-		Get
-			Return _fecha
-		End Get
-		Set(ByVal value As Date)
-			_fecha = value
-		End Set
-	End Property
+    Public Sub New()
+    End Sub
+    Public Sub New(ByVal fecha As DateTime, ByVal moneda As Integer, equivale As Double)
 
-	Public Property Moneda() As Integer
-		Get
-			Return _moneda
-		End Get
-		Set(ByVal value As Integer)
-			_moneda = value
-		End Set
-	End Property
+        Me.Fecha = fecha
+        Me.Moneda = moneda
+        Me.Equivale = equivale
 
-	Public Property Equivale() As Double
-		Get
-			Return _equivale
-		End Get
-		Set(ByVal value As Double)
-			_equivale = value
-		End Set
-	End Property
-
-	'Public Property Id_Emp() As String
-	'	Get
-	'		Return _id_emp
-	'	End Get
-	'	Set(ByVal value As String)
-	'		_id_emp = value
-	'	End Set
-	'End Property
-
-	'Public Sub New(ByVal fecha As Date, ByVal moneda As String, ByVal equivale As Double, ByVal id_emp As String)
-	'	Me.Fecha = fecha
-	'	Me.Moneda = moneda
-	'	Me.Equivale = equivale
-	'	Me.Id_Emp = id_emp
-	'End Sub
-	Public Sub New()
-
-	End Sub
+    End Sub
 
 End Class
+
+
+Public Class CambioMonedaPlus
+    Inherits CambioMoneda
+
+    Public Property UnidadMonetaria() As String
+    Public Property Simbolo() As String
+    Public Property CodigoIso As String
+
+End Class
+
+'' 
+'Public Class Foo ' consider this as your clsTest
+'    Public Sub New()
+'    End Sub
+'    Public Property Name As String
+'    Public Property Number As Int32
+'    Public Sub New(name As String)
+'        Me.Name = name
+'    End Sub
+'End Class
+
+'Public Class Bar
+'    Inherits Foo
+
+'    Public Sub New(name As String, i As Integer)
+'        MyBase.Name = name
+'        MyBase.Number = i
+'    End Sub
+'End Class

@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsMerArcMercanciasMovimientos
 
     Private Const sModulo As String = "Movimiento inventario de mercancías"
@@ -41,7 +43,7 @@ Public Class jsMerArcMercanciasMovimientos
         End Set
     End Property
 
-    Public Sub Agregar(ByVal Mycon As MySqlConnection, ByVal ds As DataSet, ByVal dt As DataTable, _
+    Public Sub Agregar(ByVal Mycon As MySqlConnection, ByVal ds As DataSet, ByVal dt As DataTable,
                        ByVal CodigoMercancia As String, ByVal Descripcion As String)
 
         i_modo = movimiento.iAgregar
@@ -58,7 +60,7 @@ Public Class jsMerArcMercanciasMovimientos
         Me.ShowDialog()
 
     End Sub
-    Public Sub Editar(ByVal Mycon As MySqlConnection, ByVal ds As DataSet, ByVal dt As DataTable, _
+    Public Sub Editar(ByVal Mycon As MySqlConnection, ByVal ds As DataSet, ByVal dt As DataTable,
                        ByVal CodigoMercancia As String, ByVal Descripcion As String)
 
         i_modo = movimiento.iEditar
@@ -77,20 +79,20 @@ Public Class jsMerArcMercanciasMovimientos
     End Sub
     Private Sub AsignarTooltips()
         'Menu Barra 
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnFecha, btnCantidadTC, btnPesoCaptura, btnAlmacen, btnLote)
+        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, txtFecha, btnCantidadTC, btnPesoCaptura, btnAlmacen, btnLote)
     End Sub
     Private Sub Habilitar()
-        ft.habilitarObjetos(False, True, txtFecha, txtCostoPrecioTotal, txtPesoTotal, txtAlmacen, _
+        ft.habilitarObjetos(False, True, txtCostoPrecioTotal, txtPesoTotal, txtAlmacen,
                          txtNumero, txtCodigo, txtDescripcion)
         If i_modo = movimiento.iEditar Then _
-            ft.habilitarObjetos(False, True, btnFecha, cmbTipo)
+            ft.habilitarObjetos(False, True, txtFecha, cmbTipo)
     End Sub
     Private Sub IniciarTXT()
 
         numRenglon = "00001"
         txtCodigo.Text = CodMercancia
         txtDescripcion.Text = DesMercancia
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
         ft.RellenaCombo(aTipo, cmbTipo)
         txtNumero.Text = Contador(MyConn, lblInfo, Gestion.iMercancías, "INVNUMMOV", "02")
         txtLote.Text = ""
@@ -106,7 +108,7 @@ Public Class jsMerArcMercanciasMovimientos
             txtCodigo.Text = CodMercancia
             txtDescripcion.Text = DesMercancia
             ft.RellenaCombo(aUnidades, cmbUnidad, ft.InArray(aUnidades, .Item("unidad")))
-            txtFecha.Text = ft.FormatoFecha(CDate(.Item("fechamov").ToString))
+            txtFecha.Value = CDate(.Item("fechamov").ToString)
             ft.RellenaCombo(aTipo, cmbTipo, ft.InArray(aTipoX, .Item("tipomov")))
             txtNumero.Text = .Item("numdoc")
             txtLote.Text = .Item("lote")
@@ -126,30 +128,31 @@ Public Class jsMerArcMercanciasMovimientos
     End Sub
 
     Private Sub jsMerArcMercanciaMovimientos_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Dim dates As SfDateTimeEdit() = {txtFecha}
+        SetSizeDateObjects(dates)
         InsertarAuditoria(MyConn, MovAud.ientrar, sModulo, txtCodigo.Text)
     End Sub
 
-    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus, _
-        txtDescripcion.GotFocus, cmbUnidad.GotFocus, txtFecha.GotFocus, txtNumero.GotFocus, txtCantidad.GotFocus, _
-        txtCostoPrecio.GotFocus, _
-         btnCantidadTC.GotFocus, _
-         btnFecha.GotFocus, btnPesoCaptura.GotFocus
+    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus,
+        txtDescripcion.GotFocus, cmbUnidad.GotFocus, txtNumero.GotFocus, txtCantidad.GotFocus,
+        txtCostoPrecio.GotFocus,
+         btnCantidadTC.GotFocus, btnPesoCaptura.GotFocus
 
         Select Case sender.name
             Case "cmbUnidad"
-                ft.mensajeEtiqueta(lblInfo, "Seleccione la unidad para movimiento de mercancía ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, "Seleccione la unidad para movimiento de mercancía ...", Transportables.tipoMensaje.iInfo)
             Case "txtLote"
-                ft.mensajeEtiqueta(lblInfo, "Indique el número de lote al cual pertenece la mercancía...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, "Indique el número de lote al cual pertenece la mercancía...", Transportables.tipoMensaje.iInfo)
             Case "txtCantidad"
-                ft.mensajeEtiqueta(lblInfo, "Indique la cantidad del movimiento de mercancía", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, "Indique la cantidad del movimiento de mercancía", Transportables.tipoMensaje.iInfo)
             Case "txtCostoPrecio"
-                ft.mensajeEtiqueta(lblInfo, "Indique el costo de la mercancía... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, "Indique el costo de la mercancía... ", Transportables.tipoMensaje.iInfo)
             Case "btnCantidadTC"
-                ft.mensajeEtiqueta(lblInfo, "Seleccione las cantidades por talla y color de esta mercancía...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, "Seleccione las cantidades por talla y color de esta mercancía...", Transportables.tipoMensaje.iInfo)
             Case "btnPesoCaptura"
-                ft.mensajeEtiqueta(lblInfo, "Seleccione el peso de la mercancía desde la balanza... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, "Seleccione el peso de la mercancía desde la balanza... ", Transportables.tipoMensaje.iInfo)
             Case "btnLote"
-                ft.mensajeEtiqueta(lblInfo, "Seleccione el Número de lote de inventario...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, "Seleccione el Número de lote de inventario...", Transportables.tipoMensaje.iInfo)
         End Select
 
     End Sub
@@ -212,11 +215,11 @@ Public Class jsMerArcMercanciasMovimientos
                 Apuntador = dtLocal.Rows.Count
             End If
 
-            InsertEditMERCASMovimientoInventario(MyConn, lblInfo, Insertar, txtCodigo.Text, CDate(txtFecha.Text), _
-                                                    aTipoX(cmbTipo.SelectedIndex), txtNumero.Text, cmbUnidad.SelectedItem, _
-                                                    ValorCantidad(txtCantidad.Text), ValorCantidad(txtPesoTotal.Text), _
-                                                    ValorNumero(txtCostoPrecioTotal.Text), ValorNumero(txtCostoPrecioTotal.Text), _
-                                                    "INV", txtNumero.Text, txtLote.Text, "", 0.0, 0.0, 0.0, 0.0, "", txtAlmacen.Text, _
+            InsertEditMERCASMovimientoInventario(MyConn, lblInfo, Insertar, txtCodigo.Text, CDate(txtFecha.Text),
+                                                    aTipoX(cmbTipo.SelectedIndex), txtNumero.Text, cmbUnidad.SelectedItem,
+                                                    ValorCantidad(txtCantidad.Text), ValorCantidad(txtPesoTotal.Text),
+                                                    ValorNumero(txtCostoPrecioTotal.Text), ValorNumero(txtCostoPrecioTotal.Text),
+                                                    "INV", txtNumero.Text, txtLote.Text, "", 0.0, 0.0, 0.0, 0.0, "", txtAlmacen.Text,
                                                     numRenglon, jytsistema.sFechadeTrabajo)
 
             ActualizarExistenciasPlus(MyConn, txtCodigo.Text)
@@ -236,7 +239,7 @@ Public Class jsMerArcMercanciasMovimientos
         Me.Close()
     End Sub
 
-    Private Sub txt_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.Click, _
+    Private Sub txt_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.Click,
         txtCantidad.Click, txtCostoPrecio.Click
         Dim txt As TextBox = sender
         ft.enfocarTexto(txt)
@@ -266,12 +269,12 @@ Public Class jsMerArcMercanciasMovimientos
 
     End Sub
 
-    Private Sub txtCantidad_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCantidad.KeyPress, _
+    Private Sub txtCantidad_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCantidad.KeyPress,
         txtCostoPrecio.KeyPress
         e.Handled = ft.validaNumeroEnTextbox(e)
     End Sub
 
-    Private Sub txtCantidad_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCantidad.TextChanged, _
+    Private Sub txtCantidad_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCantidad.TextChanged,
         txtCostoPrecio.TextChanged
         txtCostoPrecioTotal.Text = ft.FormatoNumero(ValorNumero(txtCostoPrecio.Text) * ValorCantidad(txtCantidad.Text))
         txtPesoTotal.Text = ft.FormatoCantidad(PesoActual * ValorCantidad(txtCantidad.Text))
@@ -288,7 +291,7 @@ Public Class jsMerArcMercanciasMovimientos
 
     End Sub
 
-    
+
     Private Sub btnAlmacen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAlmacen.Click
         Dim f As New jsControlArcAlmacenes
         f.Cargar(MyConn, TipoCargaFormulario.iShowDialog)
@@ -296,9 +299,6 @@ Public Class jsMerArcMercanciasMovimientos
         f = Nothing
     End Sub
 
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, btnFecha)
-    End Sub
 
     Private Sub btnDescripcion_Click(sender As System.Object, e As System.EventArgs) Handles btnDescripcion.Click
         If txtDescripcion.Text <> "" AndAlso txtNumero.Text <> "" Then

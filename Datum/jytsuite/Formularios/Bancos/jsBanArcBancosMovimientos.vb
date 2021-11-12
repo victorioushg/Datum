@@ -1,5 +1,6 @@
 Imports MySql.Data.MySqlClient
 Imports Syncfusion.WinForms.Input
+Imports fTransport
 Public Class jsBanArcBancosMovimientos
     Private Const sModulo As String = "Movimiento bancario"
 
@@ -135,7 +136,7 @@ Public Class jsBanArcBancosMovimientos
                 Codigobanco, "", txtConcepto.Text, IIf(cmbTipo.SelectedIndex < 2, ValorNumero(txtImporte.Text), -1 * ValorNumero(txtImporte.Text)),
                 "BAN", txtDocumento.Text, IIf(Trim(txtBeneficiario.Text) = "", ".", txtBeneficiario.Text),
                 numComprobante, "0", MyDate, MyDate, cmbTipo.SelectedIndex, "", MyDate,
-                cmbTipoDeposito.SelectedIndex, "", "")
+                cmbTipoDeposito.SelectedIndex, "", "", jytsistema.WorkCurrency.Id, DateTime.Now())
 
             ImprimirComprobante()
 

@@ -23,8 +23,6 @@ Partial Class jsGenProNumerosControlMovimientos
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsGenProNumerosControlMovimientos))
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.grpTablaSimple = New System.Windows.Forms.GroupBox()
-        Me.btnDescripcion = New System.Windows.Forms.Button()
-        Me.txtFecha = New System.Windows.Forms.TextBox()
         Me.txtNumeroControl = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -32,6 +30,7 @@ Partial Class jsGenProNumerosControlMovimientos
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.btnOK = New System.Windows.Forms.Button()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpTablaSimple.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
         Me.SuspendLayout()
@@ -49,7 +48,6 @@ Partial Class jsGenProNumerosControlMovimientos
         'grpTablaSimple
         '
         Me.grpTablaSimple.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.grpTablaSimple.Controls.Add(Me.btnDescripcion)
         Me.grpTablaSimple.Controls.Add(Me.txtFecha)
         Me.grpTablaSimple.Controls.Add(Me.txtNumeroControl)
         Me.grpTablaSimple.Controls.Add(Me.Label2)
@@ -59,25 +57,6 @@ Partial Class jsGenProNumerosControlMovimientos
         Me.grpTablaSimple.Size = New System.Drawing.Size(344, 74)
         Me.grpTablaSimple.TabIndex = 82
         Me.grpTablaSimple.TabStop = False
-        '
-        'btnDescripcion
-        '
-        Me.btnDescripcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDescripcion.Location = New System.Drawing.Point(279, 34)
-        Me.btnDescripcion.Name = "btnDescripcion"
-        Me.btnDescripcion.Size = New System.Drawing.Size(27, 20)
-        Me.btnDescripcion.TabIndex = 16
-        Me.btnDescripcion.Text = "···"
-        Me.btnDescripcion.UseVisualStyleBackColor = True
-        '
-        'txtFecha
-        '
-        Me.txtFecha.Enabled = False
-        Me.txtFecha.Location = New System.Drawing.Point(160, 36)
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(113, 20)
-        Me.txtFecha.TabIndex = 15
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtNumeroControl
         '
@@ -91,7 +70,7 @@ Partial Class jsGenProNumerosControlMovimientos
         'Label2
         '
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(36, 35)
+        Me.Label2.Location = New System.Drawing.Point(36, 41)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(118, 19)
         Me.Label2.TabIndex = 3
@@ -155,6 +134,18 @@ Partial Class jsGenProNumerosControlMovimientos
         Me.btnOK.Text = "Aceptar"
         Me.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         '
+        'txtFecha
+        '
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(160, 41)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(114, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 214
+        '
         'jsGenProNumerosControlMovimientos
         '
         Me.AcceptButton = Me.btnOK
@@ -182,11 +173,10 @@ Partial Class jsGenProNumerosControlMovimientos
     Friend WithEvents grpTablaSimple As System.Windows.Forms.GroupBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
     Friend WithEvents txtNumeroControl As System.Windows.Forms.TextBox
     Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
     Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
-    Friend WithEvents btnDescripcion As System.Windows.Forms.Button
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

@@ -32,14 +32,11 @@ Partial Class jsContabProProcesarCuentas
         Me.C1PictureBox1 = New C1.Win.C1Input.C1PictureBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.btnFechaHasta = New System.Windows.Forms.Button()
-        Me.txtFechaHasta = New System.Windows.Forms.TextBox()
-        Me.lblFechaHasta = New System.Windows.Forms.Label()
-        Me.btnFechaDesde = New System.Windows.Forms.Button()
-        Me.txtFechaDesde = New System.Windows.Forms.TextBox()
         Me.lblFechaDesde = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblEjercicio = New System.Windows.Forms.Label()
+        Me.txtFechaDesde = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaHasta = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpCaja.SuspendLayout()
         Me.grpTotales.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -182,52 +179,6 @@ Partial Class jsContabProProcesarCuentas
         Me.Label10.Text = "Datum"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'btnFechaHasta
-        '
-        Me.btnFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaHasta.Location = New System.Drawing.Point(486, 153)
-        Me.btnFechaHasta.Name = "btnFechaHasta"
-        Me.btnFechaHasta.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaHasta.TabIndex = 113
-        Me.btnFechaHasta.Text = "•••"
-        Me.btnFechaHasta.UseVisualStyleBackColor = True
-        '
-        'txtFechaHasta
-        '
-        Me.txtFechaHasta.Location = New System.Drawing.Point(381, 153)
-        Me.txtFechaHasta.Name = "txtFechaHasta"
-        Me.txtFechaHasta.Size = New System.Drawing.Size(99, 20)
-        Me.txtFechaHasta.TabIndex = 112
-        Me.txtFechaHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblFechaHasta
-        '
-        Me.lblFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFechaHasta.Location = New System.Drawing.Point(325, 153)
-        Me.lblFechaHasta.Name = "lblFechaHasta"
-        Me.lblFechaHasta.Size = New System.Drawing.Size(50, 20)
-        Me.lblFechaHasta.TabIndex = 111
-        Me.lblFechaHasta.Text = "hasta  :"
-        Me.lblFechaHasta.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'btnFechaDesde
-        '
-        Me.btnFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaDesde.Location = New System.Drawing.Point(282, 153)
-        Me.btnFechaDesde.Name = "btnFechaDesde"
-        Me.btnFechaDesde.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaDesde.TabIndex = 110
-        Me.btnFechaDesde.Text = "•••"
-        Me.btnFechaDesde.UseVisualStyleBackColor = True
-        '
-        'txtFechaDesde
-        '
-        Me.txtFechaDesde.Location = New System.Drawing.Point(177, 153)
-        Me.txtFechaDesde.Name = "txtFechaDesde"
-        Me.txtFechaDesde.Size = New System.Drawing.Size(99, 20)
-        Me.txtFechaDesde.TabIndex = 109
-        Me.txtFechaDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'lblFechaDesde
         '
         Me.lblFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -235,7 +186,7 @@ Partial Class jsContabProProcesarCuentas
         Me.lblFechaDesde.Name = "lblFechaDesde"
         Me.lblFechaDesde.Size = New System.Drawing.Size(170, 20)
         Me.lblFechaDesde.TabIndex = 108
-        Me.lblFechaDesde.Text = "Procesar saldos desde :"
+        Me.lblFechaDesde.Text = "Procesar saldos periodo :"
         Me.lblFechaDesde.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label1
@@ -245,7 +196,7 @@ Partial Class jsContabProProcesarCuentas
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(170, 20)
         Me.Label1.TabIndex = 114
-        Me.Label1.Text = "para el ejercicio contsable :"
+        Me.Label1.Text = "para el ejercicio contable :"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'lblEjercicio
@@ -257,6 +208,30 @@ Partial Class jsContabProProcesarCuentas
         Me.lblEjercicio.TabIndex = 115
         Me.lblEjercicio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'txtFechaDesde
+        '
+        Me.txtFechaDesde.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaDesde.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaDesde.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaDesde.Location = New System.Drawing.Point(177, 155)
+        Me.txtFechaDesde.Name = "txtFechaDesde"
+        Me.txtFechaDesde.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaDesde.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaDesde.TabIndex = 214
+        '
+        'txtFechaHasta
+        '
+        Me.txtFechaHasta.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaHasta.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaHasta.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaHasta.Location = New System.Drawing.Point(297, 155)
+        Me.txtFechaHasta.Name = "txtFechaHasta"
+        Me.txtFechaHasta.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaHasta.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaHasta.TabIndex = 215
+        '
         'jsContabProProcesarCuentas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -264,13 +239,10 @@ Partial Class jsContabProProcesarCuentas
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(732, 353)
         Me.ControlBox = False
+        Me.Controls.Add(Me.txtFechaHasta)
+        Me.Controls.Add(Me.txtFechaDesde)
         Me.Controls.Add(Me.lblEjercicio)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.btnFechaHasta)
-        Me.Controls.Add(Me.txtFechaHasta)
-        Me.Controls.Add(Me.lblFechaHasta)
-        Me.Controls.Add(Me.btnFechaDesde)
-        Me.Controls.Add(Me.txtFechaDesde)
         Me.Controls.Add(Me.lblFechaDesde)
         Me.Controls.Add(Me.grpTotales)
         Me.Controls.Add(Me.grpAceptarSalir)
@@ -289,7 +261,6 @@ Partial Class jsContabProProcesarCuentas
         Me.grpAceptarSalir.ResumeLayout(False)
         CType(Me.C1PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents lblInfo As System.Windows.Forms.Label
@@ -304,12 +275,9 @@ Partial Class jsContabProProcesarCuentas
     Friend WithEvents lblLeyenda As System.Windows.Forms.Label
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Friend WithEvents lblProgreso As System.Windows.Forms.Label
-    Friend WithEvents btnFechaHasta As System.Windows.Forms.Button
-    Friend WithEvents txtFechaHasta As System.Windows.Forms.TextBox
-    Friend WithEvents lblFechaHasta As System.Windows.Forms.Label
-    Friend WithEvents btnFechaDesde As System.Windows.Forms.Button
-    Friend WithEvents txtFechaDesde As System.Windows.Forms.TextBox
     Friend WithEvents lblFechaDesde As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents lblEjercicio As System.Windows.Forms.Label
+    Friend WithEvents txtFechaDesde As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaHasta As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

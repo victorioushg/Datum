@@ -22,6 +22,10 @@ Partial Class jsNomArcTrabajadoresCuotas
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsNomArcTrabajadoresCuotas))
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.grp = New System.Windows.Forms.GroupBox()
+        Me.cmbNomina = New System.Windows.Forms.ComboBox()
+        Me.txtNomina = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cmbEstatus = New System.Windows.Forms.ComboBox()
         Me.txtSaldo = New System.Windows.Forms.TextBox()
@@ -31,12 +35,8 @@ Partial Class jsNomArcTrabajadoresCuotas
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.btnInicio = New System.Windows.Forms.Button()
-        Me.txtInicio = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.btnAprobacion = New System.Windows.Forms.Button()
-        Me.txtAprobacion = New System.Windows.Forms.TextBox()
         Me.txtMonto = New System.Windows.Forms.TextBox()
         Me.btnPrestamo = New System.Windows.Forms.Button()
         Me.MenuRenglon = New System.Windows.Forms.ToolStrip()
@@ -53,10 +53,8 @@ Partial Class jsNomArcTrabajadoresCuotas
         Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
-        Me.cmbNomina = New System.Windows.Forms.ComboBox()
-        Me.txtNomina = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
+        Me.txtAprobacion = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtInicio = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grp.SuspendLayout()
         Me.MenuRenglon.SuspendLayout()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -76,6 +74,8 @@ Partial Class jsNomArcTrabajadoresCuotas
         'grp
         '
         Me.grp.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grp.Controls.Add(Me.txtInicio)
+        Me.grp.Controls.Add(Me.txtAprobacion)
         Me.grp.Controls.Add(Me.cmbNomina)
         Me.grp.Controls.Add(Me.txtNomina)
         Me.grp.Controls.Add(Me.Label11)
@@ -89,12 +89,8 @@ Partial Class jsNomArcTrabajadoresCuotas
         Me.grp.Controls.Add(Me.Label8)
         Me.grp.Controls.Add(Me.Label7)
         Me.grp.Controls.Add(Me.Label6)
-        Me.grp.Controls.Add(Me.btnInicio)
-        Me.grp.Controls.Add(Me.txtInicio)
         Me.grp.Controls.Add(Me.Label4)
         Me.grp.Controls.Add(Me.Label3)
-        Me.grp.Controls.Add(Me.btnAprobacion)
-        Me.grp.Controls.Add(Me.txtAprobacion)
         Me.grp.Controls.Add(Me.txtMonto)
         Me.grp.Controls.Add(Me.btnPrestamo)
         Me.grp.Controls.Add(Me.MenuRenglon)
@@ -111,6 +107,46 @@ Partial Class jsNomArcTrabajadoresCuotas
         Me.grp.TabIndex = 80
         Me.grp.TabStop = False
         Me.grp.Text = " Cuotas/Préstamo"
+        '
+        'cmbNomina
+        '
+        Me.cmbNomina.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbNomina.FormattingEnabled = True
+        Me.cmbNomina.Location = New System.Drawing.Point(101, 15)
+        Me.cmbNomina.Name = "cmbNomina"
+        Me.cmbNomina.Size = New System.Drawing.Size(334, 21)
+        Me.cmbNomina.TabIndex = 145
+        '
+        'txtNomina
+        '
+        Me.txtNomina.Enabled = False
+        Me.txtNomina.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNomina.Location = New System.Drawing.Point(560, 16)
+        Me.txtNomina.MaxLength = 2
+        Me.txtNomina.Name = "txtNomina"
+        Me.txtNomina.Size = New System.Drawing.Size(181, 20)
+        Me.txtNomina.TabIndex = 144
+        Me.txtNomina.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label11
+        '
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(31, 16)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(64, 19)
+        Me.Label11.TabIndex = 143
+        Me.Label11.Text = "Nómina :"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label12
+        '
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(457, 16)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(95, 19)
+        Me.Label12.TabIndex = 142
+        Me.Label12.Text = "Tipo nómina:"
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label10
         '
@@ -199,25 +235,6 @@ Partial Class jsNomArcTrabajadoresCuotas
         Me.Label6.Text = "Tipo de interés :"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'btnInicio
-        '
-        Me.btnInicio.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnInicio.Location = New System.Drawing.Point(281, 130)
-        Me.btnInicio.Name = "btnInicio"
-        Me.btnInicio.Size = New System.Drawing.Size(25, 20)
-        Me.btnInicio.TabIndex = 132
-        Me.btnInicio.Text = "•••"
-        Me.btnInicio.UseVisualStyleBackColor = True
-        '
-        'txtInicio
-        '
-        Me.txtInicio.BackColor = System.Drawing.Color.White
-        Me.txtInicio.Location = New System.Drawing.Point(176, 130)
-        Me.txtInicio.Name = "txtInicio"
-        Me.txtInicio.Size = New System.Drawing.Size(99, 20)
-        Me.txtInicio.TabIndex = 131
-        Me.txtInicio.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label4
         '
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -237,25 +254,6 @@ Partial Class jsNomArcTrabajadoresCuotas
         Me.Label3.TabIndex = 129
         Me.Label3.Text = "Fecha aprobación :"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'btnAprobacion
-        '
-        Me.btnAprobacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAprobacion.Location = New System.Drawing.Point(281, 108)
-        Me.btnAprobacion.Name = "btnAprobacion"
-        Me.btnAprobacion.Size = New System.Drawing.Size(25, 20)
-        Me.btnAprobacion.TabIndex = 128
-        Me.btnAprobacion.Text = "•••"
-        Me.btnAprobacion.UseVisualStyleBackColor = True
-        '
-        'txtAprobacion
-        '
-        Me.txtAprobacion.BackColor = System.Drawing.Color.White
-        Me.txtAprobacion.Location = New System.Drawing.Point(176, 109)
-        Me.txtAprobacion.Name = "txtAprobacion"
-        Me.txtAprobacion.Size = New System.Drawing.Size(99, 20)
-        Me.txtAprobacion.TabIndex = 127
-        Me.txtAprobacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtMonto
         '
@@ -421,45 +419,29 @@ Partial Class jsNomArcTrabajadoresCuotas
         Me.btnOK.Text = "Aceptar"
         Me.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         '
-        'cmbNomina
+        'txtAprobacion
         '
-        Me.cmbNomina.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbNomina.FormattingEnabled = True
-        Me.cmbNomina.Location = New System.Drawing.Point(101, 15)
-        Me.cmbNomina.Name = "cmbNomina"
-        Me.cmbNomina.Size = New System.Drawing.Size(334, 21)
-        Me.cmbNomina.TabIndex = 145
+        Me.txtAprobacion.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtAprobacion.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtAprobacion.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtAprobacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAprobacion.Location = New System.Drawing.Point(176, 109)
+        Me.txtAprobacion.Name = "txtAprobacion"
+        Me.txtAprobacion.Size = New System.Drawing.Size(114, 19)
+        Me.txtAprobacion.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtAprobacion.TabIndex = 214
         '
-        'txtNomina
+        'txtInicio
         '
-        Me.txtNomina.Enabled = False
-        Me.txtNomina.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNomina.Location = New System.Drawing.Point(560, 16)
-        Me.txtNomina.MaxLength = 2
-        Me.txtNomina.Name = "txtNomina"
-        Me.txtNomina.Size = New System.Drawing.Size(181, 20)
-        Me.txtNomina.TabIndex = 144
-        Me.txtNomina.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label11
-        '
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(31, 16)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(64, 19)
-        Me.Label11.TabIndex = 143
-        Me.Label11.Text = "Nómina :"
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label12
-        '
-        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(457, 16)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(95, 19)
-        Me.Label12.TabIndex = 142
-        Me.Label12.Text = "Tipo nómina:"
-        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.txtInicio.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtInicio.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtInicio.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtInicio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtInicio.Location = New System.Drawing.Point(176, 130)
+        Me.txtInicio.Name = "txtInicio"
+        Me.txtInicio.Size = New System.Drawing.Size(114, 19)
+        Me.txtInicio.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtInicio.TabIndex = 215
         '
         'jsNomArcTrabajadoresCuotas
         '
@@ -502,13 +484,9 @@ Partial Class jsNomArcTrabajadoresCuotas
     Friend WithEvents btnEliminaRenglon As System.Windows.Forms.ToolStripButton
     Friend WithEvents btnEditarRenglon As System.Windows.Forms.ToolStripButton
     Friend WithEvents btnPrestamo As System.Windows.Forms.Button
-    Friend WithEvents txtAprobacion As System.Windows.Forms.TextBox
     Friend WithEvents txtMonto As System.Windows.Forms.TextBox
-    Friend WithEvents btnAprobacion As System.Windows.Forms.Button
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents btnInicio As System.Windows.Forms.Button
-    Friend WithEvents txtInicio As System.Windows.Forms.TextBox
     Friend WithEvents txtPorcentajeInteres As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
@@ -522,4 +500,6 @@ Partial Class jsNomArcTrabajadoresCuotas
     Friend WithEvents txtNomina As System.Windows.Forms.TextBox
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents txtInicio As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtAprobacion As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

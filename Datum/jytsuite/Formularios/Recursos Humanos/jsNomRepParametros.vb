@@ -2,6 +2,8 @@ Imports MySql.Data.MySqlClient
 Imports System.IO
 Imports CrystalDecisions.CrystalReports.Engine
 Imports ReportesDeNomina
+Imports Syncfusion.WinForms.Input
+
 Public Class jsNomRepParametros
 
     Private Const sModulo As String = "Reportes de Recursos Humanos"
@@ -30,14 +32,14 @@ Public Class jsNomRepParametros
     Private periodoTipo As TipoPeriodo
     Private Nomina As String
 
-    Public Sub Cargar(ByVal TipoCarga As Integer, ByVal numReporte As Integer, ByVal nomReporte As String, _
-                      Optional ByVal CodTrabajador As String = "", Optional ByVal numDocumento As String = "", _
+    Public Sub Cargar(ByVal TipoCarga As Integer, ByVal numReporte As Integer, ByVal nomReporte As String,
+                      Optional ByVal CodTrabajador As String = "", Optional ByVal numDocumento As String = "",
                       Optional ByVal Fecha As Date = #1/1/2009#, Optional CodigoNomina As String = "")
-
-
 
         Me.Dock = DockStyle.Fill
         myConn.Open()
+        Dim dates As SfDateTimeEdit() = {txtPeriodoDesde, txtPeriodoHasta}
+        SetSizeDateObjects(dates)
 
         ReporteNumero = numReporte
         ReporteNombre = nomReporte
@@ -111,9 +113,9 @@ Public Class jsNomRepParametros
 
         End Select
     End Sub
-    Private Sub Inicializar(ByVal nEtiqueta As String, ByVal TabOrden As Boolean, ByVal TabGrupo As Boolean, _
-        ByVal TabCriterio As Boolean, ByVal TabConstantes As Boolean, ByVal aNombreOrden() As String, _
-        ByVal aCampoOrden() As String, ByVal aTipoOrden() As String, ByVal aLongitudOrden() As Integer, _
+    Private Sub Inicializar(ByVal nEtiqueta As String, ByVal TabOrden As Boolean, ByVal TabGrupo As Boolean,
+        ByVal TabCriterio As Boolean, ByVal TabConstantes As Boolean, ByVal aNombreOrden() As String,
+        ByVal aCampoOrden() As String, ByVal aTipoOrden() As String, ByVal aLongitudOrden() As Integer,
         Optional ByVal Trabajador As String = "")
 
 
@@ -162,36 +164,36 @@ Public Class jsNomRepParametros
 
     Private Sub VerCriterio_Periodo(ByVal Ver As Boolean, ByVal CompletoDesdeHasta As Integer, Optional ByVal Periodo As TipoPeriodo = TipoPeriodo.iMensual)
         'CompletoDesdeHasta 0 = Complete , 1 = Desde , 2 = Hasta 
-        ft.visualizarObjetos(False, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta, btnPeriodoDesde, btnPeriodoHasta)
+        ft.visualizarObjetos(False, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta)
         periodoTipo = Periodo
         If Ver Then
             Select Case CompletoDesdeHasta
                 Case 0
-                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta, btnPeriodoDesde, btnPeriodoHasta)
+                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta)
                 Case 1
-                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodo, txtPeriodoDesde, btnPeriodoDesde)
+                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodo, txtPeriodoDesde)
                 Case 2
-                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoHasta, btnPeriodoHasta)
+                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoHasta)
             End Select
         End If
 
 
         Select Case Periodo
             Case TipoPeriodo.iDiario
-                txtPeriodoDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtPeriodoHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoDesde.Value = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
             Case TipoPeriodo.iSemanal
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaSemana(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaSemana(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = ft.FormatoFecha(PrimerDiaSemana(jytsistema.sFechadeTrabajo))
+                txtPeriodoHasta.Value = ft.FormatoFecha(UltimoDiaSemana(jytsistema.sFechadeTrabajo))
             Case TipoPeriodo.iMensual
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaMes(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaMes(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = ft.FormatoFecha(PrimerDiaMes(jytsistema.sFechadeTrabajo))
+                txtPeriodoHasta.Value = ft.FormatoFecha(UltimoDiaMes(jytsistema.sFechadeTrabajo))
             Case TipoPeriodo.iAnual
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaAño(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaAño(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = ft.FormatoFecha(PrimerDiaAño(jytsistema.sFechadeTrabajo))
+                txtPeriodoHasta.Value = ft.FormatoFecha(UltimoDiaAño(jytsistema.sFechadeTrabajo))
             Case Else
-                txtPeriodoDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtPeriodoHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoDesde.Value = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
         End Select
 
     End Sub
@@ -210,7 +212,7 @@ Public Class jsNomRepParametros
             Case ReporteNomina.cTrabajadores
                 verConstante_TipoNominaPlus(True)
                 verConstante_Estatus(True)
-            Case ReporteNomina.cAcumuladosPorConcepto, ReporteNomina.cConceptosXTrabajador, ReporteNomina.cConceptosXTrabajadores, _
+            Case ReporteNomina.cAcumuladosPorConcepto, ReporteNomina.cConceptosXTrabajador, ReporteNomina.cConceptosXTrabajadores,
                 ReporteNomina.cPrenomina, ReporteNomina.cConceptosXTrabajadorMesAMes, ReporteNomina.cConceptosMesAMes
                 verConstante_TipoNomina(True)
             Case ReporteNomina.cNomina, ReporteNomina.cResumenXConcepto, ReporteNomina.cRecibos, ReporteNomina.cFirmas
@@ -269,7 +271,7 @@ Public Class jsNomRepParametros
     End Sub
     Private Function Validado() As Boolean
         Select Case ReporteNumero
-            Case ReporteNomina.cNomina, ReporteNomina.cResumenXConcepto, ReporteNomina.cRecibos, _
+            Case ReporteNomina.cNomina, ReporteNomina.cResumenXConcepto, ReporteNomina.cRecibos,
                 ReporteNomina.cConceptosXTrabajadores, ReporteNomina.cTrabajadores, ReporteNomina.cPrenomina
                 If txtCodNom.Text = "" Then
                     ft.mensajeAdvertencia("Debe seleccionar una nómina válida...")
@@ -335,30 +337,30 @@ Public Class jsNomRepParametros
                 nTabla = "dtPrenomina"
                 oReporte = New rptNominaNomina
                 Dim aFec() As String = Split(cmbNomina.Text, " / ")
-                str = SeleccionNOMNomina(vOrdenCampos(cmbOrdenadoPor.SelectedIndex), txtCodNom.Text, _
+                str = SeleccionNOMNomina(vOrdenCampos(cmbOrdenadoPor.SelectedIndex), txtCodNom.Text,
                       CDate(aFec(0)), CDate(aFec(1)), txtOrdenDesde.Text, txtOrdenHasta.Text)
             Case ReporteNomina.cRecibos
                 nTabla = "dtPrenomina"
                 oReporte = New rptNominaRecibos
                 Dim aFec() As String = Split(cmbNomina.Text, " / ")
-                str = SeleccionNOMNomina(vOrdenCampos(cmbOrdenadoPor.SelectedIndex), txtCodNom.Text, _
+                str = SeleccionNOMNomina(vOrdenCampos(cmbOrdenadoPor.SelectedIndex), txtCodNom.Text,
                       CDate(aFec(0)), CDate(aFec(1)), txtOrdenDesde.Text, txtOrdenHasta.Text)
             Case ReporteNomina.cFirmas
                 nTabla = "dtPrenomina"
                 oReporte = New rptNominaFirmas
                 Dim aFec() As String = Split(cmbNomina.Text, " / ")
-                str = SeleccionNOMNomina(vOrdenCampos(cmbOrdenadoPor.SelectedIndex), txtCodNom.Text, _
+                str = SeleccionNOMNomina(vOrdenCampos(cmbOrdenadoPor.SelectedIndex), txtCodNom.Text,
                       CDate(aFec(0)), CDate(aFec(1)), txtOrdenDesde.Text, txtOrdenHasta.Text)
             Case ReporteNomina.cResumenXConcepto
                 nTabla = "dtPrenomina"
                 oReporte = New rptNominaNominaResumen
                 Dim aFec() As String = Split(cmbNomina.Text, " / ")
-                str = SeleccionNOMResumenXConcepto(txtCodNom.Text, _
+                str = SeleccionNOMResumenXConcepto(txtCodNom.Text,
                       CDate(aFec(0)), CDate(aFec(1)))
             Case ReporteNomina.cAcumuladosPorConcepto
                 nTabla = "dtConceptosAcumulados"
                 oReporte = New rptNominaConceptoAcumulado
-                str = SeleccionNOMAcumuladosXConcepto(txtCodNom.Text, _
+                str = SeleccionNOMAcumuladosXConcepto(txtCodNom.Text,
                        CDate(txtPeriodoHasta.Text))
             Case ReporteNomina.cConceptosXTrabajadorMesAMes
                 nTabla = "dtConceptosMesAMes"
@@ -377,7 +379,7 @@ Public Class jsNomRepParametros
             If dsNom.Tables(nTabla).Rows.Count > 0 Then
                 oReporte = PresentaReporte(oReporte, dsNom, nTabla)
                 r.CrystalReportViewer1.ReportSource = oReporte
-                r.CrystalReportViewer1.ToolPanelView = IIf(PresentaArbol, CrystalDecisions.Windows.Forms.ToolPanelViewType.GroupTree, _
+                r.CrystalReportViewer1.ToolPanelView = IIf(PresentaArbol, CrystalDecisions.Windows.Forms.ToolPanelViewType.GroupTree,
                                               CrystalDecisions.Windows.Forms.ToolPanelViewType.None)
                 r.CrystalReportViewer1.ShowGroupTreeButton = PresentaArbol
                 r.CrystalReportViewer1.Zoom(1)
@@ -388,7 +390,7 @@ Public Class jsNomRepParametros
                 If ReporteNumero = ReporteNomina.cRegistroTrabajador Then
                     oReporte = PresentaReporte(oReporte, dsNom, nTabla)
                     r.CrystalReportViewer1.ReportSource = oReporte
-                    r.CrystalReportViewer1.ToolPanelView = IIf(PresentaArbol, CrystalDecisions.Windows.Forms.ToolPanelViewType.GroupTree, _
+                    r.CrystalReportViewer1.ToolPanelView = IIf(PresentaArbol, CrystalDecisions.Windows.Forms.ToolPanelViewType.GroupTree,
                                                   CrystalDecisions.Windows.Forms.ToolPanelViewType.None)
                     r.CrystalReportViewer1.ShowGroupTreeButton = PresentaArbol
                     r.CrystalReportViewer1.Zoom(1)
@@ -396,7 +398,7 @@ Public Class jsNomRepParametros
                     r.Cargar(ReporteNombre)
                     DeshabilitarCursorEnEspera()
                 Else
-                    ft.MensajeCritico("No existe información que cumpla con estos criterios y/o constantes ")
+                    ft.mensajeCritico("No existe información que cumpla con estos criterios y/o constantes ")
                 End If
 
             End If
@@ -456,23 +458,6 @@ Public Class jsNomRepParametros
         PresentaReporte = oReporte
 
     End Function
-    Private Sub UbicacionDatosCheque()
-
-    End Sub
-    Private Sub btnPeriodoDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles btnPeriodoDesde.Click
-        txtPeriodoDesde.Text = SeleccionaFecha(CDate(txtPeriodoDesde.Text), Me, sender)
-    End Sub
-
-    Private Sub btnPeriodoHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles btnPeriodoHasta.Click
-        txtPeriodoHasta.Text = SeleccionaFecha(CDate(txtPeriodoHasta.Text), Me, sender)
-    End Sub
-
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
-
-    End Sub
-
     Private Function LineaCriterios() As String
         LineaCriterios = ""
         If lblPeriodo.Visible Then LineaCriterios += "Período: " & IIf(lblPeriodoDesde.Visible, txtPeriodoDesde.Text, "") & IIf(lblPeriodoDesde.Visible AndAlso lblPeriodoHasta.Visible, "/", "") & IIf(lblPeriodoHasta.Visible, txtPeriodoHasta.Text, "")
@@ -554,16 +539,16 @@ Public Class jsNomRepParametros
         dtNom = Nothing
     End Sub
 
-    Private Sub txtPeriodoDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPeriodoDesde.TextChanged
-        Select Case PeriodoTipo
+    Private Sub txtPeriodoDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPeriodoDesde.ValueChanged
+        Select Case periodoTipo
             Case TipoPeriodo.iDiario
-                txtPeriodoHasta.Text = txtPeriodoDesde.Text
+                txtPeriodoHasta.Value = txtPeriodoDesde.Value
             Case TipoPeriodo.iSemanal
-                txtPeriodoHasta.Text = ft.FormatoFecha(DateAdd(DateInterval.Day, 7, CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = DateAdd(DateInterval.Day, 7, CDate(txtPeriodoDesde.Text))
             Case TipoPeriodo.iMensual
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaMes(CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = UltimoDiaMes(CDate(txtPeriodoDesde.Text))
             Case TipoPeriodo.iAnual
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaAño(CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = UltimoDiaAño(CDate(txtPeriodoDesde.Text))
         End Select
     End Sub
 

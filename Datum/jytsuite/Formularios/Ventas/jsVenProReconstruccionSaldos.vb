@@ -261,11 +261,11 @@ Public Class jsVenProReconstruccionDeSaldos
                             sSigno = -1
 
 
-                            InsertEditVENTASCXC(MyConn, lblInfo, True, .Item("codcli"), strTipo, .Item("numNCR"), CDate(.Item("emision").ToString), ft.FormatoHora(Now()), _
-                                CDate(.Item("vence").ToString), "", strTipo1 & ": " & .Item("numNCR"), sSigno * .Item("tot_NCR"), .Item("imp_iva"), _
-                                .Item("formapag"), .Item("caja"), .Item("numpag"), .Item("nompag"), "", "NCR", .Item("numNCR"), "0", _
-                                "", jytsistema.sFechadeTrabajo, "", "", "", 0.0#, 0.0#, "", "", "", "", .Item("codven"), _
-                                .Item("codven"), "0", sFOTipo, jytsistema.WorkDivition)
+                            InsertEditVENTASCXC(MyConn, lblInfo, True, .Item("codcli"), strTipo, .Item("numNCR"), CDate(.Item("emision").ToString), ft.FormatoHora(Now()),
+                                CDate(.Item("vence").ToString), "", strTipo1 & ": " & .Item("numNCR"), sSigno * .Item("tot_NCR"), .Item("imp_iva"),
+                                .Item("formapag"), .Item("caja"), .Item("numpag"), .Item("nompag"), "", "NCR", .Item("numNCR"), "0",
+                                "", jytsistema.sFechadeTrabajo, "", "", "", 0.0#, 0.0#, "", "", "", "", .Item("codven"),
+                                .Item("codven"), "0", sFOTipo, jytsistema.WorkDivition, jytsistema.WorkCurrency.Id, DateTime.Now())
 
                             SaldoCxC(MyConn, lblInfo, .Item("codcli"))
 
@@ -355,11 +355,11 @@ Public Class jsVenProReconstruccionDeSaldos
                                 sSigno = 1
 
 
-                                InsertEditVENTASCXC(MyConn, lblInfo, True, .Item("codcli"), strTipo, .Item("numfac"), CDate(.Item("emision").ToString), ft.FormatoHora(Now()), _
-                                    CDate(.Item("vence").ToString), "", strTipo1 & ": " & .Item("numfac"), sSigno * .Item("tot_fac"), .Item("imp_iva"), _
-                                    .Item("formapag"), .Item("caja"), .Item("numpag"), .Item("nompag"), "", "FAC", .Item("numfac"), "0", _
-                                    "", jytsistema.sFechadeTrabajo, "", "", "", 0.0#, 0.0#, "", "", "", "", .Item("codven"), _
-                                    .Item("codven"), "0", sFOTipo, jytsistema.WorkDivition)
+                                InsertEditVENTASCXC(MyConn, lblInfo, True, .Item("codcli"), strTipo, .Item("numfac"), CDate(.Item("emision").ToString), ft.FormatoHora(Now()),
+                                    CDate(.Item("vence").ToString), "", strTipo1 & ": " & .Item("numfac"), sSigno * .Item("tot_fac"), .Item("imp_iva"),
+                                    .Item("formapag"), .Item("caja"), .Item("numpag"), .Item("nompag"), "", "FAC", .Item("numfac"), "0",
+                                    "", jytsistema.sFechadeTrabajo, "", "", "", 0.0#, 0.0#, "", "", "", "", .Item("codven"),
+                                    .Item("codven"), "0", sFOTipo, jytsistema.WorkDivition, jytsistema.WorkCurrency.Id, DateTime.Now())
 
                             End If
 

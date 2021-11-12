@@ -20,16 +20,15 @@ Partial Class jsControlArcUTMovimientos
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsControlArcUTMovimientos))
-        Me.lblInfo = New System.Windows.Forms.Label
-        Me.grpEquivalencia = New System.Windows.Forms.GroupBox
-        Me.btnFecha = New System.Windows.Forms.Button
-        Me.txtFecha = New System.Windows.Forms.TextBox
-        Me.txtMonto = New System.Windows.Forms.TextBox
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.btnOK = New System.Windows.Forms.Button
+        Me.lblInfo = New System.Windows.Forms.Label()
+        Me.grpEquivalencia = New System.Windows.Forms.GroupBox()
+        Me.txtMonto = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnOK = New System.Windows.Forms.Button()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpEquivalencia.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
         Me.SuspendLayout()
@@ -47,7 +46,6 @@ Partial Class jsControlArcUTMovimientos
         'grpEquivalencia
         '
         Me.grpEquivalencia.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.grpEquivalencia.Controls.Add(Me.btnFecha)
         Me.grpEquivalencia.Controls.Add(Me.txtFecha)
         Me.grpEquivalencia.Controls.Add(Me.txtMonto)
         Me.grpEquivalencia.Controls.Add(Me.Label3)
@@ -58,25 +56,6 @@ Partial Class jsControlArcUTMovimientos
         Me.grpEquivalencia.TabIndex = 80
         Me.grpEquivalencia.TabStop = False
         Me.grpEquivalencia.Text = "Impuesto al Valor Agregado "
-        '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(241, 16)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(27, 20)
-        Me.btnFecha.TabIndex = 137
-        Me.btnFecha.Text = "···"
-        Me.btnFecha.UseVisualStyleBackColor = True
-        '
-        'txtFecha
-        '
-        Me.txtFecha.BackColor = System.Drawing.Color.White
-        Me.txtFecha.Location = New System.Drawing.Point(156, 16)
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(79, 20)
-        Me.txtFecha.TabIndex = 16
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtMonto
         '
@@ -145,6 +124,18 @@ Partial Class jsControlArcUTMovimientos
         Me.btnOK.Text = "Aceptar"
         Me.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         '
+        'txtFecha
+        '
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(156, 17)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(112, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 214
+        '
         'jsControlArcUTMovimientos
         '
         Me.AcceptButton = Me.btnOK
@@ -176,6 +167,5 @@ Partial Class jsControlArcUTMovimientos
     Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

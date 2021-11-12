@@ -21,15 +21,12 @@ Partial Class jsComProRetencionesISLR
     Private Sub InitializeComponent()
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.txtRutaArchivo = New System.Windows.Forms.TextBox()
-        Me.btnFechaDesde = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
-        Me.txtFechaDesde = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.btnRutaArchivo = New System.Windows.Forms.Button()
-        Me.btnFechaHasta = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.C1PictureBox1 = New C1.Win.C1Input.C1PictureBox()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -37,7 +34,8 @@ Partial Class jsComProRetencionesISLR
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.lblProgreso = New System.Windows.Forms.Label()
-        Me.txtFechaHasta = New System.Windows.Forms.TextBox()
+        Me.txtFechaDesde = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaHasta = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpAceptarSalir.SuspendLayout()
         CType(Me.C1PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpTotales.SuspendLayout()
@@ -60,16 +58,6 @@ Partial Class jsComProRetencionesISLR
         Me.txtRutaArchivo.Name = "txtRutaArchivo"
         Me.txtRutaArchivo.Size = New System.Drawing.Size(581, 20)
         Me.txtRutaArchivo.TabIndex = 83
-        '
-        'btnFechaDesde
-        '
-        Me.btnFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaDesde.Location = New System.Drawing.Point(245, 139)
-        Me.btnFechaDesde.Name = "btnFechaDesde"
-        Me.btnFechaDesde.Size = New System.Drawing.Size(29, 20)
-        Me.btnFechaDesde.TabIndex = 105
-        Me.btnFechaDesde.Text = "•••"
-        Me.btnFechaDesde.UseVisualStyleBackColor = True
         '
         'Label3
         '
@@ -119,16 +107,6 @@ Partial Class jsComProRetencionesISLR
         Me.btnOK.Text = "Aceptar"
         Me.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         '
-        'txtFechaDesde
-        '
-        Me.txtFechaDesde.Enabled = False
-        Me.txtFechaDesde.Location = New System.Drawing.Point(129, 139)
-        Me.txtFechaDesde.MaxLength = 15
-        Me.txtFechaDesde.Name = "txtFechaDesde"
-        Me.txtFechaDesde.Size = New System.Drawing.Size(110, 20)
-        Me.txtFechaDesde.TabIndex = 124
-        Me.txtFechaDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label9
         '
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -148,20 +126,10 @@ Partial Class jsComProRetencionesISLR
         Me.btnRutaArchivo.Text = "•••"
         Me.btnRutaArchivo.UseVisualStyleBackColor = True
         '
-        'btnFechaHasta
-        '
-        Me.btnFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaHasta.Location = New System.Drawing.Point(405, 139)
-        Me.btnFechaHasta.Name = "btnFechaHasta"
-        Me.btnFechaHasta.Size = New System.Drawing.Size(29, 20)
-        Me.btnFechaHasta.TabIndex = 132
-        Me.btnFechaHasta.Text = "•••"
-        Me.btnFechaHasta.UseVisualStyleBackColor = True
-        '
         'Label12
         '
         Me.Label12.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label12.BackColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(216, Byte), Integer), CType(CType(22, Byte), Integer))
         Me.Label12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label12.Font = New System.Drawing.Font("Consolas", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -236,15 +204,29 @@ Partial Class jsComProRetencionesISLR
         Me.lblProgreso.TabIndex = 14
         Me.lblProgreso.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'txtFechaDesde
+        '
+        Me.txtFechaDesde.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaDesde.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaDesde.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaDesde.Location = New System.Drawing.Point(129, 140)
+        Me.txtFechaDesde.Name = "txtFechaDesde"
+        Me.txtFechaDesde.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaDesde.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaDesde.TabIndex = 214
+        '
         'txtFechaHasta
         '
-        Me.txtFechaHasta.Enabled = False
-        Me.txtFechaHasta.Location = New System.Drawing.Point(289, 139)
-        Me.txtFechaHasta.MaxLength = 15
+        Me.txtFechaHasta.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaHasta.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaHasta.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaHasta.Location = New System.Drawing.Point(294, 140)
         Me.txtFechaHasta.Name = "txtFechaHasta"
-        Me.txtFechaHasta.Size = New System.Drawing.Size(110, 20)
-        Me.txtFechaHasta.TabIndex = 152
-        Me.txtFechaHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtFechaHasta.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaHasta.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaHasta.TabIndex = 215
         '
         'jsComProRetencionesISLR
         '
@@ -255,16 +237,14 @@ Partial Class jsComProRetencionesISLR
         Me.ClientSize = New System.Drawing.Size(748, 312)
         Me.ControlBox = False
         Me.Controls.Add(Me.txtFechaHasta)
+        Me.Controls.Add(Me.txtFechaDesde)
         Me.Controls.Add(Me.grpTotales)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label12)
-        Me.Controls.Add(Me.btnFechaHasta)
         Me.Controls.Add(Me.btnRutaArchivo)
         Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.txtFechaDesde)
         Me.Controls.Add(Me.grpAceptarSalir)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.btnFechaDesde)
         Me.Controls.Add(Me.txtRutaArchivo)
         Me.Controls.Add(Me.lblInfo)
         Me.Controls.Add(Me.C1PictureBox1)
@@ -282,15 +262,12 @@ Partial Class jsComProRetencionesISLR
     End Sub
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents txtRutaArchivo As System.Windows.Forms.TextBox
-    Friend WithEvents btnFechaDesde As System.Windows.Forms.Button
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
-    Friend WithEvents txtFechaDesde As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents btnRutaArchivo As System.Windows.Forms.Button
-    Friend WithEvents btnFechaHasta As System.Windows.Forms.Button
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents C1PictureBox1 As C1.Win.C1Input.C1PictureBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
@@ -298,5 +275,6 @@ Partial Class jsComProRetencionesISLR
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents lblProgreso As System.Windows.Forms.Label
-    Friend WithEvents txtFechaHasta As System.Windows.Forms.TextBox
+    Friend WithEvents txtFechaDesde As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaHasta As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

@@ -39,9 +39,7 @@ Partial Class jsProArcFormulaciones
         Me.txtMercancia = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.cmbEstatus = New System.Windows.Forms.ComboBox()
-        Me.btnEmision = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtEmision = New System.Windows.Forms.TextBox()
         Me.txtDescripProduccion = New System.Windows.Forms.TextBox()
         Me.txtCodigo = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -107,6 +105,7 @@ Partial Class jsProArcFormulaciones
         Me.TabPageFormula = New C1.Win.C1Command.C1DockingTabPage()
         Me.TabPageResidual = New C1.Win.C1Command.C1DockingTabPage()
         Me.dgResidual = New System.Windows.Forms.DataGridView()
+        Me.txtEmision = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpEncab.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -152,6 +151,7 @@ Partial Class jsProArcFormulaciones
         Me.grpEncab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpEncab.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.btnAdjuntos)
         Me.grpEncab.Controls.Add(Me.btnDescripcion)
         Me.grpEncab.Controls.Add(Me.lblUND)
@@ -167,9 +167,7 @@ Partial Class jsProArcFormulaciones
         Me.grpEncab.Controls.Add(Me.txtMercancia)
         Me.grpEncab.Controls.Add(Me.Label6)
         Me.grpEncab.Controls.Add(Me.cmbEstatus)
-        Me.grpEncab.Controls.Add(Me.btnEmision)
         Me.grpEncab.Controls.Add(Me.Label5)
-        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.txtDescripProduccion)
         Me.grpEncab.Controls.Add(Me.txtCodigo)
         Me.grpEncab.Controls.Add(Me.Label2)
@@ -332,16 +330,6 @@ Partial Class jsProArcFormulaciones
         Me.cmbEstatus.Size = New System.Drawing.Size(97, 21)
         Me.cmbEstatus.TabIndex = 198
         '
-        'btnEmision
-        '
-        Me.btnEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmision.Location = New System.Drawing.Point(477, 12)
-        Me.btnEmision.Name = "btnEmision"
-        Me.btnEmision.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmision.TabIndex = 112
-        Me.btnEmision.Text = "•••"
-        Me.btnEmision.UseVisualStyleBackColor = True
-        '
         'Label5
         '
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -351,17 +339,6 @@ Partial Class jsProArcFormulaciones
         Me.Label5.TabIndex = 11
         Me.Label5.Text = "Estatus"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtEmision
-        '
-        Me.txtEmision.Enabled = False
-        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmision.Location = New System.Drawing.Point(384, 12)
-        Me.txtEmision.MaxLength = 10
-        Me.txtEmision.Name = "txtEmision"
-        Me.txtEmision.Size = New System.Drawing.Size(87, 20)
-        Me.txtEmision.TabIndex = 5
-        Me.txtEmision.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtDescripProduccion
         '
@@ -943,6 +920,18 @@ Partial Class jsProArcFormulaciones
         Me.dgResidual.Size = New System.Drawing.Size(1133, 154)
         Me.dgResidual.TabIndex = 83
         '
+        'txtEmision
+        '
+        Me.txtEmision.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmision.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmision.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmision.Location = New System.Drawing.Point(384, 13)
+        Me.txtEmision.Name = "txtEmision"
+        Me.txtEmision.Size = New System.Drawing.Size(114, 19)
+        Me.txtEmision.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmision.TabIndex = 231
+        '
         'jsProArcFormulaciones
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -986,7 +975,6 @@ Partial Class jsProArcFormulaciones
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents dg As System.Windows.Forms.DataGridView
     Friend WithEvents grpEncab As System.Windows.Forms.GroupBox
-    Friend WithEvents txtEmision As System.Windows.Forms.TextBox
     Friend WithEvents txtDescripProduccion As System.Windows.Forms.TextBox
     Friend WithEvents txtCodigo As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -1029,7 +1017,6 @@ Partial Class jsProArcFormulaciones
     Friend WithEvents ToolStripSeparator11 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents btnEmision As System.Windows.Forms.Button
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents cmbEstatus As System.Windows.Forms.ComboBox
     Friend WithEvents Label11 As System.Windows.Forms.Label
@@ -1070,4 +1057,5 @@ Partial Class jsProArcFormulaciones
     Friend WithEvents TabPageResidual As C1.Win.C1Command.C1DockingTabPage
     Friend WithEvents dgResidual As System.Windows.Forms.DataGridView
     Friend WithEvents btnExplosion As System.Windows.Forms.ToolStripButton
+    Friend WithEvents txtEmision As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

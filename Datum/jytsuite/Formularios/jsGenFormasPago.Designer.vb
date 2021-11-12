@@ -31,6 +31,8 @@ Partial Class jsGenFormasPago
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtRegistrado = New System.Windows.Forms.TextBox()
         Me.lblIVA = New System.Windows.Forms.Label()
         Me.txtIVA = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -66,9 +68,8 @@ Partial Class jsGenFormasPago
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.grpVencimiento = New System.Windows.Forms.GroupBox()
-        Me.btnVence = New System.Windows.Forms.Button()
+        Me.txtVence = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtVence = New System.Windows.Forms.TextBox()
         Me.cmbCredito = New System.Windows.Forms.ComboBox()
         Me.grpCondicion = New System.Windows.Forms.GroupBox()
         Me.lblCaja = New System.Windows.Forms.Label()
@@ -112,7 +113,7 @@ Partial Class jsGenFormasPago
         Me.lblInfo.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.lblInfo.Location = New System.Drawing.Point(0, 642)
         Me.lblInfo.Name = "lblInfo"
-        Me.lblInfo.Size = New System.Drawing.Size(561, 26)
+        Me.lblInfo.Size = New System.Drawing.Size(697, 26)
         Me.lblInfo.TabIndex = 80
         '
         'grpAceptarSalir
@@ -123,7 +124,7 @@ Partial Class jsGenFormasPago
         Me.grpAceptarSalir.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.grpAceptarSalir.Controls.Add(Me.btnCancel, 1, 0)
         Me.grpAceptarSalir.Controls.Add(Me.btnOK, 0, 0)
-        Me.grpAceptarSalir.Location = New System.Drawing.Point(396, 642)
+        Me.grpAceptarSalir.Location = New System.Drawing.Point(532, 642)
         Me.grpAceptarSalir.Name = "grpAceptarSalir"
         Me.grpAceptarSalir.RowCount = 1
         Me.grpAceptarSalir.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -157,6 +158,8 @@ Partial Class jsGenFormasPago
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label10)
+        Me.GroupBox1.Controls.Add(Me.txtRegistrado)
         Me.GroupBox1.Controls.Add(Me.lblIVA)
         Me.GroupBox1.Controls.Add(Me.txtIVA)
         Me.GroupBox1.Controls.Add(Me.Label7)
@@ -173,42 +176,65 @@ Partial Class jsGenFormasPago
         Me.GroupBox1.Controls.Add(Me.txtAPagar)
         Me.GroupBox1.Location = New System.Drawing.Point(7, 172)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(544, 359)
+        Me.GroupBox1.Size = New System.Drawing.Size(684, 359)
         Me.GroupBox1.TabIndex = 98
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = " Cierre factura"
         '
+        'Label10
+        '
+        Me.Label10.Font = New System.Drawing.Font("Century Gothic", 17.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Label10.Location = New System.Drawing.Point(162, 124)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(250, 34)
+        Me.Label10.TabIndex = 117
+        Me.Label10.Text = "pagos registrados"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtRegistrado
+        '
+        Me.txtRegistrado.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.txtRegistrado.Font = New System.Drawing.Font("Century Gothic", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRegistrado.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.txtRegistrado.Location = New System.Drawing.Point(418, 124)
+        Me.txtRegistrado.Name = "txtRegistrado"
+        Me.txtRegistrado.Size = New System.Drawing.Size(260, 36)
+        Me.txtRegistrado.TabIndex = 116
+        Me.txtRegistrado.Text = "0.00"
+        Me.txtRegistrado.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'lblIVA
         '
-        Me.lblIVA.Font = New System.Drawing.Font("Century Gothic", 19.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblIVA.Font = New System.Drawing.Font("Century Gothic", 17.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblIVA.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lblIVA.Location = New System.Drawing.Point(12, 77)
+        Me.lblIVA.Location = New System.Drawing.Point(-1, 23)
         Me.lblIVA.Name = "lblIVA"
-        Me.lblIVA.Size = New System.Drawing.Size(260, 41)
+        Me.lblIVA.Size = New System.Drawing.Size(413, 31)
         Me.lblIVA.TabIndex = 115
-        Me.lblIVA.Text = "IVA"
+        Me.lblIVA.Text = "Impuesto del Valor Agregado (IVA)"
         Me.lblIVA.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtIVA
         '
         Me.txtIVA.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.txtIVA.Enabled = False
-        Me.txtIVA.Font = New System.Drawing.Font("Century Gothic", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtIVA.Font = New System.Drawing.Font("Century Gothic", 17.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtIVA.ForeColor = System.Drawing.Color.Gray
-        Me.txtIVA.Location = New System.Drawing.Point(278, 77)
+        Me.txtIVA.Location = New System.Drawing.Point(418, 19)
         Me.txtIVA.Name = "txtIVA"
-        Me.txtIVA.Size = New System.Drawing.Size(260, 41)
+        Me.txtIVA.Size = New System.Drawing.Size(260, 35)
         Me.txtIVA.TabIndex = 114
         Me.txtIVA.Text = "0.00"
         Me.txtIVA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label7
         '
-        Me.Label7.Font = New System.Drawing.Font("Century Gothic", 19.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Font = New System.Drawing.Font("Century Gothic", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.Label7.Location = New System.Drawing.Point(12, 312)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(260, 41)
+        Me.Label7.Size = New System.Drawing.Size(260, 36)
         Me.Label7.TabIndex = 113
         Me.Label7.Text = "Cambio"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -217,77 +243,77 @@ Partial Class jsGenFormasPago
         '
         Me.txtCambio.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.txtCambio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCambio.Font = New System.Drawing.Font("Century Gothic", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCambio.Font = New System.Drawing.Font("Century Gothic", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCambio.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.txtCambio.Location = New System.Drawing.Point(278, 312)
         Me.txtCambio.Name = "txtCambio"
-        Me.txtCambio.Size = New System.Drawing.Size(260, 41)
+        Me.txtCambio.Size = New System.Drawing.Size(260, 36)
         Me.txtCambio.TabIndex = 112
         Me.txtCambio.Text = "0.00"
         Me.txtCambio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label5
         '
-        Me.Label5.Font = New System.Drawing.Font("Century Gothic", 19.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Font = New System.Drawing.Font("Century Gothic", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.Label5.Location = New System.Drawing.Point(12, 265)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(260, 41)
+        Me.Label5.Size = New System.Drawing.Size(260, 36)
         Me.Label5.TabIndex = 111
         Me.Label5.Text = "Su pago"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label4
         '
-        Me.Label4.Font = New System.Drawing.Font("Century Gothic", 19.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Font = New System.Drawing.Font("Century Gothic", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.Label4.Location = New System.Drawing.Point(12, 218)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(260, 41)
+        Me.Label4.Size = New System.Drawing.Size(260, 36)
         Me.Label4.TabIndex = 110
         Me.Label4.Text = "Total Efectivo"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label3
         '
-        Me.Label3.Font = New System.Drawing.Font("Century Gothic", 19.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Font = New System.Drawing.Font("Century Gothic", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(11, 171)
+        Me.Label3.Location = New System.Drawing.Point(162, 161)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(260, 41)
+        Me.Label3.Size = New System.Drawing.Size(250, 36)
         Me.Label3.TabIndex = 109
         Me.Label3.Text = "Diferencia"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label2
         '
-        Me.Label2.Font = New System.Drawing.Font("Century Gothic", 19.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Font = New System.Drawing.Font("Century Gothic", 17.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Label2.Location = New System.Drawing.Point(12, 124)
+        Me.Label2.Location = New System.Drawing.Point(162, 90)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(260, 40)
+        Me.Label2.Size = New System.Drawing.Size(250, 34)
         Me.Label2.TabIndex = 108
         Me.Label2.Text = "Total a pagar"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label1
         '
-        Me.Label1.Font = New System.Drawing.Font("Century Gothic", 19.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Century Gothic", 17.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(12, 24)
+        Me.Label1.Location = New System.Drawing.Point(234, 54)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(260, 41)
+        Me.Label1.Size = New System.Drawing.Size(178, 35)
         Me.Label1.TabIndex = 107
-        Me.Label1.Text = "Subtotal pagos"
+        Me.Label1.Text = "Total Factura"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtSuPago
         '
-        Me.txtSuPago.Font = New System.Drawing.Font("Century Gothic", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSuPago.Font = New System.Drawing.Font("Century Gothic", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSuPago.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.txtSuPago.Location = New System.Drawing.Point(278, 265)
         Me.txtSuPago.Name = "txtSuPago"
-        Me.txtSuPago.Size = New System.Drawing.Size(260, 41)
+        Me.txtSuPago.Size = New System.Drawing.Size(260, 36)
         Me.txtSuPago.TabIndex = 106
         Me.txtSuPago.Text = "0.00"
         Me.txtSuPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -295,11 +321,11 @@ Partial Class jsGenFormasPago
         'txtEfectivo
         '
         Me.txtEfectivo.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.txtEfectivo.Font = New System.Drawing.Font("Century Gothic", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEfectivo.Font = New System.Drawing.Font("Century Gothic", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtEfectivo.ForeColor = System.Drawing.Color.Gray
-        Me.txtEfectivo.Location = New System.Drawing.Point(278, 218)
+        Me.txtEfectivo.Location = New System.Drawing.Point(278, 223)
         Me.txtEfectivo.Name = "txtEfectivo"
-        Me.txtEfectivo.Size = New System.Drawing.Size(260, 41)
+        Me.txtEfectivo.Size = New System.Drawing.Size(260, 36)
         Me.txtEfectivo.TabIndex = 105
         Me.txtEfectivo.Text = "0.00"
         Me.txtEfectivo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -307,11 +333,11 @@ Partial Class jsGenFormasPago
         'txtDiferencia
         '
         Me.txtDiferencia.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.txtDiferencia.Font = New System.Drawing.Font("Century Gothic", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDiferencia.Font = New System.Drawing.Font("Century Gothic", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDiferencia.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.txtDiferencia.Location = New System.Drawing.Point(277, 171)
+        Me.txtDiferencia.Location = New System.Drawing.Point(418, 161)
         Me.txtDiferencia.Name = "txtDiferencia"
-        Me.txtDiferencia.Size = New System.Drawing.Size(260, 41)
+        Me.txtDiferencia.Size = New System.Drawing.Size(260, 36)
         Me.txtDiferencia.TabIndex = 104
         Me.txtDiferencia.Text = "0.00"
         Me.txtDiferencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -320,11 +346,11 @@ Partial Class jsGenFormasPago
         '
         Me.txtSubtotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.txtSubtotal.Enabled = False
-        Me.txtSubtotal.Font = New System.Drawing.Font("Century Gothic", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSubtotal.Font = New System.Drawing.Font("Century Gothic", 17.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSubtotal.ForeColor = System.Drawing.Color.Gray
-        Me.txtSubtotal.Location = New System.Drawing.Point(278, 24)
+        Me.txtSubtotal.Location = New System.Drawing.Point(418, 55)
         Me.txtSubtotal.Name = "txtSubtotal"
-        Me.txtSubtotal.Size = New System.Drawing.Size(260, 41)
+        Me.txtSubtotal.Size = New System.Drawing.Size(260, 35)
         Me.txtSubtotal.TabIndex = 103
         Me.txtSubtotal.Text = "0.00"
         Me.txtSubtotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -332,11 +358,11 @@ Partial Class jsGenFormasPago
         'txtAPagar
         '
         Me.txtAPagar.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.txtAPagar.Font = New System.Drawing.Font("Century Gothic", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAPagar.Font = New System.Drawing.Font("Century Gothic", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAPagar.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.txtAPagar.Location = New System.Drawing.Point(278, 124)
+        Me.txtAPagar.Location = New System.Drawing.Point(418, 90)
         Me.txtAPagar.Name = "txtAPagar"
-        Me.txtAPagar.Size = New System.Drawing.Size(260, 41)
+        Me.txtAPagar.Size = New System.Drawing.Size(260, 36)
         Me.txtAPagar.TabIndex = 102
         Me.txtAPagar.Text = "0.00"
         Me.txtAPagar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -351,7 +377,7 @@ Partial Class jsGenFormasPago
         Me.MenuBarra.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAgregar, Me.btnEliminar, Me.Separator1, Me.btnPrimero, Me.btnAnterior, Me.Separator2, Me.itemsrenglon, Me.lblitemsrenglon, Me.Separator3, Me.btnSiguiente, Me.btnUltimo, Me.Separator4, Me.btnEfectivo})
         Me.MenuBarra.Location = New System.Drawing.Point(0, 15)
         Me.MenuBarra.Name = "MenuBarra"
-        Me.MenuBarra.Size = New System.Drawing.Size(741, 63)
+        Me.MenuBarra.Size = New System.Drawing.Size(874, 63)
         Me.MenuBarra.TabIndex = 99
         Me.MenuBarra.Text = "ToolStrip1"
         '
@@ -463,7 +489,7 @@ Partial Class jsGenFormasPago
         Me.dg.Location = New System.Drawing.Point(0, 79)
         Me.dg.Name = "dg"
         Me.dg.ReadOnly = True
-        Me.dg.Size = New System.Drawing.Size(560, 94)
+        Me.dg.Size = New System.Drawing.Size(693, 94)
         Me.dg.TabIndex = 100
         '
         'grpContado
@@ -471,9 +497,9 @@ Partial Class jsGenFormasPago
         Me.grpContado.Controls.Add(Me.dg)
         Me.grpContado.Controls.Add(Me.MenuBarra)
         Me.grpContado.Controls.Add(Me.GroupBox1)
-        Me.grpContado.Location = New System.Drawing.Point(6, 107)
+        Me.grpContado.Location = New System.Drawing.Point(0, 108)
         Me.grpContado.Name = "grpContado"
-        Me.grpContado.Size = New System.Drawing.Size(560, 537)
+        Me.grpContado.Size = New System.Drawing.Size(693, 537)
         Me.grpContado.TabIndex = 109
         Me.grpContado.TabStop = False
         Me.grpContado.Text = " Contado"
@@ -483,9 +509,9 @@ Partial Class jsGenFormasPago
         Me.grpCredito.Controls.Add(Me.grpGiros)
         Me.grpCredito.Controls.Add(Me.grpVencimiento)
         Me.grpCredito.Controls.Add(Me.cmbCredito)
-        Me.grpCredito.Location = New System.Drawing.Point(12, 119)
+        Me.grpCredito.Location = New System.Drawing.Point(1, 108)
         Me.grpCredito.Name = "grpCredito"
-        Me.grpCredito.Size = New System.Drawing.Size(560, 537)
+        Me.grpCredito.Size = New System.Drawing.Size(696, 537)
         Me.grpCredito.TabIndex = 110
         Me.grpCredito.TabStop = False
         Me.grpCredito.Text = "Crédito"
@@ -494,9 +520,9 @@ Partial Class jsGenFormasPago
         '
         Me.grpGiros.Controls.Add(Me.Label9)
         Me.grpGiros.Controls.Add(Me.TextBox1)
-        Me.grpGiros.Location = New System.Drawing.Point(41, 54)
+        Me.grpGiros.Location = New System.Drawing.Point(43, 148)
         Me.grpGiros.Name = "grpGiros"
-        Me.grpGiros.Size = New System.Drawing.Size(546, 477)
+        Me.grpGiros.Size = New System.Drawing.Size(691, 477)
         Me.grpGiros.TabIndex = 113
         Me.grpGiros.TabStop = False
         Me.grpGiros.Text = " Giros "
@@ -527,25 +553,26 @@ Partial Class jsGenFormasPago
         '
         'grpVencimiento
         '
-        Me.grpVencimiento.Controls.Add(Me.btnVence)
-        Me.grpVencimiento.Controls.Add(Me.Label8)
         Me.grpVencimiento.Controls.Add(Me.txtVence)
-        Me.grpVencimiento.Location = New System.Drawing.Point(95, 68)
+        Me.grpVencimiento.Controls.Add(Me.Label8)
+        Me.grpVencimiento.Location = New System.Drawing.Point(0, 51)
         Me.grpVencimiento.Name = "grpVencimiento"
-        Me.grpVencimiento.Size = New System.Drawing.Size(546, 477)
+        Me.grpVencimiento.Size = New System.Drawing.Size(696, 477)
         Me.grpVencimiento.TabIndex = 112
         Me.grpVencimiento.TabStop = False
         Me.grpVencimiento.Text = "Vencimiento"
         '
-        'btnVence
+        'txtVence
         '
-        Me.btnVence.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVence.Location = New System.Drawing.Point(475, 14)
-        Me.btnVence.Name = "btnVence"
-        Me.btnVence.Size = New System.Drawing.Size(34, 34)
-        Me.btnVence.TabIndex = 120
-        Me.btnVence.Text = "•••"
-        Me.btnVence.UseVisualStyleBackColor = True
+        Me.txtVence.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtVence.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtVence.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtVence.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtVence.Location = New System.Drawing.Point(289, 15)
+        Me.txtVence.Name = "txtVence"
+        Me.txtVence.Size = New System.Drawing.Size(182, 38)
+        Me.txtVence.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtVence.TabIndex = 214
         '
         'Label8
         '
@@ -558,18 +585,6 @@ Partial Class jsGenFormasPago
         Me.Label8.TabIndex = 109
         Me.Label8.Text = "Con vencimiento al : "
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtVence
-        '
-        Me.txtVence.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.txtVence.Enabled = False
-        Me.txtVence.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtVence.ForeColor = System.Drawing.Color.Gray
-        Me.txtVence.Location = New System.Drawing.Point(272, 16)
-        Me.txtVence.Name = "txtVence"
-        Me.txtVence.Size = New System.Drawing.Size(197, 32)
-        Me.txtVence.TabIndex = 108
-        Me.txtVence.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'cmbCredito
         '
@@ -591,7 +606,7 @@ Partial Class jsGenFormasPago
         Me.grpCondicion.Controls.Add(Me.Label6)
         Me.grpCondicion.Location = New System.Drawing.Point(0, 2)
         Me.grpCondicion.Name = "grpCondicion"
-        Me.grpCondicion.Size = New System.Drawing.Size(561, 100)
+        Me.grpCondicion.Size = New System.Drawing.Size(693, 100)
         Me.grpCondicion.TabIndex = 111
         Me.grpCondicion.TabStop = False
         Me.grpCondicion.Text = " Condición "
@@ -600,7 +615,7 @@ Partial Class jsGenFormasPago
         '
         Me.lblCaja.AutoSize = True
         Me.lblCaja.Font = New System.Drawing.Font("Century Gothic", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCaja.Location = New System.Drawing.Point(227, 66)
+        Me.lblCaja.Location = New System.Drawing.Point(363, 66)
         Me.lblCaja.Name = "lblCaja"
         Me.lblCaja.Size = New System.Drawing.Size(47, 19)
         Me.lblCaja.TabIndex = 112
@@ -612,7 +627,7 @@ Partial Class jsGenFormasPago
         Me.cmbCaja.Font = New System.Drawing.Font("Century Gothic", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbCaja.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.cmbCaja.FormattingEnabled = True
-        Me.cmbCaja.Location = New System.Drawing.Point(280, 62)
+        Me.cmbCaja.Location = New System.Drawing.Point(416, 63)
         Me.cmbCaja.Name = "cmbCaja"
         Me.cmbCaja.Size = New System.Drawing.Size(269, 27)
         Me.cmbCaja.TabIndex = 111
@@ -635,7 +650,7 @@ Partial Class jsGenFormasPago
         Me.Label15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.Label15.Location = New System.Drawing.Point(5, 13)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(545, 46)
+        Me.Label15.Size = New System.Drawing.Size(680, 46)
         Me.Label15.TabIndex = 109
         Me.Label15.Text = "CONDICION DE PAGO"
         Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -657,7 +672,7 @@ Partial Class jsGenFormasPago
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(561, 668)
+        Me.ClientSize = New System.Drawing.Size(697, 668)
         Me.ControlBox = False
         Me.Controls.Add(Me.grpContado)
         Me.Controls.Add(Me.grpCredito)
@@ -678,7 +693,6 @@ Partial Class jsGenFormasPago
         Me.grpGiros.ResumeLayout(False)
         Me.grpGiros.PerformLayout()
         Me.grpVencimiento.ResumeLayout(False)
-        Me.grpVencimiento.PerformLayout()
         Me.grpCondicion.ResumeLayout(False)
         Me.grpCondicion.PerformLayout()
         Me.ResumeLayout(False)
@@ -726,8 +740,6 @@ Partial Class jsGenFormasPago
     Friend WithEvents cmbCredito As System.Windows.Forms.ComboBox
     Friend WithEvents grpVencimiento As System.Windows.Forms.GroupBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents txtVence As System.Windows.Forms.TextBox
-    Friend WithEvents btnVence As System.Windows.Forms.Button
     Friend WithEvents grpGiros As System.Windows.Forms.GroupBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
@@ -736,4 +748,7 @@ Partial Class jsGenFormasPago
     Friend WithEvents lblIVA As System.Windows.Forms.Label
     Friend WithEvents txtIVA As System.Windows.Forms.TextBox
     Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents txtVence As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents Label10 As Label
+    Friend WithEvents txtRegistrado As TextBox
 End Class

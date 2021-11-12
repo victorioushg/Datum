@@ -1,6 +1,8 @@
 Imports MySql.Data.MySqlClient
 Imports System.IO
 Imports ReportesDeMercancias
+Imports Syncfusion.WinForms.Input
+
 Public Class jsMerRepParametros
 
     Private Const sModulo As String = "Reportes de Mercancías"
@@ -21,16 +23,16 @@ Public Class jsMerRepParametros
     Private IndiceReporte As Integer
     Private strIndiceReporte As String
 
-    Private vMERAgrupadoPor() As String = {"Ninguno", "Categorías", "Marcas", "Jerarquía", "División", "Mix", _
-        "Categorías & Marcas", "División & Categorías &  Marcas", _
-        "Categorías & Jerarquías", _
-        "División & Jerarquía", "Mix & Categorías & Marcas", "Mix & Jerarquías", _
+    Private vMERAgrupadoPor() As String = {"Ninguno", "Categorías", "Marcas", "Jerarquía", "División", "Mix",
+        "Categorías & Marcas", "División & Categorías &  Marcas",
+        "Categorías & Jerarquías",
+        "División & Jerarquía", "Mix & Categorías & Marcas", "Mix & Jerarquías",
         "Mix & División", "Mix & División & Categorías & Marcas", "Mix & División & Jerarquías"}
 
-    Private aMERAgrupadoPor() As String = {"", "categoria", "marca", "tipjer", "division", "mix", _
-                                        "categoria, marca", "division, categoria, marca", _
-                                        "categoria, tipjer", "division, tipjer", _
-                                        "mix, categoria, marca", "mix, tipjer", "mix, division", _
+    Private aMERAgrupadoPor() As String = {"", "categoria", "marca", "tipjer", "division", "mix",
+                                        "categoria, marca", "division, categoria, marca",
+                                        "categoria, tipjer", "division, tipjer",
+                                        "mix, categoria, marca", "mix, tipjer", "mix, division",
                                         "mix, division, categoria, marca", "mix, division, tipjer"}
     Private aSiNoTodos() As String = {"Si", "No", "Todos"}
     Private aExistencias() As String = {"Con", "Sin", "Todas"}
@@ -38,22 +40,22 @@ Public Class jsMerRepParametros
     Private aTipo() As String = {"Venta", "Uso interno", "POP", "Alquiler", "Préstamo", "Materia prima", "Otros", "Todos"}
     Private aTarifa() As String = {"A", "B", "C", "D", "E", "F"}
     Private aTerritorio() As String = {"Barrio/Urbanización/Sector", "Ciudad/Pueblo/Aldea", "Parroquia/Comunidad", "Municipio/Región", "Estado/Provincia/Departamento", "País"}
-    Private vVENAgrupadoPor() As String = {"Ninguno", "Canal de Distribución", "Tipo de Negocio", "Zona", "Ruta", _
-                                           "Asesor Comercial", "Canal & Tipo Negocio", "Zona & Ruta", _
-                                           "Asesor & Canal", "Asesor & Tipo de Negocio", "Asesor & Canal & Tipo de negocio", _
+    Private vVENAgrupadoPor() As String = {"Ninguno", "Canal de Distribución", "Tipo de Negocio", "Zona", "Ruta",
+                                           "Asesor Comercial", "Canal & Tipo Negocio", "Zona & Ruta",
+                                           "Asesor & Canal", "Asesor & Tipo de Negocio", "Asesor & Canal & Tipo de negocio",
                                            "Asesor & Zona", "Asesor & ruta", "Asesor & Zona & Ruta", "Territorio"}
-    Private aVENAgrupadoPor() As String = {"", "canal", "tiponegocio", "zona", "ruta", "asesor", "canal, tiponegocio", _
-                                           "zona, ruta", "asesor, canal", "asesor, tiponegocio", "asesor, canal, tiponegocio", _
+    Private aVENAgrupadoPor() As String = {"", "canal", "tiponegocio", "zona", "ruta", "asesor", "canal, tiponegocio",
+                                           "zona, ruta", "asesor, canal", "asesor, tiponegocio", "asesor, canal, tiponegocio",
                                            "asesor, zona", "asesor, ruta", "asesor, zona, ruta", "territorio"}
-    Private aAño() As Object = {2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, _
+    Private aAño() As Object = {2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020,
                                   2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030}
 
     Private aTipoEtiqueta() As String = {"Grande (58mm X 40mm) ", "Hablador (85mm X 37mm)", "Pequeña (30mm X 13mm)", "Hablador Nevera(85mm X 37mm)"}
     Private aTipoConteo() As String = {"CONTEO 1", "CONTEO 2", "DIFERENCIAS (1-2)"}
 
     Private periodoTipo As TipoPeriodo
-    Public Sub Cargar(ByVal TipoCarga As Integer, ByVal numReporte As Integer, ByVal nomReporte As String, _
-                      Optional ByVal CodMercancia As String = "", Optional ByVal numDocumento As String = "", _
+    Public Sub Cargar(ByVal TipoCarga As Integer, ByVal numReporte As Integer, ByVal nomReporte As String,
+                      Optional ByVal CodMercancia As String = "", Optional ByVal numDocumento As String = "",
                       Optional ByVal Fecha As Date = #1/1/2009#)
 
 
@@ -61,6 +63,9 @@ Public Class jsMerRepParametros
         Me.Dock = DockStyle.Fill
         myConn = New MySqlConnection(jytsistema.strConn)
         myConn.Open()
+
+        Dim dates As SfDateTimeEdit() = {txtPeriodoDesde, txtPeriodoHasta}
+        SetSizeDateObjects(dates)
 
         ReporteNumero = numReporte
         ReporteNombre = nomReporte
@@ -139,8 +144,8 @@ Public Class jsMerRepParametros
                 Dim vOrdenLongitud() As Integer = {15}
                 Inicializar(ReporteNombre, False, True, True, False, vOrdenNombres, vOrdenCampos, vOrdenTipo, vOrdenLongitud, CodigoMercancia)
 
-            Case ReporteMercancias.cCategorias, ReporteMercancias.cMarcas, ReporteMercancias.cTransferencia, _
-                    ReporteMercancias.cConteos, ReporteMercancias.cPreciosEspeciales, ReporteMercancias.cOfertas, _
+            Case ReporteMercancias.cCategorias, ReporteMercancias.cMarcas, ReporteMercancias.cTransferencia,
+                    ReporteMercancias.cConteos, ReporteMercancias.cPreciosEspeciales, ReporteMercancias.cOfertas,
                     ReporteMercancias.cJerarquias, ReporteMercancias.cPedidosAlmacen
                 Dim vOrdenNombres() As String = {"Código"}
                 Dim vOrdenCampos() As String = {"codigo"}
@@ -148,11 +153,11 @@ Public Class jsMerRepParametros
                 Dim vOrdenLongitud() As Integer = {15}
                 Inicializar(ReporteNombre, False, False, False, True, vOrdenNombres, vOrdenCampos, vOrdenTipo, vOrdenLongitud, CodigoMercancia)
 
-            Case ReporteMercancias.cMovimientosMercancias, _
-                ReporteMercancias.cVentasDeMercancias, ReporteMercancias.cVentasDeMercanciasActivacion, _
-                ReporteMercancias.cVentasDeMercanciasActivacionXMes, ReporteMercancias.cComprasdeMercanciasActivacion, _
-                ReporteMercancias.cComprasdeMercanciasActivacionXMes, ReporteMercancias.cPreciosYEquivalencias, _
-                ReporteMercancias.cPreciosYEquivalenciasSinIVA, _
+            Case ReporteMercancias.cMovimientosMercancias,
+                ReporteMercancias.cVentasDeMercancias, ReporteMercancias.cVentasDeMercanciasActivacion,
+                ReporteMercancias.cVentasDeMercanciasActivacionXMes, ReporteMercancias.cComprasdeMercanciasActivacion,
+                ReporteMercancias.cComprasdeMercanciasActivacionXMes, ReporteMercancias.cPreciosYEquivalencias,
+                ReporteMercancias.cPreciosYEquivalenciasSinIVA,
                 ReporteMercancias.cLeyDeCostos, ReporteMercancias.cVentasNetasMercancias
 
                 Dim vOrdenNombres() As String = {"Código Mercancía", "Nombre Mercancía"}
@@ -213,9 +218,9 @@ Public Class jsMerRepParametros
                 Inicializar(ReporteNombre, True, True, True, False, vOrdenNombres, vOrdenCampos, vOrdenTipo, vOrdenLongitud, CodigoMercancia)
         End Select
     End Sub
-    Private Sub Inicializar(ByVal nEtiqueta As String, ByVal TabOrden As Boolean, ByVal TabGrupo As Boolean, _
-        ByVal TabCriterio As Boolean, ByVal TabConstantes As Boolean, ByVal aNombreOrden() As String, _
-        ByVal aCampoOrden() As String, ByVal aTipoOrden() As String, ByVal aLongitudOrden() As Integer, _
+    Private Sub Inicializar(ByVal nEtiqueta As String, ByVal TabOrden As Boolean, ByVal TabGrupo As Boolean,
+        ByVal TabCriterio As Boolean, ByVal TabConstantes As Boolean, ByVal aNombreOrden() As String,
+        ByVal aCampoOrden() As String, ByVal aTipoOrden() As String, ByVal aLongitudOrden() As Integer,
         Optional ByVal Trabajador As String = "")
 
         HabilitarTabs(TabOrden, TabGrupo, TabCriterio, TabConstantes)
@@ -252,7 +257,7 @@ Public Class jsMerRepParametros
 
         ft.habilitarObjetos(False, False, TabPageVentas)
         Select Case ReporteNumero
-            Case ReporteMercancias.cVentasDeMercancias, ReporteMercancias.cVentasDeMercanciasActivacion, _
+            Case ReporteMercancias.cVentasDeMercancias, ReporteMercancias.cVentasDeMercanciasActivacion,
                 ReporteMercancias.cVentasDeMercanciasActivacionXMes
 
                 ft.habilitarObjetos(True, False, TabPageVentas)
@@ -306,7 +311,7 @@ Public Class jsMerRepParametros
                 VerCriterio_ProveedorCliente(True)
                 VerCriterio_Origen(True)
 
-            Case ReporteMercancias.cVentasDeMercancias, ReporteMercancias.cVentasDeMercanciasActivacion, _
+            Case ReporteMercancias.cVentasDeMercancias, ReporteMercancias.cVentasDeMercanciasActivacion,
                 ReporteMercancias.cVentasNetasMercancias
 
                 VerCriterio_Periodo(True, 0, TipoPeriodo.iMensual)
@@ -341,37 +346,36 @@ Public Class jsMerRepParametros
     Private Sub VerCriterio_Periodo(ByVal Ver As Boolean, ByVal CompletoDesdeHasta As Integer, Optional ByVal Periodo As TipoPeriodo = TipoPeriodo.iMensual)
         'CompletoDesdeHasta 0 = Complete , 1 = Desde , 2 = Hasta 
         periodoTipo = Periodo
-        ft.visualizarObjetos(False, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta, btnPeriodoDesde, btnPeriodoHasta)
-        ft.habilitarObjetos(False, True, txtPeriodoDesde, txtPeriodoHasta)
+        ft.visualizarObjetos(False, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta)
         If Ver Then
 
             Select Case CompletoDesdeHasta
                 Case 0
-                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta, btnPeriodoDesde, btnPeriodoHasta)
+                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta)
                 Case 1
-                    ft.visualizarObjetos(Ver, lblPeriodo, txtPeriodoDesde, btnPeriodoDesde)
+                    ft.visualizarObjetos(Ver, lblPeriodo, txtPeriodoDesde)
                 Case 2
-                    ft.visualizarObjetos(Ver, lblPeriodoHasta, txtPeriodoHasta, btnPeriodoHasta)
+                    ft.visualizarObjetos(Ver, lblPeriodoHasta, txtPeriodoHasta)
             End Select
         End If
 
 
         Select Case Periodo
             Case TipoPeriodo.iDiario
-                txtPeriodoDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtPeriodoHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoDesde.Value = jytsistema.sFechadeTrabajo
+                txtPeriodoHasta.Value = jytsistema.sFechadeTrabajo
             Case TipoPeriodo.iSemanal
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaSemana(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaSemana(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaSemana(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaSemana(jytsistema.sFechadeTrabajo)
             Case TipoPeriodo.iMensual
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaMes(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaMes(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaMes(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaMes(jytsistema.sFechadeTrabajo)
             Case TipoPeriodo.iAnual
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaAño(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaAño(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaAño(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaAño(jytsistema.sFechadeTrabajo)
             Case Else
-                txtPeriodoDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtPeriodoHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoDesde.Value = jytsistema.sFechadeTrabajo
+                txtPeriodoHasta.Value = jytsistema.sFechadeTrabajo
         End Select
 
     End Sub
@@ -458,7 +462,7 @@ Public Class jsMerRepParametros
                 VerConstante_Cartera(True)
             Case ReporteMercancias.cMovimientosServiciosS
                 VerConstante_Estatus(True)
-            Case ReporteMercancias.cVentasDeMercancias, ReporteMercancias.cVentasDeMercanciasActivacion, _
+            Case ReporteMercancias.cVentasDeMercancias, ReporteMercancias.cVentasDeMercanciasActivacion,
                 ReporteMercancias.cVentasNetasMercancias
 
                 VerConstante_TipoMercancia(True)
@@ -658,8 +662,8 @@ Public Class jsMerRepParametros
             Case ReporteMercancias.cMovimientosResumen
                 nTabla = "dtMercanciasMovimientosR"
                 oReporte = New rptMercanciaMovimientosResumen
-                str = SeleccionMERMovimientosMercanciasResumen(txtOrdenDesde.Text, txtOrdenHasta.Text, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtAlmacenDesde.Text, txtAlmacenHasta.Text, _
-                                                               txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, _
+                str = SeleccionMERMovimientosMercanciasResumen(txtOrdenDesde.Text, txtOrdenHasta.Text, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtAlmacenDesde.Text, txtAlmacenHasta.Text,
+                                                               txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text,
                                                                txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text)
             Case ReporteMercancias.cServicios
                 PresentaArbol = True
@@ -683,16 +687,16 @@ Public Class jsMerRepParametros
                         oReporte = New rptMercanciaPreciosEquivalentes4G
                 End Select
 
-                str = IIf(ReporteNumero = ReporteMercancias.cPreciosYEquivalencias, _
-                        SeleccionMERMercanciasPreciosYEquivalencias(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                                                  txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, _
-                                                                  txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, _
-                                                                  txtDivisionHasta.Text, txtAlmacenDesde.Text, txtAlmacenHasta.Text, cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex, cmbRegulada.SelectedIndex, cmbTarifa.SelectedIndex, _
-                                                                  True, cmbExistencias.SelectedIndex), _
-                        SeleccionMERMercanciasPreciosYEquivalenciasSinIVA(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                                                  txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, _
-                                                                  txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, _
-                                                                  txtDivisionHasta.Text, txtAlmacenDesde.Text, txtAlmacenHasta.Text, cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex, cmbRegulada.SelectedIndex, cmbTarifa.SelectedIndex, _
+                str = IIf(ReporteNumero = ReporteMercancias.cPreciosYEquivalencias,
+                        SeleccionMERMercanciasPreciosYEquivalencias(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                                                  txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text,
+                                                                  txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text,
+                                                                  txtDivisionHasta.Text, txtAlmacenDesde.Text, txtAlmacenHasta.Text, cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex, cmbRegulada.SelectedIndex, cmbTarifa.SelectedIndex,
+                                                                  True, cmbExistencias.SelectedIndex),
+                        SeleccionMERMercanciasPreciosYEquivalenciasSinIVA(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                                                  txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text,
+                                                                  txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text,
+                                                                  txtDivisionHasta.Text, txtAlmacenDesde.Text, txtAlmacenHasta.Text, cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex, cmbRegulada.SelectedIndex, cmbTarifa.SelectedIndex,
                                                                   True, cmbExistencias.SelectedIndex))
 
 
@@ -712,13 +716,13 @@ Public Class jsMerRepParametros
                         oReporte = New rptMercanciaPrecios4G
                 End Select
 
-                str = SeleccionMERMercancias(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                             txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, _
-                                             txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text, _
-                                             txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, _
-                                             txtDivisionHasta.Text, , , cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, _
-                                             chkPeso.Checked, cmbTipo.SelectedIndex, cmbRegulada.SelectedIndex, _
-                                             chkPrecioA.Checked, chkPrecioB.Checked, chkPrecioC.Checked, chkPrecioD.Checked, chkPrecioE.Checked, chkPrecioF.Checked, _
+                str = SeleccionMERMercancias(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                             txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text,
+                                             txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text,
+                                             txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text,
+                                             txtDivisionHasta.Text, , , cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex,
+                                             chkPeso.Checked, cmbTipo.SelectedIndex, cmbRegulada.SelectedIndex,
+                                             chkPrecioA.Checked, chkPrecioB.Checked, chkPrecioC.Checked, chkPrecioD.Checked, chkPrecioE.Checked, chkPrecioF.Checked,
                                              IIf(ReporteNumero = ReporteMercancias.cPreciosIVA, True, False), cmbExistencias.SelectedIndex)
             Case ReporteMercancias.cObsolescencia
                 nTabla = "dtMercancias"
@@ -735,11 +739,11 @@ Public Class jsMerRepParametros
                         oReporte = New rptMercanciaObsoleta4G
                 End Select
 
-                str = SeleccionMERObsolescencias(myConn, lblInfo, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                             txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, _
-                                             txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text, _
-                                             txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, _
-                                             txtDivisionHasta.Text, cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, _
+                str = SeleccionMERObsolescencias(myConn, lblInfo, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                             txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text,
+                                             txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text,
+                                             txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text,
+                                             txtDivisionHasta.Text, cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex,
                                              cmbTipo.SelectedIndex, cmbRegulada.SelectedIndex, txtAsesorDesde.Text, txtAsesorHasta.Text)
 
             Case ReporteMercancias.cMovimientosMercancias
@@ -757,34 +761,34 @@ Public Class jsMerRepParametros
                         oReporte = New rptMercanciaMovimiento4G
                 End Select
 
-                str = SeleccionMERMovimientosMercancias(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                                           CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtTipDoc.Text, txtAlmacenDesde.Text, _
-                                                           txtAlmacenHasta.Text, txtProvCliDesde.Text, txtProvCliHasta.Text, txtAsesorDesde.Text, txtAsesorHasta.Text, _
-                                                           txtLoteDesde.Text, txtLoteHasta.Text, txtDocumentoDesde.Text, txtDocumentoHasta.Text, _
-                                                           txtOrigenDesde.Text, txtOrigenHasta.Text, txtCategoriaDesde.Text, _
-                                                           txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtTipoJerarquia.Text, _
-                                                           txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, _
-                                                           txtDivisionDesde.Text, txtDivisionHasta.Text, cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, , _
+                str = SeleccionMERMovimientosMercancias(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                                           CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtTipDoc.Text, txtAlmacenDesde.Text,
+                                                           txtAlmacenHasta.Text, txtProvCliDesde.Text, txtProvCliHasta.Text, txtAsesorDesde.Text, txtAsesorHasta.Text,
+                                                           txtLoteDesde.Text, txtLoteHasta.Text, txtDocumentoDesde.Text, txtDocumentoHasta.Text,
+                                                           txtOrigenDesde.Text, txtOrigenHasta.Text, txtCategoriaDesde.Text,
+                                                           txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtTipoJerarquia.Text,
+                                                           txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text,
+                                                           txtDivisionDesde.Text, txtDivisionHasta.Text, cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, ,
                                                            cmbTipo.SelectedIndex, cmbRegulada.SelectedIndex)
 
             Case ReporteMercancias.cMovimientosMercancia
                 nTabla = "dtMercanciasMovimientos"
                 oReporte = New rptMercanciaMovimientoSG
 
-                str = SeleccionMERMovimientosMercancias(txtOrdenDesde.Text, txtOrdenHasta.Text, "codart", cmbOrdenDesde.SelectedIndex, _
-                                                           CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtTipDoc.Text, _
-                                                           txtAlmacenDesde.Text, txtAlmacenHasta.Text, txtProvCliDesde.Text, txtProvCliHasta.Text, _
-                                                           txtAsesorDesde.Text, txtAsesorHasta.Text, txtLoteDesde.Text, txtLoteHasta.Text, _
+                str = SeleccionMERMovimientosMercancias(txtOrdenDesde.Text, txtOrdenHasta.Text, "codart", cmbOrdenDesde.SelectedIndex,
+                                                           CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtTipDoc.Text,
+                                                           txtAlmacenDesde.Text, txtAlmacenHasta.Text, txtProvCliDesde.Text, txtProvCliHasta.Text,
+                                                           txtAsesorDesde.Text, txtAsesorHasta.Text, txtLoteDesde.Text, txtLoteHasta.Text,
                                                            txtDocumentoDesde.Text, txtDocumentoHasta.Text, txtOrigenDesde.Text, txtOrigenHasta.Text)
 
             Case ReporteMercancias.cMovimientosServicios, ReporteMercancias.cMovimientosServiciosS
 
                 nTabla = "dtMercanciasMovimientos"
                 oReporte = New rptMercanciaServiciosMovimientos0G
-                str = SeleccionMERMovimientosServicios(txtOrdenDesde.Text, txtOrdenHasta.Text, "codart", cmbOrdenDesde.SelectedIndex, _
-                                                       CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtTipDoc.Text, _
-                                                         txtAlmacenDesde.Text, txtAlmacenHasta.Text, txtProvCliDesde.Text, txtProvCliHasta.Text, _
-                                                           txtAsesorDesde.Text, txtAsesorHasta.Text, _
+                str = SeleccionMERMovimientosServicios(txtOrdenDesde.Text, txtOrdenHasta.Text, "codart", cmbOrdenDesde.SelectedIndex,
+                                                       CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtTipDoc.Text,
+                                                         txtAlmacenDesde.Text, txtAlmacenHasta.Text, txtProvCliDesde.Text, txtProvCliHasta.Text,
+                                                           txtAsesorDesde.Text, txtAsesorHasta.Text,
                                                            txtDocumentoDesde.Text, txtDocumentoHasta.Text, txtOrigenDesde.Text, txtOrigenHasta.Text)
             Case ReporteMercancias.cLeyDeCostos
                 nTabla = "dtLeyDeCostos"
@@ -796,22 +800,22 @@ Public Class jsMerRepParametros
                         oReporte = New rptMercanciaLeyDeCostos
                 End Select
 
-                str = SeleccionMERExistenciasAFecha(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                            txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, _
-                                            txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text, _
-                                            txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, _
-                                            txtDivisionHasta.Text, txtAlmacenDesde.Text, txtAlmacenHasta.Text, CDate(txtPeriodoHasta.Text), _
-                                            cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex, _
+                str = SeleccionMERExistenciasAFecha(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                            txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text,
+                                            txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text,
+                                            txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text,
+                                            txtDivisionHasta.Text, txtAlmacenDesde.Text, txtAlmacenHasta.Text, CDate(txtPeriodoHasta.Text),
+                                            cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex,
                                             cmbRegulada.SelectedIndex, cmbExistencias.SelectedIndex, ValorNumero(txtporGastos.Text), cmbTarifa.Text)
 
             Case ReporteMercancias.cMovimientosMercancia
                 nTabla = "dtMercanciasMovimientos"
                 oReporte = New rptMercanciaMovimientoSG
 
-                str = SeleccionMERMovimientosMercancias(txtOrdenDesde.Text, txtOrdenHasta.Text, "codart", cmbOrdenDesde.SelectedIndex, _
-                                                           CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtTipDoc.Text, _
-                                                           txtAlmacenDesde.Text, txtAlmacenHasta.Text, txtProvCliDesde.Text, txtProvCliHasta.Text, _
-                                                           txtAsesorDesde.Text, txtAsesorHasta.Text, txtLoteDesde.Text, txtLoteHasta.Text, _
+                str = SeleccionMERMovimientosMercancias(txtOrdenDesde.Text, txtOrdenHasta.Text, "codart", cmbOrdenDesde.SelectedIndex,
+                                                           CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtTipDoc.Text,
+                                                           txtAlmacenDesde.Text, txtAlmacenHasta.Text, txtProvCliDesde.Text, txtProvCliHasta.Text,
+                                                           txtAsesorDesde.Text, txtAsesorHasta.Text, txtLoteDesde.Text, txtLoteHasta.Text,
                                                            txtDocumentoDesde.Text, txtDocumentoHasta.Text, txtOrigenDesde.Text, txtOrigenHasta.Text)
 
 
@@ -821,16 +825,16 @@ Public Class jsMerRepParametros
                 nTabla = "dtVentasMer"
                 oReporte = New rptMercanciaVentasNetasMerG0
 
-                str = SeleccionMERVentasMercancias(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                             txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, _
-                                            txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text, _
-                                            txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, _
-                                            txtDivisionHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, txtTipoNegocioDesde.Text, _
-                                            txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text, _
-                                            txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, _
-                                            txtCiudad.Text, txtBarrio.Text, txtAlmacenDesde.Text, txtAlmacenHasta.Text, CDate(txtPeriodoDesde.Text), _
-                                            CDate(txtPeriodoHasta.Text), txtProvCliDesde.Text, txtProvCliHasta.Text, _
-                                            cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex, _
+                str = SeleccionMERVentasMercancias(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                             txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text,
+                                            txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text,
+                                            txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text,
+                                            txtDivisionHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, txtTipoNegocioDesde.Text,
+                                            txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text,
+                                            txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text,
+                                            txtCiudad.Text, txtBarrio.Text, txtAlmacenDesde.Text, txtAlmacenHasta.Text, CDate(txtPeriodoDesde.Text),
+                                            CDate(txtPeriodoHasta.Text), txtProvCliDesde.Text, txtProvCliHasta.Text,
+                                            cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex,
                                             cmbRegulada.SelectedIndex)
 
             Case ReporteMercancias.cVentasDeMercancias
@@ -850,16 +854,16 @@ Public Class jsMerRepParametros
                         oReporte = New rptMercanciaVentasMerG0
                 End Select
 
-                str = SeleccionMERVentasMercancias(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                             txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, _
-                                            txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text, _
-                                            txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, _
-                                            txtDivisionHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, txtTipoNegocioDesde.Text, _
-                                            txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text, _
-                                            txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, _
-                                            txtCiudad.Text, txtBarrio.Text, txtAlmacenDesde.Text, txtAlmacenHasta.Text, CDate(txtPeriodoDesde.Text), _
-                                            CDate(txtPeriodoHasta.Text), txtProvCliDesde.Text, txtProvCliHasta.Text, _
-                                            cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex, _
+                str = SeleccionMERVentasMercancias(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                             txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text,
+                                            txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text,
+                                            txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text,
+                                            txtDivisionHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, txtTipoNegocioDesde.Text,
+                                            txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text,
+                                            txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text,
+                                            txtCiudad.Text, txtBarrio.Text, txtAlmacenDesde.Text, txtAlmacenHasta.Text, CDate(txtPeriodoDesde.Text),
+                                            CDate(txtPeriodoHasta.Text), txtProvCliDesde.Text, txtProvCliHasta.Text,
+                                            cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex,
                                             cmbRegulada.SelectedIndex)
 
             Case ReporteMercancias.cVentasDeMercanciasActivacion
@@ -880,14 +884,14 @@ Public Class jsMerRepParametros
                         oReporte = New rptMercanciaVentasMerActG0
                 End Select
 
-                str = SeleccionMERVentasMercanciasAct(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), _
-                                            txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text, _
-                                            txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, _
-                                            cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex, cmbRegulada.SelectedIndex, _
-                                            txtCanalDesde.Text, txtCanalHasta.Text, txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, _
-                                            txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text, txtAsesorRDesde.Text, txtAsesorRHasta.Text, _
-                                            txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, txtCiudad.Text, txtBarrio.Text, _
-                                            CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtAlmacenDesde.Text, txtAlmacenHasta.Text, _
+                str = SeleccionMERVentasMercanciasAct(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex),
+                                            txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text,
+                                            txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text,
+                                            cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex, cmbRegulada.SelectedIndex,
+                                            txtCanalDesde.Text, txtCanalHasta.Text, txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text,
+                                            txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text, txtAsesorRDesde.Text, txtAsesorRHasta.Text,
+                                            txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, txtCiudad.Text, txtBarrio.Text,
+                                            CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtAlmacenDesde.Text, txtAlmacenHasta.Text,
                                             txtProvCliDesde.Text, txtProvCliHasta.Text, chkConsResumen.Checked, False)
 
             Case ReporteMercancias.cComprasdeMercanciasActivacion
@@ -908,10 +912,10 @@ Public Class jsMerRepParametros
                         oReporte = New rptMercanciaVentasMerActG0
                 End Select
 
-                str = SeleccionMERComprasMercanciasAct(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, _
-                                            txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, _
-                                            "", "", "", "", CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtAlmacenDesde.Text, txtAlmacenHasta.Text, _
-                                            txtProvCliDesde.Text, txtProvCliHasta.Text, txtTipoJerarquia.Text, txtCodjer1.Text, _
+                str = SeleccionMERComprasMercanciasAct(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text,
+                                            txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text,
+                                            "", "", "", "", CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtAlmacenDesde.Text, txtAlmacenHasta.Text,
+                                            txtProvCliDesde.Text, txtProvCliHasta.Text, txtTipoJerarquia.Text, txtCodjer1.Text,
                                             txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, False)
 
             Case ReporteMercancias.cVentasDeMercanciasActivacionXMes
@@ -928,14 +932,14 @@ Public Class jsMerRepParametros
                         oReporte = New rptMercanciaVentasPorItemActMesMes0G
                 End Select
 
-                str = SeleccionMERVentasMercanciasAct(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), _
-                                            txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text, _
-                                            txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, _
-                                            cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex, cmbRegulada.SelectedIndex, _
-                                            txtCanalDesde.Text, txtCanalHasta.Text, txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, _
-                                            txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text, txtAsesorRDesde.Text, txtAsesorRHasta.Text, _
-                                            txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, txtCiudad.Text, txtBarrio.Text, _
-                                            CDate("01/01/" & CStr(cmbAño.SelectedIndex + 2000)), CDate("31/12/" & CStr(cmbAño.SelectedIndex + 2000)), txtAlmacenDesde.Text, txtAlmacenHasta.Text, _
+                str = SeleccionMERVentasMercanciasAct(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex),
+                                            txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text,
+                                            txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text,
+                                            cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex, cmbRegulada.SelectedIndex,
+                                            txtCanalDesde.Text, txtCanalHasta.Text, txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text,
+                                            txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text, txtAsesorRDesde.Text, txtAsesorRHasta.Text,
+                                            txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, txtCiudad.Text, txtBarrio.Text,
+                                            CDate("01/01/" & CStr(cmbAño.SelectedIndex + 2000)), CDate("31/12/" & CStr(cmbAño.SelectedIndex + 2000)), txtAlmacenDesde.Text, txtAlmacenHasta.Text,
                                             txtProvCliDesde.Text, txtProvCliHasta.Text, chkConsResumen.Checked, True)
 
             Case ReporteMercancias.cComprasDeMercancias
@@ -954,24 +958,24 @@ Public Class jsMerRepParametros
                         oReporte = New rptMercanciaComprasMer0G
                 End Select
 
-                str = SeleccionMERComprasMercancias(txtOrdenDesde.Text, txtOrdenHasta.Text, txtCategoriaDesde.Text, txtCategoriaHasta.Text, _
+                str = SeleccionMERComprasMercancias(txtOrdenDesde.Text, txtOrdenHasta.Text, txtCategoriaDesde.Text, txtCategoriaHasta.Text,
                                             txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, "", "", "", "", CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtAlmacenDesde.Text, txtAlmacenHasta.Text, txtProvCliDesde.Text, txtProvCliHasta.Text, txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text)
 
             Case ReporteMercancias.cInventarioLegal
                 nTabla = "dtInventarioLegal"
                 oReporte = New rptMercanciaIventarioLegalSG
-                str = SeleccionMERInventarioLegalPlus(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                                  CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), _
-                                                  txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, _
-                                                  txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text, _
-                                                    txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, _
-                                                    txtDivisionHasta.Text, txtAlmacenDesde.Text, txtAlmacenHasta.Text, _
-                                                    cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex, _
+                str = SeleccionMERInventarioLegalPlus(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                                  CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text),
+                                                  txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text,
+                                                  txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text,
+                                                    txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text,
+                                                    txtDivisionHasta.Text, txtAlmacenDesde.Text, txtAlmacenHasta.Text,
+                                                    cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex,
                                                     cmbRegulada.SelectedIndex)
             Case ReporteMercancias.cListadoTransferencias
                 nTabla = "dtTransferencias"
                 oReporte = New rptMercanciaTransferencias0G
-                str = SeleccionMERListadoTransferencias(CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), _
+                str = SeleccionMERListadoTransferencias(CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text),
                                                         txtCausaDesde.Text, txtCausaHasta.Text)
             Case Else
                 oReporte = Nothing
@@ -982,7 +986,7 @@ Public Class jsMerRepParametros
             If dsMerca.Tables(nTabla).Rows.Count > 0 Then
                 oReporte = PresentaReporte(oReporte, dsMerca, nTabla)
                 r.CrystalReportViewer1.ReportSource = oReporte
-                r.CrystalReportViewer1.ToolPanelView = IIf(PresentaArbol, CrystalDecisions.Windows.Forms.ToolPanelViewType.GroupTree, _
+                r.CrystalReportViewer1.ToolPanelView = IIf(PresentaArbol, CrystalDecisions.Windows.Forms.ToolPanelViewType.GroupTree,
                                               CrystalDecisions.Windows.Forms.ToolPanelViewType.None)
                 r.CrystalReportViewer1.ShowGroupTreeButton = PresentaArbol
                 r.CrystalReportViewer1.Zoom(1)
@@ -1002,8 +1006,8 @@ Public Class jsMerRepParametros
         oReporte = Nothing
 
     End Sub
-    Private Sub colocarParametrosEnReportes(ByVal oReporte As CrystalDecisions.CrystalReports.Engine.ReportClass, _
-                                          nomIndex As String, valor As Object, reportActual As Integer, _
+    Private Sub colocarParametrosEnReportes(ByVal oReporte As CrystalDecisions.CrystalReports.Engine.ReportClass,
+                                          nomIndex As String, valor As Object, reportActual As Integer,
                                           ParamArray aReportes() As Integer)
 
         If Array.IndexOf(aReportes, reportActual) >= 0 Then
@@ -1012,7 +1016,7 @@ Public Class jsMerRepParametros
 
 
     End Sub
-    Private Function PresentaReporte(ByVal oReporte As CrystalDecisions.CrystalReports.Engine.ReportClass, _
+    Private Function PresentaReporte(ByVal oReporte As CrystalDecisions.CrystalReports.Engine.ReportClass,
         ByVal dsReport As DataSet, ByVal nTabla As String) As CrystalDecisions.CrystalReports.Engine.ReportClass
 
         Dim rif As String
@@ -1043,26 +1047,26 @@ Public Class jsMerRepParametros
         oReporte.SetParameterValue("Constantes", LineaConstantes)
         oReporte.SetParameterValue("Empresa", jytsistema.WorkName.TrimEnd(" ") + "      R.I.F. : " & rif)
 
-        colocarParametrosEnReportes(oReporte, "Titulo", ReporteNombre, ReporteNumero, _
-                                    ReporteMercancias.cTransferencia, ReporteMercancias.cPrecios, _
-                                    ReporteMercancias.cPreciosIVA, ReporteMercancias.cCategorias, _
-                                    ReporteMercancias.cMarcas, ReporteMercancias.cPreciosYEquivalencias, _
-                                    ReporteMercancias.cPreciosYEquivalenciasSinIVA, _
+        colocarParametrosEnReportes(oReporte, "Titulo", ReporteNombre, ReporteNumero,
+                                    ReporteMercancias.cTransferencia, ReporteMercancias.cPrecios,
+                                    ReporteMercancias.cPreciosIVA, ReporteMercancias.cCategorias,
+                                    ReporteMercancias.cMarcas, ReporteMercancias.cPreciosYEquivalencias,
+                                    ReporteMercancias.cPreciosYEquivalenciasSinIVA,
                                     ReporteMercancias.cVentasDeMercanciasActivacion, ReporteMercancias.cComprasdeMercanciasActivacion)
 
-        colocarParametrosEnReportes(oReporte, "numConteo", cmbEstatus.Text, ReporteNumero, _
+        colocarParametrosEnReportes(oReporte, "numConteo", cmbEstatus.Text, ReporteNumero,
                                     ReporteMercancias.cConteos)
-        colocarParametrosEnReportes(oReporte, "RIF", rif, ReporteNumero, _
+        colocarParametrosEnReportes(oReporte, "RIF", rif, ReporteNumero,
                                     ReporteMercancias.cCodigoBarras, ReporteMercancias.cCodigoBarraUbicacion)
-        colocarParametrosEnReportes(oReporte, "Empresa", jytsistema.WorkName.TrimEnd(" "), ReporteNumero, _
+        colocarParametrosEnReportes(oReporte, "Empresa", jytsistema.WorkName.TrimEnd(" "), ReporteNumero,
                                     ReporteMercancias.cCodigoBarras, ReporteMercancias.cCodigoBarraUbicacion)
-        colocarParametrosEnReportes(oReporte, "resumido", chkConsResumen.Checked, ReporteNumero, _
+        colocarParametrosEnReportes(oReporte, "resumido", chkConsResumen.Checked, ReporteNumero,
                                     ReporteMercancias.cCodigoBarras, ReporteMercancias.cCodigoBarraUbicacion)
-        colocarParametrosEnReportes(oReporte, "Resumen", chkConsResumen.Checked, ReporteNumero, _
-                                    ReporteMercancias.cVentasDeMercancias, ReporteMercancias.cVentasDeMercanciasActivacion, _
-                                    ReporteMercancias.cVentasNetasMercancias, ReporteMercancias.cListadoTransferencias, _
+        colocarParametrosEnReportes(oReporte, "Resumen", chkConsResumen.Checked, ReporteNumero,
+                                    ReporteMercancias.cVentasDeMercancias, ReporteMercancias.cVentasDeMercanciasActivacion,
+                                    ReporteMercancias.cVentasNetasMercancias, ReporteMercancias.cListadoTransferencias,
                                     ReporteMercancias.cVentasDeMercanciasActivacionXMes, ReporteMercancias.cComprasdeMercanciasActivacion)
-        colocarParametrosEnReportes(oReporte, "ResumenR", chkConsResumen.Checked, ReporteNumero, _
+        colocarParametrosEnReportes(oReporte, "ResumenR", chkConsResumen.Checked, ReporteNumero,
                                     ReporteMercancias.cVentasDeMercanciasActivacionXMes)
 
         If ReporteNumero = ReporteMercancias.cVentasDeMercanciasActivacion Then
@@ -1078,10 +1082,10 @@ Public Class jsMerRepParametros
         End If
 
         Select Case ReporteNumero
-            Case ReporteMercancias.cCatalogo, ReporteMercancias.cPrecios, ReporteMercancias.cPreciosIVA, _
-                ReporteMercancias.cObsolescencia, _
-                ReporteMercancias.cPreciosYEquivalencias, ReporteMercancias.cPreciosYEquivalenciasSinIVA, _
-                ReporteMercancias.cVentasDeMercancias, ReporteMercancias.cVentasDeMercanciasActivacion, _
+            Case ReporteMercancias.cCatalogo, ReporteMercancias.cPrecios, ReporteMercancias.cPreciosIVA,
+                ReporteMercancias.cObsolescencia,
+                ReporteMercancias.cPreciosYEquivalencias, ReporteMercancias.cPreciosYEquivalenciasSinIVA,
+                ReporteMercancias.cVentasDeMercancias, ReporteMercancias.cVentasDeMercanciasActivacion,
                 ReporteMercancias.cComprasDeMercancias, ReporteMercancias.cVentasNetasMercancias, ReporteMercancias.cVentasDeMercanciasActivacionXMes
 
                 Select Case cmbMERAgrupadoPor.SelectedIndex.ToString & cmbVenAgrupadoPor.SelectedIndex.ToString
@@ -1113,8 +1117,8 @@ Public Class jsMerRepParametros
                         FieldDef2 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(1)))
                         oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
                         oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
-                    Case "11", "12", "13", "14", "15", "114", "21", "22", "23", "24", "25", "214", _
-                        "31", "32", "33", "34", "35", "314", "41", "42", "43", "44", "45", "414", _
+                    Case "11", "12", "13", "14", "15", "114", "21", "22", "23", "24", "25", "214",
+                        "31", "32", "33", "34", "35", "314", "41", "42", "43", "44", "45", "414",
                         "51", "52", "53", "54", "55", "514"
                         oReporte.SetParameterValue("Grupo1", "categoria")
                         oReporte.SetParameterValue("Grupo2", "marca")
@@ -1148,8 +1152,8 @@ Public Class jsMerRepParametros
                         oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
                         oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
                         oReporte.DataDefinition.Groups.Item(2).ConditionField = FieldDef3
-                    Case "61", "81", "91", "111", "121", "62", "82", "92", "112", "122", _
-                         "63", "83", "93", "113", "123", "64", "84", "94", "114", "124", _
+                    Case "61", "81", "91", "111", "121", "62", "82", "92", "112", "122",
+                         "63", "83", "93", "113", "123", "64", "84", "94", "114", "124",
                          "65", "85", "95", "115", "125", "614", "814", "914", "1114", "1214"
                         oReporte.SetParameterValue("Grupo1", "categoria")
                         oReporte.SetParameterValue("Grupo2", "marca")
@@ -1162,8 +1166,8 @@ Public Class jsMerRepParametros
                         oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
                         oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
                         oReporte.DataDefinition.Groups.Item(2).ConditionField = FieldDef3
-                    Case "16", "17", "18", "19", "111", "112", "26", "27", "28", "29", "211", "212", _
-                        "36", "37", "38", "39", "311", "312", "46", "47", "48", "49", "411", "412", _
+                    Case "16", "17", "18", "19", "111", "112", "26", "27", "28", "29", "211", "212",
+                        "36", "37", "38", "39", "311", "312", "46", "47", "48", "49", "411", "412",
                         "56", "57", "58", "59", "511", "512"
                         oReporte.SetParameterValue("Grupo1", "categoria")
                         oReporte.SetParameterValue("Grupo2", "marca")
@@ -1191,8 +1195,8 @@ Public Class jsMerRepParametros
                         oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
                         oReporte.DataDefinition.Groups.Item(2).ConditionField = FieldDef3
                         oReporte.DataDefinition.Groups.Item(3).ConditionField = FieldDef4
-                    Case "66", "67", "68", "69", "611", "612", "86", "87", "88", "89", "811", "812", _
-                            "96", "97", "98", "99", "911", "912", "116", "117", "118", "119", "1111", "1112", _
+                    Case "66", "67", "68", "69", "611", "612", "86", "87", "88", "89", "811", "812",
+                            "96", "97", "98", "99", "911", "912", "116", "117", "118", "119", "1111", "1112",
                             "126", "127", "128", "129", "1211", "1212"
                         oReporte.SetParameterValue("Grupo1", "categoria")
                         oReporte.SetParameterValue("Grupo2", "marca")
@@ -1367,7 +1371,7 @@ Public Class jsMerRepParametros
                     Case Else
                 End Select
 
-                If ReporteNumero = ReporteMercancias.cComprasDeMercancias Or _
+                If ReporteNumero = ReporteMercancias.cComprasDeMercancias Or
                     ReporteNumero = ReporteMercancias.cComprasdeMercanciasActivacion Then
                     Dim oFormula As CrystalDecisions.CrystalReports.Engine.FormulaFieldDefinition
                     For Each oFormula In oReporte.DataDefinition.FormulaFields
@@ -1413,27 +1417,27 @@ Public Class jsMerRepParametros
                 GruposCantidad = 0
             Case "10", "20", "30", "40", "50", "01", "02", "03", "04", "05", "014"  ' 1 grupo
                 GruposCantidad = 1
-            Case "60", "80", "90", "110", "120", "150", "06", "07", "08", "09", "011", "012", _
-                "11", "12", "13", "14", "15", "114", "21", "22", "23", "24", "25", "214", _
-                "31", "32", "33", "34", "35", "314", "41", "42", "43", "44", "45", "414", _
+            Case "60", "80", "90", "110", "120", "150", "06", "07", "08", "09", "011", "012",
+                "11", "12", "13", "14", "15", "114", "21", "22", "23", "24", "25", "214",
+                "31", "32", "33", "34", "35", "314", "41", "42", "43", "44", "45", "414",
                 "51", "52", "53", "54", "55", "514" '2 grupos
                 GruposCantidad = 2
-            Case "70", "100", "140", "61", "81", "91", "111", "121", "62", "82", "92", "112", "122", _
-                "63", "83", "93", "113", "123", "64", "84", "94", "114", "124", _
-                "65", "85", "95", "115", "125", "614", "814", "914", "1114", "1214", _
-                "16", "17", "18", "19", "111", "112", "26", "27", "28", "29", "211", "212", _
-                "36", "37", "38", "39", "311", "312", "46", "47", "48", "49", "411", "412", _
+            Case "70", "100", "140", "61", "81", "91", "111", "121", "62", "82", "92", "112", "122",
+                "63", "83", "93", "113", "123", "64", "84", "94", "114", "124",
+                "65", "85", "95", "115", "125", "614", "814", "914", "1114", "1214",
+                "16", "17", "18", "19", "111", "112", "26", "27", "28", "29", "211", "212",
+                "36", "37", "38", "39", "311", "312", "46", "47", "48", "49", "411", "412",
                 "56", "57", "58", "59", "511", "512", "010", "013" '3 grupos
                 GruposCantidad = 3
-            Case "130", "66", "67", "68", "69", "611", "612", "86", "87", "88", "89", "811", "812", _
-                        "96", "97", "98", "99", "911", "912", "116", "117", "118", "119", "1111", "1112", _
-                        "126", "127", "128", "129", "1211", "1212", _
-                        "71", "72", "73", "74", "75", "714", _
-                        "101", "102", "103", "104", "105", "1014", "141", "142", "143", "144", "145", "1414", _
+            Case "130", "66", "67", "68", "69", "611", "612", "86", "87", "88", "89", "811", "812",
+                        "96", "97", "98", "99", "911", "912", "116", "117", "118", "119", "1111", "1112",
+                        "126", "127", "128", "129", "1211", "1212",
+                        "71", "72", "73", "74", "75", "714",
+                        "101", "102", "103", "104", "105", "1014", "141", "142", "143", "144", "145", "1414",
                         "110", "210", "310", "410", "510", "113", "213", "313", "413", "513" '4 grupos
                 GruposCantidad = 4
-            Case "131", "132", "133", "134", "135", "1314", "76", "77", "78", "79", "711", "712", _
-                "106", "107", "108", "109", "1011", "1012", "146", "147", "148", "149", "1411", "1412", _
+            Case "131", "132", "133", "134", "135", "1314", "76", "77", "78", "79", "711", "712",
+                "106", "107", "108", "109", "1011", "1012", "146", "147", "148", "149", "1411", "1412",
                 "610", "810", "910", "1110", "1210", "613", "813", "913", "1113", "1213" ' 5 Grupos
                 GruposCantidad = 5
             Case "136", "137", "138", "139", "1311", "1312", "710", "713", "1010", "1013", "1410", "1413" '6Grupos
@@ -1444,15 +1448,6 @@ Public Class jsMerRepParametros
                 GruposCantidad = 0
         End Select
     End Function
-    Private Sub btnPeriodoDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles btnPeriodoDesde.Click
-        txtPeriodoDesde.Text = SeleccionaFecha(CDate(txtPeriodoDesde.Text), Me, sender)
-    End Sub
-
-    Private Sub btnPeriodoHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles btnPeriodoHasta.Click
-        txtPeriodoHasta.Text = SeleccionaFecha(CDate(txtPeriodoHasta.Text), Me, sender)
-    End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
         LimpiarOrden()
@@ -1461,18 +1456,18 @@ Public Class jsMerRepParametros
         LimpiarCriterios()
     End Sub
     Private Sub LimpiarGrupos()
-        LimpiarTextos(txtCategoriaDesde, txtCategoriaHasta, txtCodjer1, txtCodjer2, txtCodjer3, txtCodjer4, _
+        LimpiarTextos(txtCategoriaDesde, txtCategoriaHasta, txtCodjer1, txtCodjer2, txtCodjer3, txtCodjer4,
             txtCodjer5, txtCodjer6, txtDivisionDesde, txtDivisionHasta, txtMarcaDesde, txtMarcaHasta)
     End Sub
     Private Sub LimpiarGruposVentas()
-        LimpiarTextos(txtCanalDesde, txtCanalHasta, txtTipoNegocioDesde, txtTipoNegocioHasta, txtZonaDesde, txtZonaHasta, _
+        LimpiarTextos(txtCanalDesde, txtCanalHasta, txtTipoNegocioDesde, txtTipoNegocioHasta, txtZonaDesde, txtZonaHasta,
             txtRutaDesde, txtRutaHasta, txtPais, txtEstado, txtMunicipio, txtParroquia, txtCiudad, txtBarrio)
     End Sub
     Private Sub LimpiarOrden()
         LimpiarTextos(txtOrdenDesde, txtOrdenHasta)
     End Sub
     Private Sub LimpiarCriterios()
-        LimpiarTextos(txtAsesorDesde, txtAsesorHasta, txtAlmacenDesde, txtAlmacenHasta, txtProvCliDesde, _
+        LimpiarTextos(txtAsesorDesde, txtAsesorHasta, txtAlmacenDesde, txtAlmacenHasta, txtProvCliDesde,
                       txtProvCliHasta, txtDocumentoDesde, txtDocumentoHasta, txtLoteDesde, txtLoteHasta)
     End Sub
 
@@ -1552,11 +1547,11 @@ Public Class jsMerRepParametros
 
     Private Sub cmbMERAgrupadorPor_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbMERAgrupadoPor.SelectedIndexChanged
 
-        ft.visualizarObjetos(False, lblGrupoDesde, lblGrupoHasta, lblCategoria, lblMarcas, lblDivisiones, lblJerarquias, _
-                            txtCategoriaDesde, btnCategoriaDesde, txtCategoriaHasta, btnCategoriaHasta, _
-                            txtMarcaDesde, btnMarcaDesde, txtMarcaHasta, btnMarcaHasta, _
-                            txtDivisionDesde, btnDivisionDesde, txtDivisionHasta, btnDivisionHasta, _
-                            txtTipoJerarquia, btnTipoJerarquia, txtCodjer1, btnCodjer1, txtCodjer2, btnCodjer2, _
+        ft.visualizarObjetos(False, lblGrupoDesde, lblGrupoHasta, lblCategoria, lblMarcas, lblDivisiones, lblJerarquias,
+                            txtCategoriaDesde, btnCategoriaDesde, txtCategoriaHasta, btnCategoriaHasta,
+                            txtMarcaDesde, btnMarcaDesde, txtMarcaHasta, btnMarcaHasta,
+                            txtDivisionDesde, btnDivisionDesde, txtDivisionHasta, btnDivisionHasta,
+                            txtTipoJerarquia, btnTipoJerarquia, txtCodjer1, btnCodjer1, txtCodjer2, btnCodjer2,
                             txtCodjer3, btnCodjer3, txtCodjer4, btnCodjer4, txtCodjer5, btnCodjer5, txtCodjer6, btnCodjer6)
         LimpiarGrupos()
         Dim ss As String = vMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex)
@@ -1611,13 +1606,13 @@ Public Class jsMerRepParametros
     End Sub
     Private Sub cmbVENAgrupadorPor_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbVenAgrupadoPor.SelectedIndexChanged
 
-        ft.visualizarObjetos(False, Label7, Label8, Label9, Label11, Label1, Label2, Label3, Label4, Label5, Label6, _
-                          txtCanalDesde, btnCanalDesde, txtCanalHasta, btnCanalHasta, _
-                          txtTipoNegocioDesde, btnTipoNegocioDesde, txtTipoNegocioHasta, btnTipoNegocioHasta, _
-                          txtZonaDesde, btnZonaDesde, txtZonaHasta, btnZonaHasta, _
-                          txtRutaDesde, btnRutaDesde, txtRutaHasta, btnRutaHasta, _
-                          txtAsesorRDesde, btnAsesorRDesde, txtAsesorRHasta, btnAsesorRHasta, _
-                          txtPais, txtEstado, txtMunicipio, txtParroquia, txtCiudad, txtBarrio, _
+        ft.visualizarObjetos(False, Label7, Label8, Label9, Label11, Label1, Label2, Label3, Label4, Label5, Label6,
+                          txtCanalDesde, btnCanalDesde, txtCanalHasta, btnCanalHasta,
+                          txtTipoNegocioDesde, btnTipoNegocioDesde, txtTipoNegocioHasta, btnTipoNegocioHasta,
+                          txtZonaDesde, btnZonaDesde, txtZonaHasta, btnZonaHasta,
+                          txtRutaDesde, btnRutaDesde, txtRutaHasta, btnRutaHasta,
+                          txtAsesorRDesde, btnAsesorRDesde, txtAsesorRHasta, btnAsesorRHasta,
+                          txtPais, txtEstado, txtMunicipio, txtParroquia, txtCiudad, txtBarrio,
                           btnPais, btnEstado, btnMunicipio, btnParroquia, btnCiudad, btnBarrio)
 
 
@@ -1713,7 +1708,7 @@ Public Class jsMerRepParametros
     End Sub
     Private Sub VerJerarquias()
         ft.visualizarObjetos(True, lblGrupoDesde, lblGrupoHasta)
-        ft.visualizarObjetos(True, lblJerarquias, txtTipoJerarquia, btnTipoJerarquia, txtCodjer1, btnCodjer1, _
+        ft.visualizarObjetos(True, lblJerarquias, txtTipoJerarquia, btnTipoJerarquia, txtCodjer1, btnCodjer1,
                             txtCodjer2, btnCodjer2, txtCodjer3, btnCodjer3, txtCodjer4, btnCodjer4, txtCodjer5, btnCodjer5, txtCodjer6, btnCodjer6)
         ft.habilitarObjetos(False, True, txtTipoJerarquia, txtCodjer1, txtCodjer2, txtCodjer3, txtCodjer4, txtCodjer5, txtCodjer6)
     End Sub
@@ -1771,10 +1766,10 @@ Public Class jsMerRepParametros
     End Sub
 
     Private Sub btnTipoJerarquia_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTipoJerarquia.Click
-        txtTipoJerarquia.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT tipjer codigo, descrip descripcion FROM jsmerencjer WHERE  id_emp  = '" & jytsistema.WorkID & "' order by 1 ", " Tipo de Jerarquía", _
+        txtTipoJerarquia.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT tipjer codigo, descrip descripcion FROM jsmerencjer WHERE  id_emp  = '" & jytsistema.WorkID & "' order by 1 ", " Tipo de Jerarquía",
                                                   txtTipoJerarquia.Text)
     End Sub
-    Private Sub CargarJerarquia(ByVal MyConn As MySqlConnection, ByVal ds As DataSet, ByVal TipoJerarquia As String, ByVal Nivel As Integer, _
+    Private Sub CargarJerarquia(ByVal MyConn As MySqlConnection, ByVal ds As DataSet, ByVal TipoJerarquia As String, ByVal Nivel As Integer,
                                     ByVal txtCodjer As TextBox)
 
         If TipoJerarquia <> "" Then
@@ -1825,11 +1820,11 @@ Public Class jsMerRepParametros
     End Sub
 
     Private Sub btnAsesorDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsesorDesde.Click
-        txtAsesorDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codven codigo, concat(apellidos, ', ', nombres) descripcion FROM jsvencatven WHERE estatus = 1 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Asesores Comerciales", _
+        txtAsesorDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codven codigo, concat(apellidos, ', ', nombres) descripcion FROM jsvencatven WHERE estatus = 1 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Asesores Comerciales",
                                                 txtAsesorDesde.Text)
     End Sub
     Private Sub btnAsesorHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsesorHasta.Click
-        txtAsesorHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codven codigo, concat(apellidos, ', ', nombres) descripcion FROM jsvencatven WHERE estatus = 1 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Asesores Comerciales", _
+        txtAsesorHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codven codigo, concat(apellidos, ', ', nombres) descripcion FROM jsvencatven WHERE estatus = 1 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Asesores Comerciales",
                                                 txtAsesorHasta.Text)
     End Sub
 
@@ -1854,10 +1849,10 @@ Public Class jsMerRepParametros
     Private Sub btnProvCliDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnProvCliDesde.Click
         If ReporteNumero = ReporteMercancias.cComprasDeMercancias Or ReporteNumero = ReporteMercancias.cComprasdeMercanciasActivacion _
             Or ReporteNumero = ReporteMercancias.cComprasdeMercanciasActivacionXMes Then
-            txtProvCliDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codpro codigo, nombre descripcion from jsprocatpro where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Proveedores", _
+            txtProvCliDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codpro codigo, nombre descripcion from jsprocatpro where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Proveedores",
                                                              txtProvCliDesde.Text)
         Else
-            txtProvCliDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcli codigo, nombre descripcion from jsvencatcli where estatus < 3 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Clientes", _
+            txtProvCliDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcli codigo, nombre descripcion from jsvencatcli where estatus < 3 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Clientes",
                                                              txtProvCliDesde.Text)
         End If
 
@@ -1865,10 +1860,10 @@ Public Class jsMerRepParametros
     Private Sub btnProvCliHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnProvCliHasta.Click
         If ReporteNumero = ReporteMercancias.cComprasDeMercancias Or ReporteNumero = ReporteMercancias.cComprasdeMercanciasActivacion _
             Or ReporteNumero = ReporteMercancias.cComprasdeMercanciasActivacionXMes Then
-            txtProvCliHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codpro codigo, nombre descripcion from jsprocatpro where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Proveedores", _
+            txtProvCliHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codpro codigo, nombre descripcion from jsprocatpro where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Proveedores",
                                                  txtProvCliHasta.Text)
         Else
-            txtProvCliHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcli codigo, nombre descripcion from jsvencatcli where estatus < 3 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Clientes", _
+            txtProvCliHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcli codigo, nombre descripcion from jsvencatcli where estatus < 3 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Clientes",
                                                              txtProvCliHasta.Text)
         End If
 
@@ -1879,22 +1874,22 @@ Public Class jsMerRepParametros
     End Sub
 
     Private Sub btnCanalDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCanalDesde.Click
-        txtCanalDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descrip descripcion from jsvenliscan where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Canal de Distribución", _
+        txtCanalDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descrip descripcion from jsvenliscan where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Canal de Distribución",
                                                txtCanalDesde.Text)
     End Sub
 
     Private Sub btnCanalHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCanalHasta.Click
-        txtCanalHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descrip descripcion from jsvenliscan where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Canal de Distribución", _
+        txtCanalHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descrip descripcion from jsvenliscan where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Canal de Distribución",
                                                txtCanalHasta.Text)
     End Sub
 
     Private Sub btnTipoNegocioDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTipoNegocioDesde.Click
-        txtTipoNegocioDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descrip descripcion from jsvenlistip where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Tipo de Negocio", _
+        txtTipoNegocioDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descrip descripcion from jsvenlistip where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Tipo de Negocio",
                                                      txtTipoNegocioDesde.Text)
     End Sub
 
     Private Sub btnTipoNegocioHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTipoNegocioHasta.Click
-        txtTipoNegocioHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descrip descripcion from jsvenlistip where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Tipo de Negocio", _
+        txtTipoNegocioHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descrip descripcion from jsvenlistip where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Tipo de Negocio",
                                                      txtTipoNegocioHasta.Text)
     End Sub
 
@@ -1915,22 +1910,22 @@ Public Class jsMerRepParametros
     End Sub
 
     Private Sub btnRutaDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRutaDesde.Click
-        txtRutaDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codrut codigo, nomrut descripcion FROM jsvenencrut WHERE tipo = 0 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Rutas de Visita", _
+        txtRutaDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codrut codigo, nomrut descripcion FROM jsvenencrut WHERE tipo = 0 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Rutas de Visita",
                                               txtRutaDesde.Text)
     End Sub
 
     Private Sub btnRutaHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRutaHasta.Click
-        txtRutaHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codrut codigo, nomrut descripcion FROM jsvenencrut WHERE tipo = 0 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Rutas de Visita", _
+        txtRutaHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codrut codigo, nomrut descripcion FROM jsvenencrut WHERE tipo = 0 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Rutas de Visita",
                                               txtRutaHasta.Text)
     End Sub
 
     Private Sub btnAsesorRDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsesorRDesde.Click
-        txtAsesorRDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codven codigo, concat(apellidos, ', ', nombres) descripcion FROM jsvencatven WHERE estatus = 1 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Asesores Comerciales", _
+        txtAsesorRDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codven codigo, concat(apellidos, ', ', nombres) descripcion FROM jsvencatven WHERE estatus = 1 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Asesores Comerciales",
                                                  txtAsesorRDesde.Text)
     End Sub
 
     Private Sub btnAsesorRHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsesorRHasta.Click
-        txtAsesorRHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codven codigo, concat(apellidos, ', ', nombres) descripcion FROM jsvencatven WHERE estatus = 1 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Asesores Comerciales", _
+        txtAsesorRHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " SELECT codven codigo, concat(apellidos, ', ', nombres) descripcion FROM jsvencatven WHERE estatus = 1 and id_emp  = '" & jytsistema.WorkID & "' order by 1 ", "Asesores Comerciales",
                                                  txtAsesorRHasta.Text)
     End Sub
 
@@ -1960,39 +1955,39 @@ Public Class jsMerRepParametros
     End Sub
 
     Private Sub btnPais_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPais.Click
-        txtPais.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 0 and id_emp = '" & jytsistema.WorkID & "' order by 1", "Paises", _
+        txtPais.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 0 and id_emp = '" & jytsistema.WorkID & "' order by 1", "Paises",
                                          txtPais.Text)
     End Sub
 
     Private Sub btnEstado_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEstado.Click
         If txtPais.Text <> "" Then _
-            txtEstado.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 1 and antecesor = " & txtPais.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Estados", _
+            txtEstado.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 1 and antecesor = " & txtPais.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Estados",
                 txtEstado.Text)
 
     End Sub
 
     Private Sub btnMunicipio_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMunicipio.Click
         If txtEstado.Text <> "" Then _
-            txtMunicipio.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 2 and antecesor = " & txtEstado.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Municipios", _
+            txtMunicipio.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 2 and antecesor = " & txtEstado.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Municipios",
                 txtMunicipio.Text)
 
     End Sub
 
     Private Sub btnParroquia_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnParroquia.Click
         If txtMunicipio.Text <> "" Then _
-            txtParroquia.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 2 and antecesor = " & txtMunicipio.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Parroquias", _
+            txtParroquia.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 2 and antecesor = " & txtMunicipio.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Parroquias",
                 txtParroquia.Text)
     End Sub
 
     Private Sub btnCiudad_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCiudad.Click
         If txtParroquia.Text <> "" Then _
-                    txtCiudad.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 3 and antecesor = " & txtParroquia.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Ciudades", _
+                    txtCiudad.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 3 and antecesor = " & txtParroquia.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Ciudades",
                         txtCiudad.Text)
     End Sub
 
     Private Sub btnBarrio_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBarrio.Click
         If txtCiudad.Text <> "" Then _
-                    txtBarrio.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 4 and antecesor = " & txtCiudad.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Barrios", _
+                    txtBarrio.Text = CargarTablaSimple(myConn, lblInfo, ds, " select concat(codigo) codigo, nombre descripcion from jsconcatter where tipo = 4 and antecesor = " & txtCiudad.Text & " and id_emp = '" & jytsistema.WorkID & "' order by 1", "Barrios",
                         txtBarrio.Text)
     End Sub
 
@@ -2012,16 +2007,16 @@ Public Class jsMerRepParametros
         e.Handled = ft.validaNumeroEnTextbox(e)
     End Sub
 
-    Private Sub txtPeriodoDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPeriodoDesde.TextChanged
+    Private Sub txtPeriodoDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPeriodoDesde.ValueChanged
         Select Case periodoTipo
             Case TipoPeriodo.iDiario
-                txtPeriodoHasta.Text = txtPeriodoDesde.Text
+                txtPeriodoHasta.Value = txtPeriodoDesde.Value
             Case TipoPeriodo.iSemanal
-                txtPeriodoHasta.Text = ft.FormatoFecha(DateAdd(DateInterval.Day, 7, CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = DateAdd(DateInterval.Day, 7, CDate(txtPeriodoDesde.Text))
             Case TipoPeriodo.iMensual
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaMes(CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = UltimoDiaMes(CDate(txtPeriodoDesde.Text))
             Case TipoPeriodo.iAnual
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaAño(CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = UltimoDiaAño(CDate(txtPeriodoDesde.Text))
         End Select
     End Sub
 

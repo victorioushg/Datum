@@ -51,8 +51,6 @@ Partial Class jsComArcProveedores
         Me.txtCredito = New System.Windows.Forms.TextBox()
         Me.cmbCondicion = New System.Windows.Forms.ComboBox()
         Me.txtSaldo = New System.Windows.Forms.TextBox()
-        Me.btnIngreso = New System.Windows.Forms.Button()
-        Me.txtIngreso = New System.Windows.Forms.TextBox()
         Me.txtTelefono1 = New System.Windows.Forms.TextBox()
         Me.txtZonaNombre = New System.Windows.Forms.TextBox()
         Me.txtZona = New System.Windows.Forms.TextBox()
@@ -93,6 +91,7 @@ Partial Class jsComArcProveedores
         Me.C1SuperTooltip1 = New C1.Win.C1SuperTooltip.C1SuperTooltip(Me.components)
         Me.tbcProveedor = New C1.Win.C1Command.C1DockingTab()
         Me.C1DockingTabPage1 = New C1.Win.C1Command.C1DockingTabPage()
+        Me.txtIngreso = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.txtRIF = New System.Windows.Forms.MaskedTextBox()
         Me.btnRIF = New System.Windows.Forms.Button()
         Me.Label41 = New System.Windows.Forms.Label()
@@ -191,7 +190,6 @@ Partial Class jsComArcProveedores
         Me.Label77 = New System.Windows.Forms.Label()
         Me.TextBox9 = New System.Windows.Forms.TextBox()
         Me.txtNumeroPagoCxP = New System.Windows.Forms.TextBox()
-        Me.cmbFPCxP = New System.Windows.Forms.ComboBox()
         Me.cmbCajaCxP = New System.Windows.Forms.ComboBox()
         Me.grpCondicionCXP = New System.Windows.Forms.GroupBox()
         Me.rbtnCOCXP = New System.Windows.Forms.RadioButton()
@@ -268,7 +266,6 @@ Partial Class jsComArcProveedores
         Me.Label58 = New System.Windows.Forms.Label()
         Me.txtNomPagCR = New System.Windows.Forms.TextBox()
         Me.txtNumeroPagoExP = New System.Windows.Forms.TextBox()
-        Me.cmbFPExP = New System.Windows.Forms.ComboBox()
         Me.cmbCajaExP = New System.Windows.Forms.ComboBox()
         Me.grpCondicionExP = New System.Windows.Forms.GroupBox()
         Me.rbtnCOExP = New System.Windows.Forms.RadioButton()
@@ -306,6 +303,8 @@ Partial Class jsComArcProveedores
         Me.txtCodigoEnvase = New System.Windows.Forms.TextBox()
         Me.Label84 = New System.Windows.Forms.Label()
         Me.txtNombreEnvase = New System.Windows.Forms.TextBox()
+        Me.cmbFPExP = New Syncfusion.WinForms.ListView.SfComboBox()
+        Me.cmbFPCxP = New Syncfusion.WinForms.ListView.SfComboBox()
         Me.MenuBarra.SuspendLayout()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAceptarSalir.SuspendLayout()
@@ -332,6 +331,8 @@ Partial Class jsComArcProveedores
         CType(Me.dgExP, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.C1DockingTabPage7.SuspendLayout()
         CType(Me.dgEnvases, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cmbFPExP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cmbFPCxP, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuBarra
@@ -562,25 +563,6 @@ Partial Class jsComArcProveedores
         Me.txtSaldo.Size = New System.Drawing.Size(125, 20)
         Me.txtSaldo.TabIndex = 94
         Me.txtSaldo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'btnIngreso
-        '
-        Me.btnIngreso.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnIngreso.Location = New System.Drawing.Point(787, 346)
-        Me.btnIngreso.Name = "btnIngreso"
-        Me.btnIngreso.Size = New System.Drawing.Size(25, 20)
-        Me.btnIngreso.TabIndex = 93
-        Me.btnIngreso.Text = "•••"
-        Me.btnIngreso.UseVisualStyleBackColor = True
-        '
-        'txtIngreso
-        '
-        Me.txtIngreso.Location = New System.Drawing.Point(687, 346)
-        Me.txtIngreso.MaxLength = 25
-        Me.txtIngreso.Name = "txtIngreso"
-        Me.txtIngreso.Size = New System.Drawing.Size(94, 20)
-        Me.txtIngreso.TabIndex = 54
-        Me.txtIngreso.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtTelefono1
         '
@@ -999,6 +981,7 @@ Partial Class jsComArcProveedores
         '
         'C1DockingTabPage1
         '
+        Me.C1DockingTabPage1.Controls.Add(Me.txtIngreso)
         Me.C1DockingTabPage1.Controls.Add(Me.txtRIF)
         Me.C1DockingTabPage1.Controls.Add(Me.btnRIF)
         Me.C1DockingTabPage1.Controls.Add(Me.Label41)
@@ -1063,7 +1046,6 @@ Partial Class jsComArcProveedores
         Me.C1DockingTabPage1.Controls.Add(Me.cmbCondicion)
         Me.C1DockingTabPage1.Controls.Add(Me.Label1)
         Me.C1DockingTabPage1.Controls.Add(Me.txtSaldo)
-        Me.C1DockingTabPage1.Controls.Add(Me.btnIngreso)
         Me.C1DockingTabPage1.Controls.Add(Me.txtCodigo)
         Me.C1DockingTabPage1.Controls.Add(Me.txtTelefono1)
         Me.C1DockingTabPage1.Controls.Add(Me.txtUnidadNombre)
@@ -1075,7 +1057,6 @@ Partial Class jsComArcProveedores
         Me.C1DockingTabPage1.Controls.Add(Me.Label4)
         Me.C1DockingTabPage1.Controls.Add(Me.txtNombre)
         Me.C1DockingTabPage1.Controls.Add(Me.txtUnidad)
-        Me.C1DockingTabPage1.Controls.Add(Me.txtIngreso)
         Me.C1DockingTabPage1.Controls.Add(Me.Label5)
         Me.C1DockingTabPage1.Controls.Add(Me.Label6)
         Me.C1DockingTabPage1.Controls.Add(Me.txtZonaNombre)
@@ -1094,6 +1075,19 @@ Partial Class jsComArcProveedores
         Me.C1DockingTabPage1.Size = New System.Drawing.Size(948, 433)
         Me.C1DockingTabPage1.TabIndex = 0
         Me.C1DockingTabPage1.Text = "Proveedor"
+        '
+        'txtIngreso
+        '
+        Me.txtIngreso.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtIngreso.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtIngreso.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtIngreso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtIngreso.Location = New System.Drawing.Point(687, 347)
+        Me.txtIngreso.Name = "txtIngreso"
+        Me.txtIngreso.Size = New System.Drawing.Size(126, 19)
+        Me.txtIngreso.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtIngreso.TabIndex = 271
+        Me.txtIngreso.Value = New Date(2021, 5, 6, 0, 0, 0, 0)
         '
         'txtRIF
         '
@@ -1671,7 +1665,6 @@ Partial Class jsComArcProveedores
         Me.C1DockingTabPage2.Controls.Add(Me.Label38)
         Me.C1DockingTabPage2.Controls.Add(Me.Label37)
         Me.C1DockingTabPage2.Controls.Add(Me.txtFormaUltimoPago)
-        Me.C1DockingTabPage2.Controls.Add(Me.dg)
         Me.C1DockingTabPage2.Controls.Add(Me.Label16)
         Me.C1DockingTabPage2.Controls.Add(Me.Label19)
         Me.C1DockingTabPage2.Controls.Add(Me.txtCodigo1)
@@ -1681,6 +1674,7 @@ Partial Class jsComArcProveedores
         Me.C1DockingTabPage2.Controls.Add(Me.txtFechaUltimopago)
         Me.C1DockingTabPage2.Controls.Add(Me.txtNombre1)
         Me.C1DockingTabPage2.Controls.Add(Me.grpMovimientosCxP)
+        Me.C1DockingTabPage2.Controls.Add(Me.dg)
         Me.C1DockingTabPage2.Location = New System.Drawing.Point(1, 24)
         Me.C1DockingTabPage2.Name = "C1DockingTabPage2"
         Me.C1DockingTabPage2.Size = New System.Drawing.Size(948, 433)
@@ -1878,6 +1872,7 @@ Partial Class jsComArcProveedores
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.cmbFPCxP)
         Me.GroupBox2.Controls.Add(Me.btnCodConCxP)
         Me.GroupBox2.Controls.Add(Me.txtCodConCxP)
         Me.GroupBox2.Controls.Add(Me.cmbNombrePagoCxP)
@@ -1897,7 +1892,6 @@ Partial Class jsComArcProveedores
         Me.GroupBox2.Controls.Add(Me.Label77)
         Me.GroupBox2.Controls.Add(Me.TextBox9)
         Me.GroupBox2.Controls.Add(Me.txtNumeroPagoCxP)
-        Me.GroupBox2.Controls.Add(Me.cmbFPCxP)
         Me.GroupBox2.Controls.Add(Me.cmbCajaCxP)
         Me.GroupBox2.Location = New System.Drawing.Point(433, 30)
         Me.GroupBox2.Name = "GroupBox2"
@@ -2077,16 +2071,6 @@ Partial Class jsComArcProveedores
         Me.txtNumeroPagoCxP.Size = New System.Drawing.Size(122, 20)
         Me.txtNumeroPagoCxP.TabIndex = 106
         Me.txtNumeroPagoCxP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'cmbFPCxP
-        '
-        Me.cmbFPCxP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbFPCxP.FormattingEnabled = True
-        Me.cmbFPCxP.Location = New System.Drawing.Point(112, 33)
-        Me.cmbFPCxP.Margin = New System.Windows.Forms.Padding(1)
-        Me.cmbFPCxP.Name = "cmbFPCxP"
-        Me.cmbFPCxP.Size = New System.Drawing.Size(148, 21)
-        Me.cmbFPCxP.TabIndex = 105
         '
         'cmbCajaCxP
         '
@@ -2740,6 +2724,7 @@ Partial Class jsComArcProveedores
         '
         'grpPago
         '
+        Me.grpPago.Controls.Add(Me.cmbFPExP)
         Me.grpPago.Controls.Add(Me.btnCodConExP)
         Me.grpPago.Controls.Add(Me.txtCodConExP)
         Me.grpPago.Controls.Add(Me.cmbNombrePagoExP)
@@ -2759,7 +2744,6 @@ Partial Class jsComArcProveedores
         Me.grpPago.Controls.Add(Me.Label58)
         Me.grpPago.Controls.Add(Me.txtNomPagCR)
         Me.grpPago.Controls.Add(Me.txtNumeroPagoExP)
-        Me.grpPago.Controls.Add(Me.cmbFPExP)
         Me.grpPago.Controls.Add(Me.cmbCajaExP)
         Me.grpPago.Location = New System.Drawing.Point(434, 30)
         Me.grpPago.Name = "grpPago"
@@ -2939,16 +2923,6 @@ Partial Class jsComArcProveedores
         Me.txtNumeroPagoExP.Size = New System.Drawing.Size(122, 20)
         Me.txtNumeroPagoExP.TabIndex = 106
         Me.txtNumeroPagoExP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'cmbFPExP
-        '
-        Me.cmbFPExP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbFPExP.FormattingEnabled = True
-        Me.cmbFPExP.Location = New System.Drawing.Point(112, 33)
-        Me.cmbFPExP.Margin = New System.Windows.Forms.Padding(1)
-        Me.cmbFPExP.Name = "cmbFPExP"
-        Me.cmbFPExP.Size = New System.Drawing.Size(148, 21)
-        Me.cmbFPExP.TabIndex = 105
         '
         'cmbCajaExP
         '
@@ -3342,6 +3316,46 @@ Partial Class jsComArcProveedores
         Me.txtNombreEnvase.Size = New System.Drawing.Size(508, 20)
         Me.txtNombreEnvase.TabIndex = 49
         '
+        'cmbFPExP
+        '
+        Me.cmbFPExP.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbFPExP.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbFPExP.DisplayMember = "nombre"
+        Me.cmbFPExP.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbFPExP.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbFPExP.Location = New System.Drawing.Point(111, 34)
+        Me.cmbFPExP.Name = "cmbFPExP"
+        Me.cmbFPExP.Size = New System.Drawing.Size(274, 19)
+        Me.cmbFPExP.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.cmbFPExP.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbFPExP.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbFPExP.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbFPExP.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbFPExP.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbFPExP.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbFPExP.TabIndex = 221
+        Me.cmbFPExP.ValueMember = "codcli"
+        '
+        'cmbFPCxP
+        '
+        Me.cmbFPCxP.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbFPCxP.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbFPCxP.DisplayMember = "nombre"
+        Me.cmbFPCxP.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbFPCxP.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbFPCxP.Location = New System.Drawing.Point(111, 34)
+        Me.cmbFPCxP.Name = "cmbFPCxP"
+        Me.cmbFPCxP.Size = New System.Drawing.Size(274, 19)
+        Me.cmbFPCxP.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.cmbFPCxP.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbFPCxP.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbFPCxP.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbFPCxP.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbFPCxP.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbFPCxP.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbFPCxP.TabIndex = 222
+        Me.cmbFPCxP.ValueMember = "codcli"
+        '
         'jsComArcProveedores
         '
         Me.AcceptButton = Me.btnOK
@@ -3400,6 +3414,8 @@ Partial Class jsComArcProveedores
         Me.C1DockingTabPage7.ResumeLayout(False)
         Me.C1DockingTabPage7.PerformLayout()
         CType(Me.dgEnvases, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cmbFPExP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cmbFPCxP, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3443,13 +3459,11 @@ Partial Class jsComArcProveedores
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents txtIngreso As System.Windows.Forms.TextBox
     Friend WithEvents txtTelefono1 As System.Windows.Forms.TextBox
     Friend WithEvents txtZonaNombre As System.Windows.Forms.TextBox
     Friend WithEvents txtZona As System.Windows.Forms.TextBox
     Friend WithEvents txtCategoria As System.Windows.Forms.TextBox
     Friend WithEvents txtNIT As System.Windows.Forms.TextBox
-    Friend WithEvents btnIngreso As System.Windows.Forms.Button
     Friend WithEvents txtSaldo As System.Windows.Forms.TextBox
     Friend WithEvents cmbCondicion As System.Windows.Forms.ComboBox
     Friend WithEvents txtFechaUltimopago As System.Windows.Forms.TextBox
@@ -3622,7 +3636,6 @@ Partial Class jsComArcProveedores
     Friend WithEvents Label58 As System.Windows.Forms.Label
     Friend WithEvents txtNomPagCR As System.Windows.Forms.TextBox
     Friend WithEvents txtNumeroPagoExP As System.Windows.Forms.TextBox
-    Friend WithEvents cmbFPExP As System.Windows.Forms.ComboBox
     Friend WithEvents cmbCajaExP As System.Windows.Forms.ComboBox
     Friend WithEvents grpCondicionExP As System.Windows.Forms.GroupBox
     Friend WithEvents rbtnCOExP As System.Windows.Forms.RadioButton
@@ -3664,7 +3677,6 @@ Partial Class jsComArcProveedores
     Friend WithEvents Label77 As System.Windows.Forms.Label
     Friend WithEvents TextBox9 As System.Windows.Forms.TextBox
     Friend WithEvents txtNumeroPagoCxP As System.Windows.Forms.TextBox
-    Friend WithEvents cmbFPCxP As System.Windows.Forms.ComboBox
     Friend WithEvents cmbCajaCxP As System.Windows.Forms.ComboBox
     Friend WithEvents grpCondicionCXP As System.Windows.Forms.GroupBox
     Friend WithEvents rbtnCOCXP As System.Windows.Forms.RadioButton
@@ -3689,4 +3701,7 @@ Partial Class jsComArcProveedores
     Friend WithEvents Label84 As System.Windows.Forms.Label
     Friend WithEvents txtNombreEnvase As System.Windows.Forms.TextBox
     Friend WithEvents dgEnvases As System.Windows.Forms.DataGridView
+    Friend WithEvents txtIngreso As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents cmbFPExP As Syncfusion.WinForms.ListView.SfComboBox
+    Friend WithEvents cmbFPCxP As Syncfusion.WinForms.ListView.SfComboBox
 End Class

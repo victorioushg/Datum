@@ -486,6 +486,112 @@ namespace fTransport
             if (AsignaDataSource){dg.DataSource = dt;}
 
         }
+
+        public void IniciarTablaList<T>(DataGridView dg, List<T> list, string[] aCampos, bool Encabezado = true,
+            bool EditaCampos = false, Font fnt = null, bool EncabezadoDeFila = true, int AltoDeFila = 18,
+            bool AsignaDataSource = true, bool SeleccionSimple = true, DataGridViewColumn lastCol = null)
+        {
+
+            dg.Columns.Clear();
+            dg.AutoGenerateColumns = false;
+            dg.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.AliceBlue;
+            dg.RowsDefaultCellStyle.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dg.RowHeadersDefaultCellStyle.SelectionBackColor = System.Drawing.Color.DarkBlue;
+            if (fnt == null) { fnt = new Font("Consolas", 9, FontStyle.Regular); };
+            dg.RowsDefaultCellStyle.Font = fnt;
+            dg.ColumnHeadersVisible = Encabezado;
+            dg.RowHeadersVisible = EncabezadoDeFila;
+
+            dg.AllowUserToAddRows = false;
+            dg.RowTemplate.Height = AltoDeFila;
+            dg.RowHeadersWidth = 25;
+
+            if (EditaCampos)
+            {
+                dg.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            }
+            else
+            {
+                dg.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            }
+            dg.MultiSelect = false;
+            dg.EditMode = ((EditaCampos) ? DataGridViewEditMode.EditOnKeystrokeOrF2 : DataGridViewEditMode.EditProgrammatically);
+
+            if (!SeleccionSimple)
+            {
+                using (DataGridViewCheckBoxColumn colCero = new DataGridViewCheckBoxColumn())
+                {
+                    colCero.Name = "sel";
+                    colCero.HeaderText = "";
+                    colCero.DataPropertyName = "sel";
+                    colCero.Width = 20;
+                    dg.Columns.Add(colCero);
+                    dg.MultiSelect = true;
+                }
+            }
+
+            for (int iCont = 0; iCont < aCampos.Length; iCont++)
+            {
+
+                if (aCampos[iCont] != null)
+                {
+
+                    using (DataGridViewColumn dgCol = new DataGridViewColumn())
+                    {
+                        DataGridViewCell dgCell = new DataGridViewTextBoxCell();
+
+                        dgCol.CellTemplate = dgCell;
+
+                        dgCol.Name = aCampos[iCont].Split('.')[0];
+                        dgCol.HeaderText = aCampos[iCont].Split('.')[1];
+                        dgCol.DataPropertyName = aCampos[iCont].Split('.')[0];
+                        dgCol.Width = Convert.ToInt32(aCampos[iCont].Split('.')[2]);
+                        dgCol.Resizable = DataGridViewTriState.False;
+                        dgCol.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+                        Font headerFont = new Font(fnt.FontFamily, fnt.Size, FontStyle.Bold);
+                        dgCol.HeaderCell.Style.Font = headerFont;
+
+                        dgCol.SortMode = DataGridViewColumnSortMode.NotSortable;
+                        dgCol.DefaultCellStyle.Alignment = (aCampos[iCont].Split('.')[3] == "I" ? DataGridViewContentAlignment.MiddleLeft :
+                            (aCampos[iCont].Split('.')[3] == "C" ? DataGridViewContentAlignment.MiddleCenter : DataGridViewContentAlignment.MiddleRight));
+                        dgCol.DefaultCellStyle.Format = "";
+                        switch (aCampos[iCont].Split('.')[4])
+                        {
+                            case "Entero":
+                                dgCol.DefaultCellStyle.Format = cFormatoEntero;
+                                break;
+                            case "Numero":
+                                dgCol.DefaultCellStyle.Format = cFormatoNumero;
+                                break;
+                            case "Cantidad":
+                                dgCol.DefaultCellStyle.Format = cFormatoCantidad;
+                                break;
+                            case "Fecha":
+                                dgCol.DefaultCellStyle.Format = cFormatoFecha;
+                                break;
+                            case "FechaHora":
+                                dgCol.DefaultCellStyle.Format = cFormatoFechaHora;
+                                break;
+                            case "Hora":
+                                dgCol.DefaultCellStyle.Format = cFormatoHoraCorta;
+                                break;
+                        }
+                        if (iCont == aCampos.Length - 1) { dgCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill; }
+
+                        dg.Columns.Add(dgCol);
+                    }
+
+                }
+            }
+
+            if (lastCol != null) { dg.Columns.Add(lastCol); }
+
+            if (AsignaDataSource) { dg.DataSource = list; }
+
+        }
+
+
         public void ajustarAnchoForma(Form oForm, DataGridView dg, ToolStrip ts  )
         {
             

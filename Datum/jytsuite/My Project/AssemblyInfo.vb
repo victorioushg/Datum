@@ -13,14 +13,14 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("Datum")> 
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("Datum AEDA C.A.")> 
-<Assembly: AssemblyProduct("Datum")> 
-<Assembly: AssemblyCopyright("Copyright © Datum AEDA 2010")> 
+<Assembly: AssemblyProduct("Datum")>
+<Assembly: AssemblyCopyright("Copyright © Datum AEDA 2021")>
 <Assembly: AssemblyTrademark("Datum")> 
 
 <Assembly: ComVisible(False)> 
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("230d3fbc-fd9a-4211-a631-1bd87478d556")> 
+<Assembly: Guid("230d3fbc-fd9a-4211-a631-1bd87478d556")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -33,7 +33,7 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("2.8.10.5")> 
-<Assembly: AssemblyFileVersion("2.8.10.5")> 
+<Assembly: AssemblyVersion("2.9.1.1")>
+<Assembly: AssemblyFileVersion("2.9.1.1")>
 
 <Assembly: NeutralResourcesLanguageAttribute("es-VE")> 

@@ -36,10 +36,8 @@ Partial Class jsMerArcConteos
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txtItems = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.btnEmision = New System.Windows.Forms.Button()
         Me.txtFechaProceso = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtEmision = New System.Windows.Forms.TextBox()
         Me.txtComentario = New System.Windows.Forms.TextBox()
         Me.txtConteo = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -87,6 +85,7 @@ Partial Class jsMerArcConteos
         Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnAgregarR = New System.Windows.Forms.ToolStripButton()
         Me.C1SuperTooltip1 = New C1.Win.C1SuperTooltip.C1SuperTooltip(Me.components)
+        Me.txtEmision = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpEncab.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -126,6 +125,7 @@ Partial Class jsMerArcConteos
         Me.grpEncab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpEncab.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.cmbTipoUnidad)
         Me.grpEncab.Controls.Add(Me.Label9)
         Me.grpEncab.Controls.Add(Me.Label8)
@@ -138,10 +138,8 @@ Partial Class jsMerArcConteos
         Me.grpEncab.Controls.Add(Me.Label7)
         Me.grpEncab.Controls.Add(Me.txtItems)
         Me.grpEncab.Controls.Add(Me.Label6)
-        Me.grpEncab.Controls.Add(Me.btnEmision)
         Me.grpEncab.Controls.Add(Me.txtFechaProceso)
         Me.grpEncab.Controls.Add(Me.Label4)
-        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.txtComentario)
         Me.grpEncab.Controls.Add(Me.txtConteo)
         Me.grpEncab.Controls.Add(Me.Label3)
@@ -267,22 +265,12 @@ Partial Class jsMerArcConteos
         'Label6
         '
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(291, 11)
+        Me.Label6.Location = New System.Drawing.Point(264, 11)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(63, 19)
         Me.Label6.TabIndex = 199
         Me.Label6.Text = "Emisión :"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'btnEmision
-        '
-        Me.btnEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmision.Location = New System.Drawing.Point(453, 12)
-        Me.btnEmision.Name = "btnEmision"
-        Me.btnEmision.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmision.TabIndex = 112
-        Me.btnEmision.Text = "•••"
-        Me.btnEmision.UseVisualStyleBackColor = True
         '
         'txtFechaProceso
         '
@@ -304,17 +292,6 @@ Partial Class jsMerArcConteos
         Me.Label4.TabIndex = 10
         Me.Label4.Text = "Fecha Proceso :"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtEmision
-        '
-        Me.txtEmision.Enabled = False
-        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmision.Location = New System.Drawing.Point(360, 12)
-        Me.txtEmision.MaxLength = 19
-        Me.txtEmision.Name = "txtEmision"
-        Me.txtEmision.Size = New System.Drawing.Size(87, 20)
-        Me.txtEmision.TabIndex = 5
-        Me.txtEmision.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtComentario
         '
@@ -697,6 +674,18 @@ Partial Class jsMerArcConteos
         Me.C1SuperTooltip1.IsBalloon = True
         Me.C1SuperTooltip1.ShowAlways = True
         '
+        'txtEmision
+        '
+        Me.txtEmision.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmision.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmision.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmision.Location = New System.Drawing.Point(333, 12)
+        Me.txtEmision.Name = "txtEmision"
+        Me.txtEmision.Size = New System.Drawing.Size(114, 19)
+        Me.txtEmision.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmision.TabIndex = 214
+        '
         'jsMerArcConteos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -729,7 +718,6 @@ Partial Class jsMerArcConteos
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents dg As System.Windows.Forms.DataGridView
     Friend WithEvents grpEncab As System.Windows.Forms.GroupBox
-    Friend WithEvents txtEmision As System.Windows.Forms.TextBox
     Friend WithEvents txtComentario As System.Windows.Forms.TextBox
     Friend WithEvents txtConteo As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
@@ -774,7 +762,6 @@ Partial Class jsMerArcConteos
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
     Friend WithEvents txtFechaProceso As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents btnEmision As System.Windows.Forms.Button
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents txtItems As System.Windows.Forms.TextBox
@@ -792,4 +779,5 @@ Partial Class jsMerArcConteos
     Friend WithEvents cmbTipoUnidad As System.Windows.Forms.ComboBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents btnAgregarR As System.Windows.Forms.ToolStripButton
+    Friend WithEvents txtEmision As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

@@ -1,6 +1,7 @@
 Imports MySql.Data.MySqlClient
 Imports C1.Win.C1Chart
 Imports System.IO
+Imports Syncfusion.WinForms.Input
 
 Public Class jsMerArcMercancias
     Private Const sModulo As String = "Mercancías"
@@ -62,6 +63,8 @@ Public Class jsMerArcMercancias
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
             dt = ds.Tables(nTabla)
 
+            Dim dates As SfDateTimeEdit() = {txtIngreso}
+            SetSizeDateObjects(dates)
 
             ft.RellenaCombo(aTipo, cmbTipo)
             ft.RellenaCombo(aMix, cmbMIX)
@@ -87,18 +90,18 @@ Public Class jsMerArcMercancias
 
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
-            ft.MensajeCritico("Error en conexión de base de datos: " & ex.Message)
+            ft.mensajeCritico("Error en conexión de base de datos: " & ex.Message)
         End Try
 
     End Sub
 
     Private Sub AsignarTooltips()
         'Menu Barra 
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnAgregar, btnEditar, btnEliminar, btnBuscar, btnSeleccionar, _
+        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnAgregar, btnEditar, btnEliminar, btnBuscar, btnSeleccionar,
                           btnPrimero, btnSiguiente, btnAnterior, btnUltimo, btnImprimir, btnSalir, btnRecalcular)
         'Botones Adicionales
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnCategoria, btnMarca, btnDivision, btnTipJer, btnIVA, btnTallas, btnCombo, _
-                         btnFoto, btnSACS, btnSICA, btnCEP, btnIngreso)
+        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnCategoria, btnMarca, btnDivision, btnTipJer, btnIVA, btnTallas, btnCombo,
+                         btnFoto, btnSACS, btnSICA, btnCEP, txtIngreso)
 
 
         C1Chart2.ToolTip.Enabled = True
@@ -117,15 +120,15 @@ Public Class jsMerArcMercancias
     End Sub
     Private Sub AsignaMov(ByVal nRow As Long, ByVal Actualiza As Boolean)
 
-        dtMovimientos = ft.MostrarFilaEnTabla(myConn, ds, nTablaMovimientos, strSQLMov, Me.BindingContext, MenuBarra, dg, lRegion, _
+        dtMovimientos = ft.MostrarFilaEnTabla(myConn, ds, nTablaMovimientos, strSQLMov, Me.BindingContext, MenuBarra, dg, lRegion,
             jytsistema.sUsuario, nRow, Actualiza)
-        
+
     End Sub
     Private Sub AsignaEqu(ByVal nRow As Long, ByVal Actualiza As Boolean)
 
-        dtEquivalencias = ft.MostrarFilaEnTabla(myConn, ds, nTablaEquivalencias, strSQLEQu, Me.BindingContext, MenuEquivalencia, dgEqu, lRegion, _
+        dtEquivalencias = ft.MostrarFilaEnTabla(myConn, ds, nTablaEquivalencias, strSQLEQu, Me.BindingContext, MenuEquivalencia, dgEqu, lRegion,
             jytsistema.sUsuario, nRow, Actualiza, False)
-       
+
     End Sub
     Private Sub AsignaTXT(ByVal nRow As Long)
 
@@ -242,7 +245,7 @@ Public Class jsMerArcMercancias
 
                     chkCombo.Checked = CBool(ft.DevuelveScalarEntero(myConn, "Select IF( count(*) > 0, 1, 0) FROM jsmercatcom WHERE CODART = '" & .Item("CODART") & "' AND ID_EMP = '" & jytsistema.WorkID & "'  "))
 
-                    txtIngreso.Text = ft.muestraCampoFecha(CDate(.Item("creacion").ToString))
+                    txtIngreso.Value = .Item("creacion")
                     cmbCondicion.SelectedIndex = .Item("estatus")
 
                     If ExisteTabla(myConn, jytsistema.WorkDataBase, "jsmerctainvfot") Then
@@ -342,19 +345,19 @@ Public Class jsMerArcMercancias
 
         ds = DataSetRequery(ds, strSQLMov, myConn, nTablaMovimientos, lblInfo)
         dtMovimientos = ds.Tables(nTablaMovimientos)
-        Dim aCampos() As String = {"fechamov.Emisión.80.C.fecha", _
-                                   "tipomov.TP.35.C.", _
-                                   "numdoc.Documento.100.I.", _
-                                   "unidad.UND.35.C.", _
-                                   "almacen.ALM.50.C.", _
-                                   "cantidad.Cantidad.100.D.Cantidad", _
-                                   "costotal.Costo Total.120.D.Numero", _
-                                   "costotaldes.Costo Total y Desc.120.D.Numero", _
-                                   "peso.Peso.100.D.Cantidad", _
-                                   "origen.ORG.35.C.", _
-                                   "prov_cli.Prov/Clie.80.C.", _
-                                   "nomProv_cli.Nombre o razón social.230.I.", _
-                                   "vendedor.Asesor.50.C.", _
+        Dim aCampos() As String = {"fechamov.Emisión.80.C.fecha",
+                                   "tipomov.TP.35.C.",
+                                   "numdoc.Documento.100.I.",
+                                   "unidad.UND.35.C.",
+                                   "almacen.ALM.50.C.",
+                                   "cantidad.Cantidad.100.D.Cantidad",
+                                   "costotal.Costo Total.120.D.Numero",
+                                   "costotaldes.Costo Total y Desc.120.D.Numero",
+                                   "peso.Peso.100.D.Cantidad",
+                                   "origen.ORG.35.C.",
+                                   "prov_cli.Prov/Clie.80.C.",
+                                   "nomProv_cli.Nombre o razón social.230.I.",
+                                   "vendedor.Asesor.50.C.",
                                    "nomvendedor.Nombre.90.I."}
 
         ft.IniciarTablaPlus(dg, dtMovimientos, aCampos)
@@ -371,18 +374,17 @@ Public Class jsMerArcMercancias
             txtCodigo.Text = ""
         End If
 
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtAlterno, txtBarras, txtNombre, txtCategoria, txtMarca, txtDivision, txtTipJer, _
-                           txtCodjer1, txtCodjer2, txtCodjer3, txtCodjer4, txtCodjer5, txtCodjer6, txtJerarquiaNombre, _
-                           txtPresentacion, txtUbica1, txtUbica2, txtUbica3, txtOfertaA, txtOfertaB, txtOfertaC, _
-                           txtOfertaD, txtOfertaE, txtOfertaF, txtCodigoMovimientos, txtNombreMovimientos, txtBarraA, txtBarraB, _
+        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtAlterno, txtBarras, txtNombre, txtCategoria, txtMarca, txtDivision, txtTipJer,
+                           txtCodjer1, txtCodjer2, txtCodjer3, txtCodjer4, txtCodjer5, txtCodjer6, txtJerarquiaNombre,
+                           txtPresentacion, txtUbica1, txtUbica2, txtUbica3, txtOfertaA, txtOfertaB, txtOfertaC,
+                           txtOfertaD, txtOfertaE, txtOfertaF, txtCodigoMovimientos, txtNombreMovimientos, txtBarraA, txtBarraB,
                            txtBarraC, txtBarraD, txtBarraE, txtBarraF, txtSICA, txtSCAS, txtCEP)
 
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Numero, txtPrecioA, txtPrecioB, txtPrecioC, txtPrecioD, txtPrecioE, txtPrecioF, _
-                        txtDescA, txtDescB, txtDescC, txtDescD, txtDescE, txtDescF, txtGanA, txtGanB, txtGanC, _
+        ft.iniciarTextoObjetos(Transportables.tipoDato.Numero, txtPrecioA, txtPrecioB, txtPrecioC, txtPrecioD, txtPrecioE, txtPrecioF,
+                        txtDescA, txtDescB, txtDescC, txtDescD, txtDescE, txtDescF, txtGanA, txtGanB, txtGanC,
                         txtGanD, txtGanE, txtGanF, txtPorDevoluciones, txtSugerido)
 
         ft.iniciarTextoObjetos(Transportables.tipoDato.Cantidad, txtExMin, txtExMax, txtAlto, txtAncho, txtProfun, txtPesoUnidad)
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Fecha, txtIngreso)
 
         cmbUnidad.SelectedIndex = ft.InArray(aUnidadAbreviada, "UND")
         cmbUnidadDetal.SelectedIndex = ft.InArray(aUnidadAbreviada, "UND")
@@ -397,30 +399,30 @@ Public Class jsMerArcMercancias
         chkCartera.Checked = True
         chkCuotaFija.Checked = False
         chkCombo.Checked = False
-            chkDescuentos.Checked = True
-            chkDevoluciones.Checked = False
-            chkRegulada.Checked = False
-            chkTallas.Checked = False
+        chkDescuentos.Checked = True
+        chkDevoluciones.Checked = False
+        chkRegulada.Checked = False
+        chkTallas.Checked = False
 
-            dg.Columns.Clear()
-            dgEqu.Columns.Clear()
+        dg.Columns.Clear()
+        dgEqu.Columns.Clear()
 
-            pctFoto.Image = Nothing
+        pctFoto.Image = Nothing
 
 
     End Sub
     Private Sub ActivarMarco0()
         grpAceptarSalir.Visible = True
 
-        ft.habilitarObjetos(False, False, C1DockingTabPage2, C1DockingTabPage3, C1DockingTabPage4, C1DockingTabPage5, C1DockingTabPage6, _
+        ft.habilitarObjetos(False, False, C1DockingTabPage2, C1DockingTabPage3, C1DockingTabPage4, C1DockingTabPage5, C1DockingTabPage6,
                          C1DockingTabPage7)
 
         ActivarEnGrupodeControles(tbcMercas.TabPages(0).Controls, txtCodigo)
         ActivarEnGrupodeControles(grpPrecios.Controls, txtCodigo)
 
-        ft.habilitarObjetos(False, False, txtCategoria, txtCategoriaNombre, txtMarca, txtMarcaNombre, txtDivision, _
-                         txtDivisionNombre, txtTipJer, txtTipjerNombre, txtCodjer1, txtCodjer2, txtCodjer3, _
-                         txtCodjer4, txtCodjer5, txtCodjer6, txtJerarquiaNombre, txtIVA, txtIngreso, _
+        ft.habilitarObjetos(False, False, txtCategoria, txtCategoriaNombre, txtMarca, txtMarcaNombre, txtDivision,
+                         txtDivisionNombre, txtTipJer, txtTipjerNombre, txtCodjer1, txtCodjer2, txtCodjer3,
+                         txtCodjer4, txtCodjer5, txtCodjer6, txtJerarquiaNombre, txtIVA,
                          txtOfertaA, txtOfertaB, txtOfertaC, txtOfertaD, txtOfertaE, txtOfertaF, chkTallas)
 
         ft.habilitarObjetos(True, False, btnFoto, cmbTipo, cmbMIX, cmbCondicion)
@@ -449,30 +451,30 @@ Public Class jsMerArcMercancias
         End If
 
         MenuBarra.Enabled = False
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
     End Sub
 
     Private Sub DesactivarMarco0()
 
         grpAceptarSalir.Visible = False
-        ft.habilitarObjetos(True, False, C1DockingTabPage2, C1DockingTabPage3, C1DockingTabPage4, C1DockingTabPage5, C1DockingTabPage6, _
+        ft.habilitarObjetos(True, False, C1DockingTabPage2, C1DockingTabPage3, C1DockingTabPage4, C1DockingTabPage5, C1DockingTabPage6,
                          C1DockingTabPage7)
 
-        ft.habilitarObjetos(False, True, txtCodigo, txtCodigoMovimientos, txtAlterno, txtBarras, _
-                         txtNombre, txtNombreMovimientos, txtCategoria, txtCategoriaNombre, _
-                         txtMarca, txtMarcaNombre, txtTipJer, txtTipjerNombre, txtDivision, _
-                         txtDivisionNombre, txtCodjer1, txtCodjer2, txtCodjer3, txtCodjer4, _
-                         txtCodjer5, txtCodjer6, txtJerarquiaNombre, txtSCAS, txtCEP, txtPresentacion, txtSugerido, _
-                         chkRegulada, chkDevoluciones, txtPorDevoluciones, cmbUnidad, cmbUnidadDetal, txtPesoUnidad, _
-                         txtExMin, txtExMax, txtUbica1, txtUbica2, txtUbica3, txtAlto, txtAncho, _
-                         txtProfun, cmbIVA, txtIVA, btnIVA, btnCategoria, btnMarca, btnDivision, _
-                         btnTipJer, chkCartera, chkDescuentos, txtPrecioA, txtPrecioB, txtPrecioC, _
-                         txtPrecioD, txtPrecioE, txtPrecioF, txtDescA, txtDescB, txtDescC, txtDescD, _
-                         txtDescE, txtDescF, txtGanA, txtGanB, txtGanC, txtGanD, txtGanE, txtGanF, _
-                         txtOfertaA, txtOfertaB, txtOfertaC, txtOfertaD, txtOfertaE, txtOfertaF, _
-                         txtBarraA, txtBarraB, txtBarraC, txtBarraD, txtBarraE, txtBarraF, _
-                         chkTallas, btnTallas, chkCombo, btnCombo, btnFoto, cmbTipo, cmbMIX, txtIngreso, btnIngreso, cmbCondicion, txtSICA)
+        ft.habilitarObjetos(False, True, txtCodigo, txtCodigoMovimientos, txtAlterno, txtBarras,
+                         txtNombre, txtNombreMovimientos, txtCategoria, txtCategoriaNombre,
+                         txtMarca, txtMarcaNombre, txtTipJer, txtTipjerNombre, txtDivision,
+                         txtDivisionNombre, txtCodjer1, txtCodjer2, txtCodjer3, txtCodjer4,
+                         txtCodjer5, txtCodjer6, txtJerarquiaNombre, txtSCAS, txtCEP, txtPresentacion, txtSugerido,
+                         chkRegulada, chkDevoluciones, txtPorDevoluciones, cmbUnidad, cmbUnidadDetal, txtPesoUnidad,
+                         txtExMin, txtExMax, txtUbica1, txtUbica2, txtUbica3, txtAlto, txtAncho,
+                         txtProfun, cmbIVA, txtIVA, btnIVA, btnCategoria, btnMarca, btnDivision,
+                         btnTipJer, chkCartera, chkDescuentos, txtPrecioA, txtPrecioB, txtPrecioC,
+                         txtPrecioD, txtPrecioE, txtPrecioF, txtDescA, txtDescB, txtDescC, txtDescD,
+                         txtDescE, txtDescF, txtGanA, txtGanB, txtGanC, txtGanD, txtGanE, txtGanF,
+                         txtOfertaA, txtOfertaB, txtOfertaC, txtOfertaD, txtOfertaE, txtOfertaF,
+                         txtBarraA, txtBarraB, txtBarraC, txtBarraD, txtBarraE, txtBarraF,
+                         chkTallas, btnTallas, chkCombo, btnCombo, btnFoto, cmbTipo, cmbMIX, cmbCondicion, txtSICA)
 
         ft.habilitarObjetos(False, False, btnAgregaEquivale, btnEditaEquivale, btnEliminaEquivale)
 
@@ -488,7 +490,7 @@ Public Class jsMerArcMercancias
             ft.visualizarObjetos(False, txtGanA, txtGanB, txtGanC, txtGanD, txtGanE, txtGanF)
         End If
         MenuBarra.Enabled = True
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
     End Sub
     Private Sub ColorOfertas(ByVal txt As TextBox, ByVal Color1 As Color)
         If ValorNumero(txt.Text) > 0 Then
@@ -660,10 +662,10 @@ Public Class jsMerArcMercancias
 
                 nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
                 With dtMovimientos.Rows(nPosicionMov)
-                    Dim aCamposAdicionales() As String = {"CODART|'" & txtCodigo.Text & "'", _
-                                                          "FECHAMOV|'" & ft.FormatoFechaHoraMySQL(Convert.ToDateTime(.Item("FECHAMOV"))) & "'", _
-                                                          "NUMDOC|'" & .Item("numdoc") & "'", _
-                                                          "TIPOMOV|'" & .Item("TIPOMOV") & "'", _
+                    Dim aCamposAdicionales() As String = {"CODART|'" & txtCodigo.Text & "'",
+                                                          "FECHAMOV|'" & ft.FormatoFechaHoraMySQL(Convert.ToDateTime(.Item("FECHAMOV"))) & "'",
+                                                          "NUMDOC|'" & .Item("numdoc") & "'",
+                                                          "TIPOMOV|'" & .Item("TIPOMOV") & "'",
                                                           "ASIENTO|'" & .Item("ASIENTO") & "'"}
 
                     If DocumentoBloqueado(myConn, "jsmertramer", aCamposAdicionales) Then
@@ -710,7 +712,7 @@ Public Class jsMerArcMercancias
                 ft.Ejecutar_strSQL(myConn, " delete from jsmerequmer where codart = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
                 ft.Ejecutar_strSQL(myConn, " delete from jsmerextalm where codart = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
                 ft.Ejecutar_strSQL(myConn, " delete from jsmerexpmer where codart = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
-                AsignaTXT(EliminarRegistros(myConn, lblInfo, ds, nTabla, "jsmerctainv", strSQL, aCamposDel, aStringsDel, _
+                AsignaTXT(EliminarRegistros(myConn, lblInfo, ds, nTabla, "jsmerctainv", strSQL, aCamposDel, aStringsDel,
                                               Me.BindingContext(ds, nTabla).Position, True))
             Else
                 ft.mensajeCritico("EstA MERCANCIA posee movimientos. Verifique por favor ...")
@@ -722,10 +724,10 @@ Public Class jsMerArcMercancias
         nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
         If nPosicionMov >= 0 Then
             With dtMovimientos.Rows(nPosicionMov)
-                Dim aCamposAdicionales() As String = {"CODART|'" & txtCodigo.Text & "'", _
-                                                      "FECHAMOV|'" & ft.FormatoFechaHoraMySQL(Convert.ToDateTime(.Item("FECHAMOV"))) & "'", _
-                                                      "NUMDOC|'" & .Item("numdoc") & "'", _
-                                                      "TIPOMOV|'" & .Item("TIPOMOV") & "'", _
+                Dim aCamposAdicionales() As String = {"CODART|'" & txtCodigo.Text & "'",
+                                                      "FECHAMOV|'" & ft.FormatoFechaHoraMySQL(Convert.ToDateTime(.Item("FECHAMOV"))) & "'",
+                                                      "NUMDOC|'" & .Item("numdoc") & "'",
+                                                      "TIPOMOV|'" & .Item("TIPOMOV") & "'",
                                                       "ASIENTO|'" & .Item("ASIENTO") & "'"}
 
                 If DocumentoBloqueado(myConn, "jsmertramer", aCamposAdicionales) Then
@@ -739,7 +741,7 @@ Public Class jsMerArcMercancias
                                 InsertarAuditoria(myConn, MovAud.iEliminar, sModulo, .Item("numdoc"))
 
                                 Dim aCamposDel() As String = {"codart", "numdoc", "origen", "Ejercicio", "id_emp"}
-                                Dim aFieldsDel() As String = {.Item("codart"), .Item("numdoc"), "INV", jytsistema.WorkExercise, jytsistema.WorkID}
+                                Dim aFieldsDel() As String = { .Item("codart"), .Item("numdoc"), "INV", jytsistema.WorkExercise, jytsistema.WorkID}
 
                                 nPosicionMov = EliminarRegistros(myConn, lblInfo, ds, nTablaMovimientos, "jsmertramer", strSQLMov, aCamposDel, aFieldsDel, nPosicionMov)
 
@@ -791,7 +793,7 @@ Public Class jsMerArcMercancias
 
     End Sub
 
-    
+
 
 
     Private Function Validado() As Boolean
@@ -905,26 +907,26 @@ Public Class jsMerArcMercancias
                 CodigoArticulo = txtCodigo.Text
             End If
 
-            ft.Ejecutar_strSQL(myconn, " update jsmerequmer set codart = '" & CodigoArticulo & "' where codart = '" & txtCodigo.Text & "' and id_emp ='" & jytsistema.WorkID & "' ")
-            ft.Ejecutar_strSQL(myconn, " update jsmerexpmer set codart = '" & CodigoArticulo & "' where codart = '" & txtCodigo.Text & "' and id_emp ='" & jytsistema.WorkID & "' ")
-            ft.Ejecutar_strSQL(myconn, " update jsmercatcom set codart = '" & CodigoArticulo & "' where codart = '" & txtCodigo.Text & "' and id_emp ='" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsmerequmer set codart = '" & CodigoArticulo & "' where codart = '" & txtCodigo.Text & "' and id_emp ='" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsmerexpmer set codart = '" & CodigoArticulo & "' where codart = '" & txtCodigo.Text & "' and id_emp ='" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsmercatcom set codart = '" & CodigoArticulo & "' where codart = '" & txtCodigo.Text & "' and id_emp ='" & jytsistema.WorkID & "' ")
 
         End If
 
-        InsertEditMERCASMercancia(myConn, lblInfo, Inserta, CodigoArticulo, txtAlterno.Text, txtBarras.Text, txtNombre.Text, _
-                                    txtCategoria.Text, txtMarca.Text, txtDivision.Text, txtTipJer.Text, _
-                                    txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, _
-                                    txtPresentacion.Text, CDbl(txtSugerido.Text), IIf(chkRegulada.Checked, 1, 0), IIf(chkDevoluciones.Checked, 1, 0), _
-                                    CDbl(txtPorDevoluciones.Text), aUnidadAbreviada(cmbUnidad.SelectedIndex), CDbl(txtPesoUnidad.Text), IIf(dtEquivalencias.Rows.Count > 0, "1", IIf(aUnidadAbreviada(cmbUnidad.SelectedIndex) = "KGR", "1", "0")), aUnidadAbreviada(cmbUnidadDetal.SelectedIndex), _
-                                    CDbl(txtExMin.Text), CDbl(txtExMax.Text), txtUbica1.Text, txtUbica2.Text, txtUbica3.Text, _
-                                    CDbl(txtAlto.Text), CDbl(txtAncho.Text), CDbl(txtProfun.Text), cmbIVA.Text, _
-                                    IIf(chkCartera.Checked, 1, 0), IIf(chkCuotaFija.Checked, 1, 0), If(chkDescuentos.Checked, 1, 0), CDbl(txtPrecioA.Text), _
-                                    CDbl(txtPrecioB.Text), CDbl(txtPrecioC.Text), CDbl(txtPrecioD.Text), CDbl(txtPrecioE.Text), _
-                                    CDbl(txtPrecioF.Text), CDbl(txtDescA.Text), CDbl(txtDescB.Text), CDbl(txtDescC.Text), _
-                                    CDbl(txtDescD.Text), CDbl(txtDescE.Text), CDbl(txtDescF.Text), CDbl(txtGanA.Text), _
-                                    CDbl(txtGanB.Text), CDbl(txtGanC.Text), CDbl(txtGanD.Text), CDbl(txtGanE.Text), CDbl(txtGanF.Text), _
-                                    txtBarraA.Text, txtBarraB.Text, txtBarraC.Text, txtBarraD.Text, txtBarraE.Text, txtBarraF.Text, _
-                                    cmbTipo.SelectedIndex, cmbMIX.SelectedIndex, CDate(txtIngreso.Text), cmbCondicion.SelectedIndex, _
+        InsertEditMERCASMercancia(myConn, lblInfo, Inserta, CodigoArticulo, txtAlterno.Text, txtBarras.Text, txtNombre.Text,
+                                    txtCategoria.Text, txtMarca.Text, txtDivision.Text, txtTipJer.Text,
+                                    txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text,
+                                    txtPresentacion.Text, CDbl(txtSugerido.Text), IIf(chkRegulada.Checked, 1, 0), IIf(chkDevoluciones.Checked, 1, 0),
+                                    CDbl(txtPorDevoluciones.Text), aUnidadAbreviada(cmbUnidad.SelectedIndex), CDbl(txtPesoUnidad.Text), IIf(dtEquivalencias.Rows.Count > 0, "1", IIf(aUnidadAbreviada(cmbUnidad.SelectedIndex) = "KGR", "1", "0")), aUnidadAbreviada(cmbUnidadDetal.SelectedIndex),
+                                    CDbl(txtExMin.Text), CDbl(txtExMax.Text), txtUbica1.Text, txtUbica2.Text, txtUbica3.Text,
+                                    CDbl(txtAlto.Text), CDbl(txtAncho.Text), CDbl(txtProfun.Text), cmbIVA.Text,
+                                    IIf(chkCartera.Checked, 1, 0), IIf(chkCuotaFija.Checked, 1, 0), If(chkDescuentos.Checked, 1, 0), CDbl(txtPrecioA.Text),
+                                    CDbl(txtPrecioB.Text), CDbl(txtPrecioC.Text), CDbl(txtPrecioD.Text), CDbl(txtPrecioE.Text),
+                                    CDbl(txtPrecioF.Text), CDbl(txtDescA.Text), CDbl(txtDescB.Text), CDbl(txtDescC.Text),
+                                    CDbl(txtDescD.Text), CDbl(txtDescE.Text), CDbl(txtDescF.Text), CDbl(txtGanA.Text),
+                                    CDbl(txtGanB.Text), CDbl(txtGanC.Text), CDbl(txtGanD.Text), CDbl(txtGanE.Text), CDbl(txtGanF.Text),
+                                    txtBarraA.Text, txtBarraB.Text, txtBarraC.Text, txtBarraD.Text, txtBarraE.Text, txtBarraF.Text,
+                                    cmbTipo.SelectedIndex, cmbMIX.SelectedIndex, txtIngreso.Value, cmbCondicion.SelectedIndex,
                                     txtSICA.Text, txtSCAS.Text, txtCEP.Text)
 
         InsertarAuditoria(myConn, IIf(Inserta, MovAud.iIncluir, MovAud.imodificar), sModulo, CodigoArticulo)
@@ -954,14 +956,14 @@ Public Class jsMerArcMercancias
 
     End Sub
 
-    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus, _
-        txtAlterno.GotFocus, txtAlterno.GotFocus, txtBarras.GotFocus, txtBarraA.GotFocus, txtBarraB.GotFocus, _
-        txtBarraC.GotFocus, txtBarraD.GotFocus, txtBarraE.GotFocus, txtBarraF.GotFocus, txtNombre.GotFocus, txtPresentacion.GotFocus, _
-        txtPorDevoluciones.GotFocus, txtExMin.GotFocus, txtExMax.GotFocus, txtPesoUnidad.GotFocus, txtUbica1.GotFocus, _
-        txtUbica2.GotFocus, txtUbica3.GotFocus, txtAlto.GotFocus, txtAncho.GotFocus, txtProfun.GotFocus, _
-        txtPrecioA.GotFocus, txtPrecioB.GotFocus, txtPrecioC.GotFocus, txtPrecioD.GotFocus, _
-        txtPrecioE.GotFocus, txtPrecioF.GotFocus, txtDescA.GotFocus, txtDescB.GotFocus, txtDescC.GotFocus, _
-        txtDescD.GotFocus, txtDescE.GotFocus, txtDescF.GotFocus, txtGanA.GotFocus, txtGanB.GotFocus, txtGanC.GotFocus, _
+    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus,
+        txtAlterno.GotFocus, txtAlterno.GotFocus, txtBarras.GotFocus, txtBarraA.GotFocus, txtBarraB.GotFocus,
+        txtBarraC.GotFocus, txtBarraD.GotFocus, txtBarraE.GotFocus, txtBarraF.GotFocus, txtNombre.GotFocus, txtPresentacion.GotFocus,
+        txtPorDevoluciones.GotFocus, txtExMin.GotFocus, txtExMax.GotFocus, txtPesoUnidad.GotFocus, txtUbica1.GotFocus,
+        txtUbica2.GotFocus, txtUbica3.GotFocus, txtAlto.GotFocus, txtAncho.GotFocus, txtProfun.GotFocus,
+        txtPrecioA.GotFocus, txtPrecioB.GotFocus, txtPrecioC.GotFocus, txtPrecioD.GotFocus,
+        txtPrecioE.GotFocus, txtPrecioF.GotFocus, txtDescA.GotFocus, txtDescB.GotFocus, txtDescC.GotFocus,
+        txtDescD.GotFocus, txtDescE.GotFocus, txtDescF.GotFocus, txtGanA.GotFocus, txtGanB.GotFocus, txtGanC.GotFocus,
         txtGanD.GotFocus, txtGanE.GotFocus, txtGanF.GotFocus, txtSugerido.GotFocus
 
         ft.colocaMensajeEnEtiqueta(sender, jytsistema.WorkLanguage, lblInfo)
@@ -972,7 +974,7 @@ Public Class jsMerArcMercancias
         e.Value = ft.dataGridViewCellFormating(dg, e)
     End Sub
 
-    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick, _
+    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick,
         dg.CellMouseClick, dg.RegionChanged
         Me.BindingContext(ds, nTablaMovimientos).Position = e.RowIndex
         nPosicionMov = e.RowIndex
@@ -1040,17 +1042,17 @@ Public Class jsMerArcMercancias
 
         dtEnvases = ft.AbrirDataTable(ds, nTablaEnvases, myConn, strSQLEnvases)
 
-        Dim aCampos() As String = {"fechamov.Emisión.80.C.fecha", _
-                                   "tipomov.TP.35.C.", _
-                                   "numdoc.Documento.100.I.", _
-                                   "almacen.ALM.50.C.", _
-                                   "cantidad.Cantidad.70.D.Entero", _
-                                   "origen.ORG.35.C.", _
-                                   "prov_cli.Prov/Clie.80.C.", _
-                                   "nomProv_cli.Nombre o razón social.300.I.", _
-                                   "vendedor.Asesor.50.C.", _
-                                   "nomvendedor.Nombre.300.I.", _
-                                   "nomEstatus.Estatus.200.I.", _
+        Dim aCampos() As String = {"fechamov.Emisión.80.C.fecha",
+                                   "tipomov.TP.35.C.",
+                                   "numdoc.Documento.100.I.",
+                                   "almacen.ALM.50.C.",
+                                   "cantidad.Cantidad.70.D.Entero",
+                                   "origen.ORG.35.C.",
+                                   "prov_cli.Prov/Clie.80.C.",
+                                   "nomProv_cli.Nombre o razón social.300.I.",
+                                   "vendedor.Asesor.50.C.",
+                                   "nomvendedor.Nombre.300.I.",
+                                   "nomEstatus.Estatus.200.I.",
                                    "sada..10.I."}
 
         ft.IniciarTablaPlus(dgEnvases, dtEnvases, aCampos)
@@ -1059,8 +1061,8 @@ Public Class jsMerArcMercancias
     End Sub
     Private Sub AsignarCompras(ByVal nArticulo As String)
 
-        ft.habilitarObjetos(False, True, txtCodigoCompras, txtNombreCompras, txtOrdenes, txtRecepciones, txtBackorder, _
-            txtFechaUltimaCompr, txtUltimoProveedor, txtEntradas, txtCostoAcum, txtCostoAcumDesc, txtUltimoCosto, _
+        ft.habilitarObjetos(False, True, txtCodigoCompras, txtNombreCompras, txtOrdenes, txtRecepciones, txtBackorder,
+            txtFechaUltimaCompr, txtUltimoProveedor, txtEntradas, txtCostoAcum, txtCostoAcumDesc, txtUltimoCosto,
             txtDevolucionesCompras, txtCostoAcumDev, txtCostoAcumDevDesc, txtCostoPromedio, txtNombreUltimoProveedor)
 
         If dt.Rows.Count > 0 Then
@@ -1142,9 +1144,9 @@ Public Class jsMerArcMercancias
         Histograma.ChartGroups(0).ChartData.SeriesList(0).Y.CopyDataIn(aaY)
         Histograma.ChartGroups(0).ChartData.SeriesList(1).Y.CopyDataIn(abY)
 
-        Dim dtt As DataTable = IIf(Compras_o_Ventas = 0, TablaCompras(nArticulo, CantidadKilosMoney), _
+        Dim dtt As DataTable = IIf(Compras_o_Ventas = 0, TablaCompras(nArticulo, CantidadKilosMoney),
                                    TablaVentas(nArticulo, CantidadKilosMoney))
-        Dim dttAnteriores As DataTable = IIf(Compras_o_Ventas = 0, TablaCompras(nArticulo, CantidadKilosMoney, 1), _
+        Dim dttAnteriores As DataTable = IIf(Compras_o_Ventas = 0, TablaCompras(nArticulo, CantidadKilosMoney, 1),
                                              TablaVentas(nArticulo, CantidadKilosMoney, 1))
 
         aaY = ValoresMensuales(dtt)
@@ -1306,8 +1308,8 @@ Public Class jsMerArcMercancias
 
     Private Sub AsignarVentas(ByVal nArticulo As String)
 
-        ft.habilitarObjetos(False, True, txtCodigoVentas, txtNombreVentas, txtCotizacion, txtPedidos, txtEntregas, _
-            txtFechaUltimaVenta, txtUltimoCliente, txtSalidas, txtVentasAcum, txtVentasAcumDesc, txtPrecioUltimo, _
+        ft.habilitarObjetos(False, True, txtCodigoVentas, txtNombreVentas, txtCotizacion, txtPedidos, txtEntregas,
+            txtFechaUltimaVenta, txtUltimoCliente, txtSalidas, txtVentasAcum, txtVentasAcumDesc, txtPrecioUltimo,
             txtDevolucionesVentas, txtVentasAcumDev, txtVentasAcumDevDesc, txtPrecioPromedio, txtNombreUltimoCliente)
 
         If dt.Rows.Count > 0 Then
@@ -1337,9 +1339,9 @@ Public Class jsMerArcMercancias
     End Sub
     Private Sub AsignarExistencias(ByVal nArticulo As String)
 
-        ft.habilitarObjetos(False, True, txtCodigoExistencias, txtNombreExistencias, txtExisteUnidad, _
-                         txtExistenciaKilos, txtPromedioUnidad, txtPromedioKilos, txtSugeridoUnidad, _
-                         txtSugeridoKilos, txtUnidad1, txtUnidad2, txtUnidad4, txtKilos1, txtKilos2, _
+        ft.habilitarObjetos(False, True, txtCodigoExistencias, txtNombreExistencias, txtExisteUnidad,
+                         txtExistenciaKilos, txtPromedioUnidad, txtPromedioKilos, txtSugeridoUnidad,
+                         txtSugeridoKilos, txtUnidad1, txtUnidad2, txtUnidad4, txtKilos1, txtKilos2,
                          txtKilos4, txtInventarioDias)
 
         Dim nMeses As Integer = 3
@@ -1412,7 +1414,7 @@ Public Class jsMerArcMercancias
         Dim aCamEx() As String = {"codigo", "descripcion", "existencia", "pesototal", "inventario", ""}
         Dim aNomEx() As String = {"Código", "Descripción", "Existencia en Unidades Venta", "Existencia en Kilogramos", "Dias de inventario", ""}
         Dim aAncEx() As Integer = {60, 140, 120, 120, 80, 100}
-        Dim aAliEx() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Derecha, _
+        Dim aAliEx() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Derecha,
                                    AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda}
         Dim aForEx() As String = {"", "", sFormatoCantidad, sFormatoCantidad, sFormatoEntero, ""}
 
@@ -1479,7 +1481,7 @@ Public Class jsMerArcMercancias
 
         Dim dtAse As New DataTable
         Dim nTablaAse As String = "tblAsesores"
-        ds = DataSetRequery(ds, " select * from jsvencatven where tipo = 0 and clase = 0 and id_emp = '" & jytsistema.WorkID & "' ", myConn, _
+        ds = DataSetRequery(ds, " select * from jsvencatven where tipo = 0 and clase = 0 and id_emp = '" & jytsistema.WorkID & "' ", myConn,
                              nTablaAse, lblInfo)
         dtAse = ds.Tables(nTablaAse)
 
@@ -1528,8 +1530,8 @@ Public Class jsMerArcMercancias
     End Sub
     Private Sub AgregaYCancela()
 
-        ft.Ejecutar_strSQL(myconn, " delete from jsmercatcom where codart = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
-        ft.Ejecutar_strSQL(myconn, " delete from jsmerequmer where codart = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+        ft.Ejecutar_strSQL(myConn, " delete from jsmercatcom where codart = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+        ft.Ejecutar_strSQL(myConn, " delete from jsmerequmer where codart = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
         'OJOOJOJOJO. VERIFICAR TALLAS Y COLORES
         'ft.Ejecutar_strSQL ( myconn, " delete from jsprodescom where numcom = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
         'ft.Ejecutar_strSQL ( myconn, " delete from jsvenrencom where numdoc = '" & txtCodigo.Text & "' and origen = 'COM' and id_emp = '" & jytsistema.WorkID & "' ")
@@ -1592,8 +1594,8 @@ Public Class jsMerArcMercancias
                 nPosicionEqu = Me.BindingContext(ds, nTablaEquivalencias).Position
 
                 Dim aCamDel() As String = {"codart", "unidad", "uvalencia", "id_emp"}
-                Dim aStrDel() As String = {txtCodigo.Text, aUnidadAbreviada(cmbUnidad.SelectedIndex), _
-                                           .Rows(nPosicionEqu).Item("uvalencia").ToString, _
+                Dim aStrDel() As String = {txtCodigo.Text, aUnidadAbreviada(cmbUnidad.SelectedIndex),
+                                           .Rows(nPosicionEqu).Item("uvalencia").ToString,
                                            jytsistema.WorkID}
 
                 If ft.DevuelveScalarEntero(myConn, " SELECT COUNT(*) FROM jsmertramer WHERE " _
@@ -1602,7 +1604,7 @@ Public Class jsMerArcMercancias
                                          & " id_emp = '" & jytsistema.WorkID & "'") = 0 Then
 
                     If ft.PreguntaEliminarRegistro() = Windows.Forms.DialogResult.Yes Then
-                        AsignaEqu(EliminarRegistros(myConn, lblInfo, ds, nTablaEquivalencias, "jsmerequmer", _
+                        AsignaEqu(EliminarRegistros(myConn, lblInfo, ds, nTablaEquivalencias, "jsmerequmer",
                                                    strSQLEQu, aCamDel, aStrDel, nPosicionEqu), True)
 
                     End If
@@ -1615,19 +1617,19 @@ Public Class jsMerArcMercancias
 
     End Sub
 
-    Private Sub dgEQU_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgEqu.RowHeaderMouseClick, _
+    Private Sub dgEQU_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgEqu.RowHeaderMouseClick,
         dgEqu.CellMouseClick, dgEqu.RegionChanged
         Me.BindingContext(ds, nTablaEquivalencias).Position = e.RowIndex
         nPosicionEqu = e.RowIndex
     End Sub
 
 
-    Private Sub txtSugerido_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSugerido.KeyPress, _
-        txtPorDevoluciones.KeyPress, txtPesoUnidad.KeyPress, txtExMax.KeyPress, txtExMin.KeyPress, txtAlto.KeyPress, _
-        txtAncho.KeyPress, txtProfun.KeyPress, txtPrecioA.KeyPress, txtPrecioB.KeyPress, txtPrecioC.KeyPress, _
-        txtPrecioD.KeyPress, txtPrecioE.KeyPress, txtPrecioF.KeyPress, txtDescA.KeyPress, txtDescB.KeyPress, _
-        txtDescC.KeyPress, txtDescD.KeyPress, txtDescE.KeyPress, txtDescF.KeyPress, txtGanA.KeyPress, _
-        txtGanB.KeyPress, txtGanC.KeyPress, txtGanD.KeyPress, txtGanE.KeyPress, txtGanF.KeyPress, _
+    Private Sub txtSugerido_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSugerido.KeyPress,
+        txtPorDevoluciones.KeyPress, txtPesoUnidad.KeyPress, txtExMax.KeyPress, txtExMin.KeyPress, txtAlto.KeyPress,
+        txtAncho.KeyPress, txtProfun.KeyPress, txtPrecioA.KeyPress, txtPrecioB.KeyPress, txtPrecioC.KeyPress,
+        txtPrecioD.KeyPress, txtPrecioE.KeyPress, txtPrecioF.KeyPress, txtDescA.KeyPress, txtDescB.KeyPress,
+        txtDescC.KeyPress, txtDescD.KeyPress, txtDescE.KeyPress, txtDescF.KeyPress, txtGanA.KeyPress,
+        txtGanB.KeyPress, txtGanC.KeyPress, txtGanD.KeyPress, txtGanE.KeyPress, txtGanF.KeyPress,
         txtPromedioMeses.KeyPress, txtSugeridoDias.KeyPress
 
         e.Handled = ft.validaNumeroEnTextbox(e)
@@ -1679,7 +1681,7 @@ Public Class jsMerArcMercancias
         txtNombreUltimoProveedor.Text = qFoundAndSign(myConn, lblInfo, "jsprocatpro", afld, aCam, "nombre")
     End Sub
 
-    Private Sub rBtn1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rBtn1.CheckedChanged, _
+    Private Sub rBtn1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rBtn1.CheckedChanged,
         rBtn2.CheckedChanged, rBtn3.CheckedChanged
 
         If rBtn1.Checked Then VerHistograma(c1Chart1, 0, txtCodigo.Text, 0)
@@ -1687,7 +1689,7 @@ Public Class jsMerArcMercancias
         If rBtn3.Checked Then VerHistograma(c1Chart1, 0, txtCodigo.Text, 2)
 
     End Sub
-    Private Sub rBtnV1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rBtnV1.CheckedChanged, _
+    Private Sub rBtnV1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rBtnV1.CheckedChanged,
         rBtnV2.CheckedChanged, rBtnV3.CheckedChanged
 
         If rBtnV1.Checked Then VerHistograma(C1Chart2, 1, txtCodigo.Text, 0)
@@ -1701,7 +1703,7 @@ Public Class jsMerArcMercancias
         txtNombreUltimoCliente.Text = qFoundAndSign(myConn, lblInfo, "jsvencatcli", afld, aCam, "nombre")
     End Sub
 
-    Private Sub txtPromedioMeses_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPromedioMeses.TextChanged, _
+    Private Sub txtPromedioMeses_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPromedioMeses.TextChanged,
         txtSugeridoDias.TextChanged
         PresentarExistencias(txtCodigo.Text, ValorEntero(txtPromedioMeses.Text), ValorEntero(txtSugeridoDias.Text))
     End Sub
@@ -1739,10 +1741,6 @@ Public Class jsMerArcMercancias
 
 
         f = Nothing
-    End Sub
-
-    Private Sub btnIngreso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIngreso.Click
-        txtIngreso.Text = SeleccionaFecha(CDate(txtIngreso.Text), Me, sender)
     End Sub
 
     Private Sub btnIVA_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIVA.Click
@@ -1787,7 +1785,7 @@ Public Class jsMerArcMercancias
         If txtCodigo.Text <> "" Then
             Dim f As New jsMerArcComponentesCombo
             f.Cargar(myConn, txtCodigo.Text)
-            ft.Ejecutar_strSQL(myconn, " update jsmerctainv set montoultimacompra = " & f.CostoTotal & " , pesounidad = " & f.PesoTotal & " where codart = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsmerctainv set montoultimacompra = " & f.CostoTotal & " , pesounidad = " & f.PesoTotal & " where codart = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
             txtPesoUnidad.Text = ft.FormatoCantidad(f.PesoTotal)
             txtUltimoCosto.Text = ft.FormatoNumero(f.CostoTotal)
             chkCombo.Checked = IIf(f.CostoTotal > 0, True, False)
@@ -1810,7 +1808,7 @@ Public Class jsMerArcMercancias
     Private Sub btnRecalcular_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRecalcular.Click
         Select Case tbcMercas.SelectedTab.Text
             Case "Mercancías"
-                ft.Ejecutar_strSQL(myconn, " update jsmerctainv set unidaddetal = unidad where unidaddetal = '' and id_emp = '" & jytsistema.WorkID & "' ")
+                ft.Ejecutar_strSQL(myConn, " update jsmerctainv set unidaddetal = unidad where unidaddetal = '' and id_emp = '" & jytsistema.WorkID & "' ")
                 ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
                 AsignaTXT(nPosicionCat)
             Case "Movimientos"
@@ -1863,18 +1861,18 @@ Public Class jsMerArcMercancias
             With nRow
 
                 Dim nCosto As Double = UltimoCostoAFecha(myConn, .Item("codart"), CDate(.Item("fechamov").ToString))
-                Dim nEquivale As Double = Equivalencia(myConn,  .Item("codart"), .Item("unidad"))
+                Dim nEquivale As Double = Equivalencia(myConn, .Item("codart"), .Item("unidad"))
                 Dim Descuento As Double = (1 - .Item("costotaldes") / .Item("costotal")) * 100
 
 
                 Dim Costotal As Double = nCosto * .Item("cantidad") / IIf(nEquivale = 0, 1, nEquivale)
                 Dim CostotalDescuento As Double = nCosto * (1 - Descuento / 100) * .Item("cantidad") / IIf(nEquivale = 0, 1, nEquivale)
 
-                InsertEditMERCASMovimientoInventario(myConn, lblInfo, False, .Item("codart"), CDate(.Item("fechamov").ToString), _
-                                                      .Item("tipomov"), .Item("numdoc"), .Item("unidad"), .Item("cantidad"), .Item("peso"), _
-                                                      Costotal, CostotalDescuento, .Item("origen"), .Item("numorg"), _
+                InsertEditMERCASMovimientoInventario(myConn, lblInfo, False, .Item("codart"), CDate(.Item("fechamov").ToString),
+                                                      .Item("tipomov"), .Item("numdoc"), .Item("unidad"), .Item("cantidad"), .Item("peso"),
+                                                      Costotal, CostotalDescuento, .Item("origen"), .Item("numorg"),
                                                       .Item("lote"), .Item("prov_cli"), .Item("ventotal"), .Item("ventotaldes"),
-                                                      .Item("impiva"), .Item("descuento"), .Item("vendedor"), .Item("almacen"), _
+                                                      .Item("impiva"), .Item("descuento"), .Item("vendedor"), .Item("almacen"),
                                                       .Item("asiento"), CDate(.Item("fechasi").ToString))
 
 
@@ -1903,7 +1901,7 @@ Public Class jsMerArcMercancias
             ' Callculate data coordinates
             Dim aNom() As String = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"}
             If ds.Group.CoordToDataCoord(p.X, p.Y, x, y) Then
-                e.TooltipText = String.Format("{0}" + ControlChars.Lf + "Mes = " + aNom(Math.Round(x) - 1) + _
+                e.TooltipText = String.Format("{0}" + ControlChars.Lf + "Mes = " + aNom(Math.Round(x) - 1) +
                                               ControlChars.Lf + "Valor = {2:#.##}", ds.Label, x, y)
             Else
                 e.TooltipText = ""
@@ -1926,7 +1924,7 @@ Public Class jsMerArcMercancias
             ' Callculate data coordinates
             Dim aNom() As String = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"}
             If ds.Group.CoordToDataCoord(p.X, p.Y, x, y) Then
-                e.TooltipText = String.Format("{0}" + ControlChars.Lf + "Mes = " + aNom(Math.Round(x) - 1) + _
+                e.TooltipText = String.Format("{0}" + ControlChars.Lf + "Mes = " + aNom(Math.Round(x) - 1) +
                                               ControlChars.Lf + "Valor = {2:#.##}", ds.Label, x, y)
             Else
                 e.TooltipText = ""
@@ -1944,7 +1942,7 @@ Public Class jsMerArcMercancias
                         & " id_emp = '" & jytsistema.WorkID & "' order by UVALENCIA "
 
         If i_modo = movimiento.iEditar Then
-            ft.Ejecutar_strSQL(myconn, " delete from jsmerequmer where codart = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " delete from jsmerequmer where codart = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
             AsignaEqu(nPosicionEqu, True)
         End If
 
@@ -1972,7 +1970,7 @@ Public Class jsMerArcMercancias
     End Sub
 
     Private Sub txtCodigo_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCodigo.TextChanged
-      
+
         If cmbUnidad.SelectedIndex >= 0 Then _
             strSQLEQu = " select codart, unidad, equivale, uvalencia, elt(divide + 1,'No','Si') divide, id_emp from jsmerequmer " _
                             & " where codart = '" & txtCodigo.Text & "' and " _
@@ -1980,7 +1978,7 @@ Public Class jsMerArcMercancias
                             & " id_emp = '" & jytsistema.WorkID & "' order by UVALENCIA "
     End Sub
 
-    Private Sub txtOfertaA_MouseHover(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtOfertaA.MouseHover, _
+    Private Sub txtOfertaA_MouseHover(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtOfertaA.MouseHover,
         txtOfertaB.MouseHover, txtOfertaC.MouseHover, txtOfertaD.MouseHover, txtOfertaE.MouseHover, txtOfertaF.MouseHover
 
         Dim Mensaje As String = MensajeOferta(myConn, txtCodigo.Text, jytsistema.sFechadeTrabajo, lblInfo)
@@ -2120,23 +2118,23 @@ Public Class jsMerArcMercancias
     End Sub
     Private Sub IniciarGrilla()
 
-        Dim aCam() As String = {"codven.Código.60.I.", _
-                                "vendedor.Apellidos/Nombres.250.I.", _
-                                "factorcuota.%.50.D.Numero", _
-                                "mes01.ENE.70.D.Cantidad", _
-                                "mes02.FEB.70.D.Cantidad", _
-                                "mes03.MAR.70.D.Cantidad", _
-                                "mes04.ABR.70.D.Cantidad", _
-                                "mes05.MAY.70.D.Cantidad", _
-                                "mes06.JUN.70.D.Cantidad", _
-                                "mes07.JUL.70.D.Cantidad", _
-                                "mes08.AGO.70.D.Cantidad", _
-                                "mes09.SEP.70.D.Cantidad", _
-                                "mes10.OCT.70.D.Cantidad", _
-                                "mes11.NOV.70.D.Cantidad", _
-                                "mes12.DIC.70.D.Cantidad", _
+        Dim aCam() As String = {"codven.Código.60.I.",
+                                "vendedor.Apellidos/Nombres.250.I.",
+                                "factorcuota.%.50.D.Numero",
+                                "mes01.ENE.70.D.Cantidad",
+                                "mes02.FEB.70.D.Cantidad",
+                                "mes03.MAR.70.D.Cantidad",
+                                "mes04.ABR.70.D.Cantidad",
+                                "mes05.MAY.70.D.Cantidad",
+                                "mes06.JUN.70.D.Cantidad",
+                                "mes07.JUL.70.D.Cantidad",
+                                "mes08.AGO.70.D.Cantidad",
+                                "mes09.SEP.70.D.Cantidad",
+                                "mes10.OCT.70.D.Cantidad",
+                                "mes11.NOV.70.D.Cantidad",
+                                "mes12.DIC.70.D.Cantidad",
                                 "total.TOTAL.70.D.Cantidad"}
-       
+
         ft.IniciarTablaPlus(dgCuotas, dtCuotas, aCam, , True, New Font("Consolas", 8, FontStyle.Regular))
         If dtCuotas.Rows.Count > 0 Then nPosicionCuo = 0
 
@@ -2168,12 +2166,12 @@ Public Class jsMerArcMercancias
                         Case 1 'UNIDAD VENTA
                             nValorCuotas = CDbl(dgCuotas.CurrentCell.Value) * ft.DevuelveScalarDoble(myConn, " select pesounidad from jsmerctainv where codart = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
                         Case 2 'UNIDAD MEDIDA SECUNDARIA
-                            nValorCuotas = CDbl(dgCuotas.CurrentCell.Value) / Equivalencia(myConn,  CodigoMercancia, ParametroPlus(myConn, Gestion.iMercancías, "MERPARAM07")) * ft.DevuelveScalarDoble(myConn, " select pesounidad from jsmerctainv where codart = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                            nValorCuotas = CDbl(dgCuotas.CurrentCell.Value) / Equivalencia(myConn, CodigoMercancia, ParametroPlus(myConn, Gestion.iMercancías, "MERPARAM07")) * ft.DevuelveScalarDoble(myConn, " select pesounidad from jsmerctainv where codart = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
                     End Select
                     If ft.DevuelveScalarEntero(myConn, " SELECT count(*) from jsvencuoart where codart = '" & txtCodigo.Text & "' and codven = '" & CodigoMercancia & "' and id_emp = '" & jytsistema.WorkID & "' ") = 0 Then
                         ft.Ejecutar_strSQL(myConn, " insert into jsvencuoart values('" & CodigoMercancia & "','" & txtCodigo.Text & "', 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0,0,'" & jytsistema.WorkExercise & "','" & jytsistema.WorkID & "' ) ")
                     End If
-                    ft.Ejecutar_strSQL(myconn, " update jsvencuoart set " & Mes & " = " & nValorCuotas & " " _
+                    ft.Ejecutar_strSQL(myConn, " update jsvencuoart set " & Mes & " = " & nValorCuotas & " " _
                                             & " where codven = '" & CodigoMercancia & "' and codart = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
                 End If
 

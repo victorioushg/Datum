@@ -151,10 +151,10 @@ Module FuncionesImpresionFiscalPnP
         If dtFP.Rows.Count > 0 Then
             For mCont = 0 To dtFP.Rows.Count - 1
                 With dtFP.Rows(mCont)
-                    fpCont = ft.InArray(aFormaPagoAbreviada, .Item("FORMAPAG"))
+                    Dim formaPago = formasDePago.FirstOrDefault(Function(forma) forma.Value = .Item("FORMAPAG")).Text
                     bRet = ""
                     While bRet <> "OK"
-                        PFTfiscal(aFormaPago(fpCont - 1) & RellenaCadenaConCaracter(Format(.Item("IMPORTE"), sFormatoNumeroEpson), "D", 40 - aFormaPago(fpCont - 1).Length))
+                        PFTfiscal(formaPago & RellenaCadenaConCaracter(Format(.Item("IMPORTE"), sFormatoNumeroEpson), "D", 40 - formaPago.Length))
                     End While
                 End With
             Next

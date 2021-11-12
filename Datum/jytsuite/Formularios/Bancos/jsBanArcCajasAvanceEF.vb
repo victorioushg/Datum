@@ -1,5 +1,6 @@
 Imports MySql.Data.MySqlClient
 Imports Syncfusion.WinForms.Input
+
 Public Class jsBanArcCajasAvanceEF
     Private Const sModulo As String = "Avance de Efectivo"
     Private Const nTabla As String = "tarjetas"
@@ -129,12 +130,12 @@ Public Class jsBanArcCajasAvanceEF
         End If
         InsertEditBANCOSRenglonCaja(MyConn, lblInfo, Insertar, CodigoCaja, Renglon, txtFecha.Value, "CAJ",
              "SA", txtDocumento.Text, "EF", "", "", -1 * ValorNumero(txtImporte.Text), "", "AVANCE EFECTIVO", "", jytsistema.MyDate, 1,
-             "", "", "", MyDate, "", "", "0")
+             "", "", "", MyDate, "", "", "0", jytsistema.WorkCurrency.Id, DateTime.Now())
 
         InsertEditBANCOSRenglonCaja(MyConn, lblInfo, Insertar, CodigoCaja, Renglon, txtFecha.Value, "CAJ",
                      "EN", txtDocumento.Text, aFormaPagR(cmbFormaPago.SelectedIndex),
                      txtDocPago.Text, txtRefPago.Text, ValorNumero(txtImporte.Text), "", "AVANCE EFECTIVO", "", jytsistema.MyDate, 1,
-                     "", "", "", MyDate, "", "", "0")
+                     "", "", "", MyDate, "", "", "0", jytsistema.WorkCurrency.Id, DateTime.Now())
 
 
         InsertarAuditoria(MyConn, MovAud.iSalir, sModulo, CodigoCaja & " " & txtDocumento.Text)

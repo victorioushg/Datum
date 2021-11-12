@@ -58,16 +58,14 @@ Partial Class jsContabArcCuentas
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtTotalCreditos = New System.Windows.Forms.TextBox()
         Me.txtTotalDebitos = New System.Windows.Forms.TextBox()
-        Me.txtHasta = New System.Windows.Forms.TextBox()
-        Me.btnHasta = New System.Windows.Forms.Button()
-        Me.btnDesde = New System.Windows.Forms.Button()
-        Me.txtDesde = New System.Windows.Forms.TextBox()
         Me.C1DockingTabPage3 = New C1.Win.C1Command.C1DockingTabPage()
         Me.dgSaldos = New System.Windows.Forms.DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtCodigoS = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtNombreS = New System.Windows.Forms.TextBox()
+        Me.txtDesde = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtHasta = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.MenuBarra.SuspendLayout()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbcCuentas, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -341,6 +339,8 @@ Partial Class jsContabArcCuentas
         'C1DockingTabPage2
         '
         Me.C1DockingTabPage2.CaptionText = "Movimientos"
+        Me.C1DockingTabPage2.Controls.Add(Me.txtHasta)
+        Me.C1DockingTabPage2.Controls.Add(Me.txtDesde)
         Me.C1DockingTabPage2.Controls.Add(Me.Label6)
         Me.C1DockingTabPage2.Controls.Add(Me.txtTotalSaldo)
         Me.C1DockingTabPage2.Controls.Add(Me.Label5)
@@ -348,10 +348,6 @@ Partial Class jsContabArcCuentas
         Me.C1DockingTabPage2.Controls.Add(Me.Label3)
         Me.C1DockingTabPage2.Controls.Add(Me.txtTotalCreditos)
         Me.C1DockingTabPage2.Controls.Add(Me.txtTotalDebitos)
-        Me.C1DockingTabPage2.Controls.Add(Me.txtHasta)
-        Me.C1DockingTabPage2.Controls.Add(Me.btnHasta)
-        Me.C1DockingTabPage2.Controls.Add(Me.btnDesde)
-        Me.C1DockingTabPage2.Controls.Add(Me.txtDesde)
         Me.C1DockingTabPage2.Controls.Add(Me.dg)
         Me.C1DockingTabPage2.Controls.Add(Me.Label16)
         Me.C1DockingTabPage2.Controls.Add(Me.txtCodigo)
@@ -446,46 +442,6 @@ Partial Class jsContabArcCuentas
         Me.txtTotalDebitos.TabIndex = 53
         Me.txtTotalDebitos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'txtHasta
-        '
-        Me.txtHasta.Enabled = False
-        Me.txtHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtHasta.Location = New System.Drawing.Point(265, 52)
-        Me.txtHasta.MaxLength = 15
-        Me.txtHasta.Name = "txtHasta"
-        Me.txtHasta.Size = New System.Drawing.Size(85, 20)
-        Me.txtHasta.TabIndex = 52
-        '
-        'btnHasta
-        '
-        Me.btnHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnHasta.Location = New System.Drawing.Point(356, 51)
-        Me.btnHasta.Name = "btnHasta"
-        Me.btnHasta.Size = New System.Drawing.Size(27, 20)
-        Me.btnHasta.TabIndex = 51
-        Me.btnHasta.Text = "···"
-        Me.btnHasta.UseVisualStyleBackColor = True
-        '
-        'btnDesde
-        '
-        Me.btnDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDesde.Location = New System.Drawing.Point(232, 52)
-        Me.btnDesde.Name = "btnDesde"
-        Me.btnDesde.Size = New System.Drawing.Size(27, 20)
-        Me.btnDesde.TabIndex = 50
-        Me.btnDesde.Text = "···"
-        Me.btnDesde.UseVisualStyleBackColor = True
-        '
-        'txtDesde
-        '
-        Me.txtDesde.Enabled = False
-        Me.txtDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDesde.Location = New System.Drawing.Point(141, 52)
-        Me.txtDesde.MaxLength = 15
-        Me.txtDesde.Name = "txtDesde"
-        Me.txtDesde.Size = New System.Drawing.Size(85, 20)
-        Me.txtDesde.TabIndex = 49
-        '
         'C1DockingTabPage3
         '
         Me.C1DockingTabPage3.CaptionText = "Saldos mensuales"
@@ -559,6 +515,30 @@ Partial Class jsContabArcCuentas
         Me.txtNombreS.Size = New System.Drawing.Size(503, 20)
         Me.txtNombreS.TabIndex = 49
         '
+        'txtDesde
+        '
+        Me.txtDesde.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtDesde.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtDesde.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDesde.Location = New System.Drawing.Point(141, 53)
+        Me.txtDesde.Name = "txtDesde"
+        Me.txtDesde.Size = New System.Drawing.Size(114, 19)
+        Me.txtDesde.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtDesde.TabIndex = 214
+        '
+        'txtHasta
+        '
+        Me.txtHasta.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtHasta.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtHasta.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHasta.Location = New System.Drawing.Point(261, 53)
+        Me.txtHasta.Name = "txtHasta"
+        Me.txtHasta.Size = New System.Drawing.Size(114, 19)
+        Me.txtHasta.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtHasta.TabIndex = 215
+        '
         'jsContabArcCuentas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -625,15 +605,13 @@ Partial Class jsContabArcCuentas
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents txtNombreS As System.Windows.Forms.TextBox
     Friend WithEvents dgSaldos As System.Windows.Forms.DataGridView
-    Friend WithEvents txtDesde As System.Windows.Forms.TextBox
     Friend WithEvents txtTotalCreditos As System.Windows.Forms.TextBox
     Friend WithEvents txtTotalDebitos As System.Windows.Forms.TextBox
-    Friend WithEvents txtHasta As System.Windows.Forms.TextBox
-    Friend WithEvents btnHasta As System.Windows.Forms.Button
-    Friend WithEvents btnDesde As System.Windows.Forms.Button
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents txtTotalSaldo As System.Windows.Forms.TextBox
+    Friend WithEvents txtHasta As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtDesde As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

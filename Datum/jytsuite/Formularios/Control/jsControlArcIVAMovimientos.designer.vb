@@ -22,8 +22,17 @@ Partial Class jsControlArcIVAMovimientos
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsControlArcIVAMovimientos))
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.grpEquivalencia = New System.Windows.Forms.GroupBox()
-        Me.btnFecha = New System.Windows.Forms.Button()
-        Me.txtFecha = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtHasta_2 = New System.Windows.Forms.TextBox()
+        Me.txtDesde_2 = New System.Windows.Forms.TextBox()
+        Me.txtMonto_2 = New System.Windows.Forms.TextBox()
+        Me.txtHasta_1 = New System.Windows.Forms.TextBox()
+        Me.txtDesde_1 = New System.Windows.Forms.TextBox()
+        Me.txtMonto_1 = New System.Windows.Forms.TextBox()
+        Me.txtHasta = New System.Windows.Forms.TextBox()
+        Me.txtDesde = New System.Windows.Forms.TextBox()
         Me.txtTasa = New System.Windows.Forms.TextBox()
         Me.txtMonto = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -32,17 +41,7 @@ Partial Class jsControlArcIVAMovimientos
         Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
-        Me.txtDesde = New System.Windows.Forms.TextBox()
-        Me.txtHasta = New System.Windows.Forms.TextBox()
-        Me.txtHasta_1 = New System.Windows.Forms.TextBox()
-        Me.txtDesde_1 = New System.Windows.Forms.TextBox()
-        Me.txtMonto_1 = New System.Windows.Forms.TextBox()
-        Me.txtHasta_2 = New System.Windows.Forms.TextBox()
-        Me.txtDesde_2 = New System.Windows.Forms.TextBox()
-        Me.txtMonto_2 = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpEquivalencia.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
         Me.SuspendLayout()
@@ -60,6 +59,7 @@ Partial Class jsControlArcIVAMovimientos
         'grpEquivalencia
         '
         Me.grpEquivalencia.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpEquivalencia.Controls.Add(Me.txtFecha)
         Me.grpEquivalencia.Controls.Add(Me.Label6)
         Me.grpEquivalencia.Controls.Add(Me.Label5)
         Me.grpEquivalencia.Controls.Add(Me.Label4)
@@ -71,8 +71,6 @@ Partial Class jsControlArcIVAMovimientos
         Me.grpEquivalencia.Controls.Add(Me.txtMonto_1)
         Me.grpEquivalencia.Controls.Add(Me.txtHasta)
         Me.grpEquivalencia.Controls.Add(Me.txtDesde)
-        Me.grpEquivalencia.Controls.Add(Me.btnFecha)
-        Me.grpEquivalencia.Controls.Add(Me.txtFecha)
         Me.grpEquivalencia.Controls.Add(Me.txtTasa)
         Me.grpEquivalencia.Controls.Add(Me.txtMonto)
         Me.grpEquivalencia.Controls.Add(Me.Label3)
@@ -85,24 +83,107 @@ Partial Class jsControlArcIVAMovimientos
         Me.grpEquivalencia.TabStop = False
         Me.grpEquivalencia.Text = "Impuesto al Valor Agregado "
         '
-        'btnFecha
+        'Label6
         '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(235, 49)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(27, 20)
-        Me.btnFecha.TabIndex = 137
-        Me.btnFecha.Text = "···"
-        Me.btnFecha.UseVisualStyleBackColor = True
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(557, 52)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(79, 19)
+        Me.Label6.TabIndex = 148
+        Me.Label6.Text = "Monto"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'txtFecha
+        'Label5
         '
-        Me.txtFecha.BackColor = System.Drawing.Color.White
-        Me.txtFecha.Location = New System.Drawing.Point(150, 49)
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(79, 20)
-        Me.txtFecha.TabIndex = 16
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(409, 50)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(129, 19)
+        Me.Label5.TabIndex = 147
+        Me.Label5.Text = "Hasta"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label4
+        '
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(274, 49)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(129, 19)
+        Me.Label4.TabIndex = 146
+        Me.Label4.Text = "Desde"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtHasta_2
+        '
+        Me.txtHasta_2.BackColor = System.Drawing.Color.White
+        Me.txtHasta_2.Location = New System.Drawing.Point(409, 126)
+        Me.txtHasta_2.Name = "txtHasta_2"
+        Me.txtHasta_2.Size = New System.Drawing.Size(129, 20)
+        Me.txtHasta_2.TabIndex = 145
+        Me.txtHasta_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtDesde_2
+        '
+        Me.txtDesde_2.BackColor = System.Drawing.Color.White
+        Me.txtDesde_2.Location = New System.Drawing.Point(274, 126)
+        Me.txtDesde_2.Name = "txtDesde_2"
+        Me.txtDesde_2.Size = New System.Drawing.Size(129, 20)
+        Me.txtDesde_2.TabIndex = 144
+        Me.txtDesde_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtMonto_2
+        '
+        Me.txtMonto_2.BackColor = System.Drawing.Color.White
+        Me.txtMonto_2.Location = New System.Drawing.Point(557, 126)
+        Me.txtMonto_2.Name = "txtMonto_2"
+        Me.txtMonto_2.Size = New System.Drawing.Size(79, 20)
+        Me.txtMonto_2.TabIndex = 143
+        Me.txtMonto_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtHasta_1
+        '
+        Me.txtHasta_1.BackColor = System.Drawing.Color.White
+        Me.txtHasta_1.Location = New System.Drawing.Point(409, 100)
+        Me.txtHasta_1.Name = "txtHasta_1"
+        Me.txtHasta_1.Size = New System.Drawing.Size(129, 20)
+        Me.txtHasta_1.TabIndex = 142
+        Me.txtHasta_1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtDesde_1
+        '
+        Me.txtDesde_1.BackColor = System.Drawing.Color.White
+        Me.txtDesde_1.Location = New System.Drawing.Point(274, 100)
+        Me.txtDesde_1.Name = "txtDesde_1"
+        Me.txtDesde_1.Size = New System.Drawing.Size(129, 20)
+        Me.txtDesde_1.TabIndex = 141
+        Me.txtDesde_1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtMonto_1
+        '
+        Me.txtMonto_1.BackColor = System.Drawing.Color.White
+        Me.txtMonto_1.Location = New System.Drawing.Point(557, 100)
+        Me.txtMonto_1.Name = "txtMonto_1"
+        Me.txtMonto_1.Size = New System.Drawing.Size(79, 20)
+        Me.txtMonto_1.TabIndex = 140
+        Me.txtMonto_1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtHasta
+        '
+        Me.txtHasta.BackColor = System.Drawing.Color.White
+        Me.txtHasta.Location = New System.Drawing.Point(409, 74)
+        Me.txtHasta.Name = "txtHasta"
+        Me.txtHasta.Size = New System.Drawing.Size(129, 20)
+        Me.txtHasta.TabIndex = 139
+        Me.txtHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtDesde
+        '
+        Me.txtDesde.BackColor = System.Drawing.Color.White
+        Me.txtDesde.Location = New System.Drawing.Point(274, 74)
+        Me.txtDesde.Name = "txtDesde"
+        Me.txtDesde.Size = New System.Drawing.Size(129, 20)
+        Me.txtDesde.TabIndex = 138
+        Me.txtDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtTasa
         '
@@ -171,7 +252,7 @@ Partial Class jsControlArcIVAMovimientos
         '
         Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Image = My.Resources.Resources.button_cancel
+        Me.btnCancel.Image = Global.Datum.My.Resources.Resources.button_cancel
         Me.btnCancel.Location = New System.Drawing.Point(85, 3)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(76, 24)
@@ -182,7 +263,7 @@ Partial Class jsControlArcIVAMovimientos
         'btnOK
         '
         Me.btnOK.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.btnOK.Image = My.Resources.Resources.button_ok
+        Me.btnOK.Image = Global.Datum.My.Resources.Resources.button_ok
         Me.btnOK.Location = New System.Drawing.Point(3, 3)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(76, 24)
@@ -190,107 +271,17 @@ Partial Class jsControlArcIVAMovimientos
         Me.btnOK.Text = "Aceptar"
         Me.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         '
-        'txtDesde
+        'txtFecha
         '
-        Me.txtDesde.BackColor = System.Drawing.Color.White
-        Me.txtDesde.Location = New System.Drawing.Point(274, 74)
-        Me.txtDesde.Name = "txtDesde"
-        Me.txtDesde.Size = New System.Drawing.Size(129, 20)
-        Me.txtDesde.TabIndex = 138
-        Me.txtDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtHasta
-        '
-        Me.txtHasta.BackColor = System.Drawing.Color.White
-        Me.txtHasta.Location = New System.Drawing.Point(409, 74)
-        Me.txtHasta.Name = "txtHasta"
-        Me.txtHasta.Size = New System.Drawing.Size(129, 20)
-        Me.txtHasta.TabIndex = 139
-        Me.txtHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtHasta_1
-        '
-        Me.txtHasta_1.BackColor = System.Drawing.Color.White
-        Me.txtHasta_1.Location = New System.Drawing.Point(409, 100)
-        Me.txtHasta_1.Name = "txtHasta_1"
-        Me.txtHasta_1.Size = New System.Drawing.Size(129, 20)
-        Me.txtHasta_1.TabIndex = 142
-        Me.txtHasta_1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtDesde_1
-        '
-        Me.txtDesde_1.BackColor = System.Drawing.Color.White
-        Me.txtDesde_1.Location = New System.Drawing.Point(274, 100)
-        Me.txtDesde_1.Name = "txtDesde_1"
-        Me.txtDesde_1.Size = New System.Drawing.Size(129, 20)
-        Me.txtDesde_1.TabIndex = 141
-        Me.txtDesde_1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtMonto_1
-        '
-        Me.txtMonto_1.BackColor = System.Drawing.Color.White
-        Me.txtMonto_1.Location = New System.Drawing.Point(557, 100)
-        Me.txtMonto_1.Name = "txtMonto_1"
-        Me.txtMonto_1.Size = New System.Drawing.Size(79, 20)
-        Me.txtMonto_1.TabIndex = 140
-        Me.txtMonto_1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtHasta_2
-        '
-        Me.txtHasta_2.BackColor = System.Drawing.Color.White
-        Me.txtHasta_2.Location = New System.Drawing.Point(409, 126)
-        Me.txtHasta_2.Name = "txtHasta_2"
-        Me.txtHasta_2.Size = New System.Drawing.Size(129, 20)
-        Me.txtHasta_2.TabIndex = 145
-        Me.txtHasta_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtDesde_2
-        '
-        Me.txtDesde_2.BackColor = System.Drawing.Color.White
-        Me.txtDesde_2.Location = New System.Drawing.Point(274, 126)
-        Me.txtDesde_2.Name = "txtDesde_2"
-        Me.txtDesde_2.Size = New System.Drawing.Size(129, 20)
-        Me.txtDesde_2.TabIndex = 144
-        Me.txtDesde_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtMonto_2
-        '
-        Me.txtMonto_2.BackColor = System.Drawing.Color.White
-        Me.txtMonto_2.Location = New System.Drawing.Point(557, 126)
-        Me.txtMonto_2.Name = "txtMonto_2"
-        Me.txtMonto_2.Size = New System.Drawing.Size(79, 20)
-        Me.txtMonto_2.TabIndex = 143
-        Me.txtMonto_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label4
-        '
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(274, 49)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(129, 19)
-        Me.Label4.TabIndex = 146
-        Me.Label4.Text = "Desde"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label5
-        '
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(409, 50)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(129, 19)
-        Me.Label5.TabIndex = 147
-        Me.Label5.Text = "Hasta"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label6
-        '
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(557, 52)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(79, 19)
-        Me.Label6.TabIndex = 148
-        Me.Label6.Text = "Monto"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(150, 50)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(114, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 214
         '
         'jsControlArcIVAMovimientos
         '
@@ -324,9 +315,7 @@ Partial Class jsControlArcIVAMovimientos
     Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
     Friend WithEvents txtTasa As System.Windows.Forms.TextBox
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
     Friend WithEvents txtHasta As System.Windows.Forms.TextBox
     Friend WithEvents txtDesde As System.Windows.Forms.TextBox
     Friend WithEvents txtHasta_2 As System.Windows.Forms.TextBox
@@ -338,4 +327,5 @@ Partial Class jsControlArcIVAMovimientos
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

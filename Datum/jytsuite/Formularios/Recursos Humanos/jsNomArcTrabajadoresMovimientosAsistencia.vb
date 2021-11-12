@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsNomArcTrabajadoresMovimientosAsistencia
     Private Const sModulo As String = "Movimientos de asistencia de trabajador"
     Private Const nTabla As String = "tbl_movtraasi"
@@ -35,16 +36,11 @@ Public Class jsNomArcTrabajadoresMovimientosAsistencia
     End Sub
     Private Sub IniciarTXT()
 
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtFechaEntrada.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtFechaDescanso.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtFechaRetorno.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtFechaSalida.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-
-        mskEntrada.Text = "00:00"
-        mskDescanso.Text = "00:00"
-        mskRetorno.Text = "00:00"
-        mskSalida.Text = "00:00"
+        txtFecha.Value = jytsistema.sFechadeTrabajo
+        txtFechaEntrada.Value = jytsistema.sFechadeTrabajo
+        txtFechaDescanso.Value = jytsistema.sFechadeTrabajo
+        txtFechaRetorno.Value = jytsistema.sFechadeTrabajo
+        txtFechaSalida.Value = jytsistema.sFechadeTrabajo
 
         ft.RellenaCombo(aTipoDia, cmbTipoDia)
 
@@ -52,8 +48,6 @@ Public Class jsNomArcTrabajadoresMovimientosAsistencia
 
     Public Sub Editar(ByVal MyCon As MySqlConnection, ByVal dsA As DataSet, ByVal dtA As DataTable, ByVal CodigoWorker As String)
         i_modo = movimiento.iEditar
-
-        ft.habilitarObjetos(False, False, btnFecha)
 
         MyConn = MyCon
         ds = dsA
@@ -67,15 +61,11 @@ Public Class jsNomArcTrabajadoresMovimientosAsistencia
     Private Sub AsignarTXT(ByVal nPosicion As Integer)
         With dt.Rows(nPosicion)
 
-            txtFecha.Text = ft.FormatoFecha(CDate(.Item("dia").ToString))
-            txtFechaEntrada.Text = ft.FormatoFecha(CDate(.Item("entrada").ToString))
-            txtFechaDescanso.Text = ft.FormatoFecha(CDate(.Item("descanso").ToString))
-            txtFechaRetorno.Text = ft.FormatoFecha(CDate(.Item("retorno").ToString))
-            txtFechaSalida.Text = ft.FormatoFecha(CDate(.Item("salida").ToString))
-            mskEntrada.Text = ft.FormatoHoraCorta(CDate(.Item("entrada").ToString))
-            mskDescanso.Text = ft.FormatoHoraCorta(CDate(.Item("descanso").ToString))
-            mskRetorno.Text = ft.FormatoHoraCorta(CDate(.Item("retorno").ToString))
-            mskSalida.Text = ft.FormatoHoraCorta(CDate(.Item("salida").ToString))
+            txtFecha.Value = .Item("dia")
+            txtFechaEntrada.Value = .Item("entrada")
+            txtFechaDescanso.Value = .Item("descanso")
+            txtFechaRetorno.Value = .Item("retorno")
+            txtFechaSalida.Value = .Item("salida")
             ft.RellenaCombo(aTipoDia, cmbTipoDia, .Item("tipo"))
 
         End With
@@ -87,17 +77,24 @@ Public Class jsNomArcTrabajadoresMovimientosAsistencia
 
     Private Sub jsNomArcTrabajadoresMovimientosAsistencia_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         InsertarAuditoria(MyConn, MovAud.ientrar, sModulo, txtFechaEntrada.Text)
-        ft.habilitarObjetos(False, True, txtFechaEntrada, txtFechaDescanso, txtFechaRetorno, txtFechaSalida, mskTotal, txtFecha)
+        Dim dates As SfDateTimeEdit() = {txtFecha, txtFechaEntrada, txtFechaDescanso, txtFechaRetorno, txtFechaSalida}
+        SetSizeDateObjects(dates)
+        txtFechaEntrada.DateTimePattern = Enums.DateTimePattern.Custom
+        txtFechaDescanso.DateTimePattern = Enums.DateTimePattern.Custom
+        txtFechaRetorno.DateTimePattern = Enums.DateTimePattern.Custom
+        txtFechaSalida.DateTimePattern = Enums.DateTimePattern.Custom
+
+        ft.habilitarObjetos(False, True, mskTotal)
     End Sub
 
-    Private Sub txt_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtFechaEntrada.GotFocus, _
-        cmbTipoDia.GotFocus, btnFechaEntrada.GotFocus
+    Private Sub txt_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles _
+        cmbTipoDia.GotFocus
         Select Case sender.name
-            Case "txtFechaEntrada", "btnFechaEntrada", "btnFechaDescanso", "btnFechaRetorno", "btnFechaSalida", _
+            Case "txtFechaEntrada", "btnFechaEntrada", "btnFechaDescanso", "btnFechaRetorno", "btnFechaSalida",
                 "txtFechaDescanso", "txtFechaRetorno", "txtFechaSalida", "btnFecha"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione la fecha para el movimiento ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione la fecha para el movimiento ... ", Transportables.tipoMensaje.iInfo)
             Case "cmbTipoDia"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione la tipo de día de trabajo ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione la tipo de día de trabajo ...", Transportables.tipoMensaje.iInfo)
         End Select
 
     End Sub
@@ -128,12 +125,9 @@ Public Class jsNomArcTrabajadoresMovimientosAsistencia
                 Insertar = True
                 Apuntador = dt.Rows.Count
             End If
-            InsertEditNOMINAAsistenciaTrabajador(MyConn, lblInfo, Insertar, CodigoTrabajador, CDate(txtFecha.Text), _
-                                                 CDate(txtFechaEntrada.Text & " " & mskEntrada.Text), _
-                                                 CDate(txtFechaSalida.Text & " " & mskSalida.Text), _
-                                                 CDate(txtFechaDescanso.Text & " " & mskDescanso.Text), _
-                                                 CDate(txtFechaRetorno.Text & " " & mskRetorno.Text), _
-                                                 mskTotal.Text & ":00", _
+            InsertEditNOMINAAsistenciaTrabajador(MyConn, lblInfo, Insertar, CodigoTrabajador, CDate(txtFecha.Text),
+                                                 txtFechaEntrada.Value, txtFechaSalida.Value, txtFechaDescanso.Value, txtFechaRetorno.Value,
+                                                 mskTotal.Text & ":00",
                                                  cmbTipoDia.SelectedIndex)
             Me.Close()
         End If
@@ -143,91 +137,62 @@ Public Class jsNomArcTrabajadoresMovimientosAsistencia
 
         Me.Close()
     End Sub
-
-    Private Sub btnFechaEntrada_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaEntrada.Click
-        txtFechaEntrada.Text = SeleccionaFecha(CDate(txtFechaEntrada.Text), Me, sender)
-    End Sub
-    Private Function CalculaTotalesDia(ByVal Entrada As String, ByVal Salida As String, _
+    Private Function CalculaTotalesDia(ByVal Entrada As String, ByVal Salida As String,
             ByVal Descanso As String, ByVal Retorno As String, ByVal chk As CheckBox) As String
 
-        CalculaTotalesDia = "00:00"
-        If Entrada <> "" AndAlso Descanso <> "" AndAlso Retorno <> "" AndAlso Salida <> "" Then
-            Entrada = Replace(Entrada, " ", "0").PadRight(5, "0"c)
-            Salida = Replace(Salida, " ", "0").PadRight(5, "0"c)
-            Descanso = Replace(Descanso, " ", "0").PadRight(5, "0"c)
-            Retorno = Replace(Retorno, " ", "0").PadRight(5, "0"c)
+        'CalculaTotalesDia = "00:00"
+        'If Entrada <> "" AndAlso Descanso <> "" AndAlso Retorno <> "" AndAlso Salida <> "" Then
+        '    Entrada = Replace(Entrada, " ", "0").PadRight(5, "0"c)
+        '    Salida = Replace(Salida, " ", "0").PadRight(5, "0"c)
+        '    Descanso = Replace(Descanso, " ", "0").PadRight(5, "0"c)
+        '    Retorno = Replace(Retorno, " ", "0").PadRight(5, "0"c)
 
-            If chk.Checked Then
-                Dim iMinutosTrabajo As Integer
-                If Salida >= Entrada Then
-                    iMinutosTrabajo = MinutosEntreFechas(MismaFecha(CDate(Entrada)), MismaFecha(CDate(Salida)))
-                Else
-                    iMinutosTrabajo = MinutosEntreFechas(MismaFecha(CDate(Entrada)), DateAdd("d", 1, MismaFecha(CDate(Salida))))
-                End If
+        '    If chk.Checked Then
+        '        Dim iMinutosTrabajo As Integer
+        '        If Salida >= Entrada Then
+        '            iMinutosTrabajo = MinutosEntreFechas(MismaFecha(CDate(Entrada)), MismaFecha(CDate(Salida)))
+        '        Else
+        '            iMinutosTrabajo = MinutosEntreFechas(MismaFecha(CDate(Entrada)), DateAdd("d", 1, MismaFecha(CDate(Salida))))
+        '        End If
 
-                Dim iMinutosDescanso As Integer
-                If Retorno >= Descanso Then
-                    iMinutosDescanso = MinutosEntreFechas(MismaFecha(CDate(Descanso)), MismaFecha(CDate(Retorno)))
-                Else
-                    iMinutosDescanso = MinutosEntreFechas(MismaFecha(CDate(Descanso)), DateAdd("d", 1, MismaFecha(CDate(Retorno))))
-                End If
+        '        Dim iMinutosDescanso As Integer
+        '        If Retorno >= Descanso Then
+        '            iMinutosDescanso = MinutosEntreFechas(MismaFecha(CDate(Descanso)), MismaFecha(CDate(Retorno)))
+        '        Else
+        '            iMinutosDescanso = MinutosEntreFechas(MismaFecha(CDate(Descanso)), DateAdd("d", 1, MismaFecha(CDate(Retorno))))
+        '        End If
 
-                Dim iMinutosTrabajoReal As Integer
-                iMinutosTrabajoReal = iMinutosTrabajo - iMinutosDescanso
-                CalculaTotalesDia = Minutos_A_Horas(iMinutosTrabajoReal)
-            End If
-        End If
+        '        Dim iMinutosTrabajoReal As Integer
+        '        iMinutosTrabajoReal = iMinutosTrabajo - iMinutosDescanso
+        '        CalculaTotalesDia = Minutos_A_Horas(iMinutosTrabajoReal)
+        '    End If
+        'End If
 
     End Function
 
-    Private Sub mskEntrada_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles mskEntrada.KeyUp, _
-        mskDescanso.KeyUp, mskRetorno.KeyUp, mskSalida.KeyUp
+    'Private Sub ValidarHora(Sender As Object)
 
-        '  ValidarHora(sender)
-
-    End Sub
-    Private Sub ValidarHora(Sender As Object)
-
-        Dim SenderSinEspacios As String = Replace(Sender.text, " ", "")
-        Dim EsSeparador As Boolean = IIf(SenderSinEspacios.Substring(SenderSinEspacios.Length() - 1, 1) = ":", True, False)
-        Dim hora As String = Replace(Sender.text, " ", "0").PadRight(5, "0"c)
-        If ValidaHoraEnMask(hora) Then
-            If SenderSinEspacios.Length > 1 Then
-                Sender.text = Microsoft.VisualBasic.Left(SenderSinEspacios, SenderSinEspacios.Length() - IIf(EsSeparador, 2, 1))
-            End If
-        End If
+    '    Dim SenderSinEspacios As String = Replace(Sender.text, " ", "")
+    '    Dim EsSeparador As Boolean = IIf(SenderSinEspacios.Substring(SenderSinEspacios.Length() - 1, 1) = ":", True, False)
+    '    Dim hora As String = Replace(Sender.text, " ", "0").PadRight(5, "0"c)
+    '    If ValidaHoraEnMask(hora) Then
+    '        If SenderSinEspacios.Length > 1 Then
+    '            Sender.text = Microsoft.VisualBasic.Left(SenderSinEspacios, SenderSinEspacios.Length() - IIf(EsSeparador, 2, 1))
+    '        End If
+    '    End If
 
 
-    End Sub
-    Private Sub mskEntrada_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles mskEntrada.TextChanged, _
-        mskDescanso.TextChanged, mskRetorno.TextChanged, mskSalida.TextChanged
-        Dim chk As New CheckBox
-        chk.Checked = True
+    'End Sub
+    'Private Sub mskEntrada_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles 
+    '    mskDescanso.TextChanged
+    '    Dim chk As New CheckBox
+    '    chk.Checked = True
 
-        'ValidarHora(sender)
+    '    'ValidarHora(sender)
 
-        If ValidaHoraEnMask(sender.text) Then _
-            mskTotal.Text = CalculaTotalesDia(mskEntrada.Text, mskSalida.Text, mskDescanso.Text, mskRetorno.Text, chk)
+    '    If ValidaHoraEnMask(sender.text) Then _
+    '        mskTotal.Text = CalculaTotalesDia(mskEntrada.Text, mskSalida.Text, mskDescanso.Text, mskRetorno.Text, chk)
 
-    End Sub
+    'End Sub
 
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, sender)
-    End Sub
-
-    Private Sub btnFechaDescanso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaDescanso.Click
-        txtFechaDescanso.Text = SeleccionaFecha(CDate(txtFechaDescanso.Text), Me, sender)
-    End Sub
-
-    Private Sub btnFechaRetorno_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaRetorno.Click
-        txtFechaRetorno.Text = SeleccionaFecha(CDate(txtFechaRetorno.Text), Me, sender)
-    End Sub
-
-    Private Sub btnFechaSalida_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaSalida.Click
-        txtFechaSalida.Text = SeleccionaFecha(CDate(txtFechaSalida.Text), Me, sender)
-    End Sub
-
-    Private Sub grpAsiste_Enter(sender As System.Object, e As System.EventArgs) Handles grpAsiste.Enter
-
-    End Sub
 End Class

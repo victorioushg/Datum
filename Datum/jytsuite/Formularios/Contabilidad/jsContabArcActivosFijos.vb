@@ -1,5 +1,7 @@
 Imports MySql.Data.MySqlClient
 Imports ReportesDeBancos
+Imports Syncfusion.WinForms.Input
+
 Public Class jsContabArcActivosFijos
     Private Const sModulo As String = "Activos Fijos"
     Private Const lRegion As String = "RibbonButton5"
@@ -34,6 +36,9 @@ Public Class jsContabArcActivosFijos
         Me.Dock = DockStyle.Fill
         Me.Tag = sModulo
 
+        Dim dates As SfDateTimeEdit() = {txtFecha, txtAdquisicion, txtInicioValuacion}
+        SetSizeDateObjects(dates)
+
         ft.colocaIdiomaEtiquetas(jytsistema.WorkLanguage, Me)
 
         Try
@@ -42,7 +47,7 @@ Public Class jsContabArcActivosFijos
             dt = ds.Tables(nTabla)
 
             ft.colocaOpcionesEnCombos(jytsistema.WorkLanguage, Me)
-           
+
             DesactivarMarco0()
             If dt.Rows.Count > 0 Then
                 nPosicionCat = 0
@@ -67,7 +72,7 @@ Public Class jsContabArcActivosFijos
         ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnAgregar, btnEditar, btnEliminar, btnBuscar, btnSeleccionar, btnPrimero, _
                           btnSiguiente, btnAnterior, btnUltimo, btnImprimir, btnSalir)
 
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnIngreso, btnFechaAdquisicion, btnInicioValuacion, btnGrupo, btnMoneda, btnUbica, _
+        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnGrupo, btnMoneda, btnUbica,
                          btnCuentaActivos, btnCuentaGastos, btnCuentaRepreciacion)
 
     End Sub
@@ -87,11 +92,11 @@ Public Class jsContabArcActivosFijos
 
                     cmbCondicion.SelectedIndex = .Item("ESTATUS")
 
-                    txtFecha.Text = ft.muestraCampoFecha(.Item("INGRESO"))
-                    txtAdquisicion.Text = ft.muestraCampoFecha(.Item("FECHA_ADQUISICION"))
+                    txtFecha.Value = .Item("INGRESO")
+                    txtAdquisicion.Value = .Item("FECHA_ADQUISICION")
                     txtAdquisicionMonto.Text = ft.muestraCampoNumero(.Item("VALOR_ADQUISICION"))
                     txtSalvamento.Text = ft.muestraCampoNumero(.Item("SALVAMENTO"))
-                    txtInicioValuacion.Text = ft.muestraCampoFecha(.Item("INICIO_VALUACION"))
+                    txtInicioValuacion.Value = .Item("INICIO_VALUACION")
                     txtGrupo.Text = ft.muestraCampoTexto(.Item("GRUPO"))
                     txtSerial.Text = ft.muestraCampoTexto(.Item("SERIAL"))
                     txtMoneda.Text = ft.muestraCampoTexto(.Item("MONEDA"))
@@ -158,11 +163,10 @@ Public Class jsContabArcActivosFijos
             txtCodigo.Text = ""
         End If
 
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtDescripcion, txtSerial, txtGrupo, txtMoneda, txtUbica, _
+        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtDescripcion, txtSerial, txtGrupo, txtMoneda, txtUbica,
                                txtActivo, txtGastos, txtRepreciacion)
 
         ft.iniciarTextoObjetos(Transportables.tipoDato.Entero, txtAños, txtMeses)
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Fecha, txtFecha, txtAdquisicion, txtInicioValuacion)
         ft.iniciarTextoObjetos(Transportables.tipoDato.Numero, txtAdquisicionMonto, txtSalvamento, txtTasa)
 
         cmbCondicion.SelectedIndex = 1
@@ -178,10 +182,10 @@ Public Class jsContabArcActivosFijos
         grpAceptarSalir.Visible = True
 
         ft.habilitarObjetos(False, False, C1DockingTabPage2)
-        ft.habilitarObjetos(True, True, txtDescripcion, txtSerial, txtTasa, txtAdquisicionMonto, txtSalvamento, txtAños, txtMeses, _
+        ft.habilitarObjetos(True, True, txtDescripcion, txtSerial, txtTasa, txtAdquisicionMonto, txtSalvamento, txtAños, txtMeses,
                             cmbCondicion, cmbTipoActivo, cmbMetodoValuacion)
-        ft.habilitarObjetos(True, False, btnIngreso, btnFechaAdquisicion, btnGrupo, btnMoneda, btnUbica, btnInicioValuacion, btnCuentaActivos, _
-                            btnCuentaGastos, btnCuentaRepreciacion)
+        ft.habilitarObjetos(True, False, txtFecha, txtInicioValuacion, btnGrupo, btnMoneda, btnUbica, txtAdquisicion,
+                            btnCuentaActivos, btnCuentaGastos, btnCuentaRepreciacion)
 
         MenuBarra.Enabled = False
         ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
@@ -192,26 +196,17 @@ Public Class jsContabArcActivosFijos
         grpAceptarSalir.Visible = False
 
         ft.habilitarObjetos(True, False, C1DockingTabPage2)
-        ft.habilitarObjetos(False, True, txtCodigo, txtCodigo1, txtDescripcion, txtNombre1, cmbCondicion, txtFecha, btnIngreso, _
-                            txtGrupo, btnGrupo, txtUbica, btnUbica, txtMoneda, btnMoneda, txtTasa, txtSerial, cmbTipoActivo, _
-                            cmbMetodoValuacion, txtAdquisicion, btnFechaAdquisicion, txtAdquisicionMonto, txtSalvamento, _
-                            txtInicioValuacion, btnInicioValuacion, txtAños, txtMeses, txtActivo, txtGastos, txtRepreciacion, _
+        ft.habilitarObjetos(False, True, txtCodigo, txtCodigo1, txtDescripcion, txtNombre1, cmbCondicion, txtFecha,
+                            txtGrupo, btnGrupo, txtUbica, btnUbica, txtMoneda, btnMoneda, txtTasa, txtSerial, cmbTipoActivo,
+                            cmbMetodoValuacion, txtAdquisicion, txtAdquisicionMonto, txtSalvamento,
+                            txtInicioValuacion, txtAños, txtMeses, txtActivo, txtGastos, txtRepreciacion,
                             btnCuentaActivos, btnCuentaGastos, btnCuentaRepreciacion, cmbCondicion, cmbTipoActivo, cmbMetodoValuacion)
 
         MenuBarra.Enabled = True
         ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
     End Sub
-    Private Sub btnIngreso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIngreso.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, btnIngreso)
-    End Sub
-    Private Sub btnFechaAdquisicion_Click(sender As Object, e As EventArgs) Handles btnFechaAdquisicion.Click
-        txtAdquisicion.Text = SeleccionaFecha(CDate(txtAdquisicion.Text), Me, btnFechaAdquisicion)
-    End Sub
 
-    Private Sub btnInicioValuacion_Click(sender As Object, e As EventArgs) Handles btnInicioValuacion.Click
-        txtInicioValuacion.Text = SeleccionaFecha(CDate(txtInicioValuacion.Text), Me, btnInicioValuacion)
-    End Sub
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
@@ -351,7 +346,7 @@ Public Class jsContabArcActivosFijos
 
         If ft.PreguntaEliminarRegistro() = Windows.Forms.DialogResult.Yes Then
             If dtMovimientos.Rows.Count = 0 Then
-                AsignaTXT(EliminarRegistros(myConn, lblInfo, ds, nTabla, "jscotactfij", strSQL, aCamposDel, aStringsDel, _
+                AsignaTXT(EliminarRegistros(myConn, lblInfo, ds, nTabla, "jscotactfij", strSQL, aCamposDel, aStringsDel,
                                               Me.BindingContext(ds, nTabla).Position, True))
             Else
                 ft.mensajeCritico("Este ACTIVO posee movimientos. Verifique por favor ...")
@@ -573,7 +568,7 @@ Public Class jsContabArcActivosFijos
 
     Private Function Validado() As Boolean
 
-        If i_modo = movimiento.iAgregar AndAlso _
+        If i_modo = movimiento.iAgregar AndAlso
             ft.Ejecutar_strSQL_DevuelveScalar(myConn, " SELECT COUNT(*) FROM jscotactfij WHERE " _
                                               & " CODIGO = '" & txtCodigo.Text & "' AND " _
                                               & " ID_EMP = '" & jytsistema.WorkID & "' ") > 0 Then
@@ -597,12 +592,6 @@ Public Class jsContabArcActivosFijos
             nPosicionCat = ds.Tables(nTabla).Rows.Count
         End If
 
-        'InsertEditBANCOSBanco(myConn, lblInfo, Inserta, txtCodigo.Text, TxtDescripcion.Text, txtAdquisicion.Text, txtInicioValuacion.Text, txtDireccion.Text, _
-        '    txtTelef1.Text, txtTelef2.Text, txtFax.Text, txtEmail.Text, txtWeb.Text, txtContacto.Text, _
-        '    cmbTitulo.SelectedItem, ValorNumero(IIf(txtComision.Text = "", "0.00", txtComision.Text)), CDate(txtIngreso.Text), _
-        '    ValorNumero(IIf(txtFecha.Text = "", "0.00", txtFecha.Text)), _
-        '    txtCuentaContable.Text, txtFormato.Text, cmbCondicion.SelectedIndex)
-
         ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
         dt = ds.Tables(nTabla)
 
@@ -617,11 +606,9 @@ Public Class jsContabArcActivosFijos
 
     End Sub
 
-    Private Sub txt_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus, txtDescripcion.GotFocus, _
-        txtAdquisicion.GotFocus, txtInicioValuacion.GotFocus, txtGrupo.GotFocus, txtSerial.GotFocus, txtMoneda.GotFocus, txtUbica.GotFocus, _
-        txtAños.GotFocus, txtMeses.GotFocus, txtTasa.GotFocus, txtSalvamento.GotFocus, txtAdquisicionMonto.GotFocus, btnIngreso.GotFocus, _
-        btnGrupo.GotFocus, btnMoneda.GotFocus, btnUbica.GotFocus, btnCuentaActivos.GotFocus, btnCuentaGastos.GotFocus, btnCuentaRepreciacion.GotFocus, _
-        btnInicioValuacion.GotFocus, btnFechaAdquisicion.GotFocus
+    Private Sub txt_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus, txtDescripcion.GotFocus, txtGrupo.GotFocus, txtSerial.GotFocus, txtMoneda.GotFocus, txtUbica.GotFocus,
+        txtAños.GotFocus, txtMeses.GotFocus, txtTasa.GotFocus, txtSalvamento.GotFocus, txtAdquisicionMonto.GotFocus,
+        btnGrupo.GotFocus, btnMoneda.GotFocus, btnUbica.GotFocus, btnCuentaActivos.GotFocus, btnCuentaGastos.GotFocus, btnCuentaRepreciacion.GotFocus
 
         ft.colocaMensajeEnEtiqueta(sender, jytsistema.WorkLanguage, lblInfo)
 

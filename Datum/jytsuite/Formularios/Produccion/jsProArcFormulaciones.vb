@@ -1,6 +1,8 @@
 Imports MySql.Data.MySqlClient
 Imports Microsoft.Win32
 Imports fTransport
+Imports Syncfusion.WinForms.Input
+
 Public Class jsProArcFormulaciones
     Private Const sModulo As String = "Formulaciones"
     Private Const lRegion As String = "RibbonButton161"
@@ -49,6 +51,9 @@ Public Class jsProArcFormulaciones
             myConn.Open()
             ds = DataSetRequeryPlus(ds, nTabla, myConn, strSQL)
             dt = ds.Tables(nTabla)
+
+            Dim dates As SfDateTimeEdit() = {txtEmision}
+            SetSizeDateObjects(dates)
 
             DesactivarMarco0()
             If dt.Rows.Count > 0 Then
@@ -115,7 +120,7 @@ Public Class jsProArcFormulaciones
                 With .Rows(nRow)
                     'Encabezado 
                     txtCodigo.Text = ft.muestraCampoTexto(.Item("CODFOR"))
-                    txtEmision.Text = ft.muestraCampoFecha(.Item("FECHA").ToString)
+                    txtEmision.Value = .Item("FECHA")
                     txtMercancia.Text = ft.muestraCampoTexto(.Item("CODART"))
                     sDescripcion1 = .Item("DESCRIP_1")
                     txtNombreMercancia.Text = ft.muestraCampoTexto(.Item("DESCRIP_2"))
@@ -159,9 +164,9 @@ Public Class jsProArcFormulaciones
         ds = DataSetRequeryPlus(ds, nTablaCostosFijos, myConn, strSQLCostosAdicionales)
         dtCostosFijos = ds.Tables(nTablaCostosFijos)
 
-        Dim aCampos() As String = {"codcosto.Costo.50.I.", _
-                                   "titulo.Descripción.150.I.", _
-                                   "porcentaje.% Costo.70.D.Numero", _
+        Dim aCampos() As String = {"codcosto.Costo.50.I.",
+                                   "titulo.Descripción.150.I.",
+                                   "porcentaje.% Costo.70.D.Numero",
                                    "montofijo.Importe fijo.100.D.Numero"}
 
         ft.IniciarTablaPlus(dgCostosAdicionales, dtCostosFijos, aCampos, , , New Font("Consolas", 7, FontStyle.Regular))
@@ -183,13 +188,13 @@ Public Class jsProArcFormulaciones
         ds = DataSetRequeryPlus(ds, nTablaRenglones, myConn, strSQLMov)
         dtRenglones = ds.Tables(nTablaRenglones)
 
-        Dim aCampos() As String = {"item.Item.90.I.", _
-                                   "descrip.Descripción.350.I.", _
-                                   "cantidad.Cantidad.100.D.Cantidad", _
-                                   "unidad.UND.45.C.", _
-                                   "Costo.Costo Unitario.70.D.Numero", _
-                                   "totren.Costo Total.100.D.Numero", _
-                                   "almacen_salida.Almacén Salida.70.C.", _
+        Dim aCampos() As String = {"item.Item.90.I.",
+                                   "descrip.Descripción.350.I.",
+                                   "cantidad.Cantidad.100.D.Cantidad",
+                                   "unidad.UND.45.C.",
+                                   "Costo.Costo Unitario.70.D.Numero",
+                                   "totren.Costo Total.100.D.Numero",
+                                   "almacen_salida.Almacén Salida.70.C.",
                                    "sada..100.C."}
 
         ft.IniciarTablaPlus(dg, dtRenglones, aCampos)
@@ -212,18 +217,18 @@ Public Class jsProArcFormulaciones
         ds = DataSetRequeryPlus(ds, nTablaRenglonesResidual, myConn, strSQLMovRes)
         dtRenglonesResidual = ds.Tables(nTablaRenglonesResidual)
 
-        Dim aCampos() As String = {"item.Item.90.I.", _
-                                   "descrip.Descripción.350.I.", _
-                                   "cantidad.Cantidad.100.D.Cantidad", _
-                                   "unidad.UND.45.C.", _
-                                   "porcentaje.% Costo Total.70.D.Numero", _
-                                   "almacen_salida.Almacén Entrada.70.C.", _
+        Dim aCampos() As String = {"item.Item.90.I.",
+                                   "descrip.Descripción.350.I.",
+                                   "cantidad.Cantidad.100.D.Cantidad",
+                                   "unidad.UND.45.C.",
+                                   "porcentaje.% Costo Total.70.D.Numero",
+                                   "almacen_salida.Almacén Entrada.70.C.",
                                    "sada..100.C."}
 
         ft.IniciarTablaPlus(dgResidual, dtRenglonesResidual, aCampos)
         If dtRenglonesResidual.Rows.Count > 0 Then
             nPosicionRenglonResidual = 0
-            MostrarFilaEnTabla(myConn, ds, nTablaRenglonesResidual, strSQLMovRes, Me.BindingContext, MenuBarraRenglon, dgResidual, _
+            MostrarFilaEnTabla(myConn, ds, nTablaRenglonesResidual, strSQLMovRes, Me.BindingContext, MenuBarraRenglon, dgResidual,
                                   lRegion, jytsistema.sUsuario, nPosicionRenglonResidual, False)
         End If
 
@@ -237,7 +242,7 @@ Public Class jsProArcFormulaciones
             txtCodigo.Text = ""
         End If
 
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtMercancia, txtNombreMercancia, txtDescripProduccion, _
+        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtMercancia, txtNombreMercancia, txtDescripProduccion,
                             txtAlmacen)
 
         Dim nAlmacen As String = ParametroPlus(myConn, Gestion.iProduccion, "PROPARAM01")
@@ -245,7 +250,7 @@ Public Class jsProArcFormulaciones
         If nAlmacen <> "" Then txtAlmacen.Text = ft.muestraCampoTexto(nAlmacen)
 
         ft.RellenaCombo(aEstatus, cmbEstatus, 1)
-        txtEmision.Text = ft.muestraCampoFecha(sFechadeTrabajo)
+        txtEmision.Value = sFechadeTrabajo
         txtCantidad.Text = ft.muestraCampoCantidad(1)
 
         tslblPesoT.Text = ft.muestraCampoCantidad(0)
@@ -263,7 +268,7 @@ Public Class jsProArcFormulaciones
         grpAceptarSalir.Visible = True
 
         ft.habilitarObjetos(True, False, grpEncab, grpTotales, MenuBarraRenglon, MenuDescuentos)
-        ft.habilitarObjetos(True, True, txtDescripProduccion, btnEmision, btnMercancia, txtMercancia, txtNombreMercancia, _
+        ft.habilitarObjetos(True, True, txtDescripProduccion, txtEmision, btnMercancia, txtMercancia, txtNombreMercancia,
                          cmbEstatus, btnAlmacen, txtCantidad, btnAdjuntos)
 
 
@@ -274,9 +279,9 @@ Public Class jsProArcFormulaciones
     Private Sub DesactivarMarco0()
 
         grpAceptarSalir.Visible = False
-        ft.habilitarObjetos(False, True, txtCodigo, txtEmision, btnEmision, _
-                txtMercancia, txtNombreMercancia, btnMercancia, txtDescripProduccion, _
-                cmbEstatus, btnAlmacen, _
+        ft.habilitarObjetos(False, True, txtCodigo, txtEmision,
+                txtMercancia, txtNombreMercancia, btnMercancia, txtDescripProduccion,
+                cmbEstatus, btnAlmacen,
                 txtNombreAlmacen, btnAdjuntos)
 
         MenuBarraRenglon.Enabled = False
@@ -339,10 +344,10 @@ Public Class jsProArcFormulaciones
             nPosicionEncab = ds.Tables(nTabla).Rows.Count
         End If
 
-        InsertEditPRODUCCIONEncabezadoFormulas(myConn, lblInfo, Inserta, Codigo, txtMercancia.Text, sDescripcion1, txtNombreMercancia.Text, _
-                                                ValorCantidad(txtCantidad.Text), lblUND.Text, ValorCantidad(tslblPesoT.Text), _
-                                                txtAlmacen.Text, ValorNumero(txtCostosNetos.Text), ValorNumero(txtCostosIndirectos.Text), _
-                                                ValorNumero(txtCostoTotal.Text), txtDescripProduccion.Text, Convert.ToDateTime(txtEmision.Text), _
+        InsertEditPRODUCCIONEncabezadoFormulas(myConn, lblInfo, Inserta, Codigo, txtMercancia.Text, sDescripcion1, txtNombreMercancia.Text,
+                                                ValorCantidad(txtCantidad.Text), lblUND.Text, ValorCantidad(tslblPesoT.Text),
+                                                txtAlmacen.Text, ValorNumero(txtCostosNetos.Text), ValorNumero(txtCostosIndirectos.Text),
+                                                ValorNumero(txtCostoTotal.Text), txtDescripProduccion.Text, Convert.ToDateTime(txtEmision.Text),
                                                 cmbEstatus.SelectedIndex)
 
 
@@ -376,12 +381,12 @@ Public Class jsProArcFormulaciones
     Private Sub btnEditar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditar.Click
 
         If CBool(ParametroPlus(myConn, Gestion.iProduccion, "PROFOR0001")) Then
-            
+
             i_modo = movimiento.iEditar
             nPosicionEncab = Me.BindingContext(ds, nTabla).Position
             ActivarMarco0()
             ft.habilitarObjetos(IIf(dtRenglones.Rows.Count > 0, False, True), True, txtMercancia, btnMercancia)
-            
+
         Else
             ft.mensajeCritico("Edición de Formulaciones NO está permitida...")
         End If
@@ -455,7 +460,7 @@ Public Class jsProArcFormulaciones
         '        e.Value = aTipoRenglon(e.Value)
         'End Select
     End Sub
-    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick, _
+    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick,
        dg.CellMouseClick
         Me.BindingContext(ds, nTablaRenglones).Position = e.RowIndex
         MostrarItemsEnMenuBarra(MenuBarraRenglon, e.RowIndex, ds.Tables(nTablaRenglones).Rows.Count)
@@ -492,17 +497,17 @@ Public Class jsProArcFormulaciones
 
             If Residual Then
                 f.Apuntador = Me.BindingContext(ds, nTablaRenglonesResidual).Position
-                f.Agregar(myConn, ds, dtRenglonesResidual, txtCodigo.Text, txtAlmacen.Text, , _
+                f.Agregar(myConn, ds, dtRenglonesResidual, txtCodigo.Text, txtAlmacen.Text, ,
                           Residual)
                 nPosicionRenglonResidual = f.Apuntador
-                MostrarFilaEnTabla(myConn, ds, nTablaRenglonesResidual, strSQLMovRes, Me.BindingContext, MenuBarraRenglon, dgResidual, lRegion, _
+                MostrarFilaEnTabla(myConn, ds, nTablaRenglonesResidual, strSQLMovRes, Me.BindingContext, MenuBarraRenglon, dgResidual, lRegion,
                                       jytsistema.sUsuario, nPosicionRenglonResidual, True)
             Else
                 f.Apuntador = Me.BindingContext(ds, nTablaRenglones).Position
-                f.Agregar(myConn, ds, dtRenglones, txtCodigo.Text, txtAlmacen.Text, , _
+                f.Agregar(myConn, ds, dtRenglones, txtCodigo.Text, txtAlmacen.Text, ,
                           Residual)
                 nPosicionRenglon = f.Apuntador
-                MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, lRegion, _
+                MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, lRegion,
                                       jytsistema.sUsuario, nPosicionRenglon, True)
             End If
 
@@ -559,22 +564,22 @@ Public Class jsProArcFormulaciones
                     Dim aStringsDel() As String = {txtCodigo.Text, .Item("item"), .Item("renglon"), IIf(Residual, 1, 0), jytsistema.WorkID}
 
                     If Residual Then
-                        nPosicionRenglonResidual = EliminarRegistros(myConn, lblInfo, ds, nTablaRenglonesResidual, "jsfabrenfor", _
-                                                            strSQLMovRes, aCamposDel, aStringsDel, _
+                        nPosicionRenglonResidual = EliminarRegistros(myConn, lblInfo, ds, nTablaRenglonesResidual, "jsfabrenfor",
+                                                            strSQLMovRes, aCamposDel, aStringsDel,
                                                             Me.BindingContext(ds, nTablaRenglonesResidual).Position, True)
 
                         If dtRenglonesResidual.Rows.Count - 1 < nPosicionRenglonResidual Then nPosicionRenglonResidual = dtRenglonesResidual.Rows.Count - 1
 
-                        MostrarFilaEnTabla(myConn, ds, nTablaRenglonesResidual, strSQLMovRes, Me.BindingContext, MenuBarraRenglon, dgResidual, lRegion, _
+                        MostrarFilaEnTabla(myConn, ds, nTablaRenglonesResidual, strSQLMovRes, Me.BindingContext, MenuBarraRenglon, dgResidual, lRegion,
                                              jytsistema.sUsuario, nPosicionRenglonResidual, True)
                     Else
-                        nPosicionRenglon = EliminarRegistros(myConn, lblInfo, ds, nTablaRenglones, "jsfabrenfor", _
-                                                            strSQLMov, aCamposDel, aStringsDel, _
+                        nPosicionRenglon = EliminarRegistros(myConn, lblInfo, ds, nTablaRenglones, "jsfabrenfor",
+                                                            strSQLMov, aCamposDel, aStringsDel,
                                                             Me.BindingContext(ds, nTablaRenglones).Position, True)
 
                         If dtRenglones.Rows.Count - 1 < nPosicionRenglon Then nPosicionRenglon = dtRenglones.Rows.Count - 1
 
-                        MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, lRegion, _
+                        MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, lRegion,
                                               jytsistema.sUsuario, nPosicionRenglon, True)
 
                     End If
@@ -595,7 +600,7 @@ Public Class jsProArcFormulaciones
         f.Text = "Movimientos "
         f.Buscar(dtRenglones, Campos, Nombres, Anchos, Me.BindingContext(ds, nTablaRenglones).Position, " " & Me.Tag & "...")
         nPosicionRenglon = f.Apuntador
-        MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, lRegion, _
+        MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, lRegion,
                               jytsistema.sUsuario, nPosicionRenglon, False)
         f = Nothing
 
@@ -604,39 +609,34 @@ Public Class jsProArcFormulaciones
     Private Sub btnPrimerMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrimerMovimiento.Click
         Me.BindingContext(ds, nTablaRenglones).Position = 0
         nPosicionRenglon = 0
-        MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, lRegion, _
+        MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, lRegion,
                               jytsistema.sUsuario, nPosicionRenglon, False)
     End Sub
 
     Private Sub btnAnteriorMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAnteriorMovimiento.Click
         Me.BindingContext(ds, nTablaRenglones).Position -= 1
         nPosicionRenglon = Me.BindingContext(ds, nTablaRenglones).Position
-        MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, lRegion, _
+        MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, lRegion,
                               jytsistema.sUsuario, nPosicionRenglon, False)
     End Sub
 
     Private Sub btnSiguienteMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSiguienteMovimiento.Click
         Me.BindingContext(ds, nTablaRenglones).Position += 1
         nPosicionRenglon = Me.BindingContext(ds, nTablaRenglones).Position
-        MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, lRegion, _
+        MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, lRegion,
                               jytsistema.sUsuario, nPosicionRenglon, False)
     End Sub
 
     Private Sub btnUltimoMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUltimoMovimiento.Click
         Me.BindingContext(ds, nTablaRenglones).Position = ds.Tables(nTablaRenglones).Rows.Count - 1
         nPosicionRenglon = Me.BindingContext(ds, nTablaRenglones).Position
-        MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, lRegion, _
+        MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, lRegion,
                               jytsistema.sUsuario, nPosicionRenglon, False)
     End Sub
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
         'Imprimir()
     End Sub
-
-    Private Sub btnEmision_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEmision.Click
-        txtEmision.Text = SeleccionaFecha(CDate(txtEmision.Text), Me, sender)
-    End Sub
-
 
     Private Sub txtMercancia_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtMercancia.TextChanged
         If txtMercancia.Text <> "" Then
@@ -661,7 +661,7 @@ Public Class jsProArcFormulaciones
 
         txtMercancia.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codart codigo, nomart descripcion, " _
                                               & " elt(tipoart+1,  'Venta', 'Uso interno', 'POP', 'Alquiler', 'Préstamo', 'Materia prima', 'Venta & Envase', 'Otros') Tipo " _
-                                              & " from jsmerctainv where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Mercancías", _
+                                              & " from jsmerctainv where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Mercancías",
                                                 txtMercancia.Text)
 
     End Sub
@@ -686,7 +686,7 @@ Public Class jsProArcFormulaciones
     End Sub
 
     Private Sub btnAlmacen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAlmacen.Click
-        txtAlmacen.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codalm codigo, desalm descripcion from jsmercatalm where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Almacenes", _
+        txtAlmacen.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codalm codigo, desalm descripcion from jsmercatalm where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Almacenes",
                                             txtAlmacen.Text)
     End Sub
 
@@ -695,12 +695,12 @@ Public Class jsProArcFormulaciones
             Case Keys.Down
                 Me.BindingContext(ds, nTablaRenglones).Position += 1
                 nPosicionRenglon = Me.BindingContext(ds, nTablaRenglones).Position
-                MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, lRegion, _
+                MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, lRegion,
                                       jytsistema.sUsuario, nPosicionRenglon, False)
             Case Keys.Up
                 Me.BindingContext(ds, nTablaRenglones).Position -= 1
                 nPosicionRenglon = Me.BindingContext(ds, nTablaRenglones).Position
-                MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, lRegion, _
+                MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon, dg, lRegion,
                                       jytsistema.sUsuario, nPosicionRenglon, False)
 
         End Select
@@ -715,7 +715,7 @@ Public Class jsProArcFormulaciones
         End Select
     End Sub
 
-    Private Sub txtCostosNetos_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtCostosNetos.TextChanged, _
+    Private Sub txtCostosNetos_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtCostosNetos.TextChanged,
         txtCostosIndirectos.TextChanged
 
         txtCostoTotal.Text = ft.muestraCampoNumero(ValorNumero(txtCostosNetos.Text) + ValorNumero(txtCostosIndirectos.Text))
@@ -730,7 +730,7 @@ Public Class jsProArcFormulaciones
             ft.Ejecutar_strSQL(myConn, " replace into jsfabfijfor set codfor = '" + txtCodigo.Text + "', codcosto = '" + f.Seleccionado + "', id_emp = '" + jytsistema.WorkID + "'  ")
         End If
         ds = DataSetRequery(ds, strSQLCostosAdicionales, myConn, nTablaCostosFijos, lblInfo)
-        MostrarFilaEnTabla(myConn, ds, nTablaCostosFijos, strSQLCostosAdicionales, Me.BindingContext, MenuDescuentos, dgCostosAdicionales, lRegion, _
+        MostrarFilaEnTabla(myConn, ds, nTablaCostosFijos, strSQLCostosAdicionales, Me.BindingContext, MenuDescuentos, dgCostosAdicionales, lRegion,
                               jytsistema.sUsuario, nPosicionCostosAdicionales, True)
         CalculaTotales()
         f.Dispose()
@@ -759,7 +759,7 @@ Public Class jsProArcFormulaciones
         f = Nothing
     End Sub
 
-    
+
     Private Sub btnExplosion_Click(sender As Object, e As EventArgs) Handles btnExplosion.Click
         '/// EXPLOSIONAR EN UN REPORTE . TAL VEZ ?????
     End Sub

@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsControlProCierreDiario
     Private Const sModulo As String = "Cierre/Reverso movimientos"
 
@@ -14,19 +16,22 @@ Public Class jsControlProCierreDiario
         Me.Tag = sModulo
         tipoBloqueo = TipoCierre
 
-        lblLeyenda.Text = IIf(Convert.ToBoolean(TipoCierre), " Mediante este proceso se produce el CIERRE/BLOQUEO de las diferentes gestiones para una fecha dada " + vbCr + _
-                " No podrán ser modificado ó eliminado ningún movimiento cuyo bloqueo se haya producido en el cierre.  ", _
-                " Mediante este proceso se produce el DESBLOQUEO de las diferentes gestiones para una fecha dada " + vbCr + _
+        Dim dates As SfDateTimeEdit() = {txtFecha}
+        SetSizeDateObjects(dates)
+
+        lblLeyenda.Text = IIf(Convert.ToBoolean(TipoCierre), " Mediante este proceso se produce el CIERRE/BLOQUEO de las diferentes gestiones para una fecha dada " + vbCr +
+                " No podrán ser modificado ó eliminado ningún movimiento cuyo bloqueo se haya producido en el cierre.  ",
+                " Mediante este proceso se produce el DESBLOQUEO de las diferentes gestiones para una fecha dada " + vbCr +
                 " No podrán ser modificado ó eliminado ningún movimiento cuyo bloqueo se haya producido en el cierre.  ") _
-                + vbCr + _
-                " - Si no esta seguro POR FAVOR CONSULTE con el administrador " + vbCr + _
+                + vbCr +
+                " - Si no esta seguro POR FAVOR CONSULTE con el administrador " + vbCr +
                 " - SI NO ESTA SEGURO por favor consulte CON EL ADMINISTRADOR "
 
         IniciarCHKs()
 
         lblUltimoCierre.Text = " FECHA ÚLTIMO CIERRE : " & ft.muestraCampoFecha(ft.DevuelveScalarFecha(myConn, " select fechatrabajo from jsconctaemp where id_emp = '" & jytsistema.WorkID & "' "))
 
-        txtFecha.Text = ft.muestraCampoFecha(jytsistema.sFechadeTrabajo)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
         ft.mensajeEtiqueta(lblInfo, " ... ", Transportables.tipoMensaje.iAyuda)
 
         Me.Show()
@@ -61,7 +66,7 @@ Public Class jsControlProCierreDiario
         If chk7.Checked Then ActualizarMercancias()
         If chk8.Checked Then ActualizarProduccion()
         If chk9.Checked Then ActualizarFunciones()
-        If chk10.Checked Then ActualizarControlDeGestiones()
+        'If chk10.Checked Then ActualizarControlDeGestiones()
 
         ProgressBar1.Value = 0
         lblProgreso.Text = ""
@@ -72,13 +77,13 @@ Public Class jsControlProCierreDiario
     End Sub
     Private Sub ActualizarFunciones()
 
-       
+
     End Sub
     Private Sub BloquearTablas(aTablas() As String)
 
         For iCont As Integer = 0 To aTablas.Length - 1
 
-            refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, (iCont + 1) / aTablas.Length * 100, _
+            refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, (iCont + 1) / aTablas.Length * 100,
                                           aTablas(iCont).Split("|")(0))
 
             ft.Ejecutar_strSQL(myConn, " UPDATE " & aTablas(iCont).Split("|")(0) _
@@ -90,7 +95,7 @@ Public Class jsControlProCierreDiario
         Next
 
     End Sub
-   
+
     Private Sub ActualizarContabilidad()
 
         Dim fechaBloqueo As String = ft.FormatoFechaMySQL(Convert.ToDateTime(txtFecha.Text)).ToString
@@ -196,17 +201,10 @@ Public Class jsControlProCierreDiario
 
     End Sub
 
-    Private Sub ActualizarControlDeGestiones()
-
-    End Sub
-
     Private Sub chk_CheckedChanged(sender As Object, e As EventArgs) Handles chk.CheckedChanged
         For Each cb As Control In grpGestiones.Controls
             If cb.GetType.Equals(chk.GetType) Then ft.setProperty(cb, "Checked", chk.Checked)
         Next
     End Sub
 
-    Private Sub btnFecha_Click(sender As Object, e As EventArgs) Handles btnFecha.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, grpGestiones, btnFecha)
-    End Sub
 End Class

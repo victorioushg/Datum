@@ -29,10 +29,9 @@ Partial Class jsComProComprasInventario
         Me.pb = New System.Windows.Forms.ProgressBar()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.lblProgreso = New System.Windows.Forms.Label()
-        Me.btnFecha = New System.Windows.Forms.Button()
-        Me.txtFechaProceso = New System.Windows.Forms.TextBox()
         Me.lblFecha = New System.Windows.Forms.Label()
         Me.dgMercas = New System.Windows.Forms.DataGridView()
+        Me.txtFechaProceso = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpAceptarSalir.SuspendLayout()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpTotales.SuspendLayout()
@@ -142,26 +141,6 @@ Partial Class jsComProComprasInventario
         Me.lblProgreso.TabIndex = 14
         Me.lblProgreso.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(235, 352)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(25, 20)
-        Me.btnFecha.TabIndex = 155
-        Me.btnFecha.Text = "•••"
-        Me.btnFecha.UseVisualStyleBackColor = True
-        '
-        'txtFechaProceso
-        '
-        Me.txtFechaProceso.Enabled = False
-        Me.txtFechaProceso.Location = New System.Drawing.Point(143, 352)
-        Me.txtFechaProceso.MaxLength = 25
-        Me.txtFechaProceso.Name = "txtFechaProceso"
-        Me.txtFechaProceso.Size = New System.Drawing.Size(86, 20)
-        Me.txtFechaProceso.TabIndex = 154
-        Me.txtFechaProceso.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'lblFecha
         '
         Me.lblFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -189,6 +168,18 @@ Partial Class jsComProComprasInventario
         Me.dgMercas.Size = New System.Drawing.Size(941, 136)
         Me.dgMercas.TabIndex = 156
         '
+        'txtFechaProceso
+        '
+        Me.txtFechaProceso.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaProceso.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaProceso.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaProceso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaProceso.Location = New System.Drawing.Point(143, 352)
+        Me.txtFechaProceso.Name = "txtFechaProceso"
+        Me.txtFechaProceso.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaProceso.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaProceso.TabIndex = 214
+        '
         'jsComProComprasInventario
         '
         Me.AcceptButton = Me.btnOK
@@ -197,9 +188,8 @@ Partial Class jsComProComprasInventario
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(963, 480)
         Me.ControlBox = False
-        Me.Controls.Add(Me.dgMercas)
-        Me.Controls.Add(Me.btnFecha)
         Me.Controls.Add(Me.txtFechaProceso)
+        Me.Controls.Add(Me.dgMercas)
         Me.Controls.Add(Me.lblFecha)
         Me.Controls.Add(Me.grpTotales)
         Me.Controls.Add(Me.dg)
@@ -216,7 +206,6 @@ Partial Class jsComProComprasInventario
         Me.grpTotales.ResumeLayout(False)
         CType(Me.dgMercas, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents lblInfo As System.Windows.Forms.Label
@@ -228,8 +217,7 @@ Partial Class jsComProComprasInventario
     Friend WithEvents pb As System.Windows.Forms.ProgressBar
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents lblProgreso As System.Windows.Forms.Label
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
-    Friend WithEvents txtFechaProceso As System.Windows.Forms.TextBox
     Friend WithEvents lblFecha As System.Windows.Forms.Label
     Friend WithEvents dgMercas As System.Windows.Forms.DataGridView
+    Friend WithEvents txtFechaProceso As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

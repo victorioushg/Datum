@@ -1,6 +1,8 @@
 Imports MySql.Data.MySqlClient
 Imports System.IO
 Imports ReportesDeMedicionGerencial
+Imports Syncfusion.WinForms.Input
+
 Public Class jsSIGMERepParametrosPlus
 
     Private Const sModulo As String = "Reportes de Medición gerencial"
@@ -21,16 +23,16 @@ Public Class jsSIGMERepParametrosPlus
     Private IndiceReporte As Integer
     Private strIndiceReporte As String
 
-    Private vMERAgrupadoPor() As String = {"Ninguno", "Categorías", "Marcas", "Jerarquía", "División", "Mix", _
-        "Categorías & Marcas", "División & Categorías &  Marcas", _
-        "Categorías & Jerarquías", _
-        "División & Jerarquía", "Mix & Categorías & Marcas", "Mix & Jerarquías", _
+    Private vMERAgrupadoPor() As String = {"Ninguno", "Categorías", "Marcas", "Jerarquía", "División", "Mix",
+        "Categorías & Marcas", "División & Categorías &  Marcas",
+        "Categorías & Jerarquías",
+        "División & Jerarquía", "Mix & Categorías & Marcas", "Mix & Jerarquías",
         "Mix & División", "Mix & División & Categorías & Marcas", "Mix & División & Jerarquías"}
 
-    Private aMERAgrupadoPor() As String = {"", "categoria", "marca", "tipjer", "division", "mix", _
-                                        "categoria, marca", "division, categoria, marca", _
-                                        "categoria, tipjer", "division, tipjer", _
-                                        "mix, categoria, marca", "mix, tipjer", "mix, division", _
+    Private aMERAgrupadoPor() As String = {"", "categoria", "marca", "tipjer", "division", "mix",
+                                        "categoria, marca", "division, categoria, marca",
+                                        "categoria, tipjer", "division, tipjer",
+                                        "mix, categoria, marca", "mix, tipjer", "mix, division",
                                         "mix, division, categoria, marca", "mix, division, tipjer"}
     Private vMERAgrupadoPorR() As String = {"Ninguno", "Categorías", "Marcas", "Jerarquía", "División", "Mix"}
     Private aMERAgrupadoPorR() As String = {"", "categoria", "marca", "tipjer", "division", "mix"}
@@ -45,26 +47,28 @@ Public Class jsSIGMERepParametrosPlus
     Private aTipoReporte() As String = {"Unidad Venta (UV) ", "Kilogramos (UMP)", "Ventas (BsF)", "Cajas (UMS)", "Costos (BsF)"}
     Private aTarifa() As String = {"A", "B", "C", "D", "E", "F"}
     Private aTerritorio() As String = {"Barrio/Urbanización/Sector", "Ciudad/Pueblo/Aldea", "Parroquia/Comunidad", "Municipio/Región", "Estado/Provincia/Departamento", "País"}
-    Private vVENAgrupadoPor() As String = {"Ninguno", "Canal de Distribución", "Tipo de Negocio", "Zona", "Ruta", _
-                                           "Asesor Comercial", "Canal & Tipo Negocio", "Zona & Ruta", _
-                                           "Asesor & Canal", "Asesor & Tipo de Negocio", "Asesor & Canal & Tipo de negocio", _
+    Private vVENAgrupadoPor() As String = {"Ninguno", "Canal de Distribución", "Tipo de Negocio", "Zona", "Ruta",
+                                           "Asesor Comercial", "Canal & Tipo Negocio", "Zona & Ruta",
+                                           "Asesor & Canal", "Asesor & Tipo de Negocio", "Asesor & Canal & Tipo de negocio",
                                            "Asesor & Zona", "Asesor & ruta", "Asesor & Zona & Ruta", "Territorio"}
-    Private aVENAgrupadoPor() As String = {"", "canal", "tiponegocio", "zona", "ruta", "asesor", "canal, tiponegocio", _
-                                           "zona, ruta", "asesor, canal", "asesor, tiponegocio", "asesor, canal, tiponegocio", _
+    Private aVENAgrupadoPor() As String = {"", "canal", "tiponegocio", "zona", "ruta", "asesor", "canal, tiponegocio",
+                                           "zona, ruta", "asesor, canal", "asesor, tiponegocio", "asesor, canal, tiponegocio",
                                            "asesor, zona", "asesor, ruta", "asesor, zona, ruta", "territorio"}
     Private vCOMAgrupadoPor() As String = {"Ninguno", "Categorías", "Unidades de Negocio", "Categorías & Unidades"}
     Private aCOMAgrupadoPor() As String = {"", "categoriaprov", "unidadnegocioprov", "categoriaprov, unidadnegocioprov"}
-    Private aAño() As Object = {2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, _
+    Private aAño() As Object = {2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020,
                                   2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030}
 
     Private periodoTipo As TipoPeriodo
-    Public Sub Cargar(ByVal TipoCarga As Integer, ByVal numReporte As Integer, ByVal nomReporte As String, _
-                      Optional ByVal CodMercancia As String = "", Optional ByVal numDocumento As String = "", _
+    Public Sub Cargar(ByVal TipoCarga As Integer, ByVal numReporte As Integer, ByVal nomReporte As String,
+                      Optional ByVal CodMercancia As String = "", Optional ByVal numDocumento As String = "",
                       Optional ByVal Fecha As Date = #1/1/2009#)
 
 
         Me.Tag = sModulo
         Me.Dock = DockStyle.Fill
+        Dim dates As SfDateTimeEdit() = {txtPeriodoDesde, txtPeriodoHasta}
+        SetSizeDateObjects(dates)
         myConn = New MySqlConnection(jytsistema.strConn)
         myConn.Open()
 
@@ -170,9 +174,9 @@ Public Class jsSIGMERepParametrosPlus
 
         End Select
     End Sub
-    Private Sub Inicializar(ByVal nEtiqueta As String, ByVal TabOrden As Boolean, ByVal TabGrupo As Boolean, _
-        ByVal TabCriterio As Boolean, ByVal TabConstantes As Boolean, ByVal aNombreOrden() As String, _
-        ByVal aCampoOrden() As String, ByVal aTipoOrden() As String, ByVal aLongitudOrden() As Integer, _
+    Private Sub Inicializar(ByVal nEtiqueta As String, ByVal TabOrden As Boolean, ByVal TabGrupo As Boolean,
+        ByVal TabCriterio As Boolean, ByVal TabConstantes As Boolean, ByVal aNombreOrden() As String,
+        ByVal aCampoOrden() As String, ByVal aTipoOrden() As String, ByVal aLongitudOrden() As Integer,
         Optional ByVal Trabajador As String = "")
 
         HabilitarTabs(TabOrden, TabGrupo, TabCriterio, TabConstantes)
@@ -247,37 +251,36 @@ Public Class jsSIGMERepParametrosPlus
     Private Sub VerCriterio_Periodo(ByVal Ver As Boolean, ByVal CompletoDesdeHasta As Integer, Optional ByVal Periodo As TipoPeriodo = TipoPeriodo.iMensual)
         'CompletoDesdeHasta 0 = Complete , 1 = Desde , 2 = Hasta 
         periodoTipo = Periodo
-        ft.visualizarObjetos(False, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta, btnPeriodoDesde, btnPeriodoHasta)
-        ft.habilitarObjetos(False, True, txtPeriodoDesde, txtPeriodoHasta)
+        ft.visualizarObjetos(False, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta)
         If Ver Then
 
             Select Case CompletoDesdeHasta
                 Case 0
-                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta, btnPeriodoDesde, btnPeriodoHasta)
+                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta)
                 Case 1
-                    ft.visualizarObjetos(Ver, lblPeriodo, txtPeriodoDesde, btnPeriodoDesde)
+                    ft.visualizarObjetos(Ver, lblPeriodo, txtPeriodoDesde)
                 Case 2
-                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoHasta, btnPeriodoHasta)
+                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoHasta)
             End Select
         End If
 
 
         Select Case Periodo
             Case TipoPeriodo.iDiario
-                txtPeriodoDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtPeriodoHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoDesde.Value = jytsistema.sFechadeTrabajo
+                txtPeriodoHasta.Value = jytsistema.sFechadeTrabajo
             Case TipoPeriodo.iSemanal
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaSemana(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaSemana(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaSemana(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaSemana(jytsistema.sFechadeTrabajo)
             Case TipoPeriodo.iMensual
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaMes(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaMes(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaMes(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaMes(jytsistema.sFechadeTrabajo)
             Case TipoPeriodo.iAnual
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaAño(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaAño(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaAño(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaAño(jytsistema.sFechadeTrabajo)
             Case Else
-                txtPeriodoDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtPeriodoHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoDesde.Value = jytsistema.sFechadeTrabajo
+                txtPeriodoHasta.Value = jytsistema.sFechadeTrabajo
         End Select
 
     End Sub
@@ -321,7 +324,7 @@ Public Class jsSIGMERepParametrosPlus
         ValoresInicialesConstantes()
 
         verConstante_Resumen(False)
-        VerConstante_ResumenMercas(False)
+        verConstante_ResumenMercas(False)
         VerConstante_Tarifas(False)
         VerConstante_Tarifa(False)
         VerConstante_peso(False)
@@ -450,29 +453,11 @@ Public Class jsSIGMERepParametrosPlus
                 nTabla = "dtDescuentosAsesorMesMes"
                 oReporte = New rptSIGMEDescuentosAsesorMes0G
 
-                'str = SeleccionSIGMEDescuentos(myConn, lblInfo, CDate("01/01/" & (cmbAño.SelectedIndex + 2000).ToString), CDate("31/12/" & (cmbAño.SelectedIndex + 2000).ToString), txtOrdenDesde.Text, txtOrdenHasta.Text, _
-                '                            vOrdenCampos(cmbOrdenadoPor.SelectedIndex), txtProvCliDesde.Text, txtProvCliHasta.Text, txtCategoriaDesde.Text, txtCategoriaHasta.Text, _
-                '                            txtMarcaDesde.Text, txtMarcaHasta.Text, txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, _
-                '                            txtCodjer5.Text, txtCodjer6.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, _
-                '                            txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text, _
-                '                            txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, txtCiudad.Text, txtBarrio.Text, _
-                '                            False, cmbTipoReporte.SelectedIndex)
-
             Case ReporteMedicionGerencial.cDescuentosAsesor
                 nTabla = "dtDescuentosAsesor"
                 oReporte = New rptSIGMEDescuentosAsesor0G
-                'str = SeleccionSIGMEDescuentos(myConn, lblInfo, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtOrdenDesde.Text, txtOrdenHasta.Text, _
-                '                    vOrdenCampos(cmbOrdenadoPor.SelectedIndex), txtProvCliDesde.Text, txtProvCliHasta.Text, txtCategoriaDesde.Text, txtCategoriaHasta.Text, _
-                '                    txtMarcaDesde.Text, txtMarcaHasta.Text, txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, _
-                '                    txtCodjer5.Text, txtCodjer6.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, _
-                '                    txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text, _
-                '                    txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, txtCiudad.Text, txtBarrio.Text, _
-                '                    False, cmbTipoReporte.SelectedIndex)
 
             Case ReporteMedicionGerencial.cVentasComprasExistenciasMesMes
-                'nTabla = "dtVentasComprasExistencias"
-                'oReporte = New rptSIGMEVentasComprasPorJerarquia
-                'str = SeleccionSIGMEVentasyComprasMesaMes(myConn, lblInfo, txtTipoJerarquia.Text, txtTipoJerarquia.Text, txtAlmacenDesde.Text, txtAlmacenHasta.Text, cmbAño.SelectedIndex + 2000)
 
             Case ReporteMedicionGerencial.cGananciasCestaTicketMesMes
                 nTabla = "dtGananciaCestaticketMesMes"
@@ -481,115 +466,52 @@ Public Class jsSIGMERepParametrosPlus
             Case ReporteMedicionGerencial.cGananciasCestaTicket
                 nTabla = "dtGananciaCestaticket"
                 oReporte = New rptSIGMEGananciasCestaTicket
-                str = SeleccionSIGMEGananciaCestaTicketEnPeriodo(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, _
+                str = SeleccionSIGMEGananciaCestaTicketEnPeriodo(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text,
                                                          CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text))
             Case ReporteMedicionGerencial.cDropSizeMesMes
                 nTabla = "dtDropSize"
                 oReporte = New rptSIGMEDropSizeMesMes
-                'str = SeleccionSIGMEDropSize(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, _
-                '                     txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, _
-                '                     txtProvCliDesde.Text, txtProvCliHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, _
-                '                     txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text, _
-                '                     txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, txtCiudad.Text, txtBarrio.Text, _
-                '                     cmbAño.SelectedIndex + 2000)
 
             Case ReporteMedicionGerencial.cIngresosPorAsesor
                 nTabla = "dtIngresosAsesor"
                 oReporte = New rptSIGMEIngresosAsesor0G
-                str = SeleccionSIGMEIngresosporAsesoryForma(myConn, lblInfo, txtAsesorDesde.Text, txtAsesorHasta.Text, _
+                str = SeleccionSIGMEIngresosporAsesoryForma(myConn, lblInfo, txtAsesorDesde.Text, txtAsesorHasta.Text,
                                                      CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text))
             Case ReporteMedicionGerencial.cComprasComparativasMesMes
                 nTabla = "dtComprasVentasComparativas"
                 oReporte = New rptSIGMEComprasVentasComparativas
-                'str = SeleccionSIGMEComprasComparativasMesMes(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, _
-                '                                      txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, _
-                '                                      txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text, _
-                '                                      txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, _
-                '                                      txtDivisionHasta.Text, txtProvCliDesde.Text, txtProvCliHasta.Text, _
-                '                                      txtCategoriaProveedorDesde.Text, txtCategoriaProveedorHasta.Text, txtUnidadProveedorDesde.Text, _
-                '                                      txtUnidadProveedorHasta.Text, cmbTipoReporte.SelectedIndex)
 
             Case ReporteMedicionGerencial.cVentasComparativasMesMes
                 nTabla = "dtComprasVentasComparativas"
                 oReporte = New rptSIGMEComprasVentasComparativas
-                'str = SeleccionSIGMEVentasComparativasMesMes(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, txtTipoJerarquia.Text, _
-                '                                     txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, _
-                '                                     txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, _
-                '                                     txtProvCliDesde.Text, txtProvCliHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, _
-                '                                     txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, _
-                '                                     txtRutaDesde.Text, txtRutaHasta.Text, txtAsesorRDesde.Text, txtAsesorRHasta.Text, _
-                '                                     txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, txtCiudad.Text, txtBarrio.Text, _
-                '                                     cmbTipoReporte.SelectedIndex)
             Case ReporteMedicionGerencial.cVentasMesMesAsesor
                 nTabla = "dtVentasMesMes"
                 oReporte = New rptSIGMEVentasMesMes0G
 
-                'str = SeleccionSIGMEVentasMesMes(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, txtTipoJerarquia.Text, _
-                '                                     txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, _
-                '                                     cmbAño.SelectedIndex + 2000,
-                '                                     cmbMERAgrupadoPor.Text, cmbTipoReporte.SelectedIndex)
 
             Case ReporteMedicionGerencial.cDevolucionesAsesorMesMes
                 nTabla = "dtVentasMesMes"
                 oReporte = New rptSIGMEDevolucionesAsesorMesMes0G
-                'str = SeleccionSIGMEDevolucionesMesMes(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, txtTipoJerarquia.Text, _
-                '                                     txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, _
-                '                                     cmbAño.SelectedIndex + 2000,
-                '                                     cmbMERAgrupadoPor.Text, cmbTipoReporte.SelectedIndex)
-
 
             Case ReporteMedicionGerencial.cGananciasPorFactura
                 PresentaArbol = True
                 nTabla = "dtGananciasFacturas"
                 oReporte = New rptSIGMEGananciasFacturas0G
 
-                'str = SeleccionSIGMEGananciasBrutasFacturas(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex),
-                '                             txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, _
-                '                            txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text, _
-                '                            txtCategoriaHasta.Text, txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, _
-                '                            txtDivisionHasta.Text, cmbEstatus.SelectedIndex, cmbCartera.SelectedIndex, chkPeso.Checked, cmbTipo.SelectedIndex, _
-                '                            cmbRegulada.SelectedIndex, txtCanalDesde.Text, txtCanalHasta.Text, txtTipoNegocioDesde.Text, _
-                '                            txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text, _
-                '                            txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, _
-                '                            txtCiudad.Text, txtBarrio.Text, 0, 0, CDate(txtPeriodoDesde.Text), _
-                '                            CDate(txtPeriodoHasta.Text), txtAlmacenDesde.Text, txtAlmacenHasta.Text, _
-                '                            txtProvCliDesde.Text, txtProvCliHasta.Text, chkConsResumen.Checked, False)
-
-
             Case ReporteMedicionGerencial.cGananciasPorItem
                 PresentaArbol = True
                 nTabla = "dtGananciasItem"
                 oReporte = New rptSIGMEGananciasItem0G
-                'str = SeleccionSIGMEGananciasBrutasItem(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), _
-                '                                        txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, _
-                '                                        txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text, _
-                '                                        txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, _
-                '                                        txtCiudad.Text, txtBarrio.Text, txtCategoriaDesde.Text, txtCategoriaHasta.Text, _
-                '                                        txtMarcaDesde.Text, txtMarcaHasta.Text, txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, _
-                '                                        txtDivisionDesde.Text, txtDivisionHasta.Text, False)
 
             Case ReporteMedicionGerencial.cGananciasItemMesMes
                 PresentaArbol = True
                 nTabla = "dtGananciasItemMesMes"
                 oReporte = New rptSIGMEGananciasItemMesMes0G
-                'str = SeleccionSIGMEGananciasBrutasMesMes(myConn, lblInfo, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), _
-                '                                            txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, _
-                '                                            txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, _
-                '                                            txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, txtRutaDesde.Text, txtRutaHasta.Text, _
-                '                                            txtPais.Text, txtEstado.Text, txtMunicipio.Text, txtParroquia.Text, _
-                '                                            txtCiudad.Text, txtBarrio.Text, txtCategoriaDesde.Text, txtCategoriaHasta.Text, _
-                '                                            txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, _
-                '                                            CamposEnGrupos())
 
             Case ReporteMedicionGerencial.cActivacionClientesMesMes
                 PresentaArbol = True
                 nTabla = "dtActivacionMesMes"
                 oReporte = New rptSIGMEActivacionMesMes0G
-                'str = SeleccionSIGMEActivacion(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, "codart", txtTipoJerarquia.Text, txtCodjer1.Text, txtCodjer2.Text, txtCodjer3.Text, txtCodjer4.Text, txtCodjer5.Text, txtCodjer6.Text, txtCategoriaDesde.Text, txtCategoriaHasta.Text, _
-                '                                            txtMarcaDesde.Text, txtMarcaHasta.Text, txtDivisionDesde.Text, txtDivisionHasta.Text, txtCanalDesde.Text, txtCanalHasta.Text, txtTipoNegocioDesde.Text, txtTipoNegocioHasta.Text, txtZonaDesde.Text, txtZonaHasta.Text, _
-                '                                            txtRutaDesde.Text, txtRutaHasta.Text, txtAsesorRDesde.Text, txtAsesorRHasta.Text, txtPais.Text, txtEstado.Text, txtCiudad.Text, txtMunicipio.Text, txtParroquia.Text, txtBarrio.Text, _
-                '                                             , , , , CamposEnGrupos())
-
 
             Case Else
                 oReporte = Nothing
@@ -600,7 +522,7 @@ Public Class jsSIGMERepParametrosPlus
             If dsSIGME.Tables(nTabla).Rows.Count > 0 Then
                 oReporte = PresentaReporte(oReporte, dsSIGME, nTabla)
                 r.CrystalReportViewer1.ReportSource = oReporte
-                r.CrystalReportViewer1.ToolPanelView = IIf(PresentaArbol, CrystalDecisions.Windows.Forms.ToolPanelViewType.GroupTree, _
+                r.CrystalReportViewer1.ToolPanelView = IIf(PresentaArbol, CrystalDecisions.Windows.Forms.ToolPanelViewType.GroupTree,
                                               CrystalDecisions.Windows.Forms.ToolPanelViewType.None)
                 r.CrystalReportViewer1.ShowGroupTreeButton = PresentaArbol
                 r.CrystalReportViewer1.Zoom(1)
@@ -608,7 +530,7 @@ Public Class jsSIGMERepParametrosPlus
                 r.Cargar(ReporteNombre)
                 DeshabilitarCursorEnEspera()
             Else
-                ft.MensajeCritico("No existe información que cumpla con estos criterios y/o constantes ")
+                ft.mensajeCritico("No existe información que cumpla con estos criterios y/o constantes ")
             End If
         End If
 
@@ -623,153 +545,6 @@ Public Class jsSIGMERepParametrosPlus
     Private Function CamposEnGrupos() As String()
 
         Dim CamposEn As String() = {}
-
-
-        'Select Case cmbMERAgrupadoPor.SelectedIndex.ToString & cmbVenAgrupadoPor.SelectedIndex.ToString
-        '    Case "10", "20", "30", "40", "50"
-        '        ReDim CamposEn(1)
-        '        CamposEn(0) = aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex)
-        '    Case "01", "02", "03", "04", "05", "014"
-        '        ReDim CamposEn(1)
-        '        CamposEn(0) = aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex)
-        '    Case "60", "80", "90", "110", "120", "150"
-        '        ReDim CamposEn(2)
-        '        Dim aFld() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-        '        CamposEn(0) = Trim(aFld(0))
-        '        CamposEn(1) = Trim(aFld(1))
-        '    Case "06", "07", "08", "09", "011", "012"
-        '        ReDim CamposEn(2)
-        '        Dim aFld() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-        '        CamposEn(0) = Trim(aFld(0))
-        '        CamposEn(1) = Trim(aFld(1))
-        '    Case "11", "12", "13", "14", "15", "114", "21", "22", "23", "24", "25", "214", _
-        '        "31", "32", "33", "34", "35", "314", "41", "42", "43", "44", "45", "414", _
-        '        "51", "52", "53", "54", "55", "514"
-        '        ReDim CamposEn(2)
-        '        CamposEn(0) = (aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex))
-        '        CamposEn(1) = (aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex))
-
-        '    Case "70", "100", "140"
-        '        ReDim CamposEn(3)
-        '        Dim aFld() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-        '        CamposEn(0) = Trim(aFld(0))
-        '        CamposEn(1) = Trim(aFld(1))
-        '        CamposEn(2) = Trim(aFld(2))
-        '    Case "010", "013"
-        '        ReDim CamposEn(3)
-        '        Dim aFld() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-        '        CamposEn(0) = Trim(aFld(0))
-        '        CamposEn(1) = Trim(aFld(1))
-        '        CamposEn(2) = Trim(aFld(2))
-        '    Case "61", "81", "91", "111", "121", "62", "82", "92", "112", "122", _
-        '         "63", "83", "93", "113", "123", "64", "84", "94", "114", "124", _
-        '         "65", "85", "95", "115", "125", "614", "814", "914", "1114", "1214"
-        '        ReDim CamposEn(3)
-        '        Dim aFld() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-        '        CamposEn(0) = Trim(aFld(0))
-        '        CamposEn(1) = Trim(aFld(1))
-        '        CamposEn(2) = aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex)
-        '    Case "16", "17", "18", "19", "111", "112", "26", "27", "28", "29", "211", "212", _
-        '        "36", "37", "38", "39", "311", "312", "46", "47", "48", "49", "411", "412", _
-        '        "56", "57", "58", "59", "511", "512"
-        '        ReDim CamposEn(3)
-        '        Dim aFld() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-        '        CamposEn(0) = aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex)
-        '        CamposEn(1) = Trim(aFld(0))
-        '        CamposEn(2) = Trim(aFld(1))
-        '    Case "130"
-        '        ReDim CamposEn(4)
-        '        Dim aFld() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-        '        CamposEn(0) = Trim(aFld(0))
-        '        CamposEn(1) = Trim(aFld(1))
-        '        CamposEn(2) = Trim(aFld(2))
-        '        CamposEn(3) = Trim(aFld(3))
-        '    Case "66", "67", "68", "69", "611", "612", "86", "87", "88", "89", "811", "812", _
-        '            "96", "97", "98", "99", "911", "912", "116", "117", "118", "119", "1111", "1112", _
-        '            "126", "127", "128", "129", "1211", "1212"
-        '        ReDim CamposEn(4)
-        '        Dim aFld1() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-        '        Dim aFld2() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-        '        CamposEn(0) = Trim(aFld1(0))
-        '        CamposEn(1) = Trim(aFld1(1))
-        '        CamposEn(2) = Trim(aFld2(0))
-        '        CamposEn(3) = Trim(aFld2(1))
-
-        '    Case "71", "72", "73", "74", "75", "714", "101", "102", "103", "104", "105", "1014", "141", "142", "143", "144", "145", "1414"
-        '        ReDim CamposEn(4)
-        '        Dim aFld1() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-        '        CamposEn(0) = Trim(aFld1(0))
-        '        CamposEn(1) = Trim(aFld1(1))
-        '        CamposEn(2) = Trim(aFld1(2))
-        '        CamposEn(3) = aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex)
-        '    Case "110", "210", "310", "410", "510", "113", "213", "313", "413", "513"
-        '        ReDim CamposEn(4)
-        '        Dim aFld1() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-        '        CamposEn(0) = aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex)
-        '        CamposEn(1) = Trim(aFld1(0))
-        '        CamposEn(2) = Trim(aFld1(1))
-        '        CamposEn(3) = Trim(aFld1(2))
-        '    Case "131", "132", "133", "134", "135", "1314" '5grupos 4X1
-        '        ReDim CamposEn(5)
-        '        Dim aFld1() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-        '        CamposEn(0) = Trim(aFld1(0))
-        '        CamposEn(1) = Trim(aFld1(1))
-        '        CamposEn(2) = Trim(aFld1(2))
-        '        CamposEn(3) = Trim(aFld1(3))
-        '        CamposEn(4) = aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex)
-        '    Case "106", "107", "108", "109", "1011", "1012", "146", "147", "148", "149", "1411", "1412" '5Grupos 3X2
-        '        ReDim CamposEn(5)
-        '        Dim aFld1() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-        '        Dim aFld2() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-        '        CamposEn(0) = Trim(aFld1(0))
-        '        CamposEn(1) = Trim(aFld1(1))
-        '        CamposEn(2) = Trim(aFld1(2))
-        '        CamposEn(3) = Trim(aFld2(0))
-        '        CamposEn(4) = Trim(aFld2(1))
-        '    Case "610", "810", "910", "1110", "1210", "613", "813", "913", "1113", "1213" '5grupos 2X3
-        '        ReDim CamposEn(5)
-        '        Dim aFld1() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-        '        Dim aFld2() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-        '        CamposEn(0) = Trim(aFld1(0))
-        '        CamposEn(1) = Trim(aFld1(1))
-        '        CamposEn(2) = Trim(aFld2(0))
-        '        CamposEn(3) = Trim(aFld2(1))
-        '        CamposEn(4) = Trim(aFld2(2))
-
-        '    Case "136", "137", "138", "139", "1311", "1312" '6Grupos 4X2
-        '        ReDim CamposEn(6)
-        '        Dim aFld1() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-        '        Dim aFld2() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-        '        CamposEn(0) = Trim(aFld1(0))
-        '        CamposEn(1) = Trim(aFld1(1))
-        '        CamposEn(2) = Trim(aFld1(2))
-        '        CamposEn(3) = Trim(aFld1(3))
-        '        CamposEn(4) = Trim(aFld2(0))
-        '        CamposEn(5) = Trim(aFld2(1))
-        '    Case "710", "713", "1010", "1013", "1410", "1413" '6Grupos 3X3
-        '        ReDim CamposEn(6)
-        '        Dim aFld1() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-        '        Dim aFld2() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-        '        CamposEn(0) = Trim(aFld1(0))
-        '        CamposEn(1) = Trim(aFld1(1))
-        '        CamposEn(2) = Trim(aFld1(2))
-        '        CamposEn(3) = Trim(aFld2(0))
-        '        CamposEn(4) = Trim(aFld2(1))
-        '        CamposEn(5) = Trim(aFld2(2))
-        '    Case "1310", "1313" '7Grupos 4X3
-        '        ReDim CamposEn(7)
-        '        Dim aFld1() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-        '        Dim aFld2() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-        '        CamposEn(0) = Trim(aFld1(0))
-        '        CamposEn(1) = Trim(aFld1(1))
-        '        CamposEn(2) = Trim(aFld1(2))
-        '        CamposEn(3) = Trim(aFld1(3))
-        '        CamposEn(4) = Trim(aFld2(0))
-        '        CamposEn(5) = Trim(aFld2(1))
-        '        CamposEn(6) = Trim(aFld2(2))
-        '    Case Else
-        '        CamposEn = {}
-        'End Select
         Return CamposEn
     End Function
 
@@ -839,289 +614,6 @@ Public Class jsSIGMERepParametrosPlus
                 ReporteMedicionGerencial.cGananciasItemMesMes, ReporteMedicionGerencial.cActivacionClientesMesMes, _
                 ReporteMedicionGerencial.cDescuentosAsesor, ReporteMedicionGerencial.cDescuentosAsesorMesMes
 
-                'Select Case cmbMERAgrupadoPor.SelectedIndex.ToString & cmbVenAgrupadoPor.SelectedIndex.ToString
-                '    Case "10", "20", "30", "40", "50"
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        Dim FieldDef1 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '    Case "01", "02", "03", "04", "05", "014"
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        Dim FieldDef1 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '    Case "60", "80", "90", "110", "120", "150"
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        oReporte.SetParameterValue("Grupo2", "marca")
-                '        Dim aFld() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-                '        Dim FieldDef1, FieldDef2 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(0)))
-                '        FieldDef2 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(1)))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '        oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
-                '    Case "06", "07", "08", "09", "011", "012"
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        oReporte.SetParameterValue("Grupo2", "marca")
-                '        Dim aFld() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-                '        Dim FieldDef1, FieldDef2 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(0)))
-                '        FieldDef2 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(1)))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '        oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
-                '    Case "11", "12", "13", "14", "15", "114", "21", "22", "23", "24", "25", "214", _
-                '        "31", "32", "33", "34", "35", "314", "41", "42", "43", "44", "45", "414", _
-                '        "51", "52", "53", "54", "55", "514"
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        oReporte.SetParameterValue("Grupo2", "marca")
-                '        Dim FieldDef1, FieldDef2 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex))
-                '        FieldDef2 = oReporte.Database.Tables.Item(0).Fields.Item(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '        oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
-
-                '    Case "70", "100", "140"
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        oReporte.SetParameterValue("Grupo2", "marca")
-                '        oReporte.SetParameterValue("Grupo3", "tipjer")
-                '        Dim aFld() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-                '        Dim FieldDef1, FieldDef2, FieldDef3 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(0)))
-                '        FieldDef2 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(1)))
-                '        FieldDef3 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(2)))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '        oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
-                '        oReporte.DataDefinition.Groups.Item(2).ConditionField = FieldDef3
-                '    Case "010", "013"
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        oReporte.SetParameterValue("Grupo2", "marca")
-                '        oReporte.SetParameterValue("Grupo3", "tipjer")
-                '        Dim aFld() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-                '        Dim FieldDef1, FieldDef2, FieldDef3 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(0)))
-                '        FieldDef2 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(1)))
-                '        FieldDef3 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(2)))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '        oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
-                '        oReporte.DataDefinition.Groups.Item(2).ConditionField = FieldDef3
-                '    Case "61", "81", "91", "111", "121", "62", "82", "92", "112", "122", _
-                '         "63", "83", "93", "113", "123", "64", "84", "94", "114", "124", _
-                '         "65", "85", "95", "115", "125", "614", "814", "914", "1114", "1214"
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        oReporte.SetParameterValue("Grupo2", "marca")
-                '        oReporte.SetParameterValue("Grupo3", "tipjer")
-                '        Dim aFld() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-                '        Dim FieldDef1, FieldDef2, FieldDef3 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(0)))
-                '        FieldDef2 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(1)))
-                '        FieldDef3 = oReporte.Database.Tables.Item(0).Fields.Item(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '        oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
-                '        oReporte.DataDefinition.Groups.Item(2).ConditionField = FieldDef3
-                '    Case "16", "17", "18", "19", "111", "112", "26", "27", "28", "29", "211", "212", _
-                '        "36", "37", "38", "39", "311", "312", "46", "47", "48", "49", "411", "412", _
-                '        "56", "57", "58", "59", "511", "512"
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        oReporte.SetParameterValue("Grupo2", "marca")
-                '        oReporte.SetParameterValue("Grupo3", "tipjer")
-                '        Dim aFld() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-                '        Dim FieldDef1, FieldDef2, FieldDef3 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex))
-                '        FieldDef2 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(0)))
-                '        FieldDef3 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(1)))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '        oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
-                '        oReporte.DataDefinition.Groups.Item(2).ConditionField = FieldDef3
-                '    Case "130"
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        oReporte.SetParameterValue("Grupo2", "marca")
-                '        oReporte.SetParameterValue("Grupo3", "tipjer")
-                '        oReporte.SetParameterValue("Grupo4", "division")
-                '        Dim aFld() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-                '        Dim FieldDef1, FieldDef2, FieldDef3, FieldDef4 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(0)))
-                '        FieldDef2 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(1)))
-                '        FieldDef3 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(2)))
-                '        FieldDef4 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld(3)))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '        oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
-                '        oReporte.DataDefinition.Groups.Item(2).ConditionField = FieldDef3
-                '        oReporte.DataDefinition.Groups.Item(3).ConditionField = FieldDef4
-                '    Case "66", "67", "68", "69", "611", "612", "86", "87", "88", "89", "811", "812", _
-                '            "96", "97", "98", "99", "911", "912", "116", "117", "118", "119", "1111", "1112", _
-                '            "126", "127", "128", "129", "1211", "1212"
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        oReporte.SetParameterValue("Grupo2", "marca")
-                '        oReporte.SetParameterValue("Grupo3", "tipjer")
-                '        oReporte.SetParameterValue("Grupo4", "division")
-                '        Dim aFld1() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-                '        Dim aFld2() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-                '        Dim FieldDef1, FieldDef2, FieldDef3, FieldDef4 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(0)))
-                '        FieldDef2 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(1)))
-                '        FieldDef3 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld2(0)))
-                '        FieldDef4 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld2(1)))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '        oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
-                '        oReporte.DataDefinition.Groups.Item(2).ConditionField = FieldDef3
-                '        oReporte.DataDefinition.Groups.Item(3).ConditionField = FieldDef4
-                '    Case "71", "72", "73", "74", "75", "714", "101", "102", "103", "104", "105", "1014", "141", "142", "143", "144", "145", "1414"
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        oReporte.SetParameterValue("Grupo2", "marca")
-                '        oReporte.SetParameterValue("Grupo3", "tipjer")
-                '        oReporte.SetParameterValue("Grupo4", "division")
-                '        Dim aFld1() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-                '        Dim FieldDef1, FieldDef2, FieldDef3, FieldDef4 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(0)))
-                '        FieldDef2 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(1)))
-                '        FieldDef3 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(2)))
-                '        FieldDef4 = oReporte.Database.Tables.Item(0).Fields.Item(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '        oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
-                '        oReporte.DataDefinition.Groups.Item(2).ConditionField = FieldDef3
-                '        oReporte.DataDefinition.Groups.Item(3).ConditionField = FieldDef4
-                '    Case "110", "210", "310", "410", "510", "113", "213", "313", "413", "513"
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        oReporte.SetParameterValue("Grupo2", "marca")
-                '        oReporte.SetParameterValue("Grupo3", "tipjer")
-                '        oReporte.SetParameterValue("Grupo4", "division")
-                '        Dim aFld1() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-                '        Dim FieldDef1, FieldDef2, FieldDef3, FieldDef4 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex))
-                '        FieldDef2 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(0)))
-                '        FieldDef3 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(1)))
-                '        FieldDef4 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(2)))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '        oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
-                '        oReporte.DataDefinition.Groups.Item(2).ConditionField = FieldDef3
-                '        oReporte.DataDefinition.Groups.Item(3).ConditionField = FieldDef4
-                '    Case "131", "132", "133", "134", "135", "1314" '5grupos 4X1
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        oReporte.SetParameterValue("Grupo2", "marca")
-                '        oReporte.SetParameterValue("Grupo3", "tipjer")
-                '        oReporte.SetParameterValue("Grupo4", "division")
-                '        oReporte.SetParameterValue("Grupo5", "mix")
-                '        Dim aFld1() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-                '        Dim FieldDef1, FieldDef2, FieldDef3, FieldDef4, FieldDef5 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(0)))
-                '        FieldDef2 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(1)))
-                '        FieldDef3 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(2)))
-                '        FieldDef4 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(3)))
-                '        FieldDef5 = oReporte.Database.Tables.Item(0).Fields.Item(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '        oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
-                '        oReporte.DataDefinition.Groups.Item(2).ConditionField = FieldDef3
-                '        oReporte.DataDefinition.Groups.Item(3).ConditionField = FieldDef4
-                '        oReporte.DataDefinition.Groups.Item(4).ConditionField = FieldDef5
-                '    Case "106", "107", "108", "109", "1011", "1012", "146", "147", "148", "149", "1411", "1412" '5Grupos 3X2
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        oReporte.SetParameterValue("Grupo2", "marca")
-                '        oReporte.SetParameterValue("Grupo3", "tipjer")
-                '        oReporte.SetParameterValue("Grupo4", "division")
-                '        oReporte.SetParameterValue("Grupo5", "mix")
-                '        Dim aFld1() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-                '        Dim aFld2() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-                '        Dim FieldDef1, FieldDef2, FieldDef3, FieldDef4, FieldDef5 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(0)))
-                '        FieldDef2 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(1)))
-                '        FieldDef3 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(2)))
-                '        FieldDef4 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld2(0)))
-                '        FieldDef5 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld2(1)))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '        oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
-                '        oReporte.DataDefinition.Groups.Item(2).ConditionField = FieldDef3
-                '        oReporte.DataDefinition.Groups.Item(3).ConditionField = FieldDef4
-                '        oReporte.DataDefinition.Groups.Item(4).ConditionField = FieldDef5
-                '    Case "610", "810", "910", "1110", "1210", "613", "813", "913", "1113", "1213" '5grupos 2X3
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        oReporte.SetParameterValue("Grupo2", "marca")
-                '        oReporte.SetParameterValue("Grupo3", "tipjer")
-                '        oReporte.SetParameterValue("Grupo4", "division")
-                '        oReporte.SetParameterValue("Grupo5", "mix")
-                '        Dim aFld1() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-                '        Dim aFld2() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-                '        Dim FieldDef1, FieldDef2, FieldDef3, FieldDef4, FieldDef5 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(0)))
-                '        FieldDef2 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(1)))
-                '        FieldDef3 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld2(0)))
-                '        FieldDef4 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld2(1)))
-                '        FieldDef5 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld2(2)))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '        oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
-                '        oReporte.DataDefinition.Groups.Item(2).ConditionField = FieldDef3
-                '        oReporte.DataDefinition.Groups.Item(3).ConditionField = FieldDef4
-                '        oReporte.DataDefinition.Groups.Item(4).ConditionField = FieldDef5
-                '    Case "136", "137", "138", "139", "1311", "1312" '6Grupos 4X2
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        oReporte.SetParameterValue("Grupo2", "marca")
-                '        oReporte.SetParameterValue("Grupo3", "tipjer")
-                '        oReporte.SetParameterValue("Grupo4", "division")
-                '        oReporte.SetParameterValue("Grupo5", "mix")
-                '        oReporte.SetParameterValue("Grupo6", "canal")
-                '        Dim aFld1() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-                '        Dim aFld2() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-                '        Dim FieldDef1, FieldDef2, FieldDef3, FieldDef4, FieldDef5, FieldDef6 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(0)))
-                '        FieldDef2 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(1)))
-                '        FieldDef3 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(2)))
-                '        FieldDef4 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(3)))
-                '        FieldDef5 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld2(0)))
-                '        FieldDef6 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld2(1)))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '        oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
-                '        oReporte.DataDefinition.Groups.Item(2).ConditionField = FieldDef3
-                '        oReporte.DataDefinition.Groups.Item(3).ConditionField = FieldDef4
-                '        oReporte.DataDefinition.Groups.Item(4).ConditionField = FieldDef5
-                '        oReporte.DataDefinition.Groups.Item(5).ConditionField = FieldDef6
-                '    Case "710", "713", "1010", "1013", "1410", "1413" '6Grupos 3X3
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        oReporte.SetParameterValue("Grupo2", "marca")
-                '        oReporte.SetParameterValue("Grupo3", "tipjer")
-                '        oReporte.SetParameterValue("Grupo4", "division")
-                '        oReporte.SetParameterValue("Grupo5", "mix")
-                '        oReporte.SetParameterValue("Grupo6", "canal")
-                '        Dim aFld1() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-                '        Dim aFld2() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-                '        Dim FieldDef1, FieldDef2, FieldDef3, FieldDef4, FieldDef5, FieldDef6 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(0)))
-                '        FieldDef2 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(1)))
-                '        FieldDef3 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(2)))
-                '        FieldDef4 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld2(0)))
-                '        FieldDef5 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld2(1)))
-                '        FieldDef6 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld2(2)))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '        oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
-                '        oReporte.DataDefinition.Groups.Item(2).ConditionField = FieldDef3
-                '        oReporte.DataDefinition.Groups.Item(3).ConditionField = FieldDef4
-                '        oReporte.DataDefinition.Groups.Item(4).ConditionField = FieldDef5
-                '        oReporte.DataDefinition.Groups.Item(5).ConditionField = FieldDef6
-                '    Case "1310", "1313" '7Grupos 4X3
-                '        oReporte.SetParameterValue("Grupo1", "categoria")
-                '        oReporte.SetParameterValue("Grupo2", "marca")
-                '        oReporte.SetParameterValue("Grupo3", "tipjer")
-                '        oReporte.SetParameterValue("Grupo4", "division")
-                '        oReporte.SetParameterValue("Grupo5", "mix")
-                '        oReporte.SetParameterValue("Grupo6", "canal")
-                '        oReporte.SetParameterValue("Grupo7", "tiponegocio")
-                '        Dim aFld1() As String = Split(aMERAgrupadoPor(cmbMERAgrupadoPor.SelectedIndex), ",")
-                '        Dim aFld2() As String = Split(aVENAgrupadoPor(cmbVenAgrupadoPor.SelectedIndex), ",")
-                '        Dim FieldDef1, FieldDef2, FieldDef3, FieldDef4, FieldDef5, FieldDef6, FieldDef7 As CrystalDecisions.CrystalReports.Engine.FieldDefinition
-                '        FieldDef1 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(0)))
-                '        FieldDef2 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(1)))
-                '        FieldDef3 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(2)))
-                '        FieldDef4 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld1(3)))
-                '        FieldDef5 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld2(0)))
-                '        FieldDef6 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld2(1)))
-                '        FieldDef7 = oReporte.Database.Tables.Item(0).Fields.Item(Trim(aFld2(2)))
-                '        oReporte.DataDefinition.Groups.Item(0).ConditionField = FieldDef1
-                '        oReporte.DataDefinition.Groups.Item(1).ConditionField = FieldDef2
-                '        oReporte.DataDefinition.Groups.Item(2).ConditionField = FieldDef3
-                '        oReporte.DataDefinition.Groups.Item(3).ConditionField = FieldDef4
-                '        oReporte.DataDefinition.Groups.Item(4).ConditionField = FieldDef5
-                '        oReporte.DataDefinition.Groups.Item(5).ConditionField = FieldDef6
-                '        oReporte.DataDefinition.Groups.Item(6).ConditionField = FieldDef7
-                '    Case Else
-                'End Select
-
                 Dim oFormula As CrystalDecisions.CrystalReports.Engine.FormulaFieldDefinition
                 For Each oFormula In oReporte.DataDefinition.FormulaFields
                     Select Case oFormula.Name
@@ -1184,15 +676,6 @@ Public Class jsSIGMERepParametrosPlus
                 GruposCantidad = 0
         End Select
     End Function
-    Private Sub btnPeriodoDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles btnPeriodoDesde.Click
-        txtPeriodoDesde.Text = SeleccionaFecha(CDate(txtPeriodoDesde.Text), Me, sender)
-    End Sub
-
-    Private Sub btnPeriodoHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles btnPeriodoHasta.Click
-        txtPeriodoHasta.Text = SeleccionaFecha(CDate(txtPeriodoHasta.Text), Me, sender)
-    End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
         LimpiarOrden()
@@ -1785,16 +1268,16 @@ Public Class jsSIGMERepParametrosPlus
         ft.habilitarObjetos(False, True, txtUnidadProveedorDesde, txtUnidadProveedorHasta)
     End Sub
 
-    Private Sub txtPeriodoDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPeriodoDesde.TextChanged
-        Select Case PeriodoTipo
+    Private Sub txtPeriodoDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPeriodoDesde.ValueChanged
+        Select Case periodoTipo
             Case TipoPeriodo.iDiario
-                txtPeriodoHasta.Text = txtPeriodoDesde.Text
+                txtPeriodoHasta.Value = txtPeriodoDesde.Value
             Case TipoPeriodo.iSemanal
-                txtPeriodoHasta.Text = ft.FormatoFecha(DateAdd(DateInterval.Day, 7, CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = DateAdd(DateInterval.Day, 7, CDate(txtPeriodoDesde.Text))
             Case TipoPeriodo.iMensual
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaMes(CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = UltimoDiaMes(CDate(txtPeriodoDesde.Text))
             Case TipoPeriodo.iAnual
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaAño(CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = UltimoDiaAño(CDate(txtPeriodoDesde.Text))
         End Select
     End Sub
 End Class

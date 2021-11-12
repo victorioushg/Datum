@@ -1,5 +1,7 @@
 Imports MySql.Data.MySqlClient
 Imports C1.Win.C1Chart
+Imports Syncfusion.WinForms.Input
+Imports fTransport
 Public Class jsComArcProveedores
 
     Private Const sModulo As String = "Proveedores y CxP"
@@ -65,6 +67,9 @@ Public Class jsComArcProveedores
             myConn.Open()
             dt = ft.AbrirDataTable(ds, nTabla, myConn, strSQL)
 
+            Dim dates As SfDateTimeEdit() = {txtIngreso}
+            SetSizeDateObjects(dates)
+
             ft.RellenaCombo(aCondicion, cmbCondicion)
             ft.RellenaCombo(aSaldos, cmbSaldos)
 
@@ -82,18 +87,18 @@ Public Class jsComArcProveedores
 
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
-            ft.MensajeCritico("Error en conexión de base de datos: " & ex.Message)
+            ft.mensajeCritico("Error en conexión de base de datos: " & ex.Message)
         End Try
 
     End Sub
     Private Sub AsignarTooltips()
 
         'Menu Barra 
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnAgregar, btnEditar, btnEliminar, btnBuscar, btnSeleccionar, btnPrimero, _
-                         btnSiguiente, btnAnterior, btnUltimo, btnImprimir, btnSalir, btnSubirHistorico, btnBajarHistorico, _
+        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnAgregar, btnEditar, btnEliminar, btnBuscar, btnSeleccionar, btnPrimero,
+                         btnSiguiente, btnAnterior, btnUltimo, btnImprimir, btnSalir, btnSubirHistorico, btnBajarHistorico,
                          btnReprocesar, btnExP, btnAuditoria)
         'Botones Adicionales
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnIngreso, btnUnidad, btnZona, btnForma, btnBanco, btnBancoDeposito, btnDep2)
+        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnUnidad, btnZona, btnForma, btnBanco, btnBancoDeposito, btnDep2)
 
         c1Chart1.ToolTip.Enabled = True
         c1Chart1.ToolTip.SelectAction = SelectActionEnum.MouseOver
@@ -166,7 +171,7 @@ Public Class jsComArcProveedores
                     txtBancoDep2.Text = ft.muestraCampoTexto(.Item("bancodeposito2"))
                     txtBancoDep1Cta.Text = ft.muestraCampoTexto(.Item("ctabancodeposito1"))
                     txtBancoDep2Cta.Text = ft.muestraCampoTexto(.Item("ctabancodeposito2"))
-                    txtIngreso.Text = ft.muestraCampoFecha(.Item("ingreso"))
+                    txtIngreso.Text = .Item("ingreso")
                     txtCredito.Text = ft.muestraCampoNumero(.Item("limcredito"))
                     txtSaldo.Text = ft.muestraCampoNumero(.Item("saldo"))
                     txtDisponible.Text = ft.muestraCampoNumero(.Item("disponible"))
@@ -308,17 +313,17 @@ Public Class jsComArcProveedores
                            & " order by a.nummov, a.fotipo, a.emision, a.tipomov "
         dtMovimientosExP = ft.AbrirDataTable(ds, nTablaMovimientosExP, myConn, strSQLMovExP)
 
-        Dim aCampos() As String = {"emision.Emisión.80.C.Fecha", _
-                                   "tipomov.TP.25.C.", _
-                                   "nummov.Documento.100.I.", _
-                                   "concepto.Concepto.300.I.", _
-                                   "vence.Vence.80.C.Fecha", _
-                                   "refer.Referencia.110.I.", _
-                                   "importe.Importe.110.D.Numero", _
-                                   "origen.ORG.50.C.", _
-                                   "formapag.FP.25.C.", _
-                                   "nompag.Nombre Pago.100.I.", _
-                                   "numpag.Nº Pago.100.I.", _
+        Dim aCampos() As String = {"emision.Emisión.80.C.Fecha",
+                                   "tipomov.TP.25.C.",
+                                   "nummov.Documento.100.I.",
+                                   "concepto.Concepto.300.I.",
+                                   "vence.Vence.80.C.Fecha",
+                                   "refer.Referencia.110.I.",
+                                   "importe.Importe.110.D.Numero",
+                                   "origen.ORG.50.C.",
+                                   "formapag.FP.25.C.",
+                                   "nompag.Nombre Pago.100.I.",
+                                   "numpag.Nº Pago.100.I.",
                                    "comproba.Comprobante Nº.100.I."}
 
         ft.IniciarTablaPlus(dgExP, dtMovimientosExP, aCampos)
@@ -353,18 +358,18 @@ Public Class jsComArcProveedores
         ds = DataSetRequery(ds, strSQLMov, myConn, nTablaMovimientos, lblInfo)
         dtMovimientos = ds.Tables(nTablaMovimientos)
 
-        Dim aCampos() As String = {"emision.Emisión.80.C.fecha", _
-                                   "tipomov.TP.25.C.", _
-                                   "nummov.Documento.100.I.", _
-                                   "concepto.Concepto.300.I.", _
-                                   "vence.Vence.80.C.fecha", _
-                                   "refer.Referencia.120.I.", _
-                                   "importe.Importe.120.D.Numero", _
-                                   "origen.ORG.50.C.", _
-                                   "formapag.FP.25.C.", _
-                                   "nompag.Nombre Pago.100.I.", _
-                                   "numpag.Nº Pago.100.I.", _
-                                   "comproba.Comprobante Nº.100.I.", _
+        Dim aCampos() As String = {"emision.Emisión.80.C.fecha",
+                                   "tipomov.TP.25.C.",
+                                   "nummov.Documento.100.I.",
+                                   "concepto.Concepto.300.I.",
+                                   "vence.Vence.80.C.fecha",
+                                   "refer.Referencia.120.I.",
+                                   "importe.Importe.120.D.Numero",
+                                   "origen.ORG.50.C.",
+                                   "formapag.FP.25.C.",
+                                   "nompag.Nombre Pago.100.I.",
+                                   "numpag.Nº Pago.100.I.",
+                                   "comproba.Comprobante Nº.100.I.",
                                    "sada..10.I."}
 
         ft.IniciarTablaPlus(dg, dtMovimientos, aCampos)
@@ -397,16 +402,16 @@ Public Class jsComArcProveedores
         ft.RellenaCombo(aCondicion, cmbCondicion)
 
         txtRIF.Text = ""
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtNombre, txtNombre1, txtUnidad, txtUnidadNombre, txtCategoria, txtCategoriaNombre, _
-                            txtNIT, txtAsignado, txtIVA, txtZona, txtZonaNombre, txtDireccionFiscal, _
-                            txtDireccionAlterna, txtTelefono1, txtTelefono2, txtTelefono3, txtFAX, _
-                            txtemail1, txtemail2, txtemail3, txtemail4, txtWebSite, txtGerente, txtTelefonoGerente, txtContacto, _
-                            txtTelefonoContacto, txtVendedor, txtCobrador, txtFormaPago, txtFormaPagoNombre, txtBancoPago, _
-                            txtBancoPagoNombre, txtBancoDep1, txtBancoDep2, txtBancoDep1Nombre, _
+        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtNombre, txtNombre1, txtUnidad, txtUnidadNombre, txtCategoria, txtCategoriaNombre,
+                            txtNIT, txtAsignado, txtIVA, txtZona, txtZonaNombre, txtDireccionFiscal,
+                            txtDireccionAlterna, txtTelefono1, txtTelefono2, txtTelefono3, txtFAX,
+                            txtemail1, txtemail2, txtemail3, txtemail4, txtWebSite, txtGerente, txtTelefonoGerente, txtContacto,
+                            txtTelefonoContacto, txtVendedor, txtCobrador, txtFormaPago, txtFormaPagoNombre, txtBancoPago,
+                            txtBancoPagoNombre, txtBancoDep1, txtBancoDep2, txtBancoDep1Nombre,
                             txtBancoDep2Nombre, txtBancoDep1Cta, txtBancoDep2Cta, txtBancoPagoCuenta, txtCodigoContable)
 
         ft.iniciarTextoObjetos(Transportables.tipoDato.Numero, txtCredito, txtSaldo, txtDisponible)
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Fecha, txtFechaUltimopago, txtIngreso)
+        ft.iniciarTextoObjetos(Transportables.tipoDato.Fecha, txtFechaUltimopago)
 
         Dim aIVA() As String = ArregloIVA(myConn, lblInfo)
         ft.RellenaCombo(aIVA, cmbIVA, ft.InArray(aIVA, "A"))
@@ -418,25 +423,25 @@ Public Class jsComArcProveedores
     Private Sub ActivarMarco0()
 
         ft.visualizarObjetos(True, grpAceptarSalir)
-        ft.habilitarObjetos(False, False, MenuBarra, tbcProveedor.TabPages(1), tbcProveedor.TabPages(2), tbcProveedor.TabPages(3), _
+        ft.habilitarObjetos(False, False, MenuBarra, tbcProveedor.TabPages(1), tbcProveedor.TabPages(2), tbcProveedor.TabPages(3),
                              tbcProveedor.TabPages(4), tbcProveedor.TabPages(5))
-        ft.habilitarObjetos(True, True, cmbTipo, cmbCondicion, txtNombre, btnUnidad, txtNIT, txtRIF, txtAsignado, _
-                                cmbIVA, btnIVA, btnZona, txtDireccionAlterna, txtDireccionFiscal, txtTelefono1, _
-                                txtTelefono2, txtTelefono3, txtFAX, txtWebSite, txtGerente, txtTelefonoGerente, _
-                                txtemail1, txtCobrador, txtContacto, txtVendedor, txtTelefonoContacto, txtemail2, _
-                                txtemail3, txtemail4, btnForma, btnIngreso, btnBanco, btnBancoDeposito, btnDep2, _
+        ft.habilitarObjetos(True, True, cmbTipo, cmbCondicion, txtNombre, btnUnidad, txtNIT, txtRIF, txtAsignado,
+                                cmbIVA, btnIVA, btnZona, txtDireccionAlterna, txtDireccionFiscal, txtTelefono1,
+                                txtTelefono2, txtTelefono3, txtFAX, txtWebSite, txtGerente, txtTelefonoGerente,
+                                txtemail1, txtCobrador, txtContacto, txtVendedor, txtTelefonoContacto, txtemail2,
+                                txtemail3, txtemail4, btnForma, txtIngreso, btnBanco, btnBancoDeposito, btnDep2,
                                 txtBancoDep1Cta, txtBancoDep2Cta, txtCredito)
 
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
     End Sub
     Private Sub ActivarMarco1()
 
         ft.visualizarObjetos(True, grpMovimientosCxP, grpAceptarSalir)
-        ft.habilitarObjetos(False, False, MenuBarra, tbcProveedor.TabPages(0), tbcProveedor.TabPages(2), tbcProveedor.TabPages(3), _
+        ft.habilitarObjetos(False, False, MenuBarra, tbcProveedor.TabPages(0), tbcProveedor.TabPages(2), tbcProveedor.TabPages(3),
                              tbcProveedor.TabPages(4), tbcProveedor.TabPages(5))
-        ft.habilitarObjetos(False, False, cmbTipoCxP, txtDocumentoCXP, txtEmisionCXP, txtCausaNCCXP, txtReferenciaCXP, txtConceptoCXP, _
-                         txtImporteCXP, grpCondicionCXP, cmbCajaCxP, cmbFPCxP, txtNumeroPagoCxP, cmbNombrePagoCxP, txtBeneficiarioCxP, _
+        ft.habilitarObjetos(False, False, cmbTipoCxP, txtDocumentoCXP, txtEmisionCXP, txtCausaNCCXP, txtReferenciaCXP, txtConceptoCXP,
+                         txtImporteCXP, grpCondicionCXP, cmbCajaCxP, cmbFPCxP, txtNumeroPagoCxP, cmbNombrePagoCxP, txtBeneficiarioCxP,
                          txtNumDepositoCxP, txtCtaDepositoCxP, txtBancoDepositoCxP)
 
         ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
@@ -445,10 +450,10 @@ Public Class jsComArcProveedores
     Private Sub ActivarMarco2()
 
         ft.visualizarObjetos(True, grpMovimientosExP, grpAceptarSalir)
-        ft.habilitarObjetos(False, False, MenuBarra, tbcProveedor.TabPages(0), tbcProveedor.TabPages(1), tbcProveedor.TabPages(2), _
+        ft.habilitarObjetos(False, False, MenuBarra, tbcProveedor.TabPages(0), tbcProveedor.TabPages(1), tbcProveedor.TabPages(2),
                              tbcProveedor.TabPages(3), tbcProveedor.TabPages(4), tbcProveedor.TabPages(6))
-        ft.habilitarObjetos(False, False, cmbTipoExP, txtDocumentoEXP, txtEmisionEXP, txtCausaNCEXP, txtReferenciaExP, txtConceptoExP, _
-                         txtImporteExP, grpCondicionExP, cmbCajaExP, cmbFPExP, txtNumeroPagoExP, cmbNombrePagoExP, txtBeneficiarioExP, _
+        ft.habilitarObjetos(False, False, cmbTipoExP, txtDocumentoEXP, txtEmisionEXP, txtCausaNCEXP, txtReferenciaExP, txtConceptoExP,
+                         txtImporteExP, grpCondicionExP, cmbCajaExP, cmbFPExP, txtNumeroPagoExP, cmbNombrePagoExP, txtBeneficiarioExP,
                          txtNumeroDepositoExP, txtCuentaDepositoExP, txtBancoDepositoExP)
 
         ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
@@ -457,34 +462,34 @@ Public Class jsComArcProveedores
     Private Sub DesactivarMarco0()
 
         ft.visualizarObjetos(False, grpAceptarSalir)
-        ft.habilitarObjetos(True, False, MenuBarra, tbcProveedor.TabPages(1), tbcProveedor.TabPages(2), tbcProveedor.TabPages(3), _
+        ft.habilitarObjetos(True, False, MenuBarra, tbcProveedor.TabPages(1), tbcProveedor.TabPages(2), tbcProveedor.TabPages(3),
                              tbcProveedor.TabPages(4), tbcProveedor.TabPages(5), tbcProveedor.TabPages(6))
 
-        ft.habilitarObjetos(False, True, txtCodigo, cmbTipo, txtAsignado, cmbCondicion, txtNombre, txtUnidadNombre, btnUnidad, _
-                          txtCategoriaNombre, txtRIF, txtNIT, cmbIVA, txtIVA, btnIVA, btnZona, txtZona, txtDireccionFiscal, _
-                          txtDireccionAlterna, txtTelefono1, txtTelefono2, txtTelefono3, txtFAX, txtWebSite, txtemail1, _
-                          txtemail2, txtemail3, txtemail4, txtGerente, txtTelefonoGerente, txtContacto, txtTelefonoContacto, _
-                          txtFormaPagoNombre, btnForma, btnBanco, txtBancoDep1, txtBancoDep1Cta, btnBancoDeposito, btnDep2, _
-                          txtBancoDep1Nombre, txtBancoDep2Nombre, txtBancoDep1Cta, txtBancoDep2Cta, txtBancoPagoCuenta, _
-                          txtBancoPagoNombre, txtIngreso, btnIngreso, txtCredito, txtSaldo, txtDisponible, _
-                          txtUltimoPago, txtFormaUltimoPago, txtFechaUltimopago, txtCreditoM, txtSaldoM, txtDisponibleM, _
-                          txtVendedor, txtCobrador, txtZonaNombre, _
-                          txtCodigo1, txtNombre1, txtCodigo2, txtNombre2, txtCodigoSaldos, txtNombreSaldos, _
-                          txtCodigoExP, txtNombreExP, txtUltimoPagoExP, txtFormaUltimoPagoExP, txtFechaUltimoPagoExP, _
-                          txtCreditoExP, txtSaldoExP, txtDisponibleExP, _
+        ft.habilitarObjetos(False, True, txtCodigo, cmbTipo, txtAsignado, cmbCondicion, txtNombre, txtUnidadNombre, btnUnidad,
+                          txtCategoriaNombre, txtRIF, txtNIT, cmbIVA, txtIVA, btnIVA, btnZona, txtZona, txtDireccionFiscal,
+                          txtDireccionAlterna, txtTelefono1, txtTelefono2, txtTelefono3, txtFAX, txtWebSite, txtemail1,
+                          txtemail2, txtemail3, txtemail4, txtGerente, txtTelefonoGerente, txtContacto, txtTelefonoContacto,
+                          txtFormaPagoNombre, btnForma, btnBanco, txtBancoDep1, txtBancoDep1Cta, btnBancoDeposito, btnDep2,
+                          txtBancoDep1Nombre, txtBancoDep2Nombre, txtBancoDep1Cta, txtBancoDep2Cta, txtBancoPagoCuenta,
+                          txtBancoPagoNombre, txtIngreso, txtCredito, txtSaldo, txtDisponible,
+                          txtUltimoPago, txtFormaUltimoPago, txtFechaUltimopago, txtCreditoM, txtSaldoM, txtDisponibleM,
+                          txtVendedor, txtCobrador, txtZonaNombre,
+                          txtCodigo1, txtNombre1, txtCodigo2, txtNombre2, txtCodigoSaldos, txtNombreSaldos,
+                          txtCodigoExP, txtNombreExP, txtUltimoPagoExP, txtFormaUltimoPagoExP, txtFechaUltimoPagoExP,
+                          txtCreditoExP, txtSaldoExP, txtDisponibleExP,
                           txtCodigoExpediente, txtNombreExpediente, txtDocSel, txtSaldoSel, txtCodigoContable)
 
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
     End Sub
     Private Sub DesactivarMarco1()
 
         ft.visualizarObjetos(False, grpMovimientosCxP, grpAceptarSalir)
-        ft.habilitarObjetos(True, False, MenuBarra, tbcProveedor.TabPages(0), tbcProveedor.TabPages(1), tbcProveedor.TabPages(2), tbcProveedor.TabPages(3), _
+        ft.habilitarObjetos(True, False, MenuBarra, tbcProveedor.TabPages(0), tbcProveedor.TabPages(1), tbcProveedor.TabPages(2), tbcProveedor.TabPages(3),
                              tbcProveedor.TabPages(4), tbcProveedor.TabPages(5))
 
-        ft.habilitarObjetos(True, False, cmbTipoCxP, txtDocumentoCXP, txtEmisionCXP, txtCausaNCCXP, txtReferenciaCXP, txtConceptoCXP, _
-                         txtImporteCXP, grpCondicionCXP, cmbCajaCxP, cmbFPCxP, txtNumeroPagoCxP, cmbNombrePagoCxP, txtBeneficiarioCxP, _
+        ft.habilitarObjetos(True, False, cmbTipoCxP, txtDocumentoCXP, txtEmisionCXP, txtCausaNCCXP, txtReferenciaCXP, txtConceptoCXP,
+                         txtImporteCXP, grpCondicionCXP, cmbCajaCxP, cmbFPCxP, txtNumeroPagoCxP, cmbNombrePagoCxP, txtBeneficiarioCxP,
                          txtNumDepositoCxP, txtCtaDepositoCxP, txtBancoDepositoCxP)
 
         ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
@@ -493,18 +498,15 @@ Public Class jsComArcProveedores
     Private Sub DesactivarMarco2()
 
         ft.visualizarObjetos(False, grpMovimientosExP, grpAceptarSalir)
-        ft.habilitarObjetos(True, False, MenuBarra, tbcProveedor.TabPages(0), tbcProveedor.TabPages(1), tbcProveedor.TabPages(2), _
+        ft.habilitarObjetos(True, False, MenuBarra, tbcProveedor.TabPages(0), tbcProveedor.TabPages(1), tbcProveedor.TabPages(2),
                              tbcProveedor.TabPages(3), tbcProveedor.TabPages(4), tbcProveedor.TabPages(5))
 
-        ft.habilitarObjetos(True, False, cmbTipoExP, txtDocumentoEXP, txtEmisionEXP, txtCausaNCEXP, txtReferenciaExP, txtConceptoExP, _
-                         txtImporteExP, grpCondicionExP, cmbCajaExP, cmbFPExP, txtNumeroPagoExP, cmbNombrePagoExP, txtBeneficiarioExP, _
+        ft.habilitarObjetos(True, False, cmbTipoExP, txtDocumentoEXP, txtEmisionEXP, txtCausaNCEXP, txtReferenciaExP, txtConceptoExP,
+                         txtImporteExP, grpCondicionExP, cmbCajaExP, cmbFPExP, txtNumeroPagoExP, cmbNombrePagoExP, txtBeneficiarioExP,
                          txtNumeroDepositoExP, txtCuentaDepositoExP, txtBancoDepositoExP)
 
         ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
-    End Sub
-    Private Sub btnIngreso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIngreso.Click
-        txtIngreso.Text = SeleccionaFecha(CDate(txtIngreso.Text), Me, btnIngreso)
     End Sub
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
         Me.Close()
@@ -792,16 +794,16 @@ Public Class jsComArcProveedores
             If PoseeMovimientosAsociados(myConn, lblInfo, txtCodigo.Text) Then
                 ft.mensajeCritico("Este banco posee movimientos. Verifique por favor ...")
             Else
-                AsignaTXT(EliminarRegistros(myConn, lblInfo, ds, nTabla, "jsprocatpro", strSQL, aCamposDel, aStringsDel, _
+                AsignaTXT(EliminarRegistros(myConn, lblInfo, ds, nTabla, "jsprocatpro", strSQL, aCamposDel, aStringsDel,
                                               Me.BindingContext(ds, nTabla).Position, True))
             End If
         End If
 
     End Sub
 
-    Private Function PoseeMovimientosAsociados(ByVal MyConn As MySqlConnection, ByVal lblInfo As System.Windows.Forms.Label, _
-                                               ByVal CodigoProveedor As String, Optional ByVal NumeroMovimiento As String = "", _
-                                               Optional ByVal TipoMovimiento As String = "", _
+    Private Function PoseeMovimientosAsociados(ByVal MyConn As MySqlConnection, ByVal lblInfo As System.Windows.Forms.Label,
+                                               ByVal CodigoProveedor As String, Optional ByVal NumeroMovimiento As String = "",
+                                               Optional ByVal TipoMovimiento As String = "",
                                                Optional ByVal CxP_ExP As Integer = 0) As Boolean
 
         Dim cuenta As Integer = ft.DevuelveScalarEntero(MyConn, " select count(*) from jsprotrapag where " _
@@ -822,11 +824,11 @@ Public Class jsComArcProveedores
 
                 If ft.PreguntaEliminarRegistro() = Windows.Forms.DialogResult.Yes Then
                     With dtMovimientos.Rows(nPosicionMov)
-                        Dim aCamposAdicionales() As String = {"codpro|'" & txtCodigo.Text & "'", _
-                                                            "emision|'" & ft.FormatoFechaMySQL(Convert.ToDateTime(.Item("EMISION"))) & "'", _
-                                                            "nummov|'" & .Item("NUMMOV") & "'", _
-                                                            "tipomov|'" & .Item("TIPOMOV") & "'", _
-                                                            "hora|'" & .Item("HORA") & "'", _
+                        Dim aCamposAdicionales() As String = {"codpro|'" & txtCodigo.Text & "'",
+                                                            "emision|'" & ft.FormatoFechaMySQL(Convert.ToDateTime(.Item("EMISION"))) & "'",
+                                                            "nummov|'" & .Item("NUMMOV") & "'",
+                                                            "tipomov|'" & .Item("TIPOMOV") & "'",
+                                                            "hora|'" & .Item("HORA") & "'",
                                                             "tipo|'" & .Item("TIPO") & "'"}
 
                         If DocumentoBloqueado(myConn, "jsprotrapag", aCamposAdicionales) Then
@@ -975,11 +977,11 @@ Public Class jsComArcProveedores
                 If ft.PreguntaEliminarRegistro() = Windows.Forms.DialogResult.Yes Then
                     With dtMovimientosExP.Rows(nPosicionMovExP)
 
-                        Dim aCamposAdicionales() As String = {"codpro|'" & txtCodigo.Text & "'", _
-                                                              "emision|'" & ft.FormatoFechaMySQL(Convert.ToDateTime(.Item("EMISION"))) & "'", _
-                                                              "nummov|'" & .Item("NUMMOV") & "'", _
-                                                              "tipomov|'" & .Item("TIPOMOV") & "'", _
-                                                              "hora|'" & .Item("HORA") & "'", _
+                        Dim aCamposAdicionales() As String = {"codpro|'" & txtCodigo.Text & "'",
+                                                              "emision|'" & ft.FormatoFechaMySQL(Convert.ToDateTime(.Item("EMISION"))) & "'",
+                                                              "nummov|'" & .Item("NUMMOV") & "'",
+                                                              "tipomov|'" & .Item("TIPOMOV") & "'",
+                                                              "hora|'" & .Item("HORA") & "'",
                                                               "tipo|'" & .Item("TIPO") & "'"}
 
                         If DocumentoBloqueado(myConn, "jsprotrapag", aCamposAdicionales) Then
@@ -1167,13 +1169,13 @@ Public Class jsComArcProveedores
                             fr.Dispose()
                             fr = Nothing
                         Else
-                            f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cComprobantePago, "COMPROBANTE DE EGRESO", _
+                            f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cComprobantePago, "COMPROBANTE DE EGRESO",
                                      txtCodigo.Text, dtMovimientos.Rows(nPosicionMov).Item("COMPROBA"))
                         End If
 
                     Else
                         'IMPRIMIR MOVIMIENTOS DE CXP
-                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cMovimientosProveedores, "Movimientos Proveedores", _
+                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cMovimientosProveedores, "Movimientos Proveedores",
                                  txtCodigo1.Text)
                     End If
                 End With
@@ -1183,33 +1185,33 @@ Public Class jsComArcProveedores
                 With dtMovimientosExP.Rows(nPosicionMovExP)
                     If .Item("tipomov") = "NC" And Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA" Then
                         'IMPRIMIR COMPROBANTE RETENCIOIN IVA
-                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cRetencionIVA, "Comprobante de Retención de IVA", _
+                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cRetencionIVA, "Comprobante de Retención de IVA",
                                  txtCodigo.Text, .Item("refer"), , , , , 1)
                     ElseIf .Item("tipomov") = "ND" And Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA" Then
                         'IMPRIMIR COMPROBANTE RETENCION IVA
-                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cRetencionIVA, "Comprobante de Retención de IVA", _
+                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cRetencionIVA, "Comprobante de Retención de IVA",
                                  txtCodigo.Text, .Item("refer"), , , , , 1)
                     ElseIf .Item("tipomov") = "NC" And Mid(.Item("REFER"), 1, 5) = "ISLR-" Then
                         'IMPRIMNIR COMPROBANTE RETENCION ISLR
-                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cRetencionISLR, "Comprobante de Retención de ISLR", _
+                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cRetencionISLR, "Comprobante de Retención de ISLR",
                                  txtCodigo.Text, .Item("refer"), , , , , 1)
                     ElseIf dtMovimientosExP.Rows(nPosicionMovExP).Item("comproba") <> "" Then
                         'IMPRIMIR COMPROBANTE DE EGRESO
                         If dtMovimientosExP.Rows(nPosicionMovExP).Item("formapag") = "CH" Then
                             Dim fr As New jsBanRepParametros
-                            fr.Cargar(TipoCargaFormulario.iShowDialog, ReporteBancos.cComprobanteDeEgreso, "COMPROBANTE DE PAGO", _
-                                      dtMovimientosExP.Rows(nPosicionMovExP).Item("nompag"), _
+                            fr.Cargar(TipoCargaFormulario.iShowDialog, ReporteBancos.cComprobanteDeEgreso, "COMPROBANTE DE PAGO",
+                                      dtMovimientosExP.Rows(nPosicionMovExP).Item("nompag"),
                                       dtMovimientosExP.Rows(nPosicionMovExP).Item("COMPROBA"), , "CXP")
                             fr.Dispose()
                             fr = Nothing
                         Else
-                            f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cComprobantePago, "COMPROBANTE DE EGRESO", _
+                            f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cComprobantePago, "COMPROBANTE DE EGRESO",
                                      txtCodigo.Text, dtMovimientosExP.Rows(nPosicionMovExP).Item("COMPROBA"))
                         End If
 
                     Else
                         'IMPRIMIR MOVIMIENTOS DE CXP
-                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cMovimientosProveedores, "Movimientos ExP Proveedores", _
+                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cMovimientosProveedores, "Movimientos ExP Proveedores",
                                  txtCodigo1.Text, , , , , , 1)
                     End If
                 End With
@@ -1283,16 +1285,16 @@ Public Class jsComArcProveedores
             sRIF = txtRIF.Text.Split("-")(0) + "-" + txtRIF.Text.Split("-")(1).Replace("_", "")
         End If
 
-        InsertEditCOMPRASProveedores(myConn, lblInfo, Inserta, txtCodigo.Text, txtNombre.Text, txtCategoria.Text, txtUnidad.Text, _
-                                  sRIF, txtNIT.Text, txtAsignado.Text, txtDireccionFiscal.Text, txtDireccionAlterna.Text, _
-                                  txtemail1.Text, txtemail2.Text, txtemail3.Text, txtemail4.Text, "", txtWebSite.Text, _
-                                  txtTelefono1.Text, txtTelefono2.Text, txtTelefono3.Text, txtFAX.Text, txtGerente.Text, _
-                                  txtTelefonoGerente.Text, txtContacto.Text, txtTelefonoContacto.Text, ValorNumero(txtCredito.Text), _
-                                  ValorNumero(txtDisponible.Text), 0.0, 0.0, 0.0, 0.0, 0, 0, "", txtZona.Text, txtCobrador.Text, _
-                                  txtVendedor.Text, ValorNumero(txtSaldo.Text), ValorNumero(txtUltimoPago.Text), _
-                                  fechaUltima, IIf(txtFormaUltimoPago.Text.Length > 2, Mid(txtFormaUltimoPago.Text, 1, 2), ""), cmbIVA.Text, txtFormaPago.Text, _
-                                  txtBancoPago.Text, txtBancoPagoCuenta.Text, txtBancoDep1.Text, txtBancoDep2.Text, _
-                                  txtBancoDep1Cta.Text, txtBancoDep2Cta.Text, CDate(txtIngreso.Text), txtCodigoContable.Text, cmbCondicion.SelectedIndex, _
+        InsertEditCOMPRASProveedores(myConn, lblInfo, Inserta, txtCodigo.Text, txtNombre.Text, txtCategoria.Text, txtUnidad.Text,
+                                  sRIF, txtNIT.Text, txtAsignado.Text, txtDireccionFiscal.Text, txtDireccionAlterna.Text,
+                                  txtemail1.Text, txtemail2.Text, txtemail3.Text, txtemail4.Text, "", txtWebSite.Text,
+                                  txtTelefono1.Text, txtTelefono2.Text, txtTelefono3.Text, txtFAX.Text, txtGerente.Text,
+                                  txtTelefonoGerente.Text, txtContacto.Text, txtTelefonoContacto.Text, ValorNumero(txtCredito.Text),
+                                  ValorNumero(txtDisponible.Text), 0.0, 0.0, 0.0, 0.0, 0, 0, "", txtZona.Text, txtCobrador.Text,
+                                  txtVendedor.Text, ValorNumero(txtSaldo.Text), ValorNumero(txtUltimoPago.Text),
+                                  fechaUltima, IIf(txtFormaUltimoPago.Text.Length > 2, Mid(txtFormaUltimoPago.Text, 1, 2), ""), cmbIVA.Text, txtFormaPago.Text,
+                                  txtBancoPago.Text, txtBancoPagoCuenta.Text, txtBancoDep1.Text, txtBancoDep2.Text,
+                                  txtBancoDep1Cta.Text, txtBancoDep2Cta.Text, txtIngreso.Value, txtCodigoContable.Text, cmbCondicion.SelectedIndex,
                                   cmbTipo.SelectedIndex)
 
         SaldoCxP(myConn, lblInfo, txtCodigo.Text)
@@ -1312,14 +1314,14 @@ Public Class jsComArcProveedores
 
     End Sub
 
-    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus, _
-    txtNombre.GotFocus, cmbTipo.GotFocus, cmbCondicion.GotFocus, btnUnidad.GotFocus, txtNIT.GotFocus, _
-    txtAsignado.GotFocus, cmbIVA.GotFocus, btnIVA.GotFocus, btnZona.GotFocus, txtDireccionFiscal.GotFocus, txtDireccionAlterna.GotFocus, _
-    txtTelefono1.GotFocus, txtTelefono2.GotFocus, txtTelefono3.GotFocus, txtFAX.GotFocus, txtWebSite.GotFocus, _
-    txtGerente.GotFocus, txtTelefonoGerente.GotFocus, txtemail1.GotFocus, txtContacto.GotFocus, txtTelefonoContacto.GotFocus, _
-    txtemail2.GotFocus, txtVendedor.GotFocus, txtCobrador.GotFocus, txtemail3.GotFocus, txtemail4.GotFocus, _
-    btnForma.GotFocus, btnBanco.GotFocus, btnBancoDeposito.GotFocus, btnDep2.GotFocus, txtBancoPagoCuenta.GotFocus, _
-    txtBancoDep1Cta.GotFocus, txtBancoDep2Cta.GotFocus, btnIngreso.GotFocus, txtCredito.GotFocus
+    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus,
+    txtNombre.GotFocus, cmbTipo.GotFocus, cmbCondicion.GotFocus, btnUnidad.GotFocus, txtNIT.GotFocus,
+    txtAsignado.GotFocus, cmbIVA.GotFocus, btnIVA.GotFocus, btnZona.GotFocus, txtDireccionFiscal.GotFocus, txtDireccionAlterna.GotFocus,
+    txtTelefono1.GotFocus, txtTelefono2.GotFocus, txtTelefono3.GotFocus, txtFAX.GotFocus, txtWebSite.GotFocus,
+    txtGerente.GotFocus, txtTelefonoGerente.GotFocus, txtemail1.GotFocus, txtContacto.GotFocus, txtTelefonoContacto.GotFocus,
+    txtemail2.GotFocus, txtVendedor.GotFocus, txtCobrador.GotFocus, txtemail3.GotFocus, txtemail4.GotFocus,
+    btnForma.GotFocus, btnBanco.GotFocus, btnBancoDeposito.GotFocus, btnDep2.GotFocus, txtBancoPagoCuenta.GotFocus,
+    txtBancoDep1Cta.GotFocus, txtBancoDep2Cta.GotFocus, txtCredito.GotFocus
 
         Dim mensaje As String = ""
         Select Case sender.name
@@ -1384,10 +1386,10 @@ Public Class jsComArcProveedores
             Case "txtCredito"
                 mensaje = "Indique el monto límite de crédito de este proveedor ..."
         End Select
-        ft.mensajeEtiqueta(lblInfo, mensaje, Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, mensaje, Transportables.tipoMensaje.iInfo)
     End Sub
 
-    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick, _
+    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick,
         dg.CellMouseClick, dg.RegionChanged
 
         Me.BindingContext(ds, nTablaMovimientos).Position = e.RowIndex
@@ -1417,7 +1419,7 @@ Public Class jsComArcProveedores
 
                     IniciarCajas(.Item("CAJAPAG"), cmbCajaCxP)
 
-                    IniciarFormapago(.Item("FORMAPAG"), cmbFPCxP)
+                    IniciarFormapadoDropDown(cmbFPCxP, .Item("FORMAPAG"))
                     txtNumeroPagoCxP.Text = ft.muestraCampoTexto(.Item("NUMPAG"))
 
                     IniciarNombrePago(.Item("FORMAPAG"), .Item("NOMPAG"), cmbNombrePagoCxP)
@@ -1454,7 +1456,7 @@ Public Class jsComArcProveedores
 
                     IniciarCajas(.Item("CAJAPAG"), cmbCajaExP)
 
-                    IniciarFormapago(.Item("FORMAPAG"), cmbFPExP)
+                    IniciarFormapadoDropDown(cmbFPExP, .Item("FORMAPAG"))
                     txtNumeroPagoExP.Text = ft.muestraCampoTexto(.Item("NUMPAG"))
 
                     IniciarNombrePago(.Item("FORMAPAG"), .Item("NOMPAG"), cmbNombrePagoExP)
@@ -1462,15 +1464,14 @@ Public Class jsComArcProveedores
                     txtBeneficiarioExP.Text = ft.muestraCampoTexto(.Item("BENEFIC"))
                     txtCodConExP.Text = ft.muestraCampoTexto(.Item("CODCON"))
 
-
                 End If
 
             End With
         End If
 
     End Sub
-    Private Sub IniciarCausaCredito(lblDescripCausaNotaCredito As System.Windows.Forms.Label, CausaNotaCredito As String, _
-                                    rbtnCredito As RadioButton, rbtnContado As RadioButton, _
+    Private Sub IniciarCausaCredito(lblDescripCausaNotaCredito As System.Windows.Forms.Label, CausaNotaCredito As String,
+                                    rbtnCredito As RadioButton, rbtnContado As RadioButton,
                                     TipoMovimiento As String, grpCondicion As GroupBox)
         ft.visualizarObjetos(False, grpCondicion, lblDescripCausaNotaCredito)
         If TipoMovimiento = "NC" And CausaNotaCredito <> "" Then
@@ -1513,13 +1514,6 @@ Public Class jsComArcProveedores
         End If
     End Sub
 
-    Private Sub IniciarFormapago(FormaPago As String, cmb As ComboBox)
-        If FormaPago.Equals("") Then
-            cmb.Items.Clear()
-        Else
-            ft.RellenaCombo(aFormaPago, cmb, ft.InArray(aFormaPagoAbreviada, FormaPago))
-        End If
-    End Sub
     Private Sub IniciarNombrePago(FormaPago As String, NombrePago As String, cmb As ComboBox)
         Select Case FormaPago
             Case "CH", "DP", "TR"
@@ -1534,7 +1528,7 @@ Public Class jsComArcProveedores
                 End If
         End Select
     End Sub
-    Private Sub dgExP_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgExP.RowHeaderMouseClick, _
+    Private Sub dgExP_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgExP.RowHeaderMouseClick,
         dgExP.CellMouseClick, dgExP.RegionChanged
         Me.BindingContext(ds, nTablaMovimientosExP).Position = e.RowIndex
         nPosicionMovExP = e.RowIndex
@@ -1588,17 +1582,17 @@ Public Class jsComArcProveedores
 
         dtEnvases = ft.AbrirDataTable(ds, nTablaEnvases, myConn, strSQLEnvases)
 
-        Dim aCampos() As String = {"fechamov.Emisión.80.C.fecha", _
-                                   "tipomov.TP.35.C.", _
-                                   "numdoc.Documento.100.I.", _
-                                   "almacen.ALM.50.C.", _
-                                   "cantidad.Cantidad.70.D.Entero", _
-                                   "origen.ORG.35.C.", _
-                                   "prov_cli.Prov/Clie.80.C.", _
-                                   "nomProv_cli.Nombre o razón social.300.I.", _
-                                   "vendedor.Asesor.50.C.", _
-                                   "nomvendedor.Nombre.300.I.", _
-                                   "nomEstatus.Estatus.200.I.", _
+        Dim aCampos() As String = {"fechamov.Emisión.80.C.fecha",
+                                   "tipomov.TP.35.C.",
+                                   "numdoc.Documento.100.I.",
+                                   "almacen.ALM.50.C.",
+                                   "cantidad.Cantidad.70.D.Entero",
+                                   "origen.ORG.35.C.",
+                                   "prov_cli.Prov/Clie.80.C.",
+                                   "nomProv_cli.Nombre o razón social.300.I.",
+                                   "vendedor.Asesor.50.C.",
+                                   "nomvendedor.Nombre.300.I.",
+                                   "nomEstatus.Estatus.200.I.",
                                    "sada..10.I."}
 
         ft.IniciarTablaPlus(dgEnvases, dtEnvases, aCampos)
@@ -1636,8 +1630,8 @@ Public Class jsComArcProveedores
 
 
         If CodProveedor <> "" Then
-            Dim aFields() As String = {"sel.entero.1.0", "codpro.cadena.15.0", "nombre.cadena.250.0", "nummov.cadena.20.0", "tipomov.cadena.2.0", _
-                                       "refer.cadena.15.0", "emision.fecha.0.0", "vence.fecha.0.0", "importe.doble.19.2", "saldo.doble.19.2", _
+            Dim aFields() As String = {"sel.entero.1.0", "codpro.cadena.15.0", "nombre.cadena.250.0", "nummov.cadena.20.0", "tipomov.cadena.2.0",
+                                       "refer.cadena.15.0", "emision.fecha.0.0", "vence.fecha.0.0", "importe.doble.19.2", "saldo.doble.19.2",
                                        "codven.cadena.5.0", "nomVendedor.cadena.50.0"}
 
             CrearTabla(myConn, lblInfo, jytsistema.WorkDataBase, True, tblSaldos, aFields)
@@ -1699,11 +1693,11 @@ Public Class jsComArcProveedores
         Dim aCampos() As String = {"emision", "tipomov", "nummov", "vence", "refer", "formapag", "comproba", "importe", "origen", "codven", "nomvendedor"}
         Dim aNombres() As String = {"Emisión", "TP", "Documento", "Vence", "Referencia", "FP", "Comprobante", "Importe", "ORG", "Asesor", "Nombre"}
         Dim aAnchos() As Integer = {80, 25, 90, 80, 80, 25, 90, 80, 35, 50, 80}
-        Dim aAlineacion() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, _
-                                        AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro, _
-                                        AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro, _
-                                        AlineacionDataGrid.Izquierda, AlineacionDataGrid.Derecha, _
-                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro, _
+        Dim aAlineacion() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Centro,
+                                        AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro,
+                                        AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro,
+                                        AlineacionDataGrid.Izquierda, AlineacionDataGrid.Derecha,
+                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro,
                                         AlineacionDataGrid.Izquierda}
         Dim aFormatos() As String = {sFormatoFecha, "", "", sFormatoFecha, "", "", "", sFormatoNumero, "", "", ""}
         IniciarTabla(dgDocumentos, dtDocSal, aCampos, aNombres, aAnchos, aAlineacion, aFormatos, , , 8)
@@ -1747,11 +1741,11 @@ Public Class jsComArcProveedores
         Dim aCampos() As String = {"documento", "item", "descrip", "iva", "unidad", "cantidad", "precio", "des_art", "des_cli", "por_acepta_dev", "totren"}
         Dim aNombres() As String = {"Documento", "ítem", "Descripción", "IVA", "UND", "Cantidad", "Precio", "Desc. Art.", "Desc. Pro.", "% Acepta.", "Total"}
         Dim aAnchos() As Integer = {90, 70, 190, 30, 35, 70, 70, 45, 45, 50, 70}
-        Dim aAlineacion() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, _
-                                        AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro, _
-                                        AlineacionDataGrid.Centro, AlineacionDataGrid.Derecha, _
-                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, _
-                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, _
+        Dim aAlineacion() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda,
+                                        AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro,
+                                        AlineacionDataGrid.Centro, AlineacionDataGrid.Derecha,
+                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha,
+                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha,
                                         AlineacionDataGrid.Derecha}
 
         Dim aFormatos() As String = {"", "", "", "", "", sFormatoCantidad, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero}
@@ -1769,16 +1763,16 @@ Public Class jsComArcProveedores
         Dim aCam() As String = {"codart", "nomart", "unidad", "mEne", "mFeb", "mMar", "mAbr", "mMay", "mJun", "mJul", "mAgo", "mSep", "mOct", "mNov", "mDic"}
         Dim aNom() As String = {"Código", "Nombre artículo", "UND", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"}
         Dim aAnc() As Integer = {70, 280, 35, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70}
-        Dim aAli() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro, _
-                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, _
-                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, _
-                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, _
+        Dim aAli() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro,
+                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha,
+                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha,
+                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha,
                                         AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha}
 
         Dim aFor() As String = {"", "", "", sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero}
 
         Dim dtStat As New DataTable
-        dtStat = ConsultaEstadistica(myConn, ds, lblInfo, txtCodigo.Text, "COM", _
+        dtStat = ConsultaEstadistica(myConn, ds, lblInfo, txtCodigo.Text, "COM",
                 cmbTipoEstadistica.SelectedIndex, IIf(rBtn1.Checked, TipoDatoMercancia.iUnidadesDeVenta, IIf(rBtn2.Checked, TipoDatoMercancia.iKilogramos, TipoDatoMercancia.iMonetarios)), jytsistema.sFechadeTrabajo, "tblMovimientosAnoActualCompras")
 
         IniciarTabla(dgEstadistica, dtStat, aCam, aNom, aAnc, aAli, aFor)
@@ -1802,11 +1796,11 @@ Public Class jsComArcProveedores
                 DesactivarMarco0()
             Case "Movimientos CxP"
                 ft.visualizarObjetos(False, grpMovimientosCxP, grpAceptarSalir)
-                ft.habilitarObjetos(True, False, MenuBarra, tbcProveedor.TabPages(0), tbcProveedor.TabPages(2), _
+                ft.habilitarObjetos(True, False, MenuBarra, tbcProveedor.TabPages(0), tbcProveedor.TabPages(2),
                                             tbcProveedor.TabPages(3), tbcProveedor.TabPages(4), tbcProveedor.TabPages(5))
             Case "Movimientos ExP"
                 ft.visualizarObjetos(False, grpMovimientosExP, grpAceptarSalir)
-                ft.habilitarObjetos(True, False, MenuBarra, tbcProveedor.TabPages(0), tbcProveedor.TabPages(1), _
+                ft.habilitarObjetos(True, False, MenuBarra, tbcProveedor.TabPages(0), tbcProveedor.TabPages(1),
                                             tbcProveedor.TabPages(2), tbcProveedor.TabPages(3), tbcProveedor.TabPages(4))
         End Select
     End Sub
@@ -1959,11 +1953,11 @@ Public Class jsComArcProveedores
         Histograma.ChartGroups(0).ChartData.SeriesList(1).Y.CopyDataIn(abY)
 
         Dim dtt As New DataTable
-        dtt = ConsultaEstadistica(myConn, ds, lblInfo, txtCodigo.Text, "COM", cmbTipoEstadistica.SelectedIndex, IIf(rBtn1.Checked, TipoDatoMercancia.iUnidadesDeVenta, IIf(rBtn2.Checked, TipoDatoMercancia.iKilogramos, TipoDatoMercancia.iMonetarios)), jytsistema.sFechadeTrabajo, _
+        dtt = ConsultaEstadistica(myConn, ds, lblInfo, txtCodigo.Text, "COM", cmbTipoEstadistica.SelectedIndex, IIf(rBtn1.Checked, TipoDatoMercancia.iUnidadesDeVenta, IIf(rBtn2.Checked, TipoDatoMercancia.iKilogramos, TipoDatoMercancia.iMonetarios)), jytsistema.sFechadeTrabajo,
                                   "tblResumenAnoActualCompras", " a.id_emp ")
 
         Dim dttAnteriores As New DataTable
-        dttAnteriores = ConsultaEstadistica(myConn, ds, lblInfo, txtCodigo.Text, "COM", cmbTipoEstadistica.SelectedIndex, IIf(rBtn1.Checked, TipoDatoMercancia.iUnidadesDeVenta, IIf(rBtn2.Checked, TipoDatoMercancia.iKilogramos, TipoDatoMercancia.iMonetarios)), DateAdd(DateInterval.Year, -1, jytsistema.sFechadeTrabajo), _
+        dttAnteriores = ConsultaEstadistica(myConn, ds, lblInfo, txtCodigo.Text, "COM", cmbTipoEstadistica.SelectedIndex, IIf(rBtn1.Checked, TipoDatoMercancia.iUnidadesDeVenta, IIf(rBtn2.Checked, TipoDatoMercancia.iKilogramos, TipoDatoMercancia.iMonetarios)), DateAdd(DateInterval.Year, -1, jytsistema.sFechadeTrabajo),
                                             "tblResumenAnoAnteriorCompras", " a.id_emp ")
 
         aaY = ValoresMensuales(dtt)
@@ -2075,7 +2069,7 @@ Public Class jsComArcProveedores
 
     End Function
 
-    Private Sub rBtn1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rBtn1.CheckedChanged, _
+    Private Sub rBtn1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rBtn1.CheckedChanged,
        rBtn2.CheckedChanged, rBtn3.CheckedChanged
         If cmbTipoEstadistica.Items.Count = 2 AndAlso sender.Checked Then AbrirEstadisticas()
     End Sub
@@ -2116,7 +2110,7 @@ Public Class jsComArcProveedores
     Private Sub btnDep2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDep2.Click
 
         txtBancoDep2.Text = CargarTablaSimplePlusReal("BANCOS DE LA PLAZA", Modulo.iBancos)
-       
+
     End Sub
 
     Private Sub btnDep1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBancoDeposito.Click
@@ -2131,9 +2125,9 @@ Public Class jsComArcProveedores
                                               & " from jsbancatban " _
                                               & " where " _
                                               & " estatus = '1' and " _
-                                              & " id_emp = '" & jytsistema.WorkID & "' order by codban ", "BANCOS DE LA EMPRESA", _
+                                              & " id_emp = '" & jytsistema.WorkID & "' order by codban ", "BANCOS DE LA EMPRESA",
                                               txtBancoPago.Text)
-       
+
     End Sub
 
     Private Sub btnForma_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnForma.Click
@@ -2298,15 +2292,15 @@ Public Class jsComArcProveedores
                     With dtMovimientos.Rows(nPosicionMov)
                         Select Case .Item("FORMAPAG")
                             Case "EF"
-                                InsertEditBANCOSRenglonCaja(myConn, lblInfo, True, .Item("CAJAPAG"), UltimoCajaMasUno(myConn, lblInfo, .Item("CAJAPAG")), _
-                                    CDate(.Item("EMISION").ToString), "CXP", "SA", .Item("COMPROBA"), .Item("FORMAPAG"), _
-                                    .Item("NUMPAG"), .Item("NOMPAG"), -1 * ValorNumero(.Item("IMPORTE")), .Item("CODCON"), .Item("CONCEPTO"), "", jytsistema.sFechadeTrabajo, 1, _
-                                    "", "", "", jytsistema.sFechadeTrabajo, .Item("CODPRO"), "", "1")
+                                InsertEditBANCOSRenglonCaja(myConn, lblInfo, True, .Item("CAJAPAG"), UltimoCajaMasUno(myConn, lblInfo, .Item("CAJAPAG")),
+                                    CDate(.Item("EMISION").ToString), "CXP", "SA", .Item("COMPROBA"), .Item("FORMAPAG"),
+                                    .Item("NUMPAG"), .Item("NOMPAG"), -1 * ValorNumero(.Item("IMPORTE")), .Item("CODCON"), .Item("CONCEPTO"), "", jytsistema.sFechadeTrabajo, 1,
+                                    "", "", "", jytsistema.sFechadeTrabajo, .Item("CODPRO"), "", "1", jytsistema.WorkCurrency.Id, DateTime.Now())
                             Case "CH", "TA", "DP", "TR"
-                                InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, CDate(.Item("EMISION").ToString), .Item("NUMPAG"), _
-                                    IIf(.Item("FORMAPAG") <> "CH", "ND", "CH"), .Item("NOMPAG"), "", .Item("CONCEPTO"), -1 * ValorNumero(.Item("IMPORTE")), _
-                                    "CXP", .Item("COMPROBA"), .Item("BENEFIC"), .Item("COMPROBA"), "0", CDate(.Item("EMISION").ToString), CDate(.Item("EMISION").ToString), _
-                                     .Item("TIPDOCCAN"), "", jytsistema.sFechadeTrabajo, "0", .Item("CODPRO"), "")
+                                InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, CDate(.Item("EMISION").ToString), .Item("NUMPAG"),
+                                    IIf(.Item("FORMAPAG") <> "CH", "ND", "CH"), .Item("NOMPAG"), "", .Item("CONCEPTO"), -1 * ValorNumero(.Item("IMPORTE")),
+                                    "CXP", .Item("COMPROBA"), .Item("BENEFIC"), .Item("COMPROBA"), "0", CDate(.Item("EMISION").ToString), CDate(.Item("EMISION").ToString),
+                                     .Item("TIPDOCCAN"), "", jytsistema.sFechadeTrabajo, "0", .Item("CODPRO"), "", jytsistema.WorkCurrency.Id, DateTime.Now())
                         End Select
                     End With
                 End If

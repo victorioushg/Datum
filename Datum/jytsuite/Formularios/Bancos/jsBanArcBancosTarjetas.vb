@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports fTransport
 Public Class jsBanArcBancosTarjetas
     Private Const sModulo As String = "Tarjetas del banco"
 

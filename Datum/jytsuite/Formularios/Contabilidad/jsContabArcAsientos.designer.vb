@@ -24,8 +24,6 @@ Partial Class jsContabArcAsientos
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.dg = New System.Windows.Forms.DataGridView()
         Me.grpEncab = New System.Windows.Forms.GroupBox()
-        Me.btnFecha = New System.Windows.Forms.Button()
-        Me.txtFecha = New System.Windows.Forms.TextBox()
         Me.txtDescripcion = New System.Windows.Forms.TextBox()
         Me.txtAsiento = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -83,6 +81,7 @@ Partial Class jsContabArcAsientos
         Me.txtSaldos = New System.Windows.Forms.TextBox()
         Me.txtCreditos = New System.Windows.Forms.TextBox()
         Me.txtDebitos = New System.Windows.Forms.TextBox()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpEncab.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -123,7 +122,6 @@ Partial Class jsContabArcAsientos
         Me.grpEncab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpEncab.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.grpEncab.Controls.Add(Me.btnFecha)
         Me.grpEncab.Controls.Add(Me.txtFecha)
         Me.grpEncab.Controls.Add(Me.txtDescripcion)
         Me.grpEncab.Controls.Add(Me.txtAsiento)
@@ -135,27 +133,6 @@ Partial Class jsContabArcAsientos
         Me.grpEncab.Size = New System.Drawing.Size(857, 73)
         Me.grpEncab.TabIndex = 85
         Me.grpEncab.TabStop = False
-        '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(723, 12)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(25, 20)
-        Me.btnFecha.TabIndex = 118
-        Me.btnFecha.Text = "•••"
-        Me.btnFecha.UseVisualStyleBackColor = True
-        '
-        'txtFecha
-        '
-        Me.txtFecha.Enabled = False
-        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFecha.Location = New System.Drawing.Point(624, 13)
-        Me.txtFecha.MaxLength = 19
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(93, 20)
-        Me.txtFecha.TabIndex = 5
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtDescripcion
         '
@@ -647,6 +624,18 @@ Partial Class jsContabArcAsientos
         Me.txtDebitos.TabIndex = 6
         Me.txtDebitos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'txtFecha
+        '
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(630, 12)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(118, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 215
+        '
         'jsContabArcAsientos
         '
         Me.AcceptButton = Me.btnOK
@@ -683,7 +672,6 @@ Partial Class jsContabArcAsientos
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents dg As System.Windows.Forms.DataGridView
     Friend WithEvents grpEncab As System.Windows.Forms.GroupBox
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
     Friend WithEvents txtDescripcion As System.Windows.Forms.TextBox
     Friend WithEvents txtAsiento As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
@@ -726,7 +714,6 @@ Partial Class jsContabArcAsientos
     Friend WithEvents btnUltimoMovimiento As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator11 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
     Friend WithEvents grpTotales As System.Windows.Forms.GroupBox
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
@@ -742,4 +729,5 @@ Partial Class jsContabArcAsientos
     Friend WithEvents btnDeActual As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripLabel3 As System.Windows.Forms.ToolStripLabel
     Friend WithEvents btnReconstruir As System.Windows.Forms.ToolStripButton
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

@@ -23,6 +23,8 @@ Partial Class jsMerArcEnvasesMovimientos
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsMerArcEnvasesMovimientos))
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.grpTarjeta = New System.Windows.Forms.GroupBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cmbEstatus = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
@@ -35,8 +37,6 @@ Partial Class jsMerArcEnvasesMovimientos
         Me.txtAlmacen = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmbTipo = New System.Windows.Forms.ComboBox()
-        Me.btnFecha = New System.Windows.Forms.Button()
-        Me.txtFecha = New System.Windows.Forms.TextBox()
         Me.lblNumeroMovimiento = New System.Windows.Forms.Label()
         Me.lblFactura = New System.Windows.Forms.Label()
         Me.txtCantidad = New System.Windows.Forms.TextBox()
@@ -50,8 +50,7 @@ Partial Class jsMerArcEnvasesMovimientos
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.C1SuperTooltip1 = New C1.Win.C1SuperTooltip.C1SuperTooltip(Me.components)
-        Me.cmbEstatus = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpTarjeta.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
         Me.SuspendLayout()
@@ -69,6 +68,7 @@ Partial Class jsMerArcEnvasesMovimientos
         'grpTarjeta
         '
         Me.grpTarjeta.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpTarjeta.Controls.Add(Me.txtFecha)
         Me.grpTarjeta.Controls.Add(Me.Label3)
         Me.grpTarjeta.Controls.Add(Me.cmbEstatus)
         Me.grpTarjeta.Controls.Add(Me.Label5)
@@ -83,8 +83,6 @@ Partial Class jsMerArcEnvasesMovimientos
         Me.grpTarjeta.Controls.Add(Me.txtAlmacen)
         Me.grpTarjeta.Controls.Add(Me.Label1)
         Me.grpTarjeta.Controls.Add(Me.cmbTipo)
-        Me.grpTarjeta.Controls.Add(Me.btnFecha)
-        Me.grpTarjeta.Controls.Add(Me.txtFecha)
         Me.grpTarjeta.Controls.Add(Me.lblNumeroMovimiento)
         Me.grpTarjeta.Controls.Add(Me.lblFactura)
         Me.grpTarjeta.Controls.Add(Me.txtCantidad)
@@ -99,6 +97,25 @@ Partial Class jsMerArcEnvasesMovimientos
         Me.grpTarjeta.Size = New System.Drawing.Size(538, 306)
         Me.grpTarjeta.TabIndex = 80
         Me.grpTarjeta.TabStop = False
+        '
+        'Label3
+        '
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(13, 279)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(118, 19)
+        Me.Label3.TabIndex = 66
+        Me.Label3.Text = "Estatus :"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'cmbEstatus
+        '
+        Me.cmbEstatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbEstatus.FormattingEnabled = True
+        Me.cmbEstatus.Location = New System.Drawing.Point(137, 279)
+        Me.cmbEstatus.Name = "cmbEstatus"
+        Me.cmbEstatus.Size = New System.Drawing.Size(136, 21)
+        Me.cmbEstatus.TabIndex = 65
         '
         'Label5
         '
@@ -208,24 +225,6 @@ Partial Class jsMerArcEnvasesMovimientos
         Me.cmbTipo.Name = "cmbTipo"
         Me.cmbTipo.Size = New System.Drawing.Size(136, 21)
         Me.cmbTipo.TabIndex = 53
-        '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(279, 141)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(27, 20)
-        Me.btnFecha.TabIndex = 45
-        Me.btnFecha.Text = "···"
-        Me.btnFecha.UseVisualStyleBackColor = True
-        '
-        'txtFecha
-        '
-        Me.txtFecha.Location = New System.Drawing.Point(137, 141)
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(136, 20)
-        Me.txtFecha.TabIndex = 38
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblNumeroMovimiento
         '
@@ -350,24 +349,17 @@ Partial Class jsMerArcEnvasesMovimientos
         '
         Me.C1SuperTooltip1.Font = New System.Drawing.Font("Tahoma", 8.0!)
         '
-        'cmbEstatus
+        'txtFecha
         '
-        Me.cmbEstatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbEstatus.FormattingEnabled = True
-        Me.cmbEstatus.Location = New System.Drawing.Point(137, 279)
-        Me.cmbEstatus.Name = "cmbEstatus"
-        Me.cmbEstatus.Size = New System.Drawing.Size(136, 21)
-        Me.cmbEstatus.TabIndex = 65
-        '
-        'Label3
-        '
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(13, 279)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(118, 19)
-        Me.Label3.TabIndex = 66
-        Me.Label3.Text = "Estatus :"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(137, 141)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(136, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 214
         '
         'jsMerArcEnvasesMovimientos
         '
@@ -405,10 +397,8 @@ Partial Class jsMerArcEnvasesMovimientos
     Friend WithEvents lblCantidad As System.Windows.Forms.Label
     Friend WithEvents txtNumero As System.Windows.Forms.TextBox
     Friend WithEvents txtCantidad As System.Windows.Forms.TextBox
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
     Friend WithEvents lblNumeroMovimiento As System.Windows.Forms.Label
     Friend WithEvents lblFactura As System.Windows.Forms.Label
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents btnAlmacen As System.Windows.Forms.Button
@@ -424,4 +414,5 @@ Partial Class jsMerArcEnvasesMovimientos
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents cmbEstatus As System.Windows.Forms.ComboBox
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

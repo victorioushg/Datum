@@ -117,6 +117,7 @@ Public Class Progress_Bar
         Me.CallerThreadSet = callerThread
         Me.TimeOut = idleTimeOut
 
+
         StartProgressBar()
 
     End Sub
@@ -148,7 +149,7 @@ Public Class Progress_Bar
         pb.overallProgressText = Me.OverallProgressText
         pb.partialProgressValue = Me.PartialProgressValue
         pb.partialProgressText = Me.PartialProgressText
-        pb.StartPosition = FormStartPosition.CenterScreen
+
     End Sub
 
 
@@ -208,6 +209,7 @@ Public Class Progress_Bar
             'Else
             Me.Height = defHeight
             Me.Width = defWidth
+            Me.CenterToScreen()
 
             'End If
             '==============

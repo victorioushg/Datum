@@ -28,9 +28,7 @@ Partial Class jsBanProTransferencias
         Me.txtNumCheque = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.cmbTipoTransferencia = New System.Windows.Forms.ComboBox()
-        Me.btnFecha = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtFecha = New System.Windows.Forms.TextBox()
         Me.txtMontoReal = New System.Windows.Forms.TextBox()
         Me.txtCambio = New System.Windows.Forms.TextBox()
         Me.txtMontoATransferir = New System.Windows.Forms.TextBox()
@@ -50,6 +48,7 @@ Partial Class jsBanProTransferencias
         Me.Label10 = New System.Windows.Forms.Label()
         Me.lblLeyenda = New System.Windows.Forms.Label()
         Me.grpLeyenda = New System.Windows.Forms.GroupBox()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpCaja.SuspendLayout()
         Me.grpTotales.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -69,15 +68,14 @@ Partial Class jsBanProTransferencias
         'grpCaja
         '
         Me.grpCaja.BackColor = System.Drawing.SystemColors.Control
+        Me.grpCaja.Controls.Add(Me.txtFecha)
         Me.grpCaja.Controls.Add(Me.lblBeneficiario)
         Me.grpCaja.Controls.Add(Me.lblNumCheque)
         Me.grpCaja.Controls.Add(Me.txtBeneficiario)
         Me.grpCaja.Controls.Add(Me.txtNumCheque)
         Me.grpCaja.Controls.Add(Me.Label5)
         Me.grpCaja.Controls.Add(Me.cmbTipoTransferencia)
-        Me.grpCaja.Controls.Add(Me.btnFecha)
         Me.grpCaja.Controls.Add(Me.Label4)
-        Me.grpCaja.Controls.Add(Me.txtFecha)
         Me.grpCaja.Controls.Add(Me.txtMontoReal)
         Me.grpCaja.Controls.Add(Me.txtCambio)
         Me.grpCaja.Controls.Add(Me.txtMontoATransferir)
@@ -148,16 +146,6 @@ Partial Class jsBanProTransferencias
         Me.cmbTipoTransferencia.Size = New System.Drawing.Size(143, 21)
         Me.cmbTipoTransferencia.TabIndex = 117
         '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(268, 11)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(25, 20)
-        Me.btnFecha.TabIndex = 116
-        Me.btnFecha.Text = "•••"
-        Me.btnFecha.UseVisualStyleBackColor = True
-        '
         'Label4
         '
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -167,16 +155,6 @@ Partial Class jsBanProTransferencias
         Me.Label4.TabIndex = 115
         Me.Label4.Text = "Monto a transferir :"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtFecha
-        '
-        Me.txtFecha.BackColor = System.Drawing.Color.White
-        Me.txtFecha.Enabled = False
-        Me.txtFecha.Location = New System.Drawing.Point(146, 11)
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(116, 20)
-        Me.txtFecha.TabIndex = 114
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtMontoReal
         '
@@ -384,6 +362,19 @@ Partial Class jsBanProTransferencias
         Me.grpLeyenda.TabIndex = 90
         Me.grpLeyenda.TabStop = False
         '
+        'txtFecha
+        '
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(147, 13)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(114, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 214
+        Me.txtFecha.Value = New Date(2021, 5, 2, 0, 0, 0, 0)
+        '
         'jsBanProTransferencias
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -432,16 +423,15 @@ Partial Class jsBanProTransferencias
     Friend WithEvents grpLeyenda As System.Windows.Forms.GroupBox
     Friend WithEvents cmbCuentaDestino As System.Windows.Forms.ComboBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
     Friend WithEvents txtMontoReal As System.Windows.Forms.TextBox
     Friend WithEvents txtCambio As System.Windows.Forms.TextBox
     Friend WithEvents txtMontoATransferir As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents cmbTipoTransferencia As System.Windows.Forms.ComboBox
     Friend WithEvents lblBeneficiario As System.Windows.Forms.Label
     Friend WithEvents lblNumCheque As System.Windows.Forms.Label
     Friend WithEvents txtBeneficiario As System.Windows.Forms.TextBox
     Friend WithEvents txtNumCheque As System.Windows.Forms.TextBox
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

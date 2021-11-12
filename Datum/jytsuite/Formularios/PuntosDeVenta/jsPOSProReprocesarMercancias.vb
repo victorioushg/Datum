@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsPOSProReprocesarmercancias
     Private Const sModulo As String = "Reprocesar mercancías puntos de ventas"
     Private Const nTabla As String = "tblReproPVE"
@@ -15,12 +16,14 @@ Public Class jsPOSProReprocesarmercancias
         myConn = MyCon
         Me.Tag = sModulo
 
-        txtFechaDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtFechaHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        Dim dates As SfDateTimeEdit() = {txtFechaDesde, txtFechaHasta}
+        SetSizeDateObjects(dates)
+
+        txtFechaDesde.Value = jytsistema.sFechadeTrabajo
+        txtFechaHasta.Value = jytsistema.sFechadeTrabajo
 
         ft.mensajeEtiqueta(lblInfo, "Seleccione fecha para el proceso ... ", Transportables.TipoMensaje.iAyuda)
         Me.ShowDialog()
-
 
     End Sub
 
@@ -145,10 +148,10 @@ Public Class jsPOSProReprocesarmercancias
                                              & "' and formpag = '" & .Item("formapag") & "' and numpag = '" & .Item("numpag") _
                                              & "' and refpag = '" & .Item("nompag") _
                                              & "' AND DEPOSITO = '' and id_emp = '" & jytsistema.WorkID & "'  ") = "0" Then _
-                            InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, CajaPrincipal, UltimoCajaMasUno(MyConn, lblInfo, CajaPrincipal), FechaFactura, _
-                                   "PVE", IIf(.Item("importe") <= 0, "SA", "EN"), NumeroFactura, .Item("formapag"), .Item("numpag"), .Item("nompag"), _
-                                    .Item("importe"), "", IIf(.Item("importe") <= 0, "NOTA CREDITO N° ", "FACTURA N° ") & NumeroFactura, "", jytsistema.sFechadeTrabajo, 1, "", "0", "", jytsistema.sFechadeTrabajo, _
-                                     CodigoCliente, CodigoVendedor, "1")
+                            InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, CajaPrincipal, UltimoCajaMasUno(MyConn, lblInfo, CajaPrincipal), FechaFactura,
+                                   "PVE", IIf(.Item("importe") <= 0, "SA", "EN"), NumeroFactura, .Item("formapag"), .Item("numpag"), .Item("nompag"),
+                                    .Item("importe"), "", IIf(.Item("importe") <= 0, "NOTA CREDITO N° ", "FACTURA N° ") & NumeroFactura, "", jytsistema.sFechadeTrabajo, 1, "", "0", "", jytsistema.sFechadeTrabajo,
+                                     CodigoCliente, CodigoVendedor, "1", jytsistema.WorkCurrency.Id, DateTime.Now())
 
                 End With
             Next
@@ -177,11 +180,11 @@ Public Class jsPOSProReprocesarmercancias
                                             & "' and formpag = 'CT' and numpag = '" & .Item("numpag") _
                                             & "' and refpag = '" & .Item("nompag") _
                                             & "' AND DEPOSITO = '' and id_emp = '" & jytsistema.WorkID & "'  ") = "0" Then _
-                    InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, CajaPrincipal, UltimoCajaMasUno(MyConn, lblInfo, CajaPrincipal), _
-                               FechaFactura, "PVE", "EN", NumeroFactura, "CT", _
-                               .Item("numpag"), .Item("nompag"), .Item("importe"), "", "FACTURA N° " & NumeroFactura, _
-                               "", jytsistema.sFechadeTrabajo, 0, "", "0", "", jytsistema.sFechadeTrabajo, _
-                               CodigoCliente, CodigoVendedor, "1")
+                    InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, CajaPrincipal, UltimoCajaMasUno(MyConn, lblInfo, CajaPrincipal),
+                               FechaFactura, "PVE", "EN", NumeroFactura, "CT",
+                               .Item("numpag"), .Item("nompag"), .Item("importe"), "", "FACTURA N° " & NumeroFactura,
+                               "", jytsistema.sFechadeTrabajo, 0, "", "0", "", jytsistema.sFechadeTrabajo,
+                               CodigoCliente, CodigoVendedor, "1", jytsistema.WorkCurrency.Id, DateTime.Now())
 
                 End With
             Next
@@ -196,9 +199,10 @@ Public Class jsPOSProReprocesarmercancias
             Dim gCont As Integer
             For gCont = 0 To dtPagosDPTR.Rows.Count - 1
                 With dtPagosDPTR.Rows(gCont)
-                    InsertEditBANCOSMovimientoBanco(MyConn, lblInfo, True, FechaFactura, .Item("numpag"), "DP", .Item("nompag"), "", "CANC. FACTURA N° " & NumeroFactura, _
-                                             .Item("importe"), "PVE", NumeroFactura, "", "", "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, _
-                                             "FC", "", jytsistema.sFechadeTrabajo, "0", CodigoCliente, CodigoVendedor)
+                    InsertEditBANCOSMovimientoBanco(MyConn, lblInfo, True, FechaFactura, .Item("numpag"), "DP", .Item("nompag"), "", "CANC. FACTURA N° " & NumeroFactura,
+                                             .Item("importe"), "PVE", NumeroFactura, "", "", "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo,
+                                             "FC", "", jytsistema.sFechadeTrabajo, "0", CodigoCliente, CodigoVendedor,
+                                             jytsistema.WorkCurrency.Id, DateTime.Now())
                 End With
             Next
         End If
@@ -211,16 +215,6 @@ Public Class jsPOSProReprocesarmercancias
         dtPagosDPTR = Nothing
 
     End Sub
-
-
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaDesde.Click
-        txtFechaDesde.Text = SeleccionaFecha(CDate(txtFechaDesde.Text), Me, grpCaja, btnFechaDesde)
-    End Sub
-
-    Private Sub btnFechaHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaHasta.Click
-        txtFechaHasta.Text = SeleccionaFecha(CDate(txtFechaHasta.Text), Me, grpCaja, btnFechaHasta)
-    End Sub
-
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If jytsistema.sUsuario = "00000" Then

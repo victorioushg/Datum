@@ -3,7 +3,7 @@ Imports System.IO
 Imports FP_AclasBixolon
 Module FuncionesImpresionFiscalAclas
     Private ft As New Transportables
-   
+
     Public bRet As Boolean
     Public cmd As String
 
@@ -180,8 +180,9 @@ Module FuncionesImpresionFiscalAclas
             If dtFP.Rows.Count > 0 Then
                 For mCont = 0 To dtFP.Rows.Count - 1
                     With dtFP.Rows(mCont)
-                        fpCont = ft.InArray(aFormaPagoAbreviada, .Item("FORMAPAG"))
-                        bRet = IB.enviarComando(AclasBixolon.ComandoFiscalAclasBixolon.iNombrePago, fpCont, aFormaPago(fpCont - 1) + " " & Right(.Item("numpag"), 5))
+                        Dim formaPago = formasDePago.FirstOrDefault(Function(forma) forma.Value = .Item("FORMAPAG"))
+                        fpCont = formaPago.Index + 1
+                        bRet = IB.enviarComando(AclasBixolon.ComandoFiscalAclasBixolon.iNombrePago, fpCont, formaPago.Text + " " & Right(.Item("numpag"), 5))
                         ImportePago = .Item("importe")
                         If mCont = dtFP.Rows.Count - 1 Then
                             bRet = IB.enviarComando(AclasBixolon.ComandoFiscalAclasBixolon.iPagodirecto, fpCont, "")

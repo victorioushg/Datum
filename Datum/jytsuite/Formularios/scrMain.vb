@@ -4,6 +4,7 @@ Imports C1.Win.C1Ribbon
 Imports Microsoft.Win32
 Imports System.Globalization
 Imports ReportesDeBancos
+Imports FontAwesomeNet
 
 Public Class scrMain
 
@@ -66,8 +67,9 @@ Public Class scrMain
 
             jytsistema.WorkName = ft.DevuelveScalarCadena(myConn, " SELECT NOMBRE FROM jsconctaemp where id_emp = '" & jytsistema.WorkID & "' ")
             jytsistema.WorkExercise = ""
+            jytsistema.WorkCurrency = GetWorkCurrency(myConn)
 
-            Me.Text += " " & jytsistema.nVersion & "  " & _
+            Me.Text += " " & jytsistema.nVersion & "  " &
                 IIf(nUser = "jytsuite", jytsistema.strConn.Split(";")(0), "")
 
             IniciarParametros_Y_Contadores()
@@ -170,7 +172,7 @@ Public Class scrMain
                     If dtClientes.Rows.Count > 0 Then
                         For iCont = 0 To dtClientes.Rows.Count - 1
                             With dtClientes.Rows(iCont)
-                                VerificaVencimientoCliente(myConn, lblInfo, ds, .Item("CODCLI"), .Item("ESTATUS"), _
+                                VerificaVencimientoCliente(myConn, lblInfo, ds, .Item("CODCLI"), .Item("ESTATUS"),
                                                             DiasBloqueo, CausaBloqueo, NoFacturar)
 
                             End With
@@ -189,7 +191,7 @@ Public Class scrMain
         End If
 
     End Sub
-    
+
     Private Sub IniciarReporteador()
         '////////// MI PRIMER REPORTE CRISTAL
         Dim r As New frmViewer
@@ -234,9 +236,9 @@ Public Class scrMain
         Dim aItems() As String = {}
         Select Case AplicacionTipo
             Case TipoAplicacion.iBasic
-                aItems = {"RibbonButton53", "RibbonButton191", "RibbonButton192", "RibbonButton189", "RibbonButton28", _
-                          "RibbonButton236", _
-                          "RibbonButton138", "RibbonButton140", "RibbonButton141", "RibbonButton213", "RibbonButton206", "RibbonButton293", "RibbonButton156", "RibbonButton157", "RibbonButton150", "RibbonButton159", "RibbonButton160", "RibbonMenu47", "RibbonButton280", _
+                aItems = {"RibbonButton53", "RibbonButton191", "RibbonButton192", "RibbonButton189", "RibbonButton28",
+                          "RibbonButton236",
+                          "RibbonButton138", "RibbonButton140", "RibbonButton141", "RibbonButton213", "RibbonButton206", "RibbonButton293", "RibbonButton156", "RibbonButton157", "RibbonButton150", "RibbonButton159", "RibbonButton160", "RibbonMenu47", "RibbonButton280",
                           "RibbonButton179", "RibbonButton180", "RibbonButton183", "RibbonButton184", "RibbonButton185", "RibbonButton197", "RibbonButton234"}
                 aLic = {0, 1, 0, 1, 0, 1, 1, 0, 0, 1}
             Case TipoAplicacion.iNormal
@@ -248,10 +250,10 @@ Public Class scrMain
             Case TipoAplicacion.iPlusGases
                 aLic = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
             Case TipoAplicacion.iPlusPrensa
-                aItems = {"RibbonButton138", "RibbonButton139", "RibbonButton140", "RibbonButton141", "RibbonButton142", "RibbonButton210", "RibbonButton284", _
-                          "RibbonButton213", "RibbonButton206", "RibbonButton293", _
-                          "RibbonMenu13", "RibbonMenu36", _
-                          "RibbonButton146", "RibbonButton147", "RibbonButton148", "RibbonButton149", "RibbonButton150", "RibbonButton265", _
+                aItems = {"RibbonButton138", "RibbonButton139", "RibbonButton140", "RibbonButton141", "RibbonButton142", "RibbonButton210", "RibbonButton284",
+                          "RibbonButton213", "RibbonButton206", "RibbonButton293",
+                          "RibbonMenu13", "RibbonMenu36",
+                          "RibbonButton146", "RibbonButton147", "RibbonButton148", "RibbonButton149", "RibbonButton150", "RibbonButton265",
                           "RibbonMenu23", "RibbonMenu24", "RibbonMenu47", "RibbonMenu49"}
                 aLic = {1, 1, 1, 1, 0, 0, 1, 0, 0, 1}
             Case Else
@@ -333,7 +335,7 @@ Public Class scrMain
             Next
         Next
     End Sub
-    Private Sub RecorrerYVisualizarRibbonItems(ByVal pControl As RibbonItemCollection, _
+    Private Sub RecorrerYVisualizarRibbonItems(ByVal pControl As RibbonItemCollection,
                                   ByVal r As String)
 
         Dim vControl As RibbonItem
@@ -388,7 +390,7 @@ Public Class scrMain
             tslNEjercicio.Text = "  Ejercicio : "
             Dim aFld() As String = {"ejercicio", "id_emp"}
             Dim aStr() As String = {jytsistema.WorkExercise, jytsistema.WorkID}
-            tslEjercicio.Text = jytsistema.WorkExercise & " | " & ft.FormatoFecha(CDate(qFoundAndSign(myConn, lblInfo, "jsconctaeje", aFld, aStr, "inicio").ToString)) & _
+            tslEjercicio.Text = jytsistema.WorkExercise & " | " & ft.FormatoFecha(CDate(qFoundAndSign(myConn, lblInfo, "jsconctaeje", aFld, aStr, "inicio").ToString)) &
                         " | " & ft.FormatoFecha(CDate(qFoundAndSign(myConn, lblInfo, "jsconctaeje", aFld, aStr, "cierre").ToString))
         End If
 
@@ -669,7 +671,7 @@ Public Class scrMain
         End If
         f = Nothing
     End Sub
-    Private Sub RibbonButton53_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles RibbonButton53.Click, _
+    Private Sub RibbonButton53_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles RibbonButton53.Click,
         RibbonButton191.Click, RibbonButton192.Click
         'Devolución de cheques de alimentación 
         Dim f As New jsBanProCestaTicketDevuelto
@@ -2540,7 +2542,7 @@ Public Class scrMain
         f = Nothing
     End Sub
 
-    Private Sub RibbonButton261_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles RibbonButton261.Click, _
+    Private Sub RibbonButton261_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles RibbonButton261.Click,
         RibbonButton120.Click
         '' Activacion Clientes Mes a Mes
         'Dim f As New jsSIGMERepParametros
@@ -2871,8 +2873,19 @@ Public Class scrMain
         f = Nothing
     End Sub
     Private Sub RibbonButton185_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RibbonButton185.Click
-        'MONEDAS Y CAMBIOS
+        'CAMBIO DE Monedas
         Dim f As New jsControlArcCambioMonedas
+        If ChildFormOpen(Me, f) Then
+            f.Activate()
+        Else
+            f.MdiParent = Me
+            f.Cargar(myConn, TipoCargaFormulario.iShow)
+        End If
+        f = Nothing
+    End Sub
+    Private Sub RibbonButton312_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RibbonButton312.Click
+        'MONEDAS
+        Dim f As New jsControlArcMonedas
         If ChildFormOpen(Me, f) Then
             f.Activate()
         Else
@@ -3020,7 +3033,8 @@ Public Class scrMain
     Private Sub RibbonButton204_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RibbonButton204.Click
         'Cambio de fecha
         Dim f As New FechaSistema
-        jytsistema.sFechadeTrabajo = SeleccionaFecha(jytsistema.sFechadeTrabajo)
+        f.Cargar(jytsistema.sFechadeTrabajo)
+        jytsistema.sFechadeTrabajo = f.Fecha
         f = Nothing
     End Sub
     Private Sub RibbonButton187_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RibbonButton187.Click
@@ -3040,21 +3054,15 @@ Public Class scrMain
         End If
     End Sub
 
-    Private Sub RibbonTab1_Select(ByVal sender As Object, ByVal e As System.EventArgs) Handles RibbonTab1.Select, _
-        RibbonTab2.Select, RibbonTab3.Select, RibbonTab4.Select, RibbonTab5.Select, RibbonTab6.Select, _
+    Private Sub RibbonTab1_Select(ByVal sender As Object, ByVal e As System.EventArgs) Handles RibbonTab1.Select,
+        RibbonTab2.Select, RibbonTab3.Select, RibbonTab4.Select, RibbonTab5.Select, RibbonTab6.Select,
         RibbonTab7.Select, RibbonTab9.Select, RibbonTab8.Select, RibbonTab10.Select
         Dim nName As String = sender.id.ToString
 
-        nGestion = CInt(IIf(nName.Length = 10, Microsoft.VisualBasic.Right(nName, 1), _
+        nGestion = CInt(IIf(nName.Length = 10, Microsoft.VisualBasic.Right(nName, 1),
                        Microsoft.VisualBasic.Right(nName, 2))) - 1
 
     End Sub
 #End Region
 
-
- 
-
-    Private Sub RibbonButton_Click(sender As Object, e As EventArgs)
-
-    End Sub
 End Class

@@ -113,3 +113,7 @@ D:\DESARROLLO\ProyectosDotNet\POS_Datum\POS_Datum\obj\Debug\POS_Datum.exe
 D:\DESARROLLO\ProyectosDotNet\POS_Datum\POS_Datum\obj\Debug\POS_Datum.xml
 D:\DESARROLLO\ProyectosDotNet\POS_Datum\POS_Datum\obj\Debug\POS_Datum.pdb
 D:\DESARROLLO\ProyectosDotNet\POS_Datum\POS_Datum\obj\Debug\POS_Datum.vbprojAssemblyReference.cache
+D:\DESARROLLO\ProyectosDotNet\Datum\POS_Datum\POS_Datum\obj\Debug\POS_Datum.vbproj.AssemblyReference.cache
+D:\DESARROLLO\ProyectosDotNet\Datum\POS_Datum\POS_Datum\obj\Debug\POS_Datum.exe
+D:\DESARROLLO\ProyectosDotNet\Datum\POS_Datum\POS_Datum\obj\Debug\POS_Datum.xml
+D:\DESARROLLO\ProyectosDotNet\Datum\POS_Datum\POS_Datum\obj\Debug\POS_Datum.pdb

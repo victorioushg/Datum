@@ -106,9 +106,9 @@ Module FuncionesPuntosDeVenta
 
     End Function
 
-    Public Sub GuardarFacturaNotaCredito_PuntoDeVenta(MyConn As MySqlConnection, NumeroDocumento As String, ByVal NumeroSerialFiscal As String, _
-                                 ByVal DocumentoAnterior As String, ByVal NumeroSerialFiscalAnterior As String, _
-                                 ByVal Tipo As Integer, _
+    Public Sub GuardarFacturaNotaCredito_PuntoDeVenta(MyConn As MySqlConnection, NumeroDocumento As String, ByVal NumeroSerialFiscal As String,
+                                 ByVal DocumentoAnterior As String, ByVal NumeroSerialFiscalAnterior As String,
+                                 ByVal Tipo As Integer,
                                  Optional NumeroFacturaFiscal As String = "")
 
         Dim pb As New Progress_Bar
@@ -239,9 +239,9 @@ Module FuncionesPuntosDeVenta
     End Sub
 
 
-    Public Sub IncluirMovimientosPuntoDeVentaEnCaja(ByVal MyConn As MySqlConnection, ds As DataSet, ByVal NumeroFactura As String, _
-                                                     ByVal NumeroSerialFiscal As String, _
-                                                     Factura_NotaCredito As Integer, MontoFacturaNotaCredito As Double, _
+    Public Sub IncluirMovimientosPuntoDeVentaEnCaja(ByVal MyConn As MySqlConnection, ds As DataSet, ByVal NumeroFactura As String,
+                                                     ByVal NumeroSerialFiscal As String,
+                                                     Factura_NotaCredito As Integer, MontoFacturaNotaCredito As Double,
                                                      FechaVencimiento As Date,
                                                      Optional CondicionDePago As CondicionPago = CondicionPago.iContado)
 
@@ -257,10 +257,11 @@ Module FuncionesPuntosDeVenta
                     Dim iCont As Integer
                     For iCont = 0 To dtFP.Rows.Count - 1
                         With dtFP.Rows(iCont)
-                            InsertarModificarPOSWork(MyConn, lblInfo, True, jytsistema.WorkBox, jytsistema.sFechadeTrabajo, _
-                                                     "PVE", "EN", NumeroFactura, NumeroSerialFiscal, .Item("formapag"), _
-                                                     .Item("numpag"), .Item("nompag"), .Item("importe"), _
-                                                     CDate(.Item("vence").ToString), 1, jytsistema.sUsuario)
+                            InsertarModificarPOSWork(MyConn, lblInfo, True, jytsistema.WorkBox, jytsistema.sFechadeTrabajo,
+                                                     "PVE", "EN", NumeroFactura, NumeroSerialFiscal, .Item("formapag"),
+                                                     .Item("numpag"), .Item("nompag"), .Item("importe"),
+                                                     CDate(.Item("vence").ToString), 1, jytsistema.sUsuario,
+                                                     jytsistema.WorkCurrency.Id, DateTime.Now())
                         End With
                     Next
                 End If
@@ -268,20 +269,22 @@ Module FuncionesPuntosDeVenta
                 dtFP = Nothing
 
             Else
-                InsertarModificarPOSWork(MyConn, lblInfo, True, jytsistema.WorkBox, jytsistema.sFechadeTrabajo, "PVE", "EN", _
-                                         NumeroFactura, NumeroSerialFiscal, "CR", "", _
-                                         "", MontoFacturaNotaCredito, FechaVencimiento, 1, jytsistema.sUsuario)
+                InsertarModificarPOSWork(MyConn, lblInfo, True, jytsistema.WorkBox, jytsistema.sFechadeTrabajo, "PVE", "EN",
+                                         NumeroFactura, NumeroSerialFiscal, "CR", "",
+                                         "", MontoFacturaNotaCredito, FechaVencimiento, 1, jytsistema.sUsuario,
+                                         jytsistema.WorkCurrency.Id, DateTime.Now())
             End If
         Else
-            InsertarModificarPOSWork(MyConn, lblInfo, True, jytsistema.WorkBox, jytsistema.sFechadeTrabajo, "PVE", "SA", _
-                                     NumeroFactura, _
-                                NumeroSerialFiscal, "EF", "", _
-                                "", MontoFacturaNotaCredito, FechaVencimiento, 1, jytsistema.sUsuario)
+            InsertarModificarPOSWork(MyConn, lblInfo, True, jytsistema.WorkBox, jytsistema.sFechadeTrabajo, "PVE", "SA",
+                                     NumeroFactura,
+                                NumeroSerialFiscal, "EF", "",
+                                "", MontoFacturaNotaCredito, FechaVencimiento, 1, jytsistema.sUsuario,
+                                jytsistema.WorkCurrency.Id, DateTime.Now())
         End If
 
     End Sub
 
-    Public Sub IncluirClientePV(ByVal MyConn As MySqlConnection, ByVal CodigoCliente As String, RIF_CI_Cliente As String, _
+    Public Sub IncluirClientePV(ByVal MyConn As MySqlConnection, ByVal CodigoCliente As String, RIF_CI_Cliente As String,
                                  NombreCliente As String, DireccionCliente As String, TelefonoCliente As String)
 
         Dim sCIF As String = ""
@@ -299,14 +302,14 @@ Module FuncionesPuntosDeVenta
                                                                       & " WHERE RIF = '" & sCIF & "' and " _
                                                                       & " ID_EMP = '" & jytsistema.WorkID & "' ") = 0 Then
 
-            InsertarModificarPOSClientePV(MyConn, True, "00000000", NombreCliente, "", "", sCIF, "", _
+            InsertarModificarPOSClientePV(MyConn, True, "00000000", NombreCliente, "", "", sCIF, "",
                     "", "", DireccionCliente, TelefonoCliente, "", jytsistema.sFechadeTrabajo, 1)
 
         End If
 
     End Sub
 
-    Public Function FacturaValida(MyConn As MySqlConnection, RIF_CI_Cliente As String, NombreCliente As String, _
+    Public Function FacturaValida(MyConn As MySqlConnection, RIF_CI_Cliente As String, NombreCliente As String,
                                   TelefonoCliente As String, num_items_Factura As String) As Boolean
 
         If Trim(RIF_CI_Cliente) = "" Then
@@ -341,8 +344,8 @@ Module FuncionesPuntosDeVenta
 
 
 
-    Public Sub ActualizarMovimientosInventarioCADIP(ByVal MyConn As MySqlConnection, ByVal NumeroFactura As String, _
-                                                      RIF_CI As String, _
+    Public Sub ActualizarMovimientosInventarioCADIP(ByVal MyConn As MySqlConnection, ByVal NumeroFactura As String,
+                                                      RIF_CI As String,
                                                       NumeroSerialFiscal As String, FechaFactura As Date)
         Dim dsCadip As New DataSet
         Dim dtCadip As New DataTable
@@ -379,8 +382,8 @@ Module FuncionesPuntosDeVenta
                             Dim CodigoProducto As String = ft.DevuelveScalarCadena(MyConn, " select CODJER from jsmerctainv where codart = '" & .Item("item") & "' and id_emp = '" & jytsistema.WorkID & "' ").ToString.Replace(".", "")
                             If CodigoProducto.Trim() = "" Then CodigoProducto = "0"
                             If CInt(CodigoProducto) <> 0 Then
-                                InsertarModificarCADIP(MyConn, True, TipoRazon, Documento, Identificador, _
-                                    .Item("cantidad"), CodigoProducto, FechaFactura, ft.FormatoHora(Now()), _
+                                InsertarModificarCADIP(MyConn, True, TipoRazon, Documento, Identificador,
+                                    .Item("cantidad"), CodigoProducto, FechaFactura, ft.FormatoHora(Now()),
                                     numeritoFactura, 0, jytsistema.sFechadeTrabajo)
                             End If
                         End If
@@ -401,8 +404,8 @@ Module FuncionesPuntosDeVenta
 
     End Sub
 
-    Public Sub ActualizarMovimientosInventario(ByVal MyConn As MySqlConnection, ByVal NumeroFactura As String, _
-                                                ByVal NumeroSerialFiscal As String, _
+    Public Sub ActualizarMovimientosInventario(ByVal MyConn As MySqlConnection, ByVal NumeroFactura As String,
+                                                ByVal NumeroSerialFiscal As String,
                                                 ByVal Factura_Devolucion As Boolean)
 
         Dim lblInfo As New Label

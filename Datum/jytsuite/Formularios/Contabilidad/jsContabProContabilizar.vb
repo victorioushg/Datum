@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsContabProContabilizar
     Private Const sModulo As String = "Proceso de contabilización"
     Private Const nTabla As String = "proasicon"
@@ -17,17 +19,19 @@ Public Class jsContabProContabilizar
         myConn = MyCon
         Me.Tag = sModulo
 
+        Dim dates As SfDateTimeEdit() = {txtFechaDesde, txtFechaHasta}
+        SetSizeDateObjects(dates)
 
         tbl = "tbl" & ft.NumeroAleatorio(100000)
 
-        lblLeyenda.Text = " Mediante este proceso se construyen los asientos diferidos a partir de las plantillas " + vbCr + _
-                " de asientos y las reglas de contabilización.  " + vbCr + _
-                " Para proceder debe seleccionar los asientos plantillas deseados y las fechas inicial y final de contabilización, " + vbCr + _
+        lblLeyenda.Text = " Mediante este proceso se construyen los asientos diferidos a partir de las plantillas " + vbCr +
+                " de asientos y las reglas de contabilización.  " + vbCr +
+                " Para proceder debe seleccionar los asientos plantillas deseados y las fechas inicial y final de contabilización, " + vbCr +
                 " Estos asientos diferidos se construirán de forma diaria ... "
 
-        ft.mensajeEtiqueta(lblInfo, " ... ", Transportables.TipoMensaje.iAyuda)
-        txtFechaDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtFechaHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        ft.mensajeEtiqueta(lblInfo, " ... ", Transportables.tipoMensaje.iAyuda)
+        txtFechaDesde.Value = jytsistema.sFechadeTrabajo
+        txtFechaHasta.Value = jytsistema.sFechadeTrabajo
         IniciarAsientosDefinidos()
         Me.Show()
 
@@ -40,12 +44,12 @@ Public Class jsContabProContabilizar
     Private Sub IniciarAsientosDefinidos()
 
 
-        Dim aFields() As String = {"sel.entero.1.0", "asiento.cadena.5.0", "descripcion.cadena.50.0", "fecha_ult_con.fecha.0.0", "inicio_ult_con.fecha.0.0", _
+        Dim aFields() As String = {"sel.entero.1.0", "asiento.cadena.5.0", "descripcion.cadena.50.0", "fecha_ult_con.fecha.0.0", "inicio_ult_con.fecha.0.0",
                                    "fin_ult_con.fecha.0.0", "id_emp.cadena.2.0"}
 
         CrearTabla(myConn, lblInfo, jytsistema.WorkDataBase, True, tbl, aFields)
 
-        ft.Ejecutar_strSQL(myconn, " insert into " & tbl _
+        ft.Ejecutar_strSQL(myConn, " insert into " & tbl _
             & " SELECT 0 sel, a.asiento, a.descripcion, a.fecha_ult_con, a.inicio_ult_con, a.fin_ult_con, a.id_emp  " _
             & " FROM jscotencdef a " _
             & " WHERE " _
@@ -72,13 +76,12 @@ Public Class jsContabProContabilizar
 
     Private Sub jsContabProProcesaAsientos_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        ft.habilitarObjetos(False, False, txtFechaDesde, txtFechaHasta)
     End Sub
 
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
 
         If CDate(txtFechaDesde.Text) > CDate(txtFechaHasta.Text) Then
-            ft.MensajeCritico("Debe indicar una rango de fechas válido...")
+            ft.mensajeCritico("Debe indicar una rango de fechas válido...")
             Exit Sub
         End If
 
@@ -97,7 +100,7 @@ Public Class jsContabProContabilizar
 
                     Dim nPlantillaOrigen As String = selectedItem.Cells(1).Value
 
-                    refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, iCont / dg.RowCount * 100, _
+                    refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, iCont / dg.RowCount * 100,
                                                   " Asiento : " + selectedItem.Cells(1).Value + " Fecha : " + ft.FormatoFecha(Fecha))
 
                     Dim Asiento As String = ft.DevuelveScalarCadena(myConn, " select asiento from jscotencasi " _
@@ -107,7 +110,7 @@ Public Class jsContabProContabilizar
                                                                     & " id_emp = '" & jytsistema.WorkID & "' ")
                     If Asiento = "" Then
 
-                        Contabilizar_Plantilla(myConn, lblInfo, ds, Fecha, nPlantillaOrigen, selectedItem.Cells(2).Value, _
+                        Contabilizar_Plantilla(myConn, lblInfo, ds, Fecha, nPlantillaOrigen, selectedItem.Cells(2).Value,
                                                CDate(txtFechaDesde.Text), CDate(txtFechaHasta.Text), lblProgreso, ProgressBar1)
 
 
@@ -121,7 +124,7 @@ Public Class jsContabProContabilizar
                                        & " where " _
                                        & " asiento = '" & Asiento & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
-                        Contabilizar_Plantilla(myConn, lblInfo, ds, Fecha, nPlantillaOrigen, selectedItem.Cells(2).Value, _
+                        Contabilizar_Plantilla(myConn, lblInfo, ds, Fecha, nPlantillaOrigen, selectedItem.Cells(2).Value,
                                                CDate(txtFechaDesde.Text), CDate(txtFechaHasta.Text), lblProgreso, ProgressBar1, Asiento)
 
 
@@ -145,16 +148,9 @@ Public Class jsContabProContabilizar
         IniciarAsientosDefinidos()
 
     End Sub
-    Private Sub btnFechaDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaDesde.Click
-        txtFechaDesde.Text = SeleccionaFecha(CDate(txtFechaDesde.Text), Me, btnFechaDesde)
-    End Sub
 
-    Private Sub btnFechaHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaHasta.Click
-        txtFechaHasta.Text = SeleccionaFecha(CDate(txtFechaHasta.Text), Me, btnFechaHasta)
-    End Sub
-
-    Private Sub txtFechaDesde_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaDesde.TextChanged
-        txtFechaHasta.Text = txtFechaDesde.Text
+    Private Sub txtFechaDesde_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaDesde.ValueChanged
+        txtFechaHasta.Value = txtFechaDesde.Value
     End Sub
 
     Private Sub dg_CellContentClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dg.CellContentClick
@@ -180,7 +176,7 @@ Public Class jsContabProContabilizar
     Private Sub dg_CellValidated(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dg.CellValidated
         If dg.CurrentCell.ColumnIndex = 0 Then
 
-            ft.Ejecutar_strSQL(myconn, " update  " & tbl & " set sel  = " & CInt(dg.CurrentCell.Value) & " " _
+            ft.Ejecutar_strSQL(myConn, " update  " & tbl & " set sel  = " & CInt(dg.CurrentCell.Value) & " " _
                             & " where " _
                             & " asiento = '" & CStr(dg.CurrentRow.Cells(1).Value) & "' and " _
                             & " id_emp = '" & jytsistema.WorkID & "' ")

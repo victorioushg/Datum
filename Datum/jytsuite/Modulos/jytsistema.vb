@@ -52,7 +52,7 @@ Module jytsistema
 
     Public sUsuario As String
     Public sNombreUsuario As String
-    Public sFechadeTrabajo As Date = Now()
+    Public sFechadeTrabajo As DateTime = Now()
 
     Public strConn As String
 
@@ -64,6 +64,7 @@ Module jytsistema
     Public WorkBox As String = ""
     Public WorkRegion As String = ""
     Public WorkLanguage As Integer = 0
+    Public WorkCurrency As New Moneda()
 
     Public Structure UnidadDeMedida
         Dim Abreviatura As String
@@ -481,31 +482,32 @@ Module jytsistema
     '//////////////////////////////////////////////////////////////////////////////////////////
 
 
-    Public aMenuArchivosControl() As String = {"RibbonTab10.Control de Gestión.10.0.0", _
-                                               "RibbonGroup10.Archivos control de gestión.10.1.0", _
-                                               "RibbonButton165.Empresas.10.2.0", _
-                                               "RibbonButton166.Calendario de trabajo.10.2.0", _
-                                               "RibbonButton167.Usuarios.10.2.0", _
-                                               "RibbonButton168.Mapas de acceso.10.2.0", _
-                                               "RibbonButton169.Auditorías de acceso.10.2.0", _
-                                               "RibbonButton170.Impuesto al Valor Agregado.10.2.0", _
-                                               "RibbonButton171.Retenciones del Impuesto Sobre La Renta.10.2.0", _
-                                               "RibbonButton203.Unidades Tributarias.10.2.0", _
-                                               "RibbonButton267.Impresoras fiscales.10.2.0", _
-                                               "RibbonButton172.Contadores.10.2.0", _
-                                               "RibbonButton173.Parámetrso del sistema.10.2.0", _
-                                               "RibbonButton174.Tipos de condiciones de pago y/o cobro a crédito.10.2.0", _
-                                               "RibbonButton175.Tarjetas de crédito y/o débito.10.2.0", _
-                                               "RibbonButton176.Tipos de estatus de clientes.10.2.0", _
-                                               "RibbonButton177.Causas para créditos.10.2.0", _
-                                               "RibbonButton178.Causas para débitos.10.2.0", _
-                                               "RibbonButton306.Unidades de Medida.10.2.0", _
-                                               "RibbonButton179.Divisiones.10.2.0", _
-                                               "RibbonButton180.Transportes.10.2.0", _
-                                               "RibbonButton182.Bancos de la plaza.10.2.0", _
-                                               "RibbonButton183.Agentes de cheques de alimentación.10.2.0", _
-                                               "RibbonButton184.División política territorial.10.2.0", _
-                                               "RibbonButton185.Monedas y cambios.10.2.0", _
+    Public aMenuArchivosControl() As String = {"RibbonTab10.Control de Gestión.10.0.0",
+                                               "RibbonGroup10.Archivos control de gestión.10.1.0",
+                                               "RibbonButton165.Empresas.10.2.0",
+                                               "RibbonButton166.Calendario de trabajo.10.2.0",
+                                               "RibbonButton167.Usuarios.10.2.0",
+                                               "RibbonButton168.Mapas de acceso.10.2.0",
+                                               "RibbonButton169.Auditorías de acceso.10.2.0",
+                                               "RibbonButton170.Impuesto al Valor Agregado.10.2.0",
+                                               "RibbonButton171.Retenciones del Impuesto Sobre La Renta.10.2.0",
+                                               "RibbonButton203.Unidades Tributarias.10.2.0",
+                                               "RibbonButton267.Impresoras fiscales.10.2.0",
+                                               "RibbonButton172.Contadores.10.2.0",
+                                               "RibbonButton173.Parámetrso del sistema.10.2.0",
+                                               "RibbonButton174.Tipos de condiciones de pago y/o cobro a crédito.10.2.0",
+                                               "RibbonButton175.Tarjetas de crédito y/o débito.10.2.0",
+                                               "RibbonButton176.Tipos de estatus de clientes.10.2.0",
+                                               "RibbonButton177.Causas para créditos.10.2.0",
+                                               "RibbonButton178.Causas para débitos.10.2.0",
+                                               "RibbonButton306.Unidades de Medida.10.2.0",
+                                               "RibbonButton179.Divisiones.10.2.0",
+                                               "RibbonButton180.Transportes.10.2.0",
+                                               "RibbonButton182.Bancos de la plaza.10.2.0",
+                                               "RibbonButton183.Agentes de cheques de alimentación.10.2.0",
+                                               "RibbonButton184.División política territorial.10.2.0",
+                                               "RibbonButton185.Cambios de Moneda.10.2.0",
+                                               "RibbonButton312.Monedas.10.2.0",
                                                "RibbonButton197.Conjuntos.10.2.0"}
     Public aMenuProcesosControl() As String = {"RibbonGroup27.Procesos control de gestión.10.1.1", _
                                                "RibbonButton202.Verificar base de datos.10.2.1", _
@@ -975,9 +977,18 @@ Module jytsistema
     Public ColorAmarilloClaro As Color = Color.LightGoldenrodYellow
     Public ColorRojoClaro As Color = Color.LightPink
 
-    Public aFormaPago() As String = {"Efectivo", "Cheque", "Tarjeta", "Cupón de Alimentación", "Depósito", "Transferencia"}
+    Public formasDePago As List(Of TextoValor) = New List(Of TextoValor)() From {
+            New TextoValor("Efectivo", "EF", 0),
+            New TextoValor("Cheque", "CH", 1),
+            New TextoValor("Tarjeta", "TA", 2),
+            New TextoValor("Cupón de Alimentación", "CT", 3),
+            New TextoValor("Depósito", "DP", 4),
+            New TextoValor("Transferencia", "TR", 5)
+        }
 
-    Public aFormaPagoAbreviada() As String = {"EF", "CH", "TA", "CT", "DP", "TR"}
+    'Public aFormaPago() As String = {"Efectivo", "Cheque", "Tarjeta", "Cupón de Alimentación", "Depósito", "Transferencia"}
+
+    'Public aFormaPagoAbreviada() As String = {"EF", "CH", "TA", "CT", "DP", "TR"}
 
     Public aFormaPagoCompras() As String = {"Efectivo", "Cheque", "Tarjeta", "Transferencia"}
     Public aFormaPagoAbreviadaCompras() As String = {"EF", "CH", "TA", "TR"}
@@ -987,10 +998,6 @@ Module jytsistema
                                                  "Reposo médico", "Enfermedad ocupacional", "Ausencia laboral", "Retrasos", _
                                                  "suspención", "Egreso/Desincorporación", "Otros"}
 
-    'Public aUnidad() As String = {"Unidad", "Caja", "Bulto", "Paleta", "Kilogramo", "Gramo", "Tonelada", "Litro", "MiliLitro", _
-    '                              "Decilitro", "Centímetro Cúbico", "Metro Cúbico", "Tambor", "Galón", "Cuñete", "Docena", "Pote", _
-    '                              "Paquete", "Pieza", "Display", "Estuche", "Rollo", "Saco", "Stiva", "Cesta", "Tanque", "Bolsa", _
-    '                              "Centímetro", "Metro", "Kilómetro", "Hectárea", "Carrete", "Otro"}
     Public aUnidad() As String = {}
     Public aUnidadAbreviada() As String = {}
 

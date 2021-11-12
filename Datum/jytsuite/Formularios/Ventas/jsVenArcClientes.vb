@@ -1,5 +1,7 @@
 Imports MySql.Data.MySqlClient
 Imports C1.Win.C1Chart
+Imports Syncfusion.WinForms.Input
+
 Public Class jsVenArcClientes
     Private Const sModulo As String = "Clientes y CxC"
     Private Const lRegion As String = "RibbonButton30"
@@ -73,16 +75,25 @@ Public Class jsVenArcClientes
     Private tblSaldos As String = ""
     Private _Control_Evento_SADA As Integer = 0
 
+    'Private customers As List(Of Customer)
+
     Private Sub jsVenArcClientes_FormClosed(sender As Object, e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         ft = Nothing
     End Sub
-    Private Sub jsVenArcClientes_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Async Sub jsVenArcClientes_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         Me.Dock = DockStyle.Fill
         Try
+
             myConn.Open()
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
+
+            'Dim gnGet As GenericGet(Of Customer) = New GenericGet(Of Customer)()
+            'customers = Await gnGet.GetList(String.Format("api/customer/all/{0}", jytsistema.WorkID))
+
             dt = ds.Tables(nTabla)
+            Dim dates As SfDateTimeEdit() = {txtInicioVisita, txtIngreso}
+            SetSizeDateObjects(dates)
 
             InsertarAuditoria(myConn, MovAud.ientrar, sModulo & " - " & tbcClientes.SelectedTab.Text, "")
             ft.RellenaCombo(aSaldos, cmbSaldos)
@@ -102,19 +113,19 @@ Public Class jsVenArcClientes
             AsignarTooltips()
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
-            ft.MensajeCritico("Error en conexión de base de datos: " & ex.Message)
+            ft.mensajeCritico("Error en conexión de base de datos: " & ex.Message)
         End Try
 
     End Sub
 
     Private Sub AsignarTooltips()
         'Menu Barra 
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnAgregar, btnEditar, btnEliminar, btnBuscar, btnSeleccionar, btnPrimero, _
-                         btnSiguiente, btnAnterior, btnUltimo, btnImprimir, btnSalir, btnSubirHistorico, btnBajarHistorico, _
+        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnAgregar, btnEditar, btnEliminar, btnBuscar, btnSeleccionar, btnPrimero,
+                         btnSiguiente, btnAnterior, btnUltimo, btnImprimir, btnSalir, btnSubirHistorico, btnBajarHistorico,
                          btnAuditoria)
         'Botones Adicionales
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnCanal, btnTerritorioFiscal, btnTerritorioDespacho, btnIVA, btnForma, btnListaPrecios, _
-                          btnInicioVisita, btnIngreso, btnRIF, btnSADA, btnTablaSADA)
+        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnCanal, btnTerritorioFiscal, btnTerritorioDespacho, btnIVA, btnForma, btnListaPrecios,
+                          btnRIF, btnSADA, btnTablaSADA)
 
         C1Chart2.ToolTip.Enabled = True
         C1Chart2.ToolTip.SelectAction = SelectActionEnum.MouseOver
@@ -158,11 +169,7 @@ Public Class jsVenArcClientes
                             & " group by comproba " _
                             & " order by emision desc limit 1 ")
 
-        If ft.InArray(aFormaPagoAbreviada, UltimaFormaDePago) >= 0 Then
-            txtFormaUltimoPago.Text = aFormaPago(ft.InArray(aFormaPagoAbreviada, UltimaFormaDePago))
-        Else
-            txtFormaUltimoPago.Text = ""
-        End If
+        txtFormaUltimoPago.Text = formasDePago.FirstOrDefault(Function(forma) forma.Value = UltimaFormaDePago).Text
 
     End Sub
     Private Sub AsignaCI(ByVal nRow As Long, ByVal Actualiza As Boolean)
@@ -176,7 +183,7 @@ Public Class jsVenArcClientes
 
         dtProveedores = ft.MostrarFilaEnTabla(myConn, ds, nTablaProveedores, strSQLProveedores, Me.BindingContext, MenuBarra,
                 dgProveedores, lRegion, jytsistema.sUsuario, nRow, Actualiza, False)
-       
+
     End Sub
     Private Sub AsignaTXT(ByVal nRow As Long)
 
@@ -191,47 +198,47 @@ Public Class jsVenArcClientes
                     'Cliente i
                     nPosicionCat = nRow
 
-                    txtCodigo.Text = ft.MuestraCampoTexto(.Item("codcli"))
-                    txtNombre.Text = ft.MuestraCampoTexto(.Item("nombre"))
-                    txtAlterno.Text = ft.MuestraCampoTexto(.Item("alterno"))
-                    txtRIF.Text = ft.MuestraCampoTexto(.Item("rif"))
-                    txtCanal.Text = ft.MuestraCampoTexto(.Item("categoria"))
-                    txtTipoNegocio.Text = ft.MuestraCampoTexto(.Item("unidad"))
+                    txtCodigo.Text = ft.muestraCampoTexto(.Item("codcli"))
+                    txtNombre.Text = ft.muestraCampoTexto(.Item("nombre"))
+                    txtAlterno.Text = ft.muestraCampoTexto(.Item("alterno"))
+                    txtRIF.Text = ft.muestraCampoTexto(.Item("rif"))
+                    txtCanal.Text = ft.muestraCampoTexto(.Item("categoria"))
+                    txtTipoNegocio.Text = ft.muestraCampoTexto(.Item("unidad"))
 
                     txtDireccionFiscal.Text = ft.muestraCampoTexto(.Item("dirfiscal"))
-                    txtPaisFiscal.Text = ft.MuestraCampoTexto(.Item("fpais"))
-                    txtMunicipioFiscal.Text = ft.MuestraCampoTexto(.Item("fMunicipio"))
-                    txtEstadoFiscal.Text = ft.MuestraCampoTexto(.Item("fEstado"))
-                    txtParroquiaFiscal.Text = ft.MuestraCampoTexto(.Item("fparroquia"))
-                    txtCiudadFiscal.Text = ft.MuestraCampoTexto(.Item("fciudad"))
-                    txtBarrioFiscal.Text = ft.MuestraCampoTexto(.Item("fbarrio"))
-                    txtTerritorioFiscal.Text = Territorio(txtPaisFiscal.Text, txtEstadoFiscal.Text, txtMunicipioFiscal.Text, _
+                    txtPaisFiscal.Text = ft.muestraCampoTexto(.Item("fpais"))
+                    txtMunicipioFiscal.Text = ft.muestraCampoTexto(.Item("fMunicipio"))
+                    txtEstadoFiscal.Text = ft.muestraCampoTexto(.Item("fEstado"))
+                    txtParroquiaFiscal.Text = ft.muestraCampoTexto(.Item("fparroquia"))
+                    txtCiudadFiscal.Text = ft.muestraCampoTexto(.Item("fciudad"))
+                    txtBarrioFiscal.Text = ft.muestraCampoTexto(.Item("fbarrio"))
+                    txtTerritorioFiscal.Text = Territorio(txtPaisFiscal.Text, txtEstadoFiscal.Text, txtMunicipioFiscal.Text,
                                                               txtParroquiaFiscal.Text, txtCiudadFiscal.Text, txtBarrioFiscal.Text)
 
-                    txtZIPFiscal.Text = ft.MuestraCampoTexto(.Item("fZip"))
-                    txtDireccionDespacho.Text = ft.MuestraCampoTexto(.Item("dirdespa"))
-                    txtPaisDespacho.Text = ft.MuestraCampoTexto(.Item("dpais"))
-                    txtMunicipioDespacho.Text = ft.MuestraCampoTexto(.Item("dMunicipio"))
-                    txtEstadoDespacho.Text = ft.MuestraCampoTexto(.Item("dEstado"))
-                    txtParroquiaDespacho.Text = ft.MuestraCampoTexto(.Item("dparroquia"))
-                    txtCiudadDespacho.Text = ft.MuestraCampoTexto(.Item("dciudad"))
-                    txtBarrioDespacho.Text = ft.MuestraCampoTexto(.Item("dbarrio"))
-                    txtTerritorioDespacho.Text = Territorio(txtPaisDespacho.Text, txtEstadoDespacho.Text, txtMunicipioDespacho.Text, _
+                    txtZIPFiscal.Text = ft.muestraCampoTexto(.Item("fZip"))
+                    txtDireccionDespacho.Text = ft.muestraCampoTexto(.Item("dirdespa"))
+                    txtPaisDespacho.Text = ft.muestraCampoTexto(.Item("dpais"))
+                    txtMunicipioDespacho.Text = ft.muestraCampoTexto(.Item("dMunicipio"))
+                    txtEstadoDespacho.Text = ft.muestraCampoTexto(.Item("dEstado"))
+                    txtParroquiaDespacho.Text = ft.muestraCampoTexto(.Item("dparroquia"))
+                    txtCiudadDespacho.Text = ft.muestraCampoTexto(.Item("dciudad"))
+                    txtBarrioDespacho.Text = ft.muestraCampoTexto(.Item("dbarrio"))
+                    txtTerritorioDespacho.Text = Territorio(txtPaisDespacho.Text, txtEstadoDespacho.Text, txtMunicipioDespacho.Text,
                                                               txtParroquiaDespacho.Text, txtCiudadDespacho.Text, txtBarrioDespacho.Text)
 
-                    txtZIPDespacho.Text = ft.MuestraCampoTexto(.Item("dzip"))
+                    txtZIPDespacho.Text = ft.muestraCampoTexto(.Item("dzip"))
 
-                    txttelef1.Text = ft.MuestraCampoTexto(.Item("telef1"))
-                    txtTelef2.Text = ft.MuestraCampoTexto(.Item("telef2"))
-                    txtTelef3.Text = ft.MuestraCampoTexto(.Item("telef3"))
-                    txtFax.Text = ft.MuestraCampoTexto(.Item("fax"))
-                    txtemail1.Text = ft.MuestraCampoTexto(.Item("email1"))
-                    txtemail2.Text = ft.MuestraCampoTexto(.Item("email2"))
+                    txttelef1.Text = ft.muestraCampoTexto(.Item("telef1"))
+                    txtTelef2.Text = ft.muestraCampoTexto(.Item("telef2"))
+                    txtTelef3.Text = ft.muestraCampoTexto(.Item("telef3"))
+                    txtFax.Text = ft.muestraCampoTexto(.Item("fax"))
+                    txtemail1.Text = ft.muestraCampoTexto(.Item("email1"))
+                    txtemail2.Text = ft.muestraCampoTexto(.Item("email2"))
 
-                    txtGerente.Text = ft.MuestraCampoTexto(.Item("gerente"))
-                    txtTelefonoGerente.Text = ft.MuestraCampoTexto(.Item("telger"))
-                    txtContacto.Text = ft.MuestraCampoTexto(.Item("contacto"))
-                    txtTelefonoContacto.Text = ft.MuestraCampoTexto(.Item("telcon"))
+                    txtGerente.Text = ft.muestraCampoTexto(.Item("gerente"))
+                    txtTelefonoGerente.Text = ft.muestraCampoTexto(.Item("telger"))
+                    txtContacto.Text = ft.muestraCampoTexto(.Item("contacto"))
+                    txtTelefonoContacto.Text = ft.muestraCampoTexto(.Item("telcon"))
 
                     txtLimiteCredito.Text = ft.muestraCampoNumero(.Item("limitecredito"))
                     txtSaldo.Text = ft.muestraCampoNumero(SaldoCxC(myConn, lblInfo, .Item("codcli")))
@@ -248,7 +255,7 @@ Public Class jsVenArcClientes
                     Dim aIVA() As String = ArregloIVA(myConn, lblInfo)
                     ft.RellenaCombo(aIVA, cmbIVA, ft.InArray(aIVA, .Item("regimeniva")))
                     txtDescuentoCliente.Text = ft.muestraCampoNumero(.Item("des_cli"))
-                    txtListaPrecios.Text = ft.MuestraCampoTexto(.Item("lispre"))
+                    txtListaPrecios.Text = ft.muestraCampoTexto(.Item("lispre"))
 
                     txtDescA.Text = ft.muestraCampoNumero(.Item("desc_cli_1"))
                     txtDescB.Text = ft.muestraCampoNumero(.Item("desc_cli_2"))
@@ -290,10 +297,10 @@ Public Class jsVenArcClientes
 
                     'Cliente ii
                     txtCodigoClientesii.Text = .Item("codcli")
-                    txtNombreClienteii.Text = ft.MuestraCampoTexto(.Item("nombre"))
+                    txtNombreClienteii.Text = ft.muestraCampoTexto(.Item("nombre"))
 
                     ft.RellenaCombo(aFrecuenciaVisita, cmbFrecuenciaVisita, .Item("fecvisita"))
-                    txtInicioVisita.Text = ft.FormatoFecha(CDate(.Item("inivisita").ToString))
+                    txtInicioVisita.Value = .Item("inivisita")
                     ft.RellenaCombo(aDiaPago, cmbDiaPago, .Item("diapago"))
                     txtHoraPagoDe.Text = .Item("depago")
                     txtHoraPagoA.Text = .Item("apago")
@@ -303,7 +310,7 @@ Public Class jsVenArcClientes
                     txtFechaRanking.Text = ft.FormatoFecha(CDate(.Item("fecharank").ToString))
                     ft.RellenaCombo(aContribuyente, cmbContribuyente, .Item("especial"))
                     ft.RellenaCombo(aShare, cmbShare, .Item("share"))
-                    txtIngreso.Text = ft.FormatoFecha(CDate(.Item("ingreso").ToString))
+                    txtIngreso.Value = .Item("ingreso")
                     ft.RellenaCombo(aEstatusCliente, cmbEstatus, .Item("estatus"))
                     chkMerchandising.Checked = .Item("merchandising")
                     chkFacturaConCHD.Checked = .Item("backorder")
@@ -333,23 +340,19 @@ Public Class jsVenArcClientes
 
                     'Movimientos CxC
                     txtCodigoMovimientos.Text = .Item("codcli")
-                    txtNombreMovimientos.Text = ft.MuestraCampoTexto(.Item("nombre"))
+                    txtNombreMovimientos.Text = ft.muestraCampoTexto(.Item("nombre"))
                     txtSaldoActual.Text = ft.muestraCampoNumero(.Item("saldo"))
                     txtUltimoPago.Text = ft.muestraCampoNumero(.Item("ultcobro"))
                     txtFechaUltimoPago.Text = ft.muestraCampoFecha(.Item("fecultcobro"))
-                    If InStr(ft.MuestraCampoTexto(.Item("forultcobro")), ".EF.CH.CT.DP.TR.TA") > 0 Then
-                        txtFormaUltimoPago.Text = IIf(ft.InArray(aFormaPagoAbreviada, .Item("forultcobro")) >= 0, aFormaPago(ft.InArray(aFormaPagoAbreviada, .Item("forultcobro"))), "")
-                    Else
-                        txtFormaUltimoPago.Text = ""
-                    End If
+                    txtFormaUltimoPago.Text = formasDePago.FirstOrDefault(Function(forma) forma.Value = .Item("forultcobro")).Text
 
                     'Estadisticas
                     txtCodigoEstadisticas.Text = .Item("codcli")
-                    txtNombreEstadisticas.Text = ft.MuestraCampoTexto(.Item("nombre"))
+                    txtNombreEstadisticas.Text = ft.muestraCampoTexto(.Item("nombre"))
 
                     'Expediente
                     txtCodigoExpediente.Text = .Item("codcli")
-                    txtNombreExpediente.Text = ft.MuestraCampoTexto(.Item("nombre"))
+                    txtNombreExpediente.Text = ft.muestraCampoTexto(.Item("nombre"))
 
                     'Saldos por documento
                     txtCodigoSaldos.Text = .Item("codcli")
@@ -375,7 +378,7 @@ Public Class jsVenArcClientes
     End Sub
     Private Sub AbrirSADA(CodigoCliente As String)
 
-        ds = DataSetRequery(ds, " select * from jsvencatclisada where codcli = '" & CodigoCliente & "' and id_emp = '" & jytsistema.WorkID & "' order by codigosada ", _
+        ds = DataSetRequery(ds, " select * from jsvencatclisada where codcli = '" & CodigoCliente & "' and id_emp = '" & jytsistema.WorkID & "' order by codigosada ",
                                         myConn, nTablaSada, lblInfo)
 
         dtSADA = ds.Tables(nTablaSada)
@@ -398,7 +401,7 @@ Public Class jsVenArcClientes
         Dim aCam() As String = {"dia", "desde", "hasta", "desdepm", "hastapm"}
         Dim aNom() As String = {"Día", "Desde a.m.", "Hasta a.m.", "Desde p.m.", "Hasta p.m."}
         Dim aAnc() As Integer = {60, 60, 60, 60, 60}
-        Dim aAli() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, _
+        Dim aAli() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro, AlineacionDataGrid.Centro,
                                  AlineacionDataGrid.Centro, AlineacionDataGrid.Centro}
         Dim aFor() As String = {"", "", "", "", ""}
 
@@ -423,7 +426,7 @@ Public Class jsVenArcClientes
         Dim aCam() As String = {"dia", "desde", "hasta", "desdepm", "hastapm"}
         Dim aNom() As String = {"Día", "Desde a.m.", "Hasta a.m.", "Desde p.m.", "Hasta p.m."}
         Dim aAnc() As Integer = {60, 60, 60, 60, 60}
-        Dim aAli() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, _
+        Dim aAli() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro, AlineacionDataGrid.Centro,
                                  AlineacionDataGrid.Centro, AlineacionDataGrid.Centro}
         Dim aFor() As String = {"", "", "", "", ""}
 
@@ -452,8 +455,8 @@ Public Class jsVenArcClientes
         Dim aCam() As String = {"codzon", "nomzona", "codrut", "nomrut", "codven", "nomVendedor", "numero"}
         Dim aNom() As String = {"Zona", "", "Ruta", "", "Asesor", "", "#Visita"}
         Dim aAnc() As Integer = {40, 150, 40, 150, 50, 160, 40}
-        Dim aAli() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, _
-                                 AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, _
+        Dim aAli() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda,
+                                 AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda,
                                  AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro}
         Dim aFor() As String = {"", "", "", "", "", "", sFormatoEntero}
 
@@ -482,8 +485,8 @@ Public Class jsVenArcClientes
         Dim aCam() As String = {"codzon", "nomzona", "codrut", "nomrut", "codtra", "nomTransporte", "numero"}
         Dim aNom() As String = {"Zona", "", "Ruta", "", "Transp.", "", "#Despacho"}
         Dim aAnc() As Integer = {40, 150, 40, 150, 50, 160, 40}
-        Dim aAli() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, _
-                                 AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, _
+        Dim aAli() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda,
+                                 AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda,
                                  AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro}
         Dim aFor() As String = {"", "", "", "", "", "", sFormatoEntero}
 
@@ -514,19 +517,19 @@ Public Class jsVenArcClientes
         ds = DataSetRequery(ds, strSQLMov, myConn, nTablaMovimientos, lblInfo)
         dtMovimientos = ds.Tables(nTablaMovimientos)
 
-        Dim aCampos() As String = {"emision.Emisión.80.C.fecha", _
-                                  "tipomov.TP.25.C.", _
-                                  "nummov.Documento.100.I.", _
-                                  "vence.Vence.80.C.fecha", _
-                                  "refer.Referencia.120.I.", _
-                                  "importe.Importe.120.D.Numero", _
-                                  "origen.ORG.50.C.", _
-                                  "formapag.FP.25.C.", _
-                                  "nompag.Nombre Pago.100.I.", _
-                                  "numpag.Nº Pago.100.I.", _
-                                  "comproba.Comprobante Nº.100.I.", _
-                                  "codven.Asesor.50.C.", _
-                                  "nomvendedor.Nombre.250.I.", _
+        Dim aCampos() As String = {"emision.Emisión.80.C.fecha",
+                                  "tipomov.TP.25.C.",
+                                  "nummov.Documento.100.I.",
+                                  "vence.Vence.80.C.fecha",
+                                  "refer.Referencia.120.I.",
+                                  "importe.Importe.120.D.Numero",
+                                  "origen.ORG.50.C.",
+                                  "formapag.FP.25.C.",
+                                  "nompag.Nombre Pago.100.I.",
+                                  "numpag.Nº Pago.100.I.",
+                                  "comproba.Comprobante Nº.100.I.",
+                                  "codven.Asesor.50.C.",
+                                  "nomvendedor.Nombre.250.I.",
                                   "sada..10.I."}
 
 
@@ -548,19 +551,19 @@ Public Class jsVenArcClientes
         End If
 
         txtRIF.Text = ""
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtAlterno, txtNombre, txtCanal, txtTipoNegocio, txtDireccionFiscal, _
-                            txtPaisFiscal, txtEstadoFiscal, txtMunicipioFiscal, txtParroquiaFiscal, txtCiudadFiscal, txtBarrioFiscal, _
-                            txtDireccionDespacho, txtPaisDespacho, txtEstadoDespacho, txtMunicipioDespacho, txtParroquiaDespacho, txtCiudadDespacho, txtBarrioDespacho, _
-                            txtTerritorioFiscal, txtTerritorioDespacho, txtZIPFiscal, txtZIPDespacho, _
-                            txttelef1, txtTelef2, txtTelef3, txtFax, txtemail1, txtemail2, _
-                            txtGerente, txtTelefonoGerente, txtContacto, txtTelefonoContacto, txtFormaPago, txtFormaPagoNombre, _
+        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtAlterno, txtNombre, txtCanal, txtTipoNegocio, txtDireccionFiscal,
+                            txtPaisFiscal, txtEstadoFiscal, txtMunicipioFiscal, txtParroquiaFiscal, txtCiudadFiscal, txtBarrioFiscal,
+                            txtDireccionDespacho, txtPaisDespacho, txtEstadoDespacho, txtMunicipioDespacho, txtParroquiaDespacho, txtCiudadDespacho, txtBarrioDespacho,
+                            txtTerritorioFiscal, txtTerritorioDespacho, txtZIPFiscal, txtZIPDespacho,
+                            txttelef1, txtTelef2, txtTelef3, txtFax, txtemail1, txtemail2,
+                            txtGerente, txtTelefonoGerente, txtContacto, txtTelefonoContacto, txtFormaPago, txtFormaPagoNombre,
                             txtListaPrecios, txtZona, txtComentario)
 
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Numero, txtLimiteCredito, txtSaldo, txtDisponible, _
+        ft.iniciarTextoObjetos(Transportables.tipoDato.Numero, txtLimiteCredito, txtSaldo, txtDisponible,
                             txtDescuentoCliente, txtDescA, txtDescB, txtDescC, txtDescD)
 
         ft.iniciarTextoObjetos(Transportables.tipoDato.Numero, txtDeA, txtDeB, txtDeC, txtDeD, txtAA, txtAB, txtAC, txtAD)
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Fecha, txtInicioVisita, txtIngreso, txtFechaRanking, txtUltimaVisita)
+        ft.iniciarTextoObjetos(Transportables.tipoDato.Fecha, txtFechaRanking, txtUltimaVisita)
         ft.iniciarTextoObjetos(FormatoItemListView.iHora, txtHoraPagoDe, txtHoraPagoA)
 
 
@@ -629,66 +632,66 @@ Public Class jsVenArcClientes
     Private Sub ActivarMarco0()
         grpAceptarSalir.Visible = True
 
-        ft.habilitarObjetos(False, False, C1DockingTabPage2, C1DockingTabPage6, C1DockingTabPage4, C1DockingTabPage5, _
+        ft.habilitarObjetos(False, False, C1DockingTabPage2, C1DockingTabPage6, C1DockingTabPage4, C1DockingTabPage5,
                             C1DockingTabPage6, C1DockingTabPage7, C1DockingTabPage8)
 
-        ft.habilitarObjetos(True, True, txtAlterno, txtRIF, txtNombre, btnCanal, txtDireccionFiscal, txtZIPFiscal, _
-                         btnTerritorioFiscal, txtDireccionDespacho, txtZIPDespacho, btnTerritorioDespacho, _
-                         txttelef1, txtTelef2, txtTelef3, txtFax, txtemail1, txtemail2, txtGerente, txtTelefonoGerente, _
-                         txtContacto, txtTelefonoContacto, txtLimiteCredito, _
-                         cmbIVA, btnForma, txtDescuentoCliente, btnListaPrecios, cmbTarifa, txtDescA, txtDescB, txtDescC, txtDescD, _
-                         txtDeA, txtDeB, txtDeC, txtDeD, txtAA, txtAB, txtAC, txtAD, cmbFrecuenciaVisita, _
-                         btnInicioVisita, cmbDiaPago, txtHoraPagoDe, txtHoraPagoA, txtComentario, _
-                         cmbEstatus, cmbContribuyente, cmbRanking, cmbShare, btnIngreso, btnIVA, btnRIF, cmbSADA, btnSADA)
+        ft.habilitarObjetos(True, True, txtAlterno, txtRIF, txtNombre, btnCanal, txtDireccionFiscal, txtZIPFiscal,
+                         btnTerritorioFiscal, txtDireccionDespacho, txtZIPDespacho, btnTerritorioDespacho,
+                         txttelef1, txtTelef2, txtTelef3, txtFax, txtemail1, txtemail2, txtGerente, txtTelefonoGerente,
+                         txtContacto, txtTelefonoContacto, txtLimiteCredito,
+                         cmbIVA, btnForma, txtDescuentoCliente, btnListaPrecios, cmbTarifa, txtDescA, txtDescB, txtDescC, txtDescD,
+                         txtDeA, txtDeB, txtDeC, txtDeD, txtAA, txtAB, txtAC, txtAD, cmbFrecuenciaVisita,
+                         txtInicioVisita, cmbDiaPago, txtHoraPagoDe, txtHoraPagoA, txtComentario,
+                         cmbEstatus, cmbContribuyente, cmbRanking, cmbShare, txtIngreso, btnIVA, btnRIF, cmbSADA, btnSADA)
 
-        ft.habilitarObjetos(True, False, MenuCIs, chkDoc1, chkDoc2, chkDoc3, chkDoc4, chkDoc5, grpFormaPago, _
-                         chkMerchandising, chkFacturaConCHD, _
+        ft.habilitarObjetos(True, False, MenuCIs, chkDoc1, chkDoc2, chkDoc3, chkDoc4, chkDoc5, grpFormaPago,
+                         chkMerchandising, chkFacturaConCHD,
                          chkDoc6, MenuDiasDespacho, MenuDiasVisita, MenuProveedorExclusivo)
 
         If i_modo = movimiento.iEditar Then ft.habilitarObjetos(False, False, txtCodigo)
 
         MenuBarra.Enabled = False
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
     End Sub
 
     Private Sub DesactivarMarco0()
 
         grpAceptarSalir.Visible = False
-        ft.habilitarObjetos(True, False, C1DockingTabPage2, C1DockingTabPage3, C1DockingTabPage4, C1DockingTabPage5, _
+        ft.habilitarObjetos(True, False, C1DockingTabPage2, C1DockingTabPage3, C1DockingTabPage4, C1DockingTabPage5,
                             C1DockingTabPage6, C1DockingTabPage6, C1DockingTabPage8)
 
-        ft.habilitarObjetos(False, True, txtCodigo, txtAlterno, txtRIF, txtNombre, btnCanal, txtCanalNombre, txtTipoNegocioNombre, txtTipoContribuyente, _
-                         txtDireccionFiscal, txtZIPFiscal, btnTerritorioFiscal, txtTerritorioFiscal, txtDireccionDespacho, txtZIPDespacho, btnTerritorioDespacho, txtTerritorioDespacho, _
-                         txttelef1, txtTelef2, txtTelef3, txtFax, txtemail1, txtemail2, txtGerente, txtTelefonoGerente, _
-                         txtContacto, txtTelefonoContacto, _
-                         txtLimiteCredito, txtSaldo, txtDisponible, _
-                         cmbIVA, txtIVA, btnIVA, _
-                         txtDescuentoCliente, txtListaPrecios, btnListaPrecios, cmbTarifa, _
-                         btnForma, txtFormaPagoNombre, txtDescA, txtDescB, txtDescD, txtDescC, _
-                         txtDeA, txtDeB, txtDeC, txtDeD, txtAA, txtAB, txtAC, txtAD, _
-                         txtCodigoClientesii, txtNombreClienteii, cmbFrecuenciaVisita, txtInicioVisita, btnInicioVisita, _
-                         cmbDiaPago, txtHoraPagoDe, txtHoraPagoA, txtUltimaVisita, _
-                         txtComentario, cmbRanking, txtFechaRanking, _
-                         cmbContribuyente, cmbShare, _
-                         txtIngreso, btnIngreso, cmbEstatus, _
-                         txtCodigoMovimientos, txtNombreMovimientos, txtUltimoPago, txtFechaUltimoPago, txtFormaUltimoPago, txtSaldoActual, _
-                         txtCodigoSaldos, txtNombreSaldos, txtDocSel, txtSaldoSel, _
-                         txtCodigoEstadisticas, txtNombreEstadisticas, _
-                         txtCodigoLicencias, txtNombreLicencias, _
-                         txtCodigoEnvases, txtNombreEnvases, _
-                         txtCodigoExpediente, txtNombreExpediente, txtChMes, txtChAno, txtCHTotal, txtCHMontoMes, txtChMontoAno, txtCHMontoTotal, _
+        ft.habilitarObjetos(False, True, txtCodigo, txtAlterno, txtRIF, txtNombre, btnCanal, txtCanalNombre, txtTipoNegocioNombre, txtTipoContribuyente,
+                         txtDireccionFiscal, txtZIPFiscal, btnTerritorioFiscal, txtTerritorioFiscal, txtDireccionDespacho, txtZIPDespacho, btnTerritorioDespacho, txtTerritorioDespacho,
+                         txttelef1, txtTelef2, txtTelef3, txtFax, txtemail1, txtemail2, txtGerente, txtTelefonoGerente,
+                         txtContacto, txtTelefonoContacto,
+                         txtLimiteCredito, txtSaldo, txtDisponible,
+                         cmbIVA, txtIVA, btnIVA,
+                         txtDescuentoCliente, txtListaPrecios, btnListaPrecios, cmbTarifa,
+                         btnForma, txtFormaPagoNombre, txtDescA, txtDescB, txtDescD, txtDescC,
+                         txtDeA, txtDeB, txtDeC, txtDeD, txtAA, txtAB, txtAC, txtAD,
+                         txtCodigoClientesii, txtNombreClienteii, cmbFrecuenciaVisita, txtInicioVisita,
+                         cmbDiaPago, txtHoraPagoDe, txtHoraPagoA, txtUltimaVisita,
+                         txtComentario, cmbRanking, txtFechaRanking,
+                         cmbContribuyente, cmbShare,
+                         txtIngreso, cmbEstatus,
+                         txtCodigoMovimientos, txtNombreMovimientos, txtUltimoPago, txtFechaUltimoPago, txtFormaUltimoPago, txtSaldoActual,
+                         txtCodigoSaldos, txtNombreSaldos, txtDocSel, txtSaldoSel,
+                         txtCodigoEstadisticas, txtNombreEstadisticas,
+                         txtCodigoLicencias, txtNombreLicencias,
+                         txtCodigoEnvases, txtNombreEnvases,
+                         txtCodigoExpediente, txtNombreExpediente, txtChMes, txtChAno, txtCHTotal, txtCHMontoMes, txtChMontoAno, txtCHMontoTotal,
                          btnRIF, cmbSADA, btnSADA)
 
-        ft.habilitarObjetos(False, False, chkDoc1, chkDoc2, chkDoc3, chkDoc4, chkDoc5, chkDoc6, _
-                         MenuProveedorExclusivo, MenuCIs, MenuDiasDespacho, MenuDiasVisita, _
+        ft.habilitarObjetos(False, False, chkDoc1, chkDoc2, chkDoc3, chkDoc4, chkDoc5, chkDoc6,
+                         MenuProveedorExclusivo, MenuCIs, MenuDiasDespacho, MenuDiasVisita,
                          grpFormaPago, chkMerchandising, chkFacturaConCHD)
 
         MenuBarra.Enabled = True
 
         i_modo = movimiento.iConsultar
 
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
     End Sub
 
@@ -862,10 +865,10 @@ Public Class jsVenArcClientes
 
                     With dtMovimientos.Rows(nPosicionMov)
 
-                        Dim aCamposAdicionales() As String = {"CODCLI|'" & txtCodigo.Text & "'", _
-                                                              "EMISION|'" & ft.FormatoFechaMySQL(Convert.ToDateTime(.Item("EMISION"))) & "'", _
-                                                              "TIPOMOV|'" & .Item("TIPOMOV") & "'", _
-                                                              "NUMMOV|'" & .Item("NUMMOV") & "'", _
+                        Dim aCamposAdicionales() As String = {"CODCLI|'" & txtCodigo.Text & "'",
+                                                              "EMISION|'" & ft.FormatoFechaMySQL(Convert.ToDateTime(.Item("EMISION"))) & "'",
+                                                              "TIPOMOV|'" & .Item("TIPOMOV") & "'",
+                                                              "NUMMOV|'" & .Item("NUMMOV") & "'",
                                                               "HORA|'" & .Item("HORA") & "'"}
 
                         If DocumentoBloqueado(myConn, "jsventracob", aCamposAdicionales) Then
@@ -896,7 +899,7 @@ Public Class jsVenArcClientes
                 If cmbEstatus.Text = "Activo" Then
                     EliminarMovimiento()
                 Else
-                    ft.MensajeCritico("Este proveedor NO está activo ....")
+                    ft.mensajeCritico("Este proveedor NO está activo ....")
                 End If
             Case "Expediente"
 
@@ -909,7 +912,7 @@ Public Class jsVenArcClientes
         sRespuesta = MsgBox(" ¿ Está seguro que desea eliminar registro ?", MsgBoxStyle.YesNo, "Eliminar registro ... ")
         If sRespuesta = MsgBoxResult.Yes Then
             If ft.DevuelveScalarEntero(myConn, "select COUNT(*) from jsventracob where codcli = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ") = 0 Then
-                AsignaTXT(EliminarRegistros(myConn, lblInfo, ds, nTabla, "jsvencatcli", strSQL, aCamposDel, aStringsDel, _
+                AsignaTXT(EliminarRegistros(myConn, lblInfo, ds, nTabla, "jsvencatcli", strSQL, aCamposDel, aStringsDel,
                                               Me.BindingContext(ds, nTabla).Position, True))
                 InsertarAuditoria(myConn, MovAud.iEliminar, sModulo & " - " & tbcClientes.SelectedTab.Text, txtCodigo.Text)
             Else
@@ -917,8 +920,8 @@ Public Class jsVenArcClientes
             End If
         End If
     End Sub
-    Private Function PoseeMovimientosAsociados(ByVal MyConn As MySqlConnection, ByVal lblInfo As System.Windows.Forms.Label, _
-                                               ByVal CodigoCliente As String, Optional ByVal NumeroMovimiento As String = "", _
+    Private Function PoseeMovimientosAsociados(ByVal MyConn As MySqlConnection, ByVal lblInfo As System.Windows.Forms.Label,
+                                               ByVal CodigoCliente As String, Optional ByVal NumeroMovimiento As String = "",
                                                Optional ByVal TipoMovimiento As String = "") As Boolean
 
         Dim cuenta As Integer = ft.DevuelveScalarEntero(MyConn, " select COUNT(*) from jsventracob where " _
@@ -936,10 +939,10 @@ Public Class jsVenArcClientes
         If nPosicionMov >= 0 Then
             With dtMovimientos.Rows(nPosicionMov)
 
-                Dim aCamposAdicionales() As String = {"CODCLI|'" & txtCodigo.Text & "'", _
-                                                      "EMISION|'" & ft.FormatoFechaMySQL(Convert.ToDateTime(.Item("EMISION"))) & "'", _
-                                                      "TIPOMOV|'" & .Item("TIPOMOV") & "'", _
-                                                      "NUMMOV|'" & .Item("NUMMOV") & "'", _
+                Dim aCamposAdicionales() As String = {"CODCLI|'" & txtCodigo.Text & "'",
+                                                      "EMISION|'" & ft.FormatoFechaMySQL(Convert.ToDateTime(.Item("EMISION"))) & "'",
+                                                      "TIPOMOV|'" & .Item("TIPOMOV") & "'",
+                                                      "NUMMOV|'" & .Item("NUMMOV") & "'",
                                                       "HORA|'" & .Item("HORA") & "'"}
 
                 If DocumentoBloqueado(myConn, "jsventracob", aCamposAdicionales) Then
@@ -962,17 +965,17 @@ Public Class jsVenArcClientes
                                             ft.mensajeAdvertencia("Este documento posee documentos asociados a él...")
                                         Else
                                             Dim aeCam() As String = {"codcli", "tipomov", "emision", "nummov", "refer", "ejercicio", "id_emp"}
-                                            Dim aeStr() As String = {.Item("codcli"), .Item("tipomov"), ft.FormatoFechaMySQL(CDate(.Item("emision").ToString)), _
+                                            Dim aeStr() As String = { .Item("codcli"), .Item("tipomov"), ft.FormatoFechaMySQL(CDate(.Item("emision").ToString)),
                                                                      .Item("nummov"), .Item("refer"), jytsistema.WorkExercise, jytsistema.WorkID}
 
-                                            AsignaMov(EliminarRegistros(myConn, lblInfo, ds, nTablaMovimientos, "jsventracob", strSQLMov, aeCam, _
+                                            AsignaMov(EliminarRegistros(myConn, lblInfo, ds, nTablaMovimientos, "jsventracob", strSQLMov, aeCam,
                                                                         aeStr, nPosicionMov, True), False)
 
                                         End If
                                     Case "AB", "CA", "NC"
                                         If CBool(.Item("multican").ToString) Then
                                             If ft.Pregunta("Este documento pertenece a una cancelación múltiple. " _
-                                                           & " Se eliminarán todos los documentos ¿ Desea Eliminar ?", _
+                                                           & " Se eliminarán todos los documentos ¿ Desea Eliminar ?",
                                                            "Emilinar registro...") = MsgBoxResult.No Then
                                                 Return
                                             End If
@@ -1077,7 +1080,7 @@ Public Class jsVenArcClientes
                     Dim Respuesta As Microsoft.VisualBasic.MsgBoxResult
                     Respuesta = MsgBox(" ¿ Desea imprimir RECIBO DE CANCELACION ?", MsgBoxStyle.YesNo, "IMPRIMIR RECIBO ... ")
                     If Respuesta = MsgBoxResult.Yes Then
-                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteVentas.cCxC, "Recibo cancelación y/o Abono CXC", , _
+                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteVentas.cCxC, "Recibo cancelación y/o Abono CXC", ,
                                  dtMovimientos.Rows(nPosicionMov).Item("comproba"))
                     End If
                 Else
@@ -1097,7 +1100,7 @@ Public Class jsVenArcClientes
     Private Function Validado() As Boolean
 
         If txtCodigo.Text = "" Then
-            ft.MensajeCritico("Debe indicar un código de cliente válido...")
+            ft.mensajeCritico("Debe indicar un código de cliente válido...")
             ft.enfocarTexto(txtCodigo)
             Return False
         Else
@@ -1111,7 +1114,7 @@ Public Class jsVenArcClientes
         End If
 
         If txtRIF.Text.Replace("_", "").Replace(" ", "") = "" Then
-            ft.MensajeCritico("Debe indicar un RIF de cliente válido...")
+            ft.mensajeCritico("Debe indicar un RIF de cliente válido...")
             txtRIF.Focus()
             Return False
         Else
@@ -1144,26 +1147,26 @@ Public Class jsVenArcClientes
         End If
 
         If ValorNumero(txtLimiteCredito.Text) = 0.0 Then
-            ft.MensajeCritico("Debe indicar un LIMITE DE CREDITO VALIDO....")
+            ft.mensajeCritico("Debe indicar un LIMITE DE CREDITO VALIDO....")
             ft.enfocarTexto(txtLimiteCredito)
             Return False
         End If
 
         If txtFormaPagoNombre.Text.TrimEnd() = "" Then
-            ft.MensajeCritico("Debe indicar una FORMA DE PAGO VALIDA...")
+            ft.mensajeCritico("Debe indicar una FORMA DE PAGO VALIDA...")
             Return False
         End If
 
-        If cmbFacturaDesde.SelectedIndex = 1 AndAlso _
+        If cmbFacturaDesde.SelectedIndex = 1 AndAlso
                 ValorNumero(txtDescuentoCliente.Text) = 0.0 Then
-            ft.MensajeCritico("DEBE INDICAR UN VALOR DE GANANCIA PARA LA FACTURACIÓN DE ESTE CLIENTE...")
+            ft.mensajeCritico("DEBE INDICAR UN VALOR DE GANANCIA PARA LA FACTURACIÓN DE ESTE CLIENTE...")
             Return False
         End If
 
-        If NivelUsuario(myConn, lblInfo, jytsistema.sUsuario) = 0 AndAlso _
+        If NivelUsuario(myConn, lblInfo, jytsistema.sUsuario) = 0 AndAlso
                         cmbFacturaDesde.SelectedIndex = 1 Then
 
-            ft.MensajeCritico("NO POSEE PERMISOS SUFICIENTES PARA QUE ESTE CLIENTE FACTURE DESDE EL COSTO ...")
+            ft.mensajeCritico("NO POSEE PERMISOS SUFICIENTES PARA QUE ESTE CLIENTE FACTURE DESDE EL COSTO ...")
             Return False
 
         End If
@@ -1188,39 +1191,39 @@ Public Class jsVenArcClientes
             sRIF = txtRIF.Text.Split("-")(0) + "-" + txtRIF.Text.Split("-")(1).Replace("_", "")
         End If
 
-        InsertEditVENTASCliente(myConn, lblInfo, Inserta, txtCodigo.Text, txtNombre.Text, txtCanal.Text, txtTipoNegocio.Text, _
-                                 sRIF, "", "", txtAlterno.Text, txtDireccionFiscal.Text, ValorEntero(txtPaisFiscal.Text), _
-                                 ValorEntero(txtEstadoFiscal.Text), ValorEntero(txtMunicipioFiscal.Text), ValorEntero(txtParroquiaFiscal.Text), _
-                                 ValorEntero(txtCiudadFiscal.Text), ValorEntero(txtBarrioFiscal.Text), txtZIPFiscal.Text, _
-                                 txtDireccionDespacho.Text, ValorEntero(txtPaisDespacho.Text), ValorEntero(txtEstadoDespacho.Text), _
-                                 ValorEntero(txtMunicipioDespacho.Text), ValorEntero(txtParroquiaDespacho.Text), ValorEntero(txtCiudadDespacho.Text), _
-                                 ValorEntero(txtBarrioDespacho.Text), txtZIPDespacho.Text, 0, txtemail1.Text, txtemail2.Text, _
-                                 "", "", txttelef1.Text, txtTelef2.Text, txtTelef3.Text, txtFax.Text, txtGerente.Text, txtTelefonoGerente.Text, _
-                                 txtContacto.Text, txtTelefonoContacto.Text, ValorNumero(txtLimiteCredito.Text), ValorNumero(txtLimiteCredito.Text) - LimiteCreditoAnterior + ValorNumero(txtDisponible.Text), _
-                                 ValorNumero(txtDescuentoCliente.Text), ValorNumero(txtDescA.Text), ValorNumero(txtDescB.Text), _
-                                 ValorNumero(txtDescC.Text), ValorNumero(txtDescD.Text), ValorEntero(txtDeA.Text), ValorEntero(txtDeB.Text), ValorEntero(txtDeC.Text), ValorEntero(txtDeD.Text), _
-                                 ValorEntero(txtAA.Text), ValorEntero(txtAB.Text), ValorEntero(txtAC.Text), ValorEntero(txtAD.Text), _
-                                 ValorNumero(txtSaldo.Text), cmbIVA.Text, cmbTarifa.Text, txtListaPrecios.Text, txtFormaPago.Text, _
-                                 CDate(txtIngreso.Text), "", cmbFacturaDesde.SelectedIndex, cmbEstatus.SelectedIndex, If(chkDoc1.Checked, 1, 0), 0, _
-                                 If(chkDoc2.Checked, 1, 0), 0, If(chkDoc3.Checked, 1, 0), If(chkDoc4.Checked, 1, 0), If(chkDoc5.Checked, 1, 0), If(chkDoc6.Checked, 1, 0), _
-                                 cmbFrecuenciaVisita.SelectedIndex, CDate(txtUltimaVisita.Text), CDate(txtInicioVisita.Text), _
-                                 If(chkMerchandising.Checked, 1, 0), If(chkFacturaConCHD.Checked, 1, 0), cmbDiaPago.SelectedIndex, _
-                                 txtHoraPagoDe.Text, txtHoraPagoA.Text, cmbRanking.SelectedIndex, CDate(txtFechaRanking.Text), _
+        InsertEditVENTASCliente(myConn, lblInfo, Inserta, txtCodigo.Text, txtNombre.Text, txtCanal.Text, txtTipoNegocio.Text,
+                                 sRIF, "", "", txtAlterno.Text, txtDireccionFiscal.Text, ValorEntero(txtPaisFiscal.Text),
+                                 ValorEntero(txtEstadoFiscal.Text), ValorEntero(txtMunicipioFiscal.Text), ValorEntero(txtParroquiaFiscal.Text),
+                                 ValorEntero(txtCiudadFiscal.Text), ValorEntero(txtBarrioFiscal.Text), txtZIPFiscal.Text,
+                                 txtDireccionDespacho.Text, ValorEntero(txtPaisDespacho.Text), ValorEntero(txtEstadoDespacho.Text),
+                                 ValorEntero(txtMunicipioDespacho.Text), ValorEntero(txtParroquiaDespacho.Text), ValorEntero(txtCiudadDespacho.Text),
+                                 ValorEntero(txtBarrioDespacho.Text), txtZIPDespacho.Text, 0, txtemail1.Text, txtemail2.Text,
+                                 "", "", txttelef1.Text, txtTelef2.Text, txtTelef3.Text, txtFax.Text, txtGerente.Text, txtTelefonoGerente.Text,
+                                 txtContacto.Text, txtTelefonoContacto.Text, ValorNumero(txtLimiteCredito.Text), ValorNumero(txtLimiteCredito.Text) - LimiteCreditoAnterior + ValorNumero(txtDisponible.Text),
+                                 ValorNumero(txtDescuentoCliente.Text), ValorNumero(txtDescA.Text), ValorNumero(txtDescB.Text),
+                                 ValorNumero(txtDescC.Text), ValorNumero(txtDescD.Text), ValorEntero(txtDeA.Text), ValorEntero(txtDeB.Text), ValorEntero(txtDeC.Text), ValorEntero(txtDeD.Text),
+                                 ValorEntero(txtAA.Text), ValorEntero(txtAB.Text), ValorEntero(txtAC.Text), ValorEntero(txtAD.Text),
+                                 ValorNumero(txtSaldo.Text), cmbIVA.Text, cmbTarifa.Text, txtListaPrecios.Text, txtFormaPago.Text,
+                                 CDate(txtIngreso.Text), "", cmbFacturaDesde.SelectedIndex, cmbEstatus.SelectedIndex, If(chkDoc1.Checked, 1, 0), 0,
+                                 If(chkDoc2.Checked, 1, 0), 0, If(chkDoc3.Checked, 1, 0), If(chkDoc4.Checked, 1, 0), If(chkDoc5.Checked, 1, 0), If(chkDoc6.Checked, 1, 0),
+                                 cmbFrecuenciaVisita.SelectedIndex, CDate(txtUltimaVisita.Text), CDate(txtInicioVisita.Text),
+                                 If(chkMerchandising.Checked, 1, 0), If(chkFacturaConCHD.Checked, 1, 0), cmbDiaPago.SelectedIndex,
+                                 txtHoraPagoDe.Text, txtHoraPagoA.Text, cmbRanking.SelectedIndex, CDate(txtFechaRanking.Text),
                                  txtComentario.Text, cmbContribuyente.SelectedIndex, cmbShare.SelectedIndex)
 
         ''
         If Inserta Then
             'INCLUSION EN RUTA INICIAL
-            Dim RutaInicial As String = ParametroPlus(MyConn, Gestion.iVentas, "VENPARAM27")
+            Dim RutaInicial As String = ParametroPlus(myConn, Gestion.iVentas, "VENPARAM27")
             Dim AsesorInicial As String = ft.DevuelveScalarCadena(myConn, " SELECT codven FROM jsvenencrut WHERE CODRUT = '" & RutaInicial & "' AND tipo = 0 AND id_emp = '" & jytsistema.WorkID & "' ")
             Dim NumeroInicialEnRuta As Integer = ft.DevuelveScalarEntero(myConn, " SELECT items FROM jsvenencrut WHERE CODRUT = '" & RutaInicial & "' AND tipo = 0 AND id_emp = '" & jytsistema.WorkID & "' ") + 1
             Dim CondicionInicialRuta As Integer = ft.DevuelveScalarEntero(myConn, " SELECT condicion FROM jsvenencrut WHERE CODRUT = '" & RutaInicial & "' AND tipo = 0 AND id_emp = '" & jytsistema.WorkID & "' ")
 
             InsertEditVENTASRenglonRuta(myConn, lblInfo, True, RutaInicial, NumeroInicialEnRuta, txtCodigo.Text, txtNombre.Text, 0, 1, "", CondicionInicialRuta)
 
-            ft.Ejecutar_strSQL(myconn, " update jsvenencrut set  items = " & NumeroInicialEnRuta & " where codrut = '" & RutaInicial & "' and id_emp = '" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsvenencrut set  items = " & NumeroInicialEnRuta & " where codrut = '" & RutaInicial & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
-            ft.Ejecutar_strSQL(myconn, " update jsvencatcli set vendedor = '" & AsesorInicial & "', cobrador = '" & AsesorInicial _
+            ft.Ejecutar_strSQL(myConn, " update jsvencatcli set vendedor = '" & AsesorInicial & "', cobrador = '" & AsesorInicial _
                            & "', ruta_visita ='" & RutaInicial & "', num_visita = " & NumeroInicialEnRuta _
                            & " where " _
                            & " codcli = '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
@@ -1267,96 +1270,96 @@ Public Class jsVenArcClientes
 
     End Sub
 
-    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus, _
-        txtAlterno.GotFocus, txtNombre.GotFocus, btnCanal.GotFocus, txtDireccionFiscal.GotFocus, txtZIPFiscal.GotFocus, _
-        btnTerritorioFiscal.GotFocus, txtDireccionDespacho.GotFocus, txtZIPDespacho.GotFocus, btnTerritorioDespacho.GotFocus, _
-        txttelef1.GotFocus, txtTelef2.GotFocus, txtTelef3.GotFocus, txtFax.GotFocus, txtemail1.GotFocus, txtemail2.GotFocus, _
-        txtGerente.GotFocus, txtTelefonoGerente.GotFocus, txtContacto.GotFocus, txtTelefonoContacto.GotFocus, txtLimiteCredito.GotFocus, _
-        txtDescA.GotFocus, txtDescB.GotFocus, txtDescC.GotFocus, txtDescD.GotFocus, txtDeA.GotFocus, txtDeB.GotFocus, txtDeC.GotFocus, _
-        txtDeD.GotFocus, txtAA.GotFocus, txtAB.GotFocus, txtAC.GotFocus, txtAD.GotFocus, txtDescuentoCliente.GotFocus, _
-        btnListaPrecios.GotFocus, btnForma.GotFocus, cmbTarifa.GotFocus, cmbFrecuenciaVisita.GotFocus, btnInicioVisita.GotFocus, _
-        cmbDiaPago.GotFocus, txtHoraPagoA.GotFocus, txtHoraPagoDe.GotFocus, txtComentario.GotFocus, cmbContribuyente.GotFocus, _
-        cmbShare.GotFocus, btnIngreso.GotFocus, cmbEstatus.GotFocus
+    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus,
+        txtAlterno.GotFocus, txtNombre.GotFocus, btnCanal.GotFocus, txtDireccionFiscal.GotFocus, txtZIPFiscal.GotFocus,
+        btnTerritorioFiscal.GotFocus, txtDireccionDespacho.GotFocus, txtZIPDespacho.GotFocus, btnTerritorioDespacho.GotFocus,
+        txttelef1.GotFocus, txtTelef2.GotFocus, txtTelef3.GotFocus, txtFax.GotFocus, txtemail1.GotFocus, txtemail2.GotFocus,
+        txtGerente.GotFocus, txtTelefonoGerente.GotFocus, txtContacto.GotFocus, txtTelefonoContacto.GotFocus, txtLimiteCredito.GotFocus,
+        txtDescA.GotFocus, txtDescB.GotFocus, txtDescC.GotFocus, txtDescD.GotFocus, txtDeA.GotFocus, txtDeB.GotFocus, txtDeC.GotFocus,
+        txtDeD.GotFocus, txtAA.GotFocus, txtAB.GotFocus, txtAC.GotFocus, txtAD.GotFocus, txtDescuentoCliente.GotFocus,
+        btnListaPrecios.GotFocus, btnForma.GotFocus, cmbTarifa.GotFocus, cmbFrecuenciaVisita.GotFocus,
+        cmbDiaPago.GotFocus, txtHoraPagoA.GotFocus, txtHoraPagoDe.GotFocus, txtComentario.GotFocus, cmbContribuyente.GotFocus,
+        cmbShare.GotFocus, cmbEstatus.GotFocus
 
         Select Case sender.name
             Case "txtCodigo"
-                ft.mensajeEtiqueta(lblInfo, " Indique el código de CLIENTE ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el código de CLIENTE ... ", Transportables.tipoMensaje.iInfo)
             Case "txtAlterno"
-                ft.mensajeEtiqueta(lblInfo, " Indique código alternativo para el cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique código alternativo para el cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "txtRIF"
-                ft.mensajeEtiqueta(lblInfo, " Indique RIF para el cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique RIF para el cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "txtNombre"
-                ft.mensajeEtiqueta(lblInfo, " Indique Nombre o razón social del cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique Nombre o razón social del cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "btnCanal"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione canal y tipo de negocio para este cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione canal y tipo de negocio para este cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "txtDireccionFiscal"
-                ft.mensajeEtiqueta(lblInfo, " Indique la dirección fiscal de este cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique la dirección fiscal de este cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "txtZIPFiscal"
-                ft.mensajeEtiqueta(lblInfo, " Indique el código postal de la dirección fiscal de este cliente  ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el código postal de la dirección fiscal de este cliente  ... ", Transportables.tipoMensaje.iInfo)
             Case "btnTerritorioFiscal"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione el territorio de la dirección fiscal donde se ubica este cliente  ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione el territorio de la dirección fiscal donde se ubica este cliente  ... ", Transportables.tipoMensaje.iInfo)
             Case "txtDireccionDespacho"
-                ft.mensajeEtiqueta(lblInfo, " Indique la dirección de despacho de este cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique la dirección de despacho de este cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "txtZIPDespacho"
-                ft.mensajeEtiqueta(lblInfo, " Indique el código postal de la dirección de despacho de este cliente  ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el código postal de la dirección de despacho de este cliente  ... ", Transportables.tipoMensaje.iInfo)
             Case "btnTerritorioDespacho"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione el territorio de la dirección de despacho donde se ubica este cliente  ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione el territorio de la dirección de despacho donde se ubica este cliente  ... ", Transportables.tipoMensaje.iInfo)
             Case "txtTelef1", "txtTelef2", "txtTelef3"
-                ft.mensajeEtiqueta(lblInfo, " Indique el número teléfónico de este cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el número teléfónico de este cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "txtFAX"
-                ft.mensajeEtiqueta(lblInfo, " Indique el número del 'FAX telefónico de este cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el número del 'FAX telefónico de este cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "txtemail1", "txtemail2"
-                ft.mensajeEtiqueta(lblInfo, " Indique dirección de correo electrónico de este cliente  ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique dirección de correo electrónico de este cliente  ... ", Transportables.tipoMensaje.iInfo)
             Case "txtGerente"
-                ft.mensajeEtiqueta(lblInfo, " Indique el nombre del gerente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el nombre del gerente ... ", Transportables.tipoMensaje.iInfo)
             Case "txtTelefonoGerente"
-                ft.mensajeEtiqueta(lblInfo, " Indique número teléfónico del gerente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique número teléfónico del gerente ... ", Transportables.tipoMensaje.iInfo)
             Case "txtContacto"
-                ft.mensajeEtiqueta(lblInfo, " Indique nombre de la persona contacto de este cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique nombre de la persona contacto de este cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "txtTelefonoContacto"
-                ft.mensajeEtiqueta(lblInfo, " Indique el número de teléfono contacto ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el número de teléfono contacto ... ", Transportables.tipoMensaje.iInfo)
             Case "txtLimiteCredito"
-                ft.mensajeEtiqueta(lblInfo, " Indique el Límite de crédito aprobado para este cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el Límite de crédito aprobado para este cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "txtDescA", "txtDescB", "txtDescC", "txtDescD"
-                ft.mensajeEtiqueta(lblInfo, " Indique el descuento de venta post venta para este cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el descuento de venta post venta para este cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "txtDeA", "txtDeB", "txtDeC", "txtDeD"
-                ft.mensajeEtiqueta(lblInfo, " Indique dias desde ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique dias desde ... ", Transportables.tipoMensaje.iInfo)
             Case "txtAA", "txtAB", "txtAC", "txtAD"
-                ft.mensajeEtiqueta(lblInfo, " Indique dias hasta ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique dias hasta ... ", Transportables.tipoMensaje.iInfo)
             Case "txtDescuentoCliente"
-                ft.mensajeEtiqueta(lblInfo, " Indique descuento especial para este cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique descuento especial para este cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "btnListaPrecios"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione lista de precios especiales para este cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione lista de precios especiales para este cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "btnForma"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione la forma de pago para este cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione la forma de pago para este cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "cmbTarifa"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione la tarifa de precios que se aplica a esgte cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione la tarifa de precios que se aplica a esgte cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "cmbFrecuenciaVisita"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione la frecuencia de visita para este cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione la frecuencia de visita para este cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "btnInicioVisita"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione la fecha en que se iniciarian las visitas a este cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione la fecha en que se iniciarian las visitas a este cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "cmbDiaPago"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione el día de pago de este cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione el día de pago de este cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "txtHoraPagoA"
-                ft.mensajeEtiqueta(lblInfo, " Indique hora de pago hasta ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique hora de pago hasta ... ", Transportables.tipoMensaje.iInfo)
             Case "txtHoraPagoDe"
-                ft.mensajeEtiqueta(lblInfo, " Indique hora de pago desde ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique hora de pago desde ... ", Transportables.tipoMensaje.iInfo)
             Case "txtComentario"
-                ft.mensajeEtiqueta(lblInfo, " Indique comentario ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique comentario ... ", Transportables.tipoMensaje.iInfo)
             Case "cmbContribuyente"
-                ft.mensajeEtiqueta(lblInfo, " seleccione el tipo de contribuyente de este cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " seleccione el tipo de contribuyente de este cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "cmbShare"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione el Share de mercado de este cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione el Share de mercado de este cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "btnIngreso"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione la fecha de ingreso al sistema de este cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione la fecha de ingreso al sistema de este cliente ... ", Transportables.tipoMensaje.iInfo)
             Case "cmbEstatus"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione el estatus del cliente ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione el estatus del cliente ... ", Transportables.tipoMensaje.iInfo)
 
         End Select
 
     End Sub
 
-    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick, _
+    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick,
         dg.CellMouseClick, dg.RegionChanged
         Me.BindingContext(ds, nTablaMovimientos).Position = e.RowIndex
         nPosicionMov = e.RowIndex
@@ -1415,21 +1418,21 @@ Public Class jsVenArcClientes
 
         dtEnvases = ft.AbrirDataTable(ds, nTablaEnvases, myConn, strSQLEnvases)
 
-        Dim aCampos() As String = {"fechamov.Emisión.80.C.fecha", _
-                                   "tipomov.TP.35.C.", _
-                                   "numdoc.Documento.100.I.", _
-                                   "almacen.ALM.50.C.", _
-                                   "cantidad.Cantidad.70.D.Entero", _
-                                   "origen.ORG.35.C.", _
-                                   "prov_cli.Prov/Clie.80.C.", _
-                                   "nomProv_cli.Nombre o razón social.300.I.", _
-                                   "vendedor.Asesor.50.C.", _
-                                   "nomvendedor.Nombre.300.I.", _
-                                   "nomEstatus.Estatus.200.I.", _
+        Dim aCampos() As String = {"fechamov.Emisión.80.C.fecha",
+                                   "tipomov.TP.35.C.",
+                                   "numdoc.Documento.100.I.",
+                                   "almacen.ALM.50.C.",
+                                   "cantidad.Cantidad.70.D.Entero",
+                                   "origen.ORG.35.C.",
+                                   "prov_cli.Prov/Clie.80.C.",
+                                   "nomProv_cli.Nombre o razón social.300.I.",
+                                   "vendedor.Asesor.50.C.",
+                                   "nomvendedor.Nombre.300.I.",
+                                   "nomEstatus.Estatus.200.I.",
                                    "sada..10.I."}
 
         ft.IniciarTablaPlus(dgEnvases, dtEnvases, aCampos)
-        If dtEnvases.Rows.Count > 0 Then nPosicionEnv = 0
+        If dtEnvases.Rows.Count > 0 Then nPosicionenv = 0
 
     End Sub
     Private Function ValoresMensuales(ByVal dtValores As DataTable) As Double()
@@ -1479,11 +1482,11 @@ Public Class jsVenArcClientes
         Histograma.ChartGroups(0).ChartData.SeriesList(1).Y.CopyDataIn(abY)
 
         Dim dtt As New DataTable
-        dtt = ConsultaEstadistica(myConn, ds, lblInfo, txtCodigo.Text, "VEN", cmbTipoEstadistica.SelectedIndex, IIf(rBtnV1.Checked, TipoDatoMercancia.iUnidadesDeVenta, IIf(rBtnV2.Checked, TipoDatoMercancia.iKilogramos, TipoDatoMercancia.iMonetarios)), jytsistema.sFechadeTrabajo, _
+        dtt = ConsultaEstadistica(myConn, ds, lblInfo, txtCodigo.Text, "VEN", cmbTipoEstadistica.SelectedIndex, IIf(rBtnV1.Checked, TipoDatoMercancia.iUnidadesDeVenta, IIf(rBtnV2.Checked, TipoDatoMercancia.iKilogramos, TipoDatoMercancia.iMonetarios)), jytsistema.sFechadeTrabajo,
                                   "tblResumenAnoActualVentas", " a.id_emp ")
 
         Dim dttAnteriores As New DataTable
-        dttAnteriores = ConsultaEstadistica(myConn, ds, lblInfo, txtCodigo.Text, "VEN", cmbTipoEstadistica.SelectedIndex, IIf(rBtnV1.Checked, TipoDatoMercancia.iUnidadesDeVenta, IIf(rBtnV2.Checked, TipoDatoMercancia.iKilogramos, TipoDatoMercancia.iMonetarios)), DateAdd(DateInterval.Year, -1, jytsistema.sFechadeTrabajo), _
+        dttAnteriores = ConsultaEstadistica(myConn, ds, lblInfo, txtCodigo.Text, "VEN", cmbTipoEstadistica.SelectedIndex, IIf(rBtnV1.Checked, TipoDatoMercancia.iUnidadesDeVenta, IIf(rBtnV2.Checked, TipoDatoMercancia.iKilogramos, TipoDatoMercancia.iMonetarios)), DateAdd(DateInterval.Year, -1, jytsistema.sFechadeTrabajo),
                                             "tblResumenAnoAnteriorVentas", " a.id_emp ")
 
         aaY = ValoresMensuales(dtt)
@@ -1510,11 +1513,11 @@ Public Class jsVenArcClientes
     Private Sub AsignarLicencias(ByVal nCodigoCliente As String)
         Dim dtLic As DataTable = ft.AbrirDataTable(ds, "tblLicencias", myConn, " select * from datumreg where codigo = '" & jytsistema.WorkID & nCodigoCliente & "' ")
 
-        Dim aCampos() As String = {"licencia.Licencia.120.I.", _
-                                  "numero_licencia.N° Licencia.200.I.", _
-                                  "mac_estacion.Número MAC.200.I.", _
-                                  "num_conexiones.N° máximo conexiones.120.C.Entero", _
-                                  "fecha_expiracion.Fecha Expiración.120.C.Fecha", _
+        Dim aCampos() As String = {"licencia.Licencia.120.I.",
+                                  "numero_licencia.N° Licencia.200.I.",
+                                  "mac_estacion.Número MAC.200.I.",
+                                  "num_conexiones.N° máximo conexiones.120.C.Entero",
+                                  "fecha_expiracion.Fecha Expiración.120.C.Fecha",
                                   "sada..10.I."}
 
 
@@ -1539,9 +1542,9 @@ Public Class jsVenArcClientes
 
 
 
-        Dim aCamExp() As String = {"fecha.fecha.180.I.FechaHora", _
-                                   "descripcion.Descripción y/o Causa.210.I.", _
-                                   "estatus.Condicion.90.I.", _
+        Dim aCamExp() As String = {"fecha.fecha.180.I.FechaHora",
+                                   "descripcion.Descripción y/o Causa.210.I.",
+                                   "estatus.Condicion.90.I.",
                                    "comentario.Comentario.350.I."}
 
         ft.IniciarTablaPlus(dgExpediente, dtExp, aCamExp)
@@ -1569,9 +1572,9 @@ Public Class jsVenArcClientes
 
         dtCHDev = ft.AbrirDataTable(ds, "tblCHequesDevueltos", myConn, strSQLCHDev)
 
-        Dim aCamCHD() As String = {"fechadev.FECHA.90.C.Fecha", _
-                                   "numcheque.Cheque.90.I.", _
-                                   "monto.Monto.100.D.Numero", _
+        Dim aCamCHD() As String = {"fechadev.FECHA.90.C.Fecha",
+                                   "numcheque.Cheque.90.I.",
+                                   "monto.Monto.100.D.Numero",
                                    "causa.Causa Devolución.200.I."}
 
         ft.IniciarTablaPlus(dgCheques, dtCHDev, aCamCHD, , , New Font("Consolas", 8, FontStyle.Regular), False)
@@ -1621,18 +1624,18 @@ Public Class jsVenArcClientes
 
     End Sub
 
-    Private Sub dgCIs_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgCIs.RowHeaderMouseClick, _
+    Private Sub dgCIs_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgCIs.RowHeaderMouseClick,
         dgCIs.CellMouseClick, dgCIs.RegionChanged
         Me.BindingContext(ds, nTablaCIs).Position = e.RowIndex
         nPocisionCI = e.RowIndex
     End Sub
 
 
-    Private Sub txtSugerido_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFax.KeyPress, _
-        txtZIPDespacho.KeyPress, txtTerritorioDespacho.KeyPress, txtZIPFiscal.KeyPress, txttelef1.KeyPress, _
-        txtTelef2.KeyPress, txtTelef3.KeyPress, txtAA.KeyPress, txtDisponible.KeyPress, _
-        txtSaldo.KeyPress, txtTelefonoContacto.KeyPress, txtLimiteCredito.KeyPress, txtDescB.KeyPress, _
-        txtFormaPago.KeyPress, txtDescA.KeyPress, txtDescuentoCliente.KeyPress, txtListaPrecios.KeyPress, _
+    Private Sub txtSugerido_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFax.KeyPress,
+        txtZIPDespacho.KeyPress, txtTerritorioDespacho.KeyPress, txtZIPFiscal.KeyPress, txttelef1.KeyPress,
+        txtTelef2.KeyPress, txtTelef3.KeyPress, txtAA.KeyPress, txtDisponible.KeyPress,
+        txtSaldo.KeyPress, txtTelefonoContacto.KeyPress, txtLimiteCredito.KeyPress, txtDescB.KeyPress,
+        txtFormaPago.KeyPress, txtDescA.KeyPress, txtDescuentoCliente.KeyPress, txtListaPrecios.KeyPress,
          txtDeA.KeyPress, txtDeB.KeyPress, txtDeC.KeyPress, txtDeD.KeyPress
 
         e.Handled = ft.validaNumeroEnTextbox(e)
@@ -1666,11 +1669,11 @@ Public Class jsVenArcClientes
         f = Nothing
     End Sub
     Private Sub btnListaPrecios_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnListaPrecios.Click
-        txtListaPrecios.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codlis codigo, descrip descripcion from jsmerenclispre where id_emp = '" & jytsistema.WorkID & "' ", "Lista de precios", _
+        txtListaPrecios.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codlis codigo, descrip descripcion from jsmerenclispre where id_emp = '" & jytsistema.WorkID & "' ", "Lista de precios",
                                                  txtListaPrecios.Text)
     End Sub
 
-    Private Sub rBtnV1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rBtnV1.CheckedChanged, _
+    Private Sub rBtnV1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rBtnV1.CheckedChanged,
         rBtnV2.CheckedChanged, rBtnV3.CheckedChanged
         If cmbTipoEstadistica.Items.Count = 2 AndAlso sender.Checked Then AbrirEstadisticas()
     End Sub
@@ -1688,7 +1691,7 @@ Public Class jsVenArcClientes
     End Sub
 
     Private Sub btnForma_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnForma.Click
-        txtFormaPago.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codfor codigo, nomfor descripcion from jsconctafor where id_emp = '" & jytsistema.WorkID & "' ", "Formas de pago", _
+        txtFormaPago.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codfor codigo, nomfor descripcion from jsconctafor where id_emp = '" & jytsistema.WorkID & "' ", "Formas de pago",
                                               txtFormaPago.Text)
     End Sub
 
@@ -1707,7 +1710,7 @@ Public Class jsVenArcClientes
         dg.DataSource = bs
 
     End Sub
-    Private Function Territorio(ByVal Pais As String, ByVal Estado As String, ByVal Municipio As String, _
+    Private Function Territorio(ByVal Pais As String, ByVal Estado As String, ByVal Municipio As String,
                                 ByVal Parroquia As String, ByVal Ciudad As String, ByVal Barrio As String)
 
         Territorio = ColocaTerritorio(myConn, Pais) + IIf(Estado <> "", "->", "") _
@@ -1746,8 +1749,8 @@ Public Class jsVenArcClientes
 
         If CodCliente <> "" Then
 
-            Dim aFields() As String = {"sel.entero.1.0", "codcli.cadena.15.0", "nombre.cadena.250.0", "nummov.cadena.20.0", "tipomov.cadena.2.0", _
-                                       "refer.cadena.15.0", "emision.fecha.0.0", "vence.fecha.0.0", "importe.doble.19.2", "saldo.doble.19.2", _
+            Dim aFields() As String = {"sel.entero.1.0", "codcli.cadena.15.0", "nombre.cadena.250.0", "nummov.cadena.20.0", "tipomov.cadena.2.0",
+                                       "refer.cadena.15.0", "emision.fecha.0.0", "vence.fecha.0.0", "importe.doble.19.2", "saldo.doble.19.2",
                                        "codven.cadena.5.0", "nomVendedor.cadena.50.0"}
 
             CrearTabla(myConn, lblInfo, jytsistema.WorkDataBase, True, tblSaldos, aFields)
@@ -1835,11 +1838,11 @@ Public Class jsVenArcClientes
         Dim aCampos() As String = {"emision", "tipomov", "nummov", "vence", "refer", "formapag", "comproba", "importe", "origen", "codven", "nomvendedor"}
         Dim aNombres() As String = {"Emisión", "TP", "Documento", "Vence", "Referencia", "FP", "Comprobante", "Importe", "ORG", "Asesor", "Nombre"}
         Dim aAnchos() As Integer = {80, 25, 90, 80, 80, 25, 90, 80, 35, 50, 80}
-        Dim aAlineacion() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, _
-                                        AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro, _
-                                        AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro, _
-                                        AlineacionDataGrid.Izquierda, AlineacionDataGrid.Derecha, _
-                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro, _
+        Dim aAlineacion() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Centro,
+                                        AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro,
+                                        AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro,
+                                        AlineacionDataGrid.Izquierda, AlineacionDataGrid.Derecha,
+                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro,
                                         AlineacionDataGrid.Izquierda}
         Dim aFormatos() As String = {sFormatoFecha, "", "", sFormatoFecha, "", "", "", sFormatoNumero, "", "", ""}
         IniciarTabla(dgDocumentos, dtDocSal, aCampos, aNombres, aAnchos, aAlineacion, aFormatos)
@@ -1883,11 +1886,11 @@ Public Class jsVenArcClientes
         Dim aCampos() As String = {"numfac", "item", "descrip", "iva", "unidad", "cantidad", "precio", "des_art", "des_cli", "des_ofe", "totren", "tipo"}
         Dim aNombres() As String = {"Documento", "ítem", "Descripción", "IVA", "UND", "Cantidad", "Precio", "Desc. Art.", "Desc. Cli.", "Desc. Ofe.", "Total", "Tipo"}
         Dim aAnchos() As Integer = {90, 90, 150, 25, 35, 70, 70, 45, 45, 45, 70, 30}
-        Dim aAlineacion() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, _
-                                        AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro, _
-                                        AlineacionDataGrid.Centro, AlineacionDataGrid.Derecha, _
-                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, _
-                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, _
+        Dim aAlineacion() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda,
+                                        AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro,
+                                        AlineacionDataGrid.Centro, AlineacionDataGrid.Derecha,
+                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha,
+                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha,
                                         AlineacionDataGrid.Derecha, AlineacionDataGrid.Izquierda}
 
         Dim aFormatos() As String = {"", "", "", "", "", sFormatoCantidad, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, ""}
@@ -1901,16 +1904,16 @@ Public Class jsVenArcClientes
         Dim aCam() As String = {"codart", "nomart", "unidad", "mEne", "mFeb", "mMar", "mAbr", "mMay", "mJun", "mJul", "mAgo", "mSep", "mOct", "mNov", "mDic"}
         Dim aNom() As String = {"Código", "Nombre artículo", "UND", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"}
         Dim aAnc() As Integer = {70, 280, 35, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70}
-        Dim aAli() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro, _
-                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, _
-                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, _
-                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, _
+        Dim aAli() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro,
+                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha,
+                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha,
+                                        AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha,
                                         AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha, AlineacionDataGrid.Derecha}
 
         Dim aFor() As String = {"", "", "", sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero, sFormatoNumero}
 
         Dim dtStat As New DataTable
-        dtStat = ConsultaEstadistica(myConn, ds, lblInfo, txtCodigo.Text, "VEN", _
+        dtStat = ConsultaEstadistica(myConn, ds, lblInfo, txtCodigo.Text, "VEN",
                 cmbTipoEstadistica.SelectedIndex, IIf(rBtnV1.Checked, TipoDatoMercancia.iUnidadesDeVenta, IIf(rBtnV2.Checked, TipoDatoMercancia.iKilogramos, TipoDatoMercancia.iMonetarios)), jytsistema.sFechadeTrabajo, "tblMovimientosAnoActualVentas")
 
         IniciarTabla(dgEstadistica, dtStat, aCam, aNom, aAnc, aAli, aFor)
@@ -1925,14 +1928,6 @@ Public Class jsVenArcClientes
 
     Private Sub txtNombre_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtNombre.TextChanged
         txtNombreClienteii.Text = txtNombre.Text
-    End Sub
-
-    Private Sub btnInicioVisita_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInicioVisita.Click
-        txtInicioVisita.Text = SeleccionaFecha(CDate(txtInicioVisita.Text), Me.Parent, Me, grpCompras, btnInicioVisita)
-    End Sub
-
-    Private Sub btnIngreso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIngreso.Click
-        txtIngreso.Text = SeleccionaFecha(CDate(txtIngreso.Text), Me.Parent, Me, grpOtros, btnIngreso)
     End Sub
 
     Private Sub btnSubirHistorico_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSubirHistorico.Click
@@ -1976,7 +1971,7 @@ Public Class jsVenArcClientes
                 Dim aStrDel() As String = {txtCodigo.Text, .Rows(nPosicionProveedor).Item("codpro"), jytsistema.WorkID}
 
                 sRespuesta = MsgBox(" ¿ Está seguro que desea eliminar registro ?", MsgBoxStyle.YesNo, "Eliminar registro ... ")
-                If sRespuesta = MsgBoxResult.Yes Then AsignaProveedores(EliminarRegistros(myConn, lblInfo, ds, nTablaProveedores, _
+                If sRespuesta = MsgBoxResult.Yes Then AsignaProveedores(EliminarRegistros(myConn, lblInfo, ds, nTablaProveedores,
                         "jsvenprocli", strSQLProveedores, aCamDel, aStrDel, nPosicionProveedor, True), False)
             End If
         End With
@@ -1992,7 +1987,7 @@ Public Class jsVenArcClientes
         Dim aFields() As String = {"sel.entero.1.0", "codpro.cadena.20.0", "nombre.cadena.250.0"}
 
 
-        f.Cargar(myConn, ds, "Listado de Proveedores", " select 0 sel, codpro, nombre from jsprocatpro where tipo = 0 and id_emp = '" & jytsistema.WorkID & "' order by codpro ", _
+        f.Cargar(myConn, ds, "Listado de Proveedores", " select 0 sel, codpro, nombre from jsprocatpro where tipo = 0 and id_emp = '" & jytsistema.WorkID & "' order by codpro ",
             aFields, aNombres, aCampos, aAnchos, aAlineacion, aFormato)
 
         If f.Seleccion.Length > 0 Then
@@ -2009,7 +2004,7 @@ Public Class jsVenArcClientes
 
     End Sub
 
-    Private Sub dgProveedores_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgProveedores.RowHeaderMouseClick, _
+    Private Sub dgProveedores_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgProveedores.RowHeaderMouseClick,
          dgProveedores.CellMouseClick, dgProveedores.RegionChanged
         Me.BindingContext(ds, nTablaProveedores).Position = e.RowIndex
         nPosicionProveedor = e.RowIndex
@@ -2026,7 +2021,7 @@ Public Class jsVenArcClientes
 
                 sRespuesta = MsgBox(" ¿ Está seguro que desea eliminar registro ?", MsgBoxStyle.YesNo, "Eliminar registro ... ")
                 If sRespuesta = MsgBoxResult.Yes Then
-                    EliminarRegistros(myConn, lblInfo, ds, nTablaVisitas, _
+                    EliminarRegistros(myConn, lblInfo, ds, nTablaVisitas,
                                            "jsvencatvis", strSQLVisitas, aCamDel, aStrDel, nPosicionVisitas, True)
                     AbrirVisitas(txtCodigo.Text)
                 End If
@@ -2045,7 +2040,7 @@ Public Class jsVenArcClientes
 
                 sRespuesta = MsgBox(" ¿ Está seguro que desea eliminar registro ?", MsgBoxStyle.YesNo, "Eliminar registro ... ")
                 If sRespuesta = MsgBoxResult.Yes Then
-                    EliminarRegistros(myConn, lblInfo, ds, nTablaDespachos, _
+                    EliminarRegistros(myConn, lblInfo, ds, nTablaDespachos,
                                            "jsvencatvis", strSQLDespachos, aCamDel, aStrDel, nPosicionDespachos, True)
                     AbrirDespachos(txtCodigo.Text)
                 End If
@@ -2066,7 +2061,7 @@ Public Class jsVenArcClientes
         If aTerritorio.Length >= 5 AndAlso aTerritorio(4) <> "" Then txtCiudadFiscal.Text = aTerritorio(4).ToString
         If aTerritorio.Length >= 6 AndAlso aTerritorio(5) <> "" Then txtBarrioFiscal.Text = aTerritorio(5).ToString
 
-        txtTerritorioFiscal.Text = Territorio(txtPaisFiscal.Text, txtEstadoFiscal.Text, txtMunicipioFiscal.Text, _
+        txtTerritorioFiscal.Text = Territorio(txtPaisFiscal.Text, txtEstadoFiscal.Text, txtMunicipioFiscal.Text,
                                                               txtParroquiaFiscal.Text, txtCiudadFiscal.Text, txtBarrioFiscal.Text)
 
         f.Dispose()
@@ -2087,7 +2082,7 @@ Public Class jsVenArcClientes
         If aTerritorio.Length >= 5 AndAlso aTerritorio(4) <> "" Then txtCiudadDespacho.Text = aTerritorio(4).ToString
         If aTerritorio.Length >= 6 AndAlso aTerritorio(5) <> "" Then txtBarrioDespacho.Text = aTerritorio(5).ToString
 
-        txtTerritorioDespacho.Text = Territorio(txtPaisDespacho.Text, txtEstadoDespacho.Text, txtMunicipioFiscal.Text, _
+        txtTerritorioDespacho.Text = Territorio(txtPaisDespacho.Text, txtEstadoDespacho.Text, txtMunicipioFiscal.Text,
                                                               txtParroquiaFiscal.Text, txtCiudadFiscal.Text, txtBarrioDespacho.Text)
 
         f.Dispose()
@@ -2124,9 +2119,9 @@ Public Class jsVenArcClientes
         If i_modo = movimiento.iAgregar Then
             If ft.DevuelveScalarEntero(myConn, "SELECT COUNT(*) FROM jsvencatcli WHERE RIF = '" & RIF & "' AND id_emp = '" & jytsistema.WorkID & "' GROUP BY rif") > 0 Then
 
-                MsgBox("ESTE CLIENTE YA SE ENCUENTRA EN BASE DE DATOS. LOS DATOS INGRESADOS A CONTINUACION " + _
-                       "SERAN TRATADOS COMO DE UNA SUCURSAL. POR FAVOR COLOQUE EN CODIGO ALTERNO EL CODIGO " + _
-                       "DE DESPACHO <<SADA>>. SI ES ATENDIDO POR UN ASESOR COMERCIAL DEBE SER INCLUIDO EN  " + _
+                MsgBox("ESTE CLIENTE YA SE ENCUENTRA EN BASE DE DATOS. LOS DATOS INGRESADOS A CONTINUACION " +
+                       "SERAN TRATADOS COMO DE UNA SUCURSAL. POR FAVOR COLOQUE EN CODIGO ALTERNO EL CODIGO " +
+                       "DE DESPACHO <<SADA>>. SI ES ATENDIDO POR UN ASESOR COMERCIAL DEBE SER INCLUIDO EN  " +
                        "UNA RUTA DE VISITA. MIENTRAS SE ASIGNARA A UNA RUTA PROVISIONAL", MsgBoxStyle.Information)
 
                 Dim dtClientePrincipal As DataTable
@@ -2205,7 +2200,7 @@ Public Class jsVenArcClientes
             ' Callculate data coordinates
             Dim aNom() As String = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"}
             If ds.Group.CoordToDataCoord(p.X, p.Y, x, y) Then
-                e.TooltipText = String.Format("{0}" + ControlChars.Lf + "Mes = " + aNom(Math.Round(x) - 1) + _
+                e.TooltipText = String.Format("{0}" + ControlChars.Lf + "Mes = " + aNom(Math.Round(x) - 1) +
                                               ControlChars.Lf + "Valor = {2:#.##}", ds.Label, x, y)
             Else
                 e.TooltipText = ""
@@ -2228,7 +2223,7 @@ Public Class jsVenArcClientes
 
 
     Private Sub dgSaldos_CellMouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgSaldos.CellMouseUp
-        CalculaTotalesSAldos()
+        CalculaTotalesSaldos()
     End Sub
 
     Private Sub dgSaldos_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgSaldos.CellContentClick
@@ -2241,7 +2236,7 @@ Public Class jsVenArcClientes
         If dgSaldos.CurrentCell.ColumnIndex = 0 Then
 
             With dgSaldos.CurrentRow
-                ft.Ejecutar_strSQL(myconn, " update  " & tblSaldos & " set sel  = " & CInt(dgSaldos.CurrentCell.Value) & " " _
+                ft.Ejecutar_strSQL(myConn, " update  " & tblSaldos & " set sel  = " & CInt(dgSaldos.CurrentCell.Value) & " " _
                                     & " where " _
                                     & " emision = '" & ft.FormatoFechaMySQL(CDate(.Cells(3).Value.ToString)) & "' and " _
                                     & " vence = '" & ft.FormatoFechaMySQL(CDate(.Cells(4).Value.ToString)) & "' and " _
@@ -2253,7 +2248,7 @@ Public Class jsVenArcClientes
 
     End Sub
 
-    
+
     Private Sub cmbEstatus_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cmbEstatus.SelectedIndexChanged
         Select Case cmbEstatus.SelectedIndex
             Case 3 'DESINCORPORADOS
@@ -2273,7 +2268,7 @@ Public Class jsVenArcClientes
                 f.Dispose()
                 f = Nothing
             Else
-                ft.MensajeCritico("RIF IVALIDO!!!!. VERIFIQUE POR FAVOR")
+                ft.mensajeCritico("RIF IVALIDO!!!!. VERIFIQUE POR FAVOR")
             End If
         Else
 
@@ -2294,7 +2289,7 @@ Public Class jsVenArcClientes
                 f.Dispose()
                 f = Nothing
             Else
-                ft.MensajeCritico("RIF IVALIDO!!!!. VERIFIQUE POR FAVOR")
+                ft.mensajeCritico("RIF IVALIDO!!!!. VERIFIQUE POR FAVOR")
             End If
         Else
 
@@ -2323,5 +2318,5 @@ Public Class jsVenArcClientes
         End If
     End Sub
 
-   
+
 End Class

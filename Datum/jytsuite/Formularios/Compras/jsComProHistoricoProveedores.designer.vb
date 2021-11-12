@@ -34,8 +34,6 @@ Partial Class jsComProHistoricoProveedores
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.lblFecha = New System.Windows.Forms.Label()
-        Me.txtFechaProceso = New System.Windows.Forms.TextBox()
-        Me.btnFecha = New System.Windows.Forms.Button()
         Me.txtClienteDesde = New System.Windows.Forms.TextBox()
         Me.txtClienteHasta = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -44,6 +42,7 @@ Partial Class jsComProHistoricoProveedores
         Me.lblClienteHasta = New System.Windows.Forms.Label()
         Me.btnClienteDesde = New System.Windows.Forms.Button()
         Me.btnClienteHasta = New System.Windows.Forms.Button()
+        Me.txtFechaProceso = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpCaja.SuspendLayout()
         Me.grpTotales.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -206,25 +205,6 @@ Partial Class jsComProHistoricoProveedores
         Me.lblFecha.Text = "Fecha :"
         Me.lblFecha.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'txtFechaProceso
-        '
-        Me.txtFechaProceso.Location = New System.Drawing.Point(141, 260)
-        Me.txtFechaProceso.MaxLength = 25
-        Me.txtFechaProceso.Name = "txtFechaProceso"
-        Me.txtFechaProceso.Size = New System.Drawing.Size(86, 20)
-        Me.txtFechaProceso.TabIndex = 90
-        Me.txtFechaProceso.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(227, 260)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(25, 20)
-        Me.btnFecha.TabIndex = 132
-        Me.btnFecha.Text = "•••"
-        Me.btnFecha.UseVisualStyleBackColor = True
-        '
         'txtClienteDesde
         '
         Me.txtClienteDesde.Location = New System.Drawing.Point(141, 282)
@@ -294,12 +274,24 @@ Partial Class jsComProHistoricoProveedores
         'btnClienteHasta
         '
         Me.btnClienteHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClienteHasta.Location = New System.Drawing.Point(227, 303)
+        Me.btnClienteHasta.Location = New System.Drawing.Point(227, 302)
         Me.btnClienteHasta.Name = "btnClienteHasta"
         Me.btnClienteHasta.Size = New System.Drawing.Size(25, 20)
         Me.btnClienteHasta.TabIndex = 140
         Me.btnClienteHasta.Text = "•••"
         Me.btnClienteHasta.UseVisualStyleBackColor = True
+        '
+        'txtFechaProceso
+        '
+        Me.txtFechaProceso.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaProceso.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaProceso.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaProceso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaProceso.Location = New System.Drawing.Point(141, 260)
+        Me.txtFechaProceso.Name = "txtFechaProceso"
+        Me.txtFechaProceso.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaProceso.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaProceso.TabIndex = 214
         '
         'jsComProHistoricoProveedores
         '
@@ -308,6 +300,7 @@ Partial Class jsComProHistoricoProveedores
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(732, 488)
         Me.ControlBox = False
+        Me.Controls.Add(Me.txtFechaProceso)
         Me.Controls.Add(Me.btnClienteHasta)
         Me.Controls.Add(Me.btnClienteDesde)
         Me.Controls.Add(Me.lblClienteHasta)
@@ -316,8 +309,6 @@ Partial Class jsComProHistoricoProveedores
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtClienteHasta)
         Me.Controls.Add(Me.txtClienteDesde)
-        Me.Controls.Add(Me.btnFecha)
-        Me.Controls.Add(Me.txtFechaProceso)
         Me.Controls.Add(Me.lblFecha)
         Me.Controls.Add(Me.grpAceptarSalir)
         Me.Controls.Add(Me.Label10)
@@ -354,8 +345,6 @@ Partial Class jsComProHistoricoProveedores
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents lblProgreso As System.Windows.Forms.Label
     Friend WithEvents lblFecha As System.Windows.Forms.Label
-    Friend WithEvents txtFechaProceso As System.Windows.Forms.TextBox
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
     Friend WithEvents txtClienteDesde As System.Windows.Forms.TextBox
     Friend WithEvents txtClienteHasta As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -364,4 +353,5 @@ Partial Class jsComProHistoricoProveedores
     Friend WithEvents lblClienteHasta As System.Windows.Forms.Label
     Friend WithEvents btnClienteDesde As System.Windows.Forms.Button
     Friend WithEvents btnClienteHasta As System.Windows.Forms.Button
+    Friend WithEvents txtFechaProceso As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

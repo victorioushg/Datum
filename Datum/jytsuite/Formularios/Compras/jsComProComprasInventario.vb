@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsComProComprasInventario
     Private Const sModulo As String = "Compras a Inventarios"
     Private Const nTabla As String = "noCompras"
@@ -25,12 +27,15 @@ Public Class jsComProComprasInventario
 
     Public Sub Cargar(ByVal MyCon As MySqlConnection, ByVal TipoProceso As Integer, Optional ByVal CodProveedor As String = "")
         myConn = MyCon
-        
+
         tbl = "tbl" & ft.NumeroAleatorio(100000)
 
-        ft.mensajeEtiqueta(lblInfo, " Escoja el o los documentos cuyas mercancías se habilitarán en los Inventarios ...", Transportables.TipoMensaje.iAyuda)
-      
-        txtFechaProceso.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        Dim dates As SfDateTimeEdit() = {txtFechaProceso}
+        SetSizeDateObjects(dates)
+
+        ft.mensajeEtiqueta(lblInfo, " Escoja el o los documentos cuyas mercancías se habilitarán en los Inventarios ...", Transportables.tipoMensaje.iAyuda)
+
+        txtFechaProceso.Value = jytsistema.sFechadeTrabajo
 
         IniciarCompras()
 
@@ -45,13 +50,13 @@ Public Class jsComProComprasInventario
     End Sub
     Private Sub IniciarCompras()
 
-       
-        Dim aFields() As String = {"recibido.entero.1.0", "emision.fecha.0.0", "numcom.cadena.30.0", "codpro.cadena.15.0", "nombre.cadena.250.0", _
+
+        Dim aFields() As String = {"recibido.entero.1.0", "emision.fecha.0.0", "numcom.cadena.30.0", "codpro.cadena.15.0", "nombre.cadena.250.0",
                                    "emisioniva.fecha.0.0", "fechasi.fecha.0.0", "id_emp.cadena.2.0"}
 
         CrearTabla(myConn, lblInfo, jytsistema.WorkDataBase, True, tbl, aFields)
 
-        ft.Ejecutar_strSQL(myconn, " insert into " & tbl _
+        ft.Ejecutar_strSQL(myConn, " insert into " & tbl _
             & " SELECT a.recibido, a.emision, a.numcom,  a.codpro, b.nombre, a.emisioniva, a.fechasi, a.id_emp " _
             & " FROM jsproenccom a " _
             & " LEFT JOIN jsprocatpro b ON (a.codpro = b.codpro AND a.id_emp = b.id_emp) " _
@@ -103,7 +108,7 @@ Public Class jsComProComprasInventario
         For Each selectedItem As DataGridViewRow In dgMercas.Rows
             iCont += 1
 
-            refrescaBarraprogresoEtiqueta(pb, lblProgreso, iCont / dgMercas.RowCount * 100, _
+            refrescaBarraprogresoEtiqueta(pb, lblProgreso, iCont / dgMercas.RowCount * 100,
                                           "procesando..." & selectedItem.Cells(2).Value.ToString)
 
             Dim CodigoProveedor As String = selectedItem.Cells(1).Value
@@ -113,7 +118,7 @@ Public Class jsComProComprasInventario
 
             If CBool(selectedItem.Cells(0).Value) Then
 
-                ft.Ejecutar_strSQL(myconn, "UPDATE jsprorencom SET aceptado = '2' " _
+                ft.Ejecutar_strSQL(myConn, "UPDATE jsprorencom SET aceptado = '2' " _
                                 & " where " _
                                 & " renglon = '" & NumeroRenglon & "' AND " _
                                 & " NUMCOM = '" & NumeroDeCompra & "' and " _
@@ -135,7 +140,7 @@ Public Class jsComProComprasInventario
 
         If ft.DevuelveScalarEntero(myConn, " select count(*) from jsprorencom where aceptado = '1' and numcom = '" & NumeroDeCompra & "' and codpro = '" & CodigoProveedor & "' and id_emp = '" & jytsistema.WorkID & "' ") = 0 Then
 
-            ft.Ejecutar_strSQL(myConn, "UPDATE jsproenccom SET vence3 = '" & ft.FormatoFechaMySQL(CDate(txtFechaProceso.Text)) & "', " _
+            ft.Ejecutar_strSQL(myConn, "UPDATE jsproenccom SET vence3 = '" & ft.FormatoFechaMySQL(txtFechaProceso.Value) & "', " _
                             & " RECIBIDO = 1 " _
                             & " where " _
                             & " NUMCOM = '" & NumeroDeCompra & "' and " _
@@ -143,7 +148,7 @@ Public Class jsComProComprasInventario
                             & " ID_EMP ='" & jytsistema.WorkID & "' ")
         Else
 
-            ft.Ejecutar_strSQL(myConn, "UPDATE jsproenccom SET vence3 = '" & ft.FormatoFechaMySQL(CDate(txtFechaProceso.Text)) & "' " _
+            ft.Ejecutar_strSQL(myConn, "UPDATE jsproenccom SET vence3 = '" & ft.FormatoFechaMySQL(txtFechaProceso.Value) & "' " _
                               & " where " _
                               & " NUMCOM = '" & NumeroDeCompra & "' and " _
                               & " CODPRO = '" & CodigoProveedor & "' and " _
@@ -180,11 +185,11 @@ Public Class jsComProComprasInventario
 
         Dim nTablaFacturas As String = "tbltmp" & ft.NumeroAleatorio(1000000)
         Dim nTablaFacs As String = "nTablaMercasFacturas"
-        Dim aFields() As String = {"sel.entero.1.0", "codpro.cadena.15.0", "numcom.cadena.30.0", "item.cadena.15.0", "renglon.cadena.5.0", "descrip.cadena.250.0", _
+        Dim aFields() As String = {"sel.entero.1.0", "codpro.cadena.15.0", "numcom.cadena.30.0", "item.cadena.15.0", "renglon.cadena.5.0", "descrip.cadena.250.0",
                                    "cantidad.doble.10.3", "unidad.cadena.3.0", "peso.cadena.10.0"}
         CrearTabla(myConn, lblInfo, jytsistema.WorkDataBase, True, nTablaFacturas, aFields)
 
-        ft.Ejecutar_strSQL(myconn, " insert into " & nTablaFacturas & "  " _
+        ft.Ejecutar_strSQL(myConn, " insert into " & nTablaFacturas & "  " _
                         & " select a.aceptado, a.codpro, a.numcom, a.item, a.renglon, a.descrip, a.cantidad, a.unidad, a.peso " _
                         & " from jsprorencom a " _
                         & " where " _
@@ -204,10 +209,10 @@ Public Class jsComProComprasInventario
         Dim aCampos() As String = {"sel", "codpro", "numcom", "item", "renglon", "descrip", "cantidad", "unidad"}
         Dim aNombres() As String = {"", "Proveedor", "Documento", "Item", "Renglón", "Descripción", "Cantidad", "UND"}
         Dim aAnchos() As Integer = {20, 100, 100, 100, 60, 350, 120, 50}
-        Dim aAlineacion() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, _
-                                        AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, _
-                                        AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, _
-                                        AlineacionDataGrid.Derecha, _
+        Dim aAlineacion() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda,
+                                        AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda,
+                                        AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda,
+                                        AlineacionDataGrid.Derecha,
                                         AlineacionDataGrid.Centro}
 
         Dim aFormatos() As String = {"", "", "", "", "", "", sFormatoNumero, ""}
@@ -261,7 +266,7 @@ Public Class jsComProComprasInventario
     Private Sub dg_CellValidated(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dg.CellValidated
         If dg.CurrentCell.ColumnIndex = 0 Then
 
-            ft.Ejecutar_strSQL(myconn, " update  " & tbl & " set recibido  = " & CInt(dg.CurrentCell.Value) & " " _
+            ft.Ejecutar_strSQL(myConn, " update  " & tbl & " set recibido  = " & CInt(dg.CurrentCell.Value) & " " _
                             & " where " _
                             & " numcom = '" & CStr(dg.CurrentRow.Cells(2).Value) & "' and " _
                             & " codpro = '" & CStr(dg.CurrentRow.Cells(3).Value) & "' and " _
@@ -271,11 +276,6 @@ Public Class jsComProComprasInventario
         End If
 
     End Sub
-
-    Private Sub btnFecha_Click(sender As System.Object, e As System.EventArgs) Handles btnFecha.Click
-        txtFechaProceso.Text = SeleccionaFecha(CDate(txtFechaProceso.Text), Me, sender)
-    End Sub
-
 
     Private Sub ActualizarInventarios(ByVal NumeroCompra As String, ByVal CodigoProveedor As String, CodigoArticulo As String, NumeroRenglon As String)
 
@@ -297,15 +297,15 @@ Public Class jsComProComprasInventario
         For Each dtRow As DataRow In dtRens.Rows
             With dtRow
                 If .Item("item").ToString.Substring(0, 1) <> "$" Then
-                    InsertEditMERCASMovimientoInventario(myConn, lblInfo, True, .Item("item"), CDate(txtFechaProceso.Text), "EN", NumeroCompra, _
-                                                         .Item("unidad"), .Item("cantidad"), .Item("peso"), .Item("costotot"), _
-                                                         .Item("costototdes"), "COM", NumeroCompra, .Item("lote"), CodigoProveedor, _
-                                                          0.0, 0.0, 0, 0.0, "", _
+                    InsertEditMERCASMovimientoInventario(myConn, lblInfo, True, .Item("item"), txtFechaProceso.Value, "EN", NumeroCompra,
+                                                         .Item("unidad"), .Item("cantidad"), .Item("peso"), .Item("costotot"),
+                                                         .Item("costototdes"), "COM", NumeroCompra, .Item("lote"), CodigoProveedor,
+                                                          0.0, 0.0, 0, 0.0, "",
                                                          codAlmacen, .Item("renglon"), jytsistema.sFechadeTrabajo)
 
                     Dim MontoUltimaCompra As Double = IIf(.Item("cantidad") > 0, .Item("costototdes") / .Item("cantidad"), .Item("costototdes")) / Equivalencia(myConn, .Item("item"), .Item("unidad"))
 
-                    ft.Ejecutar_strSQL(myConn, " update jsmerctainv set fecultcosto = '" & ft.FormatoFechaMySQL(CDate(txtFechaProceso.Text)) & "', ultimoproveedor = '" & CodigoProveedor & "', montoultimacompra = " & MontoUltimaCompra & " where codart = '" & .Item("item") & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                    ft.Ejecutar_strSQL(myConn, " update jsmerctainv set fecultcosto = '" & ft.FormatoFechaMySQL(txtFechaProceso.Value) & "', ultimoproveedor = '" & CodigoProveedor & "', montoultimacompra = " & MontoUltimaCompra & " where codart = '" & .Item("item") & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
                 End If
 

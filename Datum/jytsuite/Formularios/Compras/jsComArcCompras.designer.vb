@@ -28,7 +28,6 @@ Partial Class jsComArcCompras
         Me.lblRecibido = New System.Windows.Forms.Label()
         Me.txtNumeroSerie = New System.Windows.Forms.TextBox()
         Me.txtComentario = New System.Windows.Forms.TextBox()
-        Me.btnEmisionIVA = New System.Windows.Forms.Button()
         Me.lblControl = New System.Windows.Forms.Label()
         Me.txtControl = New System.Windows.Forms.TextBox()
         Me.btnCodigoContable = New System.Windows.Forms.Button()
@@ -49,10 +48,7 @@ Partial Class jsComArcCompras
         Me.btnProveedor = New System.Windows.Forms.Button()
         Me.txtProveedor = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.btnEmision = New System.Windows.Forms.Button()
-        Me.txtEmisionIVA = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtEmision = New System.Windows.Forms.TextBox()
         Me.txtCodigo = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -119,6 +115,8 @@ Partial Class jsComArcCompras
         Me.Label9 = New System.Windows.Forms.Label()
         Me.txtTotal = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtEmision = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtEmisionIVA = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpEncab.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -162,11 +160,12 @@ Partial Class jsComArcCompras
         Me.grpEncab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpEncab.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpEncab.Controls.Add(Me.txtEmisionIVA)
+        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.txtFechaRecibido)
         Me.grpEncab.Controls.Add(Me.lblRecibido)
         Me.grpEncab.Controls.Add(Me.txtNumeroSerie)
         Me.grpEncab.Controls.Add(Me.txtComentario)
-        Me.grpEncab.Controls.Add(Me.btnEmisionIVA)
         Me.grpEncab.Controls.Add(Me.lblControl)
         Me.grpEncab.Controls.Add(Me.txtControl)
         Me.grpEncab.Controls.Add(Me.btnCodigoContable)
@@ -187,10 +186,7 @@ Partial Class jsComArcCompras
         Me.grpEncab.Controls.Add(Me.btnProveedor)
         Me.grpEncab.Controls.Add(Me.txtProveedor)
         Me.grpEncab.Controls.Add(Me.Label6)
-        Me.grpEncab.Controls.Add(Me.btnEmision)
-        Me.grpEncab.Controls.Add(Me.txtEmisionIVA)
         Me.grpEncab.Controls.Add(Me.Label5)
-        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.txtCodigo)
         Me.grpEncab.Controls.Add(Me.Label2)
         Me.grpEncab.Controls.Add(Me.Label1)
@@ -240,16 +236,6 @@ Partial Class jsComArcCompras
         Me.txtComentario.Name = "txtComentario"
         Me.txtComentario.Size = New System.Drawing.Size(419, 41)
         Me.txtComentario.TabIndex = 4
-        '
-        'btnEmisionIVA
-        '
-        Me.btnEmisionIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmisionIVA.Location = New System.Drawing.Point(725, 12)
-        Me.btnEmisionIVA.Name = "btnEmisionIVA"
-        Me.btnEmisionIVA.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmisionIVA.TabIndex = 234
-        Me.btnEmisionIVA.Text = "•••"
-        Me.btnEmisionIVA.UseVisualStyleBackColor = True
         '
         'lblControl
         '
@@ -453,27 +439,6 @@ Partial Class jsComArcCompras
         Me.Label6.Text = "Emisión"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'btnEmision
-        '
-        Me.btnEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmision.Location = New System.Drawing.Point(371, 12)
-        Me.btnEmision.Name = "btnEmision"
-        Me.btnEmision.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmision.TabIndex = 112
-        Me.btnEmision.Text = "•••"
-        Me.btnEmision.UseVisualStyleBackColor = True
-        '
-        'txtEmisionIVA
-        '
-        Me.txtEmisionIVA.Enabled = False
-        Me.txtEmisionIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmisionIVA.Location = New System.Drawing.Point(633, 12)
-        Me.txtEmisionIVA.MaxLength = 19
-        Me.txtEmisionIVA.Name = "txtEmisionIVA"
-        Me.txtEmisionIVA.Size = New System.Drawing.Size(89, 20)
-        Me.txtEmisionIVA.TabIndex = 7
-        Me.txtEmisionIVA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label5
         '
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -483,17 +448,6 @@ Partial Class jsComArcCompras
         Me.Label5.TabIndex = 11
         Me.Label5.Text = "Emisión IVA"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtEmision
-        '
-        Me.txtEmision.Enabled = False
-        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmision.Location = New System.Drawing.Point(281, 12)
-        Me.txtEmision.MaxLength = 19
-        Me.txtEmision.Name = "txtEmision"
-        Me.txtEmision.Size = New System.Drawing.Size(87, 20)
-        Me.txtEmision.TabIndex = 5
-        Me.txtEmision.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtCodigo
         '
@@ -1090,6 +1044,32 @@ Partial Class jsComArcCompras
         Me.Label8.Text = "TOTAL Compra"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'txtEmision
+        '
+        Me.txtEmision.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmision.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmision.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmision.Location = New System.Drawing.Point(288, 13)
+        Me.txtEmision.Name = "txtEmision"
+        Me.txtEmision.Size = New System.Drawing.Size(114, 19)
+        Me.txtEmision.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmision.TabIndex = 238
+        Me.txtEmision.Value = New Date(2021, 5, 2, 0, 0, 0, 0)
+        '
+        'txtEmisionIVA
+        '
+        Me.txtEmisionIVA.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmisionIVA.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmisionIVA.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmisionIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmisionIVA.Location = New System.Drawing.Point(636, 13)
+        Me.txtEmisionIVA.Name = "txtEmisionIVA"
+        Me.txtEmisionIVA.Size = New System.Drawing.Size(114, 19)
+        Me.txtEmisionIVA.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmisionIVA.TabIndex = 239
+        Me.txtEmisionIVA.Value = New Date(2021, 5, 2, 0, 0, 0, 0)
+        '
         'jsComArcCompras
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1129,7 +1109,6 @@ Partial Class jsComArcCompras
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents dg As System.Windows.Forms.DataGridView
     Friend WithEvents grpEncab As System.Windows.Forms.GroupBox
-    Friend WithEvents txtEmision As System.Windows.Forms.TextBox
     Friend WithEvents txtComentario As System.Windows.Forms.TextBox
     Friend WithEvents txtCodigo As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -1171,9 +1150,7 @@ Partial Class jsComArcCompras
     Friend WithEvents btnUltimoMovimiento As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator11 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
-    Friend WithEvents txtEmisionIVA As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents btnEmision As System.Windows.Forms.Button
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents txtNombreProveedor As System.Windows.Forms.TextBox
@@ -1217,7 +1194,6 @@ Partial Class jsComArcCompras
     Friend WithEvents tscmbUltimos As System.Windows.Forms.ToolStripComboBox
     Friend WithEvents lblControl As System.Windows.Forms.Label
     Friend WithEvents txtControl As System.Windows.Forms.TextBox
-    Friend WithEvents btnEmisionIVA As System.Windows.Forms.Button
     Friend WithEvents btnOrdenes As System.Windows.Forms.ToolStripButton
     Friend WithEvents btnRecepciones As System.Windows.Forms.ToolStripButton
     Friend WithEvents txtNumeroSerie As System.Windows.Forms.TextBox
@@ -1225,4 +1201,6 @@ Partial Class jsComArcCompras
     Friend WithEvents txtFechaRecibido As System.Windows.Forms.TextBox
     Friend WithEvents lblRecibido As System.Windows.Forms.Label
     Friend WithEvents btnAuditoria As System.Windows.Forms.ToolStripButton
+    Friend WithEvents txtEmisionIVA As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtEmision As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

@@ -26,7 +26,6 @@ Partial Class jsComArcNotasDebito
         Me.grpEncab = New System.Windows.Forms.GroupBox()
         Me.txtNumeroSerie = New System.Windows.Forms.TextBox()
         Me.txtComentario = New System.Windows.Forms.TextBox()
-        Me.btnEmisionIVA = New System.Windows.Forms.Button()
         Me.lblControl = New System.Windows.Forms.Label()
         Me.txtControl = New System.Windows.Forms.TextBox()
         Me.btnCodigoContable = New System.Windows.Forms.Button()
@@ -45,10 +44,7 @@ Partial Class jsComArcNotasDebito
         Me.btnProveedor = New System.Windows.Forms.Button()
         Me.txtProveedor = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.btnEmision = New System.Windows.Forms.Button()
-        Me.txtEmisionIVA = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtEmision = New System.Windows.Forms.TextBox()
         Me.txtCodigo = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -103,6 +99,8 @@ Partial Class jsComArcNotasDebito
         Me.Label9 = New System.Windows.Forms.Label()
         Me.txtTotal = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtEmision = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtEmisionIVA = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpEncab.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -136,6 +134,7 @@ Partial Class jsComArcNotasDebito
         Me.dg.Location = New System.Drawing.Point(0, 234)
         Me.dg.Name = "dg"
         Me.dg.ReadOnly = True
+        Me.dg.RowHeadersWidth = 72
         Me.dg.Size = New System.Drawing.Size(755, 100)
         Me.dg.TabIndex = 82
         '
@@ -144,9 +143,10 @@ Partial Class jsComArcNotasDebito
         Me.grpEncab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpEncab.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpEncab.Controls.Add(Me.txtEmisionIVA)
+        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.txtNumeroSerie)
         Me.grpEncab.Controls.Add(Me.txtComentario)
-        Me.grpEncab.Controls.Add(Me.btnEmisionIVA)
         Me.grpEncab.Controls.Add(Me.lblControl)
         Me.grpEncab.Controls.Add(Me.txtControl)
         Me.grpEncab.Controls.Add(Me.btnCodigoContable)
@@ -165,10 +165,7 @@ Partial Class jsComArcNotasDebito
         Me.grpEncab.Controls.Add(Me.btnProveedor)
         Me.grpEncab.Controls.Add(Me.txtProveedor)
         Me.grpEncab.Controls.Add(Me.Label6)
-        Me.grpEncab.Controls.Add(Me.btnEmision)
-        Me.grpEncab.Controls.Add(Me.txtEmisionIVA)
         Me.grpEncab.Controls.Add(Me.Label5)
-        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.txtCodigo)
         Me.grpEncab.Controls.Add(Me.Label2)
         Me.grpEncab.Controls.Add(Me.Label1)
@@ -197,16 +194,6 @@ Partial Class jsComArcNotasDebito
         Me.txtComentario.Name = "txtComentario"
         Me.txtComentario.Size = New System.Drawing.Size(419, 41)
         Me.txtComentario.TabIndex = 4
-        '
-        'btnEmisionIVA
-        '
-        Me.btnEmisionIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmisionIVA.Location = New System.Drawing.Point(725, 12)
-        Me.btnEmisionIVA.Name = "btnEmisionIVA"
-        Me.btnEmisionIVA.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmisionIVA.TabIndex = 234
-        Me.btnEmisionIVA.Text = "•••"
-        Me.btnEmisionIVA.UseVisualStyleBackColor = True
         '
         'lblControl
         '
@@ -389,27 +376,6 @@ Partial Class jsComArcNotasDebito
         Me.Label6.Text = "Emisión"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'btnEmision
-        '
-        Me.btnEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmision.Location = New System.Drawing.Point(371, 12)
-        Me.btnEmision.Name = "btnEmision"
-        Me.btnEmision.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmision.TabIndex = 112
-        Me.btnEmision.Text = "•••"
-        Me.btnEmision.UseVisualStyleBackColor = True
-        '
-        'txtEmisionIVA
-        '
-        Me.txtEmisionIVA.Enabled = False
-        Me.txtEmisionIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmisionIVA.Location = New System.Drawing.Point(633, 12)
-        Me.txtEmisionIVA.MaxLength = 19
-        Me.txtEmisionIVA.Name = "txtEmisionIVA"
-        Me.txtEmisionIVA.Size = New System.Drawing.Size(89, 20)
-        Me.txtEmisionIVA.TabIndex = 7
-        Me.txtEmisionIVA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label5
         '
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -419,17 +385,6 @@ Partial Class jsComArcNotasDebito
         Me.Label5.TabIndex = 11
         Me.Label5.Text = "Emisión IVA"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtEmision
-        '
-        Me.txtEmision.Enabled = False
-        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmision.Location = New System.Drawing.Point(281, 12)
-        Me.txtEmision.MaxLength = 19
-        Me.txtEmision.Name = "txtEmision"
-        Me.txtEmision.Size = New System.Drawing.Size(87, 20)
-        Me.txtEmision.TabIndex = 5
-        Me.txtEmision.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtCodigo
         '
@@ -482,7 +437,7 @@ Partial Class jsComArcNotasDebito
         Me.btnCancel.Image = Global.Datum.My.Resources.Resources.button_cancel
         Me.btnCancel.Location = New System.Drawing.Point(85, 3)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(76, 24)
+        Me.btnCancel.Size = New System.Drawing.Size(76, 23)
         Me.btnCancel.TabIndex = 1
         Me.btnCancel.Text = "Cancelar"
         Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -493,7 +448,7 @@ Partial Class jsComArcNotasDebito
         Me.btnOK.Image = Global.Datum.My.Resources.Resources.button_ok
         Me.btnOK.Location = New System.Drawing.Point(3, 3)
         Me.btnOK.Name = "btnOK"
-        Me.btnOK.Size = New System.Drawing.Size(76, 24)
+        Me.btnOK.Size = New System.Drawing.Size(76, 23)
         Me.btnOK.TabIndex = 0
         Me.btnOK.Text = "Aceptar"
         Me.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -505,6 +460,7 @@ Partial Class jsComArcNotasDebito
         Me.MenuBarra.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAgregar, Me.btnEditar, Me.btnEliminar, Me.btnBuscar, Me.ToolStripSeparator1, Me.btnPrimero, Me.btnAnterior, Me.ToolStripSeparator2, Me.Items, Me.lblItems, Me.ToolStripSeparator3, Me.btnSiguiente, Me.btnUltimo, Me.ToolStripSeparator4, Me.btnImprimir, Me.ToolStripSeparator5, Me.btnSalir, Me.ToolStripSeparator6, Me.btnDuplicar})
         Me.MenuBarra.Location = New System.Drawing.Point(0, 0)
         Me.MenuBarra.Name = "MenuBarra"
+        Me.MenuBarra.Padding = New System.Windows.Forms.Padding(0, 0, 2, 0)
         Me.MenuBarra.Size = New System.Drawing.Size(754, 39)
         Me.MenuBarra.TabIndex = 88
         Me.MenuBarra.Text = "ToolStrip1"
@@ -574,7 +530,7 @@ Partial Class jsComArcNotasDebito
         Me.Items.Enabled = False
         Me.Items.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Items.Name = "Items"
-        Me.Items.Size = New System.Drawing.Size(70, 39)
+        Me.Items.Size = New System.Drawing.Size(70, 21)
         Me.Items.Text = "0"
         Me.Items.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -657,6 +613,7 @@ Partial Class jsComArcNotasDebito
         Me.MenuBarraRenglon.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAgregarMovimiento, Me.btnAgregarServicio, Me.btnEditarMovimiento, Me.btnEliminarMovimiento, Me.btnBuscarMovimiento, Me.ToolStripSeparator8, Me.btnPrimerMovimiento, Me.btnAnteriorMovimiento, Me.ToolStripSeparator9, Me.itemsrenglon, Me.lblitemsrenglon, Me.ToolStripSeparator10, Me.btnSiguienteMovimiento, Me.btnUltimoMovimiento, Me.ToolStripSeparator11, Me.tslblPeso, Me.tslblPesoT, Me.ToolStripLabel1})
         Me.MenuBarraRenglon.Location = New System.Drawing.Point(0, 192)
         Me.MenuBarraRenglon.Name = "MenuBarraRenglon"
+        Me.MenuBarraRenglon.Padding = New System.Windows.Forms.Padding(0, 0, 2, 0)
         Me.MenuBarraRenglon.Size = New System.Drawing.Size(1000, 39)
         Me.MenuBarraRenglon.TabIndex = 89
         Me.MenuBarraRenglon.Text = "ToolStrip1"
@@ -734,7 +691,7 @@ Partial Class jsComArcNotasDebito
         Me.itemsrenglon.Enabled = False
         Me.itemsrenglon.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.itemsrenglon.Name = "itemsrenglon"
-        Me.itemsrenglon.Size = New System.Drawing.Size(40, 39)
+        Me.itemsrenglon.Size = New System.Drawing.Size(40, 21)
         Me.itemsrenglon.Text = "0"
         Me.itemsrenglon.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -834,6 +791,7 @@ Partial Class jsComArcNotasDebito
         Me.dgIVA.Location = New System.Drawing.Point(458, 8)
         Me.dgIVA.Name = "dgIVA"
         Me.dgIVA.ReadOnly = True
+        Me.dgIVA.RowHeadersWidth = 72
         Me.dgIVA.Size = New System.Drawing.Size(189, 40)
         Me.dgIVA.TabIndex = 213
         '
@@ -900,6 +858,30 @@ Partial Class jsComArcNotasDebito
         Me.Label8.Text = "TOTAL Nota Débito"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'txtEmision
+        '
+        Me.txtEmision.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmision.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmision.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmision.Location = New System.Drawing.Point(287, 13)
+        Me.txtEmision.Name = "txtEmision"
+        Me.txtEmision.Size = New System.Drawing.Size(114, 19)
+        Me.txtEmision.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmision.TabIndex = 238
+        '
+        'txtEmisionIVA
+        '
+        Me.txtEmisionIVA.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmisionIVA.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmisionIVA.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmisionIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmisionIVA.Location = New System.Drawing.Point(633, 12)
+        Me.txtEmisionIVA.Name = "txtEmisionIVA"
+        Me.txtEmisionIVA.Size = New System.Drawing.Size(117, 19)
+        Me.txtEmisionIVA.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmisionIVA.TabIndex = 239
+        '
         'jsComArcNotasDebito
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -936,7 +918,6 @@ Partial Class jsComArcNotasDebito
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents dg As System.Windows.Forms.DataGridView
     Friend WithEvents grpEncab As System.Windows.Forms.GroupBox
-    Friend WithEvents txtEmision As System.Windows.Forms.TextBox
     Friend WithEvents txtComentario As System.Windows.Forms.TextBox
     Friend WithEvents txtCodigo As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -978,9 +959,7 @@ Partial Class jsComArcNotasDebito
     Friend WithEvents btnUltimoMovimiento As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator11 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
-    Friend WithEvents txtEmisionIVA As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents btnEmision As System.Windows.Forms.Button
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents txtNombreProveedor As System.Windows.Forms.TextBox
@@ -1014,6 +993,7 @@ Partial Class jsComArcNotasDebito
     Friend WithEvents tscmbUltimos As System.Windows.Forms.ToolStripComboBox
     Friend WithEvents lblControl As System.Windows.Forms.Label
     Friend WithEvents txtControl As System.Windows.Forms.TextBox
-    Friend WithEvents btnEmisionIVA As System.Windows.Forms.Button
     Friend WithEvents txtNumeroSerie As System.Windows.Forms.TextBox
+    Friend WithEvents txtEmisionIVA As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtEmision As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

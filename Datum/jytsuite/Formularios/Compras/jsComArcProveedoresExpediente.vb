@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsComArcProveedoresExpediente
 
     Private Const sModulo As String = "Movimientos EN EXPEDIENTE DE PROVEEDOR"
@@ -33,12 +35,12 @@ Public Class jsComArcProveedoresExpediente
         CodProveedor = CodigoProveedor
         elEstatus = Estatus
 
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
         txtCausa.Text = "NOTA DE USUARIO"
         txtEstatus.Text = aCondicion(Estatus)
         txtComentario.Text = ""
 
-        ft.habilitarObjetos(False, True, txtFecha, txtCausa, txtEstatus)
+        ft.habilitarObjetos(False, True, txtCausa, txtEstatus)
         Me.ShowDialog()
 
     End Sub
@@ -50,12 +52,14 @@ Public Class jsComArcProveedoresExpediente
 
     Private Sub jsComArcProveedoresExpediente_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         InsertarAuditoria(MyConn, MovAud.ientrar, sModulo, txtFecha.Text & txtEstatus.Text)
+        Dim dates As SfDateTimeEdit() = {txtFecha}
+        SetSizeDateObjects(dates)
     End Sub
 
     Private Function Validado() As Boolean
 
         Dim aAdicional() As String = {" codpro = '" & CodProveedor & "' AND "}
-        If FechaUltimoBloqueo(MyConn, "jsproexppro", aAdicional) >= Convert.ToDateTime(txtFecha.Text) Then
+        If FechaUltimoBloqueo(MyConn, "jsproexppro", aAdicional) >= txtFecha.Value Then
             ft.mensajeCritico("FECHA MENOR QUE ULTIMA FECHA DE CIERRE...")
             Return False
         End If
@@ -75,7 +79,7 @@ Public Class jsComArcProveedoresExpediente
             If i_modo = movimiento.iAgregar Then
                 Insertar = True
             End If
-            InsertEditCOMPRASExpedienteProoveedor(MyConn, lblInfo, Insertar, CodProveedor, CDate(ft.FormatoFecha(txtFecha.Text) & " " & ft.FormatoHora(Now())), _
+            InsertEditCOMPRASExpedienteProoveedor(MyConn, lblInfo, Insertar, CodProveedor, txtFecha.Value,
                                                txtComentario.Text, elEstatus, "", 1)
 
             InsertarAuditoria(MyConn, MovAud.iSalir, sModulo, txtFecha.Text & CodProveedor)
@@ -95,10 +99,6 @@ Public Class jsComArcProveedoresExpediente
 
     Private Sub txtComentario_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtComentario.TextChanged
 
-    End Sub
-
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtFecha.Text), Me, btnFecha))
     End Sub
 
 End Class

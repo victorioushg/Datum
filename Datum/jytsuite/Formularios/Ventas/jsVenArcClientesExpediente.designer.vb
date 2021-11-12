@@ -22,19 +22,18 @@ Partial Class jsVenArcClientesExpediente
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsVenArcClientesExpediente))
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.grpTarjeta = New System.Windows.Forms.GroupBox()
-        Me.btnFecha = New System.Windows.Forms.Button()
         Me.txtComentario = New System.Windows.Forms.TextBox()
         Me.txtEstatus = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtCausa = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtFecha = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.dlgColour = New System.Windows.Forms.ColorDialog()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpTarjeta.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
         Me.SuspendLayout()
@@ -52,30 +51,19 @@ Partial Class jsVenArcClientesExpediente
         'grpTarjeta
         '
         Me.grpTarjeta.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.grpTarjeta.Controls.Add(Me.btnFecha)
+        Me.grpTarjeta.Controls.Add(Me.txtFecha)
         Me.grpTarjeta.Controls.Add(Me.txtComentario)
         Me.grpTarjeta.Controls.Add(Me.txtEstatus)
         Me.grpTarjeta.Controls.Add(Me.Label5)
         Me.grpTarjeta.Controls.Add(Me.Label4)
         Me.grpTarjeta.Controls.Add(Me.txtCausa)
         Me.grpTarjeta.Controls.Add(Me.Label3)
-        Me.grpTarjeta.Controls.Add(Me.txtFecha)
         Me.grpTarjeta.Controls.Add(Me.Label1)
         Me.grpTarjeta.Location = New System.Drawing.Point(0, 1)
         Me.grpTarjeta.Name = "grpTarjeta"
         Me.grpTarjeta.Size = New System.Drawing.Size(463, 269)
         Me.grpTarjeta.TabIndex = 80
         Me.grpTarjeta.TabStop = False
-        '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(235, 14)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(25, 20)
-        Me.btnFecha.TabIndex = 124
-        Me.btnFecha.Text = "•••"
-        Me.btnFecha.UseVisualStyleBackColor = True
         '
         'txtComentario
         '
@@ -131,15 +119,6 @@ Partial Class jsVenArcClientesExpediente
         Me.Label3.Text = "Causa :"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'txtFecha
-        '
-        Me.txtFecha.BackColor = System.Drawing.Color.White
-        Me.txtFecha.Location = New System.Drawing.Point(113, 13)
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(116, 20)
-        Me.txtFecha.TabIndex = 14
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label1
         '
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -188,6 +167,18 @@ Partial Class jsVenArcClientesExpediente
         Me.btnOK.Text = "Aceptar"
         Me.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         '
+        'txtFecha
+        '
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(113, 11)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(114, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 214
+        '
         'jsVenArcClientesExpediente
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -212,7 +203,6 @@ Partial Class jsVenArcClientesExpediente
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents grpTarjeta As System.Windows.Forms.GroupBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
     Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
@@ -223,5 +213,5 @@ Partial Class jsVenArcClientesExpediente
     Friend WithEvents txtCausa As System.Windows.Forms.TextBox
     Friend WithEvents txtEstatus As System.Windows.Forms.TextBox
     Friend WithEvents txtComentario As System.Windows.Forms.TextBox
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

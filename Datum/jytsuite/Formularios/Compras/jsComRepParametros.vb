@@ -2,6 +2,8 @@ Imports MySql.Data.MySqlClient
 Imports System.IO
 Imports CrystalDecisions.CrystalReports.Engine
 Imports ReportesDeCompras
+Imports Syncfusion.WinForms.Input
+
 Public Class jsComRepParametros
 
     Private Const sModulo As String = "Reportes de compras y cuentas por pagar"
@@ -38,10 +40,10 @@ Public Class jsComRepParametros
     Private PeriodoTipo As TipoPeriodo
     Private CxP_ExP As Integer
 
-    Public Sub Cargar(ByVal TipoCarga As Integer, ByVal numReporte As Integer, ByVal nomReporte As String, _
-                      Optional ByVal CodProveedor As String = "", Optional ByVal numDocumento As String = "", _
-                      Optional ByVal Fecha As Date = #1/1/2009#, Optional strSQLTablaDoble As String = "", _
-                      Optional TituloGrupo As String = "", Optional TituloSubGrupo As String = "", _
+    Public Sub Cargar(ByVal TipoCarga As Integer, ByVal numReporte As Integer, ByVal nomReporte As String,
+                      Optional ByVal CodProveedor As String = "", Optional ByVal numDocumento As String = "",
+                      Optional ByVal Fecha As Date = #1/1/2009#, Optional strSQLTablaDoble As String = "",
+                      Optional TituloGrupo As String = "", Optional TituloSubGrupo As String = "",
                       Optional TipoCuenta As Integer = 0)
 
 
@@ -49,6 +51,8 @@ Public Class jsComRepParametros
         Me.Dock = DockStyle.Fill
         Me.Tag = sModulo
         myConn.Open()
+
+        Dim dates As SfDateTimeEdit() = {txtPeriodoDesde, txtPeriodoHasta}
 
         ReporteNumero = numReporte
         ReporteNombre = nomReporte
@@ -91,7 +95,7 @@ Public Class jsComRepParametros
                 Dim vOrdenTipo() As String = {"S"}
                 Dim vOrdenLongitud() As Integer = {15}
                 Inicializar(ReporteNombre, False, False, False, False, vOrdenNombres, vOrdenCampos, vOrdenTipo, vOrdenLongitud, Documento)
-            Case ReporteCompras.cOrdenDeCompra, ReporteCompras.cRecepcion, ReporteCompras.cGasto, ReporteCompras.cCompra, ReporteCompras.cNotaCredito, _
+            Case ReporteCompras.cOrdenDeCompra, ReporteCompras.cRecepcion, ReporteCompras.cGasto, ReporteCompras.cCompra, ReporteCompras.cNotaCredito,
                 ReporteCompras.cNotaDebito
                 Dim vOrdenNombres() As String = {"N° Documento"}
                 Dim vOrdenCampos() As String = {"numord"}
@@ -192,9 +196,9 @@ Public Class jsComRepParametros
                 Inicializar(ReporteNombre, False, False, True, False, vOrdenNombres, vOrdenCampos, vOrdenTipo, vOrdenLongitud, Documento)
         End Select
     End Sub
-    Private Sub Inicializar(ByVal nEtiqueta As String, ByVal TabOrden As Boolean, ByVal TabGrupo As Boolean, _
-        ByVal TabCriterio As Boolean, ByVal TabConstantes As Boolean, ByVal aNombreOrden() As String, _
-        ByVal aCampoOrden() As String, ByVal aTipoOrden() As String, ByVal aLongitudOrden() As Integer, _
+    Private Sub Inicializar(ByVal nEtiqueta As String, ByVal TabOrden As Boolean, ByVal TabGrupo As Boolean,
+        ByVal TabCriterio As Boolean, ByVal TabConstantes As Boolean, ByVal aNombreOrden() As String,
+        ByVal aCampoOrden() As String, ByVal aTipoOrden() As String, ByVal aLongitudOrden() As Integer,
         Optional ByVal Trabajador As String = "")
 
 
@@ -213,7 +217,7 @@ Public Class jsComRepParametros
         grpCriterios.Enabled = Criterio
         grpConstantes.Enabled = Constante
     End Sub
-    Private Sub IniciarOrden(ByVal vNombres As Object, ByVal vCampos As Object, ByVal vTipo As Object, ByVal vLongitud As Object, _
+    Private Sub IniciarOrden(ByVal vNombres As Object, ByVal vCampos As Object, ByVal vTipo As Object, ByVal vLongitud As Object,
                              ByVal OrdenMandado As String)
 
         vOrdenNombres = vNombres
@@ -240,17 +244,17 @@ Public Class jsComRepParametros
         VerCriterio_TipoDocumento(False)
         VerCriterio_Documento(False)
         VerCriterio_MesAño(False)
-        Vercriterio_CausaNC(False)
+        VerCriterio_CausaNC(False)
 
         Select Case ReporteNumero
-            Case ReporteCompras.cListadoOrdenesDeCompra, ReporteCompras.cListadoRecepciones, ReporteCompras.cListadoCompras, _
-                ReporteCompras.cListadoNotasCredito, ReporteCompras.cListadoNotasDebito, ReporteCompras.cListadoGastos, _
+            Case ReporteCompras.cListadoOrdenesDeCompra, ReporteCompras.cListadoRecepciones, ReporteCompras.cListadoCompras,
+                ReporteCompras.cListadoNotasCredito, ReporteCompras.cListadoNotasDebito, ReporteCompras.cListadoGastos,
                 ReporteCompras.cListadoDocumentosSinRetencionIVA
                 VerCriterio_Periodo(True, 0, TipoPeriodo.iMensual)
                 VerCriterio_Proveedor(True)
                 If ReporteNumero = ReporteCompras.cListadoGastos Then _
                     VerCriterio_GrupoSubGrupo(True)
-            Case ReporteCompras.cSaldosProveedores, ReporteCompras.cAuditoriasProveedores, ReporteCompras.cVencimientos, _
+            Case ReporteCompras.cSaldosProveedores, ReporteCompras.cAuditoriasProveedores, ReporteCompras.cVencimientos,
                 ReporteCompras.cVencimientosResumen
                 VerCriterio_Periodo(True, 2, TipoPeriodo.iDiario)
             Case ReporteCompras.cEstadodeCuentasProveedores
@@ -285,45 +289,44 @@ Public Class jsComRepParametros
         txtProveedorHasta.Enabled = True : txtProveedorHasta.MaxLength = 15
     End Sub
     Private Sub VerCriterio_Documento(ByVal ver As Boolean)
-        ft.visualizarObjetos(ver, lblDocumento, lblDocumentoDesde, lblDocumentoHasta, txtDocumentoDesde, txtDocumentoHasta, _
+        ft.visualizarObjetos(ver, lblDocumento, lblDocumentoDesde, lblDocumentoHasta, txtDocumentoDesde, txtDocumentoHasta,
                           btnDocumentoDesde, btnDocumentoHasta)
         ft.habilitarObjetos(ver, ver, txtDocumentoDesde, txtDocumentoHasta)
     End Sub
     Private Sub VerCriterio_Periodo(ByVal Ver As Boolean, ByVal CompletoDesdeHasta As Integer, Optional ByVal Periodo As TipoPeriodo = TipoPeriodo.iMensual)
         'CompletoDesdeHasta 0 = Complete , 1 = Desde , 2 = Hasta 
 
-        ft.visualizarObjetos(False, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta, btnPeriodoDesde, btnPeriodoHasta)
-        ft.habilitarObjetos(False, True, txtPeriodoDesde, txtPeriodoHasta)
+        ft.visualizarObjetos(False, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta)
         PeriodoTipo = Periodo
         If Ver Then
 
             Select Case CompletoDesdeHasta
                 Case 0
-                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta, btnPeriodoDesde, btnPeriodoHasta)
+                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta)
                 Case 1
-                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodo, txtPeriodoDesde, btnPeriodoDesde)
+                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodo, txtPeriodoDesde)
                 Case 2
-                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoHasta, btnPeriodoHasta)
+                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoHasta)
             End Select
         End If
 
 
         Select Case Periodo
             Case TipoPeriodo.iDiario
-                txtPeriodoDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtPeriodoHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoDesde.Value = jytsistema.sFechadeTrabajo
+                txtPeriodoHasta.Value = jytsistema.sFechadeTrabajo
             Case TipoPeriodo.iSemanal
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaSemana(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaSemana(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaSemana(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaSemana(jytsistema.sFechadeTrabajo)
             Case TipoPeriodo.iMensual
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaMes(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaMes(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaMes(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaMes(jytsistema.sFechadeTrabajo)
             Case TipoPeriodo.iAnual
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaAño(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaAño(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaAño(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaAño(jytsistema.sFechadeTrabajo)
             Case Else
-                txtPeriodoDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtPeriodoHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoDesde.Value = jytsistema.sFechadeTrabajo
+                txtPeriodoHasta.Value = jytsistema.sFechadeTrabajo
         End Select
 
     End Sub
@@ -376,8 +379,8 @@ Public Class jsComRepParametros
         verConstante_Cuenta(False)
 
         Select Case ReporteNumero
-            Case ReporteCompras.cListadoCompras, _
-                ReporteCompras.cListadoNotasCredito, ReporteCompras.cListadoNotasDebito, ReporteCompras.cListadoGastos, _
+            Case ReporteCompras.cListadoCompras,
+                ReporteCompras.cListadoNotasCredito, ReporteCompras.cListadoNotasDebito, ReporteCompras.cListadoGastos,
                 ReporteCompras.cProveedores, ReporteCompras.cListadoDocumentosSinRetencionIVA
                 VerConstante_TipoProveedor(True)
                 If ReporteNumero = ReporteCompras.cListadoCompras Or ReporteNumero = ReporteCompras.cListadoGastos Then
@@ -391,7 +394,7 @@ Public Class jsComRepParametros
                 VerConstante_TipoProveedor(True)
                 VerConstante_Estatus(True)
                 verConstante_Resumen(True)
-            Case ReporteCompras.cSaldosProveedores, ReporteCompras.cEstadodeCuentasProveedores, ReporteCompras.cMovimientosProveedores, _
+            Case ReporteCompras.cSaldosProveedores, ReporteCompras.cEstadodeCuentasProveedores, ReporteCompras.cMovimientosProveedores,
                 ReporteCompras.cAuditoriasProveedores
                 VerConstante_TipoProveedor(True)
                 VerConstante_Estatus(True)
@@ -421,7 +424,7 @@ Public Class jsComRepParametros
         ft.RellenaCombo(aSiNoTodos, cmbCartera, 2)
         ft.RellenaCombo(aSiNoTodos, cmbRegulada, 2)
         ft.RellenaCombo(aTipoProveedor, cmbTipo, 2)
-        If ReporteNumero = ReporteCompras.cListadoRecepciones Or _
+        If ReporteNumero = ReporteCompras.cListadoRecepciones Or
             ReporteNumero = ReporteCompras.cListadoOrdenesDeCompra Then
             ft.RellenaCombo(aEstatusDocumento, cmbEstatus)
         Else
@@ -432,9 +435,9 @@ Public Class jsComRepParametros
         ft.RellenaCombo(aCuenta, cmbCuenta, CxP_ExP)
 
     End Sub
-    Private Sub VerConstante_Lapsos(Ver As Boolean, Optional Desde1 As Integer = 1, Optional Hasta1 As Integer = 7, _
-                                     Optional Desde2 As Integer = 8, Optional Hasta2 As Integer = 15, _
-                                     Optional Desde3 As Integer = 16, Optional Hasta3 As Integer = 30, _
+    Private Sub VerConstante_Lapsos(Ver As Boolean, Optional Desde1 As Integer = 1, Optional Hasta1 As Integer = 7,
+                                     Optional Desde2 As Integer = 8, Optional Hasta2 As Integer = 15,
+                                     Optional Desde3 As Integer = 16, Optional Hasta3 As Integer = 30,
                                      Optional Desde4 As Integer = 31)
 
         ft.visualizarObjetos(Ver, lblLapso, txtDesde1, txtDesde2, txtDesde3, txtDesde4, txtHasta1, txtHasta2, txtHasta3)
@@ -538,7 +541,7 @@ Public Class jsComRepParametros
 
                 oReporte = New rptComprasOrdenDeCompra
 
-                str = SeleccionComprasOrdenDeCompra(Documento, CodigoProveedor, FechaParametro)
+                str = SeleccionCOMPRASOrdenDeCompra(Documento, CodigoProveedor, FechaParametro)
                 strIVA = SeleccionVENIVADocumento(Documento, "jsproivaord", "numord", " codpro = '" & CodigoProveedor & "' and ")
                 strComentarios = SeleccionGENComentarios("ORD")
             Case ReporteCompras.cRecepcion
@@ -548,19 +551,19 @@ Public Class jsComRepParametros
 
                 oReporte = New rptComprasRecepcion
 
-                str = SeleccionComprasRecepcion(Documento, CodigoProveedor, FechaParametro)
+                str = SeleccionCOMPRASRecepcion(Documento, CodigoProveedor, FechaParametro)
                 strIVA = SeleccionVENIVADocumento(Documento, "jsproivarec", "numrec", " codpro = '" & CodigoProveedor & "' and ")
                 strComentarios = SeleccionGENComentarios("REC")
 
             Case ReporteCompras.cListaRetencionesISLR
                 nTabla = "dtRetencionesISLR"
                 oReporte = New rptComprasRetencionesISLR
-                str = SeleccionCOMPRASListadoRetencionesISLR(CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), _
+                str = SeleccionCOMPRASListadoRetencionesISLR(txtPeriodoDesde.Value, txtPeriodoHasta.Value,
                                                              txtProveedorDesde.Text, txtProveedorHasta.Text)
             Case ReporteCompras.cListaRetencionesIVA
                 nTabla = "dtRetencionesIVA"
                 oReporte = New rptComprasRetencionesIVA
-                str = SeleccionCOMPRASListadoRetencionesIVA(CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), _
+                str = SeleccionCOMPRASListadoRetencionesIVA(txtPeriodoDesde.Value, txtPeriodoHasta.Value,
                                                              txtProveedorDesde.Text, txtProveedorHasta.Text)
             Case ReporteCompras.cGrupoSubGrupo
                 nTabla = "dtGrupoSubGrupo"
@@ -574,7 +577,7 @@ Public Class jsComRepParametros
                 nTablaDescuentos = "dtDescuentos"
                 oReporte = New rptComprasGasto
 
-                str = SeleccionComprasGasto(Documento, CodigoProveedor, FechaParametro)
+                str = SeleccionCOMPRASGasto(Documento, CodigoProveedor, FechaParametro)
                 strIVA = SeleccionVENIVADocumento(Documento, "jsproivagas", "numgas", " codpro = '" & CodigoProveedor & "' and ")
                 strDescuentos = SeleccionVENDescuentosDocumento(Documento, "jsprodesgas", "numgas", " codpro = '" & CodigoProveedor & "' and ")
                 strComentarios = SeleccionGENComentarios("GAS")
@@ -585,7 +588,7 @@ Public Class jsComRepParametros
                 nTablaDescuentos = "dtDescuentos"
                 oReporte = New rptComprasCompra
 
-                str = SeleccionComprasCompra(Documento, CodigoProveedor, FechaParametro)
+                str = SeleccionCOMPRASCompra(Documento, CodigoProveedor, FechaParametro)
                 strIVA = SeleccionVENIVADocumento(Documento, "jsproivacom", "numcom", " codpro = '" & CodigoProveedor & "' and ")
                 strDescuentos = SeleccionVENDescuentosDocumento(Documento, "jsprodescom", "numcom", " codpro = '" & CodigoProveedor & "' and ")
                 strComentarios = SeleccionGENComentarios("COM")
@@ -597,7 +600,7 @@ Public Class jsComRepParametros
                 nTablaDescuentos = "dtDescuentos"
                 oReporte = New rptComprasNotaCredito
 
-                str = SeleccionComprasNotaCredito(Documento, CodigoProveedor, FechaParametro)
+                str = SeleccionCOMPRASNotaCredito(Documento, CodigoProveedor, FechaParametro)
                 strIVA = SeleccionVENIVADocumento(Documento, "jsproivancr", "numncr", " codpro = '" & CodigoProveedor & "' and ")
                 strComentarios = SeleccionGENComentarios("NCC")
             Case ReporteCompras.cNotaDebito
@@ -608,7 +611,7 @@ Public Class jsComRepParametros
                 nTablaDescuentos = "dtDescuentos"
                 oReporte = New rptComprasNotaDebito
 
-                str = SeleccionComprasNotaDebito(Documento, CodigoProveedor, FechaParametro)
+                str = SeleccionCOMPRASNotaDebito(Documento, CodigoProveedor, FechaParametro)
                 strIVA = SeleccionVENIVADocumento(Documento, "jsproivandb", "numndb", " codpro = '" & CodigoProveedor & "' and ")
                 strComentarios = SeleccionGENComentarios("NDC")
             Case ReporteCompras.cComprobantePago
@@ -639,9 +642,9 @@ Public Class jsComRepParametros
                         oReporte = New rptComprasListadoDoc_Items0G
                 End Select
 
-                str = SeleccionCOMPRASListadoOrdenesDeCompra(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                           CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtProveedorDesde.Text, txtProveedorHasta.Text, _
-                                           txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text, _
+                str = SeleccionCOMPRASListadoOrdenesDeCompra(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                           txtPeriodoDesde.Value, txtPeriodoHasta.Value, txtProveedorDesde.Text, txtProveedorHasta.Text,
+                                           txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text,
                                            cmbTipo.SelectedIndex, cmbEstatus.SelectedIndex)
 
             Case ReporteCompras.cListadoRecepciones
@@ -659,9 +662,9 @@ Public Class jsComRepParametros
                         oReporte = New rptComprasListadoDoc_Items2G
                 End Select
 
-                str = SeleccionCOMPRASListadoRecepciones(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                           CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtProveedorDesde.Text, txtProveedorHasta.Text, _
-                                           txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text, _
+                str = SeleccionCOMPRASListadoRecepciones(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                           txtPeriodoDesde.Value, txtPeriodoHasta.Value, txtProveedorDesde.Text, txtProveedorHasta.Text,
+                                           txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text,
                                            cmbTipo.SelectedIndex, cmbEstatus.SelectedIndex)
 
             Case ReporteCompras.cListadoCompras
@@ -683,9 +686,9 @@ Public Class jsComRepParametros
                         oReporte = New rptComprasListadoDocumentos0G
                 End Select
 
-                str = SeleccionCOMPRASListadoCompras(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                           CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtProveedorDesde.Text, txtProveedorHasta.Text, _
-                                           txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text, _
+                str = SeleccionCOMPRASListadoCompras(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                           txtPeriodoDesde.Value, txtPeriodoHasta.Value, txtProveedorDesde.Text, txtProveedorHasta.Text,
+                                           txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text,
                                            cmbTipo.SelectedIndex, cmbCartera.SelectedIndex)
 
             Case ReporteCompras.cListadoDocumentosSinRetencionIVA
@@ -707,9 +710,9 @@ Public Class jsComRepParametros
                         oReporte = New rptComprasListadoDocumentos0G
                 End Select
 
-                str = SeleccionCOMPRASListadoComprasGastosNCRSinRetencion(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                           CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtProveedorDesde.Text, txtProveedorHasta.Text, _
-                                           txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text, _
+                str = SeleccionCOMPRASListadoComprasGastosNCRSinRetencion(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                           txtPeriodoDesde.Value, txtPeriodoHasta.Value, txtProveedorDesde.Text, txtProveedorHasta.Text,
+                                           txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text,
                                            cmbTipo.SelectedIndex)
 
             Case ReporteCompras.cListadoNotasCredito
@@ -730,9 +733,9 @@ Public Class jsComRepParametros
                         oReporte = New rptComprasListadoDocumentos0G
                 End Select
 
-                str = SeleccionComprasListadoNotasCredito(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                           CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtProveedorDesde.Text, txtProveedorHasta.Text, _
-                                           txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text, _
+                str = SeleccionCOMPRASListadoNotasCredito(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                           txtPeriodoDesde.Value, txtPeriodoHasta.Value, txtProveedorDesde.Text, txtProveedorHasta.Text,
+                                           txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text,
                                            cmbTipo.SelectedIndex)
             Case ReporteCompras.cListadoNotasDebito
 
@@ -753,9 +756,9 @@ Public Class jsComRepParametros
                         oReporte = New rptComprasListadoDocumentos0G
                 End Select
 
-                str = SeleccionComprasListadoNotasDebito(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                           CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtProveedorDesde.Text, txtProveedorHasta.Text, _
-                                           txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text, _
+                str = SeleccionCOMPRASListadoNotasDebito(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                           txtPeriodoDesde.Value, txtPeriodoHasta.Value, txtProveedorDesde.Text, txtProveedorHasta.Text,
+                                           txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text,
                                            cmbTipo.SelectedIndex)
 
             Case ReporteCompras.cListadoGastos
@@ -777,17 +780,17 @@ Public Class jsComRepParametros
                         oReporte = New rptComprasListadoDocumentos0G
                 End Select
 
-                str = SeleccionCOMPRASListadoGastos(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                           CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtProveedorDesde.Text, txtProveedorHasta.Text, _
-                                           txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text, _
-                                           txtGrupo.Text, txtSubgrupo.Text, _
+                str = SeleccionCOMPRASListadoGastos(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                           txtPeriodoDesde.Value, txtPeriodoHasta.Value, txtProveedorDesde.Text, txtProveedorHasta.Text,
+                                           txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text,
+                                           txtGrupo.Text, txtSubgrupo.Text,
                                            cmbTipo.SelectedIndex, cmbCartera.SelectedIndex)
 
             Case ReporteCompras.cFichaProveedor
                 nTabla = "dtProveedor"
                 oReporte = New rptComprasFichaProveedor
-                str = SeleccionCOMPRASProveedores(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                           txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text, _
+                str = SeleccionCOMPRASProveedores(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                           txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text,
                                            cmbTipo.SelectedIndex)
 
             Case ReporteCompras.cProveedores
@@ -806,8 +809,8 @@ Public Class jsComRepParametros
                         oReporte = New rptComprasProveedores0G
                 End Select
 
-                str = SeleccionCOMPRASProveedores(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                           txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text, _
+                str = SeleccionCOMPRASProveedores(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                           txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text,
                                            cmbTipo.SelectedIndex)
 
             Case ReporteCompras.cSaldosProveedores
@@ -826,16 +829,16 @@ Public Class jsComRepParametros
                         oReporte = New rptComprasSaldosProveedores0G
                 End Select
 
-                str = SeleccionCOMPRASSaldoProveedores(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                           CDate(txtPeriodoHasta.Text), txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text, _
+                str = SeleccionCOMPRASSaldoProveedores(myConn, lblInfo, txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                           txtPeriodoHasta.Value, txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text,
                                            cmbTipo.SelectedIndex, cmbEstatus.SelectedIndex, cmbCuenta.SelectedIndex)
 
             Case ReporteCompras.cEstadodeCuentasProveedores
 
                 nTabla = "dtMovimientos"
                 oReporte = New rptComprasEstadodeCuentaProveedores0G
-                str = SeleccionCOMPRASEstadoDeCuentaProveedores(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                   CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), _
+                str = SeleccionCOMPRASEstadoDeCuentaProveedores(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                   txtPeriodoDesde.Value, txtPeriodoHasta.Value,
                                    cmbTipo.SelectedIndex, cmbEstatus.SelectedIndex, cmbCuenta.SelectedIndex)
 
             Case ReporteCompras.cAuditoriasProveedores
@@ -843,28 +846,28 @@ Public Class jsComRepParametros
                 nTabla = "dtMovimientos"
                 oReporte = New rptComprasAuditoriasProveedores
 
-                str = SeleccionCOMPRASAuditoriaProveedores(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                             CDate(txtPeriodoHasta.Text), txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text, _
+                str = SeleccionCOMPRASAuditoriaProveedores(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                             txtPeriodoHasta.Value, txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text,
                                              cmbTipo.SelectedIndex, cmbEstatus.SelectedIndex, cmbCuenta.SelectedIndex)
 
             Case ReporteCompras.cVencimientos
                 nTabla = "dtMovimientos"
                 oReporte = New rptComprasVencimientos
 
-                str = SeleccionCOMPRASVencimientos(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                             CDate(txtPeriodoHasta.Text), txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text, _
-                                             cmbTipo.SelectedIndex, cmbEstatus.SelectedIndex, _
-                                             CInt(txtDesde1.Text), CInt(txtHasta1.Text), CInt(txtDesde2.Text), CInt(txtHasta2.Text), _
+                str = SeleccionCOMPRASVencimientos(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                             txtPeriodoHasta.Value, txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text,
+                                             cmbTipo.SelectedIndex, cmbEstatus.SelectedIndex,
+                                             CInt(txtDesde1.Text), CInt(txtHasta1.Text), CInt(txtDesde2.Text), CInt(txtHasta2.Text),
                                              CInt(txtDesde3.Text), CInt(txtHasta3.Text), CInt(txtDesde4.Text), cmbCuenta.SelectedIndex)
 
             Case ReporteCompras.cVencimientosResumen
                 nTabla = "dtVencimientosR"
                 oReporte = New rptComprasVencimientosResumen
 
-                str = SeleccionCOMPRASVencimientosResumen(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                             CDate(txtPeriodoHasta.Text), txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text, _
-                                             cmbTipo.SelectedIndex, cmbEstatus.SelectedIndex, _
-                                             CInt(txtDesde1.Text), CInt(txtHasta1.Text), CInt(txtDesde2.Text), CInt(txtHasta2.Text), _
+                str = SeleccionCOMPRASVencimientosResumen(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                             txtPeriodoHasta.Value, txtCategoriaDesde.Text, txtCategoriaHasta.Text, txtUnidadDesde.Text, txtUnidadHasta.Text,
+                                             cmbTipo.SelectedIndex, cmbEstatus.SelectedIndex,
+                                             CInt(txtDesde1.Text), CInt(txtHasta1.Text), CInt(txtDesde2.Text), CInt(txtHasta2.Text),
                                              CInt(txtDesde3.Text), CInt(txtHasta3.Text), CInt(txtDesde4.Text), cmbCuenta.SelectedIndex)
 
             Case ReporteCompras.cMovimientosProveedores
@@ -872,16 +875,16 @@ Public Class jsComRepParametros
                 nTabla = "dtMovimientos"
                 oReporte = New rptComprasMovimientosProveedores0G
 
-                str = SeleccionCOMPRASMovimientosProveedores(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex, _
-                                   CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtTipDoc.Text, _
+                str = SeleccionCOMPRASMovimientosProveedores(txtOrdenDesde.Text, txtOrdenHasta.Text, vOrdenCampos(cmbOrdenadoPor.SelectedIndex), cmbOrdenDesde.SelectedIndex,
+                                   txtPeriodoDesde.Value, txtPeriodoHasta.Value, txtTipDoc.Text,
                                    cmbTipo.SelectedIndex, cmbEstatus.SelectedIndex, cmbCuenta.SelectedIndex, txtCausaNC_Desde.Text, txtCausaNC_Hasta.Text)
 
             Case ReporteCompras.cLibroIVA
 
                 nTabla = "dtLibroIVA"
                 oReporte = New rptComprasLibroIVAGeneral
-                str = SeleccionCOMPRASLibroIVA(myConn, lblInfo, _
-                                   CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), , , , , cmbTipo.SelectedIndex, _
+                str = SeleccionCOMPRASLibroIVA(myConn, lblInfo,
+                                   txtPeriodoDesde.Value, txtPeriodoHasta.Value, , , , , cmbTipo.SelectedIndex,
                                    txtProveedorDesde.Text, txtProveedorHasta.Text)
 
             Case Else
@@ -890,11 +893,11 @@ Public Class jsComRepParametros
 
         If nTabla <> "" Then
             dsCOM = DataSetRequery(dsCOM, str, myConn, nTabla, lblInfo)
-            If ReporteNumero = ReporteCompras.cOrdenDeCompra Or _
-                ReporteNumero = ReporteCompras.cRecepcion Or _
-                ReporteNumero = ReporteCompras.cGasto Or _
-                ReporteNumero = ReporteCompras.cCompra Or _
-                ReporteNumero = ReporteCompras.cNotaCredito Or _
+            If ReporteNumero = ReporteCompras.cOrdenDeCompra Or
+                ReporteNumero = ReporteCompras.cRecepcion Or
+                ReporteNumero = ReporteCompras.cGasto Or
+                ReporteNumero = ReporteCompras.cCompra Or
+                ReporteNumero = ReporteCompras.cNotaCredito Or
                 ReporteNumero = ReporteCompras.cNotaDebito Then
                 dsCOM = DataSetRequery(dsCOM, strIVA, myConn, nTablaIVA, lblInfo)
                 If strDescuentos <> "" Then dsCOM = DataSetRequery(dsCOM, strDescuentos, myConn, nTablaDescuentos, lblInfo)
@@ -903,7 +906,7 @@ Public Class jsComRepParametros
             If dsCOM.Tables(nTabla).Rows.Count > 0 Then
                 oReporte = PresentaReporte(oReporte, dsCOM, nTabla)
                 r.CrystalReportViewer1.ReportSource = oReporte
-                r.CrystalReportViewer1.ToolPanelView = IIf(PresentaArbol, CrystalDecisions.Windows.Forms.ToolPanelViewType.GroupTree, _
+                r.CrystalReportViewer1.ToolPanelView = IIf(PresentaArbol, CrystalDecisions.Windows.Forms.ToolPanelViewType.GroupTree,
                                               CrystalDecisions.Windows.Forms.ToolPanelViewType.None)
                 r.CrystalReportViewer1.ShowGroupTreeButton = PresentaArbol
                 r.CrystalReportViewer1.Zoom(1)
@@ -911,7 +914,7 @@ Public Class jsComRepParametros
                 r.Cargar(ReporteNombre)
                 DeshabilitarCursorEnEspera()
             Else
-                ft.MensajeCritico("No existe información que cumpla con estos criterios y/o constantes ")
+                ft.mensajeCritico("No existe información que cumpla con estos criterios y/o constantes ")
             End If
         End If
 
@@ -921,7 +924,7 @@ Public Class jsComRepParametros
         oReporte = Nothing
 
     End Sub
-    Private Function PresentaReporte(ByVal oReporte As CrystalDecisions.CrystalReports.Engine.ReportClass, _
+    Private Function PresentaReporte(ByVal oReporte As CrystalDecisions.CrystalReports.Engine.ReportClass,
         ByVal ds As DataSet, ByVal nTabla As String) As CrystalDecisions.CrystalReports.Engine.ReportClass
 
         Dim rif As String
@@ -944,7 +947,7 @@ Public Class jsComRepParametros
         dtEmpresa = Nothing
 
         Select Case ReporteNumero
-            Case ReporteCompras.cOrdenDeCompra, ReporteCompras.cRecepcion, ReporteCompras.cNotaCredito, _
+            Case ReporteCompras.cOrdenDeCompra, ReporteCompras.cRecepcion, ReporteCompras.cNotaCredito,
                 ReporteCompras.cNotaDebito
                 oReporte.Subreports("rptGENIVA.rpt").SetDataSource(ds.Tables("dtIVA"))
                 oReporte.Subreports("rptGENComentarios.rpt").SetDataSource(ds.Tables("dtComentarios"))
@@ -998,13 +1001,13 @@ Public Class jsComRepParametros
                 oReporte.SetParameterValue("Lapso2", "de " & txtDesde2.Text & " a " & txtHasta2.Text & " días")
                 oReporte.SetParameterValue("Lapso3", "de " & txtDesde3.Text & " a " & txtHasta3.Text & " días")
                 oReporte.SetParameterValue("Lapso4", txtDesde4.Text & " días ó más")
-            Case ReporteCompras.cListadoOrdenesDeCompra, ReporteCompras.cListadoRecepciones, ReporteCompras.cListadoCompras, _
-                ReporteCompras.cListadoNotasCredito, ReporteCompras.cListadoNotasDebito, ReporteCompras.cListadoGastos, _
-                ReporteCompras.cSaldosProveedores, ReporteCompras.cEstadodeCuentasProveedores, ReporteCompras.cMovimientosProveedores, _
+            Case ReporteCompras.cListadoOrdenesDeCompra, ReporteCompras.cListadoRecepciones, ReporteCompras.cListadoCompras,
+                ReporteCompras.cListadoNotasCredito, ReporteCompras.cListadoNotasDebito, ReporteCompras.cListadoGastos,
+                ReporteCompras.cSaldosProveedores, ReporteCompras.cEstadodeCuentasProveedores, ReporteCompras.cMovimientosProveedores,
                 ReporteCompras.cListadoDocumentosSinRetencionIVA
 
                 If ReporteNumero = ReporteCompras.cEstadodeCuentasProveedores Then _
-                    oReporte.SetParameterValue("SaldoAl", "Saldo al " & ft.FormatoFecha(DateAdd("d", -1, CDate(txtPeriodoDesde.Text))))
+                    oReporte.SetParameterValue("SaldoAl", "Saldo al " & ft.FormatoFecha(DateAdd("d", -1, txtPeriodoDesde.Value)))
 
                 If ReporteNumero = ReporteCompras.cListadoOrdenesDeCompra Then
                     oReporte.SetParameterValue("Titulo", "Ordenes de Compra")
@@ -1066,20 +1069,11 @@ Public Class jsComRepParametros
         PresentaReporte = oReporte
 
     End Function
-    Private Sub btnPeriodoDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles btnPeriodoDesde.Click
-        txtPeriodoDesde.Text = SeleccionaFecha(CDate(txtPeriodoDesde.Text), Me, sender)
-    End Sub
-
-    Private Sub btnPeriodoHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles btnPeriodoHasta.Click
-        txtPeriodoHasta.Text = SeleccionaFecha(CDate(txtPeriodoHasta.Text), Me, sender)
-    End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
         LimpiarOrden()
         LimpiarGrupos()
-        limpiarCriterios()
+        LimpiarCriterios()
     End Sub
     Private Sub LimpiarGrupos()
         LimpiarTextos(txtCategoriaDesde, txtCategoriaHasta, txtUnidadDesde, txtUnidadHasta)
@@ -1091,7 +1085,7 @@ Public Class jsComRepParametros
         LimpiarTextos(txtProveedorDesde, txtProveedorHasta, txtGrupo, txtSubgrupo)
     End Sub
 
-    Private Sub chkList_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkList.SelectedIndexChanged, _
+    Private Sub chkList_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkList.SelectedIndexChanged,
         chkList.DoubleClick
         Dim iCont As Integer
         txtTipDoc.Text = ""
@@ -1104,8 +1098,8 @@ Public Class jsComRepParametros
     Private Function LineaGrupos() As String
 
         LineaGrupos = ""
-        If ReporteNumero = ReporteCompras.cLibroIVA Or _
-            ReporteNumero = ReporteCompras.cListaRetencionesISLR Or _
+        If ReporteNumero = ReporteCompras.cLibroIVA Or
+            ReporteNumero = ReporteCompras.cListaRetencionesISLR Or
             ReporteNumero = ReporteCompras.cListaRetencionesIVA Then
             LineaGrupos = "Dirección comercial y fiscal :" _
                 & ft.DevuelveScalarCadena(myConn, " select dirfiscal from jsconctaemp where id_emp = '" & jytsistema.WorkID & "' ") _
@@ -1126,8 +1120,8 @@ Public Class jsComRepParametros
 
         If ReporteNumero = ReporteCompras.cLibroIVA Then
 
-            LineaCriterios = "MES : " & UCase(Format(CDate(txtPeriodoDesde.Text), "MMMM")) & _
-                            " - AÑO : " & CDate(txtPeriodoHasta.Text).Year.ToString
+            LineaCriterios = "MES : " & UCase(Format(txtPeriodoDesde.Value, "MMMM")) &
+                            " - AÑO : " & CDate(txtPeriodoHasta.Text).Year.ToString()
         Else
             LineaCriterios = "Criterios : "
             If lblPeriodo.Visible Then LineaCriterios += "Período: " & IIf(lblPeriodoDesde.Visible, txtPeriodoDesde.Text, "") & IIf(lblPeriodoDesde.Visible AndAlso lblPeriodoHasta.Visible, "/", "") & IIf(lblPeriodoHasta.Visible, txtPeriodoHasta.Text, "")
@@ -1145,9 +1139,9 @@ Public Class jsComRepParametros
             If LineaConstantes <> "" Then LineaConstantes += " - "
             If lblTipo.Visible Then LineaConstantes += "Tipo proveedor : " + aTipoProveedor(cmbTipo.SelectedIndex)
             If LineaConstantes <> "" Then LineaConstantes += " - "
-            If lblLapso.Visible Then LineaConstantes += " Lapsos: 1. " + txtDesde1.Text + "-" + txtHasta1.Text + _
-                                                        " 2. " + txtDesde2.Text + "-" + txtHasta2.Text + _
-                                                        " 3. " + txtDesde3.Text + "-" + txtHasta3.Text + _
+            If lblLapso.Visible Then LineaConstantes += " Lapsos: 1. " + txtDesde1.Text + "-" + txtHasta1.Text +
+                                                        " 2. " + txtDesde2.Text + "-" + txtHasta2.Text +
+                                                        " 3. " + txtDesde3.Text + "-" + txtHasta3.Text +
                                                         " 4. " + txtDesde4.Text
             If lblCuenta.Visible Then LineaConstantes += " Cuenta : " + aCuenta(cmbCuenta.SelectedIndex)
         End If
@@ -1178,8 +1172,8 @@ Public Class jsComRepParametros
 
     Private Sub cmbCOMAgrupadorPor_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCOMAgrupadoPor.SelectedIndexChanged
 
-        ft.visualizarObjetos(False, lblGrupoDesde, lblGrupoHasta, lblCategoria, lblUnidad, _
-                            txtCategoriaDesde, btnCategoriaDesde, txtCategoriaHasta, btnCategoriaHasta, _
+        ft.visualizarObjetos(False, lblGrupoDesde, lblGrupoHasta, lblCategoria, lblUnidad,
+                            txtCategoriaDesde, btnCategoriaDesde, txtCategoriaHasta, btnCategoriaHasta,
                             txtUnidadDesde, btnUnidadDesde, txtUnidadHasta, btnUNidadHasta)
         LimpiarGrupos()
         Select Case cmbCOMAgrupadoPor.SelectedIndex
@@ -1271,16 +1265,16 @@ Public Class jsComRepParametros
         txtProveedorHasta.Text = txtProveedorDesde.Text
     End Sub
 
-    Private Sub txtPeriodoDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPeriodoDesde.TextChanged
+    Private Sub txtPeriodoDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPeriodoDesde.ValueChanged
         Select Case PeriodoTipo
             Case TipoPeriodo.iDiario
-                txtPeriodoHasta.Text = txtPeriodoDesde.Text
+                txtPeriodoHasta.Value = txtPeriodoDesde.Value
             Case TipoPeriodo.iSemanal
-                txtPeriodoHasta.Text = ft.FormatoFecha(DateAdd(DateInterval.Day, 7, CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = DateAdd(DateInterval.Day, 7, CDate(txtPeriodoDesde.Text))
             Case TipoPeriodo.iMensual
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaMes(CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = UltimoDiaMes(txtPeriodoDesde.Value)
             Case TipoPeriodo.iAnual
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaAño(CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = UltimoDiaAño(txtPeriodoDesde.Value)
         End Select
     End Sub
 
@@ -1290,6 +1284,8 @@ Public Class jsComRepParametros
     Private Sub btnCausaNC_hASTA_Click(sender As Object, e As EventArgs) Handles btnCausaNC_Hasta.Click
         txtCausaNC_Hasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codigo, descripcion from jsconcausas_notascredito where origen = 'CXP' order by codigo ", "CAUSAS NOTAS CREDITO NO FISCALES", txtCausaNC_Hasta.Text)
     End Sub
+
+
     Private Sub txtCausaNC_Desde_TextChanged(sender As Object, e As EventArgs) Handles txtCausaNC_Desde.TextChanged
         txtCausaNC_Hasta.Text = txtCausaNC_Desde.Text
     End Sub

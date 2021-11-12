@@ -24,6 +24,7 @@ Partial Class jsComArcRecepciones
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.dg = New System.Windows.Forms.DataGridView()
         Me.grpEncab = New System.Windows.Forms.GroupBox()
+        Me.txtEmision = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.txtNumeroSerie = New System.Windows.Forms.TextBox()
         Me.txtNombreAlmacen = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -32,12 +33,10 @@ Partial Class jsComArcRecepciones
         Me.txtProveedor = New System.Windows.Forms.TextBox()
         Me.btnVence = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.btnEmision = New System.Windows.Forms.Button()
         Me.txtEstatus = New System.Windows.Forms.TextBox()
         Me.txtAlmacen = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtEmision = New System.Windows.Forms.TextBox()
         Me.txtComentario = New System.Windows.Forms.TextBox()
         Me.txtCodigo = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -136,6 +135,7 @@ Partial Class jsComArcRecepciones
         Me.grpEncab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpEncab.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.txtNumeroSerie)
         Me.grpEncab.Controls.Add(Me.txtNombreAlmacen)
         Me.grpEncab.Controls.Add(Me.Label11)
@@ -144,12 +144,10 @@ Partial Class jsComArcRecepciones
         Me.grpEncab.Controls.Add(Me.txtProveedor)
         Me.grpEncab.Controls.Add(Me.btnVence)
         Me.grpEncab.Controls.Add(Me.Label6)
-        Me.grpEncab.Controls.Add(Me.btnEmision)
         Me.grpEncab.Controls.Add(Me.txtEstatus)
         Me.grpEncab.Controls.Add(Me.txtAlmacen)
         Me.grpEncab.Controls.Add(Me.Label5)
         Me.grpEncab.Controls.Add(Me.Label4)
-        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.txtComentario)
         Me.grpEncab.Controls.Add(Me.txtCodigo)
         Me.grpEncab.Controls.Add(Me.Label2)
@@ -160,11 +158,23 @@ Partial Class jsComArcRecepciones
         Me.grpEncab.TabIndex = 85
         Me.grpEncab.TabStop = False
         '
+        'txtEmision
+        '
+        Me.txtEmision.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmision.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmision.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmision.Location = New System.Drawing.Point(356, 11)
+        Me.txtEmision.Name = "txtEmision"
+        Me.txtEmision.Size = New System.Drawing.Size(114, 19)
+        Me.txtEmision.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmision.TabIndex = 238
+        '
         'txtNumeroSerie
         '
         Me.txtNumeroSerie.Enabled = False
         Me.txtNumeroSerie.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNumeroSerie.Location = New System.Drawing.Point(79, 13)
+        Me.txtNumeroSerie.Location = New System.Drawing.Point(120, 12)
         Me.txtNumeroSerie.MaxLength = 10
         Me.txtNumeroSerie.Name = "txtNumeroSerie"
         Me.txtNumeroSerie.Size = New System.Drawing.Size(39, 20)
@@ -233,22 +243,12 @@ Partial Class jsComArcRecepciones
         'Label6
         '
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(256, 11)
+        Me.Label6.Location = New System.Drawing.Point(287, 11)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(63, 19)
         Me.Label6.TabIndex = 199
         Me.Label6.Text = "Emisión"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'btnEmision
-        '
-        Me.btnEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmision.Location = New System.Drawing.Point(435, 12)
-        Me.btnEmision.Name = "btnEmision"
-        Me.btnEmision.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmision.TabIndex = 112
-        Me.btnEmision.Text = "•••"
-        Me.btnEmision.UseVisualStyleBackColor = True
         '
         'txtEstatus
         '
@@ -292,17 +292,6 @@ Partial Class jsComArcRecepciones
         Me.Label4.Text = "Almacén"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'txtEmision
-        '
-        Me.txtEmision.Enabled = False
-        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmision.Location = New System.Drawing.Point(342, 12)
-        Me.txtEmision.MaxLength = 19
-        Me.txtEmision.Name = "txtEmision"
-        Me.txtEmision.Size = New System.Drawing.Size(87, 20)
-        Me.txtEmision.TabIndex = 5
-        Me.txtEmision.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'txtComentario
         '
         Me.txtComentario.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -317,7 +306,7 @@ Partial Class jsComArcRecepciones
         '
         Me.txtCodigo.Enabled = False
         Me.txtCodigo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCodigo.Location = New System.Drawing.Point(120, 12)
+        Me.txtCodigo.Location = New System.Drawing.Point(165, 11)
         Me.txtCodigo.MaxLength = 25
         Me.txtCodigo.Name = "txtCodigo"
         Me.txtCodigo.Size = New System.Drawing.Size(105, 20)
@@ -338,7 +327,7 @@ Partial Class jsComArcRecepciones
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(0, 8)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(73, 26)
+        Me.Label1.Size = New System.Drawing.Size(109, 26)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Recepción #"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -833,7 +822,6 @@ Partial Class jsComArcRecepciones
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents dg As System.Windows.Forms.DataGridView
     Friend WithEvents grpEncab As System.Windows.Forms.GroupBox
-    Friend WithEvents txtEmision As System.Windows.Forms.TextBox
     Friend WithEvents txtComentario As System.Windows.Forms.TextBox
     Friend WithEvents txtCodigo As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -879,7 +867,6 @@ Partial Class jsComArcRecepciones
     Friend WithEvents txtAlmacen As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents btnEmision As System.Windows.Forms.Button
     Friend WithEvents btnVence As System.Windows.Forms.Button
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
@@ -904,4 +891,5 @@ Partial Class jsComArcRecepciones
     Friend WithEvents btnTraerOrdenDeCompra As System.Windows.Forms.ToolStripButton
     Friend WithEvents txtNumeroSerie As System.Windows.Forms.TextBox
     Friend WithEvents btnTraerCompra As System.Windows.Forms.ToolStripButton
+    Friend WithEvents txtEmision As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

@@ -1,9 +1,11 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsControlProConsecutivos
     Private Const sModulo As String = "Verificar números consecutivos"
     Private Const nTabla As String = "proConsecutivos"
 
-    Private tblNoConsecutivos As String = "TablaNC" & ft.NumeroAleatorio(10000)
+    Private tblNoConsecutivos As String
 
     Private strSQL As String
 
@@ -22,16 +24,21 @@ Public Class jsControlProConsecutivos
         myConn = MyCon
         Me.Tag = sModulo
 
-        lblLeyenda.Text = " Mediante este proceso se verifican los números consecutivos asignados a los diferentes documentos " + vbCr + _
-                " durante un período determinado. " + vbCr + _
-                " - Escoja el período para revisión " + vbCr + _
+        tblNoConsecutivos = "TablaNC" & ft.NumeroAleatorio(10000)
+
+        Dim dates As SfDateTimeEdit() = {txtFechaDesde, txtFechaHasta}
+        SetSizeDateObjects(dates)
+
+        lblLeyenda.Text = " Mediante este proceso se verifican los números consecutivos asignados a los diferentes documentos " + vbCr +
+                " durante un período determinado. " + vbCr +
+                " - Escoja el período para revisión " + vbCr +
                 " - SI NO ESTA SEGURO por favor consulte CON EL ADMINISTRADOR "
 
-        txtFechaDesde.Text = ft.FormatoFecha(PrimerDiaMes(jytsistema.sFechadeTrabajo))
-        txtFechaHasta.Text = ft.FormatoFecha(UltimoDiaMes(jytsistema.sFechadeTrabajo))
+        txtFechaDesde.Value = PrimerDiaMes(jytsistema.sFechadeTrabajo)
+        txtFechaHasta.Value = UltimoDiaMes(jytsistema.sFechadeTrabajo)
         ft.RellenaCombo(aConsecutivos, cmbContadores)
 
-        ft.mensajeEtiqueta(lblInfo, " ... ", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, " ... ", Transportables.tipoMensaje.iAyuda)
 
         Me.Show()
 
@@ -64,8 +71,8 @@ Public Class jsControlProConsecutivos
         Dim strSQl As String = " SELECT replace(num_control, '-','') num_control, numdoc, emision " _
             & " FROM jsconnumcon " _
             & " WHERE " _
-            & " emision >= '" & ft.FormatoFechaMySQL(CDate(txtFechaDesde.Text)) & "' AND " _
-            & " emision <= '" & ft.FormatoFechaMySQL(CDate(txtFechaHasta.Text)) & "' AND " _
+            & " emision >= '" & ft.FormatoFechaMySQL(txtFechaDesde.Value) & "' AND " _
+            & " emision <= '" & ft.FormatoFechaMySQL(txtFechaHasta.Value) & "' AND " _
             & " org in ('FAC', 'NCR', 'NDB','PVE', 'CON') AND " _
             & " origen in ('FAC', 'PVE') AND " _
             & " mid(num_control,1,3) <> 'FCT' and " _
@@ -76,7 +83,7 @@ Public Class jsControlProConsecutivos
         Dim aFld() As String = {"num_control", "numdoc", "emision"}
         Dim aStr() As String = {" Número Control", "Documento", "Fecha emisión"}
         Dim aAnc() As Integer = {90, 90, 60}
-        Dim aAli() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, _
+        Dim aAli() As Integer = {AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda,
                                  AlineacionDataGrid.Centro}
         Dim aFor() As String = {"", "", sFormatoFechaCorta}
 
@@ -102,7 +109,7 @@ Public Class jsControlProConsecutivos
     Private Sub BuscaNoConsecutivos()
 
         Dim aFldExp() As String = {"NoConsecutivo.cadena.15.0"}
-        ft.Ejecutar_strSQL(myconn, " drop table if exists " & tblNoConsecutivos)
+        ft.Ejecutar_strSQL(myConn, " drop table if exists " & tblNoConsecutivos)
         CrearTabla(myConn, lblInfo, jytsistema.WorkDataBase, True, tblNoConsecutivos, aFldExp)
 
         If dt.Rows.Count > 0 Then
@@ -113,7 +120,7 @@ Public Class jsControlProConsecutivos
             While numConsecutivo <> UltimoNumero
                 Dim row As DataRow = dt.Rows.Find(numConsecutivo)
                 If (row Is Nothing) Then
-                    ft.Ejecutar_strSQL(myconn, " insert into " & tblNoConsecutivos & " set noconsecutivo = '" & numConsecutivo & "' ")
+                    ft.Ejecutar_strSQL(myConn, " insert into " & tblNoConsecutivos & " set noconsecutivo = '" & numConsecutivo & "' ")
                     IniciarNoConsecutivos(tblNoConsecutivos)
                 End If
                 numConsecutivo = IncrementarCadena(numConsecutivo)
@@ -143,21 +150,9 @@ Public Class jsControlProConsecutivos
         lblCantidad.Text = ft.FormatoEntero(dtNC.Rows.Count)
 
     End Sub
-    Private Sub btnFechaDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaDesde.Click
-        txtFechaDesde.Text = SeleccionaFecha(CDate(txtFechaDesde.Text), btnFechaDesde)
-    End Sub
 
-    Private Sub btnFechaHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaHasta.Click
-        txtFechaHasta.Text = SeleccionaFecha(CDate(txtFechaHasta.Text), btnFechaHasta)
-    End Sub
-
-    Private Sub cmbContadores_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbContadores.SelectedIndexChanged, _
-        txtFechaDesde.TextChanged, txtFechaHasta.TextChanged
-
-        If txtFechaDesde.Text <> "" AndAlso txtFechaHasta.Text <> "" Then
-            IniciarConsecutivos()
-        End If
-
+    Private Sub cmbContadores_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbContadores.SelectedIndexChanged
+        IniciarConsecutivos()
     End Sub
 
     Private Sub btnGo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGo.Click

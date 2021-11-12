@@ -1,6 +1,8 @@
 Imports MySql.Data.MySqlClient
 Imports System.IO
 Imports ReportesDeContabilidad
+Imports Syncfusion.WinForms.Input
+
 Public Class jsContabRepParametros
     Private Const sModulo As String = "Reportes de Contabilidad"
 
@@ -10,7 +12,7 @@ Public Class jsContabRepParametros
 
     Private myConn As New MySqlConnection(jytsistema.strConn)
     Private ds As New DataSet
-    Private ft As New  Transportables
+    Private ft As New Transportables
 
     Private vOrdenNombres() As String
     Private vOrdenCampos() As String
@@ -19,12 +21,15 @@ Public Class jsContabRepParametros
     Private IndiceReporte As Integer
     Private strIndiceReporte As String
     Private periodoTipo As TipoPeriodo
-    Public Sub Cargar(ByVal TipoCarga As Integer, ByVal numReporte As Integer, ByVal nomReporte As String, _
+    Public Sub Cargar(ByVal TipoCarga As Integer, ByVal numReporte As Integer, ByVal nomReporte As String,
                       Optional ByVal Code As String = "", Optional ByVal numDocumento As String = "")
 
         Me.Dock = DockStyle.Fill
         Me.Tag = sModulo
         myConn.Open()
+
+        Dim dates As SfDateTimeEdit() = {txtPeriodoDesde, txtPeriodoHasta}
+        SetSizeDateObjects(dates)
 
         ReporteNumero = numReporte
         ReporteNombre = nomReporte
@@ -95,9 +100,9 @@ Public Class jsContabRepParametros
 
         End Select
     End Sub
-    Private Sub Inicializar(ByVal nEtiqueta As String, ByVal TabOrden As Boolean, ByVal TabGrupo As Boolean, _
-        ByVal TabCriterio As Boolean, ByVal TabConstantes As Boolean, ByVal aNombreOrden() As String, _
-        ByVal aCampoOrden() As String, ByVal aTipoOrden() As String, ByVal aLongitudOrden() As Integer, _
+    Private Sub Inicializar(ByVal nEtiqueta As String, ByVal TabOrden As Boolean, ByVal TabGrupo As Boolean,
+        ByVal TabCriterio As Boolean, ByVal TabConstantes As Boolean, ByVal aNombreOrden() As String,
+        ByVal aCampoOrden() As String, ByVal aTipoOrden() As String, ByVal aLongitudOrden() As Integer,
         Optional ByVal Codigo As String = "")
 
 
@@ -139,9 +144,9 @@ Public Class jsContabRepParametros
         VerCriterio_TipoDocumento(False)
         VerCriterio_MesAño(False)
         Select Case ReporteNumero
-            Case ReporteContabilidad.cCuentasContables, ReporteContabilidad.cPolizaDiferida, _
+            Case ReporteContabilidad.cCuentasContables, ReporteContabilidad.cPolizaDiferida,
                 ReporteContabilidad.cPolizaActual
-            Case ReporteContabilidad.cPolizasActuales, ReporteContabilidad.cMayorAnalitico, _
+            Case ReporteContabilidad.cPolizasActuales, ReporteContabilidad.cMayorAnalitico,
                 ReporteContabilidad.cBalanceComprobacion, ReporteContabilidad.cDiario
                 VerCriterio_Periodo(True, 0)
             Case ReporteContabilidad.cBalanceGeneral, ReporteContabilidad.cGananciasPerdidas
@@ -152,38 +157,37 @@ Public Class jsContabRepParametros
     Private Sub VerCriterio_Periodo(ByVal Ver As Boolean, ByVal CompletoDesdeHasta As Integer, Optional ByVal Periodo As TipoPeriodo = TipoPeriodo.iMensual)
         'CompletoDesdeHasta 0 = Complete , 1 = Desde , 2 = Hasta 
 
-        ft.visualizarObjetos(False, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta, btnPeriodoDesde, btnPeriodoHasta)
-        ft.habilitarObjetos(False, True, txtPeriodoDesde, txtPeriodoHasta)
-        PeriodoTipo = Periodo
+        ft.visualizarObjetos(False, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta)
+        periodoTipo = Periodo
         If Ver Then
 
             Select Case CompletoDesdeHasta
                 Case 0
-                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodoHasta, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta, btnPeriodoDesde, btnPeriodoHasta)
+                    ft.visualizarObjetos(Ver, lblPeriodo, txtPeriodoDesde, txtPeriodoHasta)
                 Case 1
-                    ft.visualizarObjetos(Ver, lblPeriodoDesde, lblPeriodo, txtPeriodoDesde, btnPeriodoDesde)
+                    ft.visualizarObjetos(Ver, lblPeriodo, txtPeriodoDesde)
                 Case 2
-                    ft.visualizarObjetos(Ver, lblPeriodoHasta, lblPeriodo, txtPeriodoHasta, btnPeriodoHasta)
+                    ft.visualizarObjetos(Ver, lblPeriodo, txtPeriodoHasta)
             End Select
         End If
 
 
         Select Case Periodo
             Case TipoPeriodo.iDiario
-                txtPeriodoDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtPeriodoHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoDesde.Value = jytsistema.sFechadeTrabajo
+                txtPeriodoHasta.Value = jytsistema.sFechadeTrabajo
             Case TipoPeriodo.iSemanal
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaSemana(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaSemana(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaSemana(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaSemana(jytsistema.sFechadeTrabajo)
             Case TipoPeriodo.iMensual
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaMes(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaMes(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaMes(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaMes(jytsistema.sFechadeTrabajo)
             Case TipoPeriodo.iAnual
-                txtPeriodoDesde.Text = ft.FormatoFecha(PrimerDiaAño(jytsistema.sFechadeTrabajo))
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaAño(jytsistema.sFechadeTrabajo))
+                txtPeriodoDesde.Value = PrimerDiaAño(jytsistema.sFechadeTrabajo)
+                txtPeriodoHasta.Value = UltimoDiaAño(jytsistema.sFechadeTrabajo)
             Case Else
-                txtPeriodoDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-                txtPeriodoHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+                txtPeriodoDesde.Value = jytsistema.sFechadeTrabajo
+                txtPeriodoHasta.Value = jytsistema.sFechadeTrabajo
         End Select
 
     End Sub
@@ -323,11 +327,11 @@ Public Class jsContabRepParametros
                 str = SeleccionCOTBalanceDeComprobacionPlus(CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), txtOrdenDesde.Text, txtOrdenHasta.Text, False, True, IIf(cmbConstante_TipoCuenta.SelectedIndex = 0, False, True))
 
             Case ReporteContabilidad.cBalanceGeneral
-                Dim CuentaResultado As String = ParametroPlus(MyConn, Gestion.iContabilidad, "CONPARAM03")
+                Dim CuentaResultado As String = ParametroPlus(myConn, Gestion.iContabilidad, "CONPARAM03")
                 If CuentaResultado <> "" Then
                     nTabla = "dtBalanceGeneral"
                     oReporte = New rptContabBalanceGeneral
-                    str = SeleccionCOTBalanceGeneral(myConn, lblInfo, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), _
+                    str = SeleccionCOTBalanceGeneral(myConn, lblInfo, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text),
                                                      cmbNivel.SelectedIndex + 1, True, jytsistema.WorkExercise)
                 Else
                     ft.mensajeAdvertencia("Debe indicar una cuenta resultado en los parámetros del sistema...  ")
@@ -336,7 +340,7 @@ Public Class jsContabRepParametros
             Case ReporteContabilidad.cGananciasPerdidas
                 nTabla = "dtBalanceGeneral"
                 oReporte = New rptContabGananciasPerdidas
-                str = SeleccionCOTBalanceGeneral(myConn, lblInfo, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text), _
+                str = SeleccionCOTBalanceGeneral(myConn, lblInfo, CDate(txtPeriodoDesde.Text), CDate(txtPeriodoHasta.Text),
                                                  cmbNivel.SelectedIndex + 1, False, jytsistema.WorkExercise)
             Case ReporteContabilidad.cReglaContabilizacion, ReporteContabilidad.cReglasContabilizacion
                 nTabla = "dtReglas"
@@ -351,7 +355,7 @@ Public Class jsContabRepParametros
             If dsCon.Tables(nTabla).Rows.Count > 0 Then
                 oReporte = PresentaReporte(oReporte, dsCon, nTabla)
                 r.CrystalReportViewer1.ReportSource = oReporte
-                r.CrystalReportViewer1.ToolPanelView = IIf(PresentaArbol, CrystalDecisions.Windows.Forms.ToolPanelViewType.GroupTree, _
+                r.CrystalReportViewer1.ToolPanelView = IIf(PresentaArbol, CrystalDecisions.Windows.Forms.ToolPanelViewType.GroupTree,
                                               CrystalDecisions.Windows.Forms.ToolPanelViewType.None)
                 r.CrystalReportViewer1.ShowGroupTreeButton = PresentaArbol
                 r.CrystalReportViewer1.Zoom(1)
@@ -359,7 +363,7 @@ Public Class jsContabRepParametros
                 r.Cargar(ReporteNombre)
                 DeshabilitarCursorEnEspera()
             Else
-                ft.MensajeCritico("No existe información que cumpla con estos criterios y/o constantes ")
+                ft.mensajeCritico("No existe información que cumpla con estos criterios y/o constantes ")
             End If
         End If
 
@@ -413,21 +417,7 @@ Public Class jsContabRepParametros
 
     End Function
 
-    Private Sub btnPeriodoDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles btnPeriodoDesde.Click
-        txtPeriodoDesde.Text = SeleccionaFecha(CDate(txtPeriodoDesde.Text), Me, sender)
-    End Sub
-
-    Private Sub btnPeriodoHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-        Handles btnPeriodoHasta.Click
-        txtPeriodoHasta.Text = SeleccionaFecha(CDate(txtPeriodoHasta.Text), Me, sender)
-    End Sub
-
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
-
-    End Sub
-
-    Private Sub chkList_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkList.SelectedIndexChanged, _
+    Private Sub chkList_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkList.SelectedIndexChanged,
         chkList.DoubleClick
         Dim iCont As Integer
         txtTipDoc.Text = ""
@@ -439,7 +429,8 @@ Public Class jsContabRepParametros
     End Sub
     Private Function LineaCriterios() As String
         LineaCriterios = ""
-        If lblPeriodo.Visible Then LineaCriterios += "Período: " & IIf(lblPeriodoDesde.Visible, txtPeriodoDesde.Text, "") & IIf(lblPeriodoDesde.Visible AndAlso lblPeriodoHasta.Visible, "/", "") & IIf(lblPeriodoHasta.Visible, txtPeriodoHasta.Text, "")
+        If lblPeriodo.Visible Then LineaCriterios += "Período: " & IIf(txtPeriodoDesde.Visible, txtPeriodoDesde.Text, "") &
+            IIf(txtPeriodoDesde.Visible AndAlso txtPeriodoHasta.Visible, "/", "") & IIf(txtPeriodoHasta.Visible, txtPeriodoHasta.Text, "")
         If lblTipodocumento.Visible Then LineaCriterios += " - " + " Tipo Documentos : " + txtTipDoc.Text
         If lblMesAño.Visible Then LineaCriterios += " Mes y Año " + cmbMes.Text + "/" + cmbAño.Text
     End Function
@@ -458,23 +449,11 @@ Public Class jsContabRepParametros
 
         Select Case cmbOrdenadoPor.Text
             Case "Código Cuenta"
-                txt.Text = CargarTablaSimple(myConn, lblInfo, ds, "select codcon codigo, descripcion from jscotcatcon where id_emp = '" & jytsistema.WorkID & "' order by codcon ", _
+                txt.Text = CargarTablaSimple(myConn, lblInfo, ds, "select codcon codigo, descripcion from jscotcatcon where id_emp = '" & jytsistema.WorkID & "' order by codcon ",
                                              "Cuentas Contables", txt.Text)
-
-
-                'ds = DataSetRequery(ds, "select codcon codigo, descripcion from jscotcatcon where id_emp = '" & jytsistema.WorkID & "' order by codcon ", myConn, nTAbleOrden, lblInfo)
-                'dtDeOrden = ds.Tables(nTAbleOrden)
-                'f.Cargar("Cuentas Contables", ds, dtDeOrden, nTAbleOrden, TipoCargaFormulario.iShowDialog, False)
-                'txt.Text = f.Seleccion
             Case "Asiento Contable"
-                'ds = DataSetRequery(ds, "select asiento codigo, descripcion from jscotencasi where actual = 1 and id_emp = '" & jytsistema.WorkID & "' order by asiento ", myConn, nTAbleOrden, lblInfo)
-                'dtDeOrden = ds.Tables(nTAbleOrden)
-                'f.Cargar("Asientos Contables", ds, dtDeOrden, nTAbleOrden, TipoCargaFormulario.iShowDialog, False)
-                'txt.Text = f.Seleccion
-
-                txt.Text = CargarTablaSimple(myConn, lblInfo, ds, "select asiento codigo, descripcion from jscotencasi where actual = 1 and id_emp = '" & jytsistema.WorkID & "' order by asiento ", _
+                txt.Text = CargarTablaSimple(myConn, lblInfo, ds, "select asiento codigo, descripcion from jscotencasi where actual = 1 and id_emp = '" & jytsistema.WorkID & "' order by asiento ",
                                              "Asientos Contables", txt.Text)
-
         End Select
         f.Close()
         f = Nothing
@@ -486,16 +465,16 @@ Public Class jsContabRepParametros
         txtOrdenHasta.Text = txtOrdenDesde.Text
     End Sub
 
-    Private Sub txtPeriodoDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPeriodoDesde.TextChanged
-        Select Case PeriodoTipo
+    Private Sub txtPeriodoDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPeriodoDesde.ValueChanged
+        Select Case periodoTipo
             Case TipoPeriodo.iDiario
-                txtPeriodoHasta.Text = txtPeriodoDesde.Text
+                txtPeriodoHasta.Value = txtPeriodoDesde.Value
             Case TipoPeriodo.iSemanal
-                txtPeriodoHasta.Text = ft.FormatoFecha(DateAdd(DateInterval.Day, 7, CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = DateAdd(DateInterval.Day, 7, CDate(txtPeriodoDesde.Text))
             Case TipoPeriodo.iMensual
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaMes(CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = UltimoDiaMes(CDate(txtPeriodoDesde.Text))
             Case TipoPeriodo.iAnual
-                txtPeriodoHasta.Text = ft.FormatoFecha(UltimoDiaAño(CDate(txtPeriodoDesde.Text)))
+                txtPeriodoHasta.Value = UltimoDiaAño(CDate(txtPeriodoDesde.Text))
         End Select
     End Sub
 End Class

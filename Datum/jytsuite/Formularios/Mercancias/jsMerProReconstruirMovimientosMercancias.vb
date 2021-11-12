@@ -1,4 +1,6 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+
 Public Class jsMerProReconstruirMovimientosMercancias
     Private Const sModulo As String = "Reconstruir movimientos de mercancías"
     Private Const nTabla As String = "tblProReconstruir"
@@ -12,16 +14,19 @@ Public Class jsMerProReconstruirMovimientosMercancias
     Public Sub Cargar(ByVal MyCon As MySqlConnection)
 
         myConn = MyCon
-        lblLeyenda.Text = " 1. Se reconstruyen los movimientos de mercancías desde Ventas (Notas Entrega, Facturas, Notas crédito, " + vbCrLf + _
-                          "    Notas débito), Compras (Recepciones, Compras, Notas Crédito, Notas Débito) y  Puntos de Ventas.  " + vbCrLf + _
-                          " 2. Se recalculan las existencias y " + vbCrLf + _
+        lblLeyenda.Text = " 1. Se reconstruyen los movimientos de mercancías desde Ventas (Notas Entrega, Facturas, Notas crédito, " + vbCrLf +
+                          "    Notas débito), Compras (Recepciones, Compras, Notas Crédito, Notas Débito) y  Puntos de Ventas.  " + vbCrLf +
+                          " 2. Se recalculan las existencias y " + vbCrLf +
                           " 3. Se recalculan los costos "
 
-        ft.mensajeEtiqueta(lblInfo, "Verifique la fecha desde/hasta que desea reconstruir ...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Verifique la fecha desde/hasta que desea reconstruir ...", Transportables.tipoMensaje.iAyuda)
         ft.habilitarObjetos(False, False, txtFechaDesde, txtFechaHasta)
 
-        txtFechaDesde.Text = ft.FormatoFecha(PrimerDiaMes(jytsistema.sFechadeTrabajo))
-        txtFechaHasta.Text = ft.FormatoFecha(UltimoDiaMes(jytsistema.sFechadeTrabajo))
+        Dim dates As SfDateTimeEdit() = {txtFechaDesde, txtFechaHasta}
+        SetSizeDateObjects(dates)
+
+        txtFechaDesde.Value = PrimerDiaMes(jytsistema.sFechadeTrabajo)
+        txtFechaHasta.Value = UltimoDiaMes(jytsistema.sFechadeTrabajo)
 
         chkActualizaExistencias.Checked = True
 
@@ -106,21 +111,21 @@ Public Class jsMerProReconstruirMovimientosMercancias
             With dtMovSal.Rows(jCont)
 
                 Dim nCosto As Double = UltimoCostoAFecha(myConn, .Item("codart"), CDate(.Item("fechamov").ToString))
-                Dim nEquivale As Double = Equivalencia(myConn,  .Item("codart"), .Item("unidad"))
+                Dim nEquivale As Double = Equivalencia(myConn, .Item("codart"), .Item("unidad"))
                 Dim Descuento As Double = 0
 
 
                 Dim Costotal As Double = nCosto * .Item("cantidad") / IIf(nEquivale = 0, 1, nEquivale)
                 Dim CostotalDescuento As Double = nCosto * (1 - Descuento / 100) * .Item("cantidad") / IIf(nEquivale = 0, 1, nEquivale)
 
-                InsertEditMERCASMovimientoInventario(myConn, lblInfo, False, .Item("codart"), CDate(.Item("fechamov").ToString), _
-                                                      .Item("tipomov"), .Item("numdoc"), .Item("unidad"), .Item("cantidad"), .Item("peso"), _
-                                                      Costotal, CostotalDescuento, .Item("origen"), .Item("numorg"), _
+                InsertEditMERCASMovimientoInventario(myConn, lblInfo, False, .Item("codart"), CDate(.Item("fechamov").ToString),
+                                                      .Item("tipomov"), .Item("numdoc"), .Item("unidad"), .Item("cantidad"), .Item("peso"),
+                                                      Costotal, CostotalDescuento, .Item("origen"), .Item("numorg"),
                                                       .Item("lote"), .Item("prov_cli"), .Item("ventotal"), .Item("ventotaldes"),
-                                                      .Item("impiva"), .Item("descuento"), .Item("vendedor"), .Item("almacen"), _
+                                                      .Item("impiva"), .Item("descuento"), .Item("vendedor"), .Item("almacen"),
                                                       .Item("asiento"), CDate(.Item("fechasi").ToString))
 
-                refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, CInt(jCont / dtMovSal.Rows.Count * 100), _
+                refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, CInt(jCont / dtMovSal.Rows.Count * 100),
                                               " ARTICULO : " & .Item("CODART") & " " & .Item("numdoc") & " " & .Item("fechamov").ToString)
 
             End With
@@ -136,7 +141,7 @@ Public Class jsMerProReconstruirMovimientosMercancias
         ds = DataSetRequery(ds, " select * from jsmerctainv where " _
                             & IIf(txtCodigoDesde.Text <> "", " CODART >= '" & txtCodigoDesde.Text & "' AND ", "") _
                             & IIf(txtCodigoHasta.Text <> "", " CODART <= '" & txtCodigoHasta.Text & "' AND ", "") _
-                            & " id_emp = '" & jytsistema.WorkID & "' order by codart ", _
+                            & " id_emp = '" & jytsistema.WorkID & "' order by codart ",
                              myConn, nTabla, lblInfo)
 
         dtItems = ds.Tables(nTabla)
@@ -146,9 +151,9 @@ Public Class jsMerProReconstruirMovimientosMercancias
         If dtItems.Rows.Count > 0 Then
             For jCont As Integer = 0 To dtItems.Rows.Count - 1
                 With dtItems.Rows(jCont)
-                   
+
                     ActualizarCostosEnMovimientos(.Item("CODART"))
-                    refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, CInt(jCont / dtItems.Rows.Count * 100), _
+                    refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, CInt(jCont / dtItems.Rows.Count * 100),
                                                    " ARTICULO : " & .Item("CODART") & " " & .Item("NOMART"))
                 End With
             Next
@@ -169,7 +174,7 @@ Public Class jsMerProReconstruirMovimientosMercancias
         ds = DataSetRequery(ds, " select * from jsmerctainv where " _
                             & IIf(txtCodigoDesde.Text <> "", " CODART >= '" & txtCodigoDesde.Text & "' AND ", "") _
                             & IIf(txtCodigoHasta.Text <> "", " CODART <= '" & txtCodigoHasta.Text & "' AND ", "") _
-                            & " id_emp = '" & jytsistema.WorkID & "' order by codart ", _
+                            & " id_emp = '" & jytsistema.WorkID & "' order by codart ",
                              myConn, nTabla, lblInfo)
 
         dtItems = ds.Tables(nTabla)
@@ -179,7 +184,7 @@ Public Class jsMerProReconstruirMovimientosMercancias
         If dtItems.Rows.Count > 0 Then
             For jCont As Integer = 0 To dtItems.Rows.Count - 1
                 With dtItems.Rows(jCont)
-                  
+
                     ActualizarExistenciasPlus(myConn, .Item("CODART"))
                     refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, CInt(jCont / dtItems.Rows.Count * 100), _
                                                   " ARTICULO : " & .Item("CODART") & " " & .Item("NOMART"))
@@ -252,16 +257,6 @@ Public Class jsMerProReconstruirMovimientosMercancias
 
     End Sub
 
-    Private Sub btnFechaDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaDesde.Click
-        txtFechaDesde.Text = SeleccionaFecha(CDate(txtFechaDesde.Text), Me, grpCaja, btnFechaDesde)
-    End Sub
-
-
-    Private Sub btnFechaHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaHasta.Click
-        txtFechaHasta.Text = SeleccionaFecha(CDate(txtFechaHasta.Text), Me, grpCaja, btnFechaHasta)
-    End Sub
-
-
     Private Sub btnCodigoDesde_Click(sender As System.Object, e As System.EventArgs) Handles btnCodigoDesde.Click
         txtCodigoDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " Select codart codigo, nomart descripcion, alterno from jsmerctainv where id_emp = '" & jytsistema.WorkID & "' order by codart ", "MERCANCIAS...", txtCodigoDesde.Text)
     End Sub
@@ -274,7 +269,7 @@ Public Class jsMerProReconstruirMovimientosMercancias
         txtCodigoHasta.Text = txtCodigoDesde.Text
     End Sub
 
-    Private Sub txtFechaDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtFechaDesde.TextChanged
-        txtFechaHasta.Text = txtFechaDesde.Text
+    Private Sub txtFechaDesde_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtFechaDesde.ValueChanged
+        txtFechaHasta.Value = txtFechaDesde.Value
     End Sub
 End Class

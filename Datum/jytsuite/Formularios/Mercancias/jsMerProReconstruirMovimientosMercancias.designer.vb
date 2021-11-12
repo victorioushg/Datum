@@ -22,13 +22,14 @@ Partial Class jsMerProReconstruirMovimientosMercancias
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsMerProReconstruirMovimientosMercancias))
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.grpCaja = New System.Windows.Forms.GroupBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.btnCodigoHasta = New System.Windows.Forms.Button()
+        Me.btnCodigoDesde = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtCodigoHasta = New System.Windows.Forms.TextBox()
+        Me.txtCodigoDesde = New System.Windows.Forms.TextBox()
         Me.chkFacturas = New System.Windows.Forms.CheckBox()
         Me.chkActualizaExistencias = New System.Windows.Forms.CheckBox()
-        Me.btnFechaHasta = New System.Windows.Forms.Button()
-        Me.txtFechaHasta = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.btnFechaDesde = New System.Windows.Forms.Button()
-        Me.txtFechaDesde = New System.Windows.Forms.TextBox()
         Me.lblcuenta = New System.Windows.Forms.Label()
         Me.grpTotales = New System.Windows.Forms.GroupBox()
         Me.lblTarea = New System.Windows.Forms.Label()
@@ -43,12 +44,8 @@ Partial Class jsMerProReconstruirMovimientosMercancias
         Me.Label10 = New System.Windows.Forms.Label()
         Me.lblLeyenda = New System.Windows.Forms.Label()
         Me.grpLeyenda = New System.Windows.Forms.GroupBox()
-        Me.txtCodigoDesde = New System.Windows.Forms.TextBox()
-        Me.txtCodigoHasta = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.btnCodigoDesde = New System.Windows.Forms.Button()
-        Me.btnCodigoHasta = New System.Windows.Forms.Button()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtFechaHasta = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaDesde = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpCaja.SuspendLayout()
         Me.grpTotales.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -69,6 +66,8 @@ Partial Class jsMerProReconstruirMovimientosMercancias
         'grpCaja
         '
         Me.grpCaja.BackColor = System.Drawing.SystemColors.Control
+        Me.grpCaja.Controls.Add(Me.txtFechaDesde)
+        Me.grpCaja.Controls.Add(Me.txtFechaHasta)
         Me.grpCaja.Controls.Add(Me.Label4)
         Me.grpCaja.Controls.Add(Me.btnCodigoHasta)
         Me.grpCaja.Controls.Add(Me.btnCodigoDesde)
@@ -77,17 +76,68 @@ Partial Class jsMerProReconstruirMovimientosMercancias
         Me.grpCaja.Controls.Add(Me.txtCodigoDesde)
         Me.grpCaja.Controls.Add(Me.chkFacturas)
         Me.grpCaja.Controls.Add(Me.chkActualizaExistencias)
-        Me.grpCaja.Controls.Add(Me.btnFechaHasta)
-        Me.grpCaja.Controls.Add(Me.txtFechaHasta)
-        Me.grpCaja.Controls.Add(Me.Label2)
-        Me.grpCaja.Controls.Add(Me.btnFechaDesde)
-        Me.grpCaja.Controls.Add(Me.txtFechaDesde)
         Me.grpCaja.Controls.Add(Me.lblcuenta)
         Me.grpCaja.Location = New System.Drawing.Point(2, 209)
         Me.grpCaja.Name = "grpCaja"
         Me.grpCaja.Size = New System.Drawing.Size(730, 112)
         Me.grpCaja.TabIndex = 82
         Me.grpCaja.TabStop = False
+        '
+        'Label4
+        '
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(234, 43)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(50, 20)
+        Me.Label4.TabIndex = 139
+        Me.Label4.Text = "Hasta :"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'btnCodigoHasta
+        '
+        Me.btnCodigoHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCodigoHasta.Location = New System.Drawing.Point(377, 45)
+        Me.btnCodigoHasta.Name = "btnCodigoHasta"
+        Me.btnCodigoHasta.Size = New System.Drawing.Size(25, 20)
+        Me.btnCodigoHasta.TabIndex = 138
+        Me.btnCodigoHasta.Text = "•••"
+        Me.btnCodigoHasta.UseVisualStyleBackColor = True
+        '
+        'btnCodigoDesde
+        '
+        Me.btnCodigoDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCodigoDesde.Location = New System.Drawing.Point(203, 44)
+        Me.btnCodigoDesde.Name = "btnCodigoDesde"
+        Me.btnCodigoDesde.Size = New System.Drawing.Size(25, 20)
+        Me.btnCodigoDesde.TabIndex = 137
+        Me.btnCodigoDesde.Text = "•••"
+        Me.btnCodigoDesde.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(10, 45)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(100, 19)
+        Me.Label1.TabIndex = 136
+        Me.Label1.Text = "Item desde :"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtCodigoHasta
+        '
+        Me.txtCodigoHasta.Location = New System.Drawing.Point(290, 44)
+        Me.txtCodigoHasta.Name = "txtCodigoHasta"
+        Me.txtCodigoHasta.Size = New System.Drawing.Size(81, 20)
+        Me.txtCodigoHasta.TabIndex = 135
+        Me.txtCodigoHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'txtCodigoDesde
+        '
+        Me.txtCodigoDesde.Location = New System.Drawing.Point(116, 44)
+        Me.txtCodigoDesde.Name = "txtCodigoDesde"
+        Me.txtCodigoDesde.Size = New System.Drawing.Size(81, 20)
+        Me.txtCodigoDesde.TabIndex = 134
+        Me.txtCodigoDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'chkFacturas
         '
@@ -108,52 +158,6 @@ Partial Class jsMerProReconstruirMovimientosMercancias
         Me.chkActualizaExistencias.TabIndex = 132
         Me.chkActualizaExistencias.Text = "Actualiza existencias"
         Me.chkActualizaExistencias.UseVisualStyleBackColor = True
-        '
-        'btnFechaHasta
-        '
-        Me.btnFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaHasta.Location = New System.Drawing.Point(377, 19)
-        Me.btnFechaHasta.Name = "btnFechaHasta"
-        Me.btnFechaHasta.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaHasta.TabIndex = 131
-        Me.btnFechaHasta.Text = "•••"
-        Me.btnFechaHasta.UseVisualStyleBackColor = True
-        '
-        'txtFechaHasta
-        '
-        Me.txtFechaHasta.Location = New System.Drawing.Point(290, 19)
-        Me.txtFechaHasta.Name = "txtFechaHasta"
-        Me.txtFechaHasta.Size = New System.Drawing.Size(81, 20)
-        Me.txtFechaHasta.TabIndex = 122
-        Me.txtFechaHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label2
-        '
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(234, 18)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(50, 20)
-        Me.Label2.TabIndex = 118
-        Me.Label2.Text = "Hasta :"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'btnFechaDesde
-        '
-        Me.btnFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaDesde.Location = New System.Drawing.Point(203, 19)
-        Me.btnFechaDesde.Name = "btnFechaDesde"
-        Me.btnFechaDesde.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaDesde.TabIndex = 116
-        Me.btnFechaDesde.Text = "•••"
-        Me.btnFechaDesde.UseVisualStyleBackColor = True
-        '
-        'txtFechaDesde
-        '
-        Me.txtFechaDesde.Location = New System.Drawing.Point(116, 18)
-        Me.txtFechaDesde.Name = "txtFechaDesde"
-        Me.txtFechaDesde.Size = New System.Drawing.Size(81, 20)
-        Me.txtFechaDesde.TabIndex = 115
-        Me.txtFechaDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblcuenta
         '
@@ -299,7 +303,7 @@ Partial Class jsMerProReconstruirMovimientosMercancias
         Me.lblLeyenda.Name = "lblLeyenda"
         Me.lblLeyenda.Size = New System.Drawing.Size(705, 130)
         Me.lblLeyenda.TabIndex = 89
-        Me.lblLeyenda.Text = "Mediante este proceso se incluyen las mercancías deseadas en determinado conteo d" & _
+        Me.lblLeyenda.Text = "Mediante este proceso se incluyen las mercancías deseadas en determinado conteo d" &
     "e inventario"
         '
         'grpLeyenda
@@ -312,61 +316,29 @@ Partial Class jsMerProReconstruirMovimientosMercancias
         Me.grpLeyenda.TabIndex = 90
         Me.grpLeyenda.TabStop = False
         '
-        'txtCodigoDesde
+        'txtFechaHasta
         '
-        Me.txtCodigoDesde.Location = New System.Drawing.Point(116, 44)
-        Me.txtCodigoDesde.Name = "txtCodigoDesde"
-        Me.txtCodigoDesde.Size = New System.Drawing.Size(81, 20)
-        Me.txtCodigoDesde.TabIndex = 134
-        Me.txtCodigoDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtFechaHasta.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaHasta.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaHasta.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaHasta.Location = New System.Drawing.Point(288, 21)
+        Me.txtFechaHasta.Name = "txtFechaHasta"
+        Me.txtFechaHasta.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaHasta.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaHasta.TabIndex = 214
         '
-        'txtCodigoHasta
+        'txtFechaDesde
         '
-        Me.txtCodigoHasta.Location = New System.Drawing.Point(290, 44)
-        Me.txtCodigoHasta.Name = "txtCodigoHasta"
-        Me.txtCodigoHasta.Size = New System.Drawing.Size(81, 20)
-        Me.txtCodigoHasta.TabIndex = 135
-        Me.txtCodigoHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label1
-        '
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(10, 45)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(100, 19)
-        Me.Label1.TabIndex = 136
-        Me.Label1.Text = "Item desde :"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'btnCodigoDesde
-        '
-        Me.btnCodigoDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCodigoDesde.Location = New System.Drawing.Point(203, 44)
-        Me.btnCodigoDesde.Name = "btnCodigoDesde"
-        Me.btnCodigoDesde.Size = New System.Drawing.Size(25, 20)
-        Me.btnCodigoDesde.TabIndex = 137
-        Me.btnCodigoDesde.Text = "•••"
-        Me.btnCodigoDesde.UseVisualStyleBackColor = True
-        '
-        'btnCodigoHasta
-        '
-        Me.btnCodigoHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCodigoHasta.Location = New System.Drawing.Point(377, 45)
-        Me.btnCodigoHasta.Name = "btnCodigoHasta"
-        Me.btnCodigoHasta.Size = New System.Drawing.Size(25, 20)
-        Me.btnCodigoHasta.TabIndex = 138
-        Me.btnCodigoHasta.Text = "•••"
-        Me.btnCodigoHasta.UseVisualStyleBackColor = True
-        '
-        'Label4
-        '
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(234, 43)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(50, 20)
-        Me.Label4.TabIndex = 139
-        Me.Label4.Text = "Hasta :"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.txtFechaDesde.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaDesde.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaDesde.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaDesde.Location = New System.Drawing.Point(116, 19)
+        Me.txtFechaDesde.Name = "txtFechaDesde"
+        Me.txtFechaDesde.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaDesde.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaDesde.TabIndex = 215
         '
         'jsMerProReconstruirMovimientosMercancias
         '
@@ -414,11 +386,6 @@ Partial Class jsMerProReconstruirMovimientosMercancias
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Friend WithEvents lblLeyenda As System.Windows.Forms.Label
     Friend WithEvents grpLeyenda As System.Windows.Forms.GroupBox
-    Friend WithEvents btnFechaDesde As System.Windows.Forms.Button
-    Friend WithEvents txtFechaDesde As System.Windows.Forms.TextBox
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents txtFechaHasta As System.Windows.Forms.TextBox
-    Friend WithEvents btnFechaHasta As System.Windows.Forms.Button
     Friend WithEvents lblTarea As System.Windows.Forms.Label
     Friend WithEvents chkFacturas As System.Windows.Forms.CheckBox
     Friend WithEvents chkActualizaExistencias As System.Windows.Forms.CheckBox
@@ -428,4 +395,6 @@ Partial Class jsMerProReconstruirMovimientosMercancias
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents txtCodigoHasta As System.Windows.Forms.TextBox
     Friend WithEvents txtCodigoDesde As System.Windows.Forms.TextBox
+    Friend WithEvents txtFechaDesde As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaHasta As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsBanProTransferencias
     Private Const sModulo As String = "Transferencias bancarias"
     Private Const nTabla As String = "tbltran"
@@ -17,9 +18,12 @@ Public Class jsBanProTransferencias
         myConn = MyCon
         Me.Tag = sModulo
 
+        Dim dates As SfDateTimeEdit() = {txtFecha}
+        SetSizeDateObjects(dates)
+
         IniciarCuentasEnCombo(myConn, lblInfo, cmbCuentaOrigen, , 1)
         IniciarCuentasEnCombo(myConn, lblInfo, cmbCuentaDestino, , 1)
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
         txtCambio.Text = ft.FormatoNumero(1.0)
         txtMontoATransferir.Text = ft.FormatoNumero(0.0)
         ft.RellenaCombo(aTipoTransferencia, cmbTipoTransferencia)
@@ -49,7 +53,7 @@ Public Class jsBanProTransferencias
     End Sub
     Private Function Validado() As Boolean
 
-        If FechaUltimoBloqueo(myConn, "jsbantraban") >= Convert.ToDateTime(txtFecha.Text) Then
+        If FechaUltimoBloqueo(myConn, "jsbantraban") >= txtFecha.Value Then
             ft.mensajeCritico("FECHA MENOR QUE ULTIMA FECHA DE CIERRE...")
             Return False
         End If
@@ -109,40 +113,40 @@ Public Class jsBanProTransferencias
         If cmbTipoTransferencia.SelectedIndex = 0 Then 'ELECTRONICA  
 
             'BANCO ORIGEN
-            InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, CDate(txtFecha.Text), numTrans, "ND", Mid(cmbCuentaOrigen.Text, 1, 5), "", _
-                "TRANSFERENCIA BANCARIA", -1 * ValorNumero(txtMontoReal.Text), "BAN", numTrans, "", numComprobante, "0", jytsistema.sFechadeTrabajo, _
-                jytsistema.sFechadeTrabajo, "ND", "", jytsistema.sFechadeTrabajo, "0", "", "")
+            InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, txtFecha.Value, numTrans, "ND", Mid(cmbCuentaOrigen.Text, 1, 5), "",
+                "TRANSFERENCIA BANCARIA", -1 * ValorNumero(txtMontoReal.Text), "BAN", numTrans, "", numComprobante, "0", jytsistema.sFechadeTrabajo,
+                jytsistema.sFechadeTrabajo, "ND", "", jytsistema.sFechadeTrabajo, "0", "", "", jytsistema.WorkCurrency.Id, DateTime.Now())
 
             'BANCO DESTINO
-            InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, CDate(txtFecha.Text), numTrans, "NC", Mid(cmbCuentaDestino.Text, 1, 5), "", _
-                "TRANSFERENCIA BANCARIA", ValorNumero(txtMontoReal.Text), "BAN", numTrans, "", numComprobante, "0", jytsistema.sFechadeTrabajo, _
-                jytsistema.sFechadeTrabajo, "NC", "", jytsistema.sFechadeTrabajo, "0", "", "")
+            InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, txtFecha.Value, numTrans, "NC", Mid(cmbCuentaDestino.Text, 1, 5), "",
+                "TRANSFERENCIA BANCARIA", ValorNumero(txtMontoReal.Text), "BAN", numTrans, "", numComprobante, "0", jytsistema.sFechadeTrabajo,
+                jytsistema.sFechadeTrabajo, "NC", "", jytsistema.sFechadeTrabajo, "0", "", "", jytsistema.WorkCurrency.Id, DateTime.Now())
 
         Else ' CHEQUE
 
             'BANCO ORIGEN
-            InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, CDate(txtFecha.Text), numTrans, "CH", _
-                 Mid(cmbCuentaOrigen.Text, 1, 5), "", "TRANSFERENCIA BANCARIA", -1 * ValorNumero(txtMontoReal.Text), _
-                "BAN", numTrans, txtBeneficiario.Text, numComprobante, "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, "CH", "", jytsistema.sFechadeTrabajo, _
-                "0", "", "")
+            InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, txtFecha.Value, numTrans, "CH",
+                 Mid(cmbCuentaOrigen.Text, 1, 5), "", "TRANSFERENCIA BANCARIA", -1 * ValorNumero(txtMontoReal.Text),
+                "BAN", numTrans, txtBeneficiario.Text, numComprobante, "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, "CH", "", jytsistema.sFechadeTrabajo,
+                "0", "", "", jytsistema.WorkCurrency.Id, DateTime.Now())
 
 
-            InsertEditBANCOSRenglonORDENPAGO(myConn, lblInfo, True, numComprobante, "00002", codContableCaja, _
+            InsertEditBANCOSRenglonORDENPAGO(myConn, lblInfo, True, numComprobante, "00002", codContableCaja,
                                            numTrans, "TRANSFERENCIA BANCARIA", ValorNumero(txtMontoReal.Text), 0, 0)
-            InsertEditBANCOSRenglonORDENPAGO(myConn, lblInfo, True, numComprobante, "00003", codContableCaja, _
+            InsertEditBANCOSRenglonORDENPAGO(myConn, lblInfo, True, numComprobante, "00003", codContableCaja,
                                             numTrans, "TRANSFERENCIA BANCARIA", -1 * ValorNumero(txtMontoReal.Text), 0, 1)
 
             'BANCO DESTINO
-            InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, CDate(txtFecha.Text), numTrans, "DP", _
-                 Mid(cmbCuentaDestino.Text, 1, 5), "", "TRANSFERENCIA BANCARIA", ValorNumero(txtMontoReal.Text), _
-                "BAN", numTrans, txtBeneficiario.Text, numComprobante, "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, "CH", "", jytsistema.sFechadeTrabajo, _
-                "0", "", "")
+            InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, txtFecha.Value, numTrans, "DP",
+                 Mid(cmbCuentaDestino.Text, 1, 5), "", "TRANSFERENCIA BANCARIA", ValorNumero(txtMontoReal.Text),
+                "BAN", numTrans, txtBeneficiario.Text, numComprobante, "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, "CH", "", jytsistema.sFechadeTrabajo,
+                "0", "", "", jytsistema.WorkCurrency.Id, DateTime.Now())
 
         End If
 
-        InsertEditBANCOSRenglonORDENPAGO(myConn, lblInfo, True, numComprobante, "00001", codContableSalida, _
+        InsertEditBANCOSRenglonORDENPAGO(myConn, lblInfo, True, numComprobante, "00001", codContableSalida,
                                             numTrans, "TRANSFERENCIA BANCARIA", -1 * ValorNumero(txtMontoReal.Text), 0, 1)
-        InsertEditBANCOSRenglonORDENPAGO(myConn, lblInfo, True, numComprobante, "00004", codContableEntrada, _
+        InsertEditBANCOSRenglonORDENPAGO(myConn, lblInfo, True, numComprobante, "00004", codContableEntrada,
                                            numTrans, "TRANSFERENCIA BANCARIA", ValorNumero(txtMontoReal.Text), 0, 0)
 
 
@@ -174,19 +178,14 @@ Public Class jsBanProTransferencias
 
     End Sub
 
-    Private Sub txtCambio_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCambio.KeyPress, _
+    Private Sub txtCambio_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCambio.KeyPress,
         txtMontoATransferir.KeyPress, txtMontoReal.KeyPress
         e.Handled = ft.validaNumeroEnTextbox(e)
     End Sub
-    Private Sub txtMontoATransferir_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtMontoATransferir.TextChanged, _
+    Private Sub txtMontoATransferir_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtMontoATransferir.TextChanged,
         txtCambio.TextChanged
         txtMontoReal.Text = ft.FormatoNumero(ValorNumero(txtCambio.Text) * ValorNumero(txtMontoATransferir.Text))
     End Sub
-
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, btnFecha)
-    End Sub
-
     Private Sub cmbTipoTransferencia_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cmbTipoTransferencia.SelectedIndexChanged
         Select Case cmbTipoTransferencia.SelectedIndex
             Case 0 ' ELECTRONICA
@@ -195,17 +194,5 @@ Public Class jsBanProTransferencias
                 ft.visualizarObjetos(True, txtBeneficiario, txtNumCheque, lblBeneficiario, lblNumCheque)
         End Select
     End Sub
-
-    'Private Sub ImprimirComprobante()
-    '    If cmbTipo.SelectedIndex = 2 Then
-    '        Dim resp As Integer
-    '        resp = MsgBox(" ¿Desea imprimir comprobante de egreso? ", MsgBoxStyle.YesNo, sModulo)
-    '        If resp = MsgBoxResult.Yes Then
-    '            Dim f As New jsBanRepParametros
-    '            f.Cargar(TipoCargaFormulario.iShowDialog, ReporteBancos.cComprobanteDeEgreso, "Comprobante de pago", Codigobanco, numComprobante)
-    '            f = Nothing
-    '        End If
-    '    End If
-    'End Sub
 
 End Class

@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsVenProMercanciasEnDespachos
     Private Const sModulo As String = "Mercancías en Despachos"
     Private Const nTabla As String = "tblMercanciasEnDespachos"
@@ -29,11 +30,12 @@ Public Class jsVenProMercanciasEnDespachos
         Try
             myConn.Open()
 
+            Dim dates As SfDateTimeEdit() = {txtFechaDesde, txtFechaHasta}
+            SetSizeDateObjects(dates)
 
-
-            ft.habilitarObjetos(False, True, txtAsesorDesde, txtAsesorHasta, txtFechaDesde, txtFechaHasta, txtMercanciaDesde, txtMercanciaHasta)
-            txtFechaDesde.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-            txtFechaHasta.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+            ft.habilitarObjetos(False, True, txtAsesorDesde, txtAsesorHasta, txtMercanciaDesde, txtMercanciaHasta)
+            txtFechaDesde.Value = jytsistema.sFechadeTrabajo
+            txtFechaHasta.Value = jytsistema.sFechadeTrabajo
 
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
@@ -174,18 +176,9 @@ Public Class jsVenProMercanciasEnDespachos
 
     End Sub
 
-    Private Sub txtNombre_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtFechaHasta.GotFocus
-        ft.mensajeEtiqueta(lblInfo, " Indique comentario ... ", Transportables.TipoMensaje.iInfo)
+    Private Sub txtNombre_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
+        ft.mensajeEtiqueta(lblInfo, " Indique comentario ... ", Transportables.tipoMensaje.iInfo)
     End Sub
-
-    Private Sub btnFechaDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaDesde.Click
-        txtFechaDesde.Text = SeleccionaFecha(CDate(txtFechaDesde.Text), Me, grpEncab, btnFechaDesde)
-    End Sub
-
-    Private Sub btnFechaHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaHasta.Click
-        txtFechaHasta.Text = SeleccionaFecha(CDate(txtFechaHasta.Text), Me, grpEncab, btnFechaHasta)
-    End Sub
-
     Private Sub btnMercanciaDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMercanciaDesde.Click
         txtMercanciaDesde.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codart codigo, nomart descripcion from jsmerctainv where id_emp = '" & jytsistema.WorkID & "' order by codart ", "Mercancías", txtMercanciaDesde.Text)
     End Sub
@@ -202,8 +195,8 @@ Public Class jsVenProMercanciasEnDespachos
         txtAsesorHasta.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codven codigo, concat(apellidos, ' ', nombres) descripcion from jsvencatven where tipo = 0 and id_emp = '" & jytsistema.WorkID & "' order by codven ", "Asesores Comerciales", txtAsesorHasta.Text)
     End Sub
 
-    Private Sub txtFechaDesde_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaDesde.TextChanged
-        txtFechaHasta.Text = txtFechaDesde.Text
+    Private Sub txtFechaDesde_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaDesde.ValueChanged
+        txtFechaHasta.Value = txtFechaDesde.Value
     End Sub
 
     Private Sub txtMercanciaDesde_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtMercanciaDesde.TextChanged

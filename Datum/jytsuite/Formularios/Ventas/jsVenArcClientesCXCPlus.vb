@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsVenArcClientesCXCPlus
     Private Const sModulo As String = "Clientes y CxC - Movimientos CxC"
 
@@ -122,6 +123,8 @@ Public Class jsVenArcClientesCXCPlus
     Private Sub jsVenArcClientesCXC_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         ds = DataSetRequery(ds, strSQLCajas, myConn, nTablaCajas, lblInfo)
         dtCajas = ds.Tables(nTablaCajas)
+        Dim dates As SfDateTimeEdit() = {txtEmisionCR, txtEmisionDB, txtVenceDB, txtFechaComprobanteRetIVA, txtFechaRecepcionRetIVA, txtFechaRetISLR}
+        SetSizeDateObjects(dates)
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -178,7 +181,7 @@ Public Class jsVenArcClientesCXCPlus
     End Sub
     Private Sub IniciarCreditos(ByVal Tipo As Integer)
 
-        ft.habilitarObjetos(False, True, txtDocumentoCR, txtDocSel, txtSaldoSel, txtNumPagCR, txtNomPagCR, txtEmisionCR, txtDocSel, txtSaldoSel,
+        ft.habilitarObjetos(False, True, txtDocumentoCR, txtDocSel, txtSaldoSel, txtNumPagCR, txtNomPagCR, txtDocSel, txtSaldoSel,
                          cmbNombrePago, txtAsesorCR, txtImporteCRAjustado, txtSaldoEnDivisa)
 
         If Tipo = 3 Then
@@ -192,7 +195,7 @@ Public Class jsVenArcClientesCXCPlus
         End If
 
         txtDocumentoCR.Text = "TMP" & ft.NumeroAleatorio(1000000)
-        txtEmisionCR.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtEmisionCR.Value = jytsistema.sFechadeTrabajo
         txtReferenciaCR.Text = ""
         txtConceptoCR.Text = strDocs
         txtSaldoSel.Text = ft.FormatoNumero(0.0)
@@ -219,24 +222,25 @@ Public Class jsVenArcClientesCXCPlus
         End If
         IniciarCajas()
 
-        If ChequesDevueltosPermitidos(myConn, lblInfo) > 0 AndAlso _
+        IniciarFormapadoDropDown(cmbFPCR, formasDePago)
+
+        If ChequesDevueltosPermitidos(myConn, lblInfo) > 0 AndAlso
             ChequesDevueltosCliente(myConn, lblInfo, CodigoCliente) >= ChequesDevueltosPermitidos(myConn, lblInfo) Then
-            ft.RellenaCombo(DeleteArrayValue(aFormaPago, "Cheque"), cmbFPCR)
-        Else
-            ft.RellenaCombo(aFormaPago, cmbFPCR)
+            Dim data = formasDePago.Where(Function(item) item.Value <> "CH").ToList()
+            IniciarFormapadoDropDown(cmbFPCR, data, "TA")
         End If
 
 
     End Sub
     Private Sub IniciarRetencionIVA()
 
-        ft.habilitarObjetos(False, True, txtTotalRetIVA, txtFechaComprobanteRetIVA, txtFechaRecepcionRetIVA, txtAsesorRetIVA)
+        ft.habilitarObjetos(False, True, txtTotalRetIVA, txtAsesorRetIVA)
 
         IniciarSaldosIVA(75)
 
         txtPorcentajeRetIVA.Text = ft.FormatoNumero(75)
-        txtFechaComprobanteRetIVA.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtFechaRecepcionRetIVA.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFechaComprobanteRetIVA.Value = jytsistema.sFechadeTrabajo
+        txtFechaRecepcionRetIVA.Value = jytsistema.sFechadeTrabajo
         txtNumeroRetIVA.Text = ""
         txtAsesorRetIVA.Text = ft.DevuelveScalarCadena(myConn, " select vendedor from jsvencatcli where codcli = '" & CodigoCliente & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
@@ -338,14 +342,14 @@ Public Class jsVenArcClientesCXCPlus
     Private Sub IniciarRetencionISLR()
 
         ResetearVariablesDEUsoComun()
-        ft.habilitarObjetos(False, True, txtDocsSelRetISLR, txtSaldoSelRetISLR, txtImporteBaseRetISLR, _
-                        txtFechaRetISLR, txtAsesorRetISLR)
+        ft.habilitarObjetos(False, True, txtDocsSelRetISLR, txtSaldoSelRetISLR, txtImporteBaseRetISLR,
+                        txtAsesorRetISLR)
         ft.habilitarObjetos(True, True, txtPorcentajeRetISLR, txtNumeroRetISLR, txtRetencionISLR)
         IniciarSaldosISLR(lvRetISLR)
 
         txtImporteBaseRetISLR.Text = ft.FormatoNumero(0.0)
         txtPorcentajeRetISLR.Text = ft.FormatoNumero(0.0)
-        txtFechaRetISLR.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFechaRetISLR.Value = jytsistema.sFechadeTrabajo
         txtNumeroRetISLR.Text = ""
         txtAsesorRetISLR.Text = ft.DevuelveScalarCadena(myConn, " select vendedor from jsvencatcli where codcli = '" & CodigoCliente & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
@@ -533,11 +537,11 @@ Public Class jsVenArcClientesCXCPlus
     End Sub
     Private Sub IniciarDebitos(ByVal Tipo As Integer)
 
-        ft.habilitarObjetos(False, True, txtDocumentoDB, txtEmisionDB, txtVenceDB, txtAsesor)
+        ft.habilitarObjetos(False, True, txtDocumentoDB, txtAsesor)
 
         txtDocumentoDB.Text = "TMP" & ft.NumeroAleatorio(1000000)
-        txtEmisionDB.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtVenceDB.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtEmisionDB.Value = jytsistema.sFechadeTrabajo
+        txtVenceDB.Value = jytsistema.sFechadeTrabajo
         txtReferDB.Text = ""
         txtConceptoDB.Text = ""
         txtImporteDB.Text = ft.FormatoNumero(0.0)
@@ -558,13 +562,12 @@ Public Class jsVenArcClientesCXCPlus
     End Sub
     Private Sub AsignarDebitos(ByVal Puntero As Long)
 
-        ft.habilitarObjetos(False, True, txtDocumentoDB, txtEmisionDB, btnEmisionDB, _
-                         txtVenceDB, btnVenceDB, txtReferDB, txtConceptoDB, txtImporteDB, txtAsesor)
+        ft.habilitarObjetos(False, True, txtDocumentoDB, txtReferDB, txtConceptoDB, txtImporteDB, txtAsesor)
 
         With dt.Rows(Puntero)
             txtDocumentoDB.Text = .Item("nummov")
-            txtEmisionDB.Text = ft.FormatoFecha(CDate(.Item("emision").ToString))
-            txtVenceDB.Text = ft.FormatoFecha(CDate(.Item("vence").ToString))
+            txtEmisionDB.Value = .Item("emision")
+            txtVenceDB.Value = .Item("vence")
             txtReferDB.Text = ft.MuestraCampoTexto(.Item("refer"))
             txtConceptoDB.Text = ft.MuestraCampoTexto(.Item("concepto"))
             txtImporteDB.Text = ft.FormatoNumero(.Item("importe"))
@@ -628,10 +631,11 @@ Public Class jsVenArcClientesCXCPlus
             Documento = Contador(myConn, lblInfo, Gestion.iVentas, aContador(Tipo), aContadorModulo(Tipo))
         End If
 
-        InsertEditVENTASCXC(myConn, lblInfo, Inserta, CodigoCliente, aTipoNick(Tipo), Documento, CDate(txtEmisionDB.Text), _
-                            ft.FormatoHora(Now()), CDate(txtVenceDB.Text), txtReferDB.Text, txtConceptoDB.Text, ValorNumero(txtImporteDB.Text), _
-                            0.0, "", "", "", "", "", "CXC", Documento, "0", "", jytsistema.sFechadeTrabajo, "", "0", "", 0.0, 0.0, "", "", "", _
-                            "", txtAsesor.Text, txtAsesor.Text, "0", FOTipo.Debito, jytsistema.WorkDivition)
+        InsertEditVENTASCXC(myConn, lblInfo, Inserta, CodigoCliente, aTipoNick(Tipo), Documento, CDate(txtEmisionDB.Text),
+                            ft.FormatoHora(Now()), CDate(txtVenceDB.Text), txtReferDB.Text, txtConceptoDB.Text, ValorNumero(txtImporteDB.Text),
+                            0.0, "", "", "", "", "", "CXC", Documento, "0", "", jytsistema.sFechadeTrabajo, "", "0", "", 0.0, 0.0, "", "", "",
+                            "", txtAsesor.Text, txtAsesor.Text, "0", FOTipo.Debito, jytsistema.WorkDivition,
+                            jytsistema.WorkCurrency.Id, DateTime.Now())
 
         InsertarAuditoria(myConn, IIf(Inserta, MovAud.iIncluir, MovAud.imodificar), sModulo, Documento)
 
@@ -732,11 +736,14 @@ Public Class jsVenArcClientesCXCPlus
             With lvRetISLR.Items.Item(gCont)
                 If .Checked Then
 
-                    InsertEditVENTASCXC(myConn, lblInfo, Inserta, CodigoCliente, _
-                         IIf(.SubItems(1).Text = "NC", "ND", "NC"), .Text, CDate(txtFechaRetISLR.Text), ft.FormatoHora(Now()), CDate(txtFechaRetISLR.Text), _
-                         Documento, "RETENCION I.S.L.R.", IIf(.SubItems(1).Text = "NC", 1, -1) * ValorNumero(txtRetencionISLR.Text), 0.0, "", "", "", "", _
-                         "", "CXC", .Text, "0", "", jytsistema.sFechadeTrabajo, "", "0", "", _
-                         ValorNumero(txtPorcentajeRetISLR.Text), 0.0, "", "", "", "", txtAsesorRetISLR.Text, txtAsesorRetISLR.Text, "0", IIf(.SubItems(1).Text = "NC", FOTipo.Debito, FOTipo.Credito), "")
+                    InsertEditVENTASCXC(myConn, lblInfo, Inserta, CodigoCliente,
+                         IIf(.SubItems(1).Text = "NC", "ND", "NC"), .Text, CDate(txtFechaRetISLR.Text), ft.FormatoHora(Now()), CDate(txtFechaRetISLR.Text),
+                         Documento, "RETENCION I.S.L.R.", IIf(.SubItems(1).Text = "NC", 1, -1) * ValorNumero(txtRetencionISLR.Text), 0.0, "", "", "", "",
+                         "", "CXC", .Text, "0", "", jytsistema.sFechadeTrabajo, "", "0", "",
+                         ValorNumero(txtPorcentajeRetISLR.Text), 0.0, "", "", "", "",
+                         txtAsesorRetISLR.Text, txtAsesorRetISLR.Text, "0",
+                         IIf(.SubItems(1).Text = "NC", FOTipo.Debito, FOTipo.Credito), "",
+                         jytsistema.WorkCurrency.Id, DateTime.Now())
 
 
                 End If
@@ -763,11 +770,13 @@ Public Class jsVenArcClientesCXCPlus
         For Each selectedItem As DataGridViewRow In dgRetIVA.Rows
             If selectedItem.Cells(0).Value Then
                 With selectedItem
-                    InsertEditVENTASCXC(myConn, lblInfo, Inserta, CodigoCliente, _
-                          IIf(.Cells(2).Value = "NC", "ND", "NC"), .Cells(1).Value, CDate(txtFechaRecepcionRetIVA.Text), ft.FormatoHora(Now()), CDate(txtFechaRecepcionRetIVA.Text), _
-                         Documento, "RETENCION IVA CLIENTE ESPECIAL", -1 * ValorNumero(.Cells(8).Value), 0.0, "", "", "", "", _
-                         "", "CXC", .Cells(1).Value, "0", "", CDate(txtFechaComprobanteRetIVA.Text), "", "0", "", _
-                         0.0, 0.0, "", "", "", "", txtAsesorRetIVA.Text, txtAsesorRetIVA.Text, "0", IIf(.Cells(2).Value = "NC", FOTipo.Debito, FOTipo.Credito), "")
+                    InsertEditVENTASCXC(myConn, lblInfo, Inserta, CodigoCliente,
+                          IIf(.Cells(2).Value = "NC", "ND", "NC"), .Cells(1).Value, CDate(txtFechaRecepcionRetIVA.Text), ft.FormatoHora(Now()), CDate(txtFechaRecepcionRetIVA.Text),
+                         Documento, "RETENCION IVA CLIENTE ESPECIAL", -1 * ValorNumero(.Cells(8).Value), 0.0, "", "", "", "",
+                         "", "CXC", .Cells(1).Value, "0", "", CDate(txtFechaComprobanteRetIVA.Text), "", "0", "",
+                         0.0, 0.0, "", "", "", "", txtAsesorRetIVA.Text,
+                         txtAsesorRetIVA.Text, "0", IIf(.Cells(2).Value = "NC", FOTipo.Debito, FOTipo.Credito), "",
+                         jytsistema.WorkCurrency.Id, DateTime.Now())
                 End With
 
             End If
@@ -890,18 +899,6 @@ Public Class jsVenArcClientesCXCPlus
 
         DesbloqueoDeCliente(myConn, lblInfo, ds, CodigoCliente, jytsistema.sFechadeTrabajo, 8, "00002", "CANCELACION DE FACTURA PENDIENTE")
 
-        'Dim sRespuesta As Microsoft.VisualBasic.MsgBoxResult
-        'sRespuesta = MsgBox(" ¿ Desea imprimir Comprobante de Egreso ?", MsgBoxStyle.YesNo, "Imprimir ... ")
-        'If sRespuesta = MsgBoxResult.Yes Then
-        ' Dim f As New jsComRepParametros
-        ' Select Case cmbFPCR.SelectedIndex
-        '     Case 0, 2, 3, 4, 5 'EF
-        ' f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cComprobantePago, "COMPROBANTE DE EGRESOS", CodigoCliente, ComprobanteNumero)
-        '     Case 1 'CH
-        '
-        ' End Select
-        ' f = Nothing
-        ' End If
         SaldoCxC(myConn, lblInfo, CodigoCliente)
         Me.Close()
 
@@ -925,7 +922,7 @@ Public Class jsVenArcClientesCXCPlus
 
         If optCO.Checked Then
 
-            FormaDePago = aFormaPagoAbreviada(ft.InArray(aFormaPago, cmbFPCR.Text))
+            FormaDePago = cmbFPCR.SelectedValue '  aFormaPagoAbreviada(ft.InArray(aFormaPago, cmbFPCR.Text))
             NombreDePago = txtNomPagCR.Text
             NumeroDePago = txtNumPagCR.Text
 
@@ -944,11 +941,12 @@ Public Class jsVenArcClientesCXCPlus
                             Dim fCont As Integer
                             For fCont = 0 To dtCantidad.Rows.Count - 1
                                 With dtCantidad.Rows(fCont)
-                                    InsertEditBANCOSRenglonCaja(myConn, lblInfo, True, cmbCajaCR.SelectedValue, UltimoCajaMasUno(myConn, lblInfo, cmbCajaCR.SelectedValue), _
-                                                                CDate(txtEmisionCR.Text), "CXC", "EN", Documento, _
-                                                                FormaDePago, NumeroDePago, _
-                                                                .Item("CORREDOR"), .Item("IMPORTE"), "", txtConceptoCR.Text, "", jytsistema.sFechadeTrabajo, _
-                                                                .Item("CANTIDAD"), "", "", "", jytsistema.sFechadeTrabajo, CodigoCliente, txtAsesorCR.Text, "1")
+                                    InsertEditBANCOSRenglonCaja(myConn, lblInfo, True, cmbCajaCR.SelectedValue, UltimoCajaMasUno(myConn, lblInfo, cmbCajaCR.SelectedValue),
+                                                                CDate(txtEmisionCR.Text), "CXC", "EN", Documento,
+                                                                FormaDePago, NumeroDePago,
+                                                                .Item("CORREDOR"), .Item("IMPORTE"), "", txtConceptoCR.Text, "", jytsistema.sFechadeTrabajo,
+                                                                .Item("CANTIDAD"), "", "", "", jytsistema.sFechadeTrabajo, CodigoCliente, txtAsesorCR.Text, "1",
+                                                                jytsistema.WorkCurrency.Id, DateTime.Now())
 
                                 End With
                             Next
@@ -961,21 +959,21 @@ Public Class jsVenArcClientesCXCPlus
                     Else
 
                         If ValorNumero(txtImporteCR.Text) > 0 Then _
-                            InsertEditBANCOSRenglonCaja(myConn, lblInfo, True, cmbCajaCR.SelectedValue, UltimoCajaMasUno(myConn, lblInfo, cmbCajaCR.SelectedValue), _
-                                                        CDate(txtEmisionCR.Text), "CXC", "EN", Documento, _
-                                                        FormaDePago, NumeroDePago, IIf(cmbNombrePago.Items.Count > 0, cmbNombrePago.SelectedValue, ""), _
-                                                        ValorNumero(txtImporteCR.Text), "", txtConceptoCR.Text, "", jytsistema.sFechadeTrabajo, 1, "", "", _
-                                                        "", jytsistema.sFechadeTrabajo, CodigoCliente, txtAsesorCR.Text, "1")
+                            InsertEditBANCOSRenglonCaja(myConn, lblInfo, True, cmbCajaCR.SelectedValue, UltimoCajaMasUno(myConn, lblInfo, cmbCajaCR.SelectedValue),
+                                                        CDate(txtEmisionCR.Text), "CXC", "EN", Documento,
+                                                        FormaDePago, NumeroDePago, IIf(cmbNombrePago.Items.Count > 0, cmbNombrePago.SelectedValue, ""),
+                                                        ValorNumero(txtImporteCR.Text), "", txtConceptoCR.Text, "", jytsistema.sFechadeTrabajo, 1, "", "",
+                                                        "", jytsistema.sFechadeTrabajo, CodigoCliente, txtAsesorCR.Text, "1", jytsistema.WorkCurrency.Id, DateTime.Now())
                     End If
 
 
 
                 Case "Depósito", "Transferencia"
 
-                    InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, CDate(txtEmisionCR.Text), txtNumPagCR.Text, _
-                                                    "NC", IIf(cmbNombrePago.Items.Count > 0, cmbNombrePago.SelectedValue.ToString, ""), "", txtConceptoCR.Text, ValorNumero(txtImporteCR.Text), _
-                                                    "CXC", Documento, "", "", "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, _
-                                                    aTipoNick(Tipo), "", jytsistema.sFechadeTrabajo, "0", CodigoCliente, txtAsesorCR.Text)
+                    InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, CDate(txtEmisionCR.Text), txtNumPagCR.Text,
+                                                    "NC", IIf(cmbNombrePago.Items.Count > 0, cmbNombrePago.SelectedValue.ToString, ""), "", txtConceptoCR.Text, ValorNumero(txtImporteCR.Text),
+                                                    "CXC", Documento, "", "", "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo,
+                                                    aTipoNick(Tipo), "", jytsistema.sFechadeTrabajo, "0", CodigoCliente, txtAsesorCR.Text, jytsistema.WorkCurrency.Id, DateTime.Now())
             End Select
 
         Else
@@ -1009,32 +1007,33 @@ Public Class jsVenArcClientesCXCPlus
                 If MontoACancelar > 0 Then 'FC,GR,ND
                     If MontoPositivo > 0 Then
 
-                        InsertEditVENTASCancelacion(myConn, lblInfo, True, CodigoCliente, lv.Items(jCont).SubItems(1).Text, _
-                                lv.Items(jCont).Text, CDate(lv.Items(jCont).SubItems(3).Text), txtReferenciaCR.Text, _
-                                txtConceptoCR.Text, MontoACancelar, Documento, txtAsesorCR.Text)
+                        InsertEditVENTASCancelacion(myConn, lblInfo, True, CodigoCliente, lv.Items(jCont).SubItems(1).Text,
+                                lv.Items(jCont).Text, CDate(lv.Items(jCont).SubItems(3).Text), txtReferenciaCR.Text,
+                                txtConceptoCR.Text, MontoACancelar, Documento, txtAsesorCR.Text,
+                                jytsistema.WorkCurrency.Id, DateTime.Now())
 
                         If TipoDocumento = "FC" Or TipoDocumento = "GR" Then
 
                             If MontoACancelar > MontoPositivo Then
 
-                                InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, IIf(Tipo = 3 OrElse Tipo = 4, "AB", "NC"), lv.Items(jCont).Text, _
-                                    CDate(txtEmisionCR.Text), ft.FormatoHora(Now), CDate(txtEmisionCR.Text), _
-                                    txtReferenciaCR.Text, txtConceptoCR.Text, -1 * (MontoPositivo), 0.0, _
-                                    FormaDePago, cmbCajaCR.SelectedValue, NumeroDePago, NombreDePago, txtBeneficiario.Text, "CXC", _
-                                    Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), causaNotaCredito, jytsistema.sFechadeTrabajo, _
-                                    "", " ", lv.Items(jCont).SubItems(1).Text, 0.0, 0.0, Documento, "", "", "", txtAsesorCR.Text, _
-                                    txtAsesorCR.Text, "0", FOTipo.Credito, "")
+                                InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, IIf(Tipo = 3 OrElse Tipo = 4, "AB", "NC"), lv.Items(jCont).Text,
+                                    CDate(txtEmisionCR.Text), ft.FormatoHora(Now), CDate(txtEmisionCR.Text),
+                                    txtReferenciaCR.Text, txtConceptoCR.Text, -1 * (MontoPositivo), 0.0,
+                                    FormaDePago, cmbCajaCR.SelectedValue, NumeroDePago, NombreDePago, txtBeneficiario.Text, "CXC",
+                                    Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), causaNotaCredito, jytsistema.sFechadeTrabajo,
+                                    "", " ", lv.Items(jCont).SubItems(1).Text, 0.0, 0.0, Documento, "", "", "", txtAsesorCR.Text,
+                                    txtAsesorCR.Text, "0", FOTipo.Credito, "", jytsistema.WorkCurrency.Id, DateTime.Now())
 
 
                             Else
 
-                                InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, aTipoNick(Tipo), lv.Items(jCont).Text, _
-                                    CDate(txtEmisionCR.Text), ft.FormatoHora(Now), CDate(txtEmisionCR.Text), _
-                                    txtReferenciaCR.Text, txtConceptoCR.Text, -1 * (Math.Abs(MontoACancelar)), 0.0, _
-                                    FormaDePago, cmbCajaCR.SelectedValue, NumeroDePago, NombreDePago, txtBeneficiario.Text, "CXC", _
-                                    Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), "", jytsistema.sFechadeTrabajo, _
-                                    "", "", lv.Items(jCont).SubItems(1).Text, 0.0, 0.0, Documento, "", "", "", txtAsesorCR.Text, _
-                                    txtAsesorCR.Text, "0", FOTipo.Credito, "")
+                                InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, aTipoNick(Tipo), lv.Items(jCont).Text,
+                                    CDate(txtEmisionCR.Text), ft.FormatoHora(Now), CDate(txtEmisionCR.Text),
+                                    txtReferenciaCR.Text, txtConceptoCR.Text, -1 * (Math.Abs(MontoACancelar)), 0.0,
+                                    FormaDePago, cmbCajaCR.SelectedValue, NumeroDePago, NombreDePago, txtBeneficiario.Text, "CXC",
+                                    Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), "", jytsistema.sFechadeTrabajo,
+                                    "", "", lv.Items(jCont).SubItems(1).Text, 0.0, 0.0, Documento, "", "", "", txtAsesorCR.Text,
+                                    txtAsesorCR.Text, "0", FOTipo.Credito, "", jytsistema.WorkCurrency.Id, DateTime.Now())
 
                             End If
 
@@ -1042,23 +1041,23 @@ Public Class jsVenArcClientesCXCPlus
 
                             If MontoACancelar > MontoPositivo Then
 
-                                InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, "NC", lv.Items(jCont).Text, _
-                                    CDate(txtEmisionCR.Text), ft.FormatoHora(Now), CDate(txtEmisionCR.Text), _
-                                    txtReferenciaCR.Text, txtConceptoCR.Text, -1 * (MontoPositivo), 0.0, _
-                                    FormaDePago, cmbCajaCR.SelectedValue, NumeroDePago, NombreDePago, txtBeneficiario.Text, "CXC", _
-                                    Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), causaNotaCredito, jytsistema.sFechadeTrabajo, _
-                                    "", "", lv.Items(jCont).SubItems(1).Text, 0.0, 0.0, Documento, "", "", "", txtAsesorCR.Text, _
-                                    txtAsesorCR.Text, "0", FOTipo.Credito, "")
+                                InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, "NC", lv.Items(jCont).Text,
+                                    CDate(txtEmisionCR.Text), ft.FormatoHora(Now), CDate(txtEmisionCR.Text),
+                                    txtReferenciaCR.Text, txtConceptoCR.Text, -1 * (MontoPositivo), 0.0,
+                                    FormaDePago, cmbCajaCR.SelectedValue, NumeroDePago, NombreDePago, txtBeneficiario.Text, "CXC",
+                                    Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), causaNotaCredito, jytsistema.sFechadeTrabajo,
+                                    "", "", lv.Items(jCont).SubItems(1).Text, 0.0, 0.0, Documento, "", "", "", txtAsesorCR.Text,
+                                    txtAsesorCR.Text, "0", FOTipo.Credito, "", jytsistema.WorkCurrency.Id, DateTime.Now())
 
                             Else
 
-                                InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, "NC", lv.Items(jCont).Text, _
-                                    CDate(txtEmisionCR.Text), ft.FormatoHora(Now), CDate(txtEmisionCR.Text), _
-                                    txtReferenciaCR.Text, txtConceptoCR.Text, -1 * Math.Abs(MontoACancelar), 0.0, _
-                                    FormaDePago, cmbCajaCR.SelectedValue, NumeroDePago, NombreDePago, txtBeneficiario.Text, "CXC", _
-                                    Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), causaNotaCredito, jytsistema.sFechadeTrabajo, _
-                                    "", "", lv.Items(jCont).SubItems(1).Text, 0.0, 0.0, Documento, "", "", "", txtAsesorCR.Text, _
-                                    txtAsesorCR.Text, "0", FOTipo.Credito, "")
+                                InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, "NC", lv.Items(jCont).Text,
+                                    CDate(txtEmisionCR.Text), ft.FormatoHora(Now), CDate(txtEmisionCR.Text),
+                                    txtReferenciaCR.Text, txtConceptoCR.Text, -1 * Math.Abs(MontoACancelar), 0.0,
+                                    FormaDePago, cmbCajaCR.SelectedValue, NumeroDePago, NombreDePago, txtBeneficiario.Text, "CXC",
+                                    Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), causaNotaCredito, jytsistema.sFechadeTrabajo,
+                                    "", "", lv.Items(jCont).SubItems(1).Text, 0.0, 0.0, Documento, "", "", "", txtAsesorCR.Text,
+                                    txtAsesorCR.Text, "0", FOTipo.Credito, "", jytsistema.WorkCurrency.Id, DateTime.Now())
                             End If
 
 
@@ -1073,26 +1072,26 @@ Public Class jsVenArcClientesCXCPlus
 
                     If Math.Abs(MontoACancelar) > MontoNegativo Then
 
-                        InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, "ND", lv.Items(jCont).Text, _
-                                CDate(txtEmisionCR.Text), ft.FormatoHora(Now()), CDate(txtEmisionCR.Text), txtReferenciaCR.Text, txtConceptoCR.Text, _
-                                 Math.Abs(MontoNegativo), 0.0, FormaDePago, cmbCajaCR.SelectedValue, NumeroDePago, _
-                                 NombreDePago, txtBeneficiario.Text, "CXC", Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), "", _
-                                 jytsistema.sFechadeTrabajo, "", "", lv.Items(jCont).SubItems(1).Text, 0.0, 0.0, Documento, "", "", "", _
-                                 txtAsesorCR.Text, txtAsesorCR.Text, "0", FOTipo.Debito, "")
+                        InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, "ND", lv.Items(jCont).Text,
+                                CDate(txtEmisionCR.Text), ft.FormatoHora(Now()), CDate(txtEmisionCR.Text), txtReferenciaCR.Text, txtConceptoCR.Text,
+                                 Math.Abs(MontoNegativo), 0.0, FormaDePago, cmbCajaCR.SelectedValue, NumeroDePago,
+                                 NombreDePago, txtBeneficiario.Text, "CXC", Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), "",
+                                 jytsistema.sFechadeTrabajo, "", "", lv.Items(jCont).SubItems(1).Text, 0.0, 0.0, Documento, "", "", "",
+                                 txtAsesorCR.Text, txtAsesorCR.Text, "0", FOTipo.Debito, "", jytsistema.WorkCurrency.Id, DateTime.Now())
                     Else
 
-                        InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, "ND", lv.Items(jCont).Text, _
-                                CDate(txtEmisionCR.Text), ft.FormatoHora(Now()), CDate(txtEmisionCR.Text), txtReferenciaCR.Text, txtConceptoCR.Text, _
-                                 Math.Abs(MontoACancelar), 0.0, FormaDePago, cmbCajaCR.SelectedValue, NumeroDePago, _
-                                 NombreDePago, txtBeneficiario.Text, "CXC", Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), "", _
-                                 jytsistema.sFechadeTrabajo, "", "", lv.Items(jCont).SubItems(1).Text, 0.0, 0.0, Documento, "", "", "", _
-                                 txtAsesorCR.Text, txtAsesorCR.Text, "0", FOTipo.Debito, "")
+                        InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, "ND", lv.Items(jCont).Text,
+                                CDate(txtEmisionCR.Text), ft.FormatoHora(Now()), CDate(txtEmisionCR.Text), txtReferenciaCR.Text, txtConceptoCR.Text,
+                                 Math.Abs(MontoACancelar), 0.0, FormaDePago, cmbCajaCR.SelectedValue, NumeroDePago,
+                                 NombreDePago, txtBeneficiario.Text, "CXC", Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), "",
+                                 jytsistema.sFechadeTrabajo, "", "", lv.Items(jCont).SubItems(1).Text, 0.0, 0.0, Documento, "", "", "",
+                                 txtAsesorCR.Text, txtAsesorCR.Text, "0", FOTipo.Debito, "", jytsistema.WorkCurrency.Id, DateTime.Now())
 
                     End If
 
-                    InsertEditVENTASCancelacion(myConn, lblInfo, True, CodigoCliente, lv.Items(jCont).SubItems(1).Text, _
-                            lv.Items(jCont).Text, CDate(lv.Items(jCont).SubItems(3).Text), txtReferenciaCR.Text, _
-                            txtConceptoCR.Text, MontoACancelar, Documento, txtAsesorCR.Text)
+                    InsertEditVENTASCancelacion(myConn, lblInfo, True, CodigoCliente, lv.Items(jCont).SubItems(1).Text,
+                            lv.Items(jCont).Text, CDate(lv.Items(jCont).SubItems(3).Text), txtReferenciaCR.Text,
+                            txtConceptoCR.Text, MontoACancelar, Documento, txtAsesorCR.Text, jytsistema.WorkCurrency.Id, DateTime.Now())
 
 
                     MontoNegativo -= Math.Abs(MontoACancelar)
@@ -1132,27 +1131,18 @@ Public Class jsVenArcClientesCXCPlus
 
         If Resto > 0 Then
 
-            InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, "NC", Contador(myConn, lblInfo, Gestion.iVentas, "VENNUMVDB", "13"), _
-                           CDate(txtEmisionCR.Text), ft.FormatoHora(Now()), CDate(txtEmisionCR.Text), txtReferenciaCR.Text, txtConceptoCR.Text, _
-                            -1 * Resto, 0.0, FormaDePago, cmbCajaCR.SelectedValue, txtNumPagCR.Text, _
-                            txtNomPagCR.Text, txtBeneficiario.Text, "CXC", Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), causaNotaCredito, _
-                            jytsistema.sFechadeTrabajo, "", "", "", 0.0, 0.0, Documento, "", "", "", _
-                            txtAsesorCR.Text, txtAsesorCR.Text, "0", FOTipo.Credito, "")
+            InsertEditVENTASCXC(myConn, lblInfo, True, CodigoCliente, "NC", Contador(myConn, lblInfo, Gestion.iVentas, "VENNUMVDB", "13"),
+                           CDate(txtEmisionCR.Text), ft.FormatoHora(Now()), CDate(txtEmisionCR.Text), txtReferenciaCR.Text, txtConceptoCR.Text,
+                            -1 * Resto, 0.0, FormaDePago, cmbCajaCR.SelectedValue, txtNumPagCR.Text,
+                            txtNomPagCR.Text, txtBeneficiario.Text, "CXC", Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), causaNotaCredito,
+                            jytsistema.sFechadeTrabajo, "", "", "", 0.0, 0.0, Documento, "", "", "",
+                            txtAsesorCR.Text, txtAsesorCR.Text, "0", FOTipo.Credito, "", jytsistema.WorkCurrency.Id, DateTime.Now())
         End If
 
         InsertarAuditoria(myConn, IIf(i_modo = movimiento.iAgregar, MovAud.iIncluir, MovAud.imodificar), sModulo, Documento)
         ComprobanteNumero = Documento
 
     End Sub
-
-    Private Sub btnEmisionDB_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEmisionDB.Click
-        txtEmisionDB.Text = SeleccionaFecha(CDate(txtEmisionDB.Text), grpDebitos, Me)
-    End Sub
-
-    Private Sub btnVenceDB_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVenceDB.Click
-        txtVenceDB.Text = SeleccionaFecha(CDate(txtVenceDB.Text), grpDebitos, Me)
-    End Sub
-
     Private Sub txtImporteDB_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtImporteDB.Click
         ft.enfocarTexto(sender)
     End Sub
@@ -1200,7 +1190,7 @@ Public Class jsVenArcClientesCXCPlus
 
     End Sub
 
-    Private Sub cmbFPCR_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbFPCR.SelectedIndexChanged
+    Private Sub cmbFPCR_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         btnNumPago.Enabled = False
         If cmbTipo.SelectedIndex <> 5 Then ft.habilitarObjetos(False, False, grpCRCO, optCO, optCR)
@@ -1213,10 +1203,10 @@ Public Class jsVenArcClientesCXCPlus
 
         'COLOCAR CAJA DE PAGO DESDE PARAMETRO
         '
-        Dim aCajaCT As String = ParametroPlus(MyConn, Gestion.iVentas, "VENPARAM11")
-        Dim aCajaEF As String = ParametroPlus(MyConn, Gestion.iVentas, "VENPARAM12")
-        Dim aCajaCH As String = ParametroPlus(MyConn, Gestion.iVentas, "VENPARAM13")
-        Dim aCajaTA As String = ParametroPlus(MyConn, Gestion.iVentas, "VENPARAM14")
+        Dim aCajaCT As String = ParametroPlus(myConn, Gestion.iVentas, "VENPARAM11")
+        Dim aCajaEF As String = ParametroPlus(myConn, Gestion.iVentas, "VENPARAM12")
+        Dim aCajaCH As String = ParametroPlus(myConn, Gestion.iVentas, "VENPARAM13")
+        Dim aCajaTA As String = ParametroPlus(myConn, Gestion.iVentas, "VENPARAM14")
 
         Select Case cmbFPCR.Text
 
@@ -1254,7 +1244,7 @@ Public Class jsVenArcClientesCXCPlus
             Case "Cheque"
 
                 ds = DataSetRequery(ds, " Select codigo, descrip from jsconctatab where modulo = '" & FormatoTablaSimple(Modulo.iBancos) _
-                                    & "' and id_emp = '" & jytsistema.WorkID & "' order by descrip ", _
+                                    & "' and id_emp = '" & jytsistema.WorkID & "' order by descrip ",
                                      myConn, nTablaBancosExt, lblInfo)
 
                 dtBancosExt = ds.Tables(nTablaBancosExt)
@@ -1264,7 +1254,7 @@ Public Class jsVenArcClientesCXCPlus
 
             Case "Tarjeta"
 
-                ds = DataSetRequery(ds, " Select codtar, nomtar from jsconctatar where id_emp = '" & jytsistema.WorkID & "' order by nomtar ", _
+                ds = DataSetRequery(ds, " Select codtar, nomtar from jsconctatar where id_emp = '" & jytsistema.WorkID & "' order by nomtar ",
                                     myConn, nTablaTarjetas, lblInfo)
 
                 dtTarjetas = ds.Tables(nTablaTarjetas)
@@ -1274,7 +1264,7 @@ Public Class jsVenArcClientesCXCPlus
 
             Case "Cupón de Alimentación"
 
-                ds = DataSetRequery(ds, " Select 'CHEQUE ALIMENTACION' codban, 'CHEQUE ALIMENTACION' nomban ", _
+                ds = DataSetRequery(ds, " Select 'CHEQUE ALIMENTACION' codban, 'CHEQUE ALIMENTACION' nomban ",
                                    myConn, nTablaBancosInt, lblInfo)
 
                 dtBancosInt = ds.Tables(nTablaBancosInt)
@@ -1286,7 +1276,7 @@ Public Class jsVenArcClientesCXCPlus
 
             Case "Depósito", "Transferencia"
 
-                ds = DataSetRequery(ds, " Select codban, nomban from jsbancatban where id_emp = '" & jytsistema.WorkID & "' order by nomban ", _
+                ds = DataSetRequery(ds, " Select codban, nomban from jsbancatban where id_emp = '" & jytsistema.WorkID & "' order by nomban ",
                                    myConn, nTablaBancosInt, lblInfo)
 
                 dtBancosInt = ds.Tables(nTablaBancosInt)
@@ -1299,25 +1289,25 @@ Public Class jsVenArcClientesCXCPlus
 
     End Sub
 
-    Private Sub txtImporteDB_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtImporteDB.KeyPress, _
+    Private Sub txtImporteDB_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtImporteDB.KeyPress,
         txtImporteCR.KeyPress
         e.Handled = ft.validaNumeroEnTextbox(e)
     End Sub
 
     Private Sub btnAsesor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsesor.Click
         txtAsesor.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codven codigo, concat(nombres, ' ', apellidos) " _
-                                            & " descripcion from jsvencatven  where id_emp = '" & jytsistema.WorkID & "' ", _
+                                            & " descripcion from jsvencatven  where id_emp = '" & jytsistema.WorkID & "' ",
                                             "Asesores comerciales", txtAsesor.Text)
     End Sub
 
     Private Sub btnAsesorCR_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsesorCR.Click
 
-        If CBool(ParametroPlus(MyConn, Gestion.iVentas, "VENCXCPA01")) Then
+        If CBool(ParametroPlus(myConn, Gestion.iVentas, "VENCXCPA01")) Then
             txtAsesorCR.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codven codigo, concat(nombres, ' ', apellidos) " _
-                                                & " descripcion from jsvencatven  where TIPO = " & TipoVendedor.iFuerzaventa & " AND id_emp = '" & jytsistema.WorkID & "' ", _
+                                                & " descripcion from jsvencatven  where TIPO = " & TipoVendedor.iFuerzaventa & " AND id_emp = '" & jytsistema.WorkID & "' ",
                                                 "Asesores comerciales", txtAsesorCR.Text)
         Else
-            ft.MensajeCritico("Escogencia de asesor comercial no permitida...")
+            ft.mensajeCritico("Escogencia de asesor comercial no permitida...")
         End If
     End Sub
 
@@ -1327,7 +1317,7 @@ Public Class jsVenArcClientesCXCPlus
 
     Private Sub btnNumPago_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNumPago.Click
         If ValorEntero(txtDocSel.Text) = 0 AndAlso optCR.Checked Then
-            ft.MensajeCritico("Debe seleccionar al menos un documento...")
+            ft.mensajeCritico("Debe seleccionar al menos un documento...")
         Else
             'Declarar dias para comision 
             Dim DiasParaComision As Integer = 0
@@ -1351,11 +1341,6 @@ Public Class jsVenArcClientesCXCPlus
         End If
     End Sub
 
-    Private Sub btnEmisionCR_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEmisionCR.Click
-        'If cmbFPCR.SelectedItem = "Cheque" Or cmbFPCR.SelectedItem = "Depósito" Or cmbFPCR.SelectedItem = "Transferencia" Then _
-        txtEmisionCR.Text = SeleccionaFecha(CDate(txtEmisionCR.Text), Me, grpCreditos, grptextos, btnEmisionCR)
-    End Sub
-
     Private Sub cmbNombrePago_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbNombrePago.SelectedIndexChanged
         If cmbNombrePago.SelectedIndex <> -1 Then txtNomPagCR.Text = cmbNombrePago.SelectedValue.ToString()
 
@@ -1364,23 +1349,10 @@ Public Class jsVenArcClientesCXCPlus
     Private Sub cmbNombrePago_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbNombrePago.SelectedValueChanged
         If cmbNombrePago.SelectedIndex <> -1 Then txtNomPagCR.Text = cmbNombrePago.SelectedValue.ToString()
     End Sub
-
-    Private Sub btnFechaComprobanteRetIVA_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaComprobanteRetIVA.Click
-        txtFechaComprobanteRetIVA.Text = SeleccionaFecha(CDate(txtFechaComprobanteRetIVA.Text), Me, btnFechaComprobanteRetIVA)
-    End Sub
-
-    Private Sub btnFechaRecepcionRetIVA_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaRecepcionRetIVA.Click
-        txtFechaRecepcionRetIVA.Text = SeleccionaFecha(CDate(txtFechaRecepcionRetIVA.Text), Me, sender)
-    End Sub
-
     Private Sub btnAsesorRetIVA_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsesorRetIVA.Click
         txtAsesorRetIVA.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codven codigo, concat(nombres, ' ', apellidos) " _
-                                            & " descripcion from jsvencatven  where id_emp = '" & jytsistema.WorkID & "' ", _
+                                            & " descripcion from jsvencatven  where id_emp = '" & jytsistema.WorkID & "' ",
                                             "Asesores comerciales", txtAsesorRetIVA.Text)
-    End Sub
-
-    Private Sub btnFechaRetISLR_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaRetISLR.Click
-        txtFechaRetISLR.Text = SeleccionaFecha(CDate(txtFechaRetISLR.Text), Me, btnFechaRetISLR)
     End Sub
     Private Sub lvRetISLR_ItemChecked(ByVal sender As Object, ByVal e As System.Windows.Forms.ItemCheckedEventArgs) Handles lvRetISLR.ItemChecked
 

@@ -1,4 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.ListView
+Imports Syncfusion.WinForms.ListView.Enums
+
 Module FuncionesControl
     Private ft As New Transportables
     Public Structure aParametros
@@ -41,7 +44,7 @@ Module FuncionesControl
         Return ft.DevuelveScalarEntero(MyConn, " select COUNT(*) from " & nTabla & " where " & Condicion & " AND id_emp = '" & jytsistema.WorkID & "' ")
     End Function
 
-    Public Sub InsertarParametro(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal numGestion As Integer, ByVal numModulo As Integer, _
+    Public Sub InsertarParametro(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal numGestion As Integer, ByVal numModulo As Integer,
         ByVal Codigo As String, ByVal Descripcion As String, ByVal TipoParametro As Integer, ByVal Valor As String, Optional Empresa As String = "")
 
         If Empresa = "" Then Empresa = jytsistema.WorkID
@@ -55,7 +58,7 @@ Module FuncionesControl
         End If
 
     End Sub
-    Public Sub InsertarContador(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal numGestion As Integer, ByVal numModulo As String, _
+    Public Sub InsertarContador(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal numGestion As Integer, ByVal numModulo As String,
         ByVal Codigo As String, ByVal Descripcion As String, ByVal Valor As String, Optional Empresa As String = "")
 
         If Empresa = "" Then Empresa = jytsistema.WorkID
@@ -73,13 +76,13 @@ Module FuncionesControl
 
     End Sub
 
-    Function ExisteParametro(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal numGestion As Integer, _
+    Function ExisteParametro(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal numGestion As Integer,
                              ByVal nomParametro As String, Empresa As String) As Boolean
         Dim afld() As String = {"gestion", "codigo", "id_emp"}
         Dim aStr() As String = {numGestion, nomParametro, Empresa}
         If qFound(MyConn, lblInfo, "jsconparametros", afld, aStr) Then ExisteParametro = True
     End Function
-    Function ExisteContador(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal numGestion As Integer, _
+    Function ExisteContador(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal numGestion As Integer,
                             ByVal nomContador As String, Empresa As String) As Boolean
         Dim afld() As String = {"gestion", "codigo", "id_emp"}
         Dim aStr() As String = {numGestion, nomContador, Empresa}
@@ -100,6 +103,7 @@ Module FuncionesControl
             InsertarParametro(Myconn, lblInfo, Gestion.iContabilidad, 0, "CONPARAM03", "0.03 Cuenta contable de resultado del ejercicio ... ", TipoParametro.iCadena, "", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iContabilidad, 0, "CONPARAM04", "0.04 Poder indicar el número de asiento manualmente ? ", TipoParametro.iNoSi, "0", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iContabilidad, 0, "CONPARAM05", "0.05 Forma de numeración de asientos ó pólizas contable ... ", TipoParametro.iNumeracionContable, "0", Empresa)
+            InsertarParametro(Myconn, lblInfo, Gestion.iContabilidad, 0, "CONPARAM06", "0.06 Moneda por defecto ... ", TipoParametro.iMoneda, "0", Empresa)
 
             '2 // BANCOS Y CAJAS
             InsertarParametro(Myconn, lblInfo, Gestion.iBancos, 0, "BANPARAM00", "0. GENERAL ", TipoParametro.iCadena, "", Empresa)
@@ -115,6 +119,7 @@ Module FuncionesControl
             InsertarParametro(Myconn, lblInfo, Gestion.iBancos, 0, "BANPARAM13", "0.10 Monto mínimo de la transacción para la cual aplica la CAV ...", TipoParametro.iDoble, "0.00", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iBancos, 0, "BANPARAM14", "0.11 Descripción o Nombre con el cual se identifica la comisión por alto valor (CAV) ...", TipoParametro.iCadena, "COMISION ALTO VALOR", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iBancos, 0, "BANPARAM15", "0.12 Activar CAV ...", TipoParametro.iNoSi, 0, Empresa)
+            InsertarParametro(Myconn, lblInfo, Gestion.iBancos, 0, "BANPARAM16", "0.13 Moneda por defecto ...", TipoParametro.iMoneda, 0, Empresa)
 
             InsertarParametro(Myconn, lblInfo, Gestion.iBancos, 0, "BANPARAM05", "1. CHEQUES DEVUELTOS ", TipoParametro.iCadena, "", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iBancos, 0, "BANPARAM06", "1.01 Al registrar CHEQUE DEVUELTO imprimir NOTA DE DEBITO FISCAL por la Comisión y Gastos Administrativos ...", TipoParametro.iNoSi, 1, Empresa)
@@ -131,6 +136,7 @@ Module FuncionesControl
             InsertarParametro(Myconn, lblInfo, Gestion.iRecursosHumanos, 0, "NOMPARAM04", "0.04 Código de Banco 2 para validación de cuentas de empleados ...", TipoParametro.iCadena, "", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iRecursosHumanos, 0, "NOMPARAM05", "0.05 Validar Cuenta por pagar/Cuenta por cobrar en definición de Conceptos ...", TipoParametro.iNoSi, "0")
             InsertarParametro(Myconn, lblInfo, Gestion.iRecursosHumanos, 0, "NOMPARAM06", "0.06 Validar Cuenta Contable en definición de Conceptos ...", TipoParametro.iNoSi, "0", Empresa)
+            InsertarParametro(Myconn, lblInfo, Gestion.iRecursosHumanos, 0, "NOMPARAM07", "0.07 Moneda por defecto ...", TipoParametro.iMoneda, "0", Empresa)
 
             '4 // COMPRAS
             InsertarParametro(Myconn, lblInfo, Gestion.iCompras, 0, "COMPARAM00", "0. GENERAL", TipoParametro.iCadena, "", Empresa)
@@ -139,6 +145,7 @@ Module FuncionesControl
             InsertarParametro(Myconn, lblInfo, Gestion.iCompras, 0, "COMPARAM03", "0.03 ¿Valida existencias en Notas de Crédito (Devoluciones)? ...", TipoParametro.iNoSi, "0", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iCompras, 0, "COMPARAM04", "0.04 ¿Exigir código contable en el proveedor? ...", TipoParametro.iNoSi, "0", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iCompras, 0, "COMPARAM05", "0.05 ¿Exigir código contable en ABONOS, CANCELACIONES, ETC.? ...", TipoParametro.iNoSi, "0", Empresa)
+            InsertarParametro(Myconn, lblInfo, Gestion.iCompras, 0, "COMPARAM06", "0.06 Moneda por defecto...", TipoParametro.iMoneda, "0", Empresa)
 
             InsertarParametro(Myconn, lblInfo, Gestion.iCompras, 1, "COMPAGAS00", "1. GASTOS", TipoParametro.iCadena, "", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iCompras, 1, "COMPAGAS03", "1.01 ¿Permite modificar y/o eliminar GASTOS?", TipoParametro.iNoSi, "0", Empresa)
@@ -197,7 +204,7 @@ Module FuncionesControl
             InsertarParametro(Myconn, lblInfo, Gestion.iVentas, 0, "VENPARAM38", "0.22 SI Origen del NUMERO DE CONTROL ES CERO (0=registro) Verificar TABLA de Números de Control ...", TipoParametro.iTabla, SystemInformation.ComputerName, Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iVentas, 0, "VENPARAM39", "0.23 ACTIVAR FACTURACION SEGUN DECRETO 3085 (REBAJAS DE IVA POR RANGOS/PAGOS ELECTRONICOS)  ...", TipoParametro.iNoSi, "0")
             InsertarParametro(Myconn, lblInfo, Gestion.iVentas, 0, "VENPARAM40", "0.24 ¿Imprimir adicionalmente total de COT/PED/ENT/FAC//NCR/NDB en moneda EXTRANJERA?", TipoParametro.iNoSi, "0", Empresa)
-            InsertarParametro(Myconn, lblInfo, Gestion.iVentas, 0, "VENPARAM41", "0.25 Moneda Extranjera", TipoParametro.iMoneda, "0", Empresa)
+            InsertarParametro(Myconn, lblInfo, Gestion.iVentas, 0, "VENPARAM41", "0.25 Moneda por defecto...", TipoParametro.iMoneda, "0", Empresa)
 
             InsertarParametro(Myconn, lblInfo, Gestion.iVentas, 1, "VENCOTPA00", "1. PRESUPUESTOS", TipoParametro.iCadena, "", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iVentas, 1, "VENCOTPA01", "1.01 ¿Permite modificar y/o eliminar presupuestos?", TipoParametro.iNoSi, "0", Empresa)
@@ -387,6 +394,7 @@ Module FuncionesControl
             InsertarParametro(Myconn, lblInfo, Gestion.iMercancías, 0, "MERPARAM07", "0.07 UNIDAD DE MEDIDA adicional a KGR para esta empresa ...", TipoParametro.iCadena, "CAJ", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iMercancías, 0, "MERPARAM08", "0.08 ¿Valida UNIDAD DE MEDIDA ADICIONAL en catálogo de mercancías? ...", TipoParametro.iNoSi, "0", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iMercancías, 0, "MERPARAM09", "0.09 ¿Poder facturar COMBOS sin existencias? ...", TipoParametro.iNoSi, "0", Empresa)
+            InsertarParametro(Myconn, lblInfo, Gestion.iMercancías, 0, "MERPARAM10", "0.10 Moneda por defecto ...", TipoParametro.iMoneda, "0", Empresa)
 
             InsertarParametro(Myconn, lblInfo, Gestion.iMercancías, 0, "MERTRAPA00", "1. TRANSFERENCIAS", TipoParametro.iCadena, "", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iMercancías, 0, "MERTRAPA01", "1.01 ¿Validar existencias de almacén de salida? ...", TipoParametro.iNoSi, "1", Empresa)
@@ -401,7 +409,7 @@ Module FuncionesControl
             InsertarParametro(Myconn, lblInfo, Gestion.iMercancías, 0, "MERENVPA01", "3.01 ¿Indicar Serial Interno OBLIGATORIAMENTE ? ..", TipoParametro.iNoSi, "0", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iMercancías, 0, "MERENVPA02", "3.02 ¿Indicar Serial Externo OBLIGATORIAMENTE ? ..", TipoParametro.iNoSi, "0", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iMercancías, 0, "MERENVPA03", "3.03 ¿Indicar material OBLIGATORIAMENTE ? ..", TipoParametro.iNoSi, "1", Empresa)
-           
+
 
 
             '7 // CONTROL DE GESTIONES
@@ -427,6 +435,7 @@ Module FuncionesControl
             InsertarParametro(Myconn, lblInfo, Gestion.iPuntosdeVentas, 0, "POSPARAM37", "0.14 ¿DESEA USAR MENSAJES EN CINTILLO FACTURA?", TipoParametro.iNoSi, "0", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iPuntosdeVentas, 0, "POSPARAM38", "0.15 TABLA DE MENSAJES PARA CINTILLO FACTURA", TipoParametro.iTabla, "MENSAJES", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iPuntosdeVentas, 0, "POSPARAM40", "0.16 Tiempo de presentación de mensajes en cintillo ", TipoParametro.iEntero, "10", Empresa)
+            InsertarParametro(Myconn, lblInfo, Gestion.iPuntosdeVentas, 0, "POSPARAM51", "0.17 Moneda por defecto... ", TipoParametro.iMoneda, "0", Empresa)
 
 
             InsertarParametro(Myconn, lblInfo, Gestion.iPuntosdeVentas, 0, "POSPARAM00", "1. FACTURAS", TipoParametro.iCadena, "", Empresa)
@@ -474,14 +483,13 @@ Module FuncionesControl
             InsertarParametro(Myconn, lblInfo, Gestion.iProduccion, 0, "PROPARAM02", "0.02 Almacén de productos terminados", TipoParametro.iCadena, "00001", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iProduccion, 0, "PROPARAM03", "0.03 Indique TIPO del costo para los consumos (0=Promedio 1=Estandar 2=Ultimo)", TipoParametro.iEntero, "2", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iProduccion, 0, "PROPARAM04", "0.04 Indique TIPO del costo para PRODUCTO TERMINADO (0=Promedio 1=Estandar)", TipoParametro.iEntero, "1", Empresa)
+            InsertarParametro(Myconn, lblInfo, Gestion.iProduccion, 0, "PROPARAM05", "0.05 Moneda por defecto...", TipoParametro.iMoneda, 0, Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iProduccion, 0, "PROFOR0000", "1. FORMULACIONES", TipoParametro.iCadena, "", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iProduccion, 0, "PROFOR0001", "1.01 Permite EDITAR formulaciones ", TipoParametro.iNoSi, "0", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iProduccion, 0, "PROFOR0002", "1.02 Permite ELIMINAR formulaciones ", TipoParametro.iNoSi, "0", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iProduccion, 0, "PROFOR0000", "2. ORDENES DE PRODUCCION", TipoParametro.iCadena, "", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iProduccion, 0, "PROORD0001", "2.01 Permite EDITAR Ordenes de producción ", TipoParametro.iNoSi, "0", Empresa)
             InsertarParametro(Myconn, lblInfo, Gestion.iProduccion, 0, "PROORD0002", "2.02 Permite ELIMINAR Ordenes de producción ", TipoParametro.iNoSi, "0", Empresa)
-
-
 
         End If
     End Sub
@@ -575,7 +583,7 @@ Module FuncionesControl
         End If
 
     End Sub
-    Public Function ContadorNC_Financiera(ByVal myconn As MySqlConnection, ByVal CodigoCausaNC As String, _
+    Public Function ContadorNC_Financiera(ByVal myconn As MySqlConnection, ByVal CodigoCausaNC As String,
                              ByVal OrigenCausaNC As String, Optional ByVal Incrementar As Boolean = True) As String
 
         ContadorNC_Financiera = ft.DevuelveScalarCadena(myconn, " SELECT NUMPAG FROM jsconcausas_notascredito WHERE CODIGO = '" & CodigoCausaNC & "' AND ORIGEN = '" & OrigenCausaNC & "' ").ToString
@@ -587,7 +595,7 @@ Module FuncionesControl
 
     End Function
 
-    Public Function Contador(ByVal myconn As MySqlConnection, ByVal lblInfo As Label, ByVal gestion As Integer, ByVal CodigoContador As String, _
+    Public Function Contador(ByVal myconn As MySqlConnection, ByVal lblInfo As Label, ByVal gestion As Integer, ByVal CodigoContador As String,
                              ByVal Modulo As String, Optional ByVal Incrementar As Boolean = True) As String
 
         Dim afld() As String = {"gestion", "codigo", "id_emp"}
@@ -599,7 +607,7 @@ Module FuncionesControl
         End If
 
     End Function
-    Public Function ContadorJytsuite(ByVal Myconn As MySqlConnection, ByVal lblInfo As Label, ByVal CodigoContador As String, _
+    Public Function ContadorJytsuite(ByVal Myconn As MySqlConnection, ByVal lblInfo As Label, ByVal CodigoContador As String,
                                       Optional ByVal Incrementar As Boolean = True) As String
 
         ContadorJytsuite = ft.DevuelveScalarCadena(Myconn, " select " & CodigoContador & " from jsconctacon where id_emp = '" & jytsistema.WorkID & "'  ")
@@ -607,7 +615,7 @@ Module FuncionesControl
 
         If Incrementar Then
             Dim Incremento As String = IncrementarCadena(ContadorJytsuite)
-            ft.Ejecutar_strSQL(myconn, " update jsconctacon set  " & CodigoContador & " = '" & Incremento & "' where id_emp = '" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(Myconn, " update jsconctacon set  " & CodigoContador & " = '" & Incremento & "' where id_emp = '" & jytsistema.WorkID & "' ")
         End If
 
         ContadorJytsuite = ft.DevuelveScalarCadena(Myconn, " select " & CodigoContador & " from jsconctacon where id_emp = '" & jytsistema.WorkID & "'  ")
@@ -631,7 +639,7 @@ Module FuncionesControl
         With ds.Tables(nTablaB)
             Dim aCorredor(.Rows.Count - 1) As String
             For eCont = 0 To .Rows.Count - 1
-                aCorredor(eCont) = .Rows(eCont).Item("codigo") & " | " & _
+                aCorredor(eCont) = .Rows(eCont).Item("codigo") & " | " &
                     .Rows(eCont).Item("descrip")
             Next
             ft.RellenaCombo(aCorredor, cmb)
@@ -661,5 +669,89 @@ Module FuncionesControl
             " where a.moneda = (select monedacambio from jsconctaemp where id_emp = '" & jytsistema.WorkID & "' ) ")
 
     End Function
+
+
+    Public Function GetListaDeMonedasyCambios(MyConn As MySqlConnection, Optional fecha As DateTime = Nothing) As List(Of CambioMonedaPlus)
+
+        Dim strSQL = SQLSelectCambiosYMonedas(IIf(fecha = Nothing, DateTime.Now, fecha))
+
+        Return Lista(Of CambioMonedaPlus)(MyConn, strSQL)
+
+    End Function
+    Public Function GetTransportList(MyConn As MySqlConnection) As List(Of SimpleTable)
+
+        Dim strSQL = " select codtra Codigo, concat( codtra, ' | ', nomtra ) Descripcion from jsconctatra where id_emp = '" & jytsistema.WorkID & "' order by codtra "
+        Return Lista(Of SimpleTable)(MyConn, strSQL)
+
+    End Function
+    Public Function GetWarehouseList(MyConn As MySqlConnection) As List(Of SimpleTable)
+
+        Dim strSQL = " select codalm Codigo, concat(codalm, ' | ', desalm) Descripcion from jsmercatalm where id_emp = '" & jytsistema.WorkID & "' order by codalm "
+        Return Lista(Of SimpleTable)(MyConn, strSQL)
+
+    End Function
+    Public Function SQLSelectCambiosYMonedas(fecha As DateTime)
+        Return " SELECT aa.moneda, concat( bb.UnidadMonetaria,' | ' , bb.Simbolo ) UnidadMonetaria, bb.Simbolo, bb.CodigoIso, " +
+        " aa.equivale, aa.fecha FROM ( SELECT b.moneda, b.equivale, b.fecha FROM " +
+        " (SELECT MAX(fecha) fecha, moneda FROM jsconctacam " +
+        " WHERE fecha <= '" + ft.FormatoFechaHoraMySQL(fecha) + "' " +
+        " GROUP BY moneda ) a " +
+        " Left Join jsconctacam b ON (a.fecha = b.fecha And a.moneda = b.moneda) " +
+        " WHERE " +
+        " b.id_emp = '" + jytsistema.WorkID + "' )  aa " +
+        " LEFT JOIN jsconcatmon bb on ( aa.moneda = bb.id ) UNION " +
+        " SELECT a.moneda, CONCAT( b.UnidadMonetaria,' | ' , b.Simbolo ) UnidadMonetaria, b.Simbolo, b.CodigoIso, 1.0000 equivale, NOW() fecha " +
+        " FROM jsconctaemp a LEFT JOIN jsconcatmon b ON (a.moneda = b.id) WHERE id_emp = '" + jytsistema.WorkID + "' "
+    End Function
+
+
+    Public Sub InitiateDropDownInterchangeCurrency(cmbMonedas As SfComboBox, interchangeList As List(Of CambioMonedaPlus),
+                                                   Optional defaultValue As Boolean = False)
+
+        cmbMonedas.DataSource = interchangeList
+        cmbMonedas.DisplayMember = "UnidadMonetaria"
+        cmbMonedas.ValueMember = "Moneda"
+        cmbMonedas.Watermark = "Escoja una moneda"
+        cmbMonedas.AutoCompleteMode = AutoCompleteMode.Suggest
+        cmbMonedas.DropDownStyle = DropDownStyle.DropDown
+        cmbMonedas.AutoCompleteSuggestMode = AutoCompleteSuggestMode.Contains
+        cmbMonedas.MaxDropDownItems = 10
+        If defaultValue Then cmbMonedas.SelectedValue = jytsistema.WorkCurrency.Id
+
+    End Sub
+
+    'Public Sub IniciarFormapago(cmb As ComboBox, Optional defaultValue As String = "EF")
+    '    cmb.DataSource = formasDePago
+    '    cmb.DisplayMember = "Text"
+    '    cmb.ValueMember = "Value"
+    '    cmb.SelectedValue = defaultValue
+    'End Sub
+
+    Public Sub IniciarFormapadoDropDown(cmb As SfComboBox, formasDepago As List(Of TextoValor), Optional defaultValue As String = "EF")
+        cmb.DataSource = formasDepago
+        cmb.DisplayMember = "Text"
+        cmb.ValueMember = "Value"
+        cmb.AutoCompleteMode = AutoCompleteMode.Suggest
+        cmb.DropDownStyle = DropDownStyle.DropDown
+        cmb.AutoCompleteSuggestMode = AutoCompleteSuggestMode.Contains
+        cmb.MaxDropDownItems = 6
+        cmb.DropDownListView.ItemHeight = 28
+        cmb.SelectedValue = defaultValue
+
+    End Sub
+
+    Public Sub IniciarTablaSimpleDropDown(cmb As SfComboBox, lista As List(Of SimpleTable), Optional defaultValue As String = "")
+
+        cmb.DataSource = lista
+        cmb.DisplayMember = "Descripcion"
+        cmb.ValueMember = "Codigo"
+        cmb.AutoCompleteMode = AutoCompleteMode.Suggest
+        cmb.DropDownStyle = DropDownStyle.DropDown
+        cmb.AutoCompleteSuggestMode = AutoCompleteSuggestMode.Contains
+        cmb.MaxDropDownItems = 6
+        cmb.SelectedValue = IIf(defaultValue = "", lista.FirstOrDefault().Codigo, defaultValue)
+
+    End Sub
+
 
 End Module

@@ -120,11 +120,11 @@ Public Class jsBanProDebitoBancario
         Dim desIDB As String = Convert.ToString(ParametroPlus(myConn, Gestion.iBancos, "BANPARAM04"))
 
         With nRow
-            InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, CDate(.Item("FECHAMOV").ToString), .Item("NUMDOC").ToString, _
-                        "ND", Mid(cmbCuenta.Text, 1, 5), "", desIDB + " MES : " + Format(cmbMes.SelectedIndex + 1, "00") + "/" + CStr(Year(jytsistema.sFechadeTrabajo)), _
-                        .Item("IMPORTE") * MontoIDB / 100, "BAN", "DB" & Format(cmbMes.SelectedIndex + 1, "00") & Year(jytsistema.sFechadeTrabajo), _
-                        "", "", "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, "ND", "", jytsistema.sFechadeTrabajo, _
-                        "0", "", "")
+            InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, CDate(.Item("FECHAMOV").ToString), .Item("NUMDOC").ToString,
+                        "ND", Mid(cmbCuenta.Text, 1, 5), "", desIDB + " MES : " + Format(cmbMes.SelectedIndex + 1, "00") + "/" + CStr(Year(jytsistema.sFechadeTrabajo)),
+                        .Item("IMPORTE") * MontoIDB / 100, "BAN", "DB" & Format(cmbMes.SelectedIndex + 1, "00") & Year(jytsistema.sFechadeTrabajo),
+                        "", "", "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, "ND", "", jytsistema.sFechadeTrabajo,
+                        "0", "", "", jytsistema.WorkCurrency.Id, DateTime.Now())
         End With
 
     End Sub

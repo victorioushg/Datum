@@ -190,16 +190,14 @@ Partial Class jsSIGMERepParametros
         Me.btnAsesorDesde = New System.Windows.Forms.Button()
         Me.txtAsesorHasta = New System.Windows.Forms.TextBox()
         Me.txtAsesorDesde = New System.Windows.Forms.TextBox()
-        Me.btnPeriodoHasta = New System.Windows.Forms.Button()
-        Me.btnPeriodoDesde = New System.Windows.Forms.Button()
-        Me.txtPeriodoHasta = New System.Windows.Forms.TextBox()
-        Me.txtPeriodoDesde = New System.Windows.Forms.TextBox()
         Me.lblPeriodoHasta = New System.Windows.Forms.Label()
         Me.lblPeriodo = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.lblNombreReporte = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lblInfo = New System.Windows.Forms.Label()
+        Me.txtPeriodoHasta = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtPeriodoDesde = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpImprimirSalir.SuspendLayout()
         Me.grpConstantes.SuspendLayout()
         Me.grpGrupos.SuspendLayout()
@@ -1664,6 +1662,8 @@ Partial Class jsSIGMERepParametros
         '
         Me.grpCriterios.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpCriterios.Controls.Add(Me.txtPeriodoHasta)
+        Me.grpCriterios.Controls.Add(Me.txtPeriodoDesde)
         Me.grpCriterios.Controls.Add(Me.lblAño)
         Me.grpCriterios.Controls.Add(Me.cmbAño)
         Me.grpCriterios.Controls.Add(Me.btnLoteHasta)
@@ -1697,10 +1697,6 @@ Partial Class jsSIGMERepParametros
         Me.grpCriterios.Controls.Add(Me.btnAsesorDesde)
         Me.grpCriterios.Controls.Add(Me.txtAsesorHasta)
         Me.grpCriterios.Controls.Add(Me.txtAsesorDesde)
-        Me.grpCriterios.Controls.Add(Me.btnPeriodoHasta)
-        Me.grpCriterios.Controls.Add(Me.btnPeriodoDesde)
-        Me.grpCriterios.Controls.Add(Me.txtPeriodoHasta)
-        Me.grpCriterios.Controls.Add(Me.txtPeriodoDesde)
         Me.grpCriterios.Controls.Add(Me.lblPeriodoHasta)
         Me.grpCriterios.Controls.Add(Me.lblPeriodo)
         Me.grpCriterios.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1726,7 +1722,7 @@ Partial Class jsSIGMERepParametros
         '
         Me.cmbAño.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbAño.FormattingEnabled = True
-        Me.cmbAño.Location = New System.Drawing.Point(293, 9)
+        Me.cmbAño.Location = New System.Drawing.Point(293, 11)
         Me.cmbAño.Margin = New System.Windows.Forms.Padding(1)
         Me.cmbAño.Name = "cmbAño"
         Me.cmbAño.Size = New System.Drawing.Size(74, 21)
@@ -1966,7 +1962,7 @@ Partial Class jsSIGMERepParametros
         '
         Me.chkList.ColumnWidth = 60
         Me.chkList.FormattingEnabled = True
-        Me.chkList.Location = New System.Drawing.Point(293, 52)
+        Me.chkList.Location = New System.Drawing.Point(292, 52)
         Me.chkList.MultiColumn = True
         Me.chkList.Name = "chkList"
         Me.chkList.Size = New System.Drawing.Size(334, 19)
@@ -2056,48 +2052,6 @@ Partial Class jsSIGMERepParametros
         Me.txtAsesorDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtAsesorDesde.Visible = False
         '
-        'btnPeriodoHasta
-        '
-        Me.btnPeriodoHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPeriodoHasta.Location = New System.Drawing.Point(602, 10)
-        Me.btnPeriodoHasta.Name = "btnPeriodoHasta"
-        Me.btnPeriodoHasta.Size = New System.Drawing.Size(25, 20)
-        Me.btnPeriodoHasta.TabIndex = 115
-        Me.btnPeriodoHasta.Text = "•••"
-        Me.btnPeriodoHasta.UseVisualStyleBackColor = True
-        Me.btnPeriodoHasta.Visible = False
-        '
-        'btnPeriodoDesde
-        '
-        Me.btnPeriodoDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPeriodoDesde.Location = New System.Drawing.Point(404, 10)
-        Me.btnPeriodoDesde.Name = "btnPeriodoDesde"
-        Me.btnPeriodoDesde.Size = New System.Drawing.Size(25, 20)
-        Me.btnPeriodoDesde.TabIndex = 114
-        Me.btnPeriodoDesde.Text = "•••"
-        Me.btnPeriodoDesde.UseVisualStyleBackColor = True
-        Me.btnPeriodoDesde.Visible = False
-        '
-        'txtPeriodoHasta
-        '
-        Me.txtPeriodoHasta.Enabled = False
-        Me.txtPeriodoHasta.Location = New System.Drawing.Point(490, 10)
-        Me.txtPeriodoHasta.Name = "txtPeriodoHasta"
-        Me.txtPeriodoHasta.Size = New System.Drawing.Size(107, 20)
-        Me.txtPeriodoHasta.TabIndex = 112
-        Me.txtPeriodoHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.txtPeriodoHasta.Visible = False
-        '
-        'txtPeriodoDesde
-        '
-        Me.txtPeriodoDesde.Enabled = False
-        Me.txtPeriodoDesde.Location = New System.Drawing.Point(292, 10)
-        Me.txtPeriodoDesde.Name = "txtPeriodoDesde"
-        Me.txtPeriodoDesde.Size = New System.Drawing.Size(107, 20)
-        Me.txtPeriodoDesde.TabIndex = 111
-        Me.txtPeriodoDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.txtPeriodoDesde.Visible = False
-        '
         'lblPeriodoHasta
         '
         Me.lblPeriodoHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -2172,6 +2126,30 @@ Partial Class jsSIGMERepParametros
         Me.lblInfo.Size = New System.Drawing.Size(974, 44)
         Me.lblInfo.TabIndex = 91
         '
+        'txtPeriodoHasta
+        '
+        Me.txtPeriodoHasta.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtPeriodoHasta.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtPeriodoHasta.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtPeriodoHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPeriodoHasta.Location = New System.Drawing.Point(490, 11)
+        Me.txtPeriodoHasta.Name = "txtPeriodoHasta"
+        Me.txtPeriodoHasta.Size = New System.Drawing.Size(110, 19)
+        Me.txtPeriodoHasta.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtPeriodoHasta.TabIndex = 217
+        '
+        'txtPeriodoDesde
+        '
+        Me.txtPeriodoDesde.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtPeriodoDesde.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtPeriodoDesde.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtPeriodoDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPeriodoDesde.Location = New System.Drawing.Point(293, 10)
+        Me.txtPeriodoDesde.Name = "txtPeriodoDesde"
+        Me.txtPeriodoDesde.Size = New System.Drawing.Size(113, 19)
+        Me.txtPeriodoDesde.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtPeriodoDesde.TabIndex = 216
+        '
         'jsSIGMERepParametros
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2229,12 +2207,8 @@ Partial Class jsSIGMERepParametros
     Friend WithEvents txtOrdenHasta As System.Windows.Forms.TextBox
     Friend WithEvents txtOrdenDesde As System.Windows.Forms.TextBox
     Friend WithEvents grpCriterios As System.Windows.Forms.GroupBox
-    Friend WithEvents txtPeriodoHasta As System.Windows.Forms.TextBox
-    Friend WithEvents txtPeriodoDesde As System.Windows.Forms.TextBox
     Friend WithEvents lblPeriodoHasta As System.Windows.Forms.Label
     Friend WithEvents lblPeriodo As System.Windows.Forms.Label
-    Friend WithEvents btnPeriodoHasta As System.Windows.Forms.Button
-    Friend WithEvents btnPeriodoDesde As System.Windows.Forms.Button
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents lblNombreReporte As System.Windows.Forms.Label
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
@@ -2396,4 +2370,6 @@ Partial Class jsSIGMERepParametros
     Friend WithEvents lblAño As System.Windows.Forms.Label
     Friend WithEvents chkResumenMercas As System.Windows.Forms.CheckBox
     Friend WithEvents lblChkMercas As System.Windows.Forms.Label
+    Friend WithEvents txtPeriodoHasta As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtPeriodoDesde As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

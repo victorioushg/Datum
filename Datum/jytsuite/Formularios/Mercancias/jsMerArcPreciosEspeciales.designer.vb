@@ -19,60 +19,58 @@ Partial Class jsMerArcPreciosEspeciales
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsMerArcPreciosEspeciales))
-        Me.lblInfo = New System.Windows.Forms.Label
-        Me.dg = New System.Windows.Forms.DataGridView
-        Me.grpEncab = New System.Windows.Forms.GroupBox
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.txtItems = New System.Windows.Forms.TextBox
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.btnFechaDEsde = New System.Windows.Forms.Button
-        Me.txtFechaHasta = New System.Windows.Forms.TextBox
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.txtFechaDesde = New System.Windows.Forms.TextBox
-        Me.txtComentario = New System.Windows.Forms.TextBox
-        Me.txtLista = New System.Windows.Forms.TextBox
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.btnOK = New System.Windows.Forms.Button
-        Me.MenuBarra = New System.Windows.Forms.ToolStrip
-        Me.btnAgregar = New System.Windows.Forms.ToolStripButton
-        Me.btnEditar = New System.Windows.Forms.ToolStripButton
-        Me.btnEliminar = New System.Windows.Forms.ToolStripButton
-        Me.btnBuscar = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
-        Me.btnPrimero = New System.Windows.Forms.ToolStripButton
-        Me.btnAnterior = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator
-        Me.Items = New System.Windows.Forms.ToolStripTextBox
-        Me.lblItems = New System.Windows.Forms.ToolStripLabel
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator
-        Me.btnSiguiente = New System.Windows.Forms.ToolStripButton
-        Me.btnUltimo = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator
-        Me.btnImprimir = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator
-        Me.btnSalir = New System.Windows.Forms.ToolStripButton
-        Me.MenuBarraRenglon = New System.Windows.Forms.ToolStrip
-        Me.btnAgregarMovimiento = New System.Windows.Forms.ToolStripButton
-        Me.btnEditarMovimiento = New System.Windows.Forms.ToolStripButton
-        Me.btnEliminarMovimiento = New System.Windows.Forms.ToolStripButton
-        Me.btnBuscarMovimiento = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator
-        Me.btnPrimerMovimiento = New System.Windows.Forms.ToolStripButton
-        Me.btnAnteriorMovimiento = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator
-        Me.itemsrenglon = New System.Windows.Forms.ToolStripTextBox
-        Me.lblitemsrenglon = New System.Windows.Forms.ToolStripLabel
-        Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator
-        Me.btnSiguienteMovimiento = New System.Windows.Forms.ToolStripButton
-        Me.btnUltimoMovimiento = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator
+        Me.lblInfo = New System.Windows.Forms.Label()
+        Me.dg = New System.Windows.Forms.DataGridView()
+        Me.grpEncab = New System.Windows.Forms.GroupBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtItems = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtComentario = New System.Windows.Forms.TextBox()
+        Me.txtLista = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnOK = New System.Windows.Forms.Button()
+        Me.MenuBarra = New System.Windows.Forms.ToolStrip()
+        Me.btnAgregar = New System.Windows.Forms.ToolStripButton()
+        Me.btnEditar = New System.Windows.Forms.ToolStripButton()
+        Me.btnEliminar = New System.Windows.Forms.ToolStripButton()
+        Me.btnBuscar = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnPrimero = New System.Windows.Forms.ToolStripButton()
+        Me.btnAnterior = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.Items = New System.Windows.Forms.ToolStripTextBox()
+        Me.lblItems = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnSiguiente = New System.Windows.Forms.ToolStripButton()
+        Me.btnUltimo = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnImprimir = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnSalir = New System.Windows.Forms.ToolStripButton()
+        Me.MenuBarraRenglon = New System.Windows.Forms.ToolStrip()
+        Me.btnAgregarMovimiento = New System.Windows.Forms.ToolStripButton()
+        Me.btnEditarMovimiento = New System.Windows.Forms.ToolStripButton()
+        Me.btnEliminarMovimiento = New System.Windows.Forms.ToolStripButton()
+        Me.btnBuscarMovimiento = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnPrimerMovimiento = New System.Windows.Forms.ToolStripButton()
+        Me.btnAnteriorMovimiento = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
+        Me.itemsrenglon = New System.Windows.Forms.ToolStripTextBox()
+        Me.lblitemsrenglon = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnSiguienteMovimiento = New System.Windows.Forms.ToolStripButton()
+        Me.btnUltimoMovimiento = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
         Me.C1SuperTooltip1 = New C1.Win.C1SuperTooltip.C1SuperTooltip(Me.components)
-        Me.btnFechaHasta = New System.Windows.Forms.Button
+        Me.txtFechaDesde = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaHasta = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpEncab.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -98,8 +96,8 @@ Partial Class jsMerArcPreciosEspeciales
         Me.dg.AllowUserToResizeColumns = False
         Me.dg.AllowUserToResizeRows = False
         Me.dg.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dg.Location = New System.Drawing.Point(0, 194)
         Me.dg.Name = "dg"
@@ -110,16 +108,14 @@ Partial Class jsMerArcPreciosEspeciales
         'grpEncab
         '
         Me.grpEncab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpEncab.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.grpEncab.Controls.Add(Me.btnFechaHasta)
+        Me.grpEncab.Controls.Add(Me.txtFechaHasta)
+        Me.grpEncab.Controls.Add(Me.txtFechaDesde)
         Me.grpEncab.Controls.Add(Me.Label7)
         Me.grpEncab.Controls.Add(Me.txtItems)
         Me.grpEncab.Controls.Add(Me.Label6)
-        Me.grpEncab.Controls.Add(Me.btnFechaDEsde)
-        Me.grpEncab.Controls.Add(Me.txtFechaHasta)
         Me.grpEncab.Controls.Add(Me.Label4)
-        Me.grpEncab.Controls.Add(Me.txtFechaDesde)
         Me.grpEncab.Controls.Add(Me.txtComentario)
         Me.grpEncab.Controls.Add(Me.txtLista)
         Me.grpEncab.Controls.Add(Me.Label2)
@@ -160,27 +156,6 @@ Partial Class jsMerArcPreciosEspeciales
         Me.Label6.Text = "Desde :"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'btnFechaDEsde
-        '
-        Me.btnFechaDEsde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaDEsde.Location = New System.Drawing.Point(725, 13)
-        Me.btnFechaDEsde.Name = "btnFechaDEsde"
-        Me.btnFechaDEsde.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaDEsde.TabIndex = 112
-        Me.btnFechaDEsde.Text = "•••"
-        Me.btnFechaDEsde.UseVisualStyleBackColor = True
-        '
-        'txtFechaHasta
-        '
-        Me.txtFechaHasta.Enabled = False
-        Me.txtFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFechaHasta.Location = New System.Drawing.Point(632, 34)
-        Me.txtFechaHasta.MaxLength = 19
-        Me.txtFechaHasta.Name = "txtFechaHasta"
-        Me.txtFechaHasta.Size = New System.Drawing.Size(91, 20)
-        Me.txtFechaHasta.TabIndex = 6
-        Me.txtFechaHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label4
         '
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -190,17 +165,6 @@ Partial Class jsMerArcPreciosEspeciales
         Me.Label4.TabIndex = 10
         Me.Label4.Text = "Hasta :"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtFechaDesde
-        '
-        Me.txtFechaDesde.Enabled = False
-        Me.txtFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFechaDesde.Location = New System.Drawing.Point(632, 13)
-        Me.txtFechaDesde.MaxLength = 19
-        Me.txtFechaDesde.Name = "txtFechaDesde"
-        Me.txtFechaDesde.Size = New System.Drawing.Size(91, 20)
-        Me.txtFechaDesde.TabIndex = 5
-        Me.txtFechaDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtComentario
         '
@@ -418,7 +382,7 @@ Partial Class jsMerArcPreciosEspeciales
         'MenuBarraRenglon
         '
         Me.MenuBarraRenglon.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MenuBarraRenglon.AutoSize = False
         Me.MenuBarraRenglon.Dock = System.Windows.Forms.DockStyle.None
         Me.MenuBarraRenglon.ImageScalingSize = New System.Drawing.Size(32, 32)
@@ -537,15 +501,29 @@ Partial Class jsMerArcPreciosEspeciales
         Me.C1SuperTooltip1.IsBalloon = True
         Me.C1SuperTooltip1.ShowAlways = True
         '
-        'btnFechaHasta
+        'txtFechaDesde
         '
-        Me.btnFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaHasta.Location = New System.Drawing.Point(725, 34)
-        Me.btnFechaHasta.Name = "btnFechaHasta"
-        Me.btnFechaHasta.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaHasta.TabIndex = 204
-        Me.btnFechaHasta.Text = "•••"
-        Me.btnFechaHasta.UseVisualStyleBackColor = True
+        Me.txtFechaDesde.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaDesde.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaDesde.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaDesde.Location = New System.Drawing.Point(632, 13)
+        Me.txtFechaDesde.Name = "txtFechaDesde"
+        Me.txtFechaDesde.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaDesde.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaDesde.TabIndex = 214
+        '
+        'txtFechaHasta
+        '
+        Me.txtFechaHasta.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaHasta.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaHasta.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaHasta.Location = New System.Drawing.Point(632, 34)
+        Me.txtFechaHasta.Name = "txtFechaHasta"
+        Me.txtFechaHasta.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaHasta.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaHasta.TabIndex = 215
         '
         'jsMerArcPreciosEspeciales
         '
@@ -579,7 +557,6 @@ Partial Class jsMerArcPreciosEspeciales
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents dg As System.Windows.Forms.DataGridView
     Friend WithEvents grpEncab As System.Windows.Forms.GroupBox
-    Friend WithEvents txtFechaDesde As System.Windows.Forms.TextBox
     Friend WithEvents txtComentario As System.Windows.Forms.TextBox
     Friend WithEvents txtLista As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -621,11 +598,10 @@ Partial Class jsMerArcPreciosEspeciales
     Friend WithEvents btnUltimoMovimiento As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator11 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
-    Friend WithEvents txtFechaHasta As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents btnFechaDEsde As System.Windows.Forms.Button
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents txtItems As System.Windows.Forms.TextBox
-    Friend WithEvents btnFechaHasta As System.Windows.Forms.Button
+    Friend WithEvents txtFechaHasta As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaDesde As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

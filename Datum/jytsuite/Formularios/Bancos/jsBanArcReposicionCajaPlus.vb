@@ -1,4 +1,7 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
+Imports fTransport
+
 Public Class jsBanArcReposicionCajaPlus
 
     Private Const sModulo As String = "Reposición de saldo en caja"
@@ -48,16 +51,16 @@ Public Class jsBanArcReposicionCajaPlus
     End Sub
     Private Sub IniciarTXT()
 
-        ft.habilitarObjetos(False, True, txtCuadre, txtFecha, txtFechaSeleccion, txtImporte, txtSaldo, txtiSel, txtComprobante)
+        ft.habilitarObjetos(False, True, txtCuadre, txtImporte, txtSaldo, txtiSel, txtComprobante)
 
         ft.RellenaCombo(aTipo, cmbTipo)
         ft.RellenaCombo(aFormaPago, cmbFormaPago)
         ft.RellenaCombo(aSeleccion, cmbSeleccion)
 
-        ft.visualizarObjetos(False, txtFechaSeleccion, btnFechaSeleccion)
+        ft.visualizarObjetos(False, txtFechaSeleccion)
 
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtFechaSeleccion.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
+        txtFechaSeleccion.Value = jytsistema.sFechadeTrabajo
         txtDocumento.Text = ""
         txtComprobante.Text = Contador(MyConn, lblInfo, Gestion.iBancos, "BANNUMRCC", "03")
         txtBeneficiario.Text = ""
@@ -93,6 +96,8 @@ Public Class jsBanArcReposicionCajaPlus
     Private Sub jsBanReposicionCaja_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Me.Tag = sModulo
         InsertarAuditoria(MyConn, MovAud.ientrar, sModulo, CodigoCaja)
+        Dim dates As SfDateTimeEdit() = {txtFecha, txtFechaSeleccion}
+        SetSizeDateObjects(dates)
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -146,29 +151,29 @@ Public Class jsBanArcReposicionCajaPlus
             Apuntador = dt.Rows.Count
             Renglon = Contador(MyConn, lblInfo, Gestion.iBancos, "BANNUMTRACAJ", "05")
 
-            InsertEditBANCOSMovimientoBanco(MyConn, lblInfo, True, CDate(txtFecha.Text), txtDocumento.Text, _
-                "CH", CodigoBanco, CodigoCaja, "REPOSICION DE SALDO EN CAJA " & CodigoCaja, -1 * Math.Abs(ValorNumero(txtCuadre.Text)), _
-                "BAN", txtDocumento.Text, txtBeneficiario.Text, txtComprobante.Text, "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo, _
-                "CH", "", jytsistema.sFechadeTrabajo, "0", "", "")
+            InsertEditBANCOSMovimientoBanco(MyConn, lblInfo, True, txtFecha.Value, txtDocumento.Text,
+                "CH", CodigoBanco, CodigoCaja, "REPOSICION DE SALDO EN CAJA " & CodigoCaja, -1 * Math.Abs(ValorNumero(txtCuadre.Text)),
+                "BAN", txtDocumento.Text, txtBeneficiario.Text, txtComprobante.Text, "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo,
+                "CH", "", jytsistema.sFechadeTrabajo, "0", "", "", jytsistema.WorkCurrency.Id, DateTime.Now())
 
-            IncluirImpuestoDebitoBancario(MyConn, lblInfo, "CH", CodigoBanco, txtDocumento.Text, CDate(txtFecha.Text), _
+            IncluirImpuestoDebitoBancario(MyConn, lblInfo, "CH", CodigoBanco, txtDocumento.Text, txtFecha.Value,
                                           ValorNumero(txtCuadre.Text))
 
-            InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, CodigoCaja, Renglon, CDate(txtFecha.Text), "BAN", _
-                 "EN", txtDocumento.Text, "EF", txtDocumento.Text, CodigoBanco, Math.Abs(ValorNumero(txtImporte.Text)), "", "REPOSICION DE SALDO EN CAJA", txtComprobante.Text, jytsistema.MyDate, 1, _
-                  "", "", "", jytsistema.MyDate, "", "", "1")
+            InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, CodigoCaja, Renglon, txtFecha.Value, "BAN",
+                 "EN", txtDocumento.Text, "EF", txtDocumento.Text, CodigoBanco, Math.Abs(ValorNumero(txtImporte.Text)), "", "REPOSICION DE SALDO EN CAJA", txtComprobante.Text, jytsistema.MyDate, 1,
+                  "", "", "", jytsistema.MyDate, "", "", "1", jytsistema.WorkCurrency.Id, DateTime.Now())
 
             If ValorNumero(txtAdicional.Text) > 0 Then _
-                InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, CodigoCaja, Renglon, CDate(txtFecha.Text), "BAN", _
-                     "EN", txtDocumento.Text, "EF", txtDocumento.Text, CodigoBanco, Math.Abs(ValorNumero(txtAdicional.Text)), "", "AUMENTO DE SALDO EN CAJA", "", jytsistema.MyDate, 1, _
-                      "", "", "", jytsistema.MyDate, "", "", "1")
+                InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, CodigoCaja, Renglon, txtFecha.Value, "BAN",
+                     "EN", txtDocumento.Text, "EF", txtDocumento.Text, CodigoBanco, Math.Abs(ValorNumero(txtAdicional.Text)), "", "AUMENTO DE SALDO EN CAJA", "", jytsistema.MyDate, 1,
+                      "", "", "", jytsistema.MyDate, "", "", "1", jytsistema.WorkCurrency.Id, DateTime.Now())
 
             Dim lvCont As Integer
 
             For lvCont = 0 To lv.Items.Count - 1
                 If lv.Items(lvCont).Checked Then
-                    ft.Ejecutar_strSQL(myconn, "UPDATE jsbantracaj SET DEPOSITO = '" & txtComprobante.Text & "',  " _
-                        & " fecha_dep = '" & ft.FormatoFechaMySQL(CDate(txtFecha.Text)) & "', " _
+                    ft.Ejecutar_strSQL(MyConn, "UPDATE jsbantracaj SET DEPOSITO = '" & txtComprobante.Text & "',  " _
+                        & " fecha_dep = '" & ft.FormatoFechaMySQL(txtFecha.Value) & "', " _
                         & " codban = '' " _
                         & " where " _
                         & " caja = '" & Mid(CodigoCaja, 1, 2) & "' and " _
@@ -224,20 +229,15 @@ Public Class jsBanArcReposicionCajaPlus
         ft.mensajeEtiqueta(lblInfo, "Indique NOMBRE del beneficiario de este cheque ", Transportables.TipoMensaje.iInfo)
     End Sub
 
-
-    Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, btnFecha)
-    End Sub
-
     Private Sub txtAdicional_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtAdicional.GotFocus
-        ft.mensajeEtiqueta(lblInfo, "Indique monto adicional con el cual quiere aumentar la caja chica ", Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, "Indique monto adicional con el cual quiere aumentar la caja chica ", Transportables.tipoMensaje.iInfo)
     End Sub
 
     Private Sub txtAdicional_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAdicional.KeyPress
         e.Handled = ft.validaNumeroEnTextbox(e)
     End Sub
 
-    Private Sub txtSaldo_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSaldo.TextChanged, _
+    Private Sub txtSaldo_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSaldo.TextChanged,
         txtImporte.TextChanged, txtAdicional.TextChanged
         txtCuadre.Text = ft.FormatoNumero(Math.Abs(ValorNumero(txtImporte.Text)) + ValorNumero(txtAdicional.Text))
     End Sub
@@ -296,9 +296,6 @@ Public Class jsBanArcReposicionCajaPlus
 
     End Sub
 
-    Private Sub btnFechaSeleccion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaSeleccion.Click
-        txtFechaSeleccion.Text = ft.FormatoFecha(SeleccionaFecha(CDate(txtFechaSeleccion.Text), Me, btnFechaSeleccion))
-    End Sub
 
     Private Sub btnGo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGo.Click
         Dim kCont As Integer
@@ -313,7 +310,7 @@ Public Class jsBanArcReposicionCajaPlus
                 Next
             Case 2 ' Por fecha
                 For kCont = 0 To lv.Items.Count - 1
-                    If ft.FormatoFechaMySQL(CDate(lv.Items(kCont).SubItems(0).Text)) = ft.FormatoFechaMySQL(CDate(txtFechaSeleccion.Text)) Then lv.Items(kCont).Checked = True
+                    If ft.FormatoFechaMySQL(CDate(lv.Items(kCont).SubItems(0).Text)) = ft.FormatoFechaMySQL(txtFechaSeleccion.Value) Then lv.Items(kCont).Checked = True
                 Next
         End Select
     End Sub
@@ -321,14 +318,14 @@ Public Class jsBanArcReposicionCajaPlus
     Private Sub cmbSeleccion_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbSeleccion.SelectedIndexChanged
         Select Case cmbSeleccion.SelectedIndex
             Case 2
-                ft.visualizarObjetos(True, txtFechaSeleccion, btnFechaSeleccion)
+                ft.visualizarObjetos(True, txtFechaSeleccion)
             Case Else
-                ft.visualizarObjetos(False, txtFechaSeleccion, btnFechaSeleccion)
+                ft.visualizarObjetos(False, txtFechaSeleccion)
         End Select
     End Sub
 
     Private Sub cmbTipo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTipo.SelectedIndexChanged
-        ft.visualizarObjetos(Not Convert.ToBoolean(cmbTipo.SelectedIndex), cmbSeleccion, btnGo, txtFechaSeleccion, btnFechaSeleccion)
+        ft.visualizarObjetos(Not Convert.ToBoolean(cmbTipo.SelectedIndex), cmbSeleccion, btnGo, txtFechaSeleccion)
         Select Case cmbTipo.SelectedIndex
             Case 0
             Case Else

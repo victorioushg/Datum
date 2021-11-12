@@ -23,7 +23,6 @@ Partial Class jsMerArcPreciosFuturosMovimientos
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsMerArcPreciosFuturosMovimientos))
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.grpTarjeta = New System.Windows.Forms.GroupBox()
-        Me.btnFecha = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtDescuento = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -31,7 +30,6 @@ Partial Class jsMerArcPreciosFuturosMovimientos
         Me.btnCodigo = New System.Windows.Forms.Button()
         Me.txtUnidad = New System.Windows.Forms.TextBox()
         Me.lblLote = New System.Windows.Forms.Label()
-        Me.txtFecha = New System.Windows.Forms.TextBox()
         Me.lblCantidad = New System.Windows.Forms.Label()
         Me.txtPrecio = New System.Windows.Forms.TextBox()
         Me.txtDescripcion = New System.Windows.Forms.TextBox()
@@ -43,6 +41,7 @@ Partial Class jsMerArcPreciosFuturosMovimientos
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.C1SuperTooltip1 = New C1.Win.C1SuperTooltip.C1SuperTooltip(Me.components)
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpTarjeta.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
         Me.SuspendLayout()
@@ -60,7 +59,7 @@ Partial Class jsMerArcPreciosFuturosMovimientos
         'grpTarjeta
         '
         Me.grpTarjeta.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.grpTarjeta.Controls.Add(Me.btnFecha)
+        Me.grpTarjeta.Controls.Add(Me.txtFecha)
         Me.grpTarjeta.Controls.Add(Me.Label3)
         Me.grpTarjeta.Controls.Add(Me.txtDescuento)
         Me.grpTarjeta.Controls.Add(Me.Label1)
@@ -68,7 +67,6 @@ Partial Class jsMerArcPreciosFuturosMovimientos
         Me.grpTarjeta.Controls.Add(Me.btnCodigo)
         Me.grpTarjeta.Controls.Add(Me.txtUnidad)
         Me.grpTarjeta.Controls.Add(Me.lblLote)
-        Me.grpTarjeta.Controls.Add(Me.txtFecha)
         Me.grpTarjeta.Controls.Add(Me.lblCantidad)
         Me.grpTarjeta.Controls.Add(Me.txtPrecio)
         Me.grpTarjeta.Controls.Add(Me.txtDescripcion)
@@ -81,16 +79,6 @@ Partial Class jsMerArcPreciosFuturosMovimientos
         Me.grpTarjeta.Size = New System.Drawing.Size(538, 219)
         Me.grpTarjeta.TabIndex = 80
         Me.grpTarjeta.TabStop = False
-        '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(280, 180)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(27, 20)
-        Me.btnFecha.TabIndex = 60
-        Me.btnFecha.Text = "···"
-        Me.btnFecha.UseVisualStyleBackColor = True
         '
         'Label3
         '
@@ -156,14 +144,6 @@ Partial Class jsMerArcPreciosFuturosMovimientos
         Me.lblLote.TabIndex = 37
         Me.lblLote.Text = "Monto :"
         Me.lblLote.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtFecha
-        '
-        Me.txtFecha.Location = New System.Drawing.Point(138, 180)
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(136, 20)
-        Me.txtFecha.TabIndex = 23
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblCantidad
         '
@@ -271,6 +251,18 @@ Partial Class jsMerArcPreciosFuturosMovimientos
         '
         Me.C1SuperTooltip1.Font = New System.Drawing.Font("Tahoma", 8.0!)
         '
+        'txtFecha
+        '
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(137, 180)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(136, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 214
+        '
         'jsMerArcPreciosFuturosMovimientos
         '
         Me.AcceptButton = Me.btnOK
@@ -307,14 +299,13 @@ Partial Class jsMerArcPreciosFuturosMovimientos
     Friend WithEvents btnOK As System.Windows.Forms.Button
     Friend WithEvents lblCantidad As System.Windows.Forms.Label
     Friend WithEvents txtPrecio As System.Windows.Forms.TextBox
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
     Friend WithEvents txtUnidad As System.Windows.Forms.TextBox
     Friend WithEvents lblLote As System.Windows.Forms.Label
     Friend WithEvents btnCodigo As System.Windows.Forms.Button
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents cmbTarifa As System.Windows.Forms.ComboBox
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents txtDescuento As System.Windows.Forms.TextBox
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

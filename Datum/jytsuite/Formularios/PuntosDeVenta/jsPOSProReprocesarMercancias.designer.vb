@@ -28,10 +28,6 @@ Partial Class jsPOSProReprocesarmercancias
         Me.Button1 = New System.Windows.Forms.Button()
         Me.txtFacturaActual = New System.Windows.Forms.TextBox()
         Me.txtFacturaAnterior = New System.Windows.Forms.TextBox()
-        Me.btnFechaHasta = New System.Windows.Forms.Button()
-        Me.txtFechaHasta = New System.Windows.Forms.TextBox()
-        Me.btnFechaDesde = New System.Windows.Forms.Button()
-        Me.txtFechaDesde = New System.Windows.Forms.TextBox()
         Me.lblcuenta = New System.Windows.Forms.Label()
         Me.grpTotales = New System.Windows.Forms.GroupBox()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
@@ -45,6 +41,8 @@ Partial Class jsPOSProReprocesarmercancias
         Me.Label10 = New System.Windows.Forms.Label()
         Me.lblLeyenda = New System.Windows.Forms.Label()
         Me.grpLeyenda = New System.Windows.Forms.GroupBox()
+        Me.txtFechaDesde = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaHasta = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpCaja.SuspendLayout()
         Me.grpTotales.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -65,16 +63,14 @@ Partial Class jsPOSProReprocesarmercancias
         'grpCaja
         '
         Me.grpCaja.BackColor = System.Drawing.SystemColors.Control
+        Me.grpCaja.Controls.Add(Me.txtFechaHasta)
+        Me.grpCaja.Controls.Add(Me.txtFechaDesde)
         Me.grpCaja.Controls.Add(Me.Button2)
         Me.grpCaja.Controls.Add(Me.Label2)
         Me.grpCaja.Controls.Add(Me.Label1)
         Me.grpCaja.Controls.Add(Me.Button1)
         Me.grpCaja.Controls.Add(Me.txtFacturaActual)
         Me.grpCaja.Controls.Add(Me.txtFacturaAnterior)
-        Me.grpCaja.Controls.Add(Me.btnFechaHasta)
-        Me.grpCaja.Controls.Add(Me.txtFechaHasta)
-        Me.grpCaja.Controls.Add(Me.btnFechaDesde)
-        Me.grpCaja.Controls.Add(Me.txtFechaDesde)
         Me.grpCaja.Controls.Add(Me.lblcuenta)
         Me.grpCaja.Location = New System.Drawing.Point(1, 222)
         Me.grpCaja.Name = "grpCaja"
@@ -139,44 +135,6 @@ Partial Class jsPOSProReprocesarmercancias
         Me.txtFacturaAnterior.Size = New System.Drawing.Size(107, 20)
         Me.txtFacturaAnterior.TabIndex = 118
         Me.txtFacturaAnterior.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnFechaHasta
-        '
-        Me.btnFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaHasta.Location = New System.Drawing.Point(409, 19)
-        Me.btnFechaHasta.Name = "btnFechaHasta"
-        Me.btnFechaHasta.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaHasta.TabIndex = 117
-        Me.btnFechaHasta.Text = "•••"
-        Me.btnFechaHasta.UseVisualStyleBackColor = True
-        '
-        'txtFechaHasta
-        '
-        Me.txtFechaHasta.Enabled = False
-        Me.txtFechaHasta.Location = New System.Drawing.Point(296, 17)
-        Me.txtFechaHasta.Name = "txtFechaHasta"
-        Me.txtFechaHasta.Size = New System.Drawing.Size(107, 20)
-        Me.txtFechaHasta.TabIndex = 116
-        Me.txtFechaHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnFechaDesde
-        '
-        Me.btnFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaDesde.Location = New System.Drawing.Point(265, 16)
-        Me.btnFechaDesde.Name = "btnFechaDesde"
-        Me.btnFechaDesde.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaDesde.TabIndex = 116
-        Me.btnFechaDesde.Text = "•••"
-        Me.btnFechaDesde.UseVisualStyleBackColor = True
-        '
-        'txtFechaDesde
-        '
-        Me.txtFechaDesde.Enabled = False
-        Me.txtFechaDesde.Location = New System.Drawing.Point(152, 16)
-        Me.txtFechaDesde.Name = "txtFechaDesde"
-        Me.txtFechaDesde.Size = New System.Drawing.Size(107, 20)
-        Me.txtFechaDesde.TabIndex = 115
-        Me.txtFechaDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblcuenta
         '
@@ -324,6 +282,30 @@ Partial Class jsPOSProReprocesarmercancias
         Me.grpLeyenda.TabIndex = 90
         Me.grpLeyenda.TabStop = False
         '
+        'txtFechaDesde
+        '
+        Me.txtFechaDesde.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaDesde.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaDesde.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaDesde.Location = New System.Drawing.Point(148, 17)
+        Me.txtFechaDesde.Name = "txtFechaDesde"
+        Me.txtFechaDesde.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaDesde.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaDesde.TabIndex = 214
+        '
+        'txtFechaHasta
+        '
+        Me.txtFechaHasta.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaHasta.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaHasta.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaHasta.Location = New System.Drawing.Point(268, 17)
+        Me.txtFechaHasta.Name = "txtFechaHasta"
+        Me.txtFechaHasta.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaHasta.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaHasta.TabIndex = 215
+        '
         'jsPOSProReprocesarmercancias
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -370,14 +352,12 @@ Partial Class jsPOSProReprocesarmercancias
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Friend WithEvents lblLeyenda As System.Windows.Forms.Label
     Friend WithEvents grpLeyenda As System.Windows.Forms.GroupBox
-    Friend WithEvents btnFechaDesde As System.Windows.Forms.Button
-    Friend WithEvents txtFechaDesde As System.Windows.Forms.TextBox
-    Friend WithEvents btnFechaHasta As System.Windows.Forms.Button
-    Friend WithEvents txtFechaHasta As System.Windows.Forms.TextBox
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents txtFacturaActual As System.Windows.Forms.TextBox
     Friend WithEvents txtFacturaAnterior As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents txtFechaHasta As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaDesde As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

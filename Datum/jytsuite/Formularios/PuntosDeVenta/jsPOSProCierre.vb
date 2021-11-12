@@ -1,5 +1,7 @@
 Imports MySql.Data.MySqlClient
 Imports FP_AclasBixolon
+Imports Syncfusion.WinForms.Input
+
 Public Class jsPOSProCierre
     Private Const sModulo As String = "Cierre Diario de caja"
     Private Const nTabla As String = "tbLCierre"
@@ -26,28 +28,31 @@ Public Class jsPOSProCierre
         ProcesarCierre = Procesar
         DondeLlama = DeDondeLlama
 
+        Dim dates As SfDateTimeEdit() = {txtFecha}
+        SetSizeDateObjects(dates)
+
         btnCaja.Visible = CBool((DondeLlama))
         btnCajero.Visible = CBool(DondeLlama)
-        btnFechaCierre.Visible = CBool(DondeLlama)
+        txtFecha.Visible = CBool(DondeLlama)
 
         If ProcesarCierre Then
-            lblLeyenda.Text = " Este proceso cierra la caja (Reporte Z) para el cajero, relizando la siguientes tareas : " + vbCr + _
-                " 1.- Transfiere las mercancias facturadas al inventario, si el método escogido de actualización de inventario es de tipo batch. " + vbCr + _
-                " 2.- Transfiere los movimientos de ventas de esta caja a caja principal y a bancos. " + vbCr + _
-                " 3.- Bloquea el proceso de facturación para este cajero en esta caja y en este día. " + vbCr + _
+            lblLeyenda.Text = " Este proceso cierra la caja (Reporte Z) para el cajero, relizando la siguientes tareas : " + vbCr +
+                " 1.- Transfiere las mercancias facturadas al inventario, si el método escogido de actualización de inventario es de tipo batch. " + vbCr +
+                " 2.- Transfiere los movimientos de ventas de esta caja a caja principal y a bancos. " + vbCr +
+                " 3.- Bloquea el proceso de facturación para este cajero en esta caja y en este día. " + vbCr +
                 " 4.- Imprime el arqueo de caja (Reducción Z). "
             IniciarTXT()
         Else
-            lblLeyenda.Text = " Este proceso cierre de caja " + vbCr + _
-                "  " + vbCr + _
+            lblLeyenda.Text = " Este proceso cierre de caja " + vbCr +
+                "  " + vbCr +
                 "  "
         End If
         Me.ShowDialog()
 
     End Sub
     Private Sub IniciarTXT()
-        ft.habilitarObjetos(False, True, txtCaja, txtCodigoCajero, txtFecha, txtNombreCajero)
-        txtFecha.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        ft.habilitarObjetos(False, True, txtCaja, txtCodigoCajero, txtNombreCajero)
+        txtFecha.Value = jytsistema.sFechadeTrabajo
         txtCodigoCajero.Text = IIf(DondeLlama = 0, jytsistema.sUsuario, "")
         txtNombreCajero.Text = IIf(DondeLlama = 0, jytsistema.sNombreUsuario, "")
         txtCaja.Text = IIf(DondeLlama = 0, jytsistema.WorkBox, "")
@@ -252,16 +257,16 @@ Public Class jsPOSProCierre
 
 
     End Sub
-    Private Sub ProcesarCaja(ByVal MyConn As MySqlConnection, ByVal NumeroFactura As String, _
-                             ByVal NumeroSerial As String, _
-                             ByVal CodigoCliente As String, _
+    Private Sub ProcesarCaja(ByVal MyConn As MySqlConnection, ByVal NumeroFactura As String,
+                             ByVal NumeroSerial As String,
+                             ByVal CodigoCliente As String,
                              ByVal CodigoVendedor As String, ByVal FechaFactura As Date)
 
         Dim CajaPrincipal As String = "00"
 
         '1. ELIMINA MOVIMIENTOS ANTERIORES EN CAJA Y BANCOS
         'ft.Ejecutar_strSQL ( myconn, "DELETE FROM jsbantracaj WHERE origen = 'PVE' and nummov = '" & NumeroFactura & "' AND EJERCICIO = '" & jytsistema.WorkExercise & "' AND ID_EMP = '" & jytsistema.WorkID & "'")
-        ft.Ejecutar_strSQL(myconn, "DELETE FROM jsbantraban WHERE origen = 'PVE' and TIPOMOV = 'DP' AND NUMORG = '" & NumeroFactura & "' AND EJERCICIO = '" & jytsistema.WorkExercise & "' AND ID_EMP = '" & jytsistema.WorkID & "' ")
+        ft.Ejecutar_strSQL(MyConn, "DELETE FROM jsbantraban WHERE origen = 'PVE' and TIPOMOV = 'DP' AND NUMORG = '" & NumeroFactura & "' AND EJERCICIO = '" & jytsistema.WorkExercise & "' AND ID_EMP = '" & jytsistema.WorkID & "' ")
 
         '2. INSERTA EN CAJA TODOS LOS PAGOS EN EFECTIVO, CHEQUE, TARJETAS
         Dim dtPagosEFCHTA As DataTable
@@ -284,10 +289,10 @@ Public Class jsPOSProCierre
         dtPagosEFCHTA = ds.Tables(nTableEFCHTA)
         If dtPagosEFCHTA.Rows.Count > 0 Then
             For Each nRow As DataRow In dtPagosEFCHTA.Rows
-                InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, CajaPrincipal, UltimoCajaMasUno(MyConn, lblInfo, CajaPrincipal), FechaFactura, _
-                                           "PVE", IIf(nRow.Item("importe") <= 0, "SA", "EN"), NumeroFactura, nRow.Item("formapag"), nRow.Item("numpag"), nRow.Item("nompag"), _
-                                           nRow.Item("importe"), "", IIf(nRow.Item("importe") <= 0, "NOTA CREDITO N° ", "FACTURA N° ") & NumeroFactura, "", jytsistema.sFechadeTrabajo, 1, "", "0", "", jytsistema.sFechadeTrabajo, _
-                                           CodigoCliente, CodigoVendedor, "1")
+                InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, CajaPrincipal, UltimoCajaMasUno(MyConn, lblInfo, CajaPrincipal), FechaFactura,
+                                           "PVE", IIf(nRow.Item("importe") <= 0, "SA", "EN"), NumeroFactura, nRow.Item("formapag"), nRow.Item("numpag"), nRow.Item("nompag"),
+                                           nRow.Item("importe"), "", IIf(nRow.Item("importe") <= 0, "NOTA CREDITO N° ", "FACTURA N° ") & NumeroFactura, "", jytsistema.sFechadeTrabajo, 1, "", "0", "", jytsistema.sFechadeTrabajo,
+                                           CodigoCliente, CodigoVendedor, "1", jytsistema.WorkCurrency.Id, DateTime.Now())
 
             Next
         End If
@@ -315,11 +320,11 @@ Public Class jsPOSProCierre
                                              & "' and formpag = '" & .Item("formapag") & "' and numpag = '" & .Item("numpag") _
                                              & "' and refpag = '" & .Item("nompag") _
                                              & "' AND DEPOSITO = '' and id_emp = '" & jytsistema.WorkID & "'  ") = "0" Then _
-                    InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, CajaPrincipal, UltimoCajaMasUno(MyConn, lblInfo, CajaPrincipal), _
-                                FechaFactura, "PVE", "EN", NumeroFactura, "CT", _
-                                .Item("numpag"), .Item("nompag"), .Item("importe"), "", "FACTURA N° " & NumeroFactura, _
-                                "", jytsistema.sFechadeTrabajo, 0, "", "0", "", jytsistema.sFechadeTrabajo, _
-                                CodigoCliente, CodigoVendedor, "1")
+                    InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, CajaPrincipal, UltimoCajaMasUno(MyConn, lblInfo, CajaPrincipal),
+                                FechaFactura, "PVE", "EN", NumeroFactura, "CT",
+                                .Item("numpag"), .Item("nompag"), .Item("importe"), "", "FACTURA N° " & NumeroFactura,
+                                "", jytsistema.sFechadeTrabajo, 0, "", "0", "", jytsistema.sFechadeTrabajo,
+                                CodigoCliente, CodigoVendedor, "1", jytsistema.WorkCurrency.Id, DateTime.Now())
 
                 End With
             Next
@@ -336,7 +341,7 @@ Public Class jsPOSProCierre
                 With dtPagosDPTR.Rows(gCont)
                     InsertEditBANCOSMovimientoBanco(MyConn, lblInfo, True, FechaFactura, .Item("numpag"), "DP", .Item("nompag"), "", "CANC. FACTURA N° " & NumeroFactura,
                                              .Item("importe"), "PVE", NumeroFactura, "", "", "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo,
-                                             "FC", "", jytsistema.sFechadeTrabajo, "0", CodigoCliente, CodigoVendedor)
+                                             "FC", "", jytsistema.sFechadeTrabajo, "0", CodigoCliente, CodigoVendedor, jytsistema.WorkCurrency.Id, DateTime.Now())
                 End With
             Next
         End If
@@ -387,11 +392,6 @@ Public Class jsPOSProCierre
 
         pb.PartialProgressValue = 100
 
-    End Sub
-
-    Private Sub btnFechaCierre_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaCierre.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, grpCaja, btnFechaCierre)
-        Registros()
     End Sub
 
     Private Sub btnCajero_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCajero.Click

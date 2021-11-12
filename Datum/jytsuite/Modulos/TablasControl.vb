@@ -251,6 +251,30 @@ Module TablasControl
 
     End Sub
 
+    Public Sub InsertEditCONTROLMoneda(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+                                             ByVal moneda As Moneda)
+        Dim strSQL As String = ""
+        Dim strSQLInicio As String
+        Dim strSQLFin As String = " "
+
+        If Insertar Then
+            strSQLInicio = " insert into jsconcatmon SET "
+        Else
+            strSQLInicio = " UPDATE jsconcatmon SET "
+            strSQLFin = " WHERE " _
+                & " Id = " & moneda.Id & " "
+        End If
+        strSQL = strSQL & ModificarCadena(moneda.Pais, "Pais")
+        strSQL = strSQL & ModificarCadena(moneda.UnidadMonetaria, "UnidadMonetaria")
+        strSQL = strSQL & ModificarCadena(moneda.Simbolo, "simbolo")
+        strSQL = strSQL & ModificarCadena(moneda.CodigoISO, "CodigoISO")
+        strSQL = strSQL & ModificarCadena(moneda.UnidadFraccionaria, "UnidadFraccionaria")
+        strSQL = strSQL & ModificarEntero(moneda.Division, "Division")
+        strSQL = strSQL & ModificarCadena(moneda.Notas, "Notas")
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+
+    End Sub
+
     Public Sub InsertEditCONTROLLicencia(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
                                          ByVal Codigo As String, ByVal Nombre As String, TipoAplicacion As Integer, Licencia As Integer, _
                                          NumeroLicencia As String, MACNumber As String, FechaExpiracion As Date, nEncryptionWord As String)

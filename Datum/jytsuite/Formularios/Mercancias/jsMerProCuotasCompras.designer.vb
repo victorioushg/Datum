@@ -25,10 +25,6 @@ Partial Class jsMerProCuotasCompras
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.C1SuperTooltip1 = New C1.Win.C1SuperTooltip.C1SuperTooltip(Me.components)
         Me.lblCategoria = New System.Windows.Forms.Label()
-        Me.btnFechaDesde = New System.Windows.Forms.Button()
-        Me.txtFechaDesde = New System.Windows.Forms.TextBox()
-        Me.txtFechaHasta = New System.Windows.Forms.TextBox()
-        Me.btnFechaHasta = New System.Windows.Forms.Button()
         Me.grp = New System.Windows.Forms.GroupBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cmbAsignacion = New System.Windows.Forms.ComboBox()
@@ -41,6 +37,8 @@ Partial Class jsMerProCuotasCompras
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.C1PictureBox1 = New C1.Win.C1Input.C1PictureBox()
+        Me.txtFechaDesde = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaHasta = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grp.SuspendLayout()
         CType(Me.dgCompras, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -89,56 +87,18 @@ Partial Class jsMerProCuotasCompras
         Me.lblCategoria.Text = "Período"
         Me.lblCategoria.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'btnFechaDesde
-        '
-        Me.btnFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaDesde.Location = New System.Drawing.Point(141, 10)
-        Me.btnFechaDesde.Name = "btnFechaDesde"
-        Me.btnFechaDesde.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaDesde.TabIndex = 142
-        Me.btnFechaDesde.Text = "•••"
-        Me.btnFechaDesde.UseVisualStyleBackColor = True
-        '
-        'txtFechaDesde
-        '
-        Me.txtFechaDesde.Location = New System.Drawing.Point(61, 10)
-        Me.txtFechaDesde.Name = "txtFechaDesde"
-        Me.txtFechaDesde.Size = New System.Drawing.Size(74, 20)
-        Me.txtFechaDesde.TabIndex = 140
-        Me.txtFechaDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'txtFechaHasta
-        '
-        Me.txtFechaHasta.Location = New System.Drawing.Point(172, 10)
-        Me.txtFechaHasta.Name = "txtFechaHasta"
-        Me.txtFechaHasta.Size = New System.Drawing.Size(74, 20)
-        Me.txtFechaHasta.TabIndex = 141
-        Me.txtFechaHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnFechaHasta
-        '
-        Me.btnFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaHasta.Location = New System.Drawing.Point(252, 10)
-        Me.btnFechaHasta.Name = "btnFechaHasta"
-        Me.btnFechaHasta.Size = New System.Drawing.Size(25, 20)
-        Me.btnFechaHasta.TabIndex = 143
-        Me.btnFechaHasta.Text = "•••"
-        Me.btnFechaHasta.UseVisualStyleBackColor = True
-        '
         'grp
         '
         Me.grp.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grp.Controls.Add(Me.txtFechaHasta)
+        Me.grp.Controls.Add(Me.txtFechaDesde)
         Me.grp.Controls.Add(Me.Label3)
         Me.grp.Controls.Add(Me.cmbAsignacion)
         Me.grp.Controls.Add(Me.chkCuota)
         Me.grp.Controls.Add(Me.Label2)
         Me.grp.Controls.Add(Me.dgCompras)
-        Me.grp.Controls.Add(Me.btnFechaHasta)
         Me.grp.Controls.Add(Me.lblCategoria)
-        Me.grp.Controls.Add(Me.txtFechaHasta)
-        Me.grp.Controls.Add(Me.btnFechaDesde)
-        Me.grp.Controls.Add(Me.txtFechaDesde)
         Me.grp.Location = New System.Drawing.Point(1, 67)
         Me.grp.Name = "grp"
         Me.grp.Size = New System.Drawing.Size(1104, 184)
@@ -277,6 +237,30 @@ Partial Class jsMerProCuotasCompras
         Me.C1PictureBox1.TabIndex = 146
         Me.C1PictureBox1.TabStop = False
         '
+        'txtFechaDesde
+        '
+        Me.txtFechaDesde.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaDesde.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaDesde.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaDesde.Location = New System.Drawing.Point(61, 13)
+        Me.txtFechaDesde.Name = "txtFechaDesde"
+        Me.txtFechaDesde.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaDesde.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaDesde.TabIndex = 273
+        '
+        'txtFechaHasta
+        '
+        Me.txtFechaHasta.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaHasta.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaHasta.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaHasta.Location = New System.Drawing.Point(181, 13)
+        Me.txtFechaHasta.Name = "txtFechaHasta"
+        Me.txtFechaHasta.Size = New System.Drawing.Size(114, 19)
+        Me.txtFechaHasta.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaHasta.TabIndex = 274
+        '
         'jsMerProCuotasCompras
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -310,10 +294,6 @@ Partial Class jsMerProCuotasCompras
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
     Friend WithEvents lblCategoria As System.Windows.Forms.Label
-    Friend WithEvents btnFechaDesde As System.Windows.Forms.Button
-    Friend WithEvents txtFechaDesde As System.Windows.Forms.TextBox
-    Friend WithEvents txtFechaHasta As System.Windows.Forms.TextBox
-    Friend WithEvents btnFechaHasta As System.Windows.Forms.Button
     Friend WithEvents grp As System.Windows.Forms.GroupBox
     Friend WithEvents dgCompras As System.Windows.Forms.DataGridView
     Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
@@ -326,4 +306,6 @@ Partial Class jsMerProCuotasCompras
     Friend WithEvents chkCuota As System.Windows.Forms.CheckBox
     Friend WithEvents cmbAsignacion As System.Windows.Forms.ComboBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents txtFechaHasta As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaDesde As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

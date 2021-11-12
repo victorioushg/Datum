@@ -1,4 +1,5 @@
 Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.Input
 Public Class jsNomArcTrabajadoresCuotas
 
     Private Const sModulo As String = "Cuotas/Prestamos de Trabajadores"
@@ -53,8 +54,8 @@ Public Class jsNomArcTrabajadoresCuotas
         txtCodigo.Text = ""
         txtNombre.Text = ""
         txtMonto.Text = ft.FormatoNumero(0.0)
-        txtAprobacion.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
-        txtInicio.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtAprobacion.Value = jytsistema.sFechadeTrabajo
+        txtInicio.Value = jytsistema.sFechadeTrabajo
         ft.RellenaCombo(aTipoInteres, cmbTipoInteres)
         txtPorcentajeInteres.Text = ft.FormatoNumero(0.0)
         txtCantidadCuotas.Text = ft.FormatoEntero(1)
@@ -95,8 +96,8 @@ Public Class jsNomArcTrabajadoresCuotas
             txtCodigo.Text = .Item("codpre")
             txtNombre.Text = .Item("descrip")
             txtMonto.Text = ft.FormatoNumero(.Item("montotal"))
-            txtAprobacion.Text = ft.FormatoFecha(CDate(.Item("fechaprestamo").ToString))
-            txtInicio.Text = ft.FormatoFecha(CDate(.Item("fechainicio").ToString))
+            txtAprobacion.Value = CDate(.Item("fechaprestamo").ToString)
+            txtInicio.Value = CDate(.Item("fechainicio").ToString)
             ft.RellenaCombo(aTipoInteres, cmbTipoInteres, .Item("tipointeres"))
             txtPorcentajeInteres.Text = ft.FormatoNumero(.Item("por_interes"))
             txtCantidadCuotas.Text = ft.FormatoEntero(.Item("numcuotas"))
@@ -142,31 +143,32 @@ Public Class jsNomArcTrabajadoresCuotas
 
     Private Sub jsNomArcTrabajadoresCuotas_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         InsertarAuditoria(MyConn, MovAud.ientrar, sModulo, txtCodigo.Text)
-        ft.habilitarObjetos(False, True, txtCodigo, txtNombre, txtAprobacion, txtInicio, txtSaldo)
+        Dim dates As SfDateTimeEdit() = {txtAprobacion, txtInicio}
+        SetSizeDateObjects(dates)
+        ft.habilitarObjetos(False, True, txtCodigo, txtNombre, txtSaldo)
         If i_modo = movimiento.iEditar Then
-            ft.habilitarObjetos(False, True, btnPrestamo, txtMonto, btnInicio, btnAprobacion, cmbTipoInteres, txtPorcentajeInteres, _
+            ft.habilitarObjetos(False, True, btnPrestamo, txtMonto, txtInicio, txtAprobacion, cmbTipoInteres, txtPorcentajeInteres,
                              txtCantidadCuotas)
         End If
     End Sub
 
-    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus, _
-        txtNombre.GotFocus, txtMonto.GotFocus, txtPorcentajeInteres.GotFocus, txtCantidadCuotas.GotFocus, _
-        btnAprobacion.GotFocus, btnAprobacion.GotFocus, btnInicio.GotFocus, cmbTipoInteres.GotFocus
+    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus,
+        txtNombre.GotFocus, txtMonto.GotFocus, txtPorcentajeInteres.GotFocus, txtCantidadCuotas.GotFocus, cmbTipoInteres.GotFocus
         Select Case sender.name
             Case "txtCodigo"
-                ft.mensajeEtiqueta(lblInfo, "Indique el código de cuota/préstamo ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, "Indique el código de cuota/préstamo ...", Transportables.tipoMensaje.iInfo)
             Case "txtNombre"
-                ft.mensajeEtiqueta(lblInfo, "Indique nombre o descripción de cuota/préstamo ...", Transportables.TipoMensaje.iInfo) : txtNombre.MaxLength = 50
+                ft.mensajeEtiqueta(lblInfo, "Indique nombre o descripción de cuota/préstamo ...", Transportables.tipoMensaje.iInfo) : txtNombre.MaxLength = 50
             Case "txtMonto"
-                ft.mensajeEtiqueta(lblInfo, "Indique Monto de Cuota ó préstamo ...", Transportables.TipoMensaje.iInfo) : txtMonto.MaxLength = 15
+                ft.mensajeEtiqueta(lblInfo, "Indique Monto de Cuota ó préstamo ...", Transportables.tipoMensaje.iInfo) : txtMonto.MaxLength = 15
             Case "txtPorcentajeInteres"
-                ft.mensajeEtiqueta(lblInfo, "Indique porcentaje de interés ...", Transportables.TipoMensaje.iInfo) : txtNombre.MaxLength = 6
+                ft.mensajeEtiqueta(lblInfo, "Indique porcentaje de interés ...", Transportables.tipoMensaje.iInfo) : txtNombre.MaxLength = 6
             Case "txtCantidadCuotas"
-                ft.mensajeEtiqueta(lblInfo, "Indique el número o cantidad de cuotas que serán descontadas ...", Transportables.TipoMensaje.iInfo) : txtNombre.MaxLength = 5
+                ft.mensajeEtiqueta(lblInfo, "Indique el número o cantidad de cuotas que serán descontadas ...", Transportables.tipoMensaje.iInfo) : txtNombre.MaxLength = 5
             Case "btnFechaAprobacion", "btnInicio"
-                ft.mensajeEtiqueta(lblInfo, "Seleccionar fecha " & Replace(sender.name, "btn", "") & " ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, "Seleccionar fecha " & Replace(sender.name, "btn", "") & " ...", Transportables.tipoMensaje.iInfo)
             Case "cmbTipoInteres"
-                ft.mensajeEtiqueta(lblInfo, "Seleccione el tipo de interés ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, "Seleccione el tipo de interés ...", Transportables.tipoMensaje.iInfo)
         End Select
 
     End Sub
@@ -209,9 +211,9 @@ Public Class jsNomArcTrabajadoresCuotas
 
             CalculaSaldoPrestamo()
 
-            InsertEditNOMINAEncabezadoCuota(MyConn, lblInfo, Insertar, CodigoTrabajador, cmbNomina.SelectedValue.ToString, txtCodigo.Text, txtNombre.Text, _
-                                            ValorNumero(txtMonto.Text), CDate(txtAprobacion.Text), CDate(txtInicio.Text), _
-                                            cmbTipoInteres.SelectedIndex, ValorNumero(txtPorcentajeInteres.Text), _
+            InsertEditNOMINAEncabezadoCuota(MyConn, lblInfo, Insertar, CodigoTrabajador, cmbNomina.SelectedValue.ToString, txtCodigo.Text, txtNombre.Text,
+                                            ValorNumero(txtMonto.Text), CDate(txtAprobacion.Text), CDate(txtInicio.Text),
+                                            cmbTipoInteres.SelectedIndex, ValorNumero(txtPorcentajeInteres.Text),
                                             ValorEntero(txtCantidadCuotas.Text), ValorNumero(txtSaldo.Text), cmbEstatus.SelectedIndex)
 
             InsertarAuditoria(MyConn, MovAud.iSalir, sModulo, CodigoTrabajador + "/" + txtCodigo.Text)
@@ -253,7 +255,7 @@ Public Class jsNomArcTrabajadoresCuotas
 
                 Dim numCuota As Integer = CInt(ft.autoCodigo(MyConn, "num_cuota", "jsnomrenpre", "codtra.codnom.codpre.id_emp", CodigoTrabajador + "." + cmbNomina.SelectedValue.ToString + "." + CodigoCuotaAnterior + "." + jytsistema.WorkID, 5))
 
-                InsertEditNOMINARenglonCuota(MyConn, lblInfo, True, CodigoTrabajador, cmbNomina.SelectedValue.ToString, CodigoCuotaAnterior, numCuota, ValorNumero(txtMonto.Text), _
+                InsertEditNOMINARenglonCuota(MyConn, lblInfo, True, CodigoTrabajador, cmbNomina.SelectedValue.ToString, CodigoCuotaAnterior, numCuota, ValorNumero(txtMonto.Text),
                             0.0, 0.0, 0, CDate(txtInicio.Text), CDate(txtInicio.Text))
 
             Else
@@ -270,8 +272,8 @@ Public Class jsNomArcTrabajadoresCuotas
                         Dim nMonto As Double = 0.0
 
                         For gCont = 1 To ValorEntero(txtCantidadCuotas.Text)
-                            Dim MontoReal As Double = IIf(gCont = ValorEntero(txtCantidadCuotas.Text), _
-                                                           ValorNumero(txtMonto.Text) - nMonto, _
+                            Dim MontoReal As Double = IIf(gCont = ValorEntero(txtCantidadCuotas.Text),
+                                                           ValorNumero(txtMonto.Text) - nMonto,
                                                           Math.Round(ValorNumero(txtMonto.Text) / ValorEntero(txtCantidadCuotas.Text), 2))
 
                             nMonto += Math.Round(ValorNumero(txtMonto.Text) / ValorEntero(txtCantidadCuotas.Text), 2)
@@ -284,8 +286,8 @@ Public Class jsNomArcTrabajadoresCuotas
                                                        & " num_cuota = '" & gCont & "' and " _
                                                        & " id_emp = '" & jytsistema.WorkID & "' ") = 0 Then
 
-                                InsertEditNOMINARenglonCuota(MyConn, lblInfo, True, CodigoTrabajador, cmbNomina.SelectedValue.ToString, CodigoCuotaAnterior, gCont, MontoReal, MontoReal, 0.0, 0, _
-                                                DateAdd(DateInterval.Day, aSuma(nTipoNomina) * gCont, CDate(txtInicio.Text)), _
+                                InsertEditNOMINARenglonCuota(MyConn, lblInfo, True, CodigoTrabajador, cmbNomina.SelectedValue.ToString, CodigoCuotaAnterior, gCont, MontoReal, MontoReal, 0.0, 0,
+                                                DateAdd(DateInterval.Day, aSuma(nTipoNomina) * gCont, CDate(txtInicio.Text)),
                                                 DateAdd(DateInterval.Day, aSuma(nTipoNomina) * gCont, CDate(txtInicio.Text)))
                             End If
                         Next
@@ -356,14 +358,6 @@ Public Class jsNomArcTrabajadoresCuotas
 
     End Sub
 
-
-    Private Sub btnAprobacion_Click(sender As System.Object, e As System.EventArgs) Handles btnAprobacion.Click
-        txtAprobacion.Text = SeleccionaFecha(Convert.ToDateTime(txtAprobacion.Text), Me, grp, btnAprobacion)
-    End Sub
-
-    Private Sub btnInicio_Click(sender As System.Object, e As System.EventArgs) Handles btnInicio.Click
-        txtInicio.Text = SeleccionaFecha(Convert.ToDateTime(txtInicio.Text), Me, grp, btnInicio)
-    End Sub
 
     Private Sub cmbNomina_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNomina.SelectedIndexChanged
         'cmbNomina.

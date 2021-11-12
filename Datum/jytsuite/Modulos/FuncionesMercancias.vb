@@ -750,7 +750,7 @@ Module FuncionesMercancias
                                                  & " id_emp = '" & jytsistema.WorkID & "' group by vendedor ")
     End Function
 
-    Public Sub ActualizarRenglonesEnPedidosAlmacen(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal ds As DataSet, ByVal dtRenglon As DataTable, _
+    Public Sub ActualizarRenglonesEnPedidosAlmacen(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal ds As DataSet, ByVal dtRenglon As DataTable,
                                                 ByVal nombreTablaOrigen As String)
 
         Dim NumeroOrdenDeCompra As String
@@ -767,8 +767,8 @@ Module FuncionesMercancias
                 sItem = .Item("item")
                 If NumeroOrdenDeCompra <> "" Then
                     If .Item("ESTATUS") < 2 Then
-                        ActualizaCantidadTransitoEnRenglon(MyConn, lblInfo, ds, "jsmerrenped", "numped", NumeroOrdenDeCompra, _
-                                                           RenglonOrdenDeCompra, sItem, .Item("CANTIDAD"), _
+                        ActualizaCantidadTransitoEnRenglon(MyConn, lblInfo, ds, "jsmerrenped", "numped", NumeroOrdenDeCompra,
+                                                           RenglonOrdenDeCompra, sItem, .Item("CANTIDAD"),
                                                            .Item("UNIDAD"), .Item("ESTATUS"))
 
                         ActualizaEstatusDocumento(MyConn, lblInfo, ds, "jsmerencped", "jsmerrenped", "numped", NumeroOrdenDeCompra)
@@ -778,6 +778,8 @@ Module FuncionesMercancias
         Next
 
     End Sub
+
+
 
 
 End Module

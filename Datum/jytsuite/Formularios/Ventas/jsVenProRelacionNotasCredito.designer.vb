@@ -29,16 +29,10 @@ Partial Class jsVenProRelacionNotasCredito
         Me.txtEstatus = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.btnHasta = New System.Windows.Forms.Button()
-        Me.btnDesde = New System.Windows.Forms.Button()
-        Me.txtFacturaHasta = New System.Windows.Forms.TextBox()
-        Me.txtFacturaDesde = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.txtNombreUsuario = New System.Windows.Forms.TextBox()
         Me.txtUsuario = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.btnEmision = New System.Windows.Forms.Button()
-        Me.txtEmision = New System.Windows.Forms.TextBox()
         Me.txtComentario = New System.Windows.Forms.TextBox()
         Me.txtCodigo = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -89,6 +83,9 @@ Partial Class jsVenProRelacionNotasCredito
         Me.grpTotales = New System.Windows.Forms.GroupBox()
         Me.txtTotal = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtEmision = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFacturaDesde = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFacturaHasta = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpEncab.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -129,21 +126,18 @@ Partial Class jsVenProRelacionNotasCredito
         Me.grpEncab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpEncab.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpEncab.Controls.Add(Me.txtFacturaHasta)
+        Me.grpEncab.Controls.Add(Me.txtFacturaDesde)
+        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.txtReponsable)
         Me.grpEncab.Controls.Add(Me.Label7)
         Me.grpEncab.Controls.Add(Me.txtEstatus)
         Me.grpEncab.Controls.Add(Me.Label5)
         Me.grpEncab.Controls.Add(Me.Label4)
-        Me.grpEncab.Controls.Add(Me.btnHasta)
-        Me.grpEncab.Controls.Add(Me.btnDesde)
-        Me.grpEncab.Controls.Add(Me.txtFacturaHasta)
-        Me.grpEncab.Controls.Add(Me.txtFacturaDesde)
         Me.grpEncab.Controls.Add(Me.Label11)
         Me.grpEncab.Controls.Add(Me.txtNombreUsuario)
         Me.grpEncab.Controls.Add(Me.txtUsuario)
         Me.grpEncab.Controls.Add(Me.Label6)
-        Me.grpEncab.Controls.Add(Me.btnEmision)
-        Me.grpEncab.Controls.Add(Me.txtEmision)
         Me.grpEncab.Controls.Add(Me.txtComentario)
         Me.grpEncab.Controls.Add(Me.txtCodigo)
         Me.grpEncab.Controls.Add(Me.Label2)
@@ -205,48 +199,6 @@ Partial Class jsVenProRelacionNotasCredito
         Me.Label4.Text = "Factura Desde"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'btnHasta
-        '
-        Me.btnHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnHasta.Location = New System.Drawing.Point(481, 117)
-        Me.btnHasta.Name = "btnHasta"
-        Me.btnHasta.Size = New System.Drawing.Size(25, 20)
-        Me.btnHasta.TabIndex = 220
-        Me.btnHasta.Text = "•••"
-        Me.btnHasta.UseVisualStyleBackColor = True
-        '
-        'btnDesde
-        '
-        Me.btnDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDesde.Location = New System.Drawing.Point(228, 117)
-        Me.btnDesde.Name = "btnDesde"
-        Me.btnDesde.Size = New System.Drawing.Size(25, 20)
-        Me.btnDesde.TabIndex = 219
-        Me.btnDesde.Text = "•••"
-        Me.btnDesde.UseVisualStyleBackColor = True
-        '
-        'txtFacturaHasta
-        '
-        Me.txtFacturaHasta.Enabled = False
-        Me.txtFacturaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFacturaHasta.Location = New System.Drawing.Point(373, 117)
-        Me.txtFacturaHasta.MaxLength = 19
-        Me.txtFacturaHasta.Name = "txtFacturaHasta"
-        Me.txtFacturaHasta.Size = New System.Drawing.Size(102, 20)
-        Me.txtFacturaHasta.TabIndex = 218
-        Me.txtFacturaHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'txtFacturaDesde
-        '
-        Me.txtFacturaDesde.Enabled = False
-        Me.txtFacturaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFacturaDesde.Location = New System.Drawing.Point(120, 117)
-        Me.txtFacturaDesde.MaxLength = 19
-        Me.txtFacturaDesde.Name = "txtFacturaDesde"
-        Me.txtFacturaDesde.Size = New System.Drawing.Size(102, 20)
-        Me.txtFacturaDesde.TabIndex = 214
-        Me.txtFacturaDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label11
         '
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -286,27 +238,6 @@ Partial Class jsVenProRelacionNotasCredito
         Me.Label6.TabIndex = 199
         Me.Label6.Text = "Emisión"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'btnEmision
-        '
-        Me.btnEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmision.Location = New System.Drawing.Point(390, 12)
-        Me.btnEmision.Name = "btnEmision"
-        Me.btnEmision.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmision.TabIndex = 112
-        Me.btnEmision.Text = "•••"
-        Me.btnEmision.UseVisualStyleBackColor = True
-        '
-        'txtEmision
-        '
-        Me.txtEmision.Enabled = False
-        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmision.Location = New System.Drawing.Point(300, 12)
-        Me.txtEmision.MaxLength = 19
-        Me.txtEmision.Name = "txtEmision"
-        Me.txtEmision.Size = New System.Drawing.Size(87, 20)
-        Me.txtEmision.TabIndex = 5
-        Me.txtEmision.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtComentario
         '
@@ -726,6 +657,42 @@ Partial Class jsVenProRelacionNotasCredito
         Me.Label8.Text = "Total Guía"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'txtEmision
+        '
+        Me.txtEmision.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtEmision.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtEmision.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtEmision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmision.Location = New System.Drawing.Point(300, 12)
+        Me.txtEmision.Name = "txtEmision"
+        Me.txtEmision.Size = New System.Drawing.Size(114, 19)
+        Me.txtEmision.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtEmision.TabIndex = 226
+        '
+        'txtFacturaDesde
+        '
+        Me.txtFacturaDesde.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFacturaDesde.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFacturaDesde.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFacturaDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFacturaDesde.Location = New System.Drawing.Point(120, 117)
+        Me.txtFacturaDesde.Name = "txtFacturaDesde"
+        Me.txtFacturaDesde.Size = New System.Drawing.Size(114, 19)
+        Me.txtFacturaDesde.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFacturaDesde.TabIndex = 227
+        '
+        'txtFacturaHasta
+        '
+        Me.txtFacturaHasta.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFacturaHasta.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFacturaHasta.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFacturaHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFacturaHasta.Location = New System.Drawing.Point(373, 117)
+        Me.txtFacturaHasta.Name = "txtFacturaHasta"
+        Me.txtFacturaHasta.Size = New System.Drawing.Size(114, 19)
+        Me.txtFacturaHasta.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFacturaHasta.TabIndex = 228
+        '
         'jsVenProRelacionNotasCredito
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -761,7 +728,6 @@ Partial Class jsVenProRelacionNotasCredito
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents dg As System.Windows.Forms.DataGridView
     Friend WithEvents grpEncab As System.Windows.Forms.GroupBox
-    Friend WithEvents txtEmision As System.Windows.Forms.TextBox
     Friend WithEvents txtComentario As System.Windows.Forms.TextBox
     Friend WithEvents txtCodigo As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -802,7 +768,6 @@ Partial Class jsVenProRelacionNotasCredito
     Friend WithEvents btnUltimoMovimiento As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator11 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
-    Friend WithEvents btnEmision As System.Windows.Forms.Button
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents txtNombreUsuario As System.Windows.Forms.TextBox
@@ -814,16 +779,15 @@ Partial Class jsVenProRelacionNotasCredito
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
     Friend WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents txtFacturaDesde As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents btnHasta As System.Windows.Forms.Button
-    Friend WithEvents btnDesde As System.Windows.Forms.Button
-    Friend WithEvents txtFacturaHasta As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents txtEstatus As System.Windows.Forms.TextBox
     Friend WithEvents txtReponsable As System.Windows.Forms.TextBox
     Friend WithEvents btnImprimir As System.Windows.Forms.ToolStripSplitButton
     Friend WithEvents RelaciónNotasDeCréditoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ImpresiónNotasDeCréditoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents txtFacturaHasta As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFacturaDesde As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtEmision As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

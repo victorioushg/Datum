@@ -20,49 +20,48 @@ Partial Class jsBanProCestaTicketDevuelto
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsBanProCestaTicketDevuelto))
-        Me.lblInfo = New System.Windows.Forms.Label
-        Me.grp = New System.Windows.Forms.GroupBox
-        Me.btnImprimir = New System.Windows.Forms.Button
-        Me.Label16 = New System.Windows.Forms.Label
-        Me.txtEstatus = New System.Windows.Forms.TextBox
-        Me.Label12 = New System.Windows.Forms.Label
-        Me.txtAsesor = New System.Windows.Forms.TextBox
-        Me.txtFechaRemesa = New System.Windows.Forms.TextBox
-        Me.Label15 = New System.Windows.Forms.Label
-        Me.txtFechaDep = New System.Windows.Forms.TextBox
-        Me.Label14 = New System.Windows.Forms.Label
-        Me.Label13 = New System.Windows.Forms.Label
-        Me.txtCancelacion = New System.Windows.Forms.TextBox
-        Me.txtCliente = New System.Windows.Forms.TextBox
-        Me.txtDeposito = New System.Windows.Forms.TextBox
-        Me.txtBanco = New System.Windows.Forms.TextBox
-        Me.txtMonto = New System.Windows.Forms.TextBox
-        Me.txtRemesa = New System.Windows.Forms.TextBox
-        Me.Label11 = New System.Windows.Forms.Label
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.btnCheque = New System.Windows.Forms.Button
-        Me.txtCheque = New System.Windows.Forms.TextBox
-        Me.btnFecha = New System.Windows.Forms.Button
-        Me.txtFecha = New System.Windows.Forms.TextBox
-        Me.cmbCorredor = New System.Windows.Forms.ComboBox
-        Me.grpTotales = New System.Windows.Forms.GroupBox
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.lblProgreso = New System.Windows.Forms.Label
-        Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.btnOK = New System.Windows.Forms.Button
-        Me.Label9 = New System.Windows.Forms.Label
-        Me.Label10 = New System.Windows.Forms.Label
-        Me.lblLeyenda = New System.Windows.Forms.Label
-        Me.grpLeyenda = New System.Windows.Forms.GroupBox
-        Me.C1PictureBox1 = New C1.Win.C1Input.C1PictureBox
+        Me.lblInfo = New System.Windows.Forms.Label()
+        Me.grp = New System.Windows.Forms.GroupBox()
+        Me.btnImprimir = New System.Windows.Forms.Button()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.txtEstatus = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.txtAsesor = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.txtCancelacion = New System.Windows.Forms.TextBox()
+        Me.txtCliente = New System.Windows.Forms.TextBox()
+        Me.txtDeposito = New System.Windows.Forms.TextBox()
+        Me.txtBanco = New System.Windows.Forms.TextBox()
+        Me.txtMonto = New System.Windows.Forms.TextBox()
+        Me.txtRemesa = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnCheque = New System.Windows.Forms.Button()
+        Me.txtCheque = New System.Windows.Forms.TextBox()
+        Me.cmbCorredor = New System.Windows.Forms.ComboBox()
+        Me.grpTotales = New System.Windows.Forms.GroupBox()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblProgreso = New System.Windows.Forms.Label()
+        Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnOK = New System.Windows.Forms.Button()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.lblLeyenda = New System.Windows.Forms.Label()
+        Me.grpLeyenda = New System.Windows.Forms.GroupBox()
+        Me.C1PictureBox1 = New C1.Win.C1Input.C1PictureBox()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaRemesa = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.txtFechaDep = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grp.SuspendLayout()
         Me.grpTotales.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -82,14 +81,15 @@ Partial Class jsBanProCestaTicketDevuelto
         'grp
         '
         Me.grp.BackColor = System.Drawing.SystemColors.Control
+        Me.grp.Controls.Add(Me.txtFechaDep)
+        Me.grp.Controls.Add(Me.txtFechaRemesa)
+        Me.grp.Controls.Add(Me.txtFecha)
         Me.grp.Controls.Add(Me.btnImprimir)
         Me.grp.Controls.Add(Me.Label16)
         Me.grp.Controls.Add(Me.txtEstatus)
         Me.grp.Controls.Add(Me.Label12)
         Me.grp.Controls.Add(Me.txtAsesor)
-        Me.grp.Controls.Add(Me.txtFechaRemesa)
         Me.grp.Controls.Add(Me.Label15)
-        Me.grp.Controls.Add(Me.txtFechaDep)
         Me.grp.Controls.Add(Me.Label14)
         Me.grp.Controls.Add(Me.Label13)
         Me.grp.Controls.Add(Me.txtCancelacion)
@@ -108,8 +108,6 @@ Partial Class jsBanProCestaTicketDevuelto
         Me.grp.Controls.Add(Me.Label1)
         Me.grp.Controls.Add(Me.btnCheque)
         Me.grp.Controls.Add(Me.txtCheque)
-        Me.grp.Controls.Add(Me.btnFecha)
-        Me.grp.Controls.Add(Me.txtFecha)
         Me.grp.Controls.Add(Me.cmbCorredor)
         Me.grp.Location = New System.Drawing.Point(2, 152)
         Me.grp.Name = "grp"
@@ -168,16 +166,6 @@ Partial Class jsBanProCestaTicketDevuelto
         Me.txtAsesor.Size = New System.Drawing.Size(116, 20)
         Me.txtAsesor.TabIndex = 143
         '
-        'txtFechaRemesa
-        '
-        Me.txtFechaRemesa.BackColor = System.Drawing.Color.White
-        Me.txtFechaRemesa.Enabled = False
-        Me.txtFechaRemesa.Location = New System.Drawing.Point(462, 122)
-        Me.txtFechaRemesa.Name = "txtFechaRemesa"
-        Me.txtFechaRemesa.Size = New System.Drawing.Size(102, 20)
-        Me.txtFechaRemesa.TabIndex = 142
-        Me.txtFechaRemesa.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label15
         '
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -187,16 +175,6 @@ Partial Class jsBanProCestaTicketDevuelto
         Me.Label15.TabIndex = 141
         Me.Label15.Text = "Fecha Remesa :"
         Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtFechaDep
-        '
-        Me.txtFechaDep.BackColor = System.Drawing.Color.White
-        Me.txtFechaDep.Enabled = False
-        Me.txtFechaDep.Location = New System.Drawing.Point(462, 101)
-        Me.txtFechaDep.Name = "txtFechaDep"
-        Me.txtFechaDep.Size = New System.Drawing.Size(102, 20)
-        Me.txtFechaDep.TabIndex = 140
-        Me.txtFechaDep.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label14
         '
@@ -375,26 +353,6 @@ Partial Class jsBanProCestaTicketDevuelto
         Me.txtCheque.Size = New System.Drawing.Size(230, 20)
         Me.txtCheque.TabIndex = 0
         '
-        'btnFecha
-        '
-        Me.btnFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFecha.Location = New System.Drawing.Point(697, 9)
-        Me.btnFecha.Name = "btnFecha"
-        Me.btnFecha.Size = New System.Drawing.Size(25, 20)
-        Me.btnFecha.TabIndex = 117
-        Me.btnFecha.Text = "•••"
-        Me.btnFecha.UseVisualStyleBackColor = True
-        '
-        'txtFecha
-        '
-        Me.txtFecha.BackColor = System.Drawing.Color.White
-        Me.txtFecha.Enabled = False
-        Me.txtFecha.Location = New System.Drawing.Point(592, 8)
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(99, 20)
-        Me.txtFecha.TabIndex = 115
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'cmbCorredor
         '
         Me.cmbCorredor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -541,6 +499,47 @@ Partial Class jsBanProCestaTicketDevuelto
         Me.C1PictureBox1.TabIndex = 86
         Me.C1PictureBox1.TabStop = False
         '
+        'txtFecha
+        '
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(592, 11)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(114, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 214
+        Me.txtFecha.Value = New Date(2021, 5, 2, 0, 0, 0, 0)
+        '
+        'txtFechaRemesa
+        '
+        Me.txtFechaRemesa.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaRemesa.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaRemesa.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaRemesa.Enabled = False
+        Me.txtFechaRemesa.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaRemesa.Location = New System.Drawing.Point(462, 122)
+        Me.txtFechaRemesa.Name = "txtFechaRemesa"
+        Me.txtFechaRemesa.Size = New System.Drawing.Size(124, 19)
+        Me.txtFechaRemesa.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaRemesa.TabIndex = 215
+        Me.txtFechaRemesa.Value = New Date(2021, 5, 2, 0, 0, 0, 0)
+        '
+        'txtFechaDep
+        '
+        Me.txtFechaDep.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFechaDep.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFechaDep.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFechaDep.Enabled = False
+        Me.txtFechaDep.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFechaDep.Location = New System.Drawing.Point(462, 102)
+        Me.txtFechaDep.Name = "txtFechaDep"
+        Me.txtFechaDep.Size = New System.Drawing.Size(124, 19)
+        Me.txtFechaDep.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFechaDep.TabIndex = 216
+        Me.txtFechaDep.Value = New Date(2021, 5, 2, 0, 0, 0, 0)
+        '
         'jsBanProCestaTicketDevuelto
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -586,10 +585,8 @@ Partial Class jsBanProCestaTicketDevuelto
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Friend WithEvents lblLeyenda As System.Windows.Forms.Label
     Friend WithEvents grpLeyenda As System.Windows.Forms.GroupBox
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
     Friend WithEvents btnCheque As System.Windows.Forms.Button
     Friend WithEvents txtCheque As System.Windows.Forms.TextBox
-    Friend WithEvents btnFecha As System.Windows.Forms.Button
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
@@ -605,13 +602,14 @@ Partial Class jsBanProCestaTicketDevuelto
     Friend WithEvents txtRemesa As System.Windows.Forms.TextBox
     Friend WithEvents txtCancelacion As System.Windows.Forms.TextBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
-    Friend WithEvents txtFechaDep As System.Windows.Forms.TextBox
     Friend WithEvents Label14 As System.Windows.Forms.Label
-    Friend WithEvents txtFechaRemesa As System.Windows.Forms.TextBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents txtAsesor As System.Windows.Forms.TextBox
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents txtEstatus As System.Windows.Forms.TextBox
     Friend WithEvents btnImprimir As System.Windows.Forms.Button
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaDep As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents txtFechaRemesa As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class

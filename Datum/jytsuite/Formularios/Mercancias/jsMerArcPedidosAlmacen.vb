@@ -1,5 +1,5 @@
 Imports MySql.Data.MySqlClient
-
+Imports Syncfusion.WinForms.Input
 Public Class jsMerArcPedidosAlmacen
     Private Const sModulo As String = "Pedidos de Almacén"
     Private Const lRegion As String = "RibbonButton301"
@@ -38,6 +38,8 @@ Public Class jsMerArcPedidosAlmacen
 
             ds = DataSetRequeryPlus(ds, nTabla, myConn, strSQL)
             dt = ds.Tables(nTabla)
+            Dim dates As SfDateTimeEdit() = {txtEmision, txtVence}
+            SetSizeDateObjects(dates)
 
             DesactivarMarco0()
             If dt.Rows.Count > 0 Then
@@ -108,8 +110,8 @@ Public Class jsMerArcPedidosAlmacen
                 With .Rows(nRow)
                     'Encabezado 
                     txtCodigo.Text = .Item("numped")
-                    txtEmision.Text = ft.FormatoFecha(CDate(.Item("emision").ToString))
-                    txtVence.Text = ft.FormatoFecha(CDate(.Item("entrega").ToString))
+                    txtEmision.Value = CDate(.Item("emision").ToString)
+                    txtVence.Value = CDate(.Item("entrega").ToString)
                     txtEstatus.Text = aEstatus(.Item("estatus"))
                     txtDestino.Text = .Item("ALM_DESTINO")
                     txtOrigen.Text = .Item("ALM_ORIGEN")
@@ -168,8 +170,8 @@ Public Class jsMerArcPedidosAlmacen
         txtDestino.Text = ""
 
         txtComentario.Text = ""
-        txtEmision.Text = ft.FormatoFecha(sFechadeTrabajo)
-        txtVence.Text = ft.FormatoFecha(sFechadeTrabajo)
+        txtEmision.Value = sFechadeTrabajo
+        txtVence.Value = sFechadeTrabajo
         txtEstatus.Text = aEstatus(0)
         tslblPesoT.Text = ft.FormatoCantidad(0)
 
@@ -188,7 +190,7 @@ Public Class jsMerArcPedidosAlmacen
         grpAceptarSalir.Visible = True
 
         ft.habilitarObjetos(True, False, grpEncab, grpTotales, MenuBarraRenglon)
-        ft.habilitarObjetos(True, True, txtComentario, btnEmision, btnVence, btnDestino, btnOrigen)
+        ft.habilitarObjetos(True, True, txtComentario, txtEmision, txtVence, btnDestino, btnOrigen)
 
         MenuBarra.Enabled = False
         ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
@@ -197,7 +199,7 @@ Public Class jsMerArcPedidosAlmacen
     Private Sub DesactivarMarco0()
 
         grpAceptarSalir.Visible = False
-        ft.habilitarObjetos(False, True, txtCodigo, txtEmision, btnEmision, txtVence, btnVence, txtEstatus, _
+        ft.habilitarObjetos(False, True, txtCodigo, txtEmision, txtVence, txtEstatus,
                 txtDestino, txtNombreDestino, btnOrigen, txtOrigen, btnDestino, txtNombreOrigen, txtComentario)
 
         ft.habilitarObjetos(False, True, txtTotal)
@@ -528,15 +530,6 @@ Public Class jsMerArcPedidosAlmacen
         'ft.Ejecutar_strSQL ( myconn, "update jsproencord set impresa = 1 where numord = '" & txtCodigo.Text & "' and codpro = '" & txtProveedor.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
     End Sub
-
-    Private Sub btnEmision_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEmision.Click
-        txtEmision.Text = SeleccionaFecha(CDate(txtEmision.Text), Me, sender)
-    End Sub
-
-    Private Sub btnVence_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVence.Click
-        txtVence.Text = SeleccionaFecha(CDate(txtVence.Text), Me, sender)
-    End Sub
-
 
     Private Sub txtDestino_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDestino.TextChanged
         txtNombreDestino.Text = ft.DevuelveScalarCadena(myConn, " select desalm from jsmercatalm where codalm = '" + txtDestino.Text + "' and id_emp = '" + jytsistema.WorkID + "'")

@@ -1,5 +1,7 @@
 Imports MySql.Data.MySqlClient
 Imports System.IO
+Imports Syncfusion.WinForms.Input
+
 Public Class jsNomArcTrabajadores
     Private Const sModulo As String = "Trabajadores"
     Private Const lRegion As String = "RibbonButton32"
@@ -57,6 +59,9 @@ Public Class jsNomArcTrabajadores
 
             dt = ft.AbrirDataTable(ds, nTabla, myConn, strSQL)
 
+            Dim dates As SfDateTimeEdit() = {txtFechaDiaLibre, txtFechaNacimiento, txtIngreso, txtFechaTurno}
+            SetSizeDateObjects(dates)
+
             DesactivarMarco0()
             If dt.Rows.Count > 0 Then
                 nPosicionCat = 0
@@ -82,8 +87,8 @@ Public Class jsNomArcTrabajadores
                           btnSiguiente, btnAnterior, btnUltimo, btnImprimir, btnSalir, btnAgregaTurno, btnEliminaTurno)
 
         'Botones Adicionales
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnFechaNacimiento, btnIngreso, btnBanco, btnG1, btnG2, btnG3, btnG4, btnG5, btnG6, _
-                         btnFoto, btnFechaTurno, btnFechaDiaLibre, btnCargos)
+        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnBanco, btnG1, btnG2, btnG3, btnG4, btnG5, btnG6,
+                         btnFoto, btnCargos)
 
     End Sub
 
@@ -136,7 +141,7 @@ Public Class jsNomArcTrabajadores
                     txtTelef1.Text = ft.muestraCampoTexto(.Item("telef1"))
                     txtTelef2.Text = ft.muestraCampoTexto(.Item("telef2"))
                     txtemail.Text = ft.muestraCampoTexto(.Item("email"))
-                    txtFechaNacimiento.Text = ft.muestraCampoFecha(.Item("fnacimiento"))
+                    txtFechaNacimiento.Value = .Item("fnacimiento")
                     txtCiudad.Text = ft.muestraCampoTexto(.Item("lugarnac"))
                     txtEstado.Text = ft.muestraCampoTexto(.Item("edonac"))
                     txtPais.Text = ft.muestraCampoTexto(.Item("pais"))
@@ -154,7 +159,7 @@ Public Class jsNomArcTrabajadores
                     ft.RellenaCombo(aSexo, cmbSexo, CInt(.Item("sexo").ToString))
 
                     txtProfesion.Text = ft.muestraCampoTexto(.Item("profesion"))
-                    txtIngreso.Text = ft.muestraCampoFecha(.Item("ingreso"))
+                    txtIngreso.Value = .Item("ingreso")
 
                     If ft.DevuelveScalarEntero(myConn, " select count(*) from jsnomexptra where codtra = '" & txtCodigo.Text & "' and causa = '0' and id_emp = '" & jytsistema.WorkID & "'") = 0 Then
                         ft.Ejecutar_strSQL(myConn, " insert into jsnomexptra set codtra = '" & txtCodigo.Text & "', fecha = '" & ft.FormatoFechaHoraMySQL(CDate(txtIngreso.Text)) & "', comentario = 'FECHA INGRESO A LA EMPRESA', causa = 0, id_emp = '" & jytsistema.WorkID & "'    ")
@@ -187,12 +192,12 @@ Public Class jsNomArcTrabajadores
                         pctFoto.Image = Nothing
                     End If
 
-                    txtFechaTurno.Text = ft.muestraCampoFecha(.Item("turnodesde"))
+                    txtFechaTurno.Value = .Item("turnodesde")
                     txtDiasLibres.Text = ft.muestraCampoEntero(.Item("freedays"))
 
                     ft.RellenaCombo(aTipoNomina, cmbPeriodoDiaLibre, CInt(.Item("periodo").ToString))
 
-                    txtFechaDiaLibre.Text = ft.muestraCampoFecha(.Item("datefreeday"))
+                    txtFechaDiaLibre.Value = .Item("datefreeday")
                     chkRotacion.Checked = .Item("rotatorio")
 
                     'NOMINAS
@@ -423,14 +428,14 @@ Public Class jsNomArcTrabajadores
                             txtNombreBanco1, txtBanco, txtBanco1, txtG1, txtG2, txtG3, txtG4, txtG5, txtG6, _
                             txtDescripcionCargo, txtProfesion, txtSSO)
         ft.RellenaCombo(aCondicion, cmbCondicion)
-        txtFechaNacimiento.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFechaNacimiento.Value = jytsistema.sFechadeTrabajo
         ft.RellenaCombo(aEdoCivil, cmbEdoCivil)
         txtAscendentes.Text = ft.FormatoEntero(0)
         txtDescendentes.Text = ft.FormatoEntero(0)
         ft.RellenaCombo(aTipovivienda, cmbTipoVivienda)
         txtVehiculos.Text = ft.FormatoEntero(0)
         ft.RellenaCombo(aSexo, cmbSexo)
-        txtIngreso.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtIngreso.Value = jytsistema.sFechadeTrabajo
         ft.RellenaCombo(aFP, cmbFormapago)
 
 
@@ -440,12 +445,12 @@ Public Class jsNomArcTrabajadores
         ft.RellenaCombo(aTipoNomina, cmbTipoNomina)
 
         pctFoto.Image = Nothing
-        txtFechaTurno.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFechaTurno.Value = jytsistema.sFechadeTrabajo
         txtDiasLibres.Text = ft.FormatoEntero(0)
 
         ft.RellenaCombo(aTipoNomina, cmbPeriodoDiaLibre)
 
-        txtFechaDiaLibre.Text = ft.FormatoFecha(jytsistema.sFechadeTrabajo)
+        txtFechaDiaLibre.Value = jytsistema.sFechadeTrabajo
         chkRotacion.Checked = False
 
         dg.Columns.Clear()
@@ -460,12 +465,12 @@ Public Class jsNomArcTrabajadores
         grpAceptarSalir.Visible = True
         ft.habilitarObjetos(False, True, C1DockingTabPage2, C1DockingTabPage3, C1DockingTabPage4, C1DockingTabPage5)
 
-        ft.habilitarObjetos(True, True, txtNacionalidad, txtID, txtBiometrico, cmbCondicion, txtNombre, txtApellido, _
-                         txtDireccion, txtTelef1, txtTelef2, txtemail, btnFechaNacimiento, txtCiudad, txtEstado, txtPais, _
-                         cmbEdoCivil, txtAscendentes, txtDescendentes, cmbTipoVivienda, txtSSO, txtVehiculos, cmbSexo, _
-                         txtProfesion, btnIngreso, cmbFormapago, txtCtaBanco, txtCtaBanco1, _
-                         btnG1, btnG2, btnG3, btnG4, btnG5, btnG6, btnCargos, txtSueldo, txtISLR, cmbTipoNomina, btnFoto, _
-                         btnFechaTurno, txtDiasLibres, cmbPeriodoDiaLibre, btnFechaDiaLibre, chkRotacion)
+        ft.habilitarObjetos(True, True, txtNacionalidad, txtID, txtBiometrico, cmbCondicion, txtNombre, txtApellido,
+                         txtDireccion, txtTelef1, txtTelef2, txtemail, txtFechaNacimiento, txtCiudad, txtEstado, txtPais,
+                         cmbEdoCivil, txtAscendentes, txtDescendentes, cmbTipoVivienda, txtSSO, txtVehiculos, cmbSexo,
+                         txtProfesion, txtIngreso, cmbFormapago, txtCtaBanco, txtCtaBanco1,
+                         btnG1, btnG2, btnG3, btnG4, btnG5, btnG6, btnCargos, txtSueldo, txtISLR, cmbTipoNomina, btnFoto,
+                         txtFechaTurno, txtDiasLibres, cmbPeriodoDiaLibre, txtFechaDiaLibre, chkRotacion)
         MenuTurnos.Enabled = True
 
         MenuBarra.Enabled = False
@@ -479,13 +484,13 @@ Public Class jsNomArcTrabajadores
 
         ft.habilitarObjetos(True, False, C1DockingTabPage2, C1DockingTabPage3, C1DockingTabPage4, C1DockingTabPage5)
 
-        ft.habilitarObjetos(False, True, txtCodigo, txtNacionalidad, txtID, txtBiometrico, cmbCondicion, txtNombre, txtApellido, _
-                         txtDireccion, txtTelef1, txtTelef2, txtemail, txtFechaNacimiento, btnFechaNacimiento, txtCiudad, txtEstado, txtPais, _
-                         txtEdad, cmbEdoCivil, txtAscendentes, txtDescendentes, cmbTipoVivienda, txtSSO, txtVehiculos, cmbSexo, _
-                         txtProfesion, txtIngreso, btnIngreso, txtAntiguedad, cmbFormapago, txtBanco, txtBanco1, btnBanco, btnBancoDeposito, _
-                         txtNombreBanco, txtNombreBanco1, txtCtaBanco, txtCtaBanco1, txtG1, txtG2, txtG3, txtG4, txtG5, txtG6, _
-                         btnG1, btnG2, btnG3, btnG4, btnG5, btnG6, txtDescripcionCargo, btnCargos, txtSueldo, cmbTipoNomina, btnFoto, _
-                         btnFechaTurno, txtFechaTurno, txtDiasLibres, cmbPeriodoDiaLibre, btnFechaDiaLibre, txtFechaDiaLibre, chkRotacion, txtISLR)
+        ft.habilitarObjetos(False, True, txtCodigo, txtNacionalidad, txtID, txtBiometrico, cmbCondicion, txtNombre, txtApellido,
+                         txtDireccion, txtTelef1, txtTelef2, txtemail, txtFechaNacimiento, txtCiudad, txtEstado, txtPais,
+                         txtEdad, cmbEdoCivil, txtAscendentes, txtDescendentes, cmbTipoVivienda, txtSSO, txtVehiculos, cmbSexo,
+                         txtProfesion, txtIngreso, txtAntiguedad, cmbFormapago, txtBanco, txtBanco1, btnBanco, btnBancoDeposito,
+                         txtNombreBanco, txtNombreBanco1, txtCtaBanco, txtCtaBanco1, txtG1, txtG2, txtG3, txtG4, txtG5, txtG6,
+                         btnG1, btnG2, btnG3, btnG4, btnG5, btnG6, txtDescripcionCargo, btnCargos, txtSueldo, cmbTipoNomina, btnFoto,
+                         txtFechaTurno, txtDiasLibres, cmbPeriodoDiaLibre, txtFechaDiaLibre, chkRotacion, txtISLR)
 
         MenuTurnos.Enabled = False
 
@@ -493,22 +498,6 @@ Public Class jsNomArcTrabajadores
 
         MenuBarra.Enabled = True
         ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
-
-    End Sub
-
-    Private Sub btnFechaNacimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaNacimiento.Click, _
-        btnIngreso.Click
-        Dim nombreTXT As String = "txt" + Mid(sender.name, 4, Len(sender.name))
-        Dim myTXT As TextBox = DirectCast(C1DockingTabPage1.Controls(nombreTXT), TextBox)
-        myTXT.Text = SeleccionaFecha(CDate(myTXT.Text), Me, sender)
-
-    End Sub
-    Private Sub btnFechadiaLibre_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles _
-        btnFechaDiaLibre.Click, btnFechaTurno.Click
-
-        Dim nombreTXT As String = "txt" + Mid(sender.name, 4, Len(sender.name))
-        Dim myTXT As TextBox = DirectCast(grpTurno.Controls(nombreTXT), TextBox)
-        myTXT.Text = SeleccionaFecha(CDate(myTXT.Text), Me, grpTurno, sender)
 
     End Sub
 
@@ -671,11 +660,11 @@ Public Class jsNomArcTrabajadores
                 With dtPres.Rows(Me.BindingContext(ds, nTablePre).Position)
                     If .Item("NUMCUOTAS") = ft.DevuelveScalarEntero(myConn, " SELECT COUNT(*) FROM jsnomrenpre where codtra = '" & .Item("codtra") & "' and codnom = '" & .Item("codnom") & "' and codpre = '" & .Item("codpre") & "' and procesada = 0 and id_emp = '" & jytsistema.WorkID & "' ") Then
                         Dim afld() As String = {"codtra", "codnom", "codpre", "id_emp"}
-                        Dim aStr() As String = {.Item("codtra"), .Item("codnom"), .Item("codpre"), jytsistema.WorkID}
+                        Dim aStr() As String = { .Item("codtra"), .Item("codnom"), .Item("codpre"), jytsistema.WorkID}
 
-                        EliminarRegistros(myConn, lblInfo, ds, nTablePre, "jsnomrenpre", strSQLPre, _
+                        EliminarRegistros(myConn, lblInfo, ds, nTablePre, "jsnomrenpre", strSQLPre,
                                      afld, aStr, Me.BindingContext(ds, nTablePre).Position, True)
-                        Me.BindingContext(ds, nTablePre).Position = EliminarRegistros(myConn, lblInfo, ds, nTablePre, "jsnomencpre", strSQLPre, _
+                        Me.BindingContext(ds, nTablePre).Position = EliminarRegistros(myConn, lblInfo, ds, nTablePre, "jsnomencpre", strSQLPre,
                                                                                               afld, aStr, Me.BindingContext(ds, nTablePre).Position, True)
                         nPosicionPre = Me.BindingContext(ds, nTablePre).Position
                         AsignaPre(nPosicionPre, True)
@@ -696,7 +685,7 @@ Public Class jsNomArcTrabajadores
                 Dim aStr() As String = {txtCodigo.Text, ft.FormatoFechaMySQL(CDate(.Item("fecha").ToString)), .Item("causa"), jytsistema.WorkID}
 
 
-                Me.BindingContext(ds, nTableExp).Position = EliminarRegistros(myConn, lblInfo, ds, nTableExp, "jsnomexptra", strsqlExp, _
+                Me.BindingContext(ds, nTableExp).Position = EliminarRegistros(myConn, lblInfo, ds, nTableExp, "jsnomexptra", strsqlExp,
                                                                                       afld, aStr, Me.BindingContext(ds, nTableExp).Position, True)
                 nPosicionExp = Me.BindingContext(ds, nTableExp).Position
                 AsignaExp(nPosicionExp, True)
@@ -708,7 +697,7 @@ Public Class jsNomArcTrabajadores
         Dim aFldEli() As String = {"codtra", "codcon", "id_emp"}
         Dim aStrEli() As String = {txtCodigo.Text, dtMovimientos.Rows(nPosicionMov).Item("codcon"), jytsistema.WorkID}
         If ft.PreguntaEliminarRegistro() = DialogResult.Yes Then
-            Me.BindingContext(ds, nTablaMovimientos).Position = EliminarRegistros(myConn, lblInfo, ds, nTablaMovimientos, "jsnomtrades", strSQLMov, _
+            Me.BindingContext(ds, nTablaMovimientos).Position = EliminarRegistros(myConn, lblInfo, ds, nTablaMovimientos, "jsnomtrades", strSQLMov,
                                                                                   aFldEli, aStrEli, Me.BindingContext(ds, nTablaMovimientos).Position, True)
             nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
             AsignaMov(nPosicionMov, True)
@@ -722,7 +711,7 @@ Public Class jsNomArcTrabajadores
         If ft.PreguntaEliminarRegistro() = DialogResult.Yes Then
             If dtMovimientos.Rows.Count = 0 Then
 
-                Me.BindingContext(ds, nTabla).Position = EliminarRegistros(myConn, lblInfo, ds, nTabla, "jsnomcattra", strSQL, aCamposDel, aStringsDel, _
+                Me.BindingContext(ds, nTabla).Position = EliminarRegistros(myConn, lblInfo, ds, nTabla, "jsnomcattra", strSQL, aCamposDel, aStringsDel,
                                                               Me.BindingContext(ds, nTabla).Position, True)
                 nPosicionCat = Me.BindingContext(ds, nTabla).Position
                 AsignaTXT(nPosicionCat)
@@ -830,14 +819,14 @@ Public Class jsNomArcTrabajadores
             nPosicionCat = ds.Tables(nTabla).Rows.Count
         End If
 
-        InsertEditNOMINATrabajador(myConn, lblInfo, Inserta, txtCodigo.Text, txtBiometrico.Text, txtApellido.Text, txtNombre.Text, txtProfesion.Text, CDate(txtIngreso.Text), _
-             CDate(txtFechaNacimiento.Text), txtCiudad.Text, txtPais.Text, "0", txtNacionalidad.Text, "", txtID.Text, cmbEdoCivil.SelectedIndex, _
-             cmbSexo.SelectedIndex, ValorEntero(txtAscendentes.Text), ValorEntero(txtDescendentes.Text), txtSSO.Text, "0", cmbTipoVivienda.SelectedIndex, _
-             ValorEntero(txtVehiculos.Text), txtDireccion.Text, txtTelef1.Text, txtTelef2.Text, txtemail.Text, cmbCondicion.SelectedIndex, _
-             cmbTipoNomina.SelectedIndex, cmbFormapago.SelectedIndex, txtBanco.Text, txtCtaBanco.Text, txtBanco1.Text, txtNombreBanco1.Text, "", "", "", "", "", _
-             "", CDate(txtIngreso.Text), "", "", "", txtG1.Text, txtG2.Text, _
-             txtG3.Text, txtG4.Text, txtG5.Text, txtG6.Text, txtCodigoCargo.Text, CDate(txtFechaTurno.Text), _
-             ValorNumero(txtSueldo.Text), ValorNumero(txtISLR.Text), ValorEntero(txtDiasLibres.Text), cmbPeriodoDiaLibre.SelectedIndex, CDate(txtFechaDiaLibre.Text), _
+        InsertEditNOMINATrabajador(myConn, lblInfo, Inserta, txtCodigo.Text, txtBiometrico.Text, txtApellido.Text, txtNombre.Text, txtProfesion.Text, CDate(txtIngreso.Text),
+             CDate(txtFechaNacimiento.Text), txtCiudad.Text, txtPais.Text, "0", txtNacionalidad.Text, "", txtID.Text, cmbEdoCivil.SelectedIndex,
+             cmbSexo.SelectedIndex, ValorEntero(txtAscendentes.Text), ValorEntero(txtDescendentes.Text), txtSSO.Text, "0", cmbTipoVivienda.SelectedIndex,
+             ValorEntero(txtVehiculos.Text), txtDireccion.Text, txtTelef1.Text, txtTelef2.Text, txtemail.Text, cmbCondicion.SelectedIndex,
+             cmbTipoNomina.SelectedIndex, cmbFormapago.SelectedIndex, txtBanco.Text, txtCtaBanco.Text, txtBanco1.Text, txtNombreBanco1.Text, "", "", "", "", "",
+             "", CDate(txtIngreso.Text), "", "", "", txtG1.Text, txtG2.Text,
+             txtG3.Text, txtG4.Text, txtG5.Text, txtG6.Text, txtCodigoCargo.Text, CDate(txtFechaTurno.Text),
+             ValorNumero(txtSueldo.Text), ValorNumero(txtISLR.Text), ValorEntero(txtDiasLibres.Text), cmbPeriodoDiaLibre.SelectedIndex, CDate(txtFechaDiaLibre.Text),
              chkRotacion.Checked, CDate(txtIngreso.Text))
 
         If Not pctFoto.Image Is Nothing Then
@@ -868,97 +857,95 @@ Public Class jsNomArcTrabajadores
 
     End Sub
 
-    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus, txtNacionalidad.GotFocus, _
-        txtID.GotFocus, txtBiometrico.GotFocus, cmbCondicion.GotFocus, txtNombre.GotFocus, txtApellido.GotFocus, _
-        txtDireccion.GotFocus, txtTelef1.GotFocus, txtTelef2.GotFocus, txtemail.GotFocus, txtFechaNacimiento.GotFocus, _
-        btnFechaNacimiento.GotFocus, txtCiudad.GotFocus, txtEstado.GotFocus, txtPais.GotFocus, cmbEdoCivil.GotFocus, _
-        txtAscendentes.GotFocus, txtDescendentes.GotFocus, cmbTipoVivienda.GotFocus, txtSSO.GotFocus, _
-        txtVehiculos.GotFocus, cmbSexo.GotFocus, txtProfesion.GotFocus, btnIngreso.GotFocus, cmbFormapago.GotFocus, _
-        btnBanco.GotFocus, txtCtaBanco.GotFocus, txtSueldo.GotFocus, cmbTipoNomina.GotFocus, btnFoto.GotFocus, _
-        btnFechaTurno.GotFocus, txtDiasLibres.GotFocus, btnFechaDiaLibre.GotFocus, cmbPeriodoDiaLibre.GotFocus, _
+    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus, txtNacionalidad.GotFocus,
+        txtID.GotFocus, txtBiometrico.GotFocus, cmbCondicion.GotFocus, txtNombre.GotFocus, txtApellido.GotFocus,
+        txtDireccion.GotFocus, txtTelef1.GotFocus, txtTelef2.GotFocus, txtemail.GotFocus, txtCiudad.GotFocus, txtEstado.GotFocus, txtPais.GotFocus, cmbEdoCivil.GotFocus,
+        txtAscendentes.GotFocus, txtDescendentes.GotFocus, cmbTipoVivienda.GotFocus, txtSSO.GotFocus,
+        txtVehiculos.GotFocus, cmbSexo.GotFocus, txtProfesion.GotFocus, cmbFormapago.GotFocus,
+        btnBanco.GotFocus, txtCtaBanco.GotFocus, txtSueldo.GotFocus, cmbTipoNomina.GotFocus, btnFoto.GotFocus, txtDiasLibres.GotFocus, cmbPeriodoDiaLibre.GotFocus,
          btnG6.GotFocus, btnCargos.GotFocus, txtNombre.MouseHover
 
 
         Select Case sender.name
             Case "txtCodigo"
-                ft.mensajeEtiqueta(lblInfo, " Indique el código del trabajador ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el código del trabajador ... ", Transportables.tipoMensaje.iInfo)
             Case "txtNacionalidad"
-                ft.mensajeEtiqueta(lblInfo, " Indique nacionalidad (V,E,P) del trabajador ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique nacionalidad (V,E,P) del trabajador ... ", Transportables.tipoMensaje.iInfo)
             Case "txtID"
-                ft.mensajeEtiqueta(lblInfo, " Indique el número de cédula de identidad trabajador ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el número de cédula de identidad trabajador ... ", Transportables.tipoMensaje.iInfo)
             Case "txtBiometrico"
-                ft.mensajeEtiqueta(lblInfo, " Indique el código de identificación biométrica del trabajador ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el código de identificación biométrica del trabajador ... ", Transportables.tipoMensaje.iInfo)
             Case "cmbCondicion"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione la condición o estatus del trabajador ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione la condición o estatus del trabajador ... ", Transportables.tipoMensaje.iInfo)
             Case "txtNombre"
-                ft.mensajeEtiqueta(lblInfo, " Indique el nombre del trabajador ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el nombre del trabajador ... ", Transportables.tipoMensaje.iInfo)
             Case "txtApellido"
-                ft.mensajeEtiqueta(lblInfo, " Indique el apellido del trabajador ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el apellido del trabajador ... ", Transportables.tipoMensaje.iInfo)
             Case "txtDireccion"
-                ft.mensajeEtiqueta(lblInfo, " Indique la dirección o lugar de residencia del trabajador ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique la dirección o lugar de residencia del trabajador ... ", Transportables.tipoMensaje.iInfo)
             Case "txtTelef1", "txtTelef2"
-                ft.mensajeEtiqueta(lblInfo, " Indique telefonos del trabajador ... ", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique telefonos del trabajador ... ", Transportables.tipoMensaje.iInfo)
             Case "txtemail"
-                ft.mensajeEtiqueta(lblInfo, " Indique el correo eléctronico del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el correo eléctronico del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "txtFechaNacimiento", "btnNacimiento"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione fecha de nacimiento del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione fecha de nacimiento del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "txtCiudad"
-                ft.mensajeEtiqueta(lblInfo, " Indique el ciudad de nacimiento del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el ciudad de nacimiento del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "txtEstado"
-                ft.mensajeEtiqueta(lblInfo, " Indique el estado donde nació el trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el estado donde nació el trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "txtPais"
-                ft.mensajeEtiqueta(lblInfo, " Indique el país origen del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el país origen del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "cmbEdoCivil"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione estado civil del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione estado civil del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "txtAscendentes "
-                ft.mensajeEtiqueta(lblInfo, " Indique el número de parientes ascendentes (padres, abuelos, etc.) del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el número de parientes ascendentes (padres, abuelos, etc.) del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "txtDescendentes"
-                ft.mensajeEtiqueta(lblInfo, " Indique el número de parientes descendentes (hijos, nietos, etc.) del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el número de parientes descendentes (hijos, nietos, etc.) del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "cmbTipoVivienda"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione el tipo de vivienda del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione el tipo de vivienda del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "txtSSO"
-                ft.mensajeEtiqueta(lblInfo, " Indique el número de afiliación al Seguro Social Obligatorio del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el número de afiliación al Seguro Social Obligatorio del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "txtVehiculos"
-                ft.mensajeEtiqueta(lblInfo, " Indique la cantidad de vehículos que posee el trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique la cantidad de vehículos que posee el trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "cmbSexo"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione el sexo del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione el sexo del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "txtProfesion"
-                ft.mensajeEtiqueta(lblInfo, " Indique la profesión del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique la profesión del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "btnIngreso"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione la fecha de ingreso a la empresa del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione la fecha de ingreso a la empresa del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "cmbFormapago"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione la forma de pago asignada al trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione la forma de pago asignada al trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "btnBanco"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione el banco en cual se depositará el pago del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione el banco en cual se depositará el pago del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "txtCtaBanco"
-                ft.mensajeEtiqueta(lblInfo, " Indique el número de cuenta del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el número de cuenta del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "btnGrupo"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione el grupo principal del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione el grupo principal del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "btnSubgrupos"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione e ó los grupos del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione e ó los grupos del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "btnCargos"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione el cargo del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione el cargo del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "txtSueldo"
-                ft.mensajeEtiqueta(lblInfo, " Indique el sueldo base del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el sueldo base del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "txtISLR"
-                ft.mensajeEtiqueta(lblInfo, " Indique el PORCENTAJE RETENCIÓN ISLR del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Indique el PORCENTAJE RETENCIÓN ISLR del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "cmbTipoNomina"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione el tipo de nómina del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione el tipo de nómina del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "btnFoto"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione una foto del trabajador (preferiblemente tipo carnet) ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione una foto del trabajador (preferiblemente tipo carnet) ...", Transportables.tipoMensaje.iInfo)
             Case "btnTurnoFecha"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione la fecha a partir de la cual se aplicarán los turnos del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione la fecha a partir de la cual se aplicarán los turnos del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "txtDiasLibres"
-                ft.mensajeEtiqueta(lblInfo, " indique la cantidad de días libres en el período-nómina del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " indique la cantidad de días libres en el período-nómina del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "btnDiaLibreFecha"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione la fecha a partir de la cual se aplicará el ó los días libres del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione la fecha a partir de la cual se aplicará el ó los días libres del trabajador ...", Transportables.tipoMensaje.iInfo)
             Case "cmbPeriodoDiaLibre"
-                ft.mensajeEtiqueta(lblInfo, " Seleccione el período-nómina en el cual se aplicará el ó los días libres del trabajador ...", Transportables.TipoMensaje.iInfo)
+                ft.mensajeEtiqueta(lblInfo, " Seleccione el período-nómina en el cual se aplicará el ó los días libres del trabajador ...", Transportables.tipoMensaje.iInfo)
         End Select
 
     End Sub
 
-    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick, _
+    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick,
         dg.CellMouseClick, dg.RegionChanged
         Me.BindingContext(ds, nTablaMovimientos).Position = e.RowIndex
         MostrarItemsEnMenuBarra(MenuBarra, e.RowIndex, ds.Tables(nTablaMovimientos).Rows.Count)
@@ -1024,7 +1011,7 @@ Public Class jsNomArcTrabajadores
         If g.Seleccion <> "" Then
             Dim aFldH() As String = {"codtra", "codtur", "id_emp"}
             Dim aStrH() As String = {txtCodigo.Text, g.Seleccion, jytsistema.WorkID}
-            If Not qFound(myConn, lblInfo, "jsnomturtra", aFldH, aStrH) Then ft.Ejecutar_strSQL(myconn, "insert into jsnomturtra set codtra = '" & txtCodigo.Text & "', codtur = '" & g.Seleccion & "', id_emp = '" & jytsistema.WorkID & "' ")
+            If Not qFound(myConn, lblInfo, "jsnomturtra", aFldH, aStrH) Then ft.Ejecutar_strSQL(myConn, "insert into jsnomturtra set codtra = '" & txtCodigo.Text & "', codtur = '" & g.Seleccion & "', id_emp = '" & jytsistema.WorkID & "' ")
         End If
 
         'AsignaTXT(nPosicionCat)
@@ -1041,16 +1028,16 @@ Public Class jsNomArcTrabajadores
 
     End Sub
 
-    Private Sub dgTar_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgTurnos.RowHeaderMouseClick, _
+    Private Sub dgTar_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgTurnos.RowHeaderMouseClick,
         dgTurnos.CellMouseClick, dgTurnos.RegionChanged
         Me.BindingContext(ds, nTableTurnos).Position = e.RowIndex
     End Sub
 
-    Private Sub txtFechaNacimiento_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaNacimiento.TextChanged
+    Private Sub txtFechaNacimiento_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaNacimiento.ValueChanged
         txtEdad.Text = CalculaDiferenciaFechas(CDate(txtFechaNacimiento.Text), jytsistema.sFechadeTrabajo, DiferenciaFechas.iAñosMesesDias)
     End Sub
 
-    Private Sub txtIngreso_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtIngreso.TextChanged
+    Private Sub txtIngreso_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtIngreso.ValueChanged
         txtAntiguedad.Text = CalculaDiferenciaFechas(CDate(txtIngreso.Text), jytsistema.sFechadeTrabajo, DiferenciaFechas.iAñosMesesDias)
     End Sub
 
@@ -1089,7 +1076,7 @@ Public Class jsNomArcTrabajadores
     End Sub
 
 
-    Private Sub btnG1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnG1.Click, _
+    Private Sub btnG1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnG1.Click,
         btnG2.Click, btnG3.Click, btnG4.Click, btnG5.Click, btnG6.Click
 
 
@@ -1115,7 +1102,7 @@ Public Class jsNomArcTrabajadores
 
 
     Private Sub txtBanco_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtBanco.TextChanged
-        If CBool(ParametroPlus(MyConn, Gestion.iRecursosHumanos, "NOMPARAM02")) Then
+        If CBool(ParametroPlus(myConn, Gestion.iRecursosHumanos, "NOMPARAM02")) Then
             txtNombreBanco.Text = ft.DevuelveScalarCadena(myConn, " select NOMBAN from jsbancatban where codban = '" & txtBanco.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
         Else
             Dim afld() As String = {"codigo", "modulo", "id_emp"}
@@ -1125,7 +1112,7 @@ Public Class jsNomArcTrabajadores
     End Sub
 
     Private Sub btnBanco_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBanco.Click
-        If Not CBool(ParametroPlus(MyConn, Gestion.iRecursosHumanos, "NOMPARAM02")) Then
+        If Not CBool(ParametroPlus(myConn, Gestion.iRecursosHumanos, "NOMPARAM02")) Then
             Dim f As New jsControlArcTablaSimple
             f.Cargar("Bancos", FormatoTablaSimple(Modulo.iBancos), True, TipoCargaFormulario.iShowDialog)
             txtBanco.Text = f.Seleccion
@@ -1151,7 +1138,7 @@ Public Class jsNomArcTrabajadores
         End Select
     End Sub
 
-    Private Sub dgExpediente_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgExpediente.RowHeaderMouseClick, _
+    Private Sub dgExpediente_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgExpediente.RowHeaderMouseClick,
         dgExpediente.CellMouseClick, dgExpediente.RegionChanged
         nPosicionExp = e.RowIndex
         Me.BindingContext(ds, nTableExp).Position = nPosicionExp
@@ -1162,7 +1149,7 @@ Public Class jsNomArcTrabajadores
         MyBase.Finalize()
     End Sub
 
-    Private Sub dgPrestramos_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgPrestamos.RowHeaderMouseClick, _
+    Private Sub dgPrestramos_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgPrestamos.RowHeaderMouseClick,
         dgPrestamos.CellMouseClick, dgPrestamos.RegionChanged
 
         nPosicionPre = e.RowIndex
@@ -1170,7 +1157,7 @@ Public Class jsNomArcTrabajadores
         MostrarItemsEnMenuBarra(MenuBarra, e.RowIndex, ds.Tables(nTablePre).Rows.Count)
     End Sub
 
-    Private Sub dgAsistencias_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgAsistencias.RowHeaderMouseClick, _
+    Private Sub dgAsistencias_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgAsistencias.RowHeaderMouseClick,
           dgAsistencias.CellMouseClick, dgAsistencias.RegionChanged
         Me.BindingContext(ds, nTableAsi).Position = e.RowIndex
         MostrarItemsEnMenuBarra(MenuBarra, e.RowIndex, ds.Tables(nTableAsi).Rows.Count)
@@ -1204,16 +1191,20 @@ Public Class jsNomArcTrabajadores
 
 
     Private Sub cmbFormapago_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cmbFormapago.SelectedIndexChanged
-        If CBool(ParametroPlus(MyConn, Gestion.iRecursosHumanos, "NOMPARAM02")) Then
+        If CBool(ParametroPlus(myConn, Gestion.iRecursosHumanos, "NOMPARAM02")) Then
             Select Case cmbFormapago.SelectedIndex
                 Case 2 'DEPOSITO
-                    txtBanco.Text = ParametroPlus(MyConn, Gestion.iRecursosHumanos, "NOMPARAM03")
-                    txtBanco1.Text = ParametroPlus(MyConn, Gestion.iRecursosHumanos, "NOMPARAM04")
+                    txtBanco.Text = ParametroPlus(myConn, Gestion.iRecursosHumanos, "NOMPARAM03")
+                    txtBanco1.Text = ParametroPlus(myConn, Gestion.iRecursosHumanos, "NOMPARAM04")
                 Case Else
                     txtBanco.Text = ""
                     txtBanco1.Text = ""
             End Select
         End If
+    End Sub
+
+    Private Sub txtFechaNacimiento_TextChanged(sender As Object, e As Events.DateTimeValueChangedEventArgs) Handles txtFechaNacimiento.ValueChanged
+
     End Sub
 
     Private Sub txtBanco1_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtBanco1.TextChanged

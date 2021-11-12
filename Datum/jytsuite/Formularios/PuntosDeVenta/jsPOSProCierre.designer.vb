@@ -22,13 +22,12 @@ Partial Class jsPOSProCierre
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsPOSProCierre))
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.grpCaja = New System.Windows.Forms.GroupBox()
+        Me.lblAProcesar = New System.Windows.Forms.Label()
         Me.btnCaja = New System.Windows.Forms.Button()
         Me.btnCajero = New System.Windows.Forms.Button()
-        Me.btnFechaCierre = New System.Windows.Forms.Button()
         Me.txtCaja = New System.Windows.Forms.TextBox()
         Me.txtNombreCajero = New System.Windows.Forms.TextBox()
         Me.txtCodigoCajero = New System.Windows.Forms.TextBox()
-        Me.txtFecha = New System.Windows.Forms.TextBox()
         Me.lblAño = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblcuenta = New System.Windows.Forms.Label()
@@ -44,7 +43,7 @@ Partial Class jsPOSProCierre
         Me.lblLeyenda = New System.Windows.Forms.Label()
         Me.grpLeyenda = New System.Windows.Forms.GroupBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.lblAProcesar = New System.Windows.Forms.Label()
+        Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.grpCaja.SuspendLayout()
         Me.grpTotales.SuspendLayout()
         Me.grpAceptarSalir.SuspendLayout()
@@ -64,14 +63,13 @@ Partial Class jsPOSProCierre
         'grpCaja
         '
         Me.grpCaja.BackColor = System.Drawing.Color.White
+        Me.grpCaja.Controls.Add(Me.txtFecha)
         Me.grpCaja.Controls.Add(Me.lblAProcesar)
         Me.grpCaja.Controls.Add(Me.btnCaja)
         Me.grpCaja.Controls.Add(Me.btnCajero)
-        Me.grpCaja.Controls.Add(Me.btnFechaCierre)
         Me.grpCaja.Controls.Add(Me.txtCaja)
         Me.grpCaja.Controls.Add(Me.txtNombreCajero)
         Me.grpCaja.Controls.Add(Me.txtCodigoCajero)
-        Me.grpCaja.Controls.Add(Me.txtFecha)
         Me.grpCaja.Controls.Add(Me.lblAño)
         Me.grpCaja.Controls.Add(Me.Label1)
         Me.grpCaja.Controls.Add(Me.lblcuenta)
@@ -80,6 +78,16 @@ Partial Class jsPOSProCierre
         Me.grpCaja.Size = New System.Drawing.Size(730, 63)
         Me.grpCaja.TabIndex = 82
         Me.grpCaja.TabStop = False
+        '
+        'lblAProcesar
+        '
+        Me.lblAProcesar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAProcesar.Location = New System.Drawing.Point(395, 38)
+        Me.lblAProcesar.Name = "lblAProcesar"
+        Me.lblAProcesar.Size = New System.Drawing.Size(327, 20)
+        Me.lblAProcesar.TabIndex = 116
+        Me.lblAProcesar.Text = "Registro a procesar :"
+        Me.lblAProcesar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'btnCaja
         '
@@ -100,16 +108,6 @@ Partial Class jsPOSProCierre
         Me.btnCajero.TabIndex = 114
         Me.btnCajero.Text = "···"
         Me.btnCajero.UseVisualStyleBackColor = True
-        '
-        'btnFechaCierre
-        '
-        Me.btnFechaCierre.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFechaCierre.Location = New System.Drawing.Point(207, 15)
-        Me.btnFechaCierre.Name = "btnFechaCierre"
-        Me.btnFechaCierre.Size = New System.Drawing.Size(27, 20)
-        Me.btnFechaCierre.TabIndex = 113
-        Me.btnFechaCierre.Text = "···"
-        Me.btnFechaCierre.UseVisualStyleBackColor = True
         '
         'txtCaja
         '
@@ -133,14 +131,6 @@ Partial Class jsPOSProCierre
         Me.txtCodigoCajero.Size = New System.Drawing.Size(53, 20)
         Me.txtCodigoCajero.TabIndex = 110
         Me.txtCodigoCajero.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'txtFecha
-        '
-        Me.txtFecha.Location = New System.Drawing.Point(114, 16)
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(87, 20)
-        Me.txtFecha.TabIndex = 109
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblAño
         '
@@ -302,7 +292,7 @@ Partial Class jsPOSProCierre
         Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PictureBox1.Image = My.Resources.Resources.banda_amarilla
+        Me.PictureBox1.Image = Global.Datum.My.Resources.Resources.banda_amarilla
         Me.PictureBox1.Location = New System.Drawing.Point(231, 1)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(500, 61)
@@ -310,15 +300,17 @@ Partial Class jsPOSProCierre
         Me.PictureBox1.TabIndex = 91
         Me.PictureBox1.TabStop = False
         '
-        'lblAProcesar
+        'txtFecha
         '
-        Me.lblAProcesar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAProcesar.Location = New System.Drawing.Point(395, 38)
-        Me.lblAProcesar.Name = "lblAProcesar"
-        Me.lblAProcesar.Size = New System.Drawing.Size(327, 20)
-        Me.lblAProcesar.TabIndex = 116
-        Me.lblAProcesar.Text = "Registro a procesar :"
-        Me.lblAProcesar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.txtFecha.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtFecha.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtFecha.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(114, 16)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(114, 19)
+        Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtFecha.TabIndex = 214
         '
         'jsPOSProCierre
         '
@@ -369,12 +361,11 @@ Partial Class jsPOSProCierre
     Friend WithEvents grpLeyenda As System.Windows.Forms.GroupBox
     Friend WithEvents lblAño As System.Windows.Forms.Label
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Friend WithEvents txtFecha As System.Windows.Forms.TextBox
     Friend WithEvents txtCaja As System.Windows.Forms.TextBox
     Friend WithEvents txtNombreCajero As System.Windows.Forms.TextBox
     Friend WithEvents txtCodigoCajero As System.Windows.Forms.TextBox
     Friend WithEvents btnCaja As System.Windows.Forms.Button
     Friend WithEvents btnCajero As System.Windows.Forms.Button
-    Friend WithEvents btnFechaCierre As System.Windows.Forms.Button
     Friend WithEvents lblAProcesar As System.Windows.Forms.Label
+    Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
 End Class
