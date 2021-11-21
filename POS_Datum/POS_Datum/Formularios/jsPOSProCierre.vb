@@ -284,10 +284,10 @@ Public Class jsPOSProCierre
         dtPagosEFCHTA = ds.Tables(nTableEFCHTA)
         If dtPagosEFCHTA.Rows.Count > 0 Then
             For Each nRow As DataRow In dtPagosEFCHTA.Rows
-                InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, CajaPrincipal, UltimoCajaMasUno(MyConn, lblInfo, CajaPrincipal), FechaFactura, _
-                                           "PVE", IIf(nRow.Item("importe") <= 0, "SA", "EN"), NumeroFactura, nRow.Item("formapag"), nRow.Item("numpag"), nRow.Item("nompag"), _
-                                           nRow.Item("importe"), "", IIf(nRow.Item("importe") <= 0, "NOTA CREDITO N° ", "FACTURA N° ") & NumeroFactura, "", jytsistema.sFechadeTrabajo, 1, "", "0", "", jytsistema.sFechadeTrabajo, _
-                                           CodigoCliente, CodigoVendedor, "1")
+                InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, CajaPrincipal, UltimoCajaMasUno(MyConn, lblInfo, CajaPrincipal), FechaFactura,
+                                           "PVE", IIf(nRow.Item("importe") <= 0, "SA", "EN"), NumeroFactura, nRow.Item("formapag"), nRow.Item("numpag"), nRow.Item("nompag"),
+                                           nRow.Item("importe"), "", IIf(nRow.Item("importe") <= 0, "NOTA CREDITO N° ", "FACTURA N° ") & NumeroFactura, "", jytsistema.sFechadeTrabajo, 1, "", "0", "", jytsistema.sFechadeTrabajo,
+                                           CodigoCliente, CodigoVendedor, "1", jytsistema.WorkCurrency.Id, DateTime.Now())
 
             Next
         End If
@@ -315,11 +315,11 @@ Public Class jsPOSProCierre
                                              & "' and formpag = '" & .Item("formapag") & "' and numpag = '" & .Item("numpag") _
                                              & "' and refpag = '" & .Item("nompag") _
                                              & "' AND DEPOSITO = '' and id_emp = '" & jytsistema.WorkID & "'  ") = "0" Then _
-                    InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, CajaPrincipal, UltimoCajaMasUno(MyConn, lblInfo, CajaPrincipal), _
-                                FechaFactura, "PVE", "EN", NumeroFactura, "CT", _
-                                .Item("numpag"), .Item("nompag"), .Item("importe"), "", "FACTURA N° " & NumeroFactura, _
-                                "", jytsistema.sFechadeTrabajo, 0, "", "0", "", jytsistema.sFechadeTrabajo, _
-                                CodigoCliente, CodigoVendedor, "1")
+                    InsertEditBANCOSRenglonCaja(MyConn, lblInfo, True, CajaPrincipal, UltimoCajaMasUno(MyConn, lblInfo, CajaPrincipal),
+                                FechaFactura, "PVE", "EN", NumeroFactura, "CT",
+                                .Item("numpag"), .Item("nompag"), .Item("importe"), "", "FACTURA N° " & NumeroFactura,
+                                "", jytsistema.sFechadeTrabajo, 0, "", "0", "", jytsistema.sFechadeTrabajo,
+                                CodigoCliente, CodigoVendedor, "1", jytsistema.WorkCurrency.Id, DateTime.Now())
 
                 End With
             Next
@@ -336,7 +336,7 @@ Public Class jsPOSProCierre
                 With dtPagosDPTR.Rows(gCont)
                     InsertEditBANCOSMovimientoBanco(MyConn, lblInfo, True, FechaFactura, .Item("numpag"), "DP", .Item("nompag"), "", "CANC. FACTURA N° " & NumeroFactura,
                                              .Item("importe"), "PVE", NumeroFactura, "", "", "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo,
-                                             "FC", "", jytsistema.sFechadeTrabajo, "0", CodigoCliente, CodigoVendedor)
+                                             "FC", "", jytsistema.sFechadeTrabajo, "0", CodigoCliente, CodigoVendedor, jytsistema.WorkCurrency.Id, DateTime.Now())
                 End With
             Next
         End If
@@ -390,7 +390,7 @@ Public Class jsPOSProCierre
     End Sub
 
     Private Sub btnFechaCierre_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFechaCierre.Click
-        txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, grpCaja, btnFechaCierre)
+        '   txtFecha.Text = SeleccionaFecha(CDate(txtFecha.Text), Me, grpCaja, btnFechaCierre)
         Registros()
     End Sub
 

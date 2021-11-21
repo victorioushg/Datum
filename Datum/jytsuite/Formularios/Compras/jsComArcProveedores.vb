@@ -1419,7 +1419,9 @@ Public Class jsComArcProveedores
 
                     IniciarCajas(.Item("CAJAPAG"), cmbCajaCxP)
 
-                    IniciarFormapadoDropDown(cmbFPCxP, .Item("FORMAPAG"))
+                    InitiateDropDown(Of FormaDePago)(myConn, cmbFPCxP, Tipo.FormaDePago)
+                    cmbFPCxP.SelectedValue = .Item("FORMAPAG")
+
                     txtNumeroPagoCxP.Text = ft.muestraCampoTexto(.Item("NUMPAG"))
 
                     IniciarNombrePago(.Item("FORMAPAG"), .Item("NOMPAG"), cmbNombrePagoCxP)
@@ -1456,7 +1458,9 @@ Public Class jsComArcProveedores
 
                     IniciarCajas(.Item("CAJAPAG"), cmbCajaExP)
 
-                    IniciarFormapadoDropDown(cmbFPExP, .Item("FORMAPAG"))
+                    InitiateDropDown(Of FormaDePago)(myConn, cmbFPExP, Tipo.FormaDePago)
+                    cmbFPExP.SelectedValue = .Item("FORMAPAG")
+
                     txtNumeroPagoExP.Text = ft.muestraCampoTexto(.Item("NUMPAG"))
 
                     IniciarNombrePago(.Item("FORMAPAG"), .Item("NOMPAG"), cmbNombrePagoExP)

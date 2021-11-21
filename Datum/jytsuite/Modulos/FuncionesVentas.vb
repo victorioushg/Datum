@@ -1688,28 +1688,5 @@ Module FuncionesVentas
 
     End Function
 
-    Public Sub InitiateDropDownClientes(cmbCliente As SfComboBox, customerList As List(Of Customer))
-        cmbCliente.DataSource = customerList
-        cmbCliente.DisplayMember = "Nombre"
-        cmbCliente.ValueMember = "Codcli"
-        cmbCliente.Watermark = "Escriba y seleccione un cliente"
-        cmbCliente.AutoCompleteMode = AutoCompleteMode.Suggest
-        cmbCliente.DropDownStyle = DropDownStyle.DropDown
-        cmbCliente.AutoCompleteSuggestMode = AutoCompleteSuggestMode.Contains
-        cmbCliente.MaxDropDownItems = 10
-    End Sub
-
-    Public Sub InitiateDropDownAsesores(cmbAsesores As SfComboBox, advisorsList As List(Of SalesForce))
-        cmbAsesores.DataSource = advisorsList
-        cmbAsesores.DisplayMember = "NombreAsesor"
-        cmbAsesores.ValueMember = "Codigo"
-        cmbAsesores.AutoCompleteMode = AutoCompleteMode.Suggest
-        cmbAsesores.DropDownStyle = DropDownStyle.DropDown
-        cmbAsesores.AutoCompleteSuggestMode = AutoCompleteSuggestMode.Contains
-        cmbAsesores.MaxDropDownItems = 10
-
-    End Sub
-
-
 
 End Module

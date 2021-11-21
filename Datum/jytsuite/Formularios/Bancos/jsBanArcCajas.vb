@@ -1,23 +1,31 @@
 Imports MySql.Data.MySqlClient
-Imports fTransport
+Imports dgField = fTransport.Models.DataGridField
+Imports dgFieldSF = fTransport.Models.SfDataGridField
+Imports fTransport.Models
 Public Class jsBanArcCajas
     Private Const sModulo As String = "Cajas"
     Private Const lRegion As String = ""
-    Private Const nTabla As String = "cajas"
     Private Const nTablaMovimientos As String = "movimientos_caja"
 
-    Private strSQL As String = "select * from jsbanenccaj where id_emp = '" & jytsistema.WorkID & "' order by caja "
     Private strSQLMov As String
 
     Private myConn As New MySqlConnection(jytsistema.strConn)
-    Private myCom As New MySqlCommand(strSQL, myConn)
+
     Private ds As New DataSet()
-    Private dt As New DataTable
-    Private dtMovimientos As New DataTable
+    'Private dtMovimientos As New DataTable
     Private ft As New Transportables
 
+    Private cashBoxList As New List(Of Saving)
+    Private accountList As New List(Of AccountBase)
+    Private savingTransactionList As New List(Of SavingLines)
+    Private cashBox As New Saving()
+    Private account As New AccountBase()
+    Private savingTransaction As New SavingLines()
+
     Private i_modo As Integer
-    Private nPosicionEncab As Long, nPosicionRenglon As Long
+
+    Private posicionEncab As Integer = 0
+    Private posicionRenglon As Integer = 0
 
     Private Sub jsBanArcCajas_FormClosed(sender As Object, e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         ft = Nothing
@@ -30,36 +38,37 @@ Public Class jsBanArcCajas
         Try
             myConn.Open()
 
-            dt = ft.AbrirDataTable(ds, nTabla, myConn, strSQL)
-
+            IniciarControles()
             DesactivarMarco0()
-            If dt.Rows.Count > 0 Then
-                nPosicionEncab = 0
-                AsignaTXT(nPosicionEncab)
-            Else
+
+            If cashBoxList.Count = 0 Then
                 IniciarCaja(False)
+            Else
+                AsignaTXT(cashBoxList.FirstOrDefault)
             End If
-            ft.ActivarMenuBarra(myConn, ds, dt, lRegion, MenuBarra, jytsistema.sUsuario)
+
+            '' ft.ActivarMenuBarra(myConn, ds, dt, lRegion, MenuBarra, jytsistema.sUsuario)
             AsignarTooltips()
             IniciarCajasyCestatickets()
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
-            ft.MensajeCritico("Error en conexión de base de datos: " & ex.Message)
+            ft.mensajeCritico("Error en conexión de base de datos: " & ex.Message)
         End Try
 
     End Sub
+    Private Sub IniciarControles()
+
+        cashBoxList = GetCashBoxes(myConn)
+        accountList = InitiateDropDown(Of AccountBase)(myConn, cmbCC)
+
+        accountList.Where(Function(c) c.CodigoContable)
+        InitiateDropDownInterchangeCurrency(myConn, cmbMonedas, jytsistema.sFechadeTrabajo)
+        cmbMonedas.SelectedValue = jytsistema.WorkCurrency.Id
+
+    End Sub
     Private Sub AsignarTooltips()
-        'Menu Barra 
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnAgregar, btnEditar, btnEliminar, btnBuscar, btnPrimero, btnSiguiente, _
-                          btnAnterior, btnUltimo, btnImprimir, btnSalir, btnRemesas, btnAdelantoEfectivo)
-
-        'Menu barra renglón
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnAgregarMovimiento, btnEditarMovimiento, btnEliminarMovimiento, _
-                          btnBuscarMovimiento, btnPrimerMovimiento, btnAnteriorMovimiento, btnSiguienteMovimiento, _
-                          btnUltimoMovimiento)
-
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnCodigoContable)
-
+        Dim menus As New List(Of ToolStrip) From {MenuBarra, MenuBarraRenglon}
+        AsignarToolTipsMenuBarraToolStrip(menus, "Caja")
     End Sub
     Private Sub IniciarCajasyCestatickets()
 
@@ -76,69 +85,66 @@ Public Class jsBanArcCajas
 
     End Sub
     Private Sub AsignaMov(ByVal nRow As Long, ByVal Actualiza As Boolean)
-        dtMovimientos = ft.MostrarFilaEnTabla(myConn, ds, nTablaMovimientos, strSQLMov, Me.BindingContext, MenuBarraRenglon, _
-                               dg, lRegion, jytsistema.sUsuario, nRow, Actualiza)
-
-        AsignaSaldos(txtCodigo.Text)
-
+        If Actualiza Then
+            savingTransactionList = GetSavingLines(myConn, cashBox.Codigo)
+            dg.DataSource = savingTransactionList
+        End If
+        dg.Rows().Item(nRow).Selected = True
+        MostrarItemsEnMenuBarra(MenuBarraRenglon, CInt(nRow), savingTransactionList.Count)
+        posicionRenglon = dg.SelectedRows(0).Index
+        savingTransaction = savingTransactionList.Item(posicionRenglon)
+        AsignaSaldos(cashBox.Codigo)
     End Sub
-    Private Sub AsignaTXT(ByVal nRow As Long)
 
-        With dt
-            MostrarItemsEnMenuBarra(MenuBarra, nRow, .Rows.Count)
 
-            With .Rows(nRow)
-                'Bancos 
-                txtCodigo.Text = ft.muestraCampoTexto(.Item("caja"))
-                txtNombre.Text = ft.muestraCampoTexto(.Item("nomcaja"))
-                txtCodigoContable.Text = ft.muestraCampoTexto(.Item("codcon"))
+    Private Sub AsignaTXT(Caja As Saving)
 
-                'Movimientos
+        MostrarItemsEnMenuBarra(MenuBarra, cashBoxList.IndexOf(Caja), cashBoxList.Count)
+        cashBox = Caja
 
-                strSQLMov = "select * from jsbantracaj " _
-                    & " where " _
-                    & " caja  = '" & .Item("caja") & "' and " _
-                    & " deposito = '' and " _
-                    & " fecha <= '" & ft.FormatoFechaMySQL(jytsistema.sFechadeTrabajo) & "' and " _
-                    & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
-                    & " id_emp = '" & jytsistema.WorkID & "' order by fecha desc, tipomov, nummov "
+        posicionEncab = cashBoxList.IndexOf(Caja)
+        txtCodigo.Text = cashBox.Codigo
+        txtNombre.Text = cashBox.Descripcion
+        cmbCC.SelectedValue = cashBox.CodigoContable
 
-                dtMovimientos = ft.AbrirDataTable(ds, nTablaMovimientos, myConn, strSQLMov)
+        ''Movimientos
+        savingTransactionList = GetSavingLines(myConn, Caja.Codigo)
+        Dim aCampos As List(Of dgField) = New List(Of dgField)() From {
+            New dgField("Fecha", "FECHA", 80, DataGridViewContentAlignment.MiddleCenter, FormatoFecha.FormatoFecha),
+            New dgField("TipoMovimiento", "TP", 30, DataGridViewContentAlignment.MiddleCenter, ""),
+            New dgField("NumeroMovimiento", "Documento", 120, DataGridViewContentAlignment.MiddleLeft, ""),
+            New dgField("FormaDePago", "FP", 35, DataGridViewContentAlignment.MiddleCenter, ""),
+            New dgField("NumeroDePago", "No Pago", 120, DataGridViewContentAlignment.MiddleLeft, ""),
+            New dgField("ReferenciaDePago", "Referencia Pago", 120, DataGridViewContentAlignment.MiddleLeft, ""),
+            New dgField("Importe", "Importe", 120, DataGridViewContentAlignment.MiddleRight, FormatoNumero.FormatoNumero),
+            New dgField("CodigoIso", "Moneda", 50, DataGridViewContentAlignment.MiddleCenter, ""),
+            New dgField("ImporteReal", "Importe Real", 120, DataGridViewContentAlignment.MiddleRight, FormatoNumero.FormatoNumero),
+            New dgField("Origen", "ORG", 30, DataGridViewContentAlignment.MiddleCenter, ""),
+            New dgField("ProveedorCliente", "Prov/Cli", 120, DataGridViewContentAlignment.MiddleLeft, ""),
+            New dgField("CodigoVendedor", "Asesor", 50, DataGridViewContentAlignment.MiddleCenter, ""),
+            New dgField("Concepto", "Concepto", 350, DataGridViewContentAlignment.MiddleLeft, ""),
+            New dgField("Sada", "", 100, DataGridViewContentAlignment.MiddleLeft, "")
+        }
+        ft.IniciarTablaListPlus(Of SavingLines)(dg, savingTransactionList, aCampos)
 
-                Dim aCampos() As String = {"fecha.FECHA.80.C.fecha", _
-                                           "tipomov.TP.30.C.", _
-                                           "nummov.Documento.100.I.", _
-                                           "formpag.FP.25.C.", _
-                                           "numpag.Nº Pago.75.I.", _
-                                           "refpag.Referencia Pago.75.I.", _
-                                           "Importe.Importe.120.D.Numero", _
-                                           "origen.ORG.30.C.", _
-                                           "prov_cli.Prov/Cli.80.I.", _
-                                           "codven.Asesor.50.C.", _
-                                           "concepto.Concepto.250.I.", _
-                                           "sada..100.I."}
-                ft.IniciarTablaPlus(dg, dtMovimientos, aCampos)
-
-                If dtMovimientos.Rows.Count > 0 Then
-                    nPosicionRenglon = 0
-                    AsignaMov(nPosicionRenglon, True)
-                Else
-                    AsignaSaldos(.Item("caja").ToString)
-                End If
+        If savingTransactionList.Count > 0 Then
+            posicionRenglon = 0
+            AsignaMov(posicionRenglon, True)
+        Else
+            AsignaSaldos(cashBox.Codigo)
+        End If
 
 
 
-            End With
-        End With
     End Sub
     Private Sub AsignaSaldos(ByVal numCaja As String)
 
-        txtEF.Text = ft.muestraCampoNumero(CalculaSaldoCajaPorFP(myConn, numCaja, "EF", lblInfo))
-        txtCH.Text = ft.muestraCampoNumero(CalculaSaldoCajaPorFP(myConn, numCaja, "CH", lblInfo))
-        txtTA.Text = ft.muestraCampoNumero(CalculaSaldoCajaPorFP(myConn, numCaja, "TA", lblInfo))
-        txtCT.Text = ft.muestraCampoNumero(CalculaSaldoCajaPorFP(myConn, numCaja, "CT", lblInfo))
-        txtOT.Text = ft.muestraCampoNumero(CalculaSaldoCajaPorFP(myConn, numCaja, "OT", lblInfo))
-        txtSaldo.Text = ft.muestraCampoNumero(CalculaSaldoCajaPorFP(myConn, numCaja, "", lblInfo))
+        txtEF.Text = Math.Round(savingTransactionList.Where(Function(w) w.FormaDePago = "EF").Sum(Function(s) s.ImporteReal), 2)
+        txtCH.Text = Math.Round(savingTransactionList.Where(Function(w) w.FormaDePago = "CH").Sum(Function(s) s.ImporteReal), 2)
+        txtTA.Text = Math.Round(savingTransactionList.Where(Function(w) w.FormaDePago = "TA").Sum(Function(s) s.ImporteReal), 2)
+        txtCT.Text = Math.Round(savingTransactionList.Where(Function(w) w.FormaDePago = "CT").Sum(Function(s) s.ImporteReal), 2)
+        txtOT.Text = Math.Round(savingTransactionList.Where(Function(w) w.FormaDePago = "OT").Sum(Function(s) s.ImporteReal), 2)
+        txtSaldo.Text = Math.Round(savingTransactionList.Sum(Function(s) s.ImporteReal), 2)
 
     End Sub
 
@@ -149,7 +155,7 @@ Public Class jsBanArcCajas
             txtCodigo.Text = ""
         End If
 
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtNombre, txtCodigoContable)
+        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtNombre)
         ft.iniciarTextoObjetos(Transportables.tipoDato.Numero, txtSaldo, txtEF, txtCH, txtTA, txtCT, txtOT)
 
         'Movimientos
@@ -159,10 +165,11 @@ Public Class jsBanArcCajas
     Private Sub ActivarMarco0()
 
         ft.visualizarObjetos(True, grpAceptarSalir)
-        ft.habilitarObjetos(True, True, txtNombre, btnCodigoContable)
+        ft.habilitarObjetos(True, True, txtNombre, cmbCC)
+        cmbCC.Enabled = True
 
         MenuBarra.Enabled = False
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
     End Sub
 
@@ -170,19 +177,19 @@ Public Class jsBanArcCajas
     Private Sub DesactivarMarco0()
 
         ft.visualizarObjetos(False, grpAceptarSalir)
-        ft.habilitarObjetos(False, True, txtCodigo, txtCH, txtCodigoContable, txtCT, txtEF, txtNombre, txtOT, txtSaldo, txtTA, btnCodigoContable)
+        ft.habilitarObjetos(False, True, txtCodigo, txtNombre, cmbMonedas, cmbCC, txtCH, txtCT, txtEF, txtOT, txtSaldo, txtTA)
+        cmbCC.Enabled = False
 
         MenuBarra.Enabled = True
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.TipoMensaje.iAyuda)
+        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
-        If dt.Rows.Count = 0 Then
+        If cashBoxList.Count = 0 Then
             IniciarCaja(False)
         Else
-            Me.BindingContext(ds, nTabla).CancelCurrentEdit()
-            AsignaTXT(nPosicionEncab)
+            AsignaTXT(cashBox)
         End If
         DesactivarMarco0()
     End Sub
@@ -192,154 +199,119 @@ Public Class jsBanArcCajas
         End If
     End Sub
     Private Function Validado() As Boolean
-        If txtNombre.Text.Trim = "" Then
-            ft.MensajeCritico("INDIQUE NOMBRE DE CAJA VALIDO...")
-            Return False
-        End If
-
-        If txtCodigoContable.Text.Trim = "" Then
-            ft.MensajeCritico("INDIQUE CODIGO CONTABLE CAJA VALIDO...")
+        If txtNombre.Text = "" Then
+            ft.mensajeCritico("INDIQUE NOMBRE DE CAJA VALIDO...")
             Return False
         End If
 
         If CBool(ParametroPlus(myConn, Gestion.iBancos, "BANPARAM17")) Then
-            If txtCodigoContable.Text.Trim = "" Then
-                ft.MensajeCritico("Debe indicar una CUENTA CONTABLE VALIDA...")
+            If cmbCC.Text = "" Then
+                ft.mensajeCritico("Debe indicar una CUENTA CONTABLE VALIDA...")
                 Return False
-            Else
-                If ft.DevuelveScalarEntero(myConn, " Select count(*) from jscotcatcon where codcon = '" & txtCodigoContable.Text & "' and id_emp = '" & jytsistema.WorkID & "' ") = 0 Then
-                    ft.mensajeCritico(" Debe indicar una CUENTA CONTABLE Válida...")
-                    Return False
-                End If
-                If ft.DevuelveScalarEntero(myConn, " select count(*) from jsbanenccaj where codcon = '" & txtCodigoContable.Text & "' and caja <> '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ") > 0 Then
-                    ft.mensajeCritico(" La cuenta contable YA ha sido asignada a otra CAJA ... ")
-                    Return False
-                End If
             End If
         End If
 
-        Validado = True
+        Return True
 
     End Function
     Private Sub GuardarTXT()
 
         Dim Inserta As Boolean = False
-        If i_modo = movimiento.iAgregar Then
-            Inserta = True
-            nPosicionEncab = ds.Tables(nTabla).Rows.Count
-        End If
+        If i_modo = movimiento.iAgregar Then Inserta = True
 
-        InsertEditBANCOSEncabezadoCaja(myConn, lblInfo, Inserta, txtCodigo.Text, txtNombre.Text, txtCodigoContable.Text, ValorNumero(txtSaldo.Text))
+        InsertEditBANCOSEncabezadoCaja(myConn, lblInfo, Inserta, txtCodigo.Text, txtNombre.Text, cmbCC.SelectedValue, ValorNumero(txtSaldo.Text))
 
-        ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
-        dt = ds.Tables(nTabla)
-        Me.BindingContext(ds, nTabla).Position = nPosicionEncab
-        AsignaTXT(nPosicionEncab)
+        cashBoxList = GetCashBoxes(myConn)
+        AsignaTXT(cashBoxList.LastOrDefault())
         DesactivarMarco0()
-        ft.ActivarMenuBarra(myConn, ds, dt, lRegion, MenuBarra, jytsistema.sUsuario)
+
+        '' TODO Add Functionality weith list
+        '' ft.ActivarMenuBarra(myConn, ds, dt, lRegion, MenuBarra, jytsistema.sUsuario)
 
     End Sub
 
-    Private Sub txtNombre_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtNombre.GotFocus
-        ft.mensajeEtiqueta(lblInfo, " Indique el nombre de la caja ... ", Transportables.TipoMensaje.iInfo)
+    Private Sub txtNombre_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
+        ft.mensajeEtiqueta(lblInfo, " Indique el nombre de la caja ... ", Transportables.tipoMensaje.iInfo)
     End Sub
 
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
         i_modo = movimiento.iAgregar
-        nPosicionEncab = Me.BindingContext(ds, nTabla).Position
         ActivarMarco0()
         IniciarCaja(True)
     End Sub
 
     Private Sub btnEditar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditar.Click
         i_modo = movimiento.iEditar
-        nPosicionEncab = Me.BindingContext(ds, nTabla).Position
         ActivarMarco0()
     End Sub
 
     Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
-        If dt.Rows(Me.BindingContext(ds, nTabla).Position).Item("caja") <> "00" Then
-
+        If cashBox.Codigo <> "00" Then
         End If
     End Sub
 
     Private Sub btnBuscar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBuscar.Click
-        Dim f As New frmBuscar
-        Dim Campos() As String = {"caja", "nomcaja"}
-        Dim Nombres() As String = {"Código caja", "Nombre caja"}
-        Dim Anchos() As Integer = {100, 2500}
-        f.Buscar(dt, Campos, Nombres, Anchos, Me.BindingContext(ds, nTabla).Position, " Cajas")
-        AsignaTXT(f.Apuntador)
-        f = Nothing
+
+        '     Dim fields As New List(Of fTransport.Models.DataGridField)
+        '     fields.Add(New fTransport.Models.DataGridField("Codigo", "Codigo Caja", 100, DataGridViewContentAlignment.MiddleLeft, ""))
+        '     fields.Add(New fTransport.Models.DataGridField("Descripcion", "Nombre Caja", 2500, DataGridViewContentAlignment.MiddleLeft, ""))
+
+        '        Dim f As New frmBuscarPlus
+        '        f.Buscar(cajas, fields, "Cajas")
+        '        AsignaTXT(f.Apuntador)
+
     End Sub
 
     Private Sub btnPrimero_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrimero.Click
-        Me.BindingContext(ds, nTabla).Position = 0
-        AsignaTXT(Me.BindingContext(ds, nTabla).Position)
+        AsignaTXT(cashBoxList.FirstOrDefault())
     End Sub
 
     Private Sub btnAnterior_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAnterior.Click
-        Me.BindingContext(ds, nTabla).Position -= 1
-        AsignaTXT(Me.BindingContext(ds, nTabla).Position)
+        posicionEncab -= 1
+        If posicionEncab < 0 Then posicionEncab = 0
+        AsignaTXT(cashBoxList.Item(posicionEncab))
     End Sub
 
     Private Sub btnSiguiente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSiguiente.Click
-        Me.BindingContext(ds, nTabla).Position += 1
-        AsignaTXT(Me.BindingContext(ds, nTabla).Position)
+        posicionEncab += 1
+        If posicionEncab >= cashBoxList.Count Then posicionEncab = cashBoxList.Count - 1
+        AsignaTXT(cashBoxList.Item(posicionEncab))
     End Sub
 
     Private Sub btnUltimo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUltimo.Click
-        Me.BindingContext(ds, nTabla).Position = ds.Tables(nTabla).Rows.Count - 1
-        AsignaTXT(Me.BindingContext(ds, nTabla).Position)
+        AsignaTXT(cashBoxList.LastOrDefault())
     End Sub
 
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
-    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick, _
-       dg.CellMouseClick
-        Me.BindingContext(ds, nTablaMovimientos).Position = e.RowIndex
-        MostrarItemsEnMenuBarra(MenuBarraRenglon, e.RowIndex, ds.Tables(nTablaMovimientos).Rows.Count)
-    End Sub
-
 
     Private Sub btnAgregarMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarMovimiento.Click
 
         Dim f As New jsBanArcCajasMovimientos
-        f.Apuntador = Me.BindingContext(ds, nTablaMovimientos).Position
-        f.Agregar(myConn, ds, dtMovimientos, txtCodigo.Text)
-        ds = DataSetRequery(ds, strSQLMov, myConn, nTablaMovimientos, lblInfo)
+        f.Apuntador = posicionRenglon
+        '' TODO 
+        '' f.Agregar(myConn, ds, dtMovimientos, cashBox.Codigo)
         AsignaMov(f.Apuntador, True)
         f = Nothing
 
     End Sub
 
     Private Sub btnEditarMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditarMovimiento.Click
-        With dtMovimientos.Rows(nPosicionRenglon)
 
-            Dim aCamposAdicionales() As String = {"CAJA|'" & txtCodigo.Text & "'", _
-                                                  "RENGLON|'" & .Item("RENGLON") & "'", _
-                                                  "FECHA|'" & ft.FormatoFechaMySQL(Convert.ToDateTime(.Item("FECHA"))) & "'", _
-                                                  "TIPOMOV|'" & .Item("TIPOMOV") & "'", _
-                                                  "ORIGEN|'" & .Item("ORIGEN") & "'", _
-                                                  "NUMMOV|'" & .Item("NUMMOV") & "'"}
-
-            If DocumentoBloqueado(myConn, "jsbantracaj", aCamposAdicionales) Then
+        If posicionRenglon > 0 Then
+            If ft.FormatoFechaMySQL(savingTransaction.FechaBloqueo) > ft.FormatoFechaMySQL(FechaMinimaBloqueo) Then
                 ft.mensajeCritico("DOCUMENTO BLOQUEADO. POR FAVOR VERIFIQUE...")
             Else
-                If dtMovimientos.Rows.Count > 0 Then
-                    If dtMovimientos.Rows(Me.BindingContext(ds, nTablaMovimientos).Position).Item("origen") = "CAJ" Then
-                        Dim f As New jsBanArcCajasMovimientos
-                        f.Apuntador = Me.BindingContext(ds, nTablaMovimientos).Position
-                        f.Editar(myConn, ds, dtMovimientos, txtCodigo.Text)
-                        ds = DataSetRequery(ds, strSQLMov, myConn, nTablaMovimientos, lblInfo)
-                        AsignaMov(f.Apuntador, True)
-                        f = Nothing
-                    End If
+                If savingTransaction.Origen = "CAJ" Then
+                    Dim f As New jsBanArcCajasMovimientos
+                    '' TODO
+                    '' f.Editar(myConn, ds, dtMovimientos, cashBox.Codigo)
+                    AsignaMov(f.Apuntador, True)
+                    f = Nothing
                 End If
-
             End If
-        End With
+        End If
 
     End Sub
 
@@ -350,124 +322,104 @@ Public Class jsBanArcCajas
     End Sub
     Private Sub EliminarMovimiento()
 
-        nPosicionRenglon = Me.BindingContext(ds, nTablaMovimientos).Position
-
-        With dtMovimientos.Rows(nPosicionRenglon)
-
-            Dim aCamposAdicionales() As String = {"CAJA|'" & txtCodigo.Text & "'", _
-                                                  "RENGLON|'" & .Item("RENGLON") & "'", _
-                                                  "FECHA|'" & ft.FormatoFechaMySQL(Convert.ToDateTime(.Item("FECHA"))) & "'", _
-                                                  "TIPOMOV|'" & .Item("TIPOMOV") & "'", _
-                                                  "ORIGEN|'" & .Item("ORIGEN") & "'", _
-                                                  "NUMMOV|'" & .Item("NUMMOV") & "'"}
-
-            If DocumentoBloqueado(myConn, "jsbantracaj", aCamposAdicionales) Then
+        If posicionRenglon >= 0 Then
+            If ft.FormatoFechaMySQL(savingTransaction.FechaBloqueo) > ft.FormatoFechaMySQL(FechaMinimaBloqueo) Then
                 ft.mensajeCritico("DOCUMENTO BLOQUEADO. POR FAVOR VERIFIQUE...")
             Else
+                If savingTransaction.Origen = "CAJ" Then
+                    If ft.PreguntaEliminarRegistro() = Windows.Forms.DialogResult.Yes Then
+                        InsertarAuditoria(myConn, MovAud.iEliminar, sModulo, savingTransaction.NumeroMovimiento)
 
-                If nPosicionRenglon >= 0 Then
-                    If dtMovimientos.Rows(nPosicionRenglon).Item("origen") = "CAJ" Then
+                        ft.Ejecutar_strSQL(myConn, "DELETE FROM jsbantracaj where Id = '" & savingTransaction.Id & "' ")
 
-                        If ft.PreguntaEliminarRegistro() = Windows.Forms.DialogResult.Yes Then
+                        If savingTransactionList.Count - 1 < posicionRenglon Then _
+                            posicionRenglon = savingTransactionList.Count - 1
+                        AsignaMov(posicionRenglon, True)
 
-                            InsertarAuditoria(myConn, MovAud.iEliminar, sModulo, dtMovimientos.Rows(nPosicionRenglon).Item("nummov"))
-
-                            ft.Ejecutar_strSQL(myConn, "DELETE FROM jsbantracaj where " _
-                                & " RENGLON = '" & dtMovimientos.Rows(nPosicionRenglon).Item("renglon") & "' AND " _
-                                & " ID_EMP = '" & jytsistema.WorkID & "'")
-
-                            ft.Ejecutar_strSQL(myConn, " update jsbanenccaj set saldo = " & CalculaSaldoCajaPorFP(myConn, dtMovimientos.Rows(nPosicionRenglon).Item("caja"), "", lblInfo) & " where caja = '" & dtMovimientos.Rows(nPosicionRenglon).Item("caja") & "' and id_emp = '" & jytsistema.WorkID & "' ")
-
-                            ds = DataSetRequery(ds, strSQLMov, myConn, nTablaMovimientos, lblInfo)
-                            dtMovimientos = ds.Tables(nTablaMovimientos)
-                            If dtMovimientos.Rows.Count - 1 < nPosicionRenglon Then nPosicionRenglon = dtMovimientos.Rows.Count - 1
-                            AsignaMov(nPosicionRenglon, True)
-
-                        End If
-                    Else
-                        ft.mensajeCritico("Movimiento proveniente de " & dtMovimientos.Rows(nPosicionRenglon).Item("origen") & ". ")
                     End If
-
+                Else
+                    ft.mensajeCritico("Movimiento proveniente de " & savingTransaction.Origen & ". ")
                 End If
-            End If
-        End With
 
+            End If
+        End If
     End Sub
     Private Sub btnBuscarMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBuscarMovimiento.Click
-
-        Dim f As New frmBuscar
-        Dim Campos() As String = {"fecha", "nummov", "formpag", "numpag", "refpag", "prov_cli", "codven", "importe"}
-        Dim Nombres() As String = {"Emisión", "Nº Movimiento", "Forma Pago", "Número Pago", "Referencia Pago", "Proveedor/Cliente", "Asesor Comercial", "Importe"}
-        Dim Anchos() As Integer = {140, 140, 100, 150, 150, 150, 120, 150}
-        f.Text = "Movimientos de caja"
-        f.Buscar(dtMovimientos, Campos, Nombres, Anchos, Me.BindingContext(ds, nTablaMovimientos).Position, " Movimientos de Caja")
-        AsignaMov(f.Apuntador, False)
-        f = Nothing
-
+        Dim aCampos As List(Of dgFieldSF) = New List(Of dgFieldSF)() From {
+            New dgFieldSF(TypeColumn.DateTimeColumn, "Fecha", "FECHA", 80, HorizontalAlignment.Center, FormatoFecha.FormatoFecha),
+            New dgFieldSF(TypeColumn.TextColumn, "NumeroMovimiento", "Documento", 120, HorizontalAlignment.Left, ""),
+            New dgFieldSF(TypeColumn.TextColumn, "FormaDePago", "FP", 35, HorizontalAlignment.Center, ""),
+            New dgFieldSF(TypeColumn.TextColumn, "NumeroDePago", "No Pago", 120, HorizontalAlignment.Left, ""),
+            New dgFieldSF(TypeColumn.TextColumn, "ReferenciaDePago", "Referencia Pago", 120, HorizontalAlignment.Left, ""),
+            New dgFieldSF(TypeColumn.NumericColumn, "ImporteReal", "Importe Real", 120, HorizontalAlignment.Right, FormatoNumero.FormatoNumero),
+            New dgFieldSF(TypeColumn.TextColumn, "ProveedorCliente", "Prov/Cli", 120, HorizontalAlignment.Left, ""),
+            New dgFieldSF(TypeColumn.TextColumn, "CodigoVendedor", "Asesor", 50, HorizontalAlignment.Center, "")
+        }
+        Dim f As New frmBuscarPlus
+        f.Buscar(savingTransactionList, aCampos, "Movimientos de Caja")
+        If f.Id > 0 Then
+            Dim index = savingTransactionList.FindIndex(Function(item) item.Id = f.Id)
+            dg.Rows().Item(index).Selected = True
+        End If
     End Sub
 
+    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles _
+       dg.RowHeaderMouseClick, dg.CellMouseClick
+        AsignaMov(e.RowIndex, False)
+    End Sub
     Private Sub btnPrimerMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrimerMovimiento.Click
-        Me.BindingContext(ds, nTablaMovimientos).Position = 0
-        AsignaMov(Me.BindingContext(ds, nTablaMovimientos).Position, False)
+        Dim nRow As Integer = dg.Rows.GetFirstRow(DataGridViewElementStates.None)
+        AsignaMov(nRow, False)
     End Sub
 
     Private Sub btnAnteriorMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAnteriorMovimiento.Click
-        Me.BindingContext(ds, nTablaMovimientos).Position -= 1
-        AsignaMov(Me.BindingContext(ds, nTablaMovimientos).Position, False)
+        Dim nRow As Integer = dg.Rows.GetPreviousRow(dg.SelectedRows(0).Index, DataGridViewElementStates.None)
+        AsignaMov(IIf(nRow < 0, 0, nRow), False)
     End Sub
 
     Private Sub btnSiguienteMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSiguienteMovimiento.Click
-        Me.BindingContext(ds, nTablaMovimientos).Position += 1
-        AsignaMov(Me.BindingContext(ds, nTablaMovimientos).Position, False)
+        Dim nRow As Integer = dg.Rows.GetNextRow(dg.SelectedRows(0).Index, DataGridViewElementStates.None)
+        AsignaMov(IIf(nRow < 0, 0, nRow), False)
     End Sub
 
     Private Sub btnUltimoMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUltimoMovimiento.Click
-        Me.BindingContext(ds, nTablaMovimientos).Position = ds.Tables(nTablaMovimientos).Rows.Count - 1
-        AsignaMov(Me.BindingContext(ds, nTablaMovimientos).Position, False)
+        Dim nRow As Integer = dg.Rows.GetLastRow(DataGridViewElementStates.None)
+        AsignaMov(nRow, False)
     End Sub
-
+    Private Sub dg_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles dg.KeyUp
+        Select Case e.KeyCode
+            Case Keys.Down
+                Dim nRow As Integer = dg.Rows.GetNextRow(dg.SelectedRows(0).Index, DataGridViewElementStates.None)
+                AsignaMov(IIf(nRow < 0, 0, nRow), False)
+            Case Keys.Up
+                Dim nRow As Integer = dg.Rows.GetPreviousRow(dg.SelectedRows(0).Index, DataGridViewElementStates.None)
+                AsignaMov(IIf(nRow < 0, 0, nRow), False)
+        End Select
+    End Sub
     Private Sub btnRemesas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemesas.Click
         '
     End Sub
-
     Private Sub btnRemesas_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles btnRemesas.DropDownItemClicked
-        nPosicionRenglon = Me.BindingContext(ds, nTablaMovimientos).Position
+        posicionRenglon = Me.BindingContext(ds, nTablaMovimientos).Position
         Dim f As New jsBanArcRemesasCestaTicket
-        f.Remesas(myConn, ds, txtCodigo.Text, e.ClickedItem.Text)
-        AsignaMov(nPosicionRenglon, True)
+        f.Remesas(myConn, ds, cashBox.Codigo, e.ClickedItem.Text)
+        AsignaMov(posicionRenglon, True)
         f = Nothing
     End Sub
 
     Private Sub btnAdelantoEfectivo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdelantoEfectivo.Click
         Dim f As New jsBanArcCajasAvanceEF
-        f.Apuntador = Me.BindingContext(ds, nTablaMovimientos).Position
-        f.Agregar(myConn, ds, dtMovimientos, txtCodigo.Text)
-        ds = DataSetRequery(ds, strSQLMov, myConn, nTablaMovimientos, lblInfo)
+        f.Apuntador = posicionRenglon
+        '' TODO
+        '' f.Agregar(myConn, ds, dtMovimientos, cashBox.Codigo)
         AsignaMov(f.Apuntador, True)
         f = Nothing
     End Sub
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
         Dim f As New jsBanRepParametros
-        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteBancos.cMovimientoCaja, "Movimientos Caja", txtCodigo.Text)
+        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteBancos.cMovimientoCaja, "Movimientos Caja", cashBox.Codigo)
         f = Nothing
     End Sub
 
-    Private Sub dg_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles dg.KeyUp
-        Select Case e.KeyCode
-            Case Keys.Down
-                Me.BindingContext(ds, nTablaMovimientos).Position += 1
-                nPosicionRenglon = Me.BindingContext(ds, nTablaMovimientos).Position
-                AsignaMov(nPosicionRenglon, False)
-            Case Keys.Up
-                Me.BindingContext(ds, nTablaMovimientos).Position -= 1
-                nPosicionRenglon = Me.BindingContext(ds, nTablaMovimientos).Position
-                AsignaMov(nPosicionRenglon, False)
-        End Select
-    End Sub
-
-    Private Sub btnCodCon_Click(sender As System.Object, e As System.EventArgs) Handles btnCodigoContable.Click
-        txtCodigoContable.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcon codigo, descripcion from jscotcatcon where marca = 0 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Cuentas Contables", _
-                                                   txtCodigoContable.Text)
-    End Sub
 End Class

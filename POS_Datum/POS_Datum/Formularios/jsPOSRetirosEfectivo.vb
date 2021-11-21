@@ -213,10 +213,10 @@ Public Class jsPOSRetirosEfectivo
 
 
             'GUARDAR REGISTRO DE RETENCION
-            InsertarModificarPOSWork(MyConn, lblInfo, True, jytsistema.WorkBox, jytsistema.sFechadeTrabajo, "PVE", "SA", nCodigoInterno, _
-                                     numSerialFiscal, _
-                                    "EF", nDocumentoNoFiscal, "CTRL EFECTIVO", ValorNumero(txtMontoRetiro.Text), _
-                                     jytsistema.sFechadeTrabajo, 1, jytsistema.sUsuario)
+            InsertarModificarPOSWork(MyConn, lblInfo, True, jytsistema.WorkBox, jytsistema.sFechadeTrabajo, "PVE", "SA", nCodigoInterno,
+                                     numSerialFiscal,
+                                    "EF", nDocumentoNoFiscal, "CTRL EFECTIVO", ValorNumero(txtMontoRetiro.Text),
+                                     jytsistema.sFechadeTrabajo, 1, jytsistema.sUsuario, jytsistema.WorkCurrency.Id, DateTime.Now())
 
             'IMPRIMIR DESGLOSE DE RETIRO  
             ft.mensajeInformativo("RETIRO EFECTIVO N° " & nCodigoInterno & " PROCESADO")

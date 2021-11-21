@@ -252,7 +252,7 @@ Partial Class jsControlArcIVAMovimientos
         '
         Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Image = Global.Datum.My.Resources.Resources.button_cancel
+        '   Me.btnCancel.Image = Global.Datum.My.Resources.Resources.button_cancel
         Me.btnCancel.Location = New System.Drawing.Point(85, 3)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(76, 24)
@@ -263,7 +263,7 @@ Partial Class jsControlArcIVAMovimientos
         'btnOK
         '
         Me.btnOK.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.btnOK.Image = Global.Datum.My.Resources.Resources.button_ok
+        '    Me.btnOK.Image = Global.Datum.My.Resources.Resources.button_ok
         Me.btnOK.Location = New System.Drawing.Point(3, 3)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(76, 24)

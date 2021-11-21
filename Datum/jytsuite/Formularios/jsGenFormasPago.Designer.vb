@@ -73,10 +73,9 @@ Partial Class jsGenFormasPago
         Me.cmbCredito = New System.Windows.Forms.ComboBox()
         Me.grpCondicion = New System.Windows.Forms.GroupBox()
         Me.lblCaja = New System.Windows.Forms.Label()
-        Me.cmbCaja = New System.Windows.Forms.ComboBox()
-        Me.cmbCondicion = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.cmbCondicion = New Syncfusion.WinForms.ListView.SfComboBox()
+        Me.cmbCaja = New Syncfusion.WinForms.ListView.SfComboBox()
         Me.grpAceptarSalir.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.MenuBarra.SuspendLayout()
@@ -86,6 +85,8 @@ Partial Class jsGenFormasPago
         Me.grpGiros.SuspendLayout()
         Me.grpVencimiento.SuspendLayout()
         Me.grpCondicion.SuspendLayout()
+        CType(Me.cmbCondicion, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cmbCaja, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ImageList1
@@ -573,6 +574,7 @@ Partial Class jsGenFormasPago
         Me.txtVence.Size = New System.Drawing.Size(182, 38)
         Me.txtVence.Style.BackColor = System.Drawing.Color.AliceBlue
         Me.txtVence.TabIndex = 214
+        Me.txtVence.Value = New Date(2021, 11, 12, 0, 0, 0, 0)
         '
         'Label8
         '
@@ -599,11 +601,10 @@ Partial Class jsGenFormasPago
         '
         'grpCondicion
         '
-        Me.grpCondicion.Controls.Add(Me.lblCaja)
         Me.grpCondicion.Controls.Add(Me.cmbCaja)
         Me.grpCondicion.Controls.Add(Me.cmbCondicion)
+        Me.grpCondicion.Controls.Add(Me.lblCaja)
         Me.grpCondicion.Controls.Add(Me.Label15)
-        Me.grpCondicion.Controls.Add(Me.Label6)
         Me.grpCondicion.Location = New System.Drawing.Point(0, 2)
         Me.grpCondicion.Name = "grpCondicion"
         Me.grpCondicion.Size = New System.Drawing.Size(693, 100)
@@ -615,33 +616,11 @@ Partial Class jsGenFormasPago
         '
         Me.lblCaja.AutoSize = True
         Me.lblCaja.Font = New System.Drawing.Font("Century Gothic", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCaja.Location = New System.Drawing.Point(363, 66)
+        Me.lblCaja.Location = New System.Drawing.Point(325, 66)
         Me.lblCaja.Name = "lblCaja"
         Me.lblCaja.Size = New System.Drawing.Size(47, 19)
         Me.lblCaja.TabIndex = 112
         Me.lblCaja.Text = "Caja"
-        '
-        'cmbCaja
-        '
-        Me.cmbCaja.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbCaja.Font = New System.Drawing.Font("Century Gothic", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbCaja.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.cmbCaja.FormattingEnabled = True
-        Me.cmbCaja.Location = New System.Drawing.Point(416, 63)
-        Me.cmbCaja.Name = "cmbCaja"
-        Me.cmbCaja.Size = New System.Drawing.Size(269, 27)
-        Me.cmbCaja.TabIndex = 111
-        '
-        'cmbCondicion
-        '
-        Me.cmbCondicion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbCondicion.Font = New System.Drawing.Font("Century Gothic", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbCondicion.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.cmbCondicion.FormattingEnabled = True
-        Me.cmbCondicion.Location = New System.Drawing.Point(6, 62)
-        Me.cmbCondicion.Name = "cmbCondicion"
-        Me.cmbCondicion.Size = New System.Drawing.Size(204, 27)
-        Me.cmbCondicion.TabIndex = 110
         '
         'Label15
         '
@@ -655,15 +634,45 @@ Partial Class jsGenFormasPago
         Me.Label15.Text = "CONDICION DE PAGO"
         Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label6
+        'cmbCondicion
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Century Gothic", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(227, 66)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(47, 19)
-        Me.Label6.TabIndex = 112
-        Me.Label6.Text = "Caja"
+        Me.cmbCondicion.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbCondicion.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbCondicion.DisplayMember = "nombre"
+        Me.cmbCondicion.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbCondicion.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCondicion.Location = New System.Drawing.Point(6, 63)
+        Me.cmbCondicion.Name = "cmbCondicion"
+        Me.cmbCondicion.Size = New System.Drawing.Size(220, 31)
+        Me.cmbCondicion.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.cmbCondicion.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbCondicion.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCondicion.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbCondicion.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCondicion.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbCondicion.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCondicion.TabIndex = 219
+        Me.cmbCondicion.ValueMember = "codcli"
+        '
+        'cmbCaja
+        '
+        Me.cmbCaja.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbCaja.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbCaja.DisplayMember = "nombre"
+        Me.cmbCaja.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbCaja.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCaja.Location = New System.Drawing.Point(378, 63)
+        Me.cmbCaja.Name = "cmbCaja"
+        Me.cmbCaja.Size = New System.Drawing.Size(307, 31)
+        Me.cmbCaja.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.cmbCaja.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbCaja.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCaja.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbCaja.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCaja.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbCaja.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCaja.TabIndex = 220
+        Me.cmbCaja.ValueMember = "codcli"
         '
         'jsGenFormasPago
         '
@@ -695,6 +704,8 @@ Partial Class jsGenFormasPago
         Me.grpVencimiento.ResumeLayout(False)
         Me.grpCondicion.ResumeLayout(False)
         Me.grpCondicion.PerformLayout()
+        CType(Me.cmbCondicion, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cmbCaja, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -736,7 +747,6 @@ Partial Class jsGenFormasPago
     Friend WithEvents grpCredito As System.Windows.Forms.GroupBox
     Friend WithEvents grpCondicion As System.Windows.Forms.GroupBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents cmbCondicion As System.Windows.Forms.ComboBox
     Friend WithEvents cmbCredito As System.Windows.Forms.ComboBox
     Friend WithEvents grpVencimiento As System.Windows.Forms.GroupBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
@@ -744,11 +754,11 @@ Partial Class jsGenFormasPago
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents lblCaja As System.Windows.Forms.Label
-    Friend WithEvents cmbCaja As System.Windows.Forms.ComboBox
     Friend WithEvents lblIVA As System.Windows.Forms.Label
     Friend WithEvents txtIVA As System.Windows.Forms.TextBox
-    Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents txtVence As Syncfusion.WinForms.Input.SfDateTimeEdit
     Friend WithEvents Label10 As Label
     Friend WithEvents txtRegistrado As TextBox
+    Friend WithEvents cmbCaja As Syncfusion.WinForms.ListView.SfComboBox
+    Friend WithEvents cmbCondicion As Syncfusion.WinForms.ListView.SfComboBox
 End Class

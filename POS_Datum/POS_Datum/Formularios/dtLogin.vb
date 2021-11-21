@@ -113,7 +113,7 @@ Public Class dtLogin
     End Sub
 
     Private Sub btnFecha_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFecha.Click
-        txtFecha.Text = ft.muestraCampoFecha(SeleccionaFecha(CDate(txtFecha.Text), Me, btnFecha))
+        ' txtFecha.Text = ft.muestraCampoFecha(SeleccionaFecha(CDate(txtFecha.Text), Me, btnFecha))
         'txtFecha.Text = ft.NumeroAleatorio(10000000)
     End Sub
 

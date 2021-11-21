@@ -45,6 +45,7 @@ Partial Class jsControlArcCambioMonedas
         '
         Me.dataGrid.AccessibleName = "Table"
         Me.dataGrid.AllowGrouping = False
+        Me.dataGrid.BackColor = System.Drawing.SystemColors.AppWorkspace
         Me.dataGrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dataGrid.Location = New System.Drawing.Point(0, 0)
         Me.dataGrid.Name = "dataGrid"

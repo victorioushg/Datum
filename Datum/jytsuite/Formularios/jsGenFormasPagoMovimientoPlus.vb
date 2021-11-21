@@ -23,7 +23,6 @@ Public Class jsGenFormasPagoMovimientoPlus
     Private nomTablaRenglones As String = ""
     Private nomTablaIVA As String = ""
 
-
     Public Property Apuntador() As Long
     Public Sub Agregar(ByVal MyCon As MySqlConnection, ByVal ds As DataSet, ByVal dt As DataTable,
                        ByVal nNumeroFactura As String, ByVal Origen As String, ByVal nMontoRestante As Double,
@@ -53,7 +52,7 @@ Public Class jsGenFormasPagoMovimientoPlus
         mostrarGrilla()
         txtRestoFactura.Text = ft.muestraCampoNumero(MontoRestante)
 
-        InitiateDropDownInterchangeCurrency(cmbMonedas, interchangeList, True)
+        InitiateDropDownInterchangeCurrency(MyConn, cmbMonedas, jytsistema.sFechadeTrabajo, True)
 
         txtNumeroPago.Text = ""
         txtNombrePago.Text = ""
@@ -94,32 +93,32 @@ Public Class jsGenFormasPagoMovimientoPlus
 
         '//// ELIMINA FORMAS DE PAGO NO PERMITIDAS
         Dim dataFP = formasDePago
+        InitiateDropDown(Of TextoValor)(MyConn, cmbFP, Tipo.FormaDePago)
         If OrigenFactura = "PVE" Then
 
             If Not CBool(ParametroPlus(MyConn, Gestion.iPuntosdeVentas, "POSPARAM06")) Then
-                dataFP = dataFP.Where(Function(item) item.Value <> "CH").ToList()
-                IniciarFormapadoDropDown(cmbFP, formasDePago, "TA")
-
+                cmbFP.DataSource = dataFP.Where(Function(item) item.Value <> "CH").ToList()
+                cmbFP.SelectedValue = "TA"
             End If
 
             If Not CBool(ParametroPlus(MyConn, Gestion.iPuntosdeVentas, "POSPARAM07")) Then
-                dataFP = dataFP.Where(Function(item) item.Value <> "TA").ToList()
-                IniciarFormapadoDropDown(cmbFP, formasDePago, "EF")
+                cmbFP.DataSource = dataFP.Where(Function(item) item.Value <> "TA").ToList()
+                cmbFP.SelectedValue = "EF"
             End If
 
             If Not CBool(ParametroPlus(MyConn, Gestion.iPuntosdeVentas, "POSPARAM08")) Then
-                dataFP = dataFP.Where(Function(item) item.Value <> "CT").ToList()
-                IniciarFormapadoDropDown(cmbFP, formasDePago, "TA")
+                cmbFP.DataSource = dataFP.Where(Function(item) item.Value <> "CT").ToList()
+                cmbFP.SelectedValue = "TA"
             End If
 
             If Not CBool(ParametroPlus(MyConn, Gestion.iPuntosdeVentas, "POSPARAM08")) Then
-                dataFP = dataFP.Where(Function(item) item.Value <> "DP" And item.Value <> "TR").ToList()
-                IniciarFormapadoDropDown(cmbFP, formasDePago, "TA")
+                cmbFP.DataSource = dataFP.Where(Function(item) item.Value <> "DP" And item.Value <> "TR").ToList()
+                cmbFP.SelectedValue = "TA"
             End If
 
         Else
-            dataFP = formasDePago.Where(Function(item) item.Value <> "CT").ToList()
-            IniciarFormapadoDropDown(cmbFP, dataFP, "TA")
+            cmbFP.DataSource = formasDePago.Where(Function(item) item.Value <> "CT").ToList()
+            cmbFP.SelectedValue = "TA"
         End If
 
     End Sub

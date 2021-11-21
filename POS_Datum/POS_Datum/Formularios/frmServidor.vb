@@ -100,7 +100,7 @@ Public Class frmServidor
         End If
 
 
-        jytsistema.strConn = CadenaConexion(txtServidor.Text, txtUser.Text, txtPassword.Text, txtPort.Text, txtBaseDatos.Text)
+        'jytsistema.strConn = CadenaConexion(txtServidor.Text, txtUser.Text, txtPassword.Text, txtPort.Text, txtBaseDatos.Text)
 
         Try
             MyConn = New MySqlConnection(jytsistema.strConn)
@@ -133,13 +133,13 @@ Public Class frmServidor
         End If
     End Sub
     Private Sub CerrarFormulario()
-        Dim signIn = New dtLogin
+        'Dim signIn = New dtLogin
 
-        If Me.DialogResult = System.Windows.Forms.DialogResult.OK Then
-            Guardar()
-            signIn.ShowDialog()
-        End If
-        Me.Close()
+        'If Me.DialogResult = System.Windows.Forms.DialogResult.OK Then
+        '    Guardar()
+        '    signIn.ShowDialog()
+        'End If
+        'Me.Close()
     End Sub
     Private Sub Guardar()
 
@@ -148,9 +148,9 @@ Public Class frmServidor
         Caja = txtCaja.Text
         Empresa = txtEmpresa.Text
         Registry.SetValue(jytsistema.DirReg, jytsistema.ClaveServidor, txtServidor.Text)
-        Registry.SetValue(jytsistema.DirReg, jytsistema.ClaveUsuario, txtUser.Text)
-        Registry.SetValue(jytsistema.DirReg, jytsistema.ClavePassword, txtPassword.Text)
-        Registry.SetValue(jytsistema.DirReg, jytsistema.ClavePort, txtPort.Text)
+        'Registry.SetValue(jytsistema.DirReg, jytsistema.ClaveUsuario, txtUser.Text)
+        'Registry.SetValue(jytsistema.DirReg, jytsistema.ClavePassword, txtPassword.Text)
+        'Registry.SetValue(jytsistema.DirReg, jytsistema.ClavePort, txtPort.Text)
         Registry.SetValue(jytsistema.DirReg, jytsistema.ClaveBaseDatos, txtBaseDatos.Text)
         Registry.SetValue(jytsistema.DirReg, jytsistema.ClaveCaja, txtCaja.Text)
         Registry.SetValue(jytsistema.DirReg, jytsistema.ClaveEmpresa, txtEmpresa.Text)
@@ -176,9 +176,9 @@ Public Class frmServidor
     Private Sub frmServidor_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         txtServidor.Text = Registry.GetValue(jytsistema.DirReg, jytsistema.ClaveServidor, "")
-        txtUser.Text = Registry.GetValue(jytsistema.DirReg, jytsistema.ClaveUsuario, "")
-        txtPassword.Text = Registry.GetValue(jytsistema.DirReg, jytsistema.ClavePassword, "")
-        txtPort.Text = Registry.GetValue(jytsistema.DirReg, jytsistema.ClavePort, "")
+        'txtUser.Text = Registry.GetValue(jytsistema.DirReg, jytsistema.ClaveUsuario, "")
+        'txtPassword.Text = Registry.GetValue(jytsistema.DirReg, jytsistema.ClavePassword, "")
+        'txtPort.Text = Registry.GetValue(jytsistema.DirReg, jytsistema.ClavePort, "")
         txtBaseDatos.Text = Registry.GetValue(jytsistema.DirReg, jytsistema.ClaveBaseDatos, "")
         txtCaja.Text = Registry.GetValue(jytsistema.DirReg, jytsistema.ClaveCaja, "")
         txtEmpresa.Text = Registry.GetValue(jytsistema.DirReg, jytsistema.ClaveEmpresa, "")

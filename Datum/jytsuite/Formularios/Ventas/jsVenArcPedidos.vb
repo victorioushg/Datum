@@ -26,8 +26,7 @@ Public Class jsVenArcPedidos
     Private dtDescuentos As New DataTable
     Private ft As New Transportables
     Private interchangeList As New List(Of CambioMonedaPlus)
-    Private customerList As New List(Of Customer)
-    Private advisorsList As New List(Of SalesForce)
+
     Private cliente As New Customer()
     Private asesor As New SalesForce()
 
@@ -60,16 +59,9 @@ Public Class jsVenArcPedidos
         Me.Tag = sModulo
         Try
             myConn.Open()
-
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
             dt = ds.Tables(nTabla)
-
-            interchangeList = GetListaDeMonedasyCambios(myConn, jytsistema.sFechadeTrabajo)
-            customerList = GetCustomersList(myConn)
-            advisorsList = GetSalesForce(myConn)
-
             IniciarControles()
-
             If dt.Rows.Count > 0 Then
                 nPosicionEncab = dt.Rows.Count - 1
                 Me.BindingContext(ds, nTabla).Position = nPosicionEncab
@@ -77,7 +69,6 @@ Public Class jsVenArcPedidos
             Else
                 IniciarDocumento(False)
             End If
-
             ft.ActivarMenuBarra(myConn, ds, dt, lRegion, MenuBarra, jytsistema.sUsuario)
         Catch ex As MySql.Data.MySqlClient.MySqlException
             ft.mensajeCritico("Error en conexión de base de datos: " & ex.Message)
@@ -88,11 +79,13 @@ Public Class jsVenArcPedidos
         Dim dates As SfDateTimeEdit() = {txtEmision, txtEntrega}
         SetSizeDateObjects(dates)
         '' Clientes
-        InitiateDropDownClientes(cmbCliente, customerList)
+        InitiateDropDown(Of Customer)(myConn, cmbCliente)
         ''Asesores 
-        InitiateDropDownAsesores(cmbAsesores, advisorsList)
+        InitiateDropDown(Of SalesForce)(myConn, cmbAsesores)
         '' Monedas
-        InitiateDropDownInterchangeCurrency(cmbMonedas, interchangeList)
+        ' interchangeList = GetListaDeMonedasyCambios(myConn, jytsistema.sFechadeTrabajo)
+        InitiateDropDownInterchangeCurrency(myConn, cmbMonedas, jytsistema.sFechadeTrabajo, True)
+
         DesactivarMarco0()
         AsignarTooltips()
     End Sub
@@ -111,10 +104,8 @@ Public Class jsVenArcPedidos
             dg.Refresh()
             dg.CurrentCell = dg(0, c)
         End If
-
         ft.ActivarMenuBarra(myConn, ds, dtRenglones, lRegion, MenuBarraRenglon, jytsistema.sUsuario)
         ft.habilitarObjetos(IIf(dtRenglones.Rows.Count > 0, False, True), True, cmbCliente)
-
     End Sub
     Private Sub AsignaTXT(ByVal nRow As Long)
 

@@ -1,4 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
+Imports Syncfusion.WinForms.ListView
+Imports Syncfusion.WinForms.ListView.Enums
+
 Module FuncionesBancos
     Private ft As New Transportables
     Public Function CalculaSaldoCajaPorFP(ByVal Mycon As MySqlConnection, ByVal Caja As String, ByVal Tipo As String, ByVal lblInfo As Label) As Double
@@ -24,8 +27,8 @@ Module FuncionesBancos
         ds.Dispose()
 
     End Function
-    Public Function CalculaSaldoBanco(ByVal Mycon As MySqlConnection, ByVal lblInfo As Label, ByVal Banco As String, _
-                                      Optional ByVal AUnaFecha As Boolean = False, Optional ByVal Fecha As Date = jytsistema.MyDate, _
+    Public Function CalculaSaldoBanco(ByVal Mycon As MySqlConnection, ByVal lblInfo As Label, ByVal Banco As String,
+                                      Optional ByVal AUnaFecha As Boolean = False, Optional ByVal Fecha As Date = jytsistema.MyDate,
                                       Optional ByVal Debitos_Creditos_Todos As Integer = 2) As Double
 
         Dim tbl As String = "tblbanco"
@@ -85,8 +88,8 @@ Module FuncionesBancos
             Dim aFld() As String = {"sel", "fecha", "tipomov", "nummov", "formpag", "numpag", "refpag", "importe", "origen", "Cantidad", "codven"}
             Dim aNom() As String = {"", "Emisión", "TP", "Número", "FP", "Número Pago", "Ref. Pago", "Importe", "ORG", "Cant.", "Vendedor"}
             Dim aAnc() As Integer = {20, 90, 35, 110, 30, 110, 90, 110, 45, 50, 70}
-            Dim aAli() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, _
-                                     AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, _
+            Dim aAli() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda,
+                                     AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda,
                                      AlineacionDataGrid.Derecha, AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, AlineacionDataGrid.Centro}
             Dim aFor() As String = {"", sFormatoFechaCorta, "", "", "", "", "", sFormatoNumero, "", sFormatoEntero, ""}
 
@@ -97,7 +100,7 @@ Module FuncionesBancos
             Dim aFld() As String = {"sel", "FECHASOBRE", "NUMSOBRE", "CORREDOR", "TICKETS", "MONTO"}
             Dim aNom() As String = {"", "Emisión", "Nº Sobre/Remesa", "Corredor", "Cantidad Tickets", "Importe"}
             Dim aAnc() As Integer = {20, 100, 150, 100, 100, 110}
-            Dim aAli() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, _
+            Dim aAli() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, AlineacionDataGrid.Centro,
                                      AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda}
             Dim aFor() As String = {"", sFormatoFechaCorta, "", "", sFormatoEntero, sFormatoNumero}
 
@@ -220,7 +223,7 @@ Module FuncionesBancos
         LV.EndUpdate()
 
     End Sub
-    Public Sub IniciarCuentasEnCombo(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal cmbCuenta As ComboBox, _
+    Public Sub IniciarCuentasEnCombo(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal cmbCuenta As ComboBox,
                                 Optional ByVal estatusBanco As Integer = 1, Optional ByVal montoenCombo As Integer = 0)
 
         Dim ds As New DataSet
@@ -234,7 +237,7 @@ Module FuncionesBancos
         With ds.Tables(nTablaB)
             Dim aBancos(.Rows.Count - 1) As String
             For eCont = 0 To .Rows.Count - 1
-                aBancos(eCont) = .Rows(eCont).Item("codban") & " | " & _
+                aBancos(eCont) = .Rows(eCont).Item("codban") & " | " &
                     .Rows(eCont).Item("nomban") & " | " & .Rows(eCont).Item("ctaban") _
                     & IIf(montoenCombo = 1, " | " & ft.FormatoNumero(CDbl(.Rows(eCont).Item("saldoact"))), "")
             Next
@@ -259,8 +262,8 @@ Module FuncionesBancos
             InicioEjercicio = ft.DevuelveScalarFecha(MyConn, " select inicio from jsconctaeje where ejercicio = '" & Ejercicio & "' and id_emp = '" & jytsistema.WorkID & "'   ")
             CierreEjercicio = ft.DevuelveScalarFecha(MyConn, " select cierre from jsconctaeje where ejercicio = '" & Ejercicio & "' and id_emp = '" & jytsistema.WorkID & "'   ")
         Else
-            InicioEjercicio = ft.DevuelveScalarFecha(myConn, " select inicio from jsconctaemp where id_emp = '" & jytsistema.WorkID & "'   ")
-            CierreEjercicio = ft.DevuelveScalarFecha(myConn, " select cierre from jsconctaemp where id_emp = '" & jytsistema.WorkID & "'   ")
+            InicioEjercicio = ft.DevuelveScalarFecha(MyConn, " select inicio from jsconctaemp where id_emp = '" & jytsistema.WorkID & "'   ")
+            CierreEjercicio = ft.DevuelveScalarFecha(MyConn, " select cierre from jsconctaemp where id_emp = '" & jytsistema.WorkID & "'   ")
         End If
 
         Dim EjercicioIni As Date
@@ -276,7 +279,7 @@ Module FuncionesBancos
         ft.RellenaCombo(aMeses, cmbMes, IIf(defaultItem < 0, aMeses.Length - 1, defaultItem))
 
     End Sub
-    Public Sub EliminarImpuestoDebitoBancario(MyConn As MySqlConnection, lblinfo As Label, CodigoBanco As String, _
+    Public Sub EliminarImpuestoDebitoBancario(MyConn As MySqlConnection, lblinfo As Label, CodigoBanco As String,
                                               NumeroDocumento As String, FechaDocumento As Date)
 
         Dim DescripcionIDB As String = Convert.ToString(ParametroPlus(MyConn, Gestion.iBancos, "BANPARAM04"))
@@ -293,8 +296,8 @@ Module FuncionesBancos
                             & " ID_EMP = '" & jytsistema.WorkID & "'")
 
     End Sub
-    Public Sub IncluirImpuestoDebitoBancario(MyConn As MySqlConnection, lblInfo As Label, TipoIDB As String, _
-                                              CodigoBanco As String, Numerodocumento As String, FechaDocumento As Date, _
+    Public Sub IncluirImpuestoDebitoBancario(MyConn As MySqlConnection, lblInfo As Label, TipoIDB As String,
+                                              CodigoBanco As String, Numerodocumento As String, FechaDocumento As Date,
                                               Importe As Double)
 
         'TipoIDB = "CH", "ND"
@@ -339,8 +342,5 @@ Module FuncionesBancos
         End If
 
     End Sub
-
-
-
 
 End Module

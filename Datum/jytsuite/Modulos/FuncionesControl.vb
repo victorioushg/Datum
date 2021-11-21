@@ -705,10 +705,10 @@ Module FuncionesControl
     End Function
 
 
-    Public Sub InitiateDropDownInterchangeCurrency(cmbMonedas As SfComboBox, interchangeList As List(Of CambioMonedaPlus),
+    Public Sub InitiateDropDownInterchangeCurrency(MyConn As MySqlConnection, cmbMonedas As SfComboBox, FechaLista As Date,
                                                    Optional defaultValue As Boolean = False)
 
-        cmbMonedas.DataSource = interchangeList
+        cmbMonedas.DataSource = GetListaDeMonedasyCambios(MyConn, FechaLista)
         cmbMonedas.DisplayMember = "UnidadMonetaria"
         cmbMonedas.ValueMember = "Moneda"
         cmbMonedas.Watermark = "Escoja una moneda"
@@ -717,39 +717,6 @@ Module FuncionesControl
         cmbMonedas.AutoCompleteSuggestMode = AutoCompleteSuggestMode.Contains
         cmbMonedas.MaxDropDownItems = 10
         If defaultValue Then cmbMonedas.SelectedValue = jytsistema.WorkCurrency.Id
-
-    End Sub
-
-    'Public Sub IniciarFormapago(cmb As ComboBox, Optional defaultValue As String = "EF")
-    '    cmb.DataSource = formasDePago
-    '    cmb.DisplayMember = "Text"
-    '    cmb.ValueMember = "Value"
-    '    cmb.SelectedValue = defaultValue
-    'End Sub
-
-    Public Sub IniciarFormapadoDropDown(cmb As SfComboBox, formasDepago As List(Of TextoValor), Optional defaultValue As String = "EF")
-        cmb.DataSource = formasDepago
-        cmb.DisplayMember = "Text"
-        cmb.ValueMember = "Value"
-        cmb.AutoCompleteMode = AutoCompleteMode.Suggest
-        cmb.DropDownStyle = DropDownStyle.DropDown
-        cmb.AutoCompleteSuggestMode = AutoCompleteSuggestMode.Contains
-        cmb.MaxDropDownItems = 6
-        cmb.DropDownListView.ItemHeight = 28
-        cmb.SelectedValue = defaultValue
-
-    End Sub
-
-    Public Sub IniciarTablaSimpleDropDown(cmb As SfComboBox, lista As List(Of SimpleTable), Optional defaultValue As String = "")
-
-        cmb.DataSource = lista
-        cmb.DisplayMember = "Descripcion"
-        cmb.ValueMember = "Codigo"
-        cmb.AutoCompleteMode = AutoCompleteMode.Suggest
-        cmb.DropDownStyle = DropDownStyle.DropDown
-        cmb.AutoCompleteSuggestMode = AutoCompleteSuggestMode.Contains
-        cmb.MaxDropDownItems = 6
-        cmb.SelectedValue = IIf(defaultValue = "", lista.FirstOrDefault().Codigo, defaultValue)
 
     End Sub
 

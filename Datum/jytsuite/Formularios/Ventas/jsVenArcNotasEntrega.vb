@@ -24,8 +24,7 @@ Public Class jsVenArcNotasEntrega
     Private dtDescuentos As New DataTable
     Private ft As New Transportables
     Private interchangeList As New List(Of CambioMonedaPlus)
-    Private customerList As New List(Of Customer)
-    Private advisorsList As New List(Of SalesForce)
+
     Private cliente As New Customer()
     Private asesor As New SalesForce()
 
@@ -62,12 +61,7 @@ Public Class jsVenArcNotasEntrega
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
             dt = ds.Tables(nTabla)
 
-            interchangeList = GetListaDeMonedasyCambios(myConn, jytsistema.sFechadeTrabajo)
-            customerList = GetCustomersList(myConn)
-            advisorsList = GetSalesForce(myConn)
-
             IniciarControles()
-
             If dt.Rows.Count > 0 Then
                 nPosicionEncab = dt.Rows.Count - 1
                 Me.BindingContext(ds, nTabla).Position = nPosicionEncab
@@ -75,9 +69,7 @@ Public Class jsVenArcNotasEntrega
             Else
                 IniciarDocumento(False)
             End If
-
             ft.ActivarMenuBarra(myConn, ds, dt, lRegion, MenuBarra, jytsistema.sUsuario)
-
         Catch ex As MySqlException
             ft.mensajeCritico("Error en conexión de base de datos: " & ex.Message)
         End Try
@@ -85,11 +77,14 @@ Public Class jsVenArcNotasEntrega
     End Sub
     Private Sub IniciarControles()
         '' Clientes
-        InitiateDropDownClientes(cmbCliente, customerList)
+        InitiateDropDown(Of Customer)(myConn, cmbCliente)
         ''Asesores 
-        InitiateDropDownAsesores(cmbAsesores, advisorsList)
+        InitiateDropDown(Of SalesForce)(myConn, cmbAsesores)
+
         '' Monedas
-        InitiateDropDownInterchangeCurrency(cmbMonedas, interchangeList)
+        'interchangeList = GetListaDeMonedasyCambios(myConn, jytsistema.sFechadeTrabajo)
+        InitiateDropDownInterchangeCurrency(myConn, cmbMonedas, jytsistema.sFechadeTrabajo, True)
+
         DesactivarMarco0()
         Dim dates As SfDateTimeEdit() = {txtEmision}
         SetSizeDateObjects(dates)

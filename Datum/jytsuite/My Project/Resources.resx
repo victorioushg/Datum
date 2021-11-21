@@ -151,8 +151,8 @@
   <data name="Calendario" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Calendario.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PlantillaAsiento" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PlantillaAsiento.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Categorias" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Categorias.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="FechaTrabajo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FechaTrabajo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -177,9 +177,6 @@
   </data>
   <data name="Adjunto" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Adjunto.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Ultimo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Ultimo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Formula" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Formula.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -319,6 +316,9 @@
   <data name="PoliciaISLR" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PoliciaISLR.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Back" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\..\..\..\..\BACKUP\Desarrollo\ProyectosDotNet\Iconos\Datum3\MiniPng\Blue\Back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="offer_50" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\offer_50.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -333,6 +333,9 @@
   </data>
   <data name="Arrow - down" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Arrow - down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document-ok1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\..\..\..\..\BACKUP\Desarrollo\ProyectosDotNet\Iconos\Datum3\PureFlat2013-Trial\png_format_32bpp_alpha\20x20\document-ok.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Formulas" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Formulas.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -451,6 +454,9 @@
   <data name="Aceptar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\aceptar.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="document-ok" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\..\..\..\..\BACKUP\Desarrollo\ProyectosDotNet\Iconos\Datum3\PureFlat2013-Trial\png_format_32bpp_alpha\32x32\Hot\document-ok.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Procesos" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Procesos.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -459,6 +465,9 @@
   </data>
   <data name="Mercas" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Mercas.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\..\..\..\..\BACKUP\Desarrollo\ProyectosDotNet\Iconos\Datum3\Round\Png\32x32\Cancel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="transportes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\transportes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -474,6 +483,9 @@
   </data>
   <data name="Jerarquias" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Jerarquias.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Ok" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\..\..\..\..\BACKUP\Desarrollo\ProyectosDotNet\Iconos\Datum3\Round\Png\32x32\Ok.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="campos" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\campos.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -502,8 +514,11 @@
   <data name="Primero" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Primero.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Categorias" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Categorias.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="PlantillaAsiento" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlantillaAsiento.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pinned" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pinned.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bajar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bajar.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -559,6 +574,9 @@
   <data name="restart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\restart.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="internet_browse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\..\Utilities\Iconos\Datum3\PureFlat2013-Trial\png_format_32bpp_alpha\32x32\Hot\internet_browse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="22_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\22_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -574,8 +592,8 @@
   <data name="golden_offer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\golden_offer.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pinned" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pinned.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Ultimo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Ultimo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Divisiones" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Divisiones.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -583,7 +601,7 @@
   <data name="Siguiente" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Siguiente.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="internet_browse" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\..\Utilities\Iconos\Datum3\PureFlat2013-Trial\png_format_32bpp_alpha\32x32\Hot\internet_browse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Ok1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\..\..\..\..\BACKUP\Desarrollo\ProyectosDotNet\Iconos\Datum3\MiniPng\Blue\Ok.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

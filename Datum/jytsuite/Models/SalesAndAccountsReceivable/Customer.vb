@@ -3,18 +3,18 @@ Public Class CustomerBase
 
     Public Property Codcli() As String
     Public Property Nombre() As String
+
+End Class
+
+Public Class Customer
+
+    Inherits CustomerBase
     Public Property Categoria() As String
     Public Property Unidad() As String
     Public Property Rif() As String
     Public Property Nit() As String
     Public Property Ci() As String
     Public Property Alterno() As String
-
-End Class
-
-Public Class Customer
-    Inherits CustomerBase
-
     Public Property Dirfiscal() As String
     Public Property Fpais() As Integer
     Public Property Festado() As Integer

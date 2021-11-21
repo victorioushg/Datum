@@ -97,9 +97,9 @@ Public Class jsPOSRetencionIVA
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
         If Validado() Then
             'GUARDAR REGISTRO DE RETENCION
-            InsertarModificarPOSWork(MyConn, lblInfo, True, jytsistema.WorkBox, jytsistema.sFechadeTrabajo, "PVE", "SA", txtDocumentoInterno.Text, _
-                                      txtNumeroSerial.Text, "EF", txtNumeroRetencion.Text, "RETENCION-IVA", ValorNumero(txtMontoRetencion.Text), _
-                                      jytsistema.sFechadeTrabajo, 1, jytsistema.sUsuario)
+            InsertarModificarPOSWork(MyConn, lblInfo, True, jytsistema.WorkBox, jytsistema.sFechadeTrabajo, "PVE", "SA", txtDocumentoInterno.Text,
+                                      txtNumeroSerial.Text, "EF", txtNumeroRetencion.Text, "RETENCION-IVA", ValorNumero(txtMontoRetencion.Text),
+                                      jytsistema.sFechadeTrabajo, 1, jytsistema.sUsuario, jytsistema.WorkCurrency.Id, DateTime.Now())
 
             ft.Ejecutar_strSQL(MyConn, " update jsvenencpos set " _
                 & " NUMERO_RETENCION_IVA = '" & txtNumeroRetencion.Text & "', NOMBRE_RETENCION_IVA = 'RETENCION-IVA', " _
@@ -170,7 +170,7 @@ Public Class jsPOSRetencionIVA
     End Sub
 
     Private Sub btnFechaRetencion_Click(sender As System.Object, e As System.EventArgs) Handles btnFechaRetencion.Click
-        txtFechaRetencion.Text = SeleccionaFecha(Convert.ToDateTime(txtFechaRetencion.Text), Me, grpRetencion, btnFechaRetencion)
+        '    txtFechaRetencion.Text = SeleccionaFecha(Convert.ToDateTime(txtFechaRetencion.Text), Me, grpRetencion, btnFechaRetencion)
     End Sub
 
     Private Sub txtNumeroRetencion_GotFocus(sender As Object, e As EventArgs) Handles txtNumeroRetencion.GotFocus, _

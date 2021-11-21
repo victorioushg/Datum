@@ -24,8 +24,7 @@ Public Class jsVenArcPresupuestos
     Private ft As New Transportables
 
     Private interchangeList As New List(Of CambioMonedaPlus)
-    Private customerList As New List(Of Customer)
-    Private advisorsList As New List(Of SalesForce)
+
     Private cliente As New Customer()
     Private asesor As New SalesForce()
 
@@ -53,9 +52,7 @@ Public Class jsVenArcPresupuestos
             myConn.Open()
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
 
-            interchangeList = GetListaDeMonedasyCambios(myConn, jytsistema.sFechadeTrabajo)
-            customerList = GetCustomersList(myConn)
-            advisorsList = GetSalesForce(myConn)
+
 
             IniciarControles()
 
@@ -76,11 +73,12 @@ Public Class jsVenArcPresupuestos
     Private Sub IniciarControles()
 
         '' Clientes
-        InitiateDropDownClientes(cmbCliente, customerList)
+        InitiateDropDown(Of Customer)(myConn, cmbCliente)
         ''Asesores 
-        InitiateDropDownAsesores(cmbAsesores, advisorsList)
+        InitiateDropDown(Of SalesForce)(myConn, cmbAsesores)
         '' Monedas
-        InitiateDropDownInterchangeCurrency(cmbMonedas, interchangeList)
+        'interchangeList = GetListaDeMonedasyCambios(myConn, jytsistema.sFechadeTrabajo)
+        InitiateDropDownInterchangeCurrency(myConn, cmbMonedas, jytsistema.sFechadeTrabajo, True)
 
         DesactivarMarco0()
         Dim dates As SfDateTimeEdit() = {txtEmision, txtVence}

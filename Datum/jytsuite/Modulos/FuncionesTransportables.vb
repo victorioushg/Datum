@@ -158,6 +158,10 @@ Module FuncionesTransportables
                         tt.SetToolTip(btn, "<B>Duplicar</B> este(a) " & menuName)
                     Case "btnRecalcular"
                         tt.SetToolTip(btn, "<B>Recalcular</B> este(a) " & menuName)
+                    Case "btnRemesas"
+                        tt.SetToolTip(btn, "Construir <B>Remesas de Cheques de Alimentacion</B> de esta " & menuName)
+                    Case "btnAdelantoEfectivo"
+                        tt.SetToolTip(btn, "<B>Adelantos de EFectivo</B> desde esta " & menuName)
 
                     Case "btnAgregarMovimiento"
                         'Menu barra renglón
@@ -381,6 +385,7 @@ Module FuncionesTransportables
                 + jytsistema.strCon
 
     End Function
+
 
     Function DocumentoBloqueado(MyConn As MySqlConnection, nTablaDB As String, aCampos_y_Valores() As String) As Boolean
 

@@ -151,10 +151,10 @@ Module FuncionesImpresionPnP
         If dtFP.Rows.Count > 0 Then
             For mCont = 0 To dtFP.Rows.Count - 1
                 With dtFP.Rows(mCont)
-                    fpCont = ft.InArray(aFormaPagoAbreviada, .Item("FORMAPAG"))
+                    fpCont = 0 '' ToDo ft.InArray(aFormaPagoAbreviada, .Item("FORMAPAG"))
                     bRet = ""
                     While bRet <> "OK"
-                        bRet = PFTfiscal(aFormaPago(fpCont - 1) & RellenaCadenaConCaracter(Format(.Item("IMPORTE"), sFormatoNumeroEpson), "D", 40 - aFormaPago(fpCont - 1).Length))
+                        ' bRet = PFTfiscal(aFormaPago(fpCont - 1) & RellenaCadenaConCaracter(Format(.Item("IMPORTE"), sFormatoNumeroEpson), "D", 40 - aFormaPago(fpCont - 1).Length))
                     End While
 
                 End With

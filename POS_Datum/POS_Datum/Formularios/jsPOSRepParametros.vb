@@ -323,12 +323,12 @@ Public Class jsPOSRepParametros
     End Sub
     Private Sub btnPeriodoDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
         Handles btnPeriodoDesde.Click
-        txtPeriodoDesde.Text = ft.muestracampofecha(SeleccionaFecha(CDate(txtPeriodoDesde.Text), Me, sender))
+        '   txtPeriodoDesde.Text = ft.muestracampofecha(SeleccionaFecha(CDate(txtPeriodoDesde.Text), Me, sender))
     End Sub
 
     Private Sub btnPeriodoHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
         Handles btnPeriodoHasta.Click
-        txtPeriodoHasta.Text = ft.muestracampofecha(SeleccionaFecha(CDate(txtPeriodoHasta.Text), Me, sender))
+        ' txtPeriodoHasta.Text = ft.muestracampofecha(SeleccionaFecha(CDate(txtPeriodoHasta.Text), Me, sender))
     End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click

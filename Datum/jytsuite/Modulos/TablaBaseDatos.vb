@@ -198,6 +198,8 @@ Module TablaBaseDatos
                 End If
             Case "enterolargo10A"
                 TipoCampo = " int(10) not null auto_increment"
+            Case "bigintauto"
+                TipoCampo = " bigint(20) not null auto_increment"
             Case "fecha"
                 TipoCampo = " date default '2009-01-01' not null "
             Case "tiempo"

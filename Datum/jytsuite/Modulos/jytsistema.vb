@@ -1,6 +1,30 @@
 Module jytsistema
 
     'Constantes Publicas
+
+    Public Class FormatoFecha
+        Public Const FormatoFecha As String = "dd-MM-yyyy"
+        Public Const FormatoFechaBarra As String = "dd/MM/yyyy"
+        Public Const FormatoFechaMedia As String = "dd-MM-yyyy"
+        Public Const FormatoFechaCorta As String = "dd-MM-yyyy"
+        Public Const FormatoFechaLarga As String = "D"
+        Public Const FormatoFechaHoraMySQL As String = "yyyy-MM-dd HH:mm:ss"
+        Public Const FormatoHora As String = "hh:mm:ss"
+        Public Const FormatoHoraCorta As String = "HH:mm"
+        Public Const FormatoFechaFiscal = "ddmmyy"
+        Public Const FormatoFechaMySQL As String = "yyyy-MM-dd"
+    End Class
+
+    Public Class FormatoNumero
+        Public Const FormatoPorcentaje As String = "0.00"
+        Public Const FormatoPorcentajeSimbolo As String = "0.00\%"
+        Public Const FormatoPorcentajeLargo As String = "0.0000"
+        Public Const FormatoEntero As String = "#,##"
+        Public Const FormatoNumero As String = "#,##0.00"
+        Public Const FormatoCantidad As String = "#,##0.000"
+        Public Const FormatoCantidadLarga As String = "#,##0.00000"
+    End Class
+
     Public nVersion As String
     Public Const DirReg As String = "HKEY_CURRENT_USER\SOFTWARE\Tecnologías Jytsuite\Jytsuite\CurrentVersion\"
     Public Const ClaveServidor As String = "Servidor"
@@ -47,6 +71,7 @@ Module jytsistema
     Public Const sValorPorcentajeLargo As String = "000000000000000.0000"
 
     Public Const MyDate As Date = #1/1/2010#
+    Public Const FechaMinimaBloqueo As Date = #1/1/2009#
 
     Public nGestion As Integer
 
@@ -977,6 +1002,11 @@ Module jytsistema
     Public ColorAmarilloClaro As Color = Color.LightGoldenrodYellow
     Public ColorRojoClaro As Color = Color.LightPink
 
+    Public condicionesDePago As List(Of TextoValor) = New List(Of TextoValor)() From {
+            New TextoValor("CREDITO", "CR", 0),
+            New TextoValor("CONTADO", "CO", 1)
+        }
+
     Public formasDePago As List(Of TextoValor) = New List(Of TextoValor)() From {
             New TextoValor("Efectivo", "EF", 0),
             New TextoValor("Cheque", "CH", 1),
@@ -985,10 +1015,6 @@ Module jytsistema
             New TextoValor("Depósito", "DP", 4),
             New TextoValor("Transferencia", "TR", 5)
         }
-
-    'Public aFormaPago() As String = {"Efectivo", "Cheque", "Tarjeta", "Cupón de Alimentación", "Depósito", "Transferencia"}
-
-    'Public aFormaPagoAbreviada() As String = {"EF", "CH", "TA", "CT", "DP", "TR"}
 
     Public aFormaPagoCompras() As String = {"Efectivo", "Cheque", "Tarjeta", "Transferencia"}
     Public aFormaPagoAbreviadaCompras() As String = {"EF", "CH", "TA", "TR"}

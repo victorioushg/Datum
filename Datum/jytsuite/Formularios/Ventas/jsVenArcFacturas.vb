@@ -24,10 +24,7 @@ Public Class jsVenArcFacturas
     Private dtDescuentos As New DataTable
     Private ft As New Transportables
     Private interchangeList As New List(Of CambioMonedaPlus)
-    Private customerList As New List(Of Customer)
-    Private advisorsList As New List(Of SalesForce)
-    Private transportList As New List(Of SimpleTable)
-    Private warehouseList As New List(Of SimpleTable)
+
     Private cliente As New Customer()
     Private asesor As New SalesForce()
     Private moneda As New CambioMonedaPlus()
@@ -73,12 +70,6 @@ Public Class jsVenArcFacturas
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
             dt = ds.Tables(nTabla)
 
-            interchangeList = GetListaDeMonedasyCambios(myConn, jytsistema.sFechadeTrabajo)
-            customerList = GetCustomersList(myConn)
-            advisorsList = GetSalesForce(myConn)
-            transportList = GetTransportList(myConn)
-            warehouseList = GetWarehouseList(myConn)
-
 
             IniciarControles()
 
@@ -104,14 +95,18 @@ Public Class jsVenArcFacturas
     Private Sub IniciarControles()
 
         '' Clientes
-        InitiateDropDownClientes(cmbCliente, customerList)
+        InitiateDropDown(Of Customer)(myConn, cmbCliente)
         ''Asesores 
-        InitiateDropDownAsesores(cmbAsesores, advisorsList)
-        '' Monedas
-        InitiateDropDownInterchangeCurrency(cmbMonedas, interchangeList)
+        InitiateDropDown(Of SalesForce)(myConn, cmbAsesores)
 
-        IniciarTablaSimpleDropDown(cmbTransportes, transportList)
-        IniciarTablaSimpleDropDown(cmbAlmacenes, warehouseList)
+        '' Monedas
+        interchangeList = GetListaDeMonedasyCambios(myConn, jytsistema.sFechadeTrabajo)
+        InitiateDropDownInterchangeCurrency(myConn, cmbMonedas, jytsistema.sFechadeTrabajo)
+
+        '' Transportes
+        InitiateDropDown(Of SimpleTable)(myConn, cmbTransportes, Tipo.Transportes)
+        '' Alamacenes 
+        InitiateDropDown(Of SimpleTable)(myConn, cmbAlmacenes, Tipo.Almacenes)
 
 
     End Sub

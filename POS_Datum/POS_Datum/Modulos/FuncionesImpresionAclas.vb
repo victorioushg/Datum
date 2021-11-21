@@ -151,8 +151,8 @@ Module FuncionesImpresionAclas
             If dtFP.Rows.Count > 0 Then
                 For mCont = 0 To dtFP.Rows.Count - 1
                     With dtFP.Rows(mCont)
-                        fpCont = ft.InArray(aFormaPagoAbreviada, .Item("FORMAPAG")) + 1
-                        bRet = IB.enviarComando(AclasBixolon.ComandoFiscalAclasBixolon.iNombrePago, fpCont, aFormaPago(fpCont) + " " & Right(.Item("numpag"), 5))
+                        fpCont = 0 '' ToDo ft.InArray(aFormaPagoAbreviada, .Item("FORMAPAG")) + 1
+                        '     bRet = IB.enviarComando(AclasBixolon.ComandoFiscalAclasBixolon.iNombrePago, fpCont, aFormaPago(fpCont) + " " & Right(.Item("numpag"), 5))
                         ImportePago = .Item("importe")
                         If mCont = dtFP.Rows.Count - 1 Then
                             bRet = IB.enviarComando(AclasBixolon.ComandoFiscalAclasBixolon.iPagodirecto, fpCont, "")

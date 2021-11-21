@@ -147,8 +147,8 @@ Module FuncionesContabilidad
             ValidarCaracteres = True
             For i = 1 To Len(Cadena)
                 Caracter = Asc(Mid(Cadena, i, 1))
-                If Not (Caracter = 46 Or _
-                  (Caracter > 47 And Caracter < 58) Or _
+                If Not (Caracter = 46 Or
+                  (Caracter > 47 And Caracter < 58) Or
                   (Caracter > 64 And Caracter < 91)) Then
                     ValidarCaracteres = False
                     Exit Function
@@ -292,7 +292,7 @@ Module FuncionesContabilidad
         Dim aFld() As String = {"sel", "asiento", "descripcion", "fecha_ult_con", "inicio_ult_con", "fin_ult_con"}
         Dim aNom() As String = {"", "Asiento", "Descripción Asiento", "Fecha Ultima Contabilización", "Inicio período última contabilización", "Fin período última contabilización"}
         Dim aAnc() As Integer = {20, 60, 380, 120, 120, 120}
-        Dim aAli() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro, _
+        Dim aAli() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro,
                                      AlineacionDataGrid.Centro, AlineacionDataGrid.Centro}
         Dim aFor() As String = {"", "", "", sFormatoFechaCorta, sFormatoFechaCorta, sFormatoFechaCorta}
 
@@ -301,9 +301,9 @@ Module FuncionesContabilidad
 
     End Sub
 
-    Public Sub Contabilizar_Plantilla(ByVal MyConn As MySqlConnection, lblInfo As Label, ByVal ds As DataSet, _
-                                      ByVal Fecha As Date, ByVal NumeroPlantilla As String, ByVal DescripcionPlantilla As String, _
-                                      FechaInicial As Date, FechaFinal As Date, lblProgreso As Label, pb As ProgressBar, _
+    Public Sub Contabilizar_Plantilla(ByVal MyConn As MySqlConnection, lblInfo As Label, ByVal ds As DataSet,
+                                      ByVal Fecha As Date, ByVal NumeroPlantilla As String, ByVal DescripcionPlantilla As String,
+                                      FechaInicial As Date, FechaFinal As Date, lblProgreso As Label, pb As ProgressBar,
                                       Optional numAsiento As String = "")
 
         Dim IncluyeAsiento As Boolean = False
@@ -325,7 +325,7 @@ Module FuncionesContabilidad
             For fCont = 0 To dtPlantilla.Rows.Count - 1
                 With dtPlantilla.Rows(fCont)
 
-                    refrescaBarraprogresoEtiqueta(pb, lblProgreso, (fCont + 1) / dtPlantilla.Rows.Count * 100, _
+                    refrescaBarraprogresoEtiqueta(pb, lblProgreso, (fCont + 1) / dtPlantilla.Rows.Count * 100,
                                                   Etiqueta + " Renglon : " + .Item("renglon") + " " + .Item("concepto"))
 
                     Dim nRenglon As String = .Item("renglon")
@@ -336,10 +336,10 @@ Module FuncionesContabilidad
                     Dim nSigno As Integer = IIf(.Item("signo") = 0, 1, -1)
 
 
-                    Dim strConsul As String = Replace(Replace(Replace(Replace(ConsultaAPartirDeRegla(MyConn, ds, nRegla, lblInfo), _
-                                                          "@Empresa", strEmpresa), _
-                                                              "@FechaDesde", strFechaDesde), _
-                                                                 "@FechaHasta", strFechaHasta), _
+                    Dim strConsul As String = Replace(Replace(Replace(Replace(ConsultaAPartirDeRegla(MyConn, ds, nRegla, lblInfo),
+                                                          "@Empresa", strEmpresa),
+                                                              "@FechaDesde", strFechaDesde),
+                                                                 "@FechaHasta", strFechaHasta),
                                                                     "@Fecha", strFecha)
 
                     Dim dtRenglonAsiento As New DataTable
@@ -398,20 +398,20 @@ Module FuncionesContabilidad
             Dim aStr() As String = {NumeroAsiento, 0, jytsistema.WorkExercise, jytsistema.WorkID}
             If Not qFound(MyConn, lblInfo, "jscotencasi", aCam, aStr) Then InsertarEncab = True
 
-            InsertEditCONTABEncabezadoAsiento(MyConn, lblInfo, InsertarEncab, NumeroAsiento, NumeroAsiento, Fecha, DescripcionPlantilla, _
+            InsertEditCONTABEncabezadoAsiento(MyConn, lblInfo, InsertarEncab, NumeroAsiento, NumeroAsiento, Fecha, DescripcionPlantilla,
                                  Debitos, Creditos, 0, NumeroPlantilla)
 
         End If
 
 
     End Sub
-    Public Sub ActualizaCuentasSegunAsiento(MyConn As MySqlConnection, lblInfo As Label, ds As DataSet, _
+    Public Sub ActualizaCuentasSegunAsiento(MyConn As MySqlConnection, lblInfo As Label, ds As DataSet,
                                             numAsiento As String, FechaAsiento As Date)
 
         Dim dtMov As DataTable
         Dim nTablaMov As String = "tblMov1"
         ds = DataSetRequery(ds, " select * from jscotrenasi where asiento = '" & numAsiento & "' and " _
-                                & " id_emp = '" & jytsistema.WorkID & "' order by renglon ", _
+                                & " id_emp = '" & jytsistema.WorkID & "' order by renglon ",
                              MyConn, nTablaMov, lblInfo)
         dtMov = ds.Tables(nTablaMov)
 

@@ -9,11 +9,13 @@ Public Class jsGenFormasPago
     Private ft As New Transportables
     Private pagosRecibidos As New List(Of FormaDePagoYMoneda)
 
+    Private cashBox As New Saving()
+
     Private nTabla As String = "tblpagos"
     Private strSQL As String = ""
 
     Private i_modo As Integer
-    Private aCondicion() As String = {"CREDITO", "CONTADO"}
+
     Private nModulo As String = ""
     Private NumeroDocumento As String = ""
     Private TotalFactura As Double = 0.0
@@ -62,7 +64,10 @@ Public Class jsGenFormasPago
         IniciarCredito()
         IniciarContado()
 
-        ft.RellenaCombo(aCondicion, cmbCondicion, CondicionPago)
+        InitiateDropDown(Of TextoValor)(MyConn, cmbCondicion, Tipo.CondicionDePago)
+        cmbCondicion.SelectedValue = "CR"
+        InitiateDropDown(Of Saving)(MyConn, cmbCaja)
+
         ft.habilitarObjetos(PermiteSeleccionarCRCO, True, cmbCondicion)
 
         IniciarCajas()
@@ -140,13 +145,7 @@ Public Class jsGenFormasPago
     End Sub
     Private Sub IniciarCajas()
 
-        Dim dtCajas As DataTable
-        Dim nTablaCajas As String = "tblCajas"
-
-        ds = DataSetRequery(ds, " select * from jsbanenccaj where id_emp = '" & jytsistema.WorkID & "' ", MyConn, nTablaCajas, lblInfo)
-        dtCajas = ds.Tables(nTablaCajas)
-
-        RellenaComboConDatatable(cmbCaja, dtCajas, "nomcaja", "caja")
+        InitiateDropDown(Of Saving)(MyConn, cmbCaja)
 
     End Sub
     Private Sub IniciarCredito()
@@ -279,7 +278,7 @@ Public Class jsGenFormasPago
         If Validado() Then
             Me.DialogResult = System.Windows.Forms.DialogResult.OK
             TipoCredito = cmbCredito.SelectedIndex
-            CondicionPago = cmbCondicion.SelectedIndex
+            CondicionPago = cmbCondicion.SelectedItem.Index
             scrMain.Focus()
         End If
     End Sub
@@ -346,7 +345,7 @@ Public Class jsGenFormasPago
     End Sub
 
     Private Sub btnSiguiente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSiguiente.Click
-        Dim nRow As Integer = dg.Rows.GetNextRow(nRow, DataGridViewElementStates.None)
+        Dim nRow As Integer = dg.Rows.GetNextRow(dg.CurrentRow.Index, DataGridViewElementStates.None)
         AsignaMov(IIf(nRow < 0, 0, nRow), False)
     End Sub
 

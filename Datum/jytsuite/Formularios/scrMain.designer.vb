@@ -679,6 +679,7 @@ Partial Class scrMain
         Me.RibbonSeparator50 = New C1.Win.C1Ribbon.RibbonSeparator()
         Me.RibbonButton184 = New C1.Win.C1Ribbon.RibbonButton()
         Me.RibbonButton185 = New C1.Win.C1Ribbon.RibbonButton()
+        Me.RibbonButton312 = New C1.Win.C1Ribbon.RibbonButton()
         Me.RibbonButton197 = New C1.Win.C1Ribbon.RibbonButton()
         Me.RibbonGroup27 = New C1.Win.C1Ribbon.RibbonGroup()
         Me.RibbonMenu29 = New C1.Win.C1Ribbon.RibbonMenu()
@@ -694,15 +695,14 @@ Partial Class scrMain
         Me.RibbonButton65 = New C1.Win.C1Ribbon.RibbonButton()
         Me.RibbonGroup28 = New C1.Win.C1Ribbon.RibbonGroup()
         Me.RibbonMenu30 = New C1.Win.C1Ribbon.RibbonMenu()
-        Me.RibbonButton312 = New C1.Win.C1Ribbon.RibbonButton()
         CType(Me.C1Ribbon1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'StatusStrip
         '
-        Me.StatusStrip.Location = New System.Drawing.Point(0, 431)
+        Me.StatusStrip.Location = New System.Drawing.Point(0, 599)
         Me.StatusStrip.Name = "StatusStrip"
-        Me.StatusStrip.Size = New System.Drawing.Size(1156, 22)
+        Me.StatusStrip.Size = New System.Drawing.Size(1207, 22)
         Me.StatusStrip.TabIndex = 7
         Me.StatusStrip.Text = "StatusStrip"
         '
@@ -4898,6 +4898,12 @@ Partial Class scrMain
         Me.RibbonButton185.Text = "Cambio de Monedas"
         Me.RibbonButton185.ToolTip = "Cambio de Monedas"
         '
+        'RibbonButton312
+        '
+        Me.RibbonButton312.ID = "RibbonButton312"
+        Me.RibbonButton312.Text = "Monedas"
+        Me.RibbonButton312.ToolTip = "Monedas"
+        '
         'RibbonButton197
         '
         Me.RibbonButton197.ID = "RibbonButton197"
@@ -4986,22 +4992,15 @@ Partial Class scrMain
         Me.RibbonMenu30.SmallImage = CType(resources.GetObject("RibbonMenu30.SmallImage"), System.Drawing.Image)
         Me.RibbonMenu30.Text = "Reportes"
         '
-        'RibbonButton312
-        '
-        Me.RibbonButton312.ID = "RibbonButton312"
-        Me.RibbonButton312.Text = "Monedas"
-        Me.RibbonButton312.ToolTip = "Monedas"
-        '
         'scrMain
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1156, 453)
+        Me.ClientSize = New System.Drawing.Size(1207, 621)
         Me.Controls.Add(Me.C1Ribbon1)
         Me.Controls.Add(Me.StatusStrip)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.IsMdiContainer = true
         Me.Name = "scrMain"
         Me.Text = "Datum"

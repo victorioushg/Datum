@@ -25,8 +25,7 @@ Public Class jsVenArcNotasCredito
     Private dtDescuentos As New DataTable
     Private ft As New Transportables
     Private interchangeList As New List(Of CambioMonedaPlus)
-    Private customerList As New List(Of Customer)
-    Private advisorsList As New List(Of SalesForce)
+
     Private cliente As New Customer()
     Private asesor As New SalesForce()
 
@@ -62,11 +61,8 @@ Public Class jsVenArcNotasCredito
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
             dt = ds.Tables(nTabla)
 
-            interchangeList = GetListaDeMonedasyCambios(myConn, jytsistema.sFechadeTrabajo)
-            customerList = GetCustomersList(myConn)
-            advisorsList = GetSalesForce(myConn)
-
             IniciarControles()
+
             If dt.Rows.Count > 0 Then
                 nPosicionEncab = dt.Rows.Count - 1
                 Me.BindingContext(ds, nTabla).Position = nPosicionEncab
@@ -83,15 +79,18 @@ Public Class jsVenArcNotasCredito
     End Sub
     Private Sub IniciarControles()
         '' Clientes
-        InitiateDropDownClientes(cmbCliente, customerList)
+        InitiateDropDown(Of Customer)(myConn, cmbCliente)
         ''Asesores 
-        InitiateDropDownAsesores(cmbAsesores, advisorsList)
+        InitiateDropDown(Of SalesForce)(myConn, cmbAsesores)
         '' Monedas
-        InitiateDropDownInterchangeCurrency(cmbMonedas, interchangeList)
+        ' interchangeList = GetListaDeMonedasyCambios(myConn, jytsistema.sFechadeTrabajo)
+        InitiateDropDownInterchangeCurrency(myConn, cmbMonedas, jytsistema.sFechadeTrabajo, True)
+
         DesactivarMarco0()
         AsignarTooltips()
         Dim dates As SfDateTimeEdit() = {txtEmision}
         SetSizeDateObjects(dates)
+
     End Sub
     Private Sub AsignarTooltips()
         Dim menus As New List(Of ToolStrip) From {MenuBarra, MenuBarraRenglon}

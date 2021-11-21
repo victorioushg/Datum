@@ -1,0 +1,3175 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Datum
+</name>
+</assembly>
+<members>
+<member name="T:Datum.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources._22_16x16">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources._22_32x32">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources._59">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Aactual">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Abajo">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Accesos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Aceptar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Activos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Activos1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Actualizar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.aDiferido">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Adjunto">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Agregar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.AgregarR">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.AgregarServicio">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Almacen">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Anterior">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Apagar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Apagar_2">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Apartados">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Archivos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Arriba">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Arrow___down">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.AsientosActuales">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.AsientosDiferidos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.atach">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.AvanceEfectivo">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.AvanceEfectivo1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Ayuda">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.bajar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Bancos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.banda_amarilla">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.bandaazul">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.bullet_ball_green">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.bullet_ball_green1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.bullet_ball_yellow">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.bullet_ball_yellow1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Buscar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.button_cancel">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.button_ok">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.CajaRegistradora1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Cajas">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Cajera">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Calculadora">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Calendario">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.CambioUsuario">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Camembert">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.campos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.CanalesTipos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Cancel">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Cancelar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Categorias">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Clientes">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Columnas">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Conceptos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Constantes">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Consultas">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.conteoinventario">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.CorredorCestaTicket">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Cortar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Costos_produccion">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Cuentas">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.cuotasmercancias">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.DashBoard">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Datum_Blue">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Datum_Verde">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.DefinicionBalances">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.DepositarCestaTicket">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.DepositarEfectivo">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.DepositarTarjetasCredito">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Divisiones">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Duplicar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Duplicar1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Eliminar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Envases">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.estante">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.EstructuraCargos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Explosionar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.fabrica">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Facturas">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.FechaTrabajo">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.fondoazul">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Formula">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Formulacion">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Formulas">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.golden_offer">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.GrupoVentas">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Historico">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.i_Advertencia">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.i_Ayuda">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.i_Error">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.i_Info">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Image1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Imprimir">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Información">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.internet_browse">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Jerarquias">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.jytsuite1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.LogoJytsuite">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.MapasAccesos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.marcaNike">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Menos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Mercas">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Miscelaneos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Modificar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.nominas">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.NotasCredito">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.NotasDebito">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.NotasEntrega">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.offer_50">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Ok">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.ordnen_produccion">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Parametros">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Pedidos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.pinned">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.PlantillaAsiento">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.PoliciaISLR">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.PoliciaIVA">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.PreciosFuturos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.PrePedidos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Presupuestos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.PreTransfers">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Primero">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Probar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Procesos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Proveedor1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Refresh">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.reiniciar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.RemesasCestaTicket">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Reportes">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.ReposicionCajas">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.restart">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.RutasDespacho">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.RutasVisita">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.seguimiento_produccion">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.seguir">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Seleccionar">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Servicios">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Siguiente">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.subir">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Supervisor1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.tipCondicionpago">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.tipoEstatusCliente">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.TrabajadorConcepto">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Transferencias">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.transportes">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Turnos">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Ultimo">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.UnidadT">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.unpinned">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Usuario">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.UtilisateurSZ">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.wait30">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.wait30trans">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Workers">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.WorkGroups">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.yen">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Zonas">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.Progress_Bar.WindowTitle">
+ <summary>
+ TITULO DE LA VENTANA DEL PROGRESS BAR.
+ </summary>
+</member>
+<member name="P:Datum.Progress_Bar.OverallProgressValue">
+ <summary>
+ El valor porcentaje para el progreso actual de la tarea.
+ </summary>
+</member>
+<member name="P:Datum.Progress_Bar.OverallProgressText">
+ <summary>
+ Texto descriptivo para el progreso actual de la tarea.
+ </summary>
+</member>
+<member name="P:Datum.Progress_Bar.PartialProgressValue">
+ <summary>
+ Valor porcentual de progreso parcial de la tarea. Si es omitido, el valor parcial del progress bar no es mostrado.
+ </summary>
+</member>
+<member name="P:Datum.Progress_Bar.PartialProgressText">
+ <summary>
+ Texto descriptivo del progreso parcial de la tarea.
+ </summary>
+</member>
+<member name="P:Datum.Progress_Bar.CallerThreadSet">
+ <summary>
+ Optional. El hilo que llama esta clase/hilo. Use si desea que la ventana de la barra de progreso  se cierre cuando el hilo que hace el llmado termine.
+ </summary>
+</member>
+<member name="P:Datum.Progress_Bar.CallerThreadGet">
+ <summary>
+ El Hilo que llama esta clase/hilo.
+ </summary>
+</member>
+<member name="P:Datum.Progress_Bar.TimeOut">
+ <summary>
+ Optional, defecto = 60. Tiempo en segundos sin recibir actualizaion de progreso. Se le pregunta al usuario si desea o no cerrar la ventana.
+ </summary>
+</member>
+<member name="T:Datum.DataSet1">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:Datum.dsBancos">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtBancosMovimientosDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtCajaMovimientosDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtConciliacionDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtSaldosMesDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtDepositosDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtIDBDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtIDBMesDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtChequeDevueltoDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtTicketDevueltoDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtTransferDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtBancosFichaDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtChequesDevueltosDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtRemesasDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtNoDepositadoDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtComprobantePagoDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtEstadoCuentaDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtBancosMovimientosRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtCajaMovimientosRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtConciliacionRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtSaldosMesRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtDepositosRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtIDBRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtIDBMesRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtChequeDevueltoRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtTicketDevueltoRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtTransferRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtBancosFichaRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtChequesDevueltosRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtRemesasRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtNoDepositadoRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtComprobantePagoRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtEstadoCuentaRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtBancosMovimientosRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtCajaMovimientosRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtConciliacionRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtSaldosMesRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtDepositosRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtIDBRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtIDBMesRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtChequeDevueltoRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtTicketDevueltoRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtTransferRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtBancosFichaRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtChequesDevueltosRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtRemesasRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtNoDepositadoRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtComprobantePagoRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsBancos.dtEstadoCuentaRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.dtBancosMovimientosTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.dtCajaMovimientosTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.dtConciliacionTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.dtSaldosMesTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.dtDepositosTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.dtIDBTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.dtIDBMesTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.dtChequeDevueltoTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.dtTicketDevueltoTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.dtTransferTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.dtBancosFichaTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.dtChequesDevueltosTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.dtRemesasTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.dtNoDepositadoTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.dtComprobantePagoTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.dtEstadoCuentaTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:Datum.dsBancosTableAdapters.TableAdapterManager.UpdateUpdatedRows(Datum.dsBancos,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:Datum.dsBancosTableAdapters.TableAdapterManager.UpdateInsertedRows(Datum.dsBancos,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:Datum.dsBancosTableAdapters.TableAdapterManager.UpdateDeletedRows(Datum.dsBancos,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:Datum.dsBancosTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:Datum.dsBancosTableAdapters.TableAdapterManager.UpdateAll(Datum.dsBancos)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:Datum.dsBancosTableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:Datum.dsCompras">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtComprobantePagoDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtListadoComprasDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtProveedorDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtMovimientosDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtVencimientosRDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtLibroIVADataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtRetencionesISLRDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtRetencionesIVADataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtGrupoSubGrupoDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtListadoComprasItemsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtOrdenesDeCompraDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtComprobantePagoRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtListadoComprasRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtProveedorRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtMovimientosRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtVencimientosRRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtLibroIVARow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtRetencionesISLRRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtRetencionesIVARow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtGrupoSubGrupoRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtListadoComprasItemsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtOrdenesDeCompraRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtComprobantePagoRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtListadoComprasRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtProveedorRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtMovimientosRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtVencimientosRRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtLibroIVARowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtRetencionesISLRRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtRetencionesIVARowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtGrupoSubGrupoRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtListadoComprasItemsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsCompras.dtOrdenesDeCompraRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsComprasTableAdapters.dtComprobantePagoTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsComprasTableAdapters.dtListadoComprasTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsComprasTableAdapters.dtProveedorTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsComprasTableAdapters.dtMovimientosTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsComprasTableAdapters.dtVencimientosRTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsComprasTableAdapters.dtLibroIVATableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsComprasTableAdapters.dtRetencionesISLRTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsComprasTableAdapters.dtRetencionesIVATableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsComprasTableAdapters.dtGrupoSubGrupoTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsComprasTableAdapters.dtListadoComprasItemsTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsComprasTableAdapters.dtOrdenesDeCompraTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsComprasTableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:Datum.dsComprasTableAdapters.TableAdapterManager.UpdateUpdatedRows(Datum.dsCompras,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:Datum.dsComprasTableAdapters.TableAdapterManager.UpdateInsertedRows(Datum.dsCompras,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:Datum.dsComprasTableAdapters.TableAdapterManager.UpdateDeletedRows(Datum.dsCompras,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:Datum.dsComprasTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:Datum.dsComprasTableAdapters.TableAdapterManager.UpdateAll(Datum.dsCompras)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:Datum.dsComprasTableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:Datum.dsComprasTableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:Datum.dsControl">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:Datum.dsControl.dtIVADataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsControl.dtDescuentosDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsControl.dtComentariosDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsControl.dtIVARow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsControl.dtDescuentosRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsControl.dtComentariosRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsControl.dtIVARowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsControl.dtDescuentosRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsControl.dtComentariosRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsControlTableAdapters.dtIVATableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsControlTableAdapters.dtDescuentosTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsControlTableAdapters.dtComentariosTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsControlTableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:Datum.dsControlTableAdapters.TableAdapterManager.UpdateUpdatedRows(Datum.dsControl,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:Datum.dsControlTableAdapters.TableAdapterManager.UpdateInsertedRows(Datum.dsControl,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:Datum.dsControlTableAdapters.TableAdapterManager.UpdateDeletedRows(Datum.dsControl,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:Datum.dsControlTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:Datum.dsControlTableAdapters.TableAdapterManager.UpdateAll(Datum.dsControl)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:Datum.dsControlTableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:Datum.dsControlTableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:Datum.dsContab">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:Datum.dsContab.dtCuentasDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsContab.dtAsientoDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsContab.dtMayorAnaliticoDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsContab.dtBalanceComprobacionDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsContab.dtBalanceGeneralDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsContab.dtReglasDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsContab.dtCuentasRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsContab.dtAsientoRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsContab.dtMayorAnaliticoRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsContab.dtBalanceComprobacionRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsContab.dtBalanceGeneralRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsContab.dtReglasRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsContab.dtCuentasRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsContab.dtAsientoRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsContab.dtMayorAnaliticoRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsContab.dtBalanceComprobacionRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsContab.dtBalanceGeneralRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsContab.dtReglasRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsContabTableAdapters.dtCuentasTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsContabTableAdapters.dtAsientoTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsContabTableAdapters.dtMayorAnaliticoTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsContabTableAdapters.dtBalanceComprobacionTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsContabTableAdapters.dtBalanceGeneralTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsContabTableAdapters.dtReglasTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsContabTableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:Datum.dsContabTableAdapters.TableAdapterManager.UpdateUpdatedRows(Datum.dsContab,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:Datum.dsContabTableAdapters.TableAdapterManager.UpdateInsertedRows(Datum.dsContab,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:Datum.dsContabTableAdapters.TableAdapterManager.UpdateDeletedRows(Datum.dsContab,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:Datum.dsContabTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:Datum.dsContabTableAdapters.TableAdapterManager.UpdateAll(Datum.dsContab)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:Datum.dsContabTableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:Datum.dsContabTableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:Datum.dsMercas">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtMercanciasDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtCategoriasDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtTransferenciaDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtConteoDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtPreciosFuturosDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtPreciosEspecialesDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtJerarquiasDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtOfertasDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtServiciosDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtPreciosEquivalentesDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtEquivalenciaDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtMercanciasMovimientosDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtVentasMerDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtInventarioLegalDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtVentasMerActDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtTransferenciasDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtMercanciasMovimientosRDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtComprasMerDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtComprasMerActDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtBarrasDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtVentasPlanaDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtLeyDeCostosDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtMercanciasRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtCategoriasRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtTransferenciaRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtConteoRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtPreciosFuturosRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtPreciosEspecialesRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtJerarquiasRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtOfertasRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtServiciosRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtPreciosEquivalentesRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtEquivalenciaRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtMercanciasMovimientosRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtVentasMerRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtInventarioLegalRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtVentasMerActRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtTransferenciasRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtMercanciasMovimientosRRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtComprasMerRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtComprasMerActRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtBarrasRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtVentasPlanaRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtLeyDeCostosRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtMercanciasRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtCategoriasRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtTransferenciaRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtConteoRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtPreciosFuturosRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtPreciosEspecialesRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtJerarquiasRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtOfertasRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtServiciosRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtPreciosEquivalentesRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtEquivalenciaRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtMercanciasMovimientosRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtVentasMerRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtInventarioLegalRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtVentasMerActRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtTransferenciasRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtMercanciasMovimientosRRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtComprasMerRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtComprasMerActRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtBarrasRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtVentasPlanaRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercas.dtLeyDeCostosRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtMercanciasTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtCategoriasTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtTransferenciaTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtConteoTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtPreciosFuturosTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtPreciosEspecialesTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtJerarquiasTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtOfertasTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtServiciosTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtPreciosEquivalentesTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtEquivalenciaTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtMercanciasMovimientosTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtVentasMerTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtInventarioLegalTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtVentasMerActTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtTransferenciasTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtMercanciasMovimientosRTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtComprasMerTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtComprasMerActTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtBarrasTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtVentasPlanaTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.dtLeyDeCostosTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:Datum.dsMercasTableAdapters.TableAdapterManager.UpdateUpdatedRows(Datum.dsMercas,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:Datum.dsMercasTableAdapters.TableAdapterManager.UpdateInsertedRows(Datum.dsMercas,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:Datum.dsMercasTableAdapters.TableAdapterManager.UpdateDeletedRows(Datum.dsMercas,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:Datum.dsMercasTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:Datum.dsMercasTableAdapters.TableAdapterManager.UpdateAll(Datum.dsMercas)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:Datum.dsMercasTableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:Datum.dsNomina">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtCatalogoTrabajadoresDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtConstantesDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtConceptosDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtConceptosXTrabajadorDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtPrenominaDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtConceptosAcumuladosDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtConceptosMesAMesDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtCatalogoTrabajadoresRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtConstantesRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtConceptosRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtConceptosXTrabajadorRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtPrenominaRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtConceptosAcumuladosRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtConceptosMesAMesRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtCatalogoTrabajadoresRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtConstantesRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtConceptosRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtConceptosXTrabajadorRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtPrenominaRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtConceptosAcumuladosRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsNomina.dtConceptosMesAMesRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsNominaTableAdapters.dtCatalogoTrabajadoresTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsNominaTableAdapters.dtConstantesTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsNominaTableAdapters.dtConceptosTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsNominaTableAdapters.dtConceptosXTrabajadorTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsNominaTableAdapters.dtPrenominaTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsNominaTableAdapters.dtConceptosAcumuladosTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsNominaTableAdapters.dtConceptosMesAMesTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsNominaTableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:Datum.dsNominaTableAdapters.TableAdapterManager.UpdateUpdatedRows(Datum.dsNomina,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:Datum.dsNominaTableAdapters.TableAdapterManager.UpdateInsertedRows(Datum.dsNomina,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:Datum.dsNominaTableAdapters.TableAdapterManager.UpdateDeletedRows(Datum.dsNomina,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:Datum.dsNominaTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:Datum.dsNominaTableAdapters.TableAdapterManager.UpdateAll(Datum.dsNomina)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:Datum.dsNominaTableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:Datum.dsNominaTableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:Datum.dsSIGME">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtGananciasFacturasDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtGananciasItemDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtGananciasItemMesMesDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtIngresosAsesorDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtComprasVentasComparativasDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtVentasMesMesDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtActivacionMesMesDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtGananciaCestaTicketDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtGananciaCestaTicketMesMesDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtDescuentosAsesorDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtDescuentosAsesorMesMesDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtVentasComprasExistenciasDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtDropSizeDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtGananciasFacturasRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtGananciasItemRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtGananciasItemMesMesRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtIngresosAsesorRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtComprasVentasComparativasRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtVentasMesMesRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtActivacionMesMesRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtGananciaCestaTicketRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtGananciaCestaTicketMesMesRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtDescuentosAsesorRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtDescuentosAsesorMesMesRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtVentasComprasExistenciasRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtDropSizeRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtGananciasFacturasRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtGananciasItemRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtGananciasItemMesMesRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtIngresosAsesorRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtComprasVentasComparativasRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtVentasMesMesRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtActivacionMesMesRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtGananciaCestaTicketRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtGananciaCestaTicketMesMesRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtDescuentosAsesorRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtDescuentosAsesorMesMesRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtVentasComprasExistenciasRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsSIGME.dtDropSizeRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsSIGMETableAdapters.dtGananciasFacturasTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsSIGMETableAdapters.dtGananciasItemTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsSIGMETableAdapters.dtGananciasItemMesMesTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsSIGMETableAdapters.dtIngresosAsesorTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsSIGMETableAdapters.dtComprasVentasComparativasTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsSIGMETableAdapters.dtVentasMesMesTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsSIGMETableAdapters.dtActivacionMesMesTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsSIGMETableAdapters.dtGananciaCestaTicketTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsSIGMETableAdapters.dtGananciaCestaTicketMesMesTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsSIGMETableAdapters.dtDescuentosAsesorTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsSIGMETableAdapters.dtDescuentosAsesorMesMesTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsSIGMETableAdapters.dtVentasComprasExistenciasTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsSIGMETableAdapters.dtDropSizeTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsSIGMETableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:Datum.dsSIGMETableAdapters.TableAdapterManager.UpdateUpdatedRows(Datum.dsSIGME,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:Datum.dsSIGMETableAdapters.TableAdapterManager.UpdateInsertedRows(Datum.dsSIGME,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:Datum.dsSIGMETableAdapters.TableAdapterManager.UpdateDeletedRows(Datum.dsSIGME,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:Datum.dsSIGMETableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:Datum.dsSIGMETableAdapters.TableAdapterManager.UpdateAll(Datum.dsSIGME)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:Datum.dsSIGMETableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:Datum.dsSIGMETableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtPedidosSinFacturarDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtChequesDevueltosDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtChequesDevueltosMesDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtVentasVentasYActivacionDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtVentasClientesDivisionDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtVentasClientesMesMesDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtCobranzaDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtCierreDiarioCTDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtPedidosVsEstatusDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtRankingDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtBackordersDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtSaldosDocDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtRetencionesIVAClientesDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtCobranzaPlanaDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtComisionesJerarquiaDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtComisionesCobranzaAlimicaDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtComisionesCobranzaJerarquiaDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtRutasDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtVentasVentasYActivacionPlusDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtPedidosSinFacturarRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtChequesDevueltosRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtChequesDevueltosMesRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtVentasVentasYActivacionRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtVentasClientesDivisionRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtVentasClientesMesMesRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtCobranzaRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtCierreDiarioCTRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtPedidosVsEstatusRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtRankingRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtBackordersRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtSaldosDocRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtRetencionesIVAClientesRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtCobranzaPlanaRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtComisionesJerarquiaRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtComisionesCobranzaAlimicaRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtComisionesCobranzaJerarquiaRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtRutasRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtVentasVentasYActivacionPlusRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtPedidosSinFacturarRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtChequesDevueltosRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtChequesDevueltosMesRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtVentasVentasYActivacionRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtVentasClientesDivisionRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtVentasClientesMesMesRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtCobranzaRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtCierreDiarioCTRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtPedidosVsEstatusRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtRankingRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtBackordersRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtSaldosDocRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtRetencionesIVAClientesRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtCobranzaPlanaRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtComisionesJerarquiaRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtComisionesCobranzaAlimicaRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtComisionesCobranzaJerarquiaRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtRutasRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDos.dtVentasVentasYActivacionPlusRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtPedidosSinFacturarTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtChequesDevueltosTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtChequesDevueltosMesTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtVentasVentasYActivacionTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtVentasClientesDivisionTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtVentasClientesMesMesTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtCobranzaTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtCierreDiarioCTTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtPedidosVsEstatusTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtRankingTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtBackordersTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtSaldosDocTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtRetencionesIVAClientesTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtCobranzaPlanaTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtComisionesJerarquiaTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtComisionesCobranzaAlimicaTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtComisionesCobranzaJerarquiaTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtRutasTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.dtVentasVentasYActivacionPlusTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.TableAdapterManager">
+<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+<member name="M:Datum.dsVentasDosTableAdapters.TableAdapterManager.UpdateUpdatedRows(Datum.dsVentasDos,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Update rows in top-down order.
+</summary>
+</member>
+<member name="M:Datum.dsVentasDosTableAdapters.TableAdapterManager.UpdateInsertedRows(Datum.dsVentasDos,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Insert rows in top-down order.
+</summary>
+</member>
+<member name="M:Datum.dsVentasDosTableAdapters.TableAdapterManager.UpdateDeletedRows(Datum.dsVentasDos,System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Delete rows in bottom-up order.
+</summary>
+</member>
+<member name="M:Datum.dsVentasDosTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member>
+<member name="M:Datum.dsVentasDosTableAdapters.TableAdapterManager.UpdateAll(Datum.dsVentasDos)">
+<summary>
+Update all changes to the dataset.
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.TableAdapterManager.UpdateOrderOption">
+<summary>
+Update Order Option
+</summary>
+</member>
+<member name="T:Datum.dsVentasDosTableAdapters.TableAdapterManager.SelfReferenceComparer">
+<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member>
+<member name="T:Datum.dsVentasPlus">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="M:Datum.ConsultasGenerales.SeleccionGENExistenciasAFecha(System.DateTime,System.String,System.String,System.String,System.String)">
+ <summary>
+ Devuelve las existencias de todas las mercancías a una fecha deseada
+ </summary>
+ <param name="FechaHasta">Fecha para la cual deseas ver existencia</param>
+ <param name="FiltroAlmacen">Cadena ej. "b.Almacen in ('00001') and " (letra debe ser b.) "</param>
+ <param name="CampoUnidadDeseado">Campo de la UNIDAD en BD que se desea ver la existencia (letra debe ser b.)"</param>
+ <remarks></remarks>
+</member>
+</members>
+</doc>

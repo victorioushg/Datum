@@ -212,32 +212,32 @@
       <HintPath>..\..\ReportesDeVentas\ReportesDeVentas\bin\Debug\ReportesDeVentas.dll</HintPath>
     </Reference>
     <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="Syncfusion.Core.WinForms, Version=19.3460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Core.WinForms.19.3.0.47\lib\net46\Syncfusion.Core.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.Core.WinForms, Version=19.3460.0.54, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Core.WinForms.19.3.0.54\lib\net46\Syncfusion.Core.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Data.WinForms, Version=19.3460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Data.WinForms.19.3.0.47\lib\net46\Syncfusion.Data.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.Data.WinForms, Version=19.3460.0.54, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Data.WinForms.19.3.0.54\lib\net46\Syncfusion.Data.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.DataSource.WinForms, Version=19.3460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.DataSource.WinForms.19.3.0.47\lib\net46\Syncfusion.DataSource.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.DataSource.WinForms, Version=19.3460.0.54, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.DataSource.WinForms.19.3.0.54\lib\net46\Syncfusion.DataSource.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.GridCommon.WinForms, Version=19.3460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.GridCommon.WinForms.19.3.0.47\lib\net46\Syncfusion.GridCommon.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.GridCommon.WinForms, Version=19.3460.0.54, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.GridCommon.WinForms.19.3.0.54\lib\net46\Syncfusion.GridCommon.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Licensing, Version=19.3460.0.47, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Licensing.19.3.0.47\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    <Reference Include="Syncfusion.Licensing, Version=19.3460.0.54, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.19.3.0.54\lib\net46\Syncfusion.Licensing.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfDataGrid.WinForms, Version=19.3460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.SfDataGrid.WinForms.19.3.0.47\lib\net46\Syncfusion.SfDataGrid.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.SfDataGrid.WinForms, Version=19.3460.0.54, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfDataGrid.WinForms.19.3.0.54\lib\net46\Syncfusion.SfDataGrid.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfInput.WinForms, Version=19.3460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.SfInput.WinForms.19.3.0.47\lib\net46\Syncfusion.SfInput.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.SfInput.WinForms, Version=19.3460.0.54, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfInput.WinForms.19.3.0.54\lib\net46\Syncfusion.SfInput.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfListView.WinForms, Version=19.3460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.SfListView.WinForms.19.3.0.47\lib\net46\Syncfusion.SfListView.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.SfListView.WinForms, Version=19.3460.0.54, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfListView.WinForms.19.3.0.54\lib\net46\Syncfusion.SfListView.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Shared.Base, Version=19.3460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Shared.Base.19.3.0.47\lib\net46\Syncfusion.Shared.Base.dll</HintPath>
+    <Reference Include="Syncfusion.Shared.Base, Version=19.3460.0.54, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Shared.Base.19.3.0.54\lib\net46\Syncfusion.Shared.Base.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -934,6 +934,12 @@
       <DependentUpon>FechaSistema.vb</DependentUpon>
     </Compile>
     <Compile Include="Formularios\FechaSistema.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmBuscarPlus.designer.vb">
+      <DependentUpon>frmBuscarPlus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmBuscarPlus.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\frmServidorValidacion.designer.vb">
@@ -2100,6 +2106,9 @@
     <Compile Include="Formularios\Ventas\jsVenRepParametros.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Models\Accounting\Account.vb" />
+    <Compile Include="Models\BankAccountsAndSavingsAccounts\Savings.vb" />
+    <Compile Include="Models\Control\DataGridField.vb" />
     <Compile Include="Models\Control\FormaDePago.vb" />
     <Compile Include="Models\Control\Monedas.vb" />
     <Compile Include="Models\Control\CambioMoneda.vb" />
@@ -2138,6 +2147,8 @@
     <Compile Include="Modulos\FuncionesReportesGraficos.vb" />
     <Compile Include="Modulos\FuncionesImpresionComandosESCEpsonP2.vb" />
     <Compile Include="Modulos\MyPrinter.vb" />
+    <Compile Include="Modulos\QueryFunctionAccounting.vb" />
+    <Compile Include="Modulos\QueryFunctionsBanks.vb" />
     <Compile Include="Modulos\TablasContabilidad.vb" />
     <Compile Include="Modulos\TablaBaseDatos.vb" />
     <Compile Include="Modulos\TablasBancos.vb" />
@@ -3290,6 +3301,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FechaSistema.resx">
       <DependentUpon>FechaSistema.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmBuscarPlus.resx">
+      <DependentUpon>frmBuscarPlus.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmServidorValidacion.resx">
       <DependentUpon>frmServidorValidacion.vb</DependentUpon>

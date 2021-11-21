@@ -1,4 +1,3 @@
-C1.Win.C1Input.C1PictureBox, C1.Win.C1Input.2, Version=2.0.20082.33212, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a
-C1.Win.C1Command.C1DockingTab, C1.Win.C1Command.2, Version=2.0.20082.19408, Culture=neutral, PublicKeyToken=e808566f358766d8
-C1.Win.C1SuperTooltip.C1SuperTooltip, C1.Win.C1SuperTooltip.2, Version=2.0.20082.50, Culture=neutral, PublicKeyToken=79882d576c6336da
 C1.Win.C1Ribbon.C1Ribbon, C1.Win.C1Ribbon.2, Version=2.0.20082.94, Culture=neutral, PublicKeyToken=79882d576c6336da
+C1.Win.C1SuperTooltip.C1SuperTooltip, C1.Win.C1SuperTooltip.2, Version=2.0.20151.38, Culture=neutral, PublicKeyToken=79882d576c6336da
+C1.Win.C1SuperTooltip.C1SuperTooltip, C1.Win.C1SuperTooltip.2, Version=2.0.20082.50, Culture=neutral, PublicKeyToken=79882d576c6336da

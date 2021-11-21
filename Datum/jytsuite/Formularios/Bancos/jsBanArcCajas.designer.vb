@@ -24,9 +24,11 @@ Partial Class jsBanArcCajas
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.dg = New System.Windows.Forms.DataGridView()
         Me.grpEncab = New System.Windows.Forms.GroupBox()
+        Me.txtNombre = New System.Windows.Forms.TextBox()
+        Me.txtCodigo = New System.Windows.Forms.TextBox()
+        Me.cmbMonedas = New Syncfusion.WinForms.ListView.SfComboBox()
+        Me.cmbCC = New Syncfusion.WinForms.ListView.SfComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.btnCodigoContable = New System.Windows.Forms.Button()
-        Me.txtCodigoContable = New System.Windows.Forms.TextBox()
         Me.txtOT = New System.Windows.Forms.TextBox()
         Me.txtCT = New System.Windows.Forms.TextBox()
         Me.txtTA = New System.Windows.Forms.TextBox()
@@ -38,8 +40,6 @@ Partial Class jsBanArcCajas
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtSaldo = New System.Windows.Forms.TextBox()
-        Me.txtNombre = New System.Windows.Forms.TextBox()
-        Me.txtCodigo = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -85,6 +85,8 @@ Partial Class jsBanArcCajas
         Me.C1SuperTooltip1 = New C1.Win.C1SuperTooltip.C1SuperTooltip(Me.components)
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpEncab.SuspendLayout()
+        CType(Me.cmbMonedas, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cmbCC, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAceptarSalir.SuspendLayout()
         Me.MenuBarra.SuspendLayout()
         Me.MenuBarraRenglon.SuspendLayout()
@@ -122,9 +124,11 @@ Partial Class jsBanArcCajas
         Me.grpEncab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpEncab.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpEncab.Controls.Add(Me.txtNombre)
+        Me.grpEncab.Controls.Add(Me.txtCodigo)
+        Me.grpEncab.Controls.Add(Me.cmbMonedas)
+        Me.grpEncab.Controls.Add(Me.cmbCC)
         Me.grpEncab.Controls.Add(Me.Label9)
-        Me.grpEncab.Controls.Add(Me.btnCodigoContable)
-        Me.grpEncab.Controls.Add(Me.txtCodigoContable)
         Me.grpEncab.Controls.Add(Me.txtOT)
         Me.grpEncab.Controls.Add(Me.txtCT)
         Me.grpEncab.Controls.Add(Me.txtTA)
@@ -136,8 +140,6 @@ Partial Class jsBanArcCajas
         Me.grpEncab.Controls.Add(Me.Label5)
         Me.grpEncab.Controls.Add(Me.Label4)
         Me.grpEncab.Controls.Add(Me.txtSaldo)
-        Me.grpEncab.Controls.Add(Me.txtNombre)
-        Me.grpEncab.Controls.Add(Me.txtCodigo)
         Me.grpEncab.Controls.Add(Me.Label3)
         Me.grpEncab.Controls.Add(Me.Label2)
         Me.grpEncab.Controls.Add(Me.Label1)
@@ -147,34 +149,76 @@ Partial Class jsBanArcCajas
         Me.grpEncab.TabIndex = 85
         Me.grpEncab.TabStop = False
         '
+        'txtNombre
+        '
+        Me.txtNombre.Enabled = False
+        Me.txtNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNombre.Location = New System.Drawing.Point(161, 12)
+        Me.txtNombre.MaxLength = 19
+        Me.txtNombre.Name = "txtNombre"
+        Me.txtNombre.Size = New System.Drawing.Size(286, 20)
+        Me.txtNombre.TabIndex = 242
+        '
+        'txtCodigo
+        '
+        Me.txtCodigo.Enabled = False
+        Me.txtCodigo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCodigo.Location = New System.Drawing.Point(118, 12)
+        Me.txtCodigo.MaxLength = 19
+        Me.txtCodigo.Name = "txtCodigo"
+        Me.txtCodigo.Size = New System.Drawing.Size(37, 20)
+        Me.txtCodigo.TabIndex = 241
+        Me.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'cmbMonedas
+        '
+        Me.cmbMonedas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbMonedas.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbMonedas.DisplayMember = "nombre"
+        Me.cmbMonedas.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbMonedas.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbMonedas.Location = New System.Drawing.Point(118, 117)
+        Me.cmbMonedas.Name = "cmbMonedas"
+        Me.cmbMonedas.Size = New System.Drawing.Size(329, 20)
+        Me.cmbMonedas.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.cmbMonedas.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbMonedas.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbMonedas.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbMonedas.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbMonedas.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbMonedas.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbMonedas.TabIndex = 240
+        Me.cmbMonedas.ValueMember = "codcli"
+        '
+        'cmbCC
+        '
+        Me.cmbCC.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbCC.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbCC.DisplayMember = "nombre"
+        Me.cmbCC.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbCC.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCC.Location = New System.Drawing.Point(118, 38)
+        Me.cmbCC.Name = "cmbCC"
+        Me.cmbCC.Size = New System.Drawing.Size(329, 20)
+        Me.cmbCC.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.cmbCC.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbCC.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCC.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbCC.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCC.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbCC.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCC.TabIndex = 239
+        Me.cmbCC.ValueMember = "codcli"
+        '
         'Label9
         '
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(12, 58)
+        Me.Label9.Location = New System.Drawing.Point(3, 117)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(109, 19)
         Me.Label9.TabIndex = 105
-        Me.Label9.Text = "Código Contable :"
+        Me.Label9.Text = "Moneda"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'btnCodigoContable
-        '
-        Me.btnCodigoContable.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCodigoContable.Location = New System.Drawing.Point(422, 55)
-        Me.btnCodigoContable.Name = "btnCodigoContable"
-        Me.btnCodigoContable.Size = New System.Drawing.Size(25, 20)
-        Me.btnCodigoContable.TabIndex = 104
-        Me.btnCodigoContable.Text = "•••"
-        Me.btnCodigoContable.UseVisualStyleBackColor = True
-        '
-        'txtCodigoContable
-        '
-        Me.txtCodigoContable.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCodigoContable.Location = New System.Drawing.Point(127, 55)
-        Me.txtCodigoContable.MaxLength = 50
-        Me.txtCodigoContable.Name = "txtCodigoContable"
-        Me.txtCodigoContable.Size = New System.Drawing.Size(289, 20)
-        Me.txtCodigoContable.TabIndex = 16
         '
         'txtOT
         '
@@ -292,26 +336,6 @@ Partial Class jsBanArcCajas
         Me.txtSaldo.TabIndex = 5
         Me.txtSaldo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'txtNombre
-        '
-        Me.txtNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNombre.Location = New System.Drawing.Point(127, 34)
-        Me.txtNombre.MaxLength = 50
-        Me.txtNombre.Name = "txtNombre"
-        Me.txtNombre.Size = New System.Drawing.Size(320, 20)
-        Me.txtNombre.TabIndex = 4
-        '
-        'txtCodigo
-        '
-        Me.txtCodigo.Enabled = False
-        Me.txtCodigo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCodigo.Location = New System.Drawing.Point(127, 13)
-        Me.txtCodigo.MaxLength = 2
-        Me.txtCodigo.Name = "txtCodigo"
-        Me.txtCodigo.Size = New System.Drawing.Size(41, 20)
-        Me.txtCodigo.TabIndex = 3
-        Me.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label3
         '
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -325,11 +349,11 @@ Partial Class jsBanArcCajas
         'Label2
         '
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(12, 35)
+        Me.Label2.Location = New System.Drawing.Point(12, 39)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(109, 19)
+        Me.Label2.Size = New System.Drawing.Size(100, 19)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Nombre :"
+        Me.Label2.Text = "Codigo Contable"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label1
@@ -337,9 +361,9 @@ Partial Class jsBanArcCajas
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(12, 13)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(109, 19)
+        Me.Label1.Size = New System.Drawing.Size(100, 19)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Código Caja :"
+        Me.Label1.Text = "Caja"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'grpAceptarSalir
@@ -679,6 +703,8 @@ Partial Class jsBanArcCajas
         CType(Me.dg, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpEncab.ResumeLayout(False)
         Me.grpEncab.PerformLayout()
+        CType(Me.cmbMonedas, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cmbCC, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpAceptarSalir.ResumeLayout(False)
         Me.MenuBarra.ResumeLayout(False)
         Me.MenuBarra.PerformLayout()
@@ -691,8 +717,6 @@ Partial Class jsBanArcCajas
     Friend WithEvents dg As System.Windows.Forms.DataGridView
     Friend WithEvents grpEncab As System.Windows.Forms.GroupBox
     Friend WithEvents txtSaldo As System.Windows.Forms.TextBox
-    Friend WithEvents txtNombre As System.Windows.Forms.TextBox
-    Friend WithEvents txtCodigo As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
@@ -749,4 +773,8 @@ Partial Class jsBanArcCajas
     Friend WithEvents txtCodigoContable As System.Windows.Forms.TextBox
     Friend WithEvents btnCodigoContable As System.Windows.Forms.Button
     Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents cmbMonedas As Syncfusion.WinForms.ListView.SfComboBox
+    Friend WithEvents cmbCC As Syncfusion.WinForms.ListView.SfComboBox
+    Friend WithEvents txtNombre As TextBox
+    Friend WithEvents txtCodigo As TextBox
 End Class

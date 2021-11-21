@@ -12,7 +12,7 @@
     <AssemblyName>POS_Datum</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>
     <OptionStrict>Off</OptionStrict>
@@ -72,6 +72,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\..\Datum\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="C1.Win.C1Command.2">
       <HintPath>..\..\..\ComponentOne\C1.Win.C1Command.2.dll</HintPath>
     </Reference>
@@ -102,6 +105,18 @@
     <Reference Include="fTransport">
       <HintPath>..\..\..\Datum\FuncionesTransportables\fTransport\fTransport\bin\Debug\fTransport.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Protobuf, Version=3.14.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\Google.Protobuf.3.14.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\K4os.Compression.LZ4.1.2.6\lib\net46\K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\K4os.Compression.LZ4.Streams.1.2.6\lib\net46\K4os.Compression.LZ4.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\K4os.Hash.xxHash.1.0.6\lib\net46\K4os.Hash.xxHash.dll</HintPath>
+    </Reference>
     <Reference Include="MetroFramework">
       <HintPath>..\..\metroframework-modern-ui-master\metroframework-modern-ui-master\MetroFramework\bin\Debug\MetroFramework.dll</HintPath>
     </Reference>
@@ -111,19 +126,65 @@
     <Reference Include="MetroFramework.Fonts">
       <HintPath>..\..\metroframework-modern-ui-master\metroframework-modern-ui-master\MetroFramework.Demo\bin\Debug\MetroFramework.Fonts.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=8.0.18.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Packages\MySql.Data.dll</HintPath>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=8.0.27.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\MySql.Data.8.0.27\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="RawPrinterHeper">
       <HintPath>..\..\..\RawPrinterHelper\RawPrinterHeper\RawPrinterHeper\bin\Debug\RawPrinterHeper.dll</HintPath>
     </Reference>
+    <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106" />
+    <Reference Include="Syncfusion.Core.WinForms, Version=19.3460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\Syncfusion.Core.WinForms.19.3.0.53\lib\net46\Syncfusion.Core.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Data.WinForms, Version=19.3460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\Syncfusion.Data.WinForms.19.3.0.53\lib\net46\Syncfusion.Data.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.DataSource.WinForms, Version=19.3460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\Syncfusion.DataSource.WinForms.19.3.0.53\lib\net46\Syncfusion.DataSource.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.GridCommon.WinForms, Version=19.3460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\Syncfusion.GridCommon.WinForms.19.3.0.53\lib\net46\Syncfusion.GridCommon.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=19.3460.0.53, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\Syncfusion.Licensing.19.3.0.53\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfDataGrid.WinForms, Version=19.3460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\Syncfusion.SfDataGrid.WinForms.19.3.0.53\lib\net46\Syncfusion.SfDataGrid.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfInput.WinForms, Version=19.3460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\Syncfusion.SfInput.WinForms.19.3.0.53\lib\net46\Syncfusion.SfInput.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfListView.WinForms, Version=19.3460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\Syncfusion.SfListView.WinForms.19.3.0.53\lib\net46\Syncfusion.SfListView.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.Base, Version=19.3460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\Syncfusion.Shared.Base.19.3.0.53\lib\net46\Syncfusion.Shared.Base.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
@@ -144,6 +205,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\TFHKAnet\TfhkaNet.dll</HintPath>
     </Reference>
+    <Reference Include="Ubiety.Dns.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\MySql.Data.8.0.27\lib\net452\Ubiety.Dns.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ZstdNet, Version=1.4.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\..\Datum\packages\MySql.Data.8.0.27\lib\net452\ZstdNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="fTransport" />
@@ -159,247 +226,289 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcCausasCreditos.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcCausasCreditos.designer.vb">
       <Link>Formularios\jsControlArcCausasCreditos.designer.vb</Link>
       <DependentUpon>jsControlArcCausasCreditos.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcCausasCreditos.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcCausasCreditos.vb">
       <Link>Formularios\jsControlArcCausasCreditos.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcCausasCreditosMovimientos.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcCausasCreditosMovimientos.designer.vb">
       <Link>Formularios\jsControlArcCausasCreditosMovimientos.designer.vb</Link>
       <DependentUpon>jsControlArcCausasCreditosMovimientos.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcCausasCreditosMovimientos.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcCausasCreditosMovimientos.vb">
       <Link>Formularios\jsControlArcCausasCreditosMovimientos.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcIVA.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcIVA.designer.vb">
       <Link>Formularios\jsControlArcIVA.designer.vb</Link>
       <DependentUpon>jsControlArcIVA.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcIVA.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcIVA.vb">
       <Link>Formularios\jsControlArcIVA.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcIVAMovimientos.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcIVAMovimientos.designer.vb">
       <Link>Formularios\jsControlArcIVAMovimientos.designer.vb</Link>
       <DependentUpon>jsControlArcIVAMovimientos.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcIVAMovimientos.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcIVAMovimientos.vb">
       <Link>Formularios\jsControlArcIVAMovimientos.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimple.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimple.designer.vb">
       <Link>Formularios\jsControlArcTablaSimple.designer.vb</Link>
       <DependentUpon>jsControlArcTablaSimple.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimple.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimple.vb">
       <Link>Formularios\jsControlArcTablaSimple.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimpleMovimientos.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimpleMovimientos.designer.vb">
       <Link>Formularios\jsControlArcTablaSimpleMovimientos.designer.vb</Link>
       <DependentUpon>jsControlArcTablaSimpleMovimientos.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimpleMovimientos.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimpleMovimientos.vb">
       <Link>Formularios\jsControlArcTablaSimpleMovimientos.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimpleSeleccion.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimpleSeleccion.designer.vb">
       <Link>Formularios\jsControlArcTablaSimpleSeleccion.designer.vb</Link>
       <DependentUpon>jsControlArcTablaSimpleSeleccion.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimpleSeleccion.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimpleSeleccion.vb">
       <Link>Formularios\jsControlArcTablaSimpleSeleccion.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTarjetas.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcTarjetas.designer.vb">
       <Link>Formularios\jsControlArcTarjetas.designer.vb</Link>
       <DependentUpon>jsControlArcTarjetas.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTarjetas.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcTarjetas.vb">
       <Link>Formularios\jsControlArcTarjetas.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTarjetasMovimientos.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcTarjetasMovimientos.designer.vb">
       <Link>Formularios\jsControlArcTarjetasMovimientos.designer.vb</Link>
       <DependentUpon>jsControlArcTarjetasMovimientos.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTarjetasMovimientos.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcTarjetasMovimientos.vb">
       <Link>Formularios\jsControlArcTarjetasMovimientos.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\FechaSistemaPlus.designer.vb">
-      <Link>Formularios\FechaSistemaPlus.designer.vb</Link>
-      <DependentUpon>FechaSistemaPlus.vb</DependentUpon>
-    </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\FechaSistemaPlus.vb">
-      <Link>Formularios\FechaSistemaPlus.vb</Link>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\FechaSistema.designer.vb">
-      <Link>Formularios\FechaSistema.designer.vb</Link>
-      <DependentUpon>FechaSistema.vb</DependentUpon>
-    </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\FechaSistema.vb">
-      <Link>Formularios\FechaSistema.vb</Link>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\frmBuscar.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\frmBuscar.designer.vb">
       <Link>Formularios\frmBuscar.designer.vb</Link>
       <DependentUpon>frmBuscar.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\frmBuscar.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\frmBuscar.vb">
       <Link>Formularios\frmBuscar.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\frmEspere.Designer.vb">
-      <Link>Formularios\frmEspere.Designer.vb</Link>
+    <Compile Include="..\..\Datum\jytsuite\Formularios\frmEspere.designer.vb">
+      <Link>Formularios\frmEspere.designer.vb</Link>
       <DependentUpon>frmEspere.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\frmEspere.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\frmEspere.vb">
       <Link>Formularios\frmEspere.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenComentariosRenglones.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\jsGenComentariosRenglones.designer.vb">
       <Link>Formularios\jsGenComentariosRenglones.designer.vb</Link>
       <DependentUpon>jsGenComentariosRenglones.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenComentariosRenglones.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\jsGenComentariosRenglones.vb">
       <Link>Formularios\jsGenComentariosRenglones.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenConsultaRIF.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\jsGenConsultaRIF.designer.vb">
       <Link>Formularios\jsGenConsultaRIF.designer.vb</Link>
       <DependentUpon>jsGenConsultaRIF.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenConsultaRIF.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\jsGenConsultaRIF.vb">
       <Link>Formularios\jsGenConsultaRIF.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenDescuentosComprasRenglon.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\jsGenDescuentosComprasRenglon.designer.vb">
       <Link>Formularios\jsGenDescuentosComprasRenglon.designer.vb</Link>
       <DependentUpon>jsGenDescuentosComprasRenglon.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenDescuentosComprasRenglon.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\jsGenDescuentosComprasRenglon.vb">
       <Link>Formularios\jsGenDescuentosComprasRenglon.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenRenglonesMovimientos.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\jsGenFormasPago.designer.vb">
+      <Link>Formularios\jsGenFormasPago.designer.vb</Link>
+      <DependentUpon>jsGenFormasPago.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Formularios\jsGenFormasPago.vb">
+      <Link>Formularios\jsGenFormasPago.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Formularios\jsGenFormasPagoMovimientoPlus.designer.vb">
+      <Link>Formularios\jsGenFormasPagoMovimientoPlus.designer.vb</Link>
+      <DependentUpon>jsGenFormasPagoMovimientoPlus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Formularios\jsGenFormasPagoMovimientoPlus.vb">
+      <Link>Formularios\jsGenFormasPagoMovimientoPlus.vb</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Formularios\jsGenRenglonesMovimientos.designer.vb">
       <Link>Formularios\jsGenRenglonesMovimientos.designer.vb</Link>
       <DependentUpon>jsGenRenglonesMovimientos.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenRenglonesMovimientos.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\jsGenRenglonesMovimientos.vb">
       <Link>Formularios\jsGenRenglonesMovimientos.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcListaCostosPreciosNormal.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcListaCostosPreciosNormal.designer.vb">
       <Link>Formularios\jsMerArcListaCostosPreciosNormal.designer.vb</Link>
       <DependentUpon>jsMerArcListaCostosPreciosNormal.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcListaCostosPreciosNormal.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcListaCostosPreciosNormal.vb">
       <Link>Formularios\jsMerArcListaCostosPreciosNormal.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcListadoItemsEnCompras.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcListadoItemsEnCompras.designer.vb">
       <Link>Formularios\jsMerArcListadoItemsEnCompras.designer.vb</Link>
       <DependentUpon>jsMerArcListadoItemsEnCompras.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcListadoItemsEnCompras.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcListadoItemsEnCompras.vb">
       <Link>Formularios\jsMerArcListadoItemsEnCompras.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcListadoItemsEnFacturas.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcListadoItemsEnFacturas.designer.vb">
       <Link>Formularios\jsMerArcListadoItemsEnFacturas.designer.vb</Link>
       <DependentUpon>jsMerArcListadoItemsEnFacturas.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcListadoItemsEnFacturas.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcListadoItemsEnFacturas.vb">
       <Link>Formularios\jsMerArcListadoItemsEnFacturas.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcLotesMercancia.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcLotesMercancia.designer.vb">
       <Link>Formularios\jsMerArcLotesMercancia.designer.vb</Link>
       <DependentUpon>jsMerArcLotesMercancia.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcLotesMercancia.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcLotesMercancia.vb">
       <Link>Formularios\jsMerArcLotesMercancia.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcLotesMercanciaMovimientos.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcLotesMercanciaMovimientos.designer.vb">
       <Link>Formularios\jsMerArcLotesMercanciaMovimientos.designer.vb</Link>
       <DependentUpon>jsMerArcLotesMercanciaMovimientos.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcLotesMercanciaMovimientos.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcLotesMercanciaMovimientos.vb">
       <Link>Formularios\jsMerArcLotesMercanciaMovimientos.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcServiciosA.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcServiciosA.designer.vb">
       <Link>Formularios\jsMerArcServiciosA.designer.vb</Link>
       <DependentUpon>jsMerArcServiciosA.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcServiciosA.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcServiciosA.vb">
       <Link>Formularios\jsMerArcServiciosA.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcServiciosMovimientos.designer.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcServiciosMovimientos.designer.vb">
       <Link>Formularios\jsMerArcServiciosMovimientos.designer.vb</Link>
       <DependentUpon>jsMerArcServiciosMovimientos.vb</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcServiciosMovimientos.vb">
+    <Compile Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcServiciosMovimientos.vb">
       <Link>Formularios\jsMerArcServiciosMovimientos.vb</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\ConsultasGenerales.vb">
+    <Compile Include="..\..\Datum\jytsuite\Models\Accounting\Account.vb">
+      <Link>Models\Accounting\Account.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Models\BankAccountsAndSavingsAccounts\Savings.vb">
+      <Link>Models\BankAccountsAndSavingsAccounts\Savings.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Models\Control\CambioMoneda.vb">
+      <Link>Models\Control\CambioMoneda.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Models\Control\DataGridField.vb">
+      <Link>Models\Control\DataGridField.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Models\Control\FormaDePago.vb">
+      <Link>Models\Control\FormaDePago.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Models\Control\Monedas.vb">
+      <Link>Models\Control\Monedas.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Models\General\functionStructure.vb">
+      <Link>Models\General\functionStructure.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Models\General\SimpleTable.vb">
+      <Link>Models\General\SimpleTable.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Models\General\SimpleTableProperties.vb">
+      <Link>Models\General\SimpleTableProperties.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Models\SalesAndAccountsReceivable\Customer.vb">
+      <Link>Models\SalesAndAccountsReceivable\Customer.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Models\SalesAndAccountsReceivable\SalesForce.vb">
+      <Link>Models\SalesAndAccountsReceivable\SalesForce.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Modulos\ConsultasGenerales.vb">
       <Link>Modulos\ConsultasGenerales.vb</Link>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\FuncionesBancos.vb">
+    <Compile Include="..\..\Datum\jytsuite\Modulos\FuncionesBancos.vb">
       <Link>Modulos\FuncionesBancos.vb</Link>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\FuncionesControl.vb">
+    <Compile Include="..\..\Datum\jytsuite\Modulos\FuncionesControl.vb">
       <Link>Modulos\FuncionesControl.vb</Link>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\FuncionesMercancias.vb">
+    <Compile Include="..\..\Datum\jytsuite\Modulos\FuncionesGenericas.vb">
+      <Link>Modulos\FuncionesGenericas.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Modulos\FuncionesMercancias.vb">
       <Link>Modulos\FuncionesMercancias.vb</Link>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\FuncionesReportesGraficos.vb">
+    <Compile Include="..\..\Datum\jytsuite\Modulos\FuncionesReportesGraficos.vb">
       <Link>Modulos\FuncionesReportesGraficos.vb</Link>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\FuncionesReportesRAW.vb">
+    <Compile Include="..\..\Datum\jytsuite\Modulos\FuncionesReportesRAW.vb">
       <Link>Modulos\FuncionesReportesRAW.vb</Link>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\FuncionesTransportables.vb">
+    <Compile Include="..\..\Datum\jytsuite\Modulos\FuncionesTransportables.vb">
       <Link>Modulos\FuncionesTransportables.vb</Link>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\FuncionesVentas.vb">
+    <Compile Include="..\..\Datum\jytsuite\Modulos\FuncionesVentas.vb">
       <Link>Modulos\FuncionesVentas.vb</Link>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\jytsistema.vb">
+    <Compile Include="..\..\Datum\jytsuite\Modulos\jytsistema.vb">
       <Link>Modulos\jytsistema.vb</Link>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\MyPrinter.vb">
+    <Compile Include="..\..\Datum\jytsuite\Modulos\MyPrinter.vb">
       <Link>Modulos\MyPrinter.vb</Link>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\TablaBaseDatos.vb">
+    <Compile Include="..\..\Datum\jytsuite\Modulos\QueryFunctionAccounting.vb">
+      <Link>Modulos\QueryFunctionAccounting.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Modulos\QueryFunctionsBanks.vb">
+      <Link>Modulos\QueryFunctionsBanks.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Modulos\TablaBaseDatos.vb">
       <Link>Modulos\TablaBaseDatos.vb</Link>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\TablasBancos.vb">
+    <Compile Include="..\..\Datum\jytsuite\Modulos\TablasBancos.vb">
       <Link>Modulos\TablasBancos.vb</Link>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\TablasCompras.vb">
+    <Compile Include="..\..\Datum\jytsuite\Modulos\TablasCompras.vb">
       <Link>Modulos\TablasCompras.vb</Link>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\TablasControl.vb">
+    <Compile Include="..\..\Datum\jytsuite\Modulos\TablasControl.vb">
       <Link>Modulos\TablasControl.vb</Link>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\TablasMercancias.vb">
+    <Compile Include="..\..\Datum\jytsuite\Modulos\TablasMercancias.vb">
       <Link>Modulos\TablasMercancias.vb</Link>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\TablasPuntoDeVenta.vb">
+    <Compile Include="..\..\Datum\jytsuite\Modulos\TablasPuntoDeVenta.vb">
       <Link>Modulos\TablasPuntoDeVenta.vb</Link>
     </Compile>
-    <Compile Include="..\..\Datum\Datum\jytsuite\Modulos\TablasVentas.vb">
+    <Compile Include="..\..\Datum\jytsuite\Modulos\TablasVentas.vb">
       <Link>Modulos\TablasVentas.vb</Link>
     </Compile>
     <Compile Include="Datasets\dsPOS.Designer.vb">
@@ -423,12 +532,6 @@
       <DependentUpon>frmServidor.vb</DependentUpon>
     </Compile>
     <Compile Include="Formularios\frmServidor.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Formularios\jsGenFormasPagoMovimientoPlus.designer.vb">
-      <DependentUpon>jsGenFormasPagoMovimientoPlus.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Formularios\jsGenFormasPagoMovimientoPlus.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\jsPOSFacturasXConformar.designer.vb">
@@ -473,18 +576,6 @@
     <Compile Include="Formularios\jsPOSProCierre.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formularios\jsGenFormasPagoMovimiento.designer.vb">
-      <DependentUpon>jsGenFormasPagoMovimiento.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Formularios\jsGenFormasPagoMovimiento.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Formularios\jsGenFormasPago.Designer.vb">
-      <DependentUpon>jsGenFormasPago.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Formularios\jsGenFormasPago.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Formularios\jsPOSRepParametros.designer.vb">
       <DependentUpon>jsPOSRepParametros.vb</DependentUpon>
     </Compile>
@@ -520,6 +611,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -561,99 +653,99 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcCausasCreditos.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcCausasCreditos.resx">
       <Link>Formularios\jsControlArcCausasCreditos.resx</Link>
       <DependentUpon>jsControlArcCausasCreditos.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcCausasCreditosMovimientos.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcCausasCreditosMovimientos.resx">
       <Link>Formularios\jsControlArcCausasCreditosMovimientos.resx</Link>
       <DependentUpon>jsControlArcCausasCreditosMovimientos.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcIVA.resx">
-      <Link>Formularios\jsControlArcIVA.vb</Link>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcIVA.resx">
+      <Link>Formularios\jsControlArcIVA.resx</Link>
       <DependentUpon>jsControlArcIVA.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcIVAMovimientos.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcIVAMovimientos.resx">
       <Link>Formularios\jsControlArcIVAMovimientos.resx</Link>
       <DependentUpon>jsControlArcIVAMovimientos.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimple.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimple.resx">
       <Link>Formularios\jsControlArcTablaSimple.resx</Link>
       <DependentUpon>jsControlArcTablaSimple.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimpleMovimientos.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimpleMovimientos.resx">
       <Link>Formularios\jsControlArcTablaSimpleMovimientos.resx</Link>
       <DependentUpon>jsControlArcTablaSimpleMovimientos.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimpleSeleccion.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcTablaSimpleSeleccion.resx">
       <Link>Formularios\jsControlArcTablaSimpleSeleccion.resx</Link>
       <DependentUpon>jsControlArcTablaSimpleSeleccion.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTarjetas.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcTarjetas.resx">
       <Link>Formularios\jsControlArcTarjetas.resx</Link>
       <DependentUpon>jsControlArcTarjetas.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Control\jsControlArcTarjetasMovimientos.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\Control\jsControlArcTarjetasMovimientos.resx">
       <Link>Formularios\jsControlArcTarjetasMovimientos.resx</Link>
       <DependentUpon>jsControlArcTarjetasMovimientos.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\FechaSistemaPlus.resx">
-      <Link>Formularios\FechaSistemaPlus.resx</Link>
-      <DependentUpon>FechaSistemaPlus.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\FechaSistema.resx">
-      <Link>Formularios\FechaSistema.resx</Link>
-      <DependentUpon>FechaSistema.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\frmBuscar.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\frmBuscar.resx">
       <Link>Formularios\frmBuscar.resx</Link>
       <DependentUpon>frmBuscar.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\frmEspere.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\frmEspere.resx">
       <Link>Formularios\frmEspere.resx</Link>
       <DependentUpon>frmEspere.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenComentariosRenglones.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\jsGenComentariosRenglones.resx">
       <Link>Formularios\jsGenComentariosRenglones.resx</Link>
       <DependentUpon>jsGenComentariosRenglones.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenConsultaRIF.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\jsGenConsultaRIF.resx">
       <Link>Formularios\jsGenConsultaRIF.resx</Link>
       <DependentUpon>jsGenConsultaRIF.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenDescuentosComprasRenglon.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\jsGenDescuentosComprasRenglon.resx">
       <Link>Formularios\jsGenDescuentosComprasRenglon.resx</Link>
       <DependentUpon>jsGenDescuentosComprasRenglon.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\jsGenRenglonesMovimientos.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\jsGenFormasPago.resx">
+      <Link>Formularios\jsGenFormasPago.resx</Link>
+      <DependentUpon>jsGenFormasPago.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\jsGenFormasPagoMovimientoPlus.resx">
+      <Link>Formularios\jsGenFormasPagoMovimientoPlus.resx</Link>
+      <DependentUpon>jsGenFormasPagoMovimientoPlus.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\jsGenRenglonesMovimientos.resx">
       <Link>Formularios\jsGenRenglonesMovimientos.resx</Link>
       <DependentUpon>jsGenRenglonesMovimientos.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcListaCostosPreciosNormal.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcListaCostosPreciosNormal.resx">
       <Link>Formularios\jsMerArcListaCostosPreciosNormal.resx</Link>
       <DependentUpon>jsMerArcListaCostosPreciosNormal.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcListadoItemsEnCompras.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcListadoItemsEnCompras.resx">
       <Link>Formularios\jsMerArcListadoItemsEnCompras.resx</Link>
       <DependentUpon>jsMerArcListadoItemsEnCompras.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcListadoItemsEnFacturas.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcListadoItemsEnFacturas.resx">
       <Link>Formularios\jsMerArcListadoItemsEnFacturas.resx</Link>
       <DependentUpon>jsMerArcListadoItemsEnFacturas.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcLotesMercancia.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcLotesMercancia.resx">
       <Link>Formularios\jsMerArcLotesMercancia.resx</Link>
       <DependentUpon>jsMerArcLotesMercancia.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcLotesMercanciaMovimientos.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcLotesMercanciaMovimientos.resx">
       <Link>Formularios\jsMerArcLotesMercanciaMovimientos.resx</Link>
       <DependentUpon>jsMerArcLotesMercanciaMovimientos.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcServiciosA.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcServiciosA.resx">
       <Link>Formularios\jsMerArcServiciosA.resx</Link>
       <DependentUpon>jsMerArcServiciosA.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Datum\Datum\jytsuite\Formularios\Mercancias\jsMerArcServiciosMovimientos.resx">
+    <EmbeddedResource Include="..\..\Datum\jytsuite\Formularios\Mercancias\jsMerArcServiciosMovimientos.resx">
       <Link>Formularios\jsMerArcServiciosMovimientos.resx</Link>
       <DependentUpon>jsMerArcServiciosMovimientos.vb</DependentUpon>
     </EmbeddedResource>
@@ -665,9 +757,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmServidor.resx">
       <DependentUpon>frmServidor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\jsGenFormasPagoMovimientoPlus.resx">
-      <DependentUpon>jsGenFormasPagoMovimientoPlus.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\jsPOSFacturasXConformar.resx">
       <DependentUpon>jsPOSFacturasXConformar.vb</DependentUpon>
@@ -689,12 +778,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\jsPOSProCierre.resx">
       <DependentUpon>jsPOSProCierre.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\jsGenFormasPagoMovimiento.resx">
-      <DependentUpon>jsGenFormasPagoMovimiento.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\jsGenFormasPago.resx">
-      <DependentUpon>jsGenFormasPago.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\jsPOSRepParametros.resx">
       <DependentUpon>jsPOSRepParametros.vb</DependentUpon>
@@ -787,6 +870,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\button_cancel.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -931,7 +1015,12 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Datum\Jytsuite\Datum.vbproj">
+      <Project>{1C501EF5-F8BA-4704-8EBA-0AD58ED15F85}</Project>
+      <Name>Datum</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

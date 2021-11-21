@@ -24,8 +24,7 @@ Public Class jsVenArcPrePedidos
     Private dtDescuentos As New DataTable
     Private ft As New Transportables
     Private interchangeList As New List(Of CambioMonedaPlus)
-    Private customerList As New List(Of Customer)
-    Private advisorsList As New List(Of SalesForce)
+
     Private cliente As New Customer()
     Private asesor As New SalesForce()
 
@@ -57,16 +56,9 @@ Public Class jsVenArcPrePedidos
         Me.Dock = DockStyle.Fill
         Try
             myConn.Open()
-
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
             dt = ds.Tables(nTabla)
-
-            interchangeList = GetListaDeMonedasyCambios(myConn, jytsistema.sFechadeTrabajo)
-            customerList = GetCustomersList(myConn)
-            advisorsList = GetSalesForce(myConn)
-
             IniciarControles()
-
             If dt.Rows.Count > 0 Then
                 nPosicionEncab = dt.Rows.Count - 1
                 Me.BindingContext(ds, nTabla).Position = nPosicionEncab
@@ -74,7 +66,6 @@ Public Class jsVenArcPrePedidos
             Else
                 IniciarDocumento(False)
             End If
-
             ft.ActivarMenuBarra(myConn, ds, dt, lRegion, MenuBarra, jytsistema.sUsuario)
 
 
@@ -86,11 +77,12 @@ Public Class jsVenArcPrePedidos
     Private Sub IniciarControles()
 
         '' Clientes
-        InitiateDropDownClientes(cmbCliente, customerList)
+        InitiateDropDown(Of Customer)(myConn, cmbCliente)
         ''Asesores 
-        InitiateDropDownAsesores(cmbAsesores, advisorsList)
+        InitiateDropDown(Of SalesForce)(myConn, cmbAsesores)
         '' Monedas
-        InitiateDropDownInterchangeCurrency(cmbMonedas, interchangeList)
+        ' interchangeList = GetListaDeMonedasyCambios(myConn, jytsistema.sFechadeTrabajo)
+        InitiateDropDownInterchangeCurrency(myConn, cmbMonedas, jytsistema.sFechadeTrabajo, True)
 
         Dim dates As SfDateTimeEdit() = {txtEmision, txtEntrega}
         SetSizeDateObjects(dates)
