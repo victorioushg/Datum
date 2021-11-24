@@ -2,6 +2,9 @@ Imports MySql.Data.MySqlClient
 Imports ReportesDeBancos
 Imports fTransport
 Imports Syncfusion.WinForms.Input
+Imports dgField = fTransport.Models.DataGridField
+Imports dgFieldSF = fTransport.Models.SfDataGridField
+Imports fTransport.Models
 Public Class jsBanArcBancos
     Private Const sModulo As String = "Bancos"
     Private Const lRegion As String = "RibbonButton9"
@@ -20,6 +23,10 @@ Public Class jsBanArcBancos
     Private dtMovimientos As New DataTable
     Private dtTarjetas As New DataTable
     Private ft As New Transportables
+    Private accountList As New List(Of AccountBase)
+    Private account As New AccountBase
+    Private bankTransactionList As New List(Of BankLine)
+    Private bankTransaction As New BankLine
 
     Private i_modo As Integer
     Private nPosicionCat As Long, nPosicionMov As Long, nPosicionTar As Long
@@ -39,8 +46,6 @@ Public Class jsBanArcBancos
             ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
             dt = ds.Tables(nTabla)
 
-
-
             If NivelUsuario(myConn, lblInfo, jytsistema.sUsuario) > 0 Then
                 txtSaldo.Visible = True
                 txtSaldo1.Visible = True
@@ -54,6 +59,7 @@ Public Class jsBanArcBancos
             End If
 
             ft.colocaOpcionesEnCombos(jytsistema.WorkLanguage, Me)
+            IniciarControles()
 
             DesactivarMarco0()
             If dt.Rows.Count > 0 Then
@@ -71,21 +77,26 @@ Public Class jsBanArcBancos
             SetSizeDateObjects(dates)
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
-            ft.MensajeCritico("Error en conexión de base de datos: " & ex.Message)
+            ft.mensajeCritico("Error en conexión de base de datos: " & ex.Message)
         End Try
 
     End Sub
+    Private Sub IniciarControles()
+
+        accountList = InitiateDropDown(Of AccountBase)(myConn, cmbCC)
+        'accountList.Where(Function(c) c.CodigoContable)
+
+        InitiateDropDownInterchangeCurrency(myConn, cmbMonedas, jytsistema.sFechadeTrabajo)
+        cmbMonedas.SelectedValue = jytsistema.WorkCurrency.Id
+
+    End Sub
+
     Private Sub HabilitarBotonesAdicionalesBarra(ByVal Habilitar As Boolean)
         ft.habilitarObjetos(Habilitar, False, btnDepositarEfectivo, btnDepositarTarjetas, btnDepositarCestaTicket, btnReposicion)
     End Sub
     Private Sub AsignarTooltips()
-        'Menu Barra 
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnAgregar, btnEditar, btnEliminar, btnBuscar, btnSeleccionar, btnPrimero, _
-                          btnSiguiente, btnAnterior, btnUltimo, btnImprimir, btnSalir, btnDepositarCestaTicket, _
-                          btnDepositarEfectivo, btnDepositarTarjetas, btnReposicion)
-
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, txtIngreso, btnFormatos, btnCuentaContable)
-
+        Dim menus As New List(Of ToolStrip) From {MenuBarra}
+        AsignarToolTipsMenuBarraToolStrip(menus, "Banco")
     End Sub
     Private Sub IniciarCajasyCestatickets()
 
@@ -119,13 +130,25 @@ Public Class jsBanArcBancos
     End Sub
     Private Sub AsignaMov(ByVal nRow As Long, ByVal Actualiza As Boolean)
 
-        dtMovimientos = ft.MostrarFilaEnTabla(myConn, ds, nTablaMovimientos, strSQLMov, Me.BindingContext, MenuBarra, dg, lRegion, jytsistema.sUsuario, nRow, Actualiza)
-        txtSaldo.Text = ft.FormatoNumero(CalculaSaldoBanco(myConn, lblInfo, txtCodigo.Text))
+        If Actualiza Then
+            Cursor.Current = Cursors.WaitCursor
+            bankTransactionList = GetBankLines(myConn, txtCodigo1.Text)
+            dg.DataSource = bankTransactionList
+            dg.Refresh()
+        End If
+        dg.Rows().Item(nRow).Selected = True
+        MostrarItemsEnMenuBarra(MenuBarra, CInt(nRow), bankTransactionList.Count)
+        nPosicionMov = dg.SelectedRows(0).Index
+        bankTransaction = bankTransactionList.Item(nPosicionMov)
+
+        ' Colocar Saldos 
+        Dim Saldo As Decimal = Math.Round(bankTransactionList.Sum(Function(s) s.ImporteReal), 2)
+        txtSaldo.Text = ft.FormatoNumero(Saldo)
         txtSaldo1.Text = txtSaldo.Text
 
     End Sub
     Private Sub AsignaTar(ByVal nRow As Long, ByVal Actualiza As Boolean)
-        dtTarjetas = ft.MostrarFilaEnTabla(myConn, ds, nTablaTarjetas, strSQLTar, Me.BindingContext, MenuComisiones, _
+        dtTarjetas = ft.MostrarFilaEnTabla(myConn, ds, nTablaTarjetas, strSQLTar, Me.BindingContext, MenuComisiones,
                               dgTar, lRegion, jytsistema.sUsuario, nRow, Actualiza, False)
     End Sub
     Private Sub AsignaTXT(ByVal nRow As Long)
@@ -148,14 +171,13 @@ Public Class jsBanArcBancos
                     txtTelef2.Text = ft.muestraCampoTexto(.Item("telef2"))
                     txtFax.Text = ft.muestraCampoTexto(.Item("fax"))
                     txtEmail.Text = ft.muestraCampoTexto(.Item("email"))
-                    txtCuentaContable.Text = ft.muestraCampoTexto(.Item("codcon"))
+                    cmbCC.SelectedValue = .Item("codcon")
                     txtContacto.Text = ft.muestraCampoTexto(.Item("contacto"))
                     txtComision.Text = ft.muestraCampoNumero(.Item("comision"))
                     txtIngreso.Value = .Item("fechacrea")
                     txtSaldo.Text = ft.muestraCampoNumero(CalculaSaldoBanco(myConn, lblInfo, .Item("codban")))
                     txtFormato.Text = ft.muestraCampoTexto(.Item("formato"))
                     cmbCondicion.SelectedIndex = .Item("estatus")
-                    'cmbTitulo.SelectedIndex = ft.InArray( Items() As string  cmbTitulo.Items.CopyTo(   , .Item("titulo"))
 
                     'Movimientos
                     txtCodigo1.Text = ft.muestraCampoTexto(.Item("codban"))
@@ -186,30 +208,32 @@ Public Class jsBanArcBancos
     End Sub
     Private Sub AbrirMovimientos(ByVal CodigoBanco As String)
 
-        strSQLMov = "select a.fechamov, a.tipomov, a.numdoc, a.concepto, a.importe, a.origen, a.benefic, a.prov_cli, '' nombre,  a.codven, " _
-                          & " a.numorg, a.tiporg, a.codban, a.caja, a.comproba, a.multican, a.conciliado, a.fecconcilia, a.mesconcilia " _
-                            & " from jsbantraban a " _
-                            & " where " _
-                            & " a.codban  = '" & CodigoBanco & "' and " _
-                            & " a.ejercicio = '" & jytsistema.WorkExercise & "' and " _
-                            & " a.id_emp = '" & jytsistema.WorkID & "' " _
-                            & " order by a.fechamov desc, a.tipomov, a.numdoc "
+        Cursor.Current = Cursors.WaitCursor
+        ''Movimientos
+        bankTransactionList = GetBankLines(myConn, CodigoBanco)
+        Dim aCampos As List(Of dgField) = New List(Of dgField)() From {
+            New dgField("FechaMovimiento", "FECHA", 80, DataGridViewContentAlignment.MiddleCenter, FormatoFecha.FormatoFecha),
+            New dgField("TipoMovimiento", "TP", 30, DataGridViewContentAlignment.MiddleCenter, ""),
+            New dgField("NumeroMovimiento", "Documento", 120, DataGridViewContentAlignment.MiddleLeft, ""),
+            New dgField("Concepto", "Concepto", 350, DataGridViewContentAlignment.MiddleLeft, ""),
+            New dgField("Importe", "Importe", 120, DataGridViewContentAlignment.MiddleRight, FormatoNumero.FormatoNumero),
+            New dgField("CodigoIso", "Moneda", 50, DataGridViewContentAlignment.MiddleCenter, ""),
+            New dgField("ImporteReal", "Importe Real", 120, DataGridViewContentAlignment.MiddleRight, FormatoNumero.FormatoNumero),
+            New dgField("Origen", "ORG", 30, DataGridViewContentAlignment.MiddleCenter, ""),
+            New dgField("ProveedorCliente", "Prov/Cli", 120, DataGridViewContentAlignment.MiddleLeft, ""),
+            New dgField("CodigoVendedor", "Asesor", 50, DataGridViewContentAlignment.MiddleCenter, ""),
+            New dgField("Comprobante", "Numero Comprobante", 120, DataGridViewContentAlignment.MiddleLeft, ""),
+            New dgField("Sada", "", 100, DataGridViewContentAlignment.MiddleLeft, "")
+        }
+        ft.IniciarTablaListPlus(Of BankLine)(dg, bankTransactionList, aCampos)
 
-        dtMovimientos = ft.AbrirDataTable(ds, nTablaMovimientos, myConn, strSQLMov)
+        If bankTransactionList.Count > 0 Then
+            nPosicionMov = 0
+            AsignaMov(nPosicionMov, False)
+        Else
 
-        Dim aCampos() As String = {"fechamov.Emisión.80.C.fecha", _
-                                   "tipomov.TP.25.C.", _
-                                   "numdoc.Documento.120.I.", _
-                                   "concepto.Concepto.350.I.", _
-                                   "importe.Importe.120.D.Numero", _
-                                   "origen.ORG.30.C.", _
-                                   "prov_cli.Prov/Cli.100.I.", _
-                                   "codven.Asesor.60.C.", _
-                                   "comproba.Comprobante Pago.120.I.", _
-                                   "sada..100.I."}
-        ft.IniciarTablaPlus(dg, dtMovimientos, aCampos)
+        End If
 
-        If dtMovimientos.Rows.Count > 0 Then nPosicionMov = 0
 
     End Sub
     Private Sub IniciarBanco(ByVal Inicio As Boolean)
@@ -219,9 +243,9 @@ Public Class jsBanArcBancos
         Else
             txtCodigo.Text = ""
         End If
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtNombre, txtCtaBan, txtAgencia, txtDireccion, txtTelef1, _
-                            txtTelef2, txtFax, txtEmail, txtWeb, txtContacto, txtComision, txtFormato, txtCodigo1, _
-                            txtNombre1, txtCtaBan1, txtCuentaContable)
+        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtNombre, txtCtaBan, txtAgencia, txtDireccion, txtTelef1,
+                            txtTelef2, txtFax, txtEmail, txtWeb, txtContacto, txtComision, txtFormato, txtCodigo1,
+                            txtNombre1, txtCtaBan1, cmbCC)
 
         ft.iniciarTextoObjetos(Transportables.tipoDato.Numero, txtSaldo, txtSaldo1)
         txtIngreso.Value = jytsistema.sFechadeTrabajo
@@ -238,7 +262,7 @@ Public Class jsBanArcBancos
 
         ft.habilitarObjetos(False, False, C1DockingTabPage2)
         ft.habilitarObjetos(True, True, txtNombre, txtCtaBan, txtAgencia, txtDireccion, txtTelef1, txtTelef2,
-                    txtFax, txtEmail, txtWeb, txtContacto, cmbTitulo, btnCuentaContable,
+                    txtFax, txtEmail, txtWeb, txtContacto, cmbCC, cmbMonedas,
                     txtComision, btnFormatos, cmbCondicion)
 
         ft.habilitarObjetos(True, False, MenuComisiones)
@@ -253,8 +277,8 @@ Public Class jsBanArcBancos
 
         ft.habilitarObjetos(True, False, C1DockingTabPage2)
         ft.habilitarObjetos(False, True, txtCodigo, txtCodigo1, txtNombre, txtNombre1, txtCtaBan, txtCtaBan1, txtSaldo,
-                            txtAgencia, txtDireccion, txtTelef1, txtTelef2, txtFax, txtEmail, txtWeb, cmbTitulo, txtContacto,
-                            txtCuentaContable, btnCuentaContable, txtIngreso, txtComision, txtFormato, btnFormatos,
+                            txtAgencia, txtDireccion, txtTelef1, txtTelef2, txtFax, txtEmail, txtWeb, txtContacto,
+                            cmbCC, cmbMonedas, txtIngreso, txtComision, txtFormato, btnFormatos,
                             cmbCondicion, MenuComisiones)
 
 
@@ -271,8 +295,8 @@ Public Class jsBanArcBancos
             Me.BindingContext(ds, nTabla).Position = 0
             AsignaTXT(Me.BindingContext(ds, nTabla).Position)
         Else
-            Me.BindingContext(ds, nTablaMovimientos).Position = 0
-            AsignaMov(Me.BindingContext(ds, nTablaMovimientos).Position, False)
+            Dim nRow As Integer = dg.Rows.GetFirstRow(DataGridViewElementStates.None)
+            AsignaMov(nRow, False)
         End If
     End Sub
 
@@ -281,8 +305,8 @@ Public Class jsBanArcBancos
             Me.BindingContext(ds, nTabla).Position -= 1
             AsignaTXT(Me.BindingContext(ds, nTabla).Position)
         Else
-            Me.BindingContext(ds, nTablaMovimientos).Position -= 1
-            AsignaMov(Me.BindingContext(ds, nTablaMovimientos).Position, False)
+            Dim nRow As Integer = dg.Rows.GetPreviousRow(dg.SelectedRows(0).Index, DataGridViewElementStates.None)
+            AsignaMov(IIf(nRow < 0, 0, nRow), False)
         End If
     End Sub
 
@@ -291,8 +315,8 @@ Public Class jsBanArcBancos
             Me.BindingContext(ds, nTabla).Position += 1
             AsignaTXT(Me.BindingContext(ds, nTabla).Position)
         Else
-            Me.BindingContext(ds, nTablaMovimientos).Position += 1
-            AsignaMov(Me.BindingContext(ds, nTablaMovimientos).Position, False)
+            Dim nRow As Integer = dg.Rows.GetNextRow(dg.SelectedRows(0).Index, DataGridViewElementStates.None)
+            AsignaMov(IIf(nRow < 0, 0, nRow), False)
         End If
 
     End Sub
@@ -302,8 +326,8 @@ Public Class jsBanArcBancos
             Me.BindingContext(ds, nTabla).Position = ds.Tables(nTabla).Rows.Count - 1
             AsignaTXT(Me.BindingContext(ds, nTabla).Position)
         Else
-            Me.BindingContext(ds, nTablaMovimientos).Position = ds.Tables(nTablaMovimientos).Rows.Count - 1
-            AsignaMov(Me.BindingContext(ds, nTablaMovimientos).Position, False)
+            Dim nRow As Integer = dg.Rows.GetLastRow(DataGridViewElementStates.None)
+            AsignaMov(nRow, False)
         End If
     End Sub
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
@@ -315,11 +339,9 @@ Public Class jsBanArcBancos
         Else
             If Trim(txtCodigo.Text) <> "" Then
                 Dim f As New jsBanArcBancosMovimientosPlus
+                f.Apuntador = nPosicionMov
                 f.Agregar(myConn, ds, dtMovimientos, txtCodigo.Text)
-                ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
-                ds = DataSetRequery(ds, strSQLMov, myConn, nTablaMovimientos, lblInfo)
-                AsignaTXT(nPosicionCat)
-                If f.Apuntador >= 0 Then AsignaMov(f.Apuntador, True)
+                AsignaMov(f.Apuntador, IIf(f.Apuntador >= 0, True, False))
                 f = Nothing
             End If
         End If
@@ -332,34 +354,17 @@ Public Class jsBanArcBancos
             nPosicionCat = Me.BindingContext(ds, nTabla).Position
             ActivarMarco0()
         Else
-            If dtMovimientos.Rows(Me.BindingContext(ds, nTablaMovimientos).Position).Item("origen") = "BAN" Then
-
-                With dtMovimientos.Rows(Me.BindingContext(ds, nTablaMovimientos).Position)
-                    Dim aCamposAdicionales() As String = {"codban|'" & txtCodigo.Text & "'", _
-                                                         "fechamov|'" & ft.FormatoFechaMySQL(Convert.ToDateTime(.Item("FECHAMOV"))) & "'", _
-                                                          "numdoc|'" & .Item("NUMDOC") & "'", _
-                                                          "tipomov|'" & .Item("TIPOMOV") & "'", _
-                                                          "origen|'" & .Item("ORIGEN") & "'", _
-                                                          "numorg|'" & .Item("NUMORG") & "'", _
-                                                          "prov_cli|'" & .Item("PROV_CLI") & "'"}
-
-                    If DocumentoBloqueado(myConn, "jsbantraban", aCamposAdicionales) Then
-                        ft.mensajeCritico("DOCUMENTO BLOQUEADO. POR FAVOR VERIFIQUE...")
-                    Else
-                        Dim f As New jsBanArcBancosMovimientosPlus
-                        f.Apuntador = Me.BindingContext(ds, nTablaMovimientos).Position
-                        f.Editar(myConn, ds, dtMovimientos, txtCodigo.Text)
-                        ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
-                        ds = DataSetRequery(ds, strSQLMov, myConn, nTablaMovimientos, lblInfo)
-                        AsignaTXT(nPosicionCat)
-                        AsignaMov(f.Apuntador, True)
-                        f = Nothing
-                    End If
-
-                End With
-
+            If bankTransaction.Origen = "BAN" Then
+                If bankTransaction.FechaBloqueo > FechaMinimaBloqueo Then
+                    ft.mensajeCritico("DOCUMENTO BLOQUEADO. POR FAVOR VERIFIQUE...")
+                Else
+                    Dim f As New jsBanArcBancosMovimientosPlus
+                    f.Apuntador = nPosicionMov
+                    f.Editar(myConn, ds, dtMovimientos, txtCodigo.Text)
+                    AsignaMov(f.Apuntador, IIf(f.Apuntador >= 0, True, False))
+                    f = Nothing
+                End If
             End If
-
         End If
 
     End Sub
@@ -369,21 +374,11 @@ Public Class jsBanArcBancos
             EliminaBanco()
         Else
             If cmbCondicion.Text = "Activo" Then
-                With dtMovimientos.Rows(nPosicionMov)
-                    Dim aCamposAdicionales() As String = {"codban|'" & txtCodigo.Text & "'", _
-                                                              "fechamov|'" & ft.FormatoFechaMySQL(Convert.ToDateTime(.Item("FECHAMOV"))) & "'", _
-                                                              "numdoc|'" & .Item("NUMDOC") & "'", _
-                                                              "tipomov|'" & .Item("TIPOMOV") & "'", _
-                                                              "origen|'" & .Item("ORIGEN") & "'", _
-                                                              "numorg|'" & .Item("NUMORG") & "'", _
-                                                              "prov_cli|'" & .Item("PROV_CLI") & "'"}
-
-                    If DocumentoBloqueado(myConn, "jsbantraban", aCamposAdicionales) Then
-                        ft.mensajeCritico("DOCUMENTO BLOQUEADO. POR FAVOR VERIFIQUE...")
-                    Else
-                        EliminarMovimiento()
-                    End If
-                End With
+                If bankTransaction.FechaBloqueo > FechaMinimaBloqueo Then
+                    ft.mensajeCritico("DOCUMENTO BLOQUEADO. POR FAVOR VERIFIQUE...")
+                Else
+                    EliminarMovimiento(bankTransaction)
+                End If
             Else
                 ft.mensajeCritico("Esta Cuenta - Banco está Inactiva ....")
             End If
@@ -398,7 +393,7 @@ Public Class jsBanArcBancos
 
             If dtMovimientos.Rows.Count = 0 Then
 
-                AsignaTXT(EliminarRegistros(myConn, lblInfo, ds, nTabla, "jsbancatban", strSQL, aCamposDel, aStringsDel, _
+                AsignaTXT(EliminarRegistros(myConn, lblInfo, ds, nTabla, "jsbancatban", strSQL, aCamposDel, aStringsDel,
                                               Me.BindingContext(ds, nTabla).Position, True))
 
             Else
@@ -407,177 +402,153 @@ Public Class jsBanArcBancos
         End If
 
     End Sub
-    Private Sub EliminarMovimiento()
+    Private Sub EliminarMovimiento(transaction As BankLine)
 
-
-        Dim NumeroOrigen As String
-        Dim numComproba As String = ""
-        Dim TipoOrigen As String
-        Dim Tipo As String
         Dim nPosicionMovi As Long
-
-        nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
         nPosicionMovi = nPosicionMov
-
         If nPosicionMov >= 0 Then
-            With dtMovimientos.Rows(nPosicionMov)
+            If CBool(transaction.Conciliado) Then
+                ft.mensajeCritico("MOVIMIENTO CONCILIADO. NO ES POSIBLE ELIMINAR!!!!!")
+                Return
+            End If
+            If transaction.Origen = "BAN" Then
+                If ft.PreguntaEliminarRegistro() = Windows.Forms.DialogResult.Yes Then
 
-                If CBool(.Item("conciliado")) Then
-                    ft.mensajeCritico("MOVIMIENTO CONCILIADO. NO ES POSIBLE ELIMINAR!!!!!")
-                    Return
-                End If
+                    InsertarAuditoria(myConn, MovAud.iEliminar, sModulo, transaction.NumeroMovimiento)
+                    Dim DescripcionIDB As String = Convert.ToString(ParametroPlus(myConn, Gestion.iBancos, "BANPARAM04"))
 
-                If .Item("origen") = "BAN" Then
+                    ' Elimina si provienes de una transferencia bancaria
+                    If transaction.NumeroOrigen.Substring(0, 2) = "TB" Then
+                        Dim sResp As Microsoft.VisualBasic.MsgBoxResult = MsgBox("¿ MOVIMIENTO PROVIENE DE UNA TRANSFERENCIA BANCARIA, POR LO TANTO SE ELIMINARA EN TODOS LOS BANCOS. DESEA CONTINUAR ?", MsgBoxStyle.YesNo, "TRANSFERENCIA... ")
+                        If sResp = MsgBoxResult.Yes Then
 
-                    If ft.PreguntaEliminarRegistro() = Windows.Forms.DialogResult.Yes Then
-
-                        InsertarAuditoria(myConn, MovAud.iEliminar, sModulo, .Item("numdoc"))
-                        NumeroOrigen = IIf(IsDBNull(.Item("numorg")), "", .Item("numorg"))
-                        TipoOrigen = IIf(IsDBNull(.Item("tiporg")), "", .Item("tiporg"))
-                        Tipo = IIf(IsDBNull(.Item("tipomov")), "", .Item("tipomov"))
-                        numComproba = IIf(IsDBNull(.Item("comproba")), "", .Item("comproba"))
-
-                        Dim DescripcionIDB As String = Convert.ToString(ParametroPlus(myConn, Gestion.iBancos, "BANPARAM04"))
-
-
-                        If NumeroOrigen.Substring(0, 2) = "TB" Then
-                            Dim sResp As Microsoft.VisualBasic.MsgBoxResult = MsgBox("¿ MOVIMIENTO PROVIENE DE UNA TRANSFERENCIA BANCARIA, POR LO TANTO SE ELIMINARA EN TODOS LOS BANCOS. DESEA CONTINUAR ?", MsgBoxStyle.YesNo, "TRANSFERENCIA... ")
-                            If sResp = MsgBoxResult.Yes Then
-
-                                ft.Ejecutar_strSQL(myConn, "DELETE from jsbantraban where " _
-                                    & " NUMDOC = '" & .Item("numdoc") & "' and " _
-                                    & " NUMORG = '" & NumeroOrigen & "' and " _
+                            ft.Ejecutar_strSQL(myConn, "DELETE from jsbantraban where " _
+                                    & " NUMDOC = '" & transaction.NumeroMovimiento & "' and " _
+                                    & " NUMORG = '" & transaction.NumeroOrigen & "' and " _
                                     & " EJERCICIO = '" & jytsistema.WorkExercise & "' and " _
                                     & " ID_EMP = '" & jytsistema.WorkID & "'")
 
-                                ft.Ejecutar_strSQL(myConn, " delete from jsbanordpag where " _
-                                    & " comproba = '" & numComproba & "' and  " _
+                            ft.Ejecutar_strSQL(myConn, " delete from jsbanordpag where " _
+                                    & " comproba = '" & transaction.Comprobante & "' and  " _
                                     & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
                                     & " ID_EMP = '" & jytsistema.WorkID & "' ")
 
-                            End If
                         End If
+                    End If
 
 
-                        EliminarImpuestoDebitoBancario(myConn, lblInfo, .Item("codban"), .Item("numdoc"), CDate(.Item("fechamov").ToString))
+                    EliminarImpuestoDebitoBancario(myConn, lblInfo, transaction.CodigoBanco,
+                                                   transaction.NumeroMovimiento, transaction.FechaMovimiento)
 
-                        ft.Ejecutar_strSQL(myConn, "DELETE FROM jsbantracaj where " _
-                            & " REFPAG = '" & .Item("codban") & "' AND " _
-                            & " FECHA = '" & ft.FormatoFechaMySQL(CDate(.Item("fechamov").ToString)) & "' AND " _
-                            & " NUMMOV = '" & .Item("numdoc") & "' AND " _
-                            & " TIPOMOV = 'EN' AND FORMPAG = '" & Tipo & "' AND" _
-                            & " NUMPAG = '" & .Item("numdoc") & "' AND " _
-                            & " IMPORTE = " & -1 * .Item("importe") & " AND " _
-                            & " CAJA = '" & .Item("caja") & "' AND " _
+                    ft.Ejecutar_strSQL(myConn, "DELETE FROM jsbantracaj where " _
+                            & " REFPAG = '" & transaction.CodigoBanco & "' AND " _
+                            & " FECHA = '" & ft.FormatoFechaMySQL(transaction.FechaMovimiento) & "' AND " _
+                            & " NUMMOV = '" & transaction.NumeroMovimiento & "' AND " _
+                            & " TIPOMOV = 'EN' AND FORMPAG = '" & transaction.TipoMovimiento & "' AND" _
+                            & " NUMPAG = '" & transaction.NumeroMovimiento & "' AND " _
+                            & " IMPORTE = " & -1 * transaction.Importe & " AND " _
+                            & " CAJA = '" & transaction.CodigoCaja & "' AND " _
                             & " EJERCICIO = '" & jytsistema.WorkExercise & "' AND " _
                             & " ID_EMP = '" & jytsistema.WorkID & "'")
 
-                        ft.Ejecutar_strSQL(myConn, "DELETE from jsbantraban where " _
-                            & " CODBAN = '" & .Item("codban") & "' and " _
-                            & " FECHAMOV = '" & ft.FormatoFechaMySQL(CDate(.Item("fechamov").ToString)) & "' AND " _
-                            & " NUMDOC = '" & .Item("numdoc") & "' and " _
-                            & " NUMORG = '" & .Item("numorg") & "' and " _
+                    ft.Ejecutar_strSQL(myConn, "DELETE from jsbantraban where " _
+                            & " CODBAN = '" & transaction.CodigoBanco & "' and " _
+                            & " FECHAMOV = '" & ft.FormatoFechaMySQL(transaction.FechaMovimiento) & "' AND " _
+                            & " NUMDOC = '" & transaction.NumeroMovimiento & "' and " _
+                            & " NUMORG = '" & transaction.NumeroOrigen & "' and " _
                             & " EJERCICIO = '" & jytsistema.WorkExercise & "' and " _
                             & " ID_EMP = '" & jytsistema.WorkID & "'")
 
-                        If Tipo = "CH" Then _
+                    If transaction.TipoMovimiento = "CH" Then _
                             ft.Ejecutar_strSQL(myConn, " delete from jsbanordpag where " _
-                            & " comproba = '" & numComproba & "' and  " _
+                            & " comproba = '" & transaction.Comprobante & "' and  " _
                             & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
                             & " ID_EMP = '" & jytsistema.WorkID & "' ")
 
-                        If TipoOrigen = "CH" And Tipo = "ND" Then
+                    If transaction.TipoOrigen = "CH" And transaction.TipoMovimiento = "ND" Then
 
-                            ft.Ejecutar_strSQL(myConn, "Delete from jsventracob where " _
+                        ft.Ejecutar_strSQL(myConn, "Delete from jsventracob where " _
                                & " TIPOMOV = 'ND' AND " _
-                               & " NUMORG = '" & NumeroOrigen & "' AND " _
+                               & " NUMORG = '" & transaction.NumeroOrigen & "' AND " _
                                & " ORIGEN = 'BAN' AND " _
                                & " EJERCICIO = '" & jytsistema.WorkExercise & "' and " _
                                & " ID_EMP = '" & jytsistema.WorkID & "'")
 
-                            ft.Ejecutar_strSQL(myConn, "DELETE FROM jsbanchedev where " _
-                               & " NUMCHEQUE = '" & NumeroOrigen & "' AND " _
+                        ft.Ejecutar_strSQL(myConn, "DELETE FROM jsbanchedev where " _
+                               & " NUMCHEQUE = '" & transaction.NumeroOrigen & "' AND " _
                                & " ID_EMP = '" & jytsistema.WorkID & "' ")
 
-                        End If
-
-                        If numComproba.Length > 0 AndAlso numComproba.Substring(0, 2) = "CP" Then
-                            ft.Ejecutar_strSQL(myConn, " delete from jsbantracaj where tipomov = 'EN' and nummov = '" & numComproba & "' and id_emp = '" & jytsistema.WorkID & "' ")
-                            ft.Ejecutar_strSQL(myConn, " update jsbantracaj set deposito = '' where deposito = '" & numComproba & "' and id_emp = '" & jytsistema.WorkID & "' ")
-                        End If
-
-                        ft.Ejecutar_strSQL(myConn, " update jsbanenccaj set saldo = " & CalculaSaldoCajaPorFP(myConn, .Item("caja"), "", lblInfo) & " where caja = '" & .Item("caja") & "' and id_emp = '" & jytsistema.WorkID & "' ")
-                        ft.Ejecutar_strSQL(myConn, " update jsbancatban set saldoact = " & CalculaSaldoBanco(myConn, lblInfo, txtCodigo1.Text) & " where codban = '" & txtCodigo1.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
-
-                        ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
-                        ds = DataSetRequery(ds, strSQLMov, myConn, nTablaMovimientos, lblInfo)
-                        dtMovimientos = ds.Tables(nTablaMovimientos)
-                        If dtMovimientos.Rows.Count - 1 < nPosicionMovi Then nPosicionMovi = dtMovimientos.Rows.Count - 1
-                        AsignaTXT(nPosicionCat)
-                        AsignaMov(nPosicionMovi, False)
-
                     End If
-                Else
-                    If .Item("origen") = "CAJ" Then
-                        Dim sDeposito As String
 
-                        NumeroOrigen = IIf(IsDBNull(.Item("numorg")), "", .Item("numorg"))
-                        sDeposito = .Item("numdoc")
-                        TipoOrigen = .Item("tiporg")
+                    If transaction.Comprobante.Length > 0 AndAlso transaction.Comprobante.Substring(0, 2) = "CP" Then
+                        ft.Ejecutar_strSQL(myConn, " delete from jsbantracaj where tipomov = 'EN' and nummov = '" & transaction.Comprobante & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                        ft.Ejecutar_strSQL(myConn, " update jsbantracaj set deposito = '' where deposito = '" & transaction.Comprobante & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                    End If
 
-                        If ft.PreguntaEliminarRegistro(" Movimiento proveniente de caja, estos se deshabilitarán en la caja!!!") = Windows.Forms.DialogResult.Yes Then
+                    ft.Ejecutar_strSQL(myConn, " update jsbanenccaj set saldo = " & CalculaSaldoCajaPorFP(myConn, transaction.CodigoCaja, "", lblInfo) _
+                                       & " where caja = '" & transaction.CodigoCaja & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                    ft.Ejecutar_strSQL(myConn, " update jsbancatban set saldoact = " & CalculaSaldoBanco(myConn, lblInfo, transaction.CodigoBanco) _
+                                       & " where codban = '" & transaction.CodigoBanco & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
-                            InsertarAuditoria(myConn, MovAud.iEliminar, sModulo, .Item("numdoc"))
 
-                            ft.Ejecutar_strSQL(myConn, "DELETE from jsbantraban where " _
-                                & " CODBAN = '" & .Item("codban") & "' and  " _
-                                & " FECHAMOV = '" & ft.FormatoFechaMySQL(CDate(.Item("fechamov").ToString)) & "' and " _
-                                & " NUMDOC = '" & .Item("numdoc") & "' and " _
+                    If bankTransactionList.Count - 1 < nPosicionMovi Then nPosicionMovi = bankTransactionList.Count - 1
+                    AsignaMov(nPosicionMovi, False)
+
+                End If
+            Else
+                If transaction.Origen = "CAJ" Then
+                    'NumeroOrigen = IIf(IsDBNull(.Item("numorg")), "", .Item("numorg"))
+                    'sDeposito = .Item("numdoc")
+                    'TipoOrigen = .Item("tiporg")
+
+                    If ft.PreguntaEliminarRegistro(" Movimiento proveniente de caja, estos se deshabilitarán en la caja!!!") = Windows.Forms.DialogResult.Yes Then
+
+                        InsertarAuditoria(myConn, MovAud.iEliminar, sModulo, transaction.NumeroMovimiento)
+
+                        ft.Ejecutar_strSQL(myConn, "DELETE from jsbantraban where " _
+                                & " CODBAN = '" & transaction.CodigoBanco & "' and  " _
+                                & " FECHAMOV = '" & ft.FormatoFechaMySQL(transaction.FechaMovimiento) & "' and " _
+                                & " NUMDOC = '" & transaction.NumeroMovimiento & "' and " _
                                 & " EJERCICIO = '" & jytsistema.WorkExercise & "' and" _
                                 & " ID_EMP = '" & jytsistema.WorkID & "'")
 
-                            ft.Ejecutar_strSQL(myConn, "UPDATE jsbantracaj SET " _
+                        ft.Ejecutar_strSQL(myConn, "UPDATE jsbantracaj SET " _
                                 & "DEPOSITO = '' " _
                                 & "where " _
-                                & "DEPOSITO = '" & sDeposito & "' and " _
+                                & "DEPOSITO = '" & transaction.NumeroMovimiento & "' and " _
                                 & "EJERCICIO = '" & jytsistema.WorkExercise & "' and " _
                                 & "ID_EMP = '" & jytsistema.WorkID & "'")
 
-                            ft.Ejecutar_strSQL(myConn, "UPDATE jsventabtic SET " _
+                        ft.Ejecutar_strSQL(myConn, "UPDATE jsventabtic SET " _
                                 & "NUMDEP = '', FECHADEP = '0000-00-00', BANCODEP = '' " _
                                 & "WHERE " _
-                                & "NUMDEP = '" & sDeposito & "' AND " _
-                                & "BANCODEP = '" & .Item("codban") & "' and " _
+                                & "NUMDEP = '" & transaction.NumeroMovimiento & "' AND " _
+                                & "BANCODEP = '" & transaction.CodigoBanco & "' and " _
                                 & "ID_EMP = '" & jytsistema.WorkID & "'")
 
-                            If TipoOrigen = "CT" Then ft.Ejecutar_strSQL(myConn, " delete from jsproencgas where " _
-                               & " NUMGAS = '" & NumeroOrigen & "' AND " _
+                        If transaction.TipoOrigen = "CT" Then ft.Ejecutar_strSQL(myConn, " delete from jsproencgas where " _
+                               & " NUMGAS = '" & transaction.NumeroOrigen & "' AND " _
                                & " ID_EMP = '" & jytsistema.WorkID & "'")
 
-                            ft.Ejecutar_strSQL(myConn, " update jsbanenccaj set saldo = " & CalculaSaldoCajaPorFP(myConn, .Item("caja"), "", lblInfo) & " where caja = '" & .Item("caja") & "' and id_emp = '" & jytsistema.WorkID & "' ")
-                            ft.Ejecutar_strSQL(myConn, " update jsbancatban set saldoact = " & CalculaSaldoBanco(myConn, lblInfo, txtCodigo1.Text) & " where codban = '" & txtCodigo1.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                        ft.Ejecutar_strSQL(myConn, " update jsbanenccaj set saldo = " & CalculaSaldoCajaPorFP(myConn, transaction.CodigoCaja, "", lblInfo) _
+                                           & " where caja = '" & transaction.CodigoCaja & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                        ft.Ejecutar_strSQL(myConn, " update jsbancatban set saldoact = " & CalculaSaldoBanco(myConn, lblInfo, transaction.CodigoBanco) _
+                                           & " where codban = '" & transaction.CodigoBanco & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
-                            ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
-                            ds = DataSetRequery(ds, strSQLMov, myConn, nTablaMovimientos, lblInfo)
-                            dtMovimientos = ds.Tables(nTablaMovimientos)
-                            If dtMovimientos.Rows.Count - 1 < nPosicionMovi Then nPosicionMovi = dtMovimientos.Rows.Count - 1
-                            AsignaTXT(nPosicionCat)
-                            AsignaMov(nPosicionMov, True)
+                        If bankTransactionList.Count - 1 < nPosicionMovi Then nPosicionMovi = bankTransactionList.Count - 1
+                        AsignaMov(nPosicionMov, True)
 
-                        End If
-                    Else
-                        ft.mensajeCritico("Movimiento proveniente de " & .Item("origen") & ". ")
                     End If
+                Else
+                    ft.mensajeCritico("Movimiento proveniente de " & transaction.Origen & ". ")
                 End If
-            End With
+            End If
         End If
 
     End Sub
     Private Sub btnBuscar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBuscar.Click
-
-        Dim f As New frmBuscar
-
         If tbcBancos.SelectedTab.Text = "Bancos" Then
+            Dim f As New frmBuscar
             Dim Campos() As String = {"codban", "nomban"}
             Dim Nombres() As String = {"Código Banco", "Nombre Banco"}
             Dim Anchos() As Integer = {100, 2500}
@@ -586,14 +557,18 @@ Public Class jsBanArcBancos
             AsignaTXT(f.Apuntador)
             f = Nothing
         Else
-            Dim Campos() As String = {"numdoc", "fechamov", "concepto", "nombre"}
-            Dim Nombres() As String = {"Nº Movimiento", "Emisión", "Concepto", "Cliente ó Proveedor"}
-            Dim Anchos() As Integer = {120, 100, 2450, 2450}
-            f.Text = "Movimientos bancarios"
-            f.Buscar(dtMovimientos, Campos, Nombres, Anchos, Me.BindingContext(ds, nTablaMovimientos).Position, "Movimientos de bancos....")
-            nPosicionMov = f.Apuntador
-            AsignaMov(nPosicionMov, False)
-            f = Nothing
+            Dim aCampos As List(Of dgFieldSF) = New List(Of dgFieldSF)() From {
+                New dgFieldSF(TypeColumn.DateTimeColumn, "FechaMovimiento", "Fecha Movimiento   ", 80, HorizontalAlignment.Center, FormatoFecha.FormatoFecha),
+                New dgFieldSF(TypeColumn.TextColumn, "NumeroMovimiento", "Documento   ", 120, HorizontalAlignment.Left, ""),
+                New dgFieldSF(TypeColumn.TextColumn, "Concepto", "Concepto   ", 350, HorizontalAlignment.Left, ""),
+                New dgFieldSF(TypeColumn.TextColumn, "ProveedorCliente", "Proveedor/Cliente  ", 350, HorizontalAlignment.Left, "")
+            }
+            Dim f As New frmBuscarPlus
+            f.Buscar(bankTransactionList, aCampos, "Movimientos de Bancos")
+            If f.Id > 0 Then
+                Dim index = bankTransactionList.FindIndex(Function(item) item.Id = f.Id)
+                SetSelectedRowByIndex(dg, index)
+            End If
         End If
 
     End Sub
@@ -612,7 +587,6 @@ Public Class jsBanArcBancos
             Else
                 f.Cargar(TipoCargaFormulario.iShowDialog, ReporteBancos.cMovimientoBanco, "Movimientos banco", txtCodigo1.Text)
             End If
-
             f = Nothing
         End If
 
@@ -643,18 +617,9 @@ Public Class jsBanArcBancos
         End If
 
         If CBool(ParametroPlus(myConn, Gestion.iBancos, "BANPARAM16")) Then
-            If txtCuentaContable.Text.Trim = "" Then
-                ft.MensajeCritico("Debe indicar una CUENTA CONTABLE VALIDA...")
+            If cmbCC.SelectedValue.Text.Trim = "" Then
+                ft.mensajeCritico("Debe indicar una CUENTA CONTABLE VALIDA...")
                 Return False
-            Else
-                If ft.DevuelveScalarEntero(myConn, " Select count(*) from jscotcatcon where codcon = '" & txtCuentaContable.Text & "' and id_emp = '" & jytsistema.WorkID & "' ") = 0 Then
-                    ft.mensajeCritico(" Debe indicar una CUENTA CONTABLE Válida...")
-                    Return False
-                End If
-                If ft.DevuelveScalarEntero(myConn, " select count(*) from jsbancatban where codcon = '" & txtCuentaContable.Text & "' and codban <> '" & txtCodigo.Text & "' and id_emp = '" & jytsistema.WorkID & "' ") > 0 Then
-                    ft.mensajeCritico(" La cuenta contable YA ha sido asignada a otro banco ... ")
-                    Return False
-                End If
             End If
         End If
 
@@ -671,9 +636,9 @@ Public Class jsBanArcBancos
 
         InsertEditBANCOSBanco(myConn, lblInfo, Inserta, txtCodigo.Text, txtNombre.Text, txtCtaBan.Text, txtAgencia.Text, txtDireccion.Text,
             txtTelef1.Text, txtTelef2.Text, txtFax.Text, txtEmail.Text, txtWeb.Text, txtContacto.Text,
-            cmbTitulo.SelectedItem, ValorNumero(IIf(txtComision.Text = "", "0.00", txtComision.Text)), txtIngreso.Value,
+            "", ValorNumero(IIf(txtComision.Text = "", "0.00", txtComision.Text)), txtIngreso.Value,
             ValorNumero(IIf(txtSaldo.Text = "", "0.00", txtSaldo.Text)),
-            txtCuentaContable.Text, txtFormato.Text, cmbCondicion.SelectedIndex)
+            cmbCC.SelectedValue, txtFormato.Text, cmbCondicion.SelectedIndex, cmbMonedas.SelectedValue, jytsistema.sFechadeTrabajo)
 
         ds = DataSetRequery(ds, strSQL, myConn, nTabla, lblInfo)
         dt = ds.Tables(nTabla)
@@ -689,19 +654,17 @@ Public Class jsBanArcBancos
 
     End Sub
 
-    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus, txtNombre.GotFocus, _
-        txtCtaBan.GotFocus, txtAgencia.GotFocus, txtDireccion.GotFocus, txtTelef1.GotFocus, txtTelef2.GotFocus, txtFax.GotFocus, txtEmail.GotFocus, _
-        txtWeb.GotFocus, txtContacto.GotFocus, txtComision.GotFocus, cmbCondicion.GotFocus, cmbTitulo.GotFocus, btnCuentaContable.GotFocus, btnFormatos.GotFocus
+    Private Sub txtCodigo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCodigo.GotFocus, txtNombre.GotFocus,
+        txtCtaBan.GotFocus, txtAgencia.GotFocus, txtDireccion.GotFocus, txtTelef1.GotFocus, txtTelef2.GotFocus, txtFax.GotFocus, txtEmail.GotFocus,
+        txtWeb.GotFocus, txtComision.GotFocus, cmbCondicion.GotFocus, btnFormatos.GotFocus
 
         ft.colocaMensajeEnEtiqueta(sender, jytsistema.WorkLanguage, lblInfo)
 
     End Sub
 
-    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick, _
+    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick,
         dg.CellMouseClick, dg.RegionChanged
-        Me.BindingContext(ds, nTablaMovimientos).Position = e.RowIndex
-        nPosicionMov = e.RowIndex
-        MostrarItemsEnMenuBarra(MenuBarra, e.RowIndex, ds.Tables(nTablaMovimientos).Rows.Count)
+        AsignaMov(e.RowIndex, False)
     End Sub
 
     Private Sub tbcBancos_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tbcBancos.SelectedIndexChanged
@@ -720,7 +683,7 @@ Public Class jsBanArcBancos
     End Sub
 
     Private Sub btnDepositarEfectivo_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles btnDepositarEfectivo.DropDownItemClicked
-        nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
+        '   nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
         If tbcBancos.SelectedTab.Text = "Movimientos" Then
             Dim f As New jsBanArcDepositarCajaPlus
             f.Depositar(myConn, ds, txtCodigo.Text, e.ClickedItem.Text, 0)
@@ -729,7 +692,7 @@ Public Class jsBanArcBancos
         End If
     End Sub
     Private Sub btnDepositarTarjetas_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles btnDepositarTarjetas.DropDownItemClicked
-        nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
+        '  nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
         If tbcBancos.SelectedTab.Text = "Movimientos" Then
             Dim f As New jsBanArcDepositarCajaPlus
             f.Depositar(myConn, ds, txtCodigo.Text, e.ClickedItem.Text, 1)
@@ -738,7 +701,7 @@ Public Class jsBanArcBancos
         End If
     End Sub
     Private Sub btnDepositarCestaTicket_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles btnDepositarCestaTicket.DropDownItemClicked
-        nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
+        ' nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
         If tbcBancos.SelectedTab.Text = "Movimientos" Then
             Dim f As New jsBanArcDepositarCajaPlus
             f.Depositar(myConn, ds, txtCodigo.Text, "", 2, e.ClickedItem.Text)
@@ -747,7 +710,7 @@ Public Class jsBanArcBancos
         End If
     End Sub
     Private Sub btnReposicion_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles btnReposicion.DropDownItemClicked
-        nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
+        'nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
         If tbcBancos.SelectedTab.Text = "Movimientos" Then
             Dim f As New jsBanArcReposicionCaja
             f.Cargar(myConn, ds, dtMovimientos, e.ClickedItem.Text, txtCodigo.Text)
@@ -783,10 +746,10 @@ Public Class jsBanArcBancos
     End Sub
 
     Private Sub btnDepositarEfectivo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDepositarEfectivo.Click
-        '
+        ' Do not delete
     End Sub
     Private Sub btnDepositarCestaTicket_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDepositarCestaTicket.Click
-        '
+        ' do not delete
     End Sub
 
     Private Sub btnAgregaTarjeta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregaTarjeta.Click
@@ -815,7 +778,7 @@ Public Class jsBanArcBancos
                 Dim aStrDel() As String = {txtCodigo.Text, .Rows(nPosicionTar).Item("codtar").ToString, jytsistema.WorkID}
 
                 If ft.PreguntaEliminarRegistro() = Windows.Forms.DialogResult.Yes Then
-                    AsignaTar(EliminarRegistros(myConn, lblInfo, ds, nTablaTarjetas, "jsbancatbantar", _
+                    AsignaTar(EliminarRegistros(myConn, lblInfo, ds, nTablaTarjetas, "jsbancatbantar",
                                                 strSQLTar, aCamDel, aStrDel, nPosicionTar), True)
 
                 End If
@@ -824,88 +787,29 @@ Public Class jsBanArcBancos
 
     End Sub
 
-    Private Sub dgTar_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgTar.RowHeaderMouseClick, _
+    Private Sub dgTar_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgTar.RowHeaderMouseClick,
         dgTar.CellMouseClick, dgTar.RegionChanged
         Me.BindingContext(ds, nTablaTarjetas).Position = e.RowIndex
     End Sub
 
+    Private Sub dg_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dg.DataBindingComplete
+        '' 
+        Cursor.Current = Cursors.Default
+    End Sub
 
     Private Sub txtComision_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtComision.KeyPress
         e.Handled = ft.validaNumeroEnTextbox(e)
     End Sub
-
-
-
-    Private Sub btObtenerPuertos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btObtenerPuertos.Click
-        'Dim puertosSerie As List(Of String)
-        'Dim i As Integer
-
-        'cmbPuerto.Items.Clear()
-
-        'puertosSerie = obtenerPuertosSeriePC()
-        'For i = 0 To puertosSerie.Count - 1
-        '    cmbPuerto.Items.Add(puertosSerie(i).ToString)
-        'Next
-
-        'If cmbPuerto.Items.Count >= 1 Then
-        '    cmbPuerto.Text = cmbPuerto.Items(0)
-        'Else
-        '    cmbPuerto.Text = ""
-        'End If
-
-        'If puertosSerie.Count = 0 Then
-        '    MsgBox("No se han detectado puertos serie en su equipo, " +
-        '           "asegúrese de que están correctamente configurados.",
-        '           MsgBoxStyle.Information + MsgBoxStyle.OkOnly)
-        'End If
-        '   ft.mensajeInformativo(InStr("FAC.PVE.PFC.NDV", "fac"))
-        ft.mensajeInformativo(getMacAddress() & "  " & driveser(""))
-    End Sub
     Private Sub dg_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles dg.KeyUp
-        Select Case e.KeyCode
-            Case Keys.Down
-                Me.BindingContext(ds, nTablaMovimientos).Position += 1
-                nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
-                AsignaMov(nPosicionMov, False)
-            Case Keys.Up
-                Me.BindingContext(ds, nTablaMovimientos).Position -= 1
-                nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
-                AsignaMov(nPosicionMov, False)
-        End Select
-    End Sub
-
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-
-        'Dim r As New frmViewer
-        'Dim dsBan As New dsBancos
-        'Dim oReporte As New CrystalDecisions.CrystalReports.Engine.ReportClass
-        'Dim nTabla As String = "dtBancosFicha"
-        'oReporte = New rptBanBancosFicha
-        'Dim str As String = " select * from jsbancatban where codban = '00001' and id_emp = '" & jytsistema.WorkID & "' "
-        'oReporte.SetDataSource(ds)
-        'dsBan = DataSetRequery(dsBan, str, myConn, nTabla, lblInfo)
-
-        'r.CrystalReportViewer1.ReportSource = oReporte
-        'r.CrystalReportViewer1.Refresh()
-        ''r.Cargar("")
-        'r.Close()
-        'r = Nothing
-        'oReporte.Close()
-        'oReporte = Nothing
-
-        'Dim bRet As Boolean = UltimoDocumentoFiscalAclasBixolon(myConn, lblInfo, "FC")
-
-    End Sub
-
-    Private Sub dg_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dg.CellContentClick
-
-    End Sub
-
-    Private Sub btnCuentaContable_Click(sender As System.Object, e As System.EventArgs) Handles btnCuentaContable.Click
-        txtCuentaContable.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcon codigo, descripcion from jscotcatcon where marca = 0 and id_emp = '" & jytsistema.WorkID & "' order by codcon ", "Cuentas Contables", txtCuentaContable.Text)
-    End Sub
-
-    Private Sub btnDepositarTarjetas_Click(sender As System.Object, e As System.EventArgs) Handles btnDepositarTarjetas.Click
-
+        'Select Case e.KeyCode
+        '    Case Keys.Down
+        '        Me.BindingContext(ds, nTablaMovimientos).Position += 1
+        '        nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
+        '        AsignaMov(nPosicionMov, False)
+        '    Case Keys.Up
+        '        Me.BindingContext(ds, nTablaMovimientos).Position -= 1
+        '        nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
+        '        AsignaMov(nPosicionMov, False)
+        'End Select                                                 
     End Sub
 End Class

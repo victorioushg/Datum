@@ -25,8 +25,6 @@ Partial Class jsBanArcCajasMovimientos
         Me.txtDocPago = New System.Windows.Forms.TextBox()
         Me.txtRefPago = New System.Windows.Forms.TextBox()
         Me.txtImporte = New System.Windows.Forms.TextBox()
-        Me.cmbTipo = New System.Windows.Forms.ComboBox()
-        Me.cmbFormaPago = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -39,7 +37,11 @@ Partial Class jsBanArcCajasMovimientos
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.cmbTipo = New Syncfusion.WinForms.ListView.SfComboBox()
+        Me.cmbFormaPago = New Syncfusion.WinForms.ListView.SfComboBox()
         Me.grpAceptarSalir.SuspendLayout()
+        CType(Me.cmbTipo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cmbFormaPago, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblInfo
@@ -47,14 +49,14 @@ Partial Class jsBanArcCajasMovimientos
         Me.lblInfo.BackColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(217, Byte), Integer))
         Me.lblInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblInfo.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.lblInfo.Location = New System.Drawing.Point(0, 169)
+        Me.lblInfo.Location = New System.Drawing.Point(0, 188)
         Me.lblInfo.Name = "lblInfo"
         Me.lblInfo.Size = New System.Drawing.Size(565, 31)
         Me.lblInfo.TabIndex = 80
         '
         'txtDocumento
         '
-        Me.txtDocumento.Location = New System.Drawing.Point(202, 55)
+        Me.txtDocumento.Location = New System.Drawing.Point(202, 61)
         Me.txtDocumento.MaxLength = 15
         Me.txtDocumento.Name = "txtDocumento"
         Me.txtDocumento.Size = New System.Drawing.Size(144, 20)
@@ -62,7 +64,7 @@ Partial Class jsBanArcCajasMovimientos
         '
         'txtDocPago
         '
-        Me.txtDocPago.Location = New System.Drawing.Point(202, 98)
+        Me.txtDocPago.Location = New System.Drawing.Point(201, 115)
         Me.txtDocPago.MaxLength = 25
         Me.txtDocPago.Name = "txtDocPago"
         Me.txtDocPago.Size = New System.Drawing.Size(144, 20)
@@ -70,40 +72,20 @@ Partial Class jsBanArcCajasMovimientos
         '
         'txtRefPago
         '
-        Me.txtRefPago.Location = New System.Drawing.Point(202, 119)
+        Me.txtRefPago.Location = New System.Drawing.Point(202, 139)
         Me.txtRefPago.MaxLength = 25
         Me.txtRefPago.Name = "txtRefPago"
-        Me.txtRefPago.Size = New System.Drawing.Size(144, 20)
+        Me.txtRefPago.Size = New System.Drawing.Size(143, 20)
         Me.txtRefPago.TabIndex = 85
         '
         'txtImporte
         '
-        Me.txtImporte.Location = New System.Drawing.Point(202, 140)
+        Me.txtImporte.Location = New System.Drawing.Point(202, 162)
         Me.txtImporte.MaxLength = 19
         Me.txtImporte.Name = "txtImporte"
-        Me.txtImporte.Size = New System.Drawing.Size(144, 20)
+        Me.txtImporte.Size = New System.Drawing.Size(143, 20)
         Me.txtImporte.TabIndex = 86
         Me.txtImporte.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'cmbTipo
-        '
-        Me.cmbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbTipo.FormattingEnabled = True
-        Me.cmbTipo.Location = New System.Drawing.Point(202, 33)
-        Me.cmbTipo.Margin = New System.Windows.Forms.Padding(1)
-        Me.cmbTipo.Name = "cmbTipo"
-        Me.cmbTipo.Size = New System.Drawing.Size(144, 21)
-        Me.cmbTipo.TabIndex = 103
-        '
-        'cmbFormaPago
-        '
-        Me.cmbFormaPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbFormaPago.FormattingEnabled = True
-        Me.cmbFormaPago.Location = New System.Drawing.Point(202, 76)
-        Me.cmbFormaPago.Margin = New System.Windows.Forms.Padding(1)
-        Me.cmbFormaPago.Name = "cmbFormaPago"
-        Me.cmbFormaPago.Size = New System.Drawing.Size(144, 21)
-        Me.cmbFormaPago.TabIndex = 104
         '
         'Label1
         '
@@ -117,7 +99,7 @@ Partial Class jsBanArcCajasMovimientos
         'Label2
         '
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(68, 36)
+        Me.Label2.Location = New System.Drawing.Point(69, 35)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(127, 20)
         Me.Label2.TabIndex = 107
@@ -126,7 +108,7 @@ Partial Class jsBanArcCajasMovimientos
         'Label3
         '
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(68, 58)
+        Me.Label3.Location = New System.Drawing.Point(69, 61)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(127, 20)
         Me.Label3.TabIndex = 108
@@ -135,7 +117,7 @@ Partial Class jsBanArcCajasMovimientos
         'Label4
         '
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(68, 79)
+        Me.Label4.Location = New System.Drawing.Point(68, 87)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(127, 20)
         Me.Label4.TabIndex = 109
@@ -144,7 +126,7 @@ Partial Class jsBanArcCajasMovimientos
         'Label5
         '
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(68, 101)
+        Me.Label5.Location = New System.Drawing.Point(68, 115)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(127, 20)
         Me.Label5.TabIndex = 110
@@ -153,7 +135,7 @@ Partial Class jsBanArcCajasMovimientos
         'Label6
         '
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(68, 122)
+        Me.Label6.Location = New System.Drawing.Point(68, 139)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(127, 20)
         Me.Label6.TabIndex = 111
@@ -162,7 +144,7 @@ Partial Class jsBanArcCajasMovimientos
         'Label7
         '
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(68, 143)
+        Me.Label7.Location = New System.Drawing.Point(68, 162)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(127, 20)
         Me.Label7.TabIndex = 112
@@ -171,7 +153,7 @@ Partial Class jsBanArcCajasMovimientos
         'btnTarjeta
         '
         Me.btnTarjeta.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnTarjeta.Location = New System.Drawing.Point(348, 119)
+        Me.btnTarjeta.Location = New System.Drawing.Point(352, 139)
         Me.btnTarjeta.Name = "btnTarjeta"
         Me.btnTarjeta.Size = New System.Drawing.Size(29, 20)
         Me.btnTarjeta.TabIndex = 113
@@ -187,7 +169,7 @@ Partial Class jsBanArcCajasMovimientos
         Me.grpAceptarSalir.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.grpAceptarSalir.Controls.Add(Me.btnCancel, 1, 0)
         Me.grpAceptarSalir.Controls.Add(Me.btnOK, 0, 0)
-        Me.grpAceptarSalir.Location = New System.Drawing.Point(387, 169)
+        Me.grpAceptarSalir.Location = New System.Drawing.Point(387, 188)
         Me.grpAceptarSalir.Name = "grpAceptarSalir"
         Me.grpAceptarSalir.RowCount = 1
         Me.grpAceptarSalir.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -226,17 +208,39 @@ Partial Class jsBanArcCajasMovimientos
         Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFecha.Location = New System.Drawing.Point(202, 10)
         Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(114, 19)
+        Me.txtFecha.Size = New System.Drawing.Size(143, 19)
         Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
         Me.txtFecha.TabIndex = 214
+        '
+        'cmbTipo
+        '
+        Me.cmbTipo.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.cmbTipo.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbTipo.Location = New System.Drawing.Point(201, 33)
+        Me.cmbTipo.Name = "cmbTipo"
+        Me.cmbTipo.Size = New System.Drawing.Size(145, 22)
+        Me.cmbTipo.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbTipo.TabIndex = 215
+        '
+        'cmbFormaPago
+        '
+        Me.cmbFormaPago.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.cmbFormaPago.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbFormaPago.Location = New System.Drawing.Point(202, 87)
+        Me.cmbFormaPago.Name = "cmbFormaPago"
+        Me.cmbFormaPago.Size = New System.Drawing.Size(143, 22)
+        Me.cmbFormaPago.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbFormaPago.TabIndex = 216
         '
         'jsBanArcCajasMovimientos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(565, 200)
+        Me.ClientSize = New System.Drawing.Size(565, 219)
         Me.ControlBox = False
+        Me.Controls.Add(Me.cmbFormaPago)
+        Me.Controls.Add(Me.cmbTipo)
         Me.Controls.Add(Me.txtFecha)
         Me.Controls.Add(Me.grpAceptarSalir)
         Me.Controls.Add(Me.btnTarjeta)
@@ -247,8 +251,6 @@ Partial Class jsBanArcCajasMovimientos
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.cmbFormaPago)
-        Me.Controls.Add(Me.cmbTipo)
         Me.Controls.Add(Me.txtImporte)
         Me.Controls.Add(Me.txtRefPago)
         Me.Controls.Add(Me.txtDocPago)
@@ -262,6 +264,8 @@ Partial Class jsBanArcCajasMovimientos
         Me.Tag = "Movimiento de caja"
         Me.Text = "Movimiento de caja"
         Me.grpAceptarSalir.ResumeLayout(False)
+        CType(Me.cmbTipo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cmbFormaPago, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -271,8 +275,6 @@ Partial Class jsBanArcCajasMovimientos
     Friend WithEvents txtDocPago As System.Windows.Forms.TextBox
     Friend WithEvents txtRefPago As System.Windows.Forms.TextBox
     Friend WithEvents txtImporte As System.Windows.Forms.TextBox
-    Friend WithEvents cmbTipo As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbFormaPago As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
@@ -285,4 +287,6 @@ Partial Class jsBanArcCajasMovimientos
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
     Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents cmbTipo As Syncfusion.WinForms.ListView.SfComboBox
+    Friend WithEvents cmbFormaPago As Syncfusion.WinForms.ListView.SfComboBox
 End Class

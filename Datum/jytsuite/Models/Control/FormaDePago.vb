@@ -1,4 +1,4 @@
-﻿Public Class FormaDePago
+﻿Public Class MovimientoDePago
 
 	Public Property NumeroFactura As String
 	Public Property SerialCaja As String
@@ -17,8 +17,8 @@
 
 End Class
 
-Public Class FormaDePagoYMoneda
-	Inherits FormaDePago
+Public Class MovimientoDePagoYMoneda
+	Inherits MovimientoDePago
 
 	Public Property UnidadMonetaria As String
 	Public Property Simbolo As String

@@ -19,17 +19,17 @@ Public Class jsControlArcCambioMonedas
     Private dtCurrencies As New DataTable
     Private ft As New Transportables
 
-    'Private strSQL As String = "SELECT a.fecha, a.moneda, b.equivale FROM (Select MAX(fecha) fecha, moneda " +
-    '        " FROM jsconctacam " +
-    '        " WHERE fecha <=  '" & ft.FormatoFechaMySQL(jytsistema.sFechadeTrabajo) & "' " +
-    '        " GROUP BY moneda) a " +
-    '        " LEFT JOIN jsconctacam b ON (a.fecha = b.fecha AND a.moneda = b.moneda) " +
-    '        " ORDER BY a.moneda "
-
-    Private strSQL As String = "SELECT fecha, moneda, equivale " +
+    Private strSQL As String = "SELECT a.fecha, a.moneda, b.equivale FROM (Select MAX(fecha) fecha, moneda " +
             " FROM jsconctacam " +
-            " WHERE fecha <  '" & ft.FormatoFechaMySQL(DateAdd("d", 1, jytsistema.sFechadeTrabajo)) & "' " +
-            " ORDER BY fecha desc, moneda "
+            " WHERE fecha <=  '" & ft.FormatoFechaMySQL(DateAdd("d", 1, jytsistema.sFechadeTrabajo)) & "' " +
+            " GROUP BY moneda) a " +
+            " LEFT JOIN jsconctacam b ON (a.fecha = b.fecha AND a.moneda = b.moneda) " +
+            " ORDER BY a.moneda "
+
+    'Private strSQL As String = "SELECT fecha, moneda, equivale " +
+    '        " FROM jsconctacam " +
+    '        " WHERE fecha <  '" & ft.FormatoFechaMySQL(DateAdd("d", 1, jytsistema.sFechadeTrabajo)) & "' " +
+    '        " ORDER BY fecha desc, moneda "
 
     Private strSqlCurrency As String = "select concat(a.UnidadMonetaria, ' | ', a.simbolo) PaisMoneda,  a.id, " +
         " a.unidadmonetaria, a.simbolo, a.codigoiso, GROUP_CONCAT(a.pais SEPARATOR '| ') paises " +

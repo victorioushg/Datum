@@ -14,7 +14,6 @@ Partial Class jsBanArcBancos
 
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsBanArcBancos))
         Me.MenuBarra = New System.Windows.Forms.ToolStrip()
         Me.btnAgregar = New System.Windows.Forms.ToolStripButton()
@@ -45,12 +44,10 @@ Partial Class jsBanArcBancos
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.dgTar = New System.Windows.Forms.DataGridView()
-        Me.cmbTitulo = New System.Windows.Forms.ComboBox()
         Me.btnFormatos = New System.Windows.Forms.Button()
         Me.txtFormato = New System.Windows.Forms.TextBox()
         Me.cmbCondicion = New System.Windows.Forms.ComboBox()
         Me.txtComision = New System.Windows.Forms.TextBox()
-        Me.txtContacto = New System.Windows.Forms.TextBox()
         Me.txtWeb = New System.Windows.Forms.TextBox()
         Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.txtFax = New System.Windows.Forms.TextBox()
@@ -88,11 +85,12 @@ Partial Class jsBanArcBancos
         Me.grpAceptarSalir = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
-        Me.C1SuperTooltip1 = New C1.Win.C1SuperTooltip.C1SuperTooltip(Me.components)
         Me.tbcBancos = New C1.Win.C1Command.C1DockingTab()
         Me.C1DockingTabPage1 = New C1.Win.C1Command.C1DockingTabPage()
-        Me.txtCuentaContable = New System.Windows.Forms.TextBox()
-        Me.btnCuentaContable = New System.Windows.Forms.Button()
+        Me.txtContacto = New System.Windows.Forms.TextBox()
+        Me.cmbMonedas = New Syncfusion.WinForms.ListView.SfComboBox()
+        Me.cmbCC = New Syncfusion.WinForms.ListView.SfComboBox()
+        Me.txtIngreso = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.cmbPuerto = New System.Windows.Forms.ComboBox()
         Me.btObtenerPuertos = New System.Windows.Forms.Button()
@@ -101,7 +99,6 @@ Partial Class jsBanArcBancos
         Me.btnEditaTarjeta = New System.Windows.Forms.ToolStripButton()
         Me.btnEliminaTarjeta = New System.Windows.Forms.ToolStripButton()
         Me.C1DockingTabPage2 = New C1.Win.C1Command.C1DockingTabPage()
-        Me.txtIngreso = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.MenuBarra.SuspendLayout()
         CType(Me.dgTar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -109,6 +106,8 @@ Partial Class jsBanArcBancos
         CType(Me.tbcBancos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbcBancos.SuspendLayout()
         Me.C1DockingTabPage1.SuspendLayout()
+        CType(Me.cmbMonedas, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cmbCC, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuComisiones.SuspendLayout()
         Me.C1DockingTabPage2.SuspendLayout()
         Me.SuspendLayout()
@@ -307,7 +306,7 @@ Partial Class jsBanArcBancos
         Me.lblInfo.BackColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(217, Byte), Integer))
         Me.lblInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblInfo.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.lblInfo.Location = New System.Drawing.Point(0, 417)
+        Me.lblInfo.Location = New System.Drawing.Point(0, 450)
         Me.lblInfo.Name = "lblInfo"
         Me.lblInfo.Size = New System.Drawing.Size(818, 27)
         Me.lblInfo.TabIndex = 31
@@ -336,18 +335,6 @@ Partial Class jsBanArcBancos
         Me.dgTar.ReadOnly = True
         Me.dgTar.Size = New System.Drawing.Size(503, 83)
         Me.dgTar.TabIndex = 106
-        '
-        'cmbTitulo
-        '
-        Me.cmbTitulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbTitulo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cmbTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbTitulo.FormattingEnabled = True
-        Me.cmbTitulo.Location = New System.Drawing.Point(113, 202)
-        Me.cmbTitulo.Margin = New System.Windows.Forms.Padding(1)
-        Me.cmbTitulo.Name = "cmbTitulo"
-        Me.cmbTitulo.Size = New System.Drawing.Size(71, 21)
-        Me.cmbTitulo.TabIndex = 105
         '
         'btnFormatos
         '
@@ -390,22 +377,13 @@ Partial Class jsBanArcBancos
         Me.txtComision.TabIndex = 94
         Me.txtComision.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'txtContacto
-        '
-        Me.txtContacto.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtContacto.Location = New System.Drawing.Point(188, 202)
-        Me.txtContacto.MaxLength = 35
-        Me.txtContacto.Name = "txtContacto"
-        Me.txtContacto.Size = New System.Drawing.Size(261, 20)
-        Me.txtContacto.TabIndex = 52
-        '
         'txtWeb
         '
         Me.txtWeb.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtWeb.Location = New System.Drawing.Point(113, 181)
+        Me.txtWeb.Location = New System.Drawing.Point(369, 160)
         Me.txtWeb.MaxLength = 100
         Me.txtWeb.Name = "txtWeb"
-        Me.txtWeb.Size = New System.Drawing.Size(531, 20)
+        Me.txtWeb.Size = New System.Drawing.Size(275, 20)
         Me.txtWeb.TabIndex = 51
         '
         'txtEmail
@@ -414,7 +392,7 @@ Partial Class jsBanArcBancos
         Me.txtEmail.Location = New System.Drawing.Point(113, 160)
         Me.txtEmail.MaxLength = 100
         Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Size = New System.Drawing.Size(531, 20)
+        Me.txtEmail.Size = New System.Drawing.Size(250, 20)
         Me.txtEmail.TabIndex = 50
         '
         'txtFax
@@ -508,9 +486,9 @@ Partial Class jsBanArcBancos
         '
         Me.Label13.BackColor = System.Drawing.Color.Transparent
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(235, 224)
+        Me.Label13.Location = New System.Drawing.Point(226, 224)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(59, 27)
+        Me.Label13.Size = New System.Drawing.Size(68, 27)
         Me.Label13.TabIndex = 40
         Me.Label13.Text = "% Comisión"
         Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -519,7 +497,7 @@ Partial Class jsBanArcBancos
         '
         Me.Label12.BackColor = System.Drawing.Color.Transparent
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(5, 220)
+        Me.Label12.Location = New System.Drawing.Point(2, 229)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(104, 19)
         Me.Label12.TabIndex = 39
@@ -530,22 +508,22 @@ Partial Class jsBanArcBancos
         '
         Me.Label10.BackColor = System.Drawing.Color.Transparent
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(0, 201)
+        Me.Label10.Location = New System.Drawing.Point(5, 183)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(104, 19)
         Me.Label10.TabIndex = 37
-        Me.Label10.Text = "Contacto / C.C."
+        Me.Label10.Text = "Contacto"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label9
         '
         Me.Label9.BackColor = System.Drawing.Color.Transparent
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(5, 181)
+        Me.Label9.Location = New System.Drawing.Point(5, 202)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(104, 19)
         Me.Label9.TabIndex = 36
-        Me.Label9.Text = "web site"
+        Me.Label9.Text = "Código Contable"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label8
@@ -556,7 +534,7 @@ Partial Class jsBanArcBancos
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(104, 19)
         Me.Label8.TabIndex = 35
-        Me.Label8.Text = "email"
+        Me.Label8.Text = "email/wesite"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label7
@@ -670,7 +648,7 @@ Partial Class jsBanArcBancos
         Me.dg.Location = New System.Drawing.Point(3, 78)
         Me.dg.Name = "dg"
         Me.dg.ReadOnly = True
-        Me.dg.Size = New System.Drawing.Size(810, 270)
+        Me.dg.Size = New System.Drawing.Size(810, 303)
         Me.dg.TabIndex = 48
         '
         'Label19
@@ -767,7 +745,7 @@ Partial Class jsBanArcBancos
         Me.grpAceptarSalir.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.grpAceptarSalir.Controls.Add(Me.btnCancel, 1, 0)
         Me.grpAceptarSalir.Controls.Add(Me.btnOK, 0, 0)
-        Me.grpAceptarSalir.Location = New System.Drawing.Point(653, 417)
+        Me.grpAceptarSalir.Location = New System.Drawing.Point(653, 450)
         Me.grpAceptarSalir.Name = "grpAceptarSalir"
         Me.grpAceptarSalir.RowCount = 1
         Me.grpAceptarSalir.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -797,12 +775,6 @@ Partial Class jsBanArcBancos
         Me.btnOK.Text = "Aceptar"
         Me.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         '
-        'C1SuperTooltip1
-        '
-        Me.C1SuperTooltip1.Font = New System.Drawing.Font("Tahoma", 8.0!)
-        Me.C1SuperTooltip1.IsBalloon = True
-        Me.C1SuperTooltip1.ShowAlways = True
-        '
         'tbcBancos
         '
         Me.tbcBancos.Controls.Add(Me.C1DockingTabPage1)
@@ -811,7 +783,7 @@ Partial Class jsBanArcBancos
         Me.tbcBancos.HotTrack = True
         Me.tbcBancos.Location = New System.Drawing.Point(0, 39)
         Me.tbcBancos.Name = "tbcBancos"
-        Me.tbcBancos.Size = New System.Drawing.Size(818, 378)
+        Me.tbcBancos.Size = New System.Drawing.Size(818, 411)
         Me.tbcBancos.TabIndex = 108
         Me.tbcBancos.TabsSpacing = 5
         Me.tbcBancos.TabStyle = C1.Win.C1Command.TabStyleEnum.Office2007
@@ -820,9 +792,10 @@ Partial Class jsBanArcBancos
         '
         'C1DockingTabPage1
         '
+        Me.C1DockingTabPage1.Controls.Add(Me.txtContacto)
+        Me.C1DockingTabPage1.Controls.Add(Me.cmbMonedas)
+        Me.C1DockingTabPage1.Controls.Add(Me.cmbCC)
         Me.C1DockingTabPage1.Controls.Add(Me.txtIngreso)
-        Me.C1DockingTabPage1.Controls.Add(Me.txtCuentaContable)
-        Me.C1DockingTabPage1.Controls.Add(Me.btnCuentaContable)
         Me.C1DockingTabPage1.Controls.Add(Me.Button1)
         Me.C1DockingTabPage1.Controls.Add(Me.cmbPuerto)
         Me.C1DockingTabPage1.Controls.Add(Me.btObtenerPuertos)
@@ -835,8 +808,6 @@ Partial Class jsBanArcBancos
         Me.C1DockingTabPage1.Controls.Add(Me.txtComision)
         Me.C1DockingTabPage1.Controls.Add(Me.dgTar)
         Me.C1DockingTabPage1.Controls.Add(Me.txtCodigo)
-        Me.C1DockingTabPage1.Controls.Add(Me.txtContacto)
-        Me.C1DockingTabPage1.Controls.Add(Me.cmbTitulo)
         Me.C1DockingTabPage1.Controls.Add(Me.txtFax)
         Me.C1DockingTabPage1.Controls.Add(Me.txtSaldo)
         Me.C1DockingTabPage1.Controls.Add(Me.txtTelef2)
@@ -863,28 +834,70 @@ Partial Class jsBanArcBancos
         Me.C1DockingTabPage1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.249999!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.C1DockingTabPage1.Location = New System.Drawing.Point(1, 24)
         Me.C1DockingTabPage1.Name = "C1DockingTabPage1"
-        Me.C1DockingTabPage1.Size = New System.Drawing.Size(816, 353)
+        Me.C1DockingTabPage1.Size = New System.Drawing.Size(816, 386)
         Me.C1DockingTabPage1.TabIndex = 0
         Me.C1DockingTabPage1.Text = "Bancos"
         '
-        'txtCuentaContable
+        'txtContacto
         '
-        Me.txtCuentaContable.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCuentaContable.Location = New System.Drawing.Point(459, 202)
-        Me.txtCuentaContable.MaxLength = 15
-        Me.txtCuentaContable.Name = "txtCuentaContable"
-        Me.txtCuentaContable.Size = New System.Drawing.Size(154, 20)
-        Me.txtCuentaContable.TabIndex = 114
+        Me.txtContacto.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtContacto.Location = New System.Drawing.Point(113, 182)
+        Me.txtContacto.MaxLength = 100
+        Me.txtContacto.Name = "txtContacto"
+        Me.txtContacto.Size = New System.Drawing.Size(531, 20)
+        Me.txtContacto.TabIndex = 242
         '
-        'btnCuentaContable
+        'cmbMonedas
         '
-        Me.btnCuentaContable.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCuentaContable.Location = New System.Drawing.Point(619, 202)
-        Me.btnCuentaContable.Name = "btnCuentaContable"
-        Me.btnCuentaContable.Size = New System.Drawing.Size(25, 20)
-        Me.btnCuentaContable.TabIndex = 113
-        Me.btnCuentaContable.Text = "•••"
-        Me.btnCuentaContable.UseVisualStyleBackColor = True
+        Me.cmbMonedas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbMonedas.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbMonedas.DisplayMember = "nombre"
+        Me.cmbMonedas.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbMonedas.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbMonedas.Location = New System.Drawing.Point(369, 205)
+        Me.cmbMonedas.Name = "cmbMonedas"
+        Me.cmbMonedas.Size = New System.Drawing.Size(275, 20)
+        Me.cmbMonedas.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.cmbMonedas.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbMonedas.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbMonedas.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbMonedas.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbMonedas.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbMonedas.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbMonedas.TabIndex = 241
+        Me.cmbMonedas.ValueMember = "codcli"
+        '
+        'cmbCC
+        '
+        Me.cmbCC.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbCC.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbCC.DisplayMember = "nombre"
+        Me.cmbCC.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbCC.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCC.Location = New System.Drawing.Point(112, 205)
+        Me.cmbCC.Name = "cmbCC"
+        Me.cmbCC.Size = New System.Drawing.Size(251, 20)
+        Me.cmbCC.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.cmbCC.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbCC.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCC.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbCC.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCC.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbCC.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCC.TabIndex = 240
+        Me.cmbCC.ValueMember = "codcli"
+        '
+        'txtIngreso
+        '
+        Me.txtIngreso.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtIngreso.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtIngreso.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
+        Me.txtIngreso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtIngreso.Location = New System.Drawing.Point(112, 228)
+        Me.txtIngreso.Name = "txtIngreso"
+        Me.txtIngreso.Size = New System.Drawing.Size(114, 19)
+        Me.txtIngreso.Style.BackColor = System.Drawing.Color.AliceBlue
+        Me.txtIngreso.TabIndex = 239
         '
         'Button1
         '
@@ -974,27 +987,15 @@ Partial Class jsBanArcBancos
         Me.C1DockingTabPage2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.249999!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.C1DockingTabPage2.Location = New System.Drawing.Point(1, 24)
         Me.C1DockingTabPage2.Name = "C1DockingTabPage2"
-        Me.C1DockingTabPage2.Size = New System.Drawing.Size(816, 353)
+        Me.C1DockingTabPage2.Size = New System.Drawing.Size(816, 386)
         Me.C1DockingTabPage2.TabIndex = 1
         Me.C1DockingTabPage2.Text = "Movimientos"
-        '
-        'txtIngreso
-        '
-        Me.txtIngreso.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtIngreso.Cursor = System.Windows.Forms.Cursors.Default
-        Me.txtIngreso.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
-        Me.txtIngreso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtIngreso.Location = New System.Drawing.Point(112, 228)
-        Me.txtIngreso.Name = "txtIngreso"
-        Me.txtIngreso.Size = New System.Drawing.Size(114, 19)
-        Me.txtIngreso.Style.BackColor = System.Drawing.Color.AliceBlue
-        Me.txtIngreso.TabIndex = 239
         '
         'jsBanArcBancos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(818, 444)
+        Me.ClientSize = New System.Drawing.Size(818, 477)
         Me.ControlBox = False
         Me.Controls.Add(Me.tbcBancos)
         Me.Controls.Add(Me.grpAceptarSalir)
@@ -1015,6 +1016,8 @@ Partial Class jsBanArcBancos
         Me.tbcBancos.ResumeLayout(False)
         Me.C1DockingTabPage1.ResumeLayout(False)
         Me.C1DockingTabPage1.PerformLayout()
+        CType(Me.cmbMonedas, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cmbCC, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuComisiones.ResumeLayout(False)
         Me.MenuComisiones.PerformLayout()
         Me.C1DockingTabPage2.ResumeLayout(False)
@@ -1063,7 +1066,6 @@ Partial Class jsBanArcBancos
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents txtContacto As System.Windows.Forms.TextBox
     Friend WithEvents txtWeb As System.Windows.Forms.TextBox
     Friend WithEvents txtEmail As System.Windows.Forms.TextBox
     Friend WithEvents txtFax As System.Windows.Forms.TextBox
@@ -1088,10 +1090,8 @@ Partial Class jsBanArcBancos
     Friend WithEvents btnOK As System.Windows.Forms.Button
     Friend WithEvents btnFormatos As System.Windows.Forms.Button
     Friend WithEvents txtFormato As System.Windows.Forms.TextBox
-    Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
     Friend WithEvents btnDepositarEfectivo As System.Windows.Forms.ToolStripDropDownButton
     Friend WithEvents btnDepositarCestaTicket As System.Windows.Forms.ToolStripDropDownButton
-    Friend WithEvents cmbTitulo As System.Windows.Forms.ComboBox
     Friend WithEvents dgTar As System.Windows.Forms.DataGridView
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents tbcBancos As C1.Win.C1Command.C1DockingTab
@@ -1106,7 +1106,8 @@ Partial Class jsBanArcBancos
     Friend WithEvents btObtenerPuertos As System.Windows.Forms.Button
     Friend WithEvents cmbPuerto As System.Windows.Forms.ComboBox
     Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents txtCuentaContable As System.Windows.Forms.TextBox
-    Friend WithEvents btnCuentaContable As System.Windows.Forms.Button
     Friend WithEvents txtIngreso As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents cmbCC As Syncfusion.WinForms.ListView.SfComboBox
+    Friend WithEvents cmbMonedas As Syncfusion.WinForms.ListView.SfComboBox
+    Friend WithEvents txtContacto As TextBox
 End Class

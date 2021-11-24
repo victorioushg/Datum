@@ -60,8 +60,8 @@ Public Class jsBanArcCajas
 
         cashBoxList = GetCashBoxes(myConn)
         accountList = InitiateDropDown(Of AccountBase)(myConn, cmbCC)
+        'accountList.Where(Function(c) c.CodigoContable)
 
-        accountList.Where(Function(c) c.CodigoContable)
         InitiateDropDownInterchangeCurrency(myConn, cmbMonedas, jytsistema.sFechadeTrabajo)
         cmbMonedas.SelectedValue = jytsistema.WorkCurrency.Id
 
@@ -86,6 +86,7 @@ Public Class jsBanArcCajas
     End Sub
     Private Sub AsignaMov(ByVal nRow As Long, ByVal Actualiza As Boolean)
         If Actualiza Then
+            Cursor.Current = Cursors.WaitCursor
             savingTransactionList = GetSavingLines(myConn, cashBox.Codigo)
             dg.DataSource = savingTransactionList
         End If
@@ -107,6 +108,7 @@ Public Class jsBanArcCajas
         txtNombre.Text = cashBox.Descripcion
         cmbCC.SelectedValue = cashBox.CodigoContable
 
+        Cursor.Current = Cursors.WaitCursor
         ''Movimientos
         savingTransactionList = GetSavingLines(myConn, Caja.Codigo)
         Dim aCampos As List(Of dgField) = New List(Of dgField)() From {
@@ -167,7 +169,6 @@ Public Class jsBanArcCajas
         ft.visualizarObjetos(True, grpAceptarSalir)
         ft.habilitarObjetos(True, True, txtNombre, cmbCC)
         cmbCC.Enabled = True
-
         MenuBarra.Enabled = False
         ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
@@ -219,7 +220,8 @@ Public Class jsBanArcCajas
         Dim Inserta As Boolean = False
         If i_modo = movimiento.iAgregar Then Inserta = True
 
-        InsertEditBANCOSEncabezadoCaja(myConn, lblInfo, Inserta, txtCodigo.Text, txtNombre.Text, cmbCC.SelectedValue, ValorNumero(txtSaldo.Text))
+        InsertEditBANCOSEncabezadoCaja(myConn, lblInfo, Inserta, txtCodigo.Text, txtNombre.Text, cmbCC.SelectedValue,
+                                       ValorNumero(txtSaldo.Text), cmbMonedas.SelectedValue, jytsistema.sFechadeTrabajo)
 
         cashBoxList = GetCashBoxes(myConn)
         AsignaTXT(cashBoxList.LastOrDefault())
@@ -228,10 +230,6 @@ Public Class jsBanArcCajas
         '' TODO Add Functionality weith list
         '' ft.ActivarMenuBarra(myConn, ds, dt, lRegion, MenuBarra, jytsistema.sUsuario)
 
-    End Sub
-
-    Private Sub txtNombre_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
-        ft.mensajeEtiqueta(lblInfo, " Indique el nombre de la caja ... ", Transportables.tipoMensaje.iInfo)
     End Sub
 
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
@@ -265,23 +263,19 @@ Public Class jsBanArcCajas
     Private Sub btnPrimero_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrimero.Click
         AsignaTXT(cashBoxList.FirstOrDefault())
     End Sub
-
     Private Sub btnAnterior_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAnterior.Click
         posicionEncab -= 1
         If posicionEncab < 0 Then posicionEncab = 0
         AsignaTXT(cashBoxList.Item(posicionEncab))
     End Sub
-
     Private Sub btnSiguiente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSiguiente.Click
         posicionEncab += 1
         If posicionEncab >= cashBoxList.Count Then posicionEncab = cashBoxList.Count - 1
         AsignaTXT(cashBoxList.Item(posicionEncab))
     End Sub
-
     Private Sub btnUltimo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUltimo.Click
         AsignaTXT(cashBoxList.LastOrDefault())
     End Sub
-
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
@@ -291,7 +285,7 @@ Public Class jsBanArcCajas
         Dim f As New jsBanArcCajasMovimientos
         f.Apuntador = posicionRenglon
         '' TODO 
-        '' f.Agregar(myConn, ds, dtMovimientos, cashBox.Codigo)
+        f.Agregar(myConn, cashBox.Codigo)
         AsignaMov(f.Apuntador, True)
         f = Nothing
 
@@ -359,7 +353,7 @@ Public Class jsBanArcCajas
         f.Buscar(savingTransactionList, aCampos, "Movimientos de Caja")
         If f.Id > 0 Then
             Dim index = savingTransactionList.FindIndex(Function(item) item.Id = f.Id)
-            dg.Rows().Item(index).Selected = True
+            SetSelectedRowByIndex(dg, index)
         End If
     End Sub
 
@@ -422,4 +416,7 @@ Public Class jsBanArcCajas
         f = Nothing
     End Sub
 
+    Private Sub dg_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dg.DataBindingComplete
+        Cursor.Current = Cursors.Default
+    End Sub
 End Class

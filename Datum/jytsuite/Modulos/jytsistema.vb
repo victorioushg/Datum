@@ -1006,6 +1006,10 @@ Module jytsistema
             New TextoValor("CREDITO", "CR", 0),
             New TextoValor("CONTADO", "CO", 1)
         }
+    Public tipoMovimientoCaja As List(Of TextoValor) = New List(Of TextoValor)() From {
+            New TextoValor("ENTRADA", "EN", 0),
+            New TextoValor("SALIDA", "SA", 1)
+        }
 
     Public formasDePago As List(Of TextoValor) = New List(Of TextoValor)() From {
             New TextoValor("Efectivo", "EF", 0),
@@ -1015,6 +1019,8 @@ Module jytsistema
             New TextoValor("Depósito", "DP", 4),
             New TextoValor("Transferencia", "TR", 5)
         }
+
+
 
     Public aFormaPagoCompras() As String = {"Efectivo", "Cheque", "Tarjeta", "Transferencia"}
     Public aFormaPagoAbreviadaCompras() As String = {"EF", "CH", "TA", "TR"}

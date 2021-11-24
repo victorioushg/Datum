@@ -52,3 +52,35 @@ Public Class SavingLines
 
 End Class
 
+
+Public Class BankLine
+
+    Public Property Id() As Long
+    Public Property FechaMovimiento() As DateTime
+    Public Property NumeroMovimiento() As String
+    Public Property TipoMovimiento() As String
+    Public Property Concepto() As String
+    Public Property Importe() As Decimal
+    Public Property Currency As Integer
+    Public Property CurrencyDate As DateTime
+    Public Property Origen As String
+    Public Property NumeroOrigen As String
+    Public Property TipoOrigen As String
+    Public Property Beneficiario As String
+    Public Property Comprobante As String
+    Public Property Conciliado As String
+    Public Property MesConciliacion As Date
+    Public Property FechaConciliacion As Date
+    Public Property Asiento As String
+    Public Property FechaAsiento As Date
+    Public Property Multicancelacion As String
+    Public Property CodigoBanco As String
+    Public Property CodigoCaja As String
+    Public Property ProveedorCliente As String
+    Public Property CodigoVendedor As String
+    Public Property FechaBloqueo As Date
+
+    Public Property ImporteReal() As Decimal
+    Public Property CodigoIso() As String
+
+End Class

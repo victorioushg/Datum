@@ -750,7 +750,7 @@ namespace fTransport
                     CheckBoxSize = new Size(14, 14)
                 });
             }
-            fields.Add(new SfDataGridField(TypeColumn.TextColumn, "ColumnWithNoData", "", 10, HorizontalAlignment.Left, ""));
+
             foreach (SfDataGridField field in fields)
             {
                 switch (field.Type)
@@ -760,8 +760,9 @@ namespace fTransport
                         {
                             MappingName = field.Campo,
                             HeaderText = field.Nombre,
-                            //  Width = field.Ancho,
+                            MaximumWidth = field.Ancho, 
                             AllowEditing = EditaCampos
+                            
                         });
                         break;
                     case TypeColumn.DateTimeColumn:
@@ -770,7 +771,7 @@ namespace fTransport
                             MappingName = field.Campo,
                             HeaderText = field.Nombre,
                             AllowNull = true,
-                            //   Width = field.Ancho,
+                            MaximumWidth = field.Ancho,
                             Pattern = DateTimePattern.Custom,
                             Format = field.Formato,
                             AllowEditing = EditaCampos
@@ -782,7 +783,7 @@ namespace fTransport
                             MappingName = field.Campo,
                             HeaderText = field.Nombre,
                             AllowNull = true,
-                            //  Width = field.Ancho,
+                            MaximumWidth = field.Ancho,
                             Format = field.Formato,
                             AllowEditing = EditaCampos
                         });
@@ -803,7 +804,12 @@ namespace fTransport
                     dg.Columns[field.Campo].HeaderStyle.HorizontalAlignment = HorizontalAlignment.Center;
                 }
             }
-
+            dg.Columns.Add(new GridTextColumn()
+            {
+                MappingName = "ColumnWithNoData",
+                HeaderText = "",
+                AllowEditing = EditaCampos
+            });
             //if (lastCol != null) { dg.Columns.Add(lastCol); }
             if (AsignaDataSource) { dg.DataSource = list; }
         }

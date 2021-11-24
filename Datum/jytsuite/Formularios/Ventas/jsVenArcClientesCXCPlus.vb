@@ -222,13 +222,13 @@ Public Class jsVenArcClientesCXCPlus
         End If
         IniciarCajas()
 
-        InitiateDropDown(Of FormaDePago)(myConn, cmbFPCR, FuncionesGenericas.Tipo.FormaDePago)
+        InitiateDropDown(Of TextoValor)(myConn, cmbFPCR, FuncionesGenericas.Tipo.FormaDePago)
 
 
         If ChequesDevueltosPermitidos(myConn, lblInfo) > 0 AndAlso
             ChequesDevueltosCliente(myConn, lblInfo, CodigoCliente) >= ChequesDevueltosPermitidos(myConn, lblInfo) Then
             Dim data = formasDePago.Where(Function(item) item.Value <> "CH").ToList()
-            InitiateDropDown(Of FormaDePago)(myConn, cmbFPCR, FuncionesGenericas.Tipo.FormaDePago)
+            InitiateDropDown(Of TextoValor)(myConn, cmbFPCR, FuncionesGenericas.Tipo.FormaDePago)
             cmbFPCR.SelectedValue = "TA"
 
         End If

@@ -194,11 +194,23 @@ Module FuncionesTransportables
                     Case "btnCortar"
                         tt.SetToolTip(btn, "<B>Recortar precios</B> en " & menuName)
 
+                    Case "btnDepositarEfectivo"
+                        tt.SetToolTip(btn, "<B>Depositar efectivo</B> desde caja seleccionada en " & menuName)
+                    Case "btnDepositarTarjetas"
+                        tt.SetToolTip(btn, "<B>Depositar Tarjetas</B> desde caja seleccionada en " & menuName)
+                    Case "btnDepositarCestaTicket"
+                        tt.SetToolTip(btn, "<B>Depositar Cesta Ticket</B> desde la caja seleccionada en " & menuName)
+                    Case "btnReposicion"
+                        tt.SetToolTip(btn, "<B>Reposicion</B> de caja chica desde " & menuName)
+
+
                     Case "btnAgregaDescuento"
                         'Menu Barra Descuento 
                         tt.SetToolTip(btn, "<B>Agrega </B> descuento global a " & menuName)
                     Case "btnEliminaDescuento"
                         tt.SetToolTip(btn, "<B>Elimina</B> descuento global de " & menuName)
+
+                        'btnDepositarEfectivo, btnDepositarTarjetas, btnDepositarCestaTicket, btnReposicion)
 
                 End Select
             Next
@@ -1189,43 +1201,7 @@ calculadoraErr:
                                                       & " id_emp = '" & jytsistema.WorkID & "'")
 
     End Function
-    'Public Function SeleccionaFecha(FechaInicial As Date, ByVal ParamArray oObjetos() As Object) As String
 
-    '    Dim oObjeto As Object
-    '    Dim nLeft As Integer = 0
-    '    Dim nTop As Integer = 0
-    '    For Each oObjeto In oObjetos
-    '        nLeft += oObjeto.left
-    '        nTop += oObjeto.top
-    '    Next
-
-    '    Dim f As New FechaSistema
-    '    f.Fecha = FechaInicial
-    '    f.Cargar(nLeft, nTop)
-
-    '    SeleccionaFecha = ft.FormatoFecha(f.Fecha)
-    '    f = Nothing
-
-    'End Function
-    'Public Function SeleccionaFechaPlus(ByVal FechaInicial As Date, FechaFinal As Date, PermiteFechaAnterior As Boolean,
-    '                                ByVal ParamArray oObjetos() As Object) As String
-
-    '    Dim oObjeto As Object
-    '    Dim nLeft As Integer = 0
-    '    Dim nTop As Integer = 0
-    '    For Each oObjeto In oObjetos
-    '        nLeft += oObjeto.left
-    '        nTop += oObjeto.top
-    '    Next
-
-    '    Dim f As New FechaSistemaPlus
-    '    f.Fecha = FechaInicial
-    '    f.Cargar(FechaFinal, PermiteFechaAnterior, nLeft, nTop)
-
-    '    SeleccionaFechaPlus = ft.FormatoFecha(f.Fecha)
-    '    f = Nothing
-
-    'End Function
     Public Function FechaInicioEjercicio(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label) As Date
         If jytsistema.WorkExercise = "" Then
             Dim aFld() As String = {"id_emp"}
@@ -2800,6 +2776,11 @@ calculadoraErr:
             End If
 
         End If
+    End Sub
+
+    Public Sub SetSelectedRowByIndex(dg As DataGridView, index As Long)
+        dg.Rows().Item(index).Selected = True
+        dg.FirstDisplayedScrollingRowIndex = index
     End Sub
 
 End Module

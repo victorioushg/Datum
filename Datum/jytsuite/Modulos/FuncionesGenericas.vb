@@ -1,7 +1,8 @@
 ﻿Imports System.Reflection
 Imports MySql.Data.MySqlClient
-Imports Syncfusion.WinForms.ListView
 Imports Syncfusion.WinForms.ListView.Enums
+Imports Syncfusion.WinForms.ListView '
+
 
 Module FuncionesGenericas
 
@@ -80,6 +81,7 @@ Module FuncionesGenericas
         Transportes = 2
         Almacenes = 3
         CondicionDePago = 4
+        TipoMovimientoCaja = 5
     End Enum
     Public Function InitiateDropDown(Of T)(MyConn As MySqlConnection, cmb As SfComboBox,
                                       Optional tipo As Tipo = Tipo.Defecto,
@@ -108,6 +110,8 @@ Module FuncionesGenericas
                     list = formasDePago.Cast(Of T)
                 ElseIf (tipo = Tipo.CondicionDePago) Then
                     list = condicionesDePago.Cast(Of T)
+                ElseIf (tipo = Tipo.TipoMovimientoCaja) Then
+                    list = tipoMovimientoCaja.Cast(Of T)
                 End If
             Case GetType(SimpleTable)
                 cmb.DisplayMember = "Descripcion"

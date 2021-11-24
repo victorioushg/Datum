@@ -19,7 +19,6 @@ Partial Class jsBanArcCajas
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jsBanArcCajas))
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.dg = New System.Windows.Forms.DataGridView()
@@ -82,7 +81,6 @@ Partial Class jsBanArcCajas
         Me.btnSiguienteMovimiento = New System.Windows.Forms.ToolStripButton()
         Me.btnUltimoMovimiento = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
-        Me.C1SuperTooltip1 = New C1.Win.C1SuperTooltip.C1SuperTooltip(Me.components)
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpEncab.SuspendLayout()
         CType(Me.cmbMonedas, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -113,7 +111,7 @@ Partial Class jsBanArcCajas
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dg.Location = New System.Drawing.Point(-1, 231)
+        Me.dg.Location = New System.Drawing.Point(0, 231)
         Me.dg.Name = "dg"
         Me.dg.ReadOnly = True
         Me.dg.Size = New System.Drawing.Size(755, 195)
@@ -676,12 +674,6 @@ Partial Class jsBanArcCajas
         Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
         Me.ToolStripSeparator11.Size = New System.Drawing.Size(6, 39)
         '
-        'C1SuperTooltip1
-        '
-        Me.C1SuperTooltip1.Font = New System.Drawing.Font("Tahoma", 8.0!)
-        Me.C1SuperTooltip1.IsBalloon = True
-        Me.C1SuperTooltip1.ShowAlways = True
-        '
         'jsBanArcCajas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -756,7 +748,6 @@ Partial Class jsBanArcCajas
     Friend WithEvents btnSiguienteMovimiento As System.Windows.Forms.ToolStripButton
     Friend WithEvents btnUltimoMovimiento As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator11 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents C1SuperTooltip1 As C1.Win.C1SuperTooltip.C1SuperTooltip
     Friend WithEvents txtTA As System.Windows.Forms.TextBox
     Friend WithEvents txtCH As System.Windows.Forms.TextBox
     Friend WithEvents txtEF As System.Windows.Forms.TextBox

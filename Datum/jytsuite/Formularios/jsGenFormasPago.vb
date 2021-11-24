@@ -7,7 +7,7 @@ Public Class jsGenFormasPago
     Private ds As New DataSet
     Private dt As DataTable
     Private ft As New Transportables
-    Private pagosRecibidos As New List(Of FormaDePagoYMoneda)
+    Private pagosRecibidos As New List(Of MovimientoDePagoYMoneda)
 
     Private cashBox As New Saving()
 
@@ -100,7 +100,7 @@ Public Class jsGenFormasPago
             & " origen = '" & nModulo & "' and " _
             & " id_emp = '" & jytsistema.WorkID & "' order by formapag "
 
-        pagosRecibidos = Lista(Of FormaDePagoYMoneda)(MyConn, strSQL)
+        pagosRecibidos = Lista(Of MovimientoDePagoYMoneda)(MyConn, strSQL)
         dt = ft.AbrirDataTable(ds, nTabla, MyConn, strSQL)
 
 
@@ -121,7 +121,7 @@ Public Class jsGenFormasPago
 
         dg.DataSource = pagosRecibidos
 
-        ft.IniciarTablaList(Of FormaDePagoYMoneda)(dg, pagosRecibidos, aCampos)
+        ft.IniciarTablaList(Of MovimientoDePagoYMoneda)(dg, pagosRecibidos, aCampos)
         CalculaTotales()
 
     End Sub
@@ -259,7 +259,7 @@ Public Class jsGenFormasPago
 
     Private Sub AsignaMov(ByVal nRow As Long, ByVal Actualiza As Boolean)
         If Actualiza Then
-            pagosRecibidos = Lista(Of FormaDePagoYMoneda)(MyConn, strSQL)
+            pagosRecibidos = Lista(Of MovimientoDePagoYMoneda)(MyConn, strSQL)
             dg.DataSource = pagosRecibidos
         End If
 
@@ -319,7 +319,7 @@ Public Class jsGenFormasPago
         If pagosRecibidos.Count > 0 Then
 
             Dim Apuntador = dg.SelectedRows(0).Index
-            Dim data As FormaDePagoYMoneda = dg.Rows(Apuntador).DataBoundItem
+            Dim data As MovimientoDePagoYMoneda = dg.Rows(Apuntador).DataBoundItem
 
             Dim aCamposDel() As String = {"numfac", "origen", "formapag", "numpag", "Currency"}
             Dim aStringsDel() As String = {data.NumeroFactura, data.Origen, data.FormaDePago, data.NumeroDePago, data.Currency}

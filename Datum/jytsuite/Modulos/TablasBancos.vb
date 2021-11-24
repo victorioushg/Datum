@@ -1,11 +1,11 @@
 Imports MySql.Data.MySqlClient
 Module TablasBancos
     Private ft As New Transportables
-    Public Sub InsertEditBANCOSBanco(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, ByVal CodigoBanco As String, ByVal NombreBanco As String, _
-       ByVal CtaBancaria As String, ByVal Agencia As String, ByVal Direccion As String, ByVal Telef1 As String, ByVal Telef2 As String, _
-       ByVal Fax As String, ByVal email As String, ByVal web As String, ByVal Contacto As String, ByVal Titulo As String, _
-       ByVal Comision As Double, ByVal Ingreso As Date, ByVal SaldoActual As Double, ByVal CodigoContable As String, _
-       ByVal Formato As String, ByVal Estatus As Integer)
+    Public Sub InsertEditBANCOSBanco(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, ByVal CodigoBanco As String, ByVal NombreBanco As String,
+       ByVal CtaBancaria As String, ByVal Agencia As String, ByVal Direccion As String, ByVal Telef1 As String, ByVal Telef2 As String,
+       ByVal Fax As String, ByVal email As String, ByVal web As String, ByVal Contacto As String, ByVal Titulo As String,
+       ByVal Comision As Double, ByVal Ingreso As Date, ByVal SaldoActual As Double, ByVal CodigoContable As String,
+       ByVal Formato As String, ByVal Estatus As Integer, Currency As Integer, CurrencyDate As DateTime)
 
         Dim strSQL As String = ""
         Dim strSQLInicio As String
@@ -13,6 +13,8 @@ Module TablasBancos
 
         If Insertar Then
             strSQLInicio = " insert into jsbancatban SET "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsbancatban SET "
             strSQLFin = " WHERE " _
@@ -39,7 +41,7 @@ Module TablasBancos
         strSQL = strSQL & ModificarEntero(Estatus, "estatus")
 
         strSQL = strSQL & ModificarCadena(jytsistema.WorkID, "id_emp")
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
     Public Sub InsertEditBANCOSTarjetaBanco(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, ByVal CodigoBanco As String, ByVal CodigoTarjeta As String, _
@@ -162,8 +164,8 @@ Module TablasBancos
 
     End Sub
 
-    Public Sub InsertEditBANCOSEncabezadoCaja(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, ByVal CodigoCaja As String, ByVal NombreCaja As String, _
-                                              CodigoContable As String, ByVal SaldoCaja As Double)
+    Public Sub InsertEditBANCOSEncabezadoCaja(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, ByVal CodigoCaja As String, ByVal NombreCaja As String,
+                                              CodigoContable As String, ByVal SaldoCaja As Double, Currency As Integer, CurrencyDate As DateTime)
 
         Dim strSQL As String = ""
         Dim strSQLInicio As String
@@ -171,6 +173,8 @@ Module TablasBancos
 
         If Insertar Then
             strSQLInicio = " insert into jsbanenccaj SET "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsbanenccaj SET "
             strSQLFin = " WHERE " _
