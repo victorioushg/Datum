@@ -172,11 +172,12 @@ Public Class jsNomProProcesarNomina
                                                     & Format(CDate(txtFechaHasta.Text), "yyyyMMdd") _
                                                     & .Item("codcon")
 
-                    InsertEditCOMPRASCXP(myConn, lblInfo, True, .Item("codpro"), TipoMovimiento, nContador, jytsistema.sFechadeTrabajo, ft.FormatoHora(Now), _
-                                         jytsistema.sFechadeTrabajo, nReferencia, .Item("nomcon") & " " & ft.FormatoFechaMySQL(CDate(txtFechaDesde.Text)) & "/" & _
-                                         ft.FormatoFechaMySQL(CDate(txtFechaHasta.Text)), Signo * .Item("total"), 0.0, "", "", "", "", "NOM", _
-                                         "", "", "", "", nReferencia, "0", "", jytsistema.sFechadeTrabajo, "", "0", "", 0.0, 0.0, "", "", "", "", _
-                                         "", "", TipoProveedor.Gastos, IIf(Signo = 1, FOTipo.Credito, FOTipo.Debito), "0")
+                    InsertEditCOMPRASCXP(myConn, lblInfo, True, .Item("codpro"), TipoMovimiento, nContador, jytsistema.sFechadeTrabajo, ft.FormatoHora(Now),
+                                         jytsistema.sFechadeTrabajo, nReferencia, .Item("nomcon") & " " & ft.FormatoFechaMySQL(CDate(txtFechaDesde.Text)) & "/" &
+                                         ft.FormatoFechaMySQL(CDate(txtFechaHasta.Text)), Signo * .Item("total"), 0.0, "", "", "", "", "NOM",
+                                         "", "", "", "", nReferencia, "0", "", jytsistema.sFechadeTrabajo, "", "0", "", 0.0, 0.0, "", "", "", "",
+                                         "", "", TipoProveedor.Gastos, IIf(Signo = 1, FOTipo.Credito, FOTipo.Debito), "0",
+                                          jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
 
                 End With
             Next

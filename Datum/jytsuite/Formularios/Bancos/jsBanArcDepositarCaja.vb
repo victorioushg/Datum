@@ -382,7 +382,8 @@ Public Class jsBanArcDepositarCaja
                 NITProveedor, "GASTOS CHEQUES ALIMENTACION", "", "", CodigoContable, CodigoGrupo,
                 CodigoSubgrupo, BaseIVA, 0, 0, 0, TipoIVA, PorcentajeIVA(myConn, lblInfo, txtEmision.Value, TipoIVA), BaseIVA,
                 ValorNumero(txtIVA.Text), TotalGasto, txtEmision.Value, 1, 0, "EF", txtDeposito.Text, "", "", "", 0.0#,
-                "", 0, 0, 0, 0, "", jytsistema.sFechadeTrabajo, 0, "", "COM", "", "", "0")
+                "", 0, 0, 0, 0, "", jytsistema.sFechadeTrabajo, 0, "", "COM", "", "", "0",
+                jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
 
             For iCont = 0 To lv.Items.Count - 1
                 If lv.Items(iCont).Checked Then

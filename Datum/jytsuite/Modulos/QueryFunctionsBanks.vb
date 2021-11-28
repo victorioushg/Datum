@@ -50,4 +50,12 @@ Module QueryFunctionsBanks
         Return Lista(Of BankLine)(MyConn, strSQL)
     End Function
 
+    Public Function GetBanksAccounts(MyConn As MySqlConnection) As List(Of BankAccount)
+        Dim strSQL = " select codban CodigoBanco, nomban NombreCuenta, ctaban CodigoCuenta from jsbancatban where " _
+                            & " estatus = 1 and " _
+                            & " id_emp = '" & jytsistema.WorkID & "' order by codban "
+
+        Return Lista(Of BankAccount)(MyConn, strSQL)
+    End Function
+
 End Module

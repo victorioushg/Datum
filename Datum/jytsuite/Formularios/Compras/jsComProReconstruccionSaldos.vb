@@ -228,7 +228,7 @@ Public Class jsComProReconstruccionDeSaldos
                                 CDate(.Item("vence").ToString), "", strTipo1 & ": " & .Item("numNCR"), sSigno * .Item("tot_NCR"), .Item("imp_iva"),
                                 .Item("formapag"), .Item("numpag"), .Item("nompag"), "", "NCR", "", "", "", .Item("caja"), .Item("numNCR"), "0",
                                 "", jytsistema.sFechadeTrabajo, .Item("CODCON"), "", "", 0.0#, 0.0#, "", "", "", "", .Item("codven"),
-                                .Item("codven"), 0, sFOTipo, "0")
+                                .Item("codven"), 0, sFOTipo, "0", jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
 
                             SaldoCxP(MyConn, lblInfo, .Item("codpro"))
 
@@ -378,9 +378,7 @@ Public Class jsComProReconstruccionDeSaldos
                                                       .Item("lote"), .Item("prov_cli"), .Item("ventotal"), .Item("ventotaldes"),
                                                       .Item("impiva"), .Item("descuento"), .Item("vendedor"), .Item("almacen"),
                                                       .Item("asiento"), CDate(.Item("fechasi").ToString))
-
                 refrescaBarraprogresoEtiqueta(ProgressBar1, lblProgreso, 100, "")
-
             End With
         Next
 
@@ -437,9 +435,6 @@ Public Class jsComProReconstruccionDeSaldos
                     If chkMercancias.Checked = True Then
                         If dtRenglones.Rows.Count > 0 Then
                             For kCont = 0 To dtRenglones.Rows.Count - 1
-
-
-
                                 If Mid(dtRenglones.Rows(kCont).Item("item"), 1, 1) <> "$" Then
                                     Costo = dtRenglones.Rows(kCont).Item("CANTIDAD") * UltimoCostoAFecha(MyConn, dtRenglones.Rows(kCont).Item("ITEM"), CDate(.Item("emision").ToString)) / Equivalencia(MyConn, dtRenglones.Rows(kCont).Item("ITEM"), dtRenglones.Rows(kCont).Item("UNIDAD"))
 
@@ -469,18 +464,15 @@ Public Class jsComProReconstruccionDeSaldos
                                                  .Item("codpro") & "' and tipomov = 'FC' and origen = 'COM' and nummov = '" &
                                                  .Item("NUMCOM") & "' and numorg = '" & .Item("NUMCOM") & "' and id_emp = '" &
                                                  jytsistema.WorkID & "'") = 0 Then
-
                             strTipo = "FC"
                             strTipo1 = "COMPRA N° "
                             sFOTipo = "0"
                             sSigno = -1
-
-
                             InsertEditCOMPRASCXP(MyConn, lblInfo, True, .Item("CODPRO"), strTipo, .Item("NUMCOM"), CDate(.Item("emision").ToString), ft.FormatoHora(Now()),
                                 CDate(.Item("vence").ToString), "", strTipo1 & ": " & .Item("numfac"), sSigno * .Item("TOT_COM"), .Item("IMP_IVA"),
                                 .Item("formapag"), .Item("numpag"), .Item("nompag"), "", "COM", "", "", "", .Item("CAJA"), .Item("NUMCOM"), "0",
                                 "", jytsistema.sFechadeTrabajo, .Item("CODCON"), "", "", 0.0#, 0.0#, "", "", "", "", .Item("codven"),
-                                .Item("codven"), 0, sFOTipo, "0")
+                                .Item("codven"), 0, sFOTipo, "0", jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
 
                             SaldoCxP(MyConn, lblInfo, .Item("codpro"))
 

@@ -421,11 +421,17 @@
     <Compile Include="..\..\Datum\jytsuite\Models\Accounting\Account.vb">
       <Link>Models\Accounting\Account.vb</Link>
     </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Models\BankAccountsAndSavingsAccounts\BanckAccount.vb">
+      <Link>Models\BankAccountsAndSavingsAccounts\BanckAccount.vb</Link>
+    </Compile>
     <Compile Include="..\..\Datum\jytsuite\Models\BankAccountsAndSavingsAccounts\Savings.vb">
       <Link>Models\BankAccountsAndSavingsAccounts\Savings.vb</Link>
     </Compile>
     <Compile Include="..\..\Datum\jytsuite\Models\Control\CambioMoneda.vb">
       <Link>Models\Control\CambioMoneda.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Models\Control\CreditCauses.vb">
+      <Link>Models\Control\CreditCauses.vb</Link>
     </Compile>
     <Compile Include="..\..\Datum\jytsuite\Models\Control\DataGridField.vb">
       <Link>Models\Control\DataGridField.vb</Link>
@@ -445,6 +451,12 @@
     <Compile Include="..\..\Datum\jytsuite\Models\General\SimpleTableProperties.vb">
       <Link>Models\General\SimpleTableProperties.vb</Link>
     </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Models\PurchasesExpensesAndAccountsPayable\Vendor.vb">
+      <Link>Models\PurchasesExpensesAndAccountsPayable\Vendor.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Models\PurchasesExpensesAndAccountsPayable\VendorTransaction.vb">
+      <Link>Models\PurchasesExpensesAndAccountsPayable\VendorTransaction.vb</Link>
+    </Compile>
     <Compile Include="..\..\Datum\jytsuite\Models\SalesAndAccountsReceivable\Customer.vb">
       <Link>Models\SalesAndAccountsReceivable\Customer.vb</Link>
     </Compile>
@@ -456,6 +468,9 @@
     </Compile>
     <Compile Include="..\..\Datum\jytsuite\Modulos\FuncionesBancos.vb">
       <Link>Modulos\FuncionesBancos.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Modulos\FuncionesCompras.vb">
+      <Link>Modulos\FuncionesCompras.vb</Link>
     </Compile>
     <Compile Include="..\..\Datum\jytsuite\Modulos\FuncionesControl.vb">
       <Link>Modulos\FuncionesControl.vb</Link>

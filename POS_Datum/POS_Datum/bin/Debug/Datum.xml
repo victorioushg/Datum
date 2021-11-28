@@ -167,6 +167,11 @@ Datum
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:Datum.My.Resources.Resources.Back">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:Datum.My.Resources.Resources.bajar">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
@@ -377,6 +382,16 @@ Datum
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:Datum.My.Resources.Resources.document_ok">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.document_ok1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:Datum.My.Resources.Resources.Duplicar">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
@@ -573,6 +588,11 @@ Datum
 </summary>
 </member>
 <member name="P:Datum.My.Resources.Resources.Ok">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:Datum.My.Resources.Resources.Ok1">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>

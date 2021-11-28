@@ -2107,12 +2107,16 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Models\Accounting\Account.vb" />
+    <Compile Include="Models\BankAccountsAndSavingsAccounts\BanckAccount.vb" />
     <Compile Include="Models\BankAccountsAndSavingsAccounts\Savings.vb" />
+    <Compile Include="Models\Control\CreditCauses.vb" />
     <Compile Include="Models\Control\DataGridField.vb" />
     <Compile Include="Models\Control\FormaDePago.vb" />
     <Compile Include="Models\Control\Monedas.vb" />
     <Compile Include="Models\Control\CambioMoneda.vb" />
     <Compile Include="Models\General\SimpleTable.vb" />
+    <Compile Include="Models\PurchasesExpensesAndAccountsPayable\Vendor.vb" />
+    <Compile Include="Models\PurchasesExpensesAndAccountsPayable\VendorTransaction.vb" />
     <Compile Include="Models\SalesAndAccountsReceivable\Customer.vb" />
     <Compile Include="Models\General\functionStructure.vb" />
     <Compile Include="Models\General\SimpleTableProperties.vb" />

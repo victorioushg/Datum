@@ -2,6 +2,7 @@ Imports MySql.Data.MySqlClient
 Imports Syncfusion.WinForms.Input
 
 Public Class jsComArcNotasCredito
+
     Private Const sModulo As String = "Notas Crédito"
     Private Const lRegion As String = "RibbonButton62"
     Private Const nTabla As String = "tblEncab"
@@ -27,9 +28,14 @@ Public Class jsComArcNotasCredito
     Private dtDescuentos As New DataTable
     Private ft As New Transportables
 
+    Private proveedor As New Vendor()
+    Private moneda As New CambioMonedaPlus()
+    Private almacen As New SimpleTable()
+    Private accountList As New List(Of AccountBase)
+    Private interchangeList As New List(Of CambioMonedaPlus)
+
     Private i_modo As Integer
     Private nPosicionEncab As Long, nPosicionRenglon As Long
-
 
     Private Eliminados As New ArrayList
 
@@ -47,8 +53,7 @@ Public Class jsComArcNotasCredito
             myConn.Open()
             dt = ft.AbrirDataTable(ds, nTabla, myConn, strSQL)
 
-            Dim dates As SfDateTimeEdit() = {txtEmision, txtEmisionIVA}
-            SetSizeDateObjects(dates)
+            IniciarControles()
 
             DesactivarMarco0()
             If dt.Rows.Count > 0 Then
@@ -68,27 +73,34 @@ Public Class jsComArcNotasCredito
         End Try
 
     End Sub
+    Private Sub IniciarControles()
+        Dim dates As SfDateTimeEdit() = {txtEmision, txtEmisionIVA}
+        SetSizeDateObjects(dates)
+
+        '' Proveedores
+        InitiateDropDown(Of Vendor)(myConn, cmbProveedor)
+        '' Monedas
+        interchangeList = GetListaDeMonedasyCambios(myConn, jytsistema.sFechadeTrabajo)
+        InitiateDropDownInterchangeCurrency(myConn, cmbMonedas, jytsistema.sFechadeTrabajo)
+        '' Cuentas Contables
+        accountList = InitiateDropDown(Of AccountBase)(myConn, cmbCC)
+        '' Alamacenes 
+        InitiateDropDown(Of SimpleTable)(myConn, cmbAlmacenes, Tipo.Almacenes)
+    End Sub
+
     Private Sub AsignarTooltips()
-        'Menu Barra 
-        ft.colocaToolTip(C1SuperTooltip1, jytsistema.WorkLanguage, btnAgregar, btnEditar, btnEliminar, btnBuscar, btnPrimero, btnSiguiente, btnAnterior,
-                          btnUltimo, btnImprimir, btnSalir, btnDuplicar, btnAgregarMovimiento, btnEditarMovimiento,
-                          btnEliminarMovimiento, btnBuscarMovimiento, btnPrimerMovimiento, btnAnteriorMovimiento,
-                          btnSiguienteMovimiento, btnUltimoMovimiento)
+        Dim menus As New List(Of ToolStrip) From {MenuBarra, MenuBarraRenglon}
+        AsignarToolTipsMenuBarraToolStrip(menus, "Compra")
     End Sub
 
     Private Sub AsignaMov(ByVal nRow As Long, ByVal Actualiza As Boolean)
-
         dtRenglones = ft.MostrarFilaEnTabla(myConn, ds, nTablaRenglones, strSQLMov, Me.BindingContext, MenuBarraRenglon,
                                              dg, lRegion, jytsistema.sUsuario, nRow, Actualiza)
-
-        ft.habilitarObjetos(IIf(dtRenglones.Rows.Count > 0, False, True), True, txtProveedor, btnProveedor, txtNumeroSerie)
-
+        ft.habilitarObjetos(IIf(dtRenglones.Rows.Count > 0, False, True), True, cmbProveedor, txtNumeroSerie)
     End Sub
 
     Private Sub AsignaTXT(ByVal nRow As Long)
-
         With dt
-
             nPosicionEncab = nRow
             Me.BindingContext(ds, nTabla).Position = nRow
 
@@ -102,7 +114,7 @@ Public Class jsComArcNotasCredito
                 txtEmision.Value = .Item("emision")
                 txtFacturaAfectada.Text = ft.muestraCampoTexto(.Item("numcom"))
                 txtEmisionIVA.Value = .Item("emisioniva")
-                txtProveedor.Text = ft.muestraCampoTexto(.Item("codpro"))
+                cmbProveedor.SelectedValue = .Item("codpro")
                 CodigoProveedorAnterior = .Item("codpro")
                 txtReferencia.Text = ft.muestraCampoTexto(.Item("refer"))
                 Dim numControl As String = ft.DevuelveScalarCadena(myConn, " select num_control from jsconnumcon where numdoc = '" & .Item("numncr") & "' and  " _
@@ -111,8 +123,9 @@ Public Class jsComArcNotasCredito
 
                 txtControl.Text = IIf(numControl <> "0", numControl, "")
                 txtComentario.Text = ft.muestraCampoTexto(.Item("comen"))
-                txtAlmacen.Text = ft.muestraCampoTexto(.Item("almacen"))
-                txtCodigoContable.Text = ft.muestraCampoTexto(.Item("codcon"))
+                cmbAlmacenes.SelectedValue = .Item("almacen")
+                cmbCC.SelectedValue = .Item("codcon")
+                cmbMonedas.SelectedValue = .Item("Currency")
 
                 tslblPesoT.Text = ft.muestraCampoCantidad(ft.DevuelveScalarDoble(myConn, "select SUM(PESO) from jsprorenncr where numncr = '" & .Item("numncr") & "' and codpro = '" & .Item("codpro") & "' and id_emp = '" & jytsistema.WorkID & "' "))
 
@@ -183,7 +196,6 @@ Public Class jsComArcNotasCredito
     End Sub
 
     Private Sub IniciarDocumento(ByVal Inicio As Boolean)
-
         If Inicio Then
             txtCodigo.Text = Contador(myConn, lblInfo, Gestion.iCompras, "COMNUMNCC", 8)
             NumeroDocumentoAnterior = txtCodigo.Text
@@ -195,55 +207,39 @@ Public Class jsComArcNotasCredito
             ft.habilitarObjetos(False, True, txtCodigo)
             txtReferencia.Text = ""
         End If
-        '
         CodigoProveedorAnterior = "PRTMP" & ft.NumeroAleatorio(100000)
-
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtNumeroSerie, txtControl, txtProveedor, txtNombreProveedor, txtComentario,
-                            txtAlmacen, txtCodigoContable, txtFacturaAfectada)
-
-        txtAlmacen.Text = ft.DevuelveScalarCadena(myConn, "SELECT codalm FROM jsmercatalm WHERE id_emp = '" & jytsistema.WorkID & "' ORDER BY codalm LIMIT 1")
-
+        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtNumeroSerie, txtControl, txtComentario, txtFacturaAfectada)
+        cmbProveedor.SelectedIndex = -1
+        cmbAlmacenes.SelectedIndex = 0
+        cmbMonedas.SelectedIndex = 0
+        cmbCC.SelectedIndex = -1
         tslblPesoT.Text = ft.FormatoCantidad(0)
         dgIVA.Columns.Clear()
         ft.iniciarTextoObjetos(Transportables.tipoDato.Numero, txtSubTotal, txtTotalIVA, txtTotal)
-
         Impresa = 0
 
         'Movimientos
         MostrarItemsEnMenuBarra(MenuBarraRenglon, 0, 0)
         AsignarMovimientos(NumeroDocumentoAnterior, CodigoProveedorAnterior)
         AbrirIVA(NumeroDocumentoAnterior, CodigoProveedorAnterior)
-
     End Sub
     Private Sub ActivarMarco0()
-
         grpAceptarSalir.Visible = True
-
         ft.habilitarObjetos(True, False, grpEncab, grpTotales, MenuBarraRenglon)
-        ft.habilitarObjetos(True, True, txtCodigo, txtNumeroSerie, txtComentario, txtEmision, btnProveedor, txtProveedor, txtEmisionIVA,
-                         txtControl, txtAlmacen, btnAlmacen,
-                         txtReferencia, btnCodigoContable, txtFacturaAfectada)
-
+        ft.habilitarObjetos(True, True, txtCodigo, txtNumeroSerie, txtComentario, txtEmision, cmbProveedor, txtEmisionIVA,
+                         txtControl, cmbAlmacenes, txtReferencia, cmbCC, cmbMonedas, txtFacturaAfectada)
         MenuBarra.Enabled = False
         ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
-
     End Sub
     Private Sub DesactivarMarco0()
-
         i_modo = movimiento.iConsultar
-
         grpAceptarSalir.Visible = False
         ft.habilitarObjetos(False, True, txtCodigo, txtNumeroSerie, txtEmision, txtControl, txtEmisionIVA,
-                txtProveedor, txtNombreProveedor, btnProveedor, txtComentario,
-                txtAlmacen, btnAlmacen, txtNombreAlmacen, txtReferencia, txtCodigoContable, btnCodigoContable, txtFacturaAfectada)
-
+                cmbProveedor, txtComentario, cmbAlmacenes, txtReferencia, cmbCC, cmbMonedas, txtFacturaAfectada)
         ft.habilitarObjetos(False, True, txtSubTotal, txtTotalIVA, txtTotal)
-
         MenuBarraRenglon.Enabled = False
         MenuBarra.Enabled = True
-
         ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
-
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -252,7 +248,7 @@ Public Class jsComArcNotasCredito
             If ft.DevuelveScalarEntero(myConn, " select count(*) from jsproencncr " _
                                       & " where " _
                                       & " numncr = '" & txtCodigo.Text & "' and " _
-                                      & " codpro = '" & txtProveedor.Text & "' and " _
+                                      & " codpro = '" & proveedor.Codigo & "' and " _
                                       & " id_emp = '" & jytsistema.WorkID & "' ") = 0 Then
                 AgregaYCancela()
             End If
@@ -288,78 +284,64 @@ Public Class jsComArcNotasCredito
     Private Sub Imprimir()
 
         Dim f As New jsComRepParametros
-        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cNotaCredito, "Nota Crédito", txtProveedor.Text, txtCodigo.Text, txtEmision.Value)
+        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cNotaCredito, "Nota Crédito", proveedor.Codigo, txtCodigo.Text, txtEmision.Value)
         f = Nothing
 
     End Sub
     Private Function Validado() As Boolean
-
         If FechaUltimoBloqueo(myConn, "jsproencncr") >= txtEmision.Value Then
             ft.mensajeCritico("FECHA MENOR QUE ULTIMA FECHA DE CIERRE...")
             Return False
         End If
-
         If txtCodigo.Text = "" Then
             ft.mensajeCritico("Debe indicar un Número de Nota Crédito válida...")
             Return False
         End If
-
-        If txtNombreProveedor.Text = "" Then
+        If cmbProveedor.SelectedValue = "" Then
             ft.mensajeCritico("Debe indicar un proveedor válido...")
             Return False
         End If
-
-        If ft.DevuelveScalarEntero(myConn, " select count(*) from jsproencncr where numncr = '" & txtCodigo.Text & "' and codpro = '" & txtProveedor.Text & "' and id_emp = '" & jytsistema.WorkID & "'  ") > 0 AndAlso
+        If ft.DevuelveScalarEntero(myConn, " select count(*) from jsproencncr where numncr = '" & txtCodigo.Text & "' and codpro = '" & proveedor.Codigo & "' and id_emp = '" & jytsistema.WorkID & "'  ") > 0 AndAlso
             i_modo = movimiento.iAgregar Then
             ft.mensajeCritico("Número de Nota Crédito YA existe para este proveedor ...")
             Return False
         End If
-
-        If txtNombreAlmacen.Text = "" Then
+        If cmbAlmacenes.SelectedValue = "" Then
             ft.mensajeCritico("Debe indicar un almacén válido...")
             Return False
         End If
-
-
         If dtRenglones.Rows.Count = 0 Then
             ft.mensajeCritico("Debe incluir al menos un ítem...")
             Return False
         End If
-
         Return True
-
     End Function
     Private Sub GuardarTXT()
-
         Dim Codigo As String = txtCodigo.Text
         Dim Inserta As Boolean = False
-
         If i_modo = movimiento.iAgregar Then
-
             Inserta = True
             nPosicionEncab = ds.Tables(nTabla).Rows.Count
-
         End If
-
-        ft.Ejecutar_strSQL(myConn, " update jsprorenncr set numncr = '" & Codigo & "', codpro = '" & txtProveedor.Text & "' where codpro = '" & CodigoProveedorAnterior & "' and numncr = '" & NumeroDocumentoAnterior & "' and id_emp = '" & jytsistema.WorkID & "' ")
-        ft.Ejecutar_strSQL(myConn, " update jsproivancr set numncr = '" & Codigo & "', codpro = '" & txtProveedor.Text & "' where codpro = '" & CodigoProveedorAnterior & "' and numncr = '" & NumeroDocumentoAnterior & "' and id_emp = '" & jytsistema.WorkID & "' ")
+        ft.Ejecutar_strSQL(myConn, " update jsprorenncr set numncr = '" & Codigo & "', codpro = '" & proveedor.Codigo & "' where codpro = '" & CodigoProveedorAnterior & "' and numncr = '" & NumeroDocumentoAnterior & "' and id_emp = '" & jytsistema.WorkID & "' ")
+        ft.Ejecutar_strSQL(myConn, " update jsproivancr set numncr = '" & Codigo & "', codpro = '" & proveedor.Codigo & "' where codpro = '" & CodigoProveedorAnterior & "' and numncr = '" & NumeroDocumentoAnterior & "' and id_emp = '" & jytsistema.WorkID & "' ")
         ft.Ejecutar_strSQL(myConn, " update jsvenrencom set numdoc = '" & Codigo & "' where numdoc = '" & NumeroDocumentoAnterior & "' and origen = 'NCC' and id_emp = '" & jytsistema.WorkID & "' ")
+        Dim numCajas As Double = ft.DevuelveScalarDoble(myConn, " select SUM(CANTIDAD) from jsprorenncr where numncr = '" & Codigo & "' and codpro = '" & proveedor.Codigo & "' and id_emp = '" & jytsistema.WorkID & "' group by numncr ")
 
-        Dim numCajas As Double = ft.DevuelveScalarDoble(myConn, " select SUM(CANTIDAD) from jsprorenncr where numncr = '" & Codigo & "' and codpro = '" & txtProveedor.Text & "' and id_emp = '" & jytsistema.WorkID & "' group by numncr ")
+        InsertEditCOMPRASEncabezadoNOTACREDITO(myConn, lblInfo, Inserta, Codigo, txtNumeroSerie.Text, txtFacturaAfectada.Text,
+                                               txtEmision.Value, txtEmisionIVA.Value, proveedor.Codigo, txtComentario.Text, "",
+                                               cmbAlmacenes.SelectedValue, "", txtReferencia.Text, cmbCC.SelectedValue, "",
+                                               dtRenglones.Rows.Count, numCajas, ValorCantidad(tslblPesoT.Text),
+                                               ValorNumero(txtSubTotal.Text), ValorNumero(txtTotalIVA.Text), ValorNumero(txtTotal.Text),
+                                               jytsistema.sFechadeTrabajo, "0", "", jytsistema.sFechadeTrabajo, Impresa,
+                                               CodigoProveedorAnterior, NumeroDocumentoAnterior, cmbMonedas.SelectedValue, jytsistema.sFechadeTrabajo)
 
+        InsertEditCONTROLNumeroControl(myConn, Codigo, proveedor.Codigo, txtControl.Text, txtEmisionIVA.Value, "COM", "NCR")
 
-        InsertEditCOMPRASEncabezadoNOTACREDITO(myConn, lblInfo, Inserta, Codigo, txtNumeroSerie.Text, txtFacturaAfectada.Text, txtEmision.Value, txtEmisionIVA.Value,
-                txtProveedor.Text, txtComentario.Text, "", txtAlmacen.Text, "", txtReferencia.Text, txtCodigoContable.Text, "", dtRenglones.Rows.Count, numCajas,
-                ValorCantidad(tslblPesoT.Text), ValorNumero(txtSubTotal.Text), ValorNumero(txtTotalIVA.Text), ValorNumero(txtTotal.Text), jytsistema.sFechadeTrabajo,
-                "0", "", jytsistema.sFechadeTrabajo, Impresa,
-                CodigoProveedorAnterior, NumeroDocumentoAnterior)
-
-        InsertEditCONTROLNumeroControl(myConn, Codigo, txtProveedor.Text, txtControl.Text, txtEmisionIVA.Value, "COM", "NCR")
-
-        ActualizarMovimientos(NumeroDocumentoAnterior, Codigo, txtProveedor.Text)
+        ActualizarMovimientos(NumeroDocumentoAnterior, Codigo, proveedor.Codigo)
 
         dt = ft.AbrirDataTable(ds, nTabla, myConn, strSQL)
-        Dim row As DataRow = dt.Select(" NUMNCR = '" & Codigo & "' AND CODPRO = '" & txtProveedor.Text & "' AND ID_EMP = '" & jytsistema.WorkID & "' ")(0)
+        Dim row As DataRow = dt.Select(" NUMNCR = '" & Codigo & "' AND CODPRO = '" & proveedor.Codigo & "' AND ID_EMP = '" & jytsistema.WorkID & "' ")(0)
         nPosicionEncab = dt.Rows.IndexOf(row)
 
         Me.BindingContext(ds, nTabla).Position = nPosicionEncab
@@ -395,23 +377,23 @@ Public Class jsComArcNotasCredito
                         InsertEditMERCASMovimientoInventario(myConn, lblInfo, True, .Item("item"), txtEmision.Value, "SA", NumeroNotaCredito,
                                                              .Item("unidad"), .Item("cantidad"), .Item("peso"), .Item("totren"),
                                                              .Item("totrendes"), "NCC", NumeroNotaCredito, .Item("lote"), CodigoProveedor,
-                                                             0.0, 0.0, 0, 0.0, "",
-                                                             txtAlmacen.Text, .Item("renglon"), jytsistema.sFechadeTrabajo)
+                                                             0.0, 0.0, 0, 0.0, "", cmbAlmacenes.SelectedValue,
+                                                             .Item("renglon"), jytsistema.sFechadeTrabajo)
 
                         Dim AjustaPrecio As Boolean = ft.DevuelveScalarBooleano(myConn, " select ajustaprecio from jsvencaudcr where codigo = '" & .Item("causa") & "' and credito_debito = 0 and id_emp = '" & jytsistema.WorkID & "' ")
                         If AjustaPrecio Then _
-                            InsertEditMERCASMovimientoInventario(myConn, lblInfo, True, .Item("item"), txtEmision.Value, "AC", NumeroNotaCredito,
-                                                                                 .Item("unidad"), 0.0, 0.0, .Item("totren"),
-                                                                                 .Item("totrendes"), "NCC", .Item("numncr"), .Item("lote"), txtProveedor.Text,
-                                                                                 0.0, 0.0, 0, 0.0, "",
-                                                                                 txtAlmacen.Text, .Item("renglon"), jytsistema.sFechadeTrabajo)
+                            InsertEditMERCASMovimientoInventario(myConn, lblInfo, True, .Item("item"), txtEmision.Value, "AC",
+                                                                 NumeroNotaCredito, .Item("unidad"), 0.0, 0.0, .Item("totren"),
+                                                                 .Item("totrendes"), "NCC", .Item("numncr"), .Item("lote"),
+                                                                 proveedor.Codigo, 0.0, 0.0, 0, 0.0, "", cmbAlmacenes.SelectedValue,
+                                                                 .Item("renglon"), jytsistema.sFechadeTrabajo)
                     Else
 
                         InsertEditMERCASMovimientoInventario(myConn, lblInfo, True, .Item("item"), txtEmision.Value, "SA", NumeroNotaCredito,
                                                          .Item("unidad"), .Item("cantidad"), .Item("peso"), .Item("totren"),
-                                                         .Item("totrendes"), "NCC", NumeroNotaCredito, .Item("lote"), txtProveedor.Text,
-                                                         0.0, 0.0, 0, 0.0, "",
-                                                         txtAlmacen.Text, .Item("renglon"), jytsistema.sFechadeTrabajo)
+                                                         .Item("totrendes"), "NCC", NumeroNotaCredito, .Item("lote"), proveedor.Codigo,
+                                                         0.0, 0.0, 0, 0.0, "", cmbAlmacenes.SelectedValue, .Item("renglon"),
+                                                         jytsistema.sFechadeTrabajo)
 
                     End If
 
@@ -435,10 +417,11 @@ Public Class jsComArcNotasCredito
                                             & " EJERCICIO = '" & jytsistema.WorkExercise & "' AND " _
                                             & " ID_EMP = '" & jytsistema.WorkID & "'  ")
 
-        InsertEditCOMPRASCXP(myConn, lblInfo, True, txtProveedor.Text, "NC", NumeroNotaCredito, txtEmision.Value, ft.FormatoHora(Now),
+        InsertEditCOMPRASCXP(myConn, lblInfo, True, proveedor.Codigo, "NC", NumeroNotaCredito, txtEmision.Value, ft.FormatoHora(Now),
                             txtEmision.Value, txtReferencia.Text, "NOTA CREDITO N° : " & NumeroNotaCredito, ValorNumero(txtTotal.Text),
                             ValorNumero(txtTotalIVA.Text), "", "", "", "", "NCR", "", "", "", "", NumeroNotaCredito, "0", "", jytsistema.sFechadeTrabajo,
-                            txtCodigoContable.Text, "", "", 0.0, 0.0, "", "", "", "", "", "", "0", "1", "0")
+                            cmbCC.SelectedValue, "", "", 0.0, 0.0, "", "", "", "", "", "", "0", "1", "0",
+                            cmbMonedas.SelectedValue, jytsistema.sFechadeTrabajo)
 
     End Sub
 
@@ -451,7 +434,7 @@ Public Class jsComArcNotasCredito
         nPosicionEncab = Me.BindingContext(ds, nTabla).Position
         ActivarMarco0()
         IniciarDocumento(True)
-        ft.habilitarObjetos(IIf(dtRenglones.Rows.Count > 0, False, True), True, txtProveedor, btnProveedor, txtCodigo, txtNumeroSerie)
+        ft.habilitarObjetos(IIf(dtRenglones.Rows.Count > 0, False, True), True, cmbProveedor, txtCodigo, txtNumeroSerie)
     End Sub
 
     Private Sub btnEditar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditar.Click
@@ -461,7 +444,7 @@ Public Class jsComArcNotasCredito
             If nPosicionEncab >= 0 Then
                 With dt.Rows(nPosicionEncab)
                     Dim aCamposAdicionales() As String = {"numncr|'" & txtCodigo.Text & "'",
-                                                          "codpro|'" & txtProveedor.Text & "'"}
+                                                          "codpro|'" & proveedor.Codigo & "'"}
                     If DocumentoBloqueado(myConn, "jsproencncr", aCamposAdicionales) Then
                         ft.mensajeCritico("DOCUMENTO BLOQUEADO. POR FAVOR VERIFIQUE...")
                     Else
@@ -476,7 +459,7 @@ Public Class jsComArcNotasCredito
                                                           & " id_emp = '" & jytsistema.WorkID & "' ") = 0 Then
 
                                 ActivarMarco0()
-                                ft.habilitarObjetos(IIf(dtRenglones.Rows.Count > 0, False, True), True, txtProveedor, btnProveedor, txtCodigo, txtNumeroSerie)
+                                ft.habilitarObjetos(IIf(dtRenglones.Rows.Count > 0, False, True), True, cmbProveedor, txtCodigo, txtNumeroSerie)
                                 If txtReferencia.Text.Length > 2 And txtReferencia.Text.Substring(0, 2) = "FL" Then ft.habilitarObjetos(True, True, txtCodigo, txtNumeroSerie)
 
                             Else
@@ -501,7 +484,7 @@ Public Class jsComArcNotasCredito
             nPosicionEncab = Me.BindingContext(ds, nTabla).Position
             With dt.Rows(nPosicionEncab)
                 Dim aCamposAdicionales() As String = {"numncr|'" & txtCodigo.Text & "'",
-                                                      "codpro|'" & txtProveedor.Text & "'"}
+                                                      "codpro|'" & proveedor.Codigo & "'"}
                 If DocumentoBloqueado(myConn, "jsproencncr", aCamposAdicionales) Then
                     ft.mensajeCritico("DOCUMENTO BLOQUEADO. POR FAVOR VERIFIQUE...")
                 Else
@@ -525,13 +508,13 @@ Public Class jsComArcNotasCredito
                                     End With
                                 Next
 
-                                ft.Ejecutar_strSQL(myConn, " delete from jsproencncr where numncr = '" & txtCodigo.Text & "' AND CODPRO = '" & txtProveedor.Text & "' and ID_EMP = '" & jytsistema.WorkID & "'")
-                                ft.Ejecutar_strSQL(myConn, " delete from jsprorenncr where numncr = '" & txtCodigo.Text & "' and codpro = '" & txtProveedor.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
-                                ft.Ejecutar_strSQL(myConn, " delete from jsproivancr where numncr = '" & txtCodigo.Text & "' and codpro = '" & txtProveedor.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                                ft.Ejecutar_strSQL(myConn, " delete from jsproencncr where numncr = '" & txtCodigo.Text & "' AND CODPRO = '" & proveedor.Codigo & "' and ID_EMP = '" & jytsistema.WorkID & "'")
+                                ft.Ejecutar_strSQL(myConn, " delete from jsprorenncr where numncr = '" & txtCodigo.Text & "' and codpro = '" & proveedor.Codigo & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                                ft.Ejecutar_strSQL(myConn, " delete from jsproivancr where numncr = '" & txtCodigo.Text & "' and codpro = '" & proveedor.Codigo & "' and id_emp = '" & jytsistema.WorkID & "' ")
                                 ft.Ejecutar_strSQL(myConn, " delete from jsvenrencom where numdoc = '" & txtCodigo.Text & "' and origen = 'NCC' and id_emp = '" & jytsistema.WorkID & "' ")
-                                ft.Ejecutar_strSQL(myConn, " DELETE FROM jsprotrapag where CODPRO = '" & txtProveedor.Text & "' AND TIPOMOV = 'NC' AND NUMMOV = '" & txtCodigo.Text _
+                                ft.Ejecutar_strSQL(myConn, " DELETE FROM jsprotrapag where CODPRO = '" & proveedor.Codigo & "' AND TIPOMOV = 'NC' AND NUMMOV = '" & txtCodigo.Text _
                                                & "' AND ORIGEN = 'NCR' AND EJERCICIO = '" & jytsistema.WorkExercise & "' AND ID_EMP = '" & jytsistema.WorkID & "' ")
-                                EliminarMovimientosdeInventario(myConn, txtCodigo.Text, "NCC", lblInfo, , , txtProveedor.Text)
+                                EliminarMovimientosdeInventario(myConn, txtCodigo.Text, "NCC", lblInfo, , , proveedor.Codigo)
 
                                 For Each aSTR As Object In Eliminados
                                     ActualizarExistenciasPlus(myConn, aSTR)
@@ -626,11 +609,11 @@ Public Class jsComArcNotasCredito
     End Sub
 
     Private Sub btnAgregarMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarMovimiento.Click
-        If txtNombreProveedor.Text <> "" Then
+        If cmbProveedor.SelectedValue <> "" Then
             Dim f As New jsGenRenglonesMovimientos
             f.Apuntador = Me.BindingContext(ds, nTablaRenglones).Position
-            f.Agregar(myConn, ds, dtRenglones, "NCC", NumeroDocumentoAnterior, txtEmision.Value, txtAlmacen.Text,
-                      , , , , , , , , , , txtProveedor.Text, , CodigoProveedorAnterior)
+            f.Agregar(myConn, ds, dtRenglones, "NCC", NumeroDocumentoAnterior, txtEmision.Value, cmbAlmacenes.SelectedValue,
+                      , , , , , , , , , , proveedor.Codigo, , CodigoProveedorAnterior)
             nPosicionRenglon = f.Apuntador
             AsignarMovimientos(NumeroDocumentoAnterior, CodigoProveedorAnterior)
             CalculaTotales()
@@ -639,46 +622,34 @@ Public Class jsComArcNotasCredito
     End Sub
 
     Private Sub btnEditarMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditarMovimiento.Click
-
         If dtRenglones.Rows.Count > 0 Then
             Dim f As New jsGenRenglonesMovimientos
             f.Apuntador = Me.BindingContext(ds, nTablaRenglones).Position
-            f.Editar(myConn, ds, dtRenglones, "NCC", NumeroDocumentoAnterior, txtEmision.Value, txtAlmacen.Text, , ,
+            f.Editar(myConn, ds, dtRenglones, "NCC", NumeroDocumentoAnterior, txtEmision.Value, cmbAlmacenes.SelectedValue, , ,
                      IIf(dtRenglones.Rows(Me.BindingContext(ds, nTablaRenglones).Position).Item("item").ToString.Substring(0, 1) = "$", True, False),
-                     , , , , , , , txtProveedor.Text, , CodigoProveedorAnterior)
+                     , , , , , , , proveedor.Codigo, , CodigoProveedorAnterior)
             ds = DataSetRequery(ds, strSQLMov, myConn, nTablaRenglones, lblInfo)
             AsignaMov(f.Apuntador, True)
             CalculaTotales()
             f = Nothing
         End If
-
     End Sub
 
     Private Sub btnEliminarMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminarMovimiento.Click
-
         EliminarMovimiento()
-
     End Sub
     Private Sub EliminarMovimiento()
-
-
         nPosicionRenglon = Me.BindingContext(ds, nTablaRenglones).Position
-
         If nPosicionRenglon >= 0 Then
-
             If ft.PreguntaEliminarRegistro() = Windows.Forms.DialogResult.Yes Then
                 With dtRenglones.Rows(nPosicionRenglon)
                     InsertarAuditoria(myConn, MovAud.iEliminar, sModulo, .Item("item"))
-
                     Eliminados.Add(.Item("item"))
-
                     Dim aCamposDel() As String = {"numncr", "item", "renglon", "id_emp"}
                     Dim aStringsDel() As String = {NumeroDocumentoAnterior, .Item("item"), .Item("renglon"), jytsistema.WorkID}
-
                     ft.Ejecutar_strSQL(myConn, " delete from jsvenrencom where numdoc = '" & NumeroDocumentoAnterior & "' and " _
                            & " origen = 'NCC' and item = '" & .Item("item") & "' and renglon = '" & .Item("renglon") & "' and " _
                            & " id_emp = '" & jytsistema.WorkID & "' ")
-
                     nPosicionRenglon = EliminarRegistros(myConn, lblInfo, ds, nTablaRenglones, "jsprorenncr", strSQLMov, aCamposDel, aStringsDel,
                                                   Me.BindingContext(ds, nTablaRenglones).Position, True)
 
@@ -691,7 +662,6 @@ Public Class jsComArcNotasCredito
 
     End Sub
     Private Sub btnBuscarMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBuscarMovimiento.Click
-
         Dim f As New frmBuscar
         Dim Campos() As String = {"item", "descripcion"}
         Dim Nombres() As String = {"Item", "Descripción"}
@@ -700,81 +670,41 @@ Public Class jsComArcNotasCredito
         f.Buscar(dtRenglones, Campos, Nombres, Anchos, Me.BindingContext(ds, nTablaRenglones).Position, "Renglones de notas de crédito...")
         AsignaMov(f.Apuntador, False)
         f = Nothing
-
     End Sub
-
     Private Sub btnPrimerMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrimerMovimiento.Click
         Me.BindingContext(ds, nTablaRenglones).Position = 0
         AsignaMov(Me.BindingContext(ds, nTablaRenglones).Position, False)
     End Sub
-
     Private Sub btnAnteriorMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAnteriorMovimiento.Click
         Me.BindingContext(ds, nTablaRenglones).Position -= 1
         AsignaMov(Me.BindingContext(ds, nTablaRenglones).Position, False)
     End Sub
-
     Private Sub btnSiguienteMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSiguienteMovimiento.Click
         Me.BindingContext(ds, nTablaRenglones).Position += 1
         AsignaMov(Me.BindingContext(ds, nTablaRenglones).Position, False)
     End Sub
-
     Private Sub btnUltimoMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUltimoMovimiento.Click
         Me.BindingContext(ds, nTablaRenglones).Position = ds.Tables(nTablaRenglones).Rows.Count - 1
         AsignaMov(Me.BindingContext(ds, nTablaRenglones).Position, False)
     End Sub
-
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
         Imprimir()
     End Sub
-
-    Private Sub txtCliente_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtProveedor.TextChanged
-        If txtProveedor.Text <> "" Then
-            Dim aFld() As String = {"codpro", "id_emp"}
-            Dim aStr() As String = {txtProveedor.Text, jytsistema.WorkID}
-            Dim FormaDePagoCliente As String = qFoundAndSign(myConn, lblInfo, "jsprocatpro", aFld, aStr, "formapago")
-            txtNombreProveedor.Text = qFoundAndSign(myConn, lblInfo, "jsprocatpro", aFld, aStr, "nombre")
-            'If txtNombreProveedor.Text <> "" AndAlso i_modo = movimiento.iEditar Then CodigoProveedorAnterior = txtProveedor.Text
-            Dim mTotalFac As Double = ValorNumero(txtTotal.Text)
-            If i_modo = movimiento.iAgregar Then mTotalFac = 0.0
-        End If
-    End Sub
-
     Private Sub dgIVA_CellFormatting(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellFormattingEventArgs) Handles _
         dgIVA.CellFormatting
         If e.ColumnIndex = 1 Then e.Value = ft.FormatoNumero(e.Value) & "%"
     End Sub
-
-    Private Sub btnCliente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnProveedor.Click
-        txtProveedor.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codpro codigo, nombre descripcion, RIF from jsprocatpro where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Proveedores De Compras/Gastos",
-                                            txtProveedor.Text)
-    End Sub
-
     Private Sub btnAgregarServicio_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarServicio.Click
-        If txtNombreProveedor.Text <> "" Then
+        If cmbProveedor.SelectedValue <> "" Then
             Dim f As New jsGenRenglonesMovimientos
             f.Apuntador = Me.BindingContext(ds, nTablaRenglones).Position
-            f.Agregar(myConn, ds, dtRenglones, "NCC", NumeroDocumentoAnterior, txtEmision.Value, txtAlmacen.Text, , , True, , , , , , , , , , CodigoProveedorAnterior)
+            f.Agregar(myConn, ds, dtRenglones, "NCC", NumeroDocumentoAnterior, txtEmision.Value, cmbAlmacenes.SelectedValue, , , True, , , , , , , , , , CodigoProveedorAnterior)
             nPosicionRenglon = f.Apuntador
             AsignarMovimientos(NumeroDocumentoAnterior, CodigoProveedorAnterior)
             CalculaTotales()
             f = Nothing
         End If
     End Sub
-
-    Private Sub txtAlmacen_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAlmacen.TextChanged
-        txtNombreAlmacen.Text = ft.DevuelveScalarCadena(myConn, " select desalm from jsmercatalm where codalm = '" & txtAlmacen.Text & "' and id_emp = '" & jytsistema.WorkID & "' ")
-    End Sub
-
-    Private Sub btnAlmacen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAlmacen.Click
-        txtAlmacen.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codalm codigo, desalm descripcion from jsmercatalm where id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Almacenes",
-                                            txtAlmacen.Text)
-    End Sub
-
-    Private Sub btnCodigoContable_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCodigoContable.Click
-        txtCodigoContable.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcon codigo, descripcion from jscotcatcon where marca = 0 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Cuentas Contables",
-                                                   txtCodigoContable.Text)
-    End Sub
-
     Private Sub dg_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles dg.KeyUp
         Select Case e.KeyCode
             Case Keys.Down
@@ -787,11 +717,9 @@ Public Class jsComArcNotasCredito
                 AsignaMov(nPosicionRenglon, False)
         End Select
     End Sub
-
-
     Private Sub btnReconstruir_Click(sender As System.Object, e As System.EventArgs) Handles btnReconstruir.Click
         '2.- Elimina movimientos de inventarios anteriores del gasto
-        EliminarMovimientosdeInventario(myConn, txtCodigo.Text, "NCC", lblInfo, , , txtProveedor.Text)
+        EliminarMovimientosdeInventario(myConn, txtCodigo.Text, "NCC", lblInfo, , , proveedor.Codigo)
 
         '3.- Actualizar Movimientos de Inventario con los del gasto
         For Each dtRow As DataRow In dtRenglones.Rows
@@ -802,34 +730,26 @@ Public Class jsComArcNotasCredito
 
                         InsertEditMERCASMovimientoInventario(myConn, lblInfo, True, .Item("item"), txtEmision.Value, "SA", txtCodigo.Text,
                                                              .Item("unidad"), .Item("cantidad"), .Item("peso"), .Item("totren"),
-                                                             .Item("totrendes"), "NCC", txtCodigo.Text, .Item("lote"), txtProveedor.Text,
+                                                             .Item("totrendes"), "NCC", txtCodigo.Text, .Item("lote"), proveedor.Codigo,
                                                               0.0, 0.0, 0, 0.0, "",
-                                                             txtAlmacen.Text, .Item("renglon"), jytsistema.sFechadeTrabajo)
-
-                        'Dim MontoUltimaCompra As Double = UltimoCostoAFecha(myConn, lblInfo, .Item("item"), jytsistema.sFechadeTrabajo) ' IIf(.Item("cantidad") > 0, .Item("costototdes") / .Item("cantidad"), .Item("costototdes")) / Equivalencia(myConn,  .Item("item"), .Item("unidad"))
-                        'Dim nUltimoProveedor As String = UltimoProveedor(myConn, lblInfo, .Item("item"), jytsistema.sFechadeTrabajo)
-                        'Dim nUltimaFechaCompra As Date = UltimaFechaCompra(myConn, lblInfo, .Item("item"), jytsistema.sFechadeTrabajo)
-
-                        'ft.Ejecutar_strSQL ( myconn, " update jsmerctainv set fecultcosto = '" & ft.FormatoFechaMySQL(nUltimaFechaCompra) _
-                        '               & "', ultimoproveedor = '" & nUltimoProveedor _
-                        '               & "', montoultimacompra = " & MontoUltimaCompra & " where codart = '" & .Item("item") & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                                                             cmbAlmacenes.SelectedValue, .Item("renglon"), jytsistema.sFechadeTrabajo)
                     End If
-
                 End If
-
                 ActualizarExistenciasPlus(myConn, .Item("item"))
-
             End With
         Next
-
         ft.mensajeInformativo("Proceso terminado!!! ")
     End Sub
 
-    Private Sub txtCodigo_TextChanged(sender As Object, e As EventArgs) Handles txtCodigo.TextChanged, txtControl.TextChanged
-
-        If txtCodigo.Text.Trim <> "" And txtControl.Text.Trim <> "" Then txtReferencia.Text = ""
-
+    Private Sub cmbProveedor_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbProveedor.SelectedIndexChanged
+        If cmbProveedor.SelectedValue <> "" Then
+            proveedor = cmbProveedor.SelectedItem
+            Dim FormaDePagoCliente As String = proveedor.FormaDePago
+            Dim mTotalFac As Double = ValorNumero(txtTotal.Text)
+            If i_modo = movimiento.iAgregar Then mTotalFac = 0.0
+        End If
     End Sub
-
-
+    Private Sub txtCodigo_TextChanged(sender As Object, e As EventArgs) Handles txtCodigo.TextChanged, txtControl.TextChanged
+        If txtCodigo.Text.Trim <> "" And txtControl.Text.Trim <> "" Then txtReferencia.Text = ""
+    End Sub
 End Class

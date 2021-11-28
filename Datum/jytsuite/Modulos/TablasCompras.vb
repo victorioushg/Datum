@@ -87,19 +87,19 @@ Module TablasCompras
         ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub InsertEditCOMPRASEncabezadoGasto(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, ByVal NumeroGastoAnterior As String, _
-    ByVal NumeroGasto As String, ByVal NumeroSerieGasto As String, ByVal Emision As Date, ByVal EmisionIVA As Date, ByVal CodigoProveedorAnterior As String, _
-    ByVal CodigoProveedor As String, ByVal NombreProveedor As String, _
-    ByVal RIF As String, ByVal NIT As String, ByVal Comentario As String, ByVal Almacen As String, ByVal Referencia As String, ByVal CodigoContable As String, _
-    ByVal Grupo As Integer, ByVal Subgrupo As Integer, ByVal TotalNeto As Double, ByVal PorcentajeDescuento As Double, _
-    ByVal Descuento As Double, ByVal Cargos As Double, ByVal TipoIVA As String, ByVal PorcentajeIVA As Double, _
-    ByVal BaseIVA As Double, ByVal ImpuestoIVA As Double, ByVal TotalGasto As Double, ByVal Vence As Date, _
-    ByVal CondicionPago As Integer, ByVal TipoCredito As Integer, ByVal FormaPago As String, _
-    ByVal NumeroPago As String, ByVal NombrePago As String, ByVal Beneficiario As String, ByVal Caja As String, _
-    ByVal Abono As Double, ByVal Serie As String, ByVal NumeroGiros As Integer, ByVal PeriodoGiros As Integer, _
-    ByVal Interes As Double, ByVal PorcentajeInteres As Double, ByVal Asiento As String, ByVal FechaAsiento As Date, _
-    ByVal RetencionISLR As Double, ByVal NumeroCXP As String, ByVal OtraCXP As String, ByVal OtroProveedor As String, _
-    ByVal Zona As String, ByVal Impresa As String)
+    Public Sub InsertEditCOMPRASEncabezadoGasto(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, ByVal NumeroGastoAnterior As String,
+    ByVal NumeroGasto As String, ByVal NumeroSerieGasto As String, ByVal Emision As Date, ByVal EmisionIVA As Date, ByVal CodigoProveedorAnterior As String,
+    ByVal CodigoProveedor As String, ByVal NombreProveedor As String,
+    ByVal RIF As String, ByVal NIT As String, ByVal Comentario As String, ByVal Almacen As String, ByVal Referencia As String, ByVal CodigoContable As String,
+    ByVal Grupo As Integer, ByVal Subgrupo As Integer, ByVal TotalNeto As Double, ByVal PorcentajeDescuento As Double,
+    ByVal Descuento As Double, ByVal Cargos As Double, ByVal TipoIVA As String, ByVal PorcentajeIVA As Double,
+    ByVal BaseIVA As Double, ByVal ImpuestoIVA As Double, ByVal TotalGasto As Double, ByVal Vence As Date,
+    ByVal CondicionPago As Integer, ByVal TipoCredito As Integer, ByVal FormaPago As String,
+    ByVal NumeroPago As String, ByVal NombrePago As String, ByVal Beneficiario As String, ByVal Caja As String,
+    ByVal Abono As Double, ByVal Serie As String, ByVal NumeroGiros As Integer, ByVal PeriodoGiros As Integer,
+    ByVal Interes As Double, ByVal PorcentajeInteres As Double, ByVal Asiento As String, ByVal FechaAsiento As Date,
+    ByVal RetencionISLR As Double, ByVal NumeroCXP As String, ByVal OtraCXP As String, ByVal OtroProveedor As String,
+    ByVal Zona As String, ByVal Impresa As String, ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
         Dim strSQL As String
         Dim strSQLInicio As String
@@ -109,6 +109,8 @@ Module TablasCompras
             strSQLInicio = " insert into jsproencgas SET "
             strSQL = ""
             strSQLFin = " "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsproencgas SET "
             strSQL = ""
@@ -167,24 +169,25 @@ Module TablasCompras
         strSQL += ModificarCadena(jytsistema.WorkExercise, "EJERCICIO")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
-    Public Sub InsertEditCOMPRASEncabezadoGastos(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-    ByVal NumeroGasto As String, ByVal NumeroSerieGasto As String, ByVal Emision As Date, ByVal EmisionIVA As Date, _
-    ByVal CodigoProveedor As String, ByVal NombreProveedor As String, _
-    ByVal RIF As String, ByVal NIT As String, ByVal Comentario As String, ByVal Referencia As String, ByVal Almacen As String, _
-    ByVal CodigoContable As String, ByVal Grupo As Integer, ByVal Subgrupo As Integer, ByVal TotalNeto As Double, ByVal PorcentajeDescuento As Double, _
-    ByVal Descuento As Double, ByVal Cargos As Double, ByVal TipoIVA As String, ByVal PorcentajeIVA As Double, _
-    ByVal BaseIVA As Double, ByVal ImpuestoIVA As Double, ByVal ImpuestoICS As Double, ByVal RetencionIVA As Double, _
-    ByVal NumeroRetencionIVA As String, ByVal FEchaRetencionIVA As Date, ByVal TotalGasto As Double, ByVal Vence As Date, _
-    ByVal CondicionPago As Integer, ByVal TipoCredito As Integer, ByVal FormaPago As String, _
-    ByVal NumeroPago As String, ByVal NombrePago As String, ByVal Beneficiario As String, ByVal Caja As String, _
-    ByVal Abono As Double, ByVal Serie As String, ByVal NumeroGiros As Integer, ByVal PeriodoGiros As Integer, _
-    ByVal Interes As Double, ByVal PorcentajeInteres As Double, ByVal Asiento As String, ByVal FechaAsiento As Date, _
-    ByVal RetencionISLR As Double, ByVal NumeroRetencionISLR As String, ByVal FechaRetencionISLR As Date, ByVal PorcentajeRetencionISLR As Double, _
-    ByVal BaseRetencionISLR As Double, ByVal NumeroCXP As String, ByVal OtraCXP As String, ByVal OtroProveedor As String, _
-    ByVal Zona As String, ByVal TipoGasto As Integer, ByVal Impresa As String, ByVal NumeroGastoAnterior As String, ByVal CodigoProveedorAnterior As String)
+    Public Sub InsertEditCOMPRASEncabezadoGastos(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+    ByVal NumeroGasto As String, ByVal NumeroSerieGasto As String, ByVal Emision As Date, ByVal EmisionIVA As Date,
+    ByVal CodigoProveedor As String, ByVal NombreProveedor As String,
+    ByVal RIF As String, ByVal NIT As String, ByVal Comentario As String, ByVal Referencia As String, ByVal Almacen As String,
+    ByVal CodigoContable As String, ByVal Grupo As Integer, ByVal Subgrupo As Integer, ByVal TotalNeto As Double, ByVal PorcentajeDescuento As Double,
+    ByVal Descuento As Double, ByVal Cargos As Double, ByVal TipoIVA As String, ByVal PorcentajeIVA As Double,
+    ByVal BaseIVA As Double, ByVal ImpuestoIVA As Double, ByVal ImpuestoICS As Double, ByVal RetencionIVA As Double,
+    ByVal NumeroRetencionIVA As String, ByVal FEchaRetencionIVA As Date, ByVal TotalGasto As Double, ByVal Vence As Date,
+    ByVal CondicionPago As Integer, ByVal TipoCredito As Integer, ByVal FormaPago As String,
+    ByVal NumeroPago As String, ByVal NombrePago As String, ByVal Beneficiario As String, ByVal Caja As String,
+    ByVal Abono As Double, ByVal Serie As String, ByVal NumeroGiros As Integer, ByVal PeriodoGiros As Integer,
+    ByVal Interes As Double, ByVal PorcentajeInteres As Double, ByVal Asiento As String, ByVal FechaAsiento As Date,
+    ByVal RetencionISLR As Double, ByVal NumeroRetencionISLR As String, ByVal FechaRetencionISLR As Date, ByVal PorcentajeRetencionISLR As Double,
+    ByVal BaseRetencionISLR As Double, ByVal NumeroCXP As String, ByVal OtraCXP As String, ByVal OtroProveedor As String,
+    ByVal Zona As String, ByVal TipoGasto As Integer, ByVal Impresa As String, ByVal NumeroGastoAnterior As String, ByVal CodigoProveedorAnterior As String,
+                                                     ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
         Dim strSQL As String
         Dim strSQLInicio As String
@@ -194,6 +197,8 @@ Module TablasCompras
             strSQLInicio = " insert into jsproencgas SET "
             strSQL = ""
             strSQLFin = " "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsproencgas SET "
             strSQL = ""
@@ -261,7 +266,7 @@ Module TablasCompras
         strSQL += ModificarCadena(jytsistema.WorkExercise, "EJERCICIO")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
     Public Sub InsertEditCOMPRASEncabezadoPROGRAMACION(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
@@ -300,10 +305,11 @@ Module TablasCompras
     End Sub
 
     Public Sub InsertEditCOMPRASEncabezadoOrdenes(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
-                                                  ByVal NumeroDeOrden As String, ByVal NumeroSerieOrden As String, ByVal Emision As Date, ByVal Entrega As Date, _
-                                                  ByVal CodigoProveedor As String, ByVal Comentario As String, ByVal TotalNeto As Double, _
-                                                  ByVal ImporteIVA As Double, ByVal TotalOrden As Double, ByVal Estatus As String, _
-                                                  ByVal Items As Integer, ByVal Impresa As String, ByVal CodigoProveedorAnterior As String)
+                                                  ByVal NumeroDeOrden As String, ByVal NumeroSerieOrden As String, ByVal Emision As Date, ByVal Entrega As Date,
+                                                  ByVal CodigoProveedor As String, ByVal Comentario As String, ByVal TotalNeto As Double,
+                                                  ByVal ImporteIVA As Double, ByVal TotalOrden As Double, ByVal Estatus As String,
+                                                  ByVal Items As Integer, ByVal Impresa As String, ByVal CodigoProveedorAnterior As String,
+                                                      ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
         Dim strSQL As String
         Dim strSQLInicio As String
@@ -313,6 +319,8 @@ Module TablasCompras
             strSQLInicio = " insert into jsproencord SET "
             strSQL = ""
             strSQLFin = " "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsproencord SET "
             strSQL = ""
@@ -338,15 +346,16 @@ Module TablasCompras
         strSQL += ModificarCadena(jytsistema.WorkExercise, "EJERCICIO")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
     Public Sub InsertEditCOMPRASEncabezadoRecepciones(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
-                                                  ByVal NumeroRecepcion As String, ByVal NumeroSerieRecepcion As String, ByVal Emision As Date, _
-                                                  ByVal CodigoProveedor As String, ByVal Comentario As String, ByVal Responsable As String, _
-                                                  ByVal Almacen As String, ByVal TotalNeto As Double, ByVal ImporteIVA As Double, _
-                                                  ByVal TotalRecepcion As Double, ByVal Estatus As String, ByVal NumeroDeCompra As String, _
-                                                  ByVal Items As Integer, ByVal Cajas As Double, ByVal Kilos As Double, ByVal Impresa As String, ByVal CodigoProveedorAnterior As String)
+                                                  ByVal NumeroRecepcion As String, ByVal NumeroSerieRecepcion As String, ByVal Emision As Date,
+                                                  ByVal CodigoProveedor As String, ByVal Comentario As String, ByVal Responsable As String,
+                                                  ByVal Almacen As String, ByVal TotalNeto As Double, ByVal ImporteIVA As Double,
+                                                  ByVal TotalRecepcion As Double, ByVal Estatus As String, ByVal NumeroDeCompra As String,
+                                                  ByVal Items As Integer, ByVal Cajas As Double, ByVal Kilos As Double, ByVal Impresa As String, ByVal CodigoProveedorAnterior As String,
+                                                          ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
         Dim strSQL As String
         Dim strSQLInicio As String
@@ -356,6 +365,8 @@ Module TablasCompras
             strSQLInicio = " insert into jsproencrep SET "
             strSQL = ""
             strSQLFin = " "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsproencrep SET "
             strSQL = ""
@@ -385,7 +396,7 @@ Module TablasCompras
         strSQL += ModificarCadena(jytsistema.WorkExercise, "EJERCICIO")
         strSQL += ModificarCadena(jytsistema.WorkID, "ID_EMP")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
     Public Sub InsertEditCOMPRASEncabezadoCompras(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
@@ -405,7 +416,8 @@ Module TablasCompras
                                                     ByVal ImporteICS As Double, ByVal RetencionIVA As Double, ByVal NumRetencionIVA As String, ByVal FechaRetencionIVA As Date, _
                                                     ByVal RetencionISLR As Double, ByVal NumRetencionISLR As String, ByVal FechaRetencionISLR As Date, ByVal porRetencionISLR As Double, _
                                                     ByVal BaseRetencionISLR As Double, ByVal NumeroPorPagar As String, ByVal OtraCuentaPorPagar As String, ByVal OtroProveedor As String, _
-                                                    ByVal Impresa As String, ByVal CodigoProveedorAnterior As String, ByVal NumerodeCompraAnterior As String)
+                                                    ByVal Impresa As String, ByVal CodigoProveedorAnterior As String, ByVal NumerodeCompraAnterior As String, 
+                                                    ByVal Currency As Integer, byVal CurrencyDate As DateTime)
 
         Dim strSQL As String
         Dim strSQLInicio As String
@@ -415,6 +427,8 @@ Module TablasCompras
             strSQLInicio = " insert into jsproenccom SET "
             strSQL = ""
             strSQLFin = " "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsproenccom SET "
             strSQL = ""
@@ -491,14 +505,15 @@ Module TablasCompras
     End Sub
 
     Public Sub InsertEditCOMPRASEncabezadoNOTACREDITO(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
-                                                   ByVal NumeroNOTACREDITO As String, ByVal NumeroSerieNotaCredito As String, ByVal NumeroCompraAfectada As String, ByVal Emision As Date, ByVal EmisionIVA As Date, _
-                                                   ByVal CodigoProveedor As String, ByVal Comentario As String, ByVal CodigoVendedor As String, ByVal Almacen As String, _
-                                                   ByVal Transporte As String, ByVal Referencia As String, ByVal CodigoContable As String, ByVal Tarifa As String, _
-                                                   ByVal Items As Integer, ByVal Cajas As Double, ByVal Kilos As Double, _
-                                                   ByVal TotalNeto As Double, ByVal ImporteIVA As Double, _
-                                                   ByVal TotalNOTACREDITO As Double, ByVal Vencimiento As Date, _
+                                                   ByVal NumeroNOTACREDITO As String, ByVal NumeroSerieNotaCredito As String, ByVal NumeroCompraAfectada As String, ByVal Emision As Date, ByVal EmisionIVA As Date,
+                                                   ByVal CodigoProveedor As String, ByVal Comentario As String, ByVal CodigoVendedor As String, ByVal Almacen As String,
+                                                   ByVal Transporte As String, ByVal Referencia As String, ByVal CodigoContable As String, ByVal Tarifa As String,
+                                                   ByVal Items As Integer, ByVal Cajas As Double, ByVal Kilos As Double,
+                                                   ByVal TotalNeto As Double, ByVal ImporteIVA As Double,
+                                                   ByVal TotalNOTACREDITO As Double, ByVal Vencimiento As Date,
                                                    ByVal Estatus As String, ByVal Asiento As String, ByVal FechaAsiento As Date,
-                                                   ByVal Impresa As String, ByVal CodigoProveedorAnterior As String, ByVal NumeroNOTACREDITOAnterior As String)
+                                                   ByVal Impresa As String, ByVal CodigoProveedorAnterior As String, ByVal NumeroNOTACREDITOAnterior As String,
+                                                          ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
         Dim strSQL As String
         Dim strSQLInicio As String
@@ -508,6 +523,8 @@ Module TablasCompras
             strSQLInicio = " insert into jsproencncr SET "
             strSQL = ""
             strSQLFin = " "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsproencncr SET "
             strSQL = ""
@@ -544,20 +561,21 @@ Module TablasCompras
         strSQL += ModificarCadena(jytsistema.WorkExercise, "EJERCICIO")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
 
     Public Sub InsertEditCOMPRASEncabezadoNOTADEBITO(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
-                                                   ByVal NumeroNOTADEBITO As String, ByVal NumeroSerieNotaDebito As String, ByVal NumeroCompraAfectada As String, ByVal Emision As Date, ByVal EmisionIVA As Date, _
-                                                   ByVal CodigoProveedor As String, ByVal Comentario As String, ByVal Almacen As String, _
-                                                   ByVal Referencia As String, ByVal CodigoContable As String, _
-                                                   ByVal Items As Integer, ByVal Cajas As Double, ByVal Kilos As Double, _
-                                                   ByVal TotalNeto As Double, ByVal ImporteIVA As Double, _
-                                                   ByVal TotalNOTADEBITO As Double, ByVal Vencimiento As Date, _
+                                                   ByVal NumeroNOTADEBITO As String, ByVal NumeroSerieNotaDebito As String, ByVal NumeroCompraAfectada As String, ByVal Emision As Date, ByVal EmisionIVA As Date,
+                                                   ByVal CodigoProveedor As String, ByVal Comentario As String, ByVal Almacen As String,
+                                                   ByVal Referencia As String, ByVal CodigoContable As String,
+                                                   ByVal Items As Integer, ByVal Cajas As Double, ByVal Kilos As Double,
+                                                   ByVal TotalNeto As Double, ByVal ImporteIVA As Double,
+                                                   ByVal TotalNOTADEBITO As Double, ByVal Vencimiento As Date,
                                                    ByVal Asiento As String, ByVal FechaAsiento As Date,
-                                                   ByVal CodigoProveedorAnterior As String, ByVal NumeroNOTADEBITOAnterior As String)
+                                                   ByVal CodigoProveedorAnterior As String, ByVal NumeroNOTADEBITOAnterior As String,
+                                                         ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
         Dim strSQL As String
         Dim strSQLInicio As String
@@ -567,6 +585,8 @@ Module TablasCompras
             strSQLInicio = " insert into jsproencndb SET "
             strSQL = ""
             strSQLFin = " "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsproencndb SET "
             strSQL = ""
@@ -599,7 +619,7 @@ Module TablasCompras
         strSQL += ModificarCadena(jytsistema.WorkExercise, "EJERCICIO")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
     '//////////////////////// RENGLONES
@@ -996,16 +1016,17 @@ Module TablasCompras
 
     End Sub
     '/////////////////////////////////////////////////////////// 
-    Public Sub InsertEditCOMPRASCXP(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, ByVal CodigoProveedor As String, _
-        ByVal TipoMovimiento As String, ByVal NumeroMovimiento As String, ByVal FechaEmision As Date, ByVal Hora As String, _
-        ByVal FechaVencimiento As Date, ByVal Referencia As String, ByVal Concepto As String, ByVal Importe As Double, _
-        ByVal ImporteIVA As Double, ByVal FormaPago As String, ByVal NumeroPago As String, ByVal NombrePago As String, _
-        ByVal Beneficiario As String, ByVal Origen As String, ByVal NumeroDeposito As String, ByVal CuentaDeposito As String, _
-        ByVal BancoDeposito As String, ByVal CajaPago As String, ByVal NumeroOrigen As String, ByVal MultiCancelacion As String, _
-        ByVal Asiento As String, ByVal FechaAsiento As Date, ByVal CodigoContable As String, ByVal Multidocumento As String, _
-        ByVal TipoDocumentoCancelado As String, ByVal Intereses As Double, ByVal Capital As Double, ByVal NumeroComprobante As String, _
-        ByVal Banco As String, ByVal CuentaBancaria As String, ByVal Remesa As String, ByVal CodigoVendedor As String, _
-        ByVal CodigoCobrador As String, ByVal TipoProveedor As Integer, ByVal FoTipo As String, ByVal Historico As String)
+    Public Sub InsertEditCOMPRASCXP(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, ByVal CodigoProveedor As String,
+        ByVal TipoMovimiento As String, ByVal NumeroMovimiento As String, ByVal FechaEmision As Date, ByVal Hora As String,
+        ByVal FechaVencimiento As Date, ByVal Referencia As String, ByVal Concepto As String, ByVal Importe As Double,
+        ByVal ImporteIVA As Double, ByVal FormaPago As String, ByVal NumeroPago As String, ByVal NombrePago As String,
+        ByVal Beneficiario As String, ByVal Origen As String, ByVal NumeroDeposito As String, ByVal CuentaDeposito As String,
+        ByVal BancoDeposito As String, ByVal CajaPago As String, ByVal NumeroOrigen As String, ByVal MultiCancelacion As String,
+        ByVal Asiento As String, ByVal FechaAsiento As Date, ByVal CodigoContable As String, ByVal Multidocumento As String,
+        ByVal TipoDocumentoCancelado As String, ByVal Intereses As Double, ByVal Capital As Double, ByVal NumeroComprobante As String,
+        ByVal Banco As String, ByVal CuentaBancaria As String, ByVal Remesa As String, ByVal CodigoVendedor As String,
+        ByVal CodigoCobrador As String, ByVal TipoProveedor As Integer, ByVal FoTipo As String, ByVal Historico As String,
+                                        ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
         Dim strSQL As String = ""
         Dim strSQLInicio As String
@@ -1014,6 +1035,8 @@ Module TablasCompras
         If Insertar Then
             strSQLInicio = " insert into jsprotrapag SET "
             strSQLFin = " "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsprotrapag SET "
             strSQLFin = " WHERE " _
@@ -1066,14 +1089,15 @@ Module TablasCompras
         strSQL += ModificarCadena(jytsistema.WorkExercise, "EJERCICIO")
         strSQL += ModificarCadena(jytsistema.WorkID, "ID_EMP")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
 
-    Public Sub InsertEditCOMPRASCancelacion(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _
-    ByVal CodigoProveedor As String, ByVal TipoMovimiento As String, ByVal NumeroMovimiento As String, _
-    ByVal Emision As Date, ByVal Referencia As String, ByVal Concepto As String, ByVal Importe As Double, _
-    ByVal Comprobante As String, ByVal CodigoVendedor As String)
+    Public Sub InsertEditCOMPRASCancelacion(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
+    ByVal CodigoProveedor As String, ByVal TipoMovimiento As String, ByVal NumeroMovimiento As String,
+    ByVal Emision As Date, ByVal Referencia As String, ByVal Concepto As String, ByVal Importe As Double,
+    ByVal Comprobante As String, ByVal CodigoVendedor As String, ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
+
 
 
         Dim strSQL As String = ""
@@ -1082,6 +1106,8 @@ Module TablasCompras
 
         If Insertar Then
             strSQLInicio = " insert into jsprotrapagcan SET "
+            strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
+            strSQL += ModificarEntero(Currency, "currency")
         Else
             strSQLInicio = " UPDATE jsprotrapagcan set "
             strSQLFin = " WHERE " _
@@ -1102,7 +1128,7 @@ Module TablasCompras
         strSQL += ModificarCadena(Comprobante, "comproba")
         strSQL += ModificarCadena(jytsistema.WorkID, "id_emp")
 
-        ft.Ejecutar_strSQL(myconn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
+        ft.Ejecutar_strSQL(MyConn, Actualizar_strSQL(strSQLInicio, strSQL, strSQLFin))
 
     End Sub
     Public Sub InsertEditCOMPRASGrupo(ByVal Myconn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean, _

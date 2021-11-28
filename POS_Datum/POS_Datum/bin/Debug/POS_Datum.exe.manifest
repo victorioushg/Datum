@@ -318,14 +318,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Datum.exe" size="31470592">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Datum.exe" size="31483392">
       <assemblyIdentity name="Datum" version="2.9.1.1" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>n+w/WdioLz5JXbtaYdfXaqoKbxDJ6j9uPjJg4MR/9OE=</dsig:DigestValue>
+        <dsig:DigestValue>2vCLWOMFGqKYIKN954GNuFfAgl87XiAsZ3XpPnKaWDA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -342,14 +342,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="fTransport.dll" size="113152">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="fTransport.dll" size="113664">
       <assemblyIdentity name="fTransport" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>6MEggO9KXAs2JNkqVjofjOuGtp2JQhpx5Nt3nGxXOe8=</dsig:DigestValue>
+        <dsig:DigestValue>PcOzJZSY61bY6UWYMorbiB1KvLr0AzSY/BhZB+xPaQI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -462,14 +462,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="POS_Datum.exe" size="2478592">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="POS_Datum.exe" size="2526720">
       <assemblyIdentity name="POS_Datum" version="2.2.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>1R3+Fm8fTaE/xaAZ982FTsw01/TVhLi8RIYx6CvjHBI=</dsig:DigestValue>
+        <dsig:DigestValue>evIygQIDs4P4B5daBtnUh0a0HNrKmEfxRZuwM/78zsE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

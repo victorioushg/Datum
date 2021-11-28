@@ -230,9 +230,6 @@ D:\DESARROLLO\ProyectosDotNet\Datum\POS_Datum\POS_Datum\bin\Debug\Google.Protobu
 D:\DESARROLLO\ProyectosDotNet\Datum\POS_Datum\POS_Datum\bin\Debug\K4os.Compression.LZ4.xml
 D:\DESARROLLO\ProyectosDotNet\Datum\POS_Datum\POS_Datum\bin\Debug\K4os.Compression.LZ4.Streams.xml
 D:\DESARROLLO\ProyectosDotNet\Datum\POS_Datum\POS_Datum\bin\Debug\K4os.Hash.xxHash.xml
-D:\DESARROLLO\ProyectosDotNet\Datum\POS_Datum\POS_Datum\bin\Debug\MetroFramework.pdb
-D:\DESARROLLO\ProyectosDotNet\Datum\POS_Datum\POS_Datum\bin\Debug\MetroFramework.Design.pdb
-D:\DESARROLLO\ProyectosDotNet\Datum\POS_Datum\POS_Datum\bin\Debug\MetroFramework.Fonts.pdb
 D:\DESARROLLO\ProyectosDotNet\Datum\POS_Datum\POS_Datum\bin\Debug\MySql.Data.xml
 D:\DESARROLLO\ProyectosDotNet\Datum\POS_Datum\POS_Datum\bin\Debug\Syncfusion.Core.WinForms.xml
 D:\DESARROLLO\ProyectosDotNet\Datum\POS_Datum\POS_Datum\bin\Debug\Syncfusion.Data.WinForms.xml

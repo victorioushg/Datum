@@ -705,20 +705,24 @@ Module FuncionesControl
     End Function
 
 
-    Public Sub InitiateDropDownInterchangeCurrency(MyConn As MySqlConnection, cmbMonedas As SfComboBox, FechaLista As Date,
-                                                   Optional defaultValue As Boolean = False)
+    Public Function InitiateDropDownInterchangeCurrency(MyConn As MySqlConnection, cmbMonedas As SfComboBox, FechaLista As Date,
+                                                   Optional defaultValue As Boolean = False,
+                                                   Optional displayMember As String = "UnidadMonetaria") As List(Of CambioMonedaPlus)
 
-        cmbMonedas.DataSource = GetListaDeMonedasyCambios(MyConn, FechaLista)
-        cmbMonedas.DisplayMember = "UnidadMonetaria"
+        Dim lista = GetListaDeMonedasyCambios(MyConn, FechaLista)
+        cmbMonedas.DataSource = lista
+        cmbMonedas.DisplayMember = displayMember
         cmbMonedas.ValueMember = "Moneda"
         cmbMonedas.Watermark = "Escoja una moneda"
         cmbMonedas.AutoCompleteMode = AutoCompleteMode.Suggest
-        cmbMonedas.DropDownStyle = DropDownStyle.DropDown
+        cmbMonedas.DropDownStyle = DropDownStyle.DropDownList
         cmbMonedas.AutoCompleteSuggestMode = AutoCompleteSuggestMode.Contains
         cmbMonedas.MaxDropDownItems = 10
         If defaultValue Then cmbMonedas.SelectedValue = jytsistema.WorkCurrency.Id
 
-    End Sub
+        Return lista
+
+    End Function
 
 
 End Module

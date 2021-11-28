@@ -14,8 +14,7 @@ Public Module TablasVentas
     ByVal Multidocumento As String, ByVal TipoDocumentoCancelado As String, ByVal Interes As Double,
     ByVal Capital As Double, ByVal Comprobante As String, ByVal Banco As String, ByVal CuentaBancaria As String,
     ByVal Remesa As String, ByVal CodigoVendedor As String, ByVal CodigoCobrador As String, ByVal Historico As String,
-    ByVal DebitoCredito As String, ByVal Division As String,
-                                   ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
+    ByVal DebitoCredito As String, ByVal Division As String, ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
         Dim strSQL As String
         Dim strSQLInicio As String
@@ -28,13 +27,11 @@ Public Module TablasVentas
         If CodigoCobrador = "" Then CodigoCobrador = qFoundAndSign(MyConn, lblInfo, "jsvencatcli", aF, aFN, "cobrador")
 
         If Insertar Then
-
             strSQLInicio = " insert into jsventracob SET "
             strSQL = ""
             strSQLFin = " "
             strSQL += ModificarFechaTiempoPlus(CurrencyDate, "currency_date")
             strSQL += ModificarEntero(Currency, "currency")
-
         Else
             Dim strHORA As String = ""
             If Hora <> "" Then strHORA = " HORA = '" & Hora & "' AND "
@@ -50,10 +47,7 @@ Public Module TablasVentas
                 & " ejercicio = '" & jytsistema.WorkExercise & "' AND " _
                 & " division = '" & Division & "' and " _
                 & " id_emp = '" & jytsistema.WorkID & "' "
-
-
         End If
-
         strSQL = strSQL & ModificarCadena(CodigoCliente, "codcli")
         strSQL = strSQL & ModificarCadena(TipoMovimiento, "tipomov")
         strSQL = strSQL & ModificarCadena(NumeroMovimiento, "nummov")
@@ -97,8 +91,7 @@ Public Module TablasVentas
     Public Sub InsertEditVENTASCancelacion(ByVal MyConn As MySqlConnection, ByVal lblInfo As Label, ByVal Insertar As Boolean,
    ByVal CodigoCliente As String, ByVal TipoMovimiento As String, ByVal NumeroMovimiento As String,
    ByVal Emision As Date, ByVal Referencia As String, ByVal Concepto As String, ByVal Importe As Double,
-   ByVal Comprobante As String, ByVal CodigoVendedor As String,
-                                           ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
+   ByVal Comprobante As String, ByVal CodigoVendedor As String, ByVal Currency As Integer, ByVal CurrencyDate As DateTime)
 
 
         Dim strSQL As String = ""

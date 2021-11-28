@@ -158,11 +158,14 @@ Module FuncionesTransportables
                         tt.SetToolTip(btn, "<B>Duplicar</B> este(a) " & menuName)
                     Case "btnRecalcular"
                         tt.SetToolTip(btn, "<B>Recalcular</B> este(a) " & menuName)
+                    Case "btnReconstruir"
+                        tt.SetToolTip(btn, "<B>Reconstruye</B> movimientos de este documento")
                     Case "btnRemesas"
                         tt.SetToolTip(btn, "Construir <B>Remesas de Cheques de Alimentacion</B> de esta " & menuName)
                     Case "btnAdelantoEfectivo"
                         tt.SetToolTip(btn, "<B>Adelantos de EFectivo</B> desde esta " & menuName)
-
+                    Case "btnAuditoria"
+                        tt.SetToolTip(btn, "Ver <B>Auditoría</B> de este documento ")
                     Case "btnAgregarMovimiento"
                         'Menu barra renglón
                         tt.SetToolTip(btn, "<B>Agregar</B> renglón en " & menuName)

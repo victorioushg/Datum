@@ -82,7 +82,7 @@ Public Class scrMain
             IniciarBloqueoDeClientes()
             IniciarCierreDiarioVentas()
             IniciarCierreDeRutas(myConn, ds)
-            inicioHorarios = IniciarDiasTrabajo(myConn, ds, jytsistema.sFechadeTrabajo, lblInfo)
+            ''      inicioHorarios = IniciarDiasTrabajo(myConn, ds, jytsistema.sFechadeTrabajo, lblInfo)
 
             IniciarReporteador()
             IniciarUnidadesDeMedida(myConn)
@@ -3064,6 +3064,10 @@ Public Class scrMain
         nGestion = CInt(IIf(nName.Length = 10, Microsoft.VisualBasic.Right(nName, 1),
                        Microsoft.VisualBasic.Right(nName, 2))) - 1
 
+    End Sub
+
+    Private Sub scrMain_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        Cursor.Current = Cursors.Default
     End Sub
 #End Region
 

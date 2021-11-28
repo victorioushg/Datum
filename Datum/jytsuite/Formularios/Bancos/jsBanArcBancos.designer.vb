@@ -851,6 +851,7 @@ Partial Class jsBanArcBancos
         '
         Me.cmbMonedas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbMonedas.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbMonedas.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.cmbMonedas.DisplayMember = "nombre"
         Me.cmbMonedas.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
         Me.cmbMonedas.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
@@ -871,6 +872,7 @@ Partial Class jsBanArcBancos
         '
         Me.cmbCC.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbCC.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbCC.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.cmbCC.DisplayMember = "nombre"
         Me.cmbCC.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
         Me.cmbCC.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)

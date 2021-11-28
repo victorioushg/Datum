@@ -7,7 +7,7 @@ Public Class Saving
     Public Property Saldo() As Decimal
     Public Property Currency() As Integer
 
-    Public ReadOnly Property DisplayNamne As String
+    Public ReadOnly Property DisplayName As String
         Get
             Return Codigo & " | " & Descripcion
         End Get

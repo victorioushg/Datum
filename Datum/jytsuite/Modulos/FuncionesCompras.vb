@@ -235,16 +235,210 @@ Module FuncionesCompras
         Dim aFld() As String = {"recibido", "emision", "numcom", "codpro", "nombre", "emisioniva", "fechasi"}
         Dim aNom() As String = {"", "Emisión", "N° Documento", "Código Proveedor", "Nombre Proveedor", "Fecha IVA", "Fecha Asiento"}
         Dim aAnc() As Integer = {20, 90, 120, 120, 350, 90, 90}
-        Dim aAli() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda, _
+        Dim aAli() As Integer = {AlineacionDataGrid.Centro, AlineacionDataGrid.Centro, AlineacionDataGrid.Izquierda, AlineacionDataGrid.Izquierda,
                                      AlineacionDataGrid.Izquierda, AlineacionDataGrid.Centro, AlineacionDataGrid.Centro}
         Dim aFor() As String = {"", sFormatoFechaCorta, "", "", "", sFormatoFechaCorta, sFormatoFechaCorta}
 
 
         IniciarTablaSeleccion(dg, dt, aFld, aNom, aAnc, aAli, aFor)
 
-
-
-
     End Sub
+
+    ''//// Listas de Datos 
+
+    Public Function GetVendorList(MyConn As MySqlConnection) As List(Of Vendor)
+
+        Dim strSQL = " select p.codpro Codigo, p.nombre, p.RIF, p.Zona, p.formapago FormaDePago  " &
+            "  " &
+            "  " &
+            " from jsprocatpro p " &
+            " where " &
+            " p.id_emp='" & jytsistema.WorkID & "' order by p.nombre "
+
+        Return Lista(Of Vendor)(MyConn, strSQL)
+
+    End Function
+    Public Function GetVendorZonesList(MyConn As MySqlConnection) As List(Of SimpleTable)
+
+        Dim strSQL = " select codigo, descrip descripcion from jsconctatab where modulo = '" &
+            FormatoTablaSimple(Modulo.iZonaProveedor) & "' and id_emp = '" & jytsistema.WorkID & "'  order by 1 "
+        Return Lista(Of SimpleTable)(MyConn, strSQL)
+
+    End Function
+
+    Public Function GetVendorBalance(MyConn As MySqlConnection, CodigoProveedor As String, Remesa As String) As List(Of VendorTransaction)
+        Dim strSQL As String = " SELECT a.codpro CodigoProveedor, a.nummov NumeroMovimiento, a.tipomov TipoMovimiento, " _
+                                 & " a.refer Referencia, a.emision, a.vence Vencimiento, a.importe Importe, c.saldo " _
+                                 & " FROM jsprotrapag a " _
+                                 & " LEFT JOIN (SELECT a.codpro, a.nummov, a.tipomov, IFNULL(SUM(a.IMPORTE),0) saldo, a.id_emp " _
+                                 & "            FROM jsprotrapag a " _
+                                 & "            WHERE " _
+                                 & "            a.REMESA = '" & Remesa & "' AND " _
+                                 & "            a.codpro = '" & CodigoProveedor & "' AND " _
+                                 & "            a.id_emp = '" & jytsistema.WorkID & "' " _
+                                 & "            GROUP BY a.nummov) c ON (a.codpro = c.codpro AND a.nummov = c.nummov AND a.id_emp = c.id_emp) " _
+                                 & " WHERE " _
+                                 & " CONCAT(a.nummov, a.emision, a.hora) IN (SELECT MIN(CONCAT(nummov, emision, hora)) FROM jsprotrapag a WHERE a.codpro = '" & CodigoProveedor & "' GROUP BY nummov) AND " _
+                                 & " a.codpro = '" & CodigoProveedor & "'  AND " _
+                                 & " a.codpro <> '' AND " _
+                                 & " (c.saldo > 0.001 OR c.saldo < -0.001) AND " _
+                                 & " a.historico = '0' AND " _
+                                 & " a.REMESA = '" & Remesa & "' AND " _
+                                 & " a.ID_EMP = '" & jytsistema.WorkID & "' " _
+                                 & " ORDER BY a.nummov, a.emision "
+
+        Return Lista(Of VendorTransaction)(MyConn, strSQL)
+
+    End Function
+    Public Function GetVendorBalanceISLR(MyConn As MySqlConnection, CodigoProveedor As String, Remesa As String) As List(Of VendorTransaction)
+        Dim strSQL As String = " Select a.codpro CodigoProveedor, a.nummov NumeroMovimiento, a.tipomov TipoMovimiento, " _
+                          & " c.num_control NumeroControl, a.emision, a.vence Vencimiento, a.importe, c.saldo " _
+                          & " FROM jsprotrapag a " _
+                          & " LEFT JOIN (Select a.codpro, a.numcom nummov, c.num_control, SUM(a.costototdes) saldo, a.id_emp " _
+                                            & " FROM jsprorencom a " _
+                                            & " LEFT JOIN jsproenccom b ON (a.numcom = b.numcom And a.codpro = b.codpro And a.id_emp = b.id_emp) " _
+                                            & " LEFT JOIN jsconnumcon c ON (a.numcom = c.numdoc And a.codpro = c.prov_cli And b.emisioniva = c.emision And c.org = 'COM' AND origen = 'COM' AND a.id_emp = c.id_emp)" _
+                                            & " LEFT JOIN jsmercatser d on (a.item = concat('$', d.codser) and d.tipo = '0' and a.id_emp = d.id_emp) " _
+                                            & " WHERE " _
+                                            & " d.tiposervicio = '0' and  d.tipo = '0' and " _
+                                            & " b.num_ret_islr = '' AND " _
+                                            & " a.codpro = '" & CodigoProveedor & "' and " _
+                                            & " MID(a.item,1,1) = '$' AND " _
+                                            & " a.id_emp = '" & jytsistema.WorkID & "' " _
+                                            & " GROUP BY a.codpro, a.numcom " _
+                                            & " UNION " _
+                                            & " SELECT a.codpro, a.numgas, c.num_control, SUM(a.costototdes) saldo, a.id_emp " _
+                                            & " FROM jsprorengas a " _
+                                            & " LEFT JOIN jsproencgas b ON (a.numgas = b.numgas AND a.codpro = b.codpro AND a.id_emp = b.id_emp) " _
+                                            & " LEFT JOIN jsconnumcon c ON (a.numgas = c.numdoc AND a.codpro = c.prov_cli AND b.emisioniva = c.emision AND c.org = 'GAS' AND origen = 'COM' AND a.id_emp = c.id_emp) " _
+                                            & " LEFT JOIN jsmercatser d on (a.item = concat('$', d.codser) and d.tipo = '0' and a.id_emp = d.id_emp) " _
+                                            & " WHERE " _
+                                            & " d.tiposervicio = '0' and d.tipo = '0' and " _
+                                            & " b.num_ret_islr = '' AND " _
+                                            & " a.codpro = '" & CodigoProveedor & "' and " _
+                                            & " MID(a.item,1,1) = '$' AND " _
+                                            & " a.id_emp = '" & jytsistema.WorkID & "' " _
+                                            & " GROUP BY a.codpro, a.numgas) c ON (a.codpro = c.codpro AND a.nummov = c.nummov AND a.id_emp = c.id_emp) " _
+                          & " WHERE " _
+                          & " CONCAT(a.nummov, a.emision, a.hora) IN (SELECT MIN(CONCAT(nummov, emision, hora)) FROM jsprotrapag a WHERE a.codpro = '" & CodigoProveedor & "' GROUP BY nummov) AND " _
+                          & " a.codpro = '" & CodigoProveedor & "'  AND " _
+                          & " a.codpro <> '' AND " _
+                          & " (c.saldo > 0.001 OR c.saldo < -0.001) AND " _
+                          & " a.REMESA = '" & Remesa & "' AND " _
+                          & " a.historico = '0' AND " _
+                          & " a.ID_EMP = '" & jytsistema.WorkID & "' " _
+                          & " ORDER BY a.nummov, a.emision "
+        Return Lista(Of VendorTransaction)(MyConn, strSQL)
+
+    End Function
+
+    Public Function GetVendorBalanceIVA(MyConn As MySqlConnection, CodigoProveedor As String, Remesa As String) As List(Of VendorTransaction)
+        Dim strSQL As String = "SELECT a.codpro, b.nombre, a.nummov, a.tipomov, d.num_control, a.emision, a.vence, a.importe, c.impiva ImporteIVA " _
+                          & " FROM jsprotrapag a " _
+                          & " LEFT JOIN jsprocatpro b ON (a.codpro = b.codpro AND a.id_emp = b.id_emp) " _
+                          & " LEFT JOIN (SELECT a.codpro, a.numcom nummov, SUM(a.baseiva) baseiva, SUM(a.impiva) impiva, a.id_emp " _
+                          & "            FROM jsproivacom a " _
+                          & "            WHERE " _
+                          & "            a.tipoiva NOT IN ('', 'E') AND " _
+                          & "            a.codpro = '" & CodigoProveedor & "' AND " _
+                          & "            a.id_emp = '" & jytsistema.WorkID & "' " _
+                          & "            GROUP BY a.numcom) c ON (a.codpro = c.codpro AND a.nummov = c.nummov AND a.id_emp = c.id_emp) " _
+                          & " LEFT JOIN jsconnumcon d on (a.nummov = d.numdoc and a.codpro = d.prov_cli and d.org = 'COM' and d.origen = 'COM' and a.id_emp = d.id_emp) " _
+                          & " LEFT JOIN (SELECT a.codpro, a.nummov, IFNULL(SUM(a.IMPORTE),0) saldo FROM jsprotrapag a WHERE a.codpro = '" & CodigoProveedor & "' AND a.id_emp = '" & jytsistema.WorkID & "' GROUP BY a.nummov HAVING saldo <> 0.00) e ON (a.nummov = e.nummov AND a.codpro = e.codpro ) " _
+                          & " WHERE " _
+                          & " d.num_control <> '' and " _
+                          & " CONCAT(a.nummov, a.emision, a.hora) IN (SELECT MIN(CONCAT(nummov, emision, hora)) FROM jsprotrapag a WHERE a.codpro = '" & CodigoProveedor & "' GROUP BY nummov) AND " _
+                          & " a.nummov NOT IN (SELECT a.nummov FROM jsprotrapag a WHERE a.tipomov = 'NC'  AND SUBSTRING(a.concepto,1,13) = 'RETENCION IVA' AND a.codpro = '" & CodigoProveedor & "' AND a.id_emp = '" & jytsistema.WorkID & "' GROUP BY a.nummov) AND " _
+                          & " a.codpro = '" & CodigoProveedor & "'  AND " _
+                          & " a.codpro <> '' AND " _
+                          & " c.impiva <> 0.00 AND " _
+                          & " e.saldo <> 0.00 AND " _
+                          & " a.historico = '0' AND " _
+                          & " a.REMESA = '" & Remesa & "' AND " _
+                          & " a.ID_EMP = '" & jytsistema.WorkID & "' " _
+                          & " UNION " _
+                          & " SELECT a.codpro, b.nombre, a.nummov, a.tipomov, d.num_control, a.emision, a.vence, a.importe, c.impiva ImporteIVA " _
+                          & " FROM jsprotrapag a " _
+                          & " LEFT JOIN jsprocatpro b ON (a.codpro = b.codpro AND a.id_emp = b.id_emp) " _
+                          & " LEFT JOIN (SELECT a.codpro, a.numgas nummov, SUM(a.baseiva) baseiva, SUM(a.impiva) impiva, a.id_emp " _
+                          & "            FROM jsproivagas a " _
+                          & "            WHERE " _
+                          & "            a.tipoiva NOT IN ('', 'E') AND " _
+                          & "            a.codpro = '" & CodigoProveedor & "' AND " _
+                          & "            a.id_emp = '" & jytsistema.WorkID & "' " _
+                          & "            GROUP BY a.numgas) c ON (a.codpro = c.codpro AND a.nummov = c.nummov AND a.id_emp = c.id_emp) " _
+                          & " LEFT JOIN jsconnumcon d on (a.nummov = d.numdoc and a.codpro = d.prov_cli and d.org = 'GAS' and d.origen = 'COM' and a.id_emp = d.id_emp) " _
+                          & " LEFT JOIN (SELECT a.codpro, a.nummov, IFNULL(SUM(a.IMPORTE),0) saldo FROM jsprotrapag a WHERE a.codpro = '" & CodigoProveedor & "' AND a.id_emp = '" & jytsistema.WorkID & "' GROUP BY a.nummov HAVING saldo <> 0.00) e ON (a.nummov = e.nummov AND a.codpro = e.codpro ) " _
+                          & " WHERE " _
+                          & " d.num_control <> '' and " _
+                          & " CONCAT(a.nummov, a.emision, a.hora) IN (SELECT MIN(CONCAT(nummov, emision, hora)) FROM jsprotrapag a WHERE a.codpro = '" & CodigoProveedor & "' GROUP BY nummov) AND " _
+                          & " a.nummov NOT IN (SELECT a.nummov FROM jsprotrapag a WHERE a.tipomov = 'NC'  AND SUBSTRING(a.concepto,1,13) = 'RETENCION IVA' AND a.codpro = '" & CodigoProveedor & "' AND a.id_emp = '" & jytsistema.WorkID & "' GROUP BY a.nummov) AND " _
+                          & " a.codpro = '" & CodigoProveedor & "'  AND " _
+                          & " a.codpro <> '' AND " _
+                          & " c.impiva <> 0.00 AND " _
+                          & " e.saldo <> 0.00 AND " _
+                          & " a.historico = '0' AND " _
+                          & " a.REMESA = '" & Remesa & "' AND " _
+                          & " a.ID_EMP = '" & jytsistema.WorkID & "' " _
+                          & " UNION " _
+                          & " SELECT a.codpro, b.nombre, a.nummov, a.tipomov, d.num_control, a.emision, a.vence, a.importe, c.impiva ImporteIVA " _
+                          & " FROM jsprotrapag a " _
+                          & " LEFT JOIN jsprocatpro b ON (a.codpro = b.codpro AND a.id_emp = b.id_emp) " _
+                          & " LEFT JOIN (SELECT a.codpro, a.numncr nummov, SUM(a.baseiva) baseiva, SUM(a.impiva) impiva, a.id_emp " _
+                          & "            FROM jsproivancr a " _
+                          & "            WHERE " _
+                          & "            a.tipoiva NOT IN ('', 'E') AND " _
+                          & "            a.codpro = '" & CodigoProveedor & "' AND " _
+                          & "            a.id_emp = '" & jytsistema.WorkID & "' " _
+                          & "            GROUP BY a.numncr) c ON (a.codpro = c.codpro AND a.nummov = c.nummov AND a.id_emp = c.id_emp) " _
+                          & " LEFT JOIN jsconnumcon d on (a.nummov = d.numdoc and a.codpro = d.prov_cli  and d.org = 'NCR' and d.origen = 'COM' and a.id_emp = d.id_emp) " _
+                          & " LEFT JOIN (SELECT a.codpro, a.nummov, IFNULL(SUM(a.IMPORTE),0) saldo FROM jsprotrapag a WHERE a.codpro = '" & CodigoProveedor & "' AND a.id_emp = '" & jytsistema.WorkID & "' GROUP BY a.nummov HAVING saldo <> 0.00) e ON (a.nummov = e.nummov AND a.codpro = e.codpro ) " _
+                          & " WHERE " _
+                          & " d.num_control <> '' and " _
+                          & " CONCAT(a.nummov, a.emision, a.hora) IN (SELECT MIN(CONCAT(nummov, emision, hora)) FROM jsprotrapag a WHERE a.codpro = '" & CodigoProveedor & "' GROUP BY nummov) AND " _
+                          & " a.nummov NOT IN (SELECT a.nummov FROM jsprotrapag a WHERE a.tipomov = 'NC'  AND SUBSTRING(a.concepto,1,13) = 'RETENCION IVA' AND a.codpro = '" & CodigoProveedor & "' AND a.id_emp = '" & jytsistema.WorkID & "' GROUP BY a.nummov) AND " _
+                          & " a.codpro = '" & CodigoProveedor & "'  AND " _
+                          & " a.codpro <> '' AND " _
+                          & " c.impiva <> 0.00 AND " _
+                          & " e.saldo <> 0.00 AND " _
+                          & " a.REMESA = '" & Remesa & "' AND " _
+                          & " a.historico = '0' AND " _
+                          & " a.ID_EMP = '" & jytsistema.WorkID & "' " _
+                          & " UNION " _
+                          & " SELECT a.codpro, b.nombre, a.nummov, a.tipomov, d.num_control, a.emision, a.vence, a.importe, c.impiva ImporteIVA " _
+                          & " FROM jsprotrapag a " _
+                          & " LEFT JOIN jsprocatpro b ON (a.codpro = b.codpro AND a.id_emp = b.id_emp) " _
+                          & " LEFT JOIN (SELECT a.codpro, a.numndb nummov, SUM(a.baseiva) baseiva, SUM(a.impiva) impiva, a.id_emp " _
+                          & "            FROM jsproivandb a " _
+                          & "            WHERE " _
+                          & "            a.tipoiva NOT IN ('', 'E') AND " _
+                          & "            a.codpro = '" & CodigoProveedor & "' AND " _
+                          & "            a.id_emp = '" & jytsistema.WorkID & "' " _
+                          & "            GROUP BY a.numndb) c ON (a.codpro = c.codpro AND a.nummov = c.nummov AND a.id_emp = c.id_emp) " _
+                          & " LEFT JOIN jsconnumcon d on (a.nummov = d.numdoc and a.codpro = d.prov_cli and d.org = 'NDB' and d.origen = 'COM' and a.id_emp = d.id_emp) " _
+                          & " LEFT JOIN (SELECT a.codpro, a.nummov, IFNULL(SUM(a.IMPORTE),0) saldo FROM jsprotrapag a WHERE a.codpro = '" & CodigoProveedor & "' AND a.id_emp = '" & jytsistema.WorkID & "' GROUP BY a.nummov HAVING saldo <> 0.00) e ON (a.nummov = e.nummov AND a.codpro = e.codpro ) " _
+                          & " WHERE " _
+                          & " d.num_control <> '' and " _
+                          & " CONCAT(a.nummov, a.emision, a.hora) IN (SELECT MIN(CONCAT(nummov, emision, hora)) FROM jsprotrapag a WHERE a.codpro = '" & CodigoProveedor & "' GROUP BY nummov) AND " _
+                          & " a.nummov NOT IN (SELECT a.nummov FROM jsprotrapag a WHERE a.tipomov = 'NC'  AND SUBSTRING(a.concepto,1,13) = 'RETENCION IVA' AND a.codpro = '" & CodigoProveedor & "' AND a.id_emp = '" & jytsistema.WorkID & "' GROUP BY a.nummov) AND " _
+                          & " a.codpro = '" & CodigoProveedor & "'  AND " _
+                          & " a.codpro <> '' AND " _
+                          & " c.impiva <> 0.00 AND " _
+                          & " e.saldo <> 0.00 AND " _
+                          & " a.REMESA = '" & Remesa & "' AND " _
+                          & " a.historico = '0' AND " _
+                          & " a.ID_EMP = '" & jytsistema.WorkID & "'" _
+                          & " ORDER BY nummov, emision "
+        Return Lista(Of VendorTransaction)(MyConn, strSQL)
+    End Function
+
+    Public Function GetCreditCauses(MyConn As MySqlConnection, Origen As String) As List(Of CreditCause)
+        Dim strSQL As String = " select Codigo, Descripcion, CR Credit, Valida_documentos ValidaDocumentos, Origen, FormaPago, " _
+            & " numpag NumeroPago, nompag NombrePago " _
+            & " from jsconcausas_notascredito  where origen  = '" & Origen & "' order by codigo "
+        Return Lista(Of CreditCause)(MyConn, strSQL)
+
+    End Function
+
 
 End Module

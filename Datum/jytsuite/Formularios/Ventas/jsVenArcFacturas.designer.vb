@@ -36,10 +36,8 @@ Partial Class jsVenArcFacturas
         Me.txtImpresion = New System.Windows.Forms.TextBox()
         Me.lblControl = New System.Windows.Forms.Label()
         Me.txtControl = New System.Windows.Forms.TextBox()
-        Me.btnCodigoContable = New System.Windows.Forms.Button()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.txtCodigoContable = New System.Windows.Forms.TextBox()
         Me.txtReferencia = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -124,6 +122,7 @@ Partial Class jsVenArcFacturas
         Me.Label9 = New System.Windows.Forms.Label()
         Me.txtTotal = New System.Windows.Forms.TextBox()
         Me.lblTotal = New System.Windows.Forms.Label()
+        Me.cmbCC = New Syncfusion.WinForms.ListView.SfComboBox()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpEncab.SuspendLayout()
         CType(Me.cmbAlmacenes, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -140,6 +139,7 @@ Partial Class jsVenArcFacturas
         Me.MenuDescuentos.SuspendLayout()
         CType(Me.dgDescuentos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgIVA, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cmbCC, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblInfo
@@ -175,6 +175,7 @@ Partial Class jsVenArcFacturas
         Me.grpEncab.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpEncab.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.grpEncab.Controls.Add(Me.cmbCC)
         Me.grpEncab.Controls.Add(Me.cmbAlmacenes)
         Me.grpEncab.Controls.Add(Me.cmbTransportes)
         Me.grpEncab.Controls.Add(Me.cmbAsesores)
@@ -185,10 +186,8 @@ Partial Class jsVenArcFacturas
         Me.grpEncab.Controls.Add(Me.txtImpresion)
         Me.grpEncab.Controls.Add(Me.lblControl)
         Me.grpEncab.Controls.Add(Me.txtControl)
-        Me.grpEncab.Controls.Add(Me.btnCodigoContable)
         Me.grpEncab.Controls.Add(Me.Label17)
         Me.grpEncab.Controls.Add(Me.Label16)
-        Me.grpEncab.Controls.Add(Me.txtCodigoContable)
         Me.grpEncab.Controls.Add(Me.txtReferencia)
         Me.grpEncab.Controls.Add(Me.Label14)
         Me.grpEncab.Controls.Add(Me.Label4)
@@ -216,6 +215,7 @@ Partial Class jsVenArcFacturas
         '
         Me.cmbAlmacenes.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbAlmacenes.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbAlmacenes.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.cmbAlmacenes.DisplayMember = "nombre"
         Me.cmbAlmacenes.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
         Me.cmbAlmacenes.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
@@ -236,6 +236,7 @@ Partial Class jsVenArcFacturas
         '
         Me.cmbTransportes.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbTransportes.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbTransportes.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.cmbTransportes.DisplayMember = "nombre"
         Me.cmbTransportes.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
         Me.cmbTransportes.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
@@ -256,6 +257,7 @@ Partial Class jsVenArcFacturas
         '
         Me.cmbAsesores.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbAsesores.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbAsesores.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.cmbAsesores.DisplayMember = "nombre"
         Me.cmbAsesores.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
         Me.cmbAsesores.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
@@ -276,6 +278,7 @@ Partial Class jsVenArcFacturas
         '
         Me.cmbCliente.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbCliente.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbCliente.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.cmbCliente.DisplayMember = "nombre"
         Me.cmbCliente.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
         Me.cmbCliente.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
@@ -296,6 +299,7 @@ Partial Class jsVenArcFacturas
         '
         Me.cmbMonedas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbMonedas.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbMonedas.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.cmbMonedas.DisplayMember = "nombre"
         Me.cmbMonedas.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
         Me.cmbMonedas.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
@@ -390,20 +394,10 @@ Partial Class jsVenArcFacturas
         Me.txtControl.TabIndex = 232
         Me.txtControl.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'btnCodigoContable
-        '
-        Me.btnCodigoContable.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCodigoContable.Location = New System.Drawing.Point(565, 136)
-        Me.btnCodigoContable.Name = "btnCodigoContable"
-        Me.btnCodigoContable.Size = New System.Drawing.Size(25, 20)
-        Me.btnCodigoContable.TabIndex = 229
-        Me.btnCodigoContable.Text = "•••"
-        Me.btnCodigoContable.UseVisualStyleBackColor = True
-        '
         'Label17
         '
         Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(455, 136)
+        Me.Label17.Location = New System.Drawing.Point(455, 129)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(108, 20)
         Me.Label17.TabIndex = 228
@@ -413,28 +407,18 @@ Partial Class jsVenArcFacturas
         'Label16
         '
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(455, 116)
+        Me.Label16.Location = New System.Drawing.Point(452, 92)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(131, 20)
+        Me.Label16.Size = New System.Drawing.Size(128, 20)
         Me.Label16.TabIndex = 227
         Me.Label16.Text = "Referencia"
         Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtCodigoContable
-        '
-        Me.txtCodigoContable.Enabled = False
-        Me.txtCodigoContable.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCodigoContable.Location = New System.Drawing.Point(592, 137)
-        Me.txtCodigoContable.MaxLength = 19
-        Me.txtCodigoContable.Name = "txtCodigoContable"
-        Me.txtCodigoContable.Size = New System.Drawing.Size(158, 20)
-        Me.txtCodigoContable.TabIndex = 226
         '
         'txtReferencia
         '
         Me.txtReferencia.Enabled = False
         Me.txtReferencia.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtReferencia.Location = New System.Drawing.Point(592, 116)
+        Me.txtReferencia.Location = New System.Drawing.Point(589, 93)
         Me.txtReferencia.MaxLength = 19
         Me.txtReferencia.Name = "txtReferencia"
         Me.txtReferencia.Size = New System.Drawing.Size(158, 20)
@@ -525,7 +509,7 @@ Partial Class jsVenArcFacturas
         '
         Me.cmbTarifa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbTarifa.FormattingEnabled = True
-        Me.cmbTarifa.Location = New System.Drawing.Point(708, 94)
+        Me.cmbTarifa.Location = New System.Drawing.Point(705, 124)
         Me.cmbTarifa.Margin = New System.Windows.Forms.Padding(1)
         Me.cmbTarifa.Name = "cmbTarifa"
         Me.cmbTarifa.Size = New System.Drawing.Size(42, 21)
@@ -575,7 +559,7 @@ Partial Class jsVenArcFacturas
         'Label3
         '
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(650, 94)
+        Me.Label3.Location = New System.Drawing.Point(647, 124)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(54, 19)
         Me.Label3.TabIndex = 2
@@ -1196,6 +1180,27 @@ Partial Class jsVenArcFacturas
         Me.lblTotal.Text = "Total"
         Me.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'cmbCC
+        '
+        Me.cmbCC.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbCC.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbCC.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.cmbCC.DisplayMember = "nombre"
+        Me.cmbCC.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbCC.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCC.Location = New System.Drawing.Point(455, 148)
+        Me.cmbCC.Name = "cmbCC"
+        Me.cmbCC.Size = New System.Drawing.Size(295, 23)
+        Me.cmbCC.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.cmbCC.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbCC.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCC.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbCC.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCC.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbCC.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbCC.TabIndex = 241
+        Me.cmbCC.ValueMember = "codcli"
+        '
         'jsVenArcFacturas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1236,6 +1241,7 @@ Partial Class jsVenArcFacturas
         Me.MenuDescuentos.PerformLayout()
         CType(Me.dgDescuentos, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgIVA, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cmbCC, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1310,9 +1316,7 @@ Partial Class jsVenArcFacturas
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents Label16 As System.Windows.Forms.Label
-    Friend WithEvents txtCodigoContable As System.Windows.Forms.TextBox
     Friend WithEvents txtReferencia As System.Windows.Forms.TextBox
-    Friend WithEvents btnCodigoContable As System.Windows.Forms.Button
     Friend WithEvents tscmbUltimos As System.Windows.Forms.ToolStripComboBox
     Friend WithEvents lblControl As System.Windows.Forms.Label
     Friend WithEvents txtControl As System.Windows.Forms.TextBox
@@ -1343,4 +1347,5 @@ Partial Class jsVenArcFacturas
     Friend WithEvents cmbAsesores As Syncfusion.WinForms.ListView.SfComboBox
     Friend WithEvents cmbAlmacenes As Syncfusion.WinForms.ListView.SfComboBox
     Friend WithEvents cmbTransportes As Syncfusion.WinForms.ListView.SfComboBox
+    Friend WithEvents cmbCC As Syncfusion.WinForms.ListView.SfComboBox
 End Class

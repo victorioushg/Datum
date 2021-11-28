@@ -112,7 +112,7 @@ Public Class jsBanArcCajas
         ''Movimientos
         savingTransactionList = GetSavingLines(myConn, Caja.Codigo)
         Dim aCampos As List(Of dgField) = New List(Of dgField)() From {
-            New dgField("Fecha", "FECHA", 80, DataGridViewContentAlignment.MiddleCenter, FormatoFecha.FormatoFecha),
+            New dgField("Fecha", "FECHA", 80, DataGridViewContentAlignment.MiddleCenter, FormatoFecha.Corta),
             New dgField("TipoMovimiento", "TP", 30, DataGridViewContentAlignment.MiddleCenter, ""),
             New dgField("NumeroMovimiento", "Documento", 120, DataGridViewContentAlignment.MiddleLeft, ""),
             New dgField("FormaDePago", "FP", 35, DataGridViewContentAlignment.MiddleCenter, ""),
@@ -340,7 +340,7 @@ Public Class jsBanArcCajas
     End Sub
     Private Sub btnBuscarMovimiento_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBuscarMovimiento.Click
         Dim aCampos As List(Of dgFieldSF) = New List(Of dgFieldSF)() From {
-            New dgFieldSF(TypeColumn.DateTimeColumn, "Fecha", "FECHA", 80, HorizontalAlignment.Center, FormatoFecha.FormatoFecha),
+            New dgFieldSF(TypeColumn.DateTimeColumn, "Fecha", "FECHA", 80, HorizontalAlignment.Center, FormatoFecha.Corta),
             New dgFieldSF(TypeColumn.TextColumn, "NumeroMovimiento", "Documento", 120, HorizontalAlignment.Left, ""),
             New dgFieldSF(TypeColumn.TextColumn, "FormaDePago", "FP", 35, HorizontalAlignment.Center, ""),
             New dgFieldSF(TypeColumn.TextColumn, "NumeroDePago", "No Pago", 120, HorizontalAlignment.Left, ""),

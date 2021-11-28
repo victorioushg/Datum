@@ -3,16 +3,14 @@ Module jytsistema
     'Constantes Publicas
 
     Public Class FormatoFecha
-        Public Const FormatoFecha As String = "dd-MM-yyyy"
-        Public Const FormatoFechaBarra As String = "dd/MM/yyyy"
-        Public Const FormatoFechaMedia As String = "dd-MM-yyyy"
-        Public Const FormatoFechaCorta As String = "dd-MM-yyyy"
-        Public Const FormatoFechaLarga As String = "D"
-        Public Const FormatoFechaHoraMySQL As String = "yyyy-MM-dd HH:mm:ss"
-        Public Const FormatoHora As String = "hh:mm:ss"
-        Public Const FormatoHoraCorta As String = "HH:mm"
-        Public Const FormatoFechaFiscal = "ddmmyy"
-        Public Const FormatoFechaMySQL As String = "yyyy-MM-dd"
+        Public Const Corta As String = "dd-MM-yyyy"
+        Public Const CortaBarras As String = "dd/MM/yyyy"
+        Public Const Larga As String = "D"
+        Public Const FechaHoraMySQL As String = "yyyy-MM-dd HH:mm:ss"
+        Public Const Hora As String = "hh:mm:ss"
+        Public Const HoraCorta As String = "HH:mm"
+        Public Const FechaFiscal = "ddmmyy"
+        Public Const FechaMySQL As String = "yyyy-MM-dd"
     End Class
 
     Public Class FormatoNumero
@@ -1011,6 +1009,18 @@ Module jytsistema
             New TextoValor("SALIDA", "SA", 1)
         }
 
+    Public tipoMovimientoBanco As List(Of TextoValor) = New List(Of TextoValor)() From {
+            New TextoValor("DEPOSITO", "DP", 0),
+            New TextoValor("NOTA CREDITO", "NC", 1),
+            New TextoValor("CHEQUE", "CH", 2),
+            New TextoValor("NOTA DEBITO", "ND", 3)
+        }
+
+    Public tipoDepositoBanco As List(Of TextoValor) = New List(Of TextoValor)() From {
+            New TextoValor("NORMAL", "NM", 0),
+            New TextoValor("DIFERIDO", "DF", 1)
+        }
+
     Public formasDePago As List(Of TextoValor) = New List(Of TextoValor)() From {
             New TextoValor("Efectivo", "EF", 0),
             New TextoValor("Cheque", "CH", 1),
@@ -1020,7 +1030,17 @@ Module jytsistema
             New TextoValor("Transferencia", "TR", 5)
         }
 
-
+    Public tipoMovimientoCXP As List(Of TextoValor) = New List(Of TextoValor)() From {
+            New TextoValor("Factura", "FC", 0),
+            New TextoValor("Giro", "GR", 1),
+            New TextoValor("Nota Débito", "ND", 2),
+            New TextoValor("Abono", "AB", 3),
+            New TextoValor("Cancelación", "CA", 4),
+            New TextoValor("Nota Crédito", "NC", 5),
+            New TextoValor("---", "--", 6),
+            New TextoValor("Retención IVA", "NC", 7),
+            New TextoValor("Retención ISLR", "NC", 8)
+        }
 
     Public aFormaPagoCompras() As String = {"Efectivo", "Cheque", "Tarjeta", "Transferencia"}
     Public aFormaPagoAbreviadaCompras() As String = {"EF", "CH", "TA", "TR"}

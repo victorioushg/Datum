@@ -34,8 +34,6 @@ Partial Class jsBanArcBancosMovimientosPlus
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.cmbTipo = New System.Windows.Forms.ComboBox()
-        Me.cmbTipoDeposito = New System.Windows.Forms.ComboBox()
         Me.dgAsiento = New System.Windows.Forms.DataGridView()
         Me.MenuComisiones = New System.Windows.Forms.ToolStrip()
         Me.btnAgregaCC = New System.Windows.Forms.ToolStripButton()
@@ -46,10 +44,16 @@ Partial Class jsBanArcBancosMovimientosPlus
         Me.btnBeneficiario = New System.Windows.Forms.Button()
         Me.grpCheque = New System.Windows.Forms.GroupBox()
         Me.txtFecha = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.cmbMonedas = New Syncfusion.WinForms.ListView.SfComboBox()
+        Me.cmbTipo = New Syncfusion.WinForms.ListView.SfComboBox()
+        Me.cmbTipoDeposito = New Syncfusion.WinForms.ListView.SfComboBox()
         Me.grpAceptarSalir.SuspendLayout()
         CType(Me.dgAsiento, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuComisiones.SuspendLayout()
         Me.grpCheque.SuspendLayout()
+        CType(Me.cmbMonedas, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cmbTipo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cmbTipoDeposito, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'grpAceptarSalir
@@ -189,26 +193,6 @@ Partial Class jsBanArcBancosMovimientosPlus
         Me.Label6.TabIndex = 90
         Me.Label6.Text = "Beneficiario"
         '
-        'cmbTipo
-        '
-        Me.cmbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbTipo.FormattingEnabled = True
-        Me.cmbTipo.Location = New System.Drawing.Point(127, 33)
-        Me.cmbTipo.Margin = New System.Windows.Forms.Padding(1)
-        Me.cmbTipo.Name = "cmbTipo"
-        Me.cmbTipo.Size = New System.Drawing.Size(155, 21)
-        Me.cmbTipo.TabIndex = 102
-        '
-        'cmbTipoDeposito
-        '
-        Me.cmbTipoDeposito.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbTipoDeposito.FormattingEnabled = True
-        Me.cmbTipoDeposito.Location = New System.Drawing.Point(303, 33)
-        Me.cmbTipoDeposito.Margin = New System.Windows.Forms.Padding(1)
-        Me.cmbTipoDeposito.Name = "cmbTipoDeposito"
-        Me.cmbTipoDeposito.Size = New System.Drawing.Size(94, 21)
-        Me.cmbTipoDeposito.TabIndex = 104
-        '
         'dgAsiento
         '
         Me.dgAsiento.AllowUserToAddRows = False
@@ -297,9 +281,9 @@ Partial Class jsBanArcBancosMovimientosPlus
         Me.grpCheque.Controls.Add(Me.MenuComisiones)
         Me.grpCheque.Controls.Add(Me.Label6)
         Me.grpCheque.Controls.Add(Me.txtBeneficiario)
-        Me.grpCheque.Location = New System.Drawing.Point(0, 135)
+        Me.grpCheque.Location = New System.Drawing.Point(0, 145)
         Me.grpCheque.Name = "grpCheque"
-        Me.grpCheque.Size = New System.Drawing.Size(829, 204)
+        Me.grpCheque.Size = New System.Drawing.Size(829, 194)
         Me.grpCheque.TabIndex = 114
         Me.grpCheque.TabStop = False
         '
@@ -315,6 +299,69 @@ Partial Class jsBanArcBancosMovimientosPlus
         Me.txtFecha.Style.BackColor = System.Drawing.Color.AliceBlue
         Me.txtFecha.TabIndex = 239
         '
+        'cmbMonedas
+        '
+        Me.cmbMonedas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbMonedas.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbMonedas.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.cmbMonedas.DisplayMember = "nombre"
+        Me.cmbMonedas.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbMonedas.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbMonedas.Location = New System.Drawing.Point(288, 115)
+        Me.cmbMonedas.Name = "cmbMonedas"
+        Me.cmbMonedas.Size = New System.Drawing.Size(362, 20)
+        Me.cmbMonedas.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.cmbMonedas.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbMonedas.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbMonedas.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbMonedas.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbMonedas.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbMonedas.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbMonedas.TabIndex = 244
+        Me.cmbMonedas.ValueMember = "codcli"
+        '
+        'cmbTipo
+        '
+        Me.cmbTipo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbTipo.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbTipo.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.cmbTipo.DisplayMember = "nombre"
+        Me.cmbTipo.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbTipo.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbTipo.Location = New System.Drawing.Point(127, 33)
+        Me.cmbTipo.Name = "cmbTipo"
+        Me.cmbTipo.Size = New System.Drawing.Size(155, 20)
+        Me.cmbTipo.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.cmbTipo.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbTipo.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbTipo.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbTipo.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbTipo.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbTipo.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbTipo.TabIndex = 245
+        Me.cmbTipo.ValueMember = "codcli"
+        '
+        'cmbTipoDeposito
+        '
+        Me.cmbTipoDeposito.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbTipoDeposito.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbTipoDeposito.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.cmbTipoDeposito.DisplayMember = "nombre"
+        Me.cmbTipoDeposito.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbTipoDeposito.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbTipoDeposito.Location = New System.Drawing.Point(288, 33)
+        Me.cmbTipoDeposito.Name = "cmbTipoDeposito"
+        Me.cmbTipoDeposito.Size = New System.Drawing.Size(136, 20)
+        Me.cmbTipoDeposito.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.cmbTipoDeposito.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbTipoDeposito.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbTipoDeposito.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbTipoDeposito.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbTipoDeposito.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbTipoDeposito.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmbTipoDeposito.TabIndex = 246
+        Me.cmbTipoDeposito.ValueMember = "codcli"
+        '
         'jsBanArcBancosMovimientosPlus
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -323,11 +370,12 @@ Partial Class jsBanArcBancosMovimientosPlus
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(833, 369)
         Me.ControlBox = False
+        Me.Controls.Add(Me.cmbTipoDeposito)
+        Me.Controls.Add(Me.cmbTipo)
+        Me.Controls.Add(Me.cmbMonedas)
         Me.Controls.Add(Me.txtFecha)
         Me.Controls.Add(Me.grpCheque)
-        Me.Controls.Add(Me.cmbTipoDeposito)
         Me.Controls.Add(Me.grpAceptarSalir)
-        Me.Controls.Add(Me.cmbTipo)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
@@ -350,6 +398,9 @@ Partial Class jsBanArcBancosMovimientosPlus
         Me.MenuComisiones.PerformLayout()
         Me.grpCheque.ResumeLayout(False)
         Me.grpCheque.PerformLayout()
+        CType(Me.cmbMonedas, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cmbTipo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cmbTipoDeposito, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -368,8 +419,6 @@ Partial Class jsBanArcBancosMovimientosPlus
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents cmbTipo As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbTipoDeposito As System.Windows.Forms.ComboBox
     Friend WithEvents dgAsiento As System.Windows.Forms.DataGridView
     Friend WithEvents MenuComisiones As System.Windows.Forms.ToolStrip
     Friend WithEvents btnAgregaCC As System.Windows.Forms.ToolStripButton
@@ -380,4 +429,7 @@ Partial Class jsBanArcBancosMovimientosPlus
     Friend WithEvents grpCheque As System.Windows.Forms.GroupBox
     Friend WithEvents btnEditarCC As System.Windows.Forms.ToolStripButton
     Friend WithEvents txtFecha As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents cmbMonedas As Syncfusion.WinForms.ListView.SfComboBox
+    Friend WithEvents cmbTipo As Syncfusion.WinForms.ListView.SfComboBox
+    Friend WithEvents cmbTipoDeposito As Syncfusion.WinForms.ListView.SfComboBox
 End Class

@@ -212,7 +212,7 @@ Public Class jsBanArcBancos
         ''Movimientos
         bankTransactionList = GetBankLines(myConn, CodigoBanco)
         Dim aCampos As List(Of dgField) = New List(Of dgField)() From {
-            New dgField("FechaMovimiento", "FECHA", 80, DataGridViewContentAlignment.MiddleCenter, FormatoFecha.FormatoFecha),
+            New dgField("FechaMovimiento", "FECHA", 80, DataGridViewContentAlignment.MiddleCenter, FormatoFecha.Corta),
             New dgField("TipoMovimiento", "TP", 30, DataGridViewContentAlignment.MiddleCenter, ""),
             New dgField("NumeroMovimiento", "Documento", 120, DataGridViewContentAlignment.MiddleLeft, ""),
             New dgField("Concepto", "Concepto", 350, DataGridViewContentAlignment.MiddleLeft, ""),
@@ -340,7 +340,7 @@ Public Class jsBanArcBancos
             If Trim(txtCodigo.Text) <> "" Then
                 Dim f As New jsBanArcBancosMovimientosPlus
                 f.Apuntador = nPosicionMov
-                f.Agregar(myConn, ds, dtMovimientos, txtCodigo.Text)
+                f.Agregar(myConn, ds, dtMovimientos, txtCodigo.Text, cmbMonedas.SelectedValue)
                 AsignaMov(f.Apuntador, IIf(f.Apuntador >= 0, True, False))
                 f = Nothing
             End If
@@ -558,7 +558,7 @@ Public Class jsBanArcBancos
             f = Nothing
         Else
             Dim aCampos As List(Of dgFieldSF) = New List(Of dgFieldSF)() From {
-                New dgFieldSF(TypeColumn.DateTimeColumn, "FechaMovimiento", "Fecha Movimiento   ", 80, HorizontalAlignment.Center, FormatoFecha.FormatoFecha),
+                New dgFieldSF(TypeColumn.DateTimeColumn, "FechaMovimiento", "Fecha Movimiento   ", 80, HorizontalAlignment.Center, FormatoFecha.Corta),
                 New dgFieldSF(TypeColumn.TextColumn, "NumeroMovimiento", "Documento   ", 120, HorizontalAlignment.Left, ""),
                 New dgFieldSF(TypeColumn.TextColumn, "Concepto", "Concepto   ", 350, HorizontalAlignment.Left, ""),
                 New dgFieldSF(TypeColumn.TextColumn, "ProveedorCliente", "Proveedor/Cliente  ", 350, HorizontalAlignment.Left, "")

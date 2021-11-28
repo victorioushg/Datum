@@ -23,8 +23,9 @@ Public Class jsVenArcFacturas
     Private dtIVA As New DataTable
     Private dtDescuentos As New DataTable
     Private ft As New Transportables
-    Private interchangeList As New List(Of CambioMonedaPlus)
 
+    Private interchangeList As New List(Of CambioMonedaPlus)
+    Private accountList As New List(Of AccountBase)
     Private cliente As New Customer()
     Private asesor As New SalesForce()
     Private moneda As New CambioMonedaPlus()
@@ -103,6 +104,8 @@ Public Class jsVenArcFacturas
         interchangeList = GetListaDeMonedasyCambios(myConn, jytsistema.sFechadeTrabajo)
         InitiateDropDownInterchangeCurrency(myConn, cmbMonedas, jytsistema.sFechadeTrabajo)
 
+        accountList = InitiateDropDown(Of AccountBase)(myConn, cmbCC)
+
         '' Transportes
         InitiateDropDown(Of SimpleTable)(myConn, cmbTransportes, Tipo.Transportes)
         '' Alamacenes 
@@ -166,7 +169,7 @@ Public Class jsVenArcFacturas
                     cmbAlmacenes.SelectedValue = .Item("almacen")
                     ft.RellenaCombo(aTarifa, cmbTarifa, ft.InArray(aTarifa, .Item("tarifa").ToString))
                     txtReferencia.Text = ft.muestraCampoTexto(.Item("refer"))
-                    txtCodigoContable.Text = ft.muestraCampoTexto(.Item("codcon"))
+                    cmbCC.SelectedValue = .Item("codcon")
 
                     tslblPesoT.Text = ft.FormatoCantidad(.Item("kilos"))
 
@@ -241,9 +244,10 @@ Public Class jsVenArcFacturas
             txtCodigo.Text = ""
         End If
 
-        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtControl, txtComentario, txtReferencia, txtCodigoContable, txtVencimiento, txtCondicionPago, txtImpresion)
+        ft.iniciarTextoObjetos(Transportables.tipoDato.Cadena, txtControl, txtComentario, txtReferencia, txtVencimiento, txtCondicionPago, txtImpresion)
         cmbCliente.SelectedIndex = -1
         cmbAsesores.SelectedIndex = -1
+        cmbCC.SelectedIndex = -1
         cmbTransportes.SelectedIndex = 0
         cmbAlmacenes.SelectedIndex = 0
 
@@ -313,7 +317,7 @@ Public Class jsVenArcFacturas
 
         ft.habilitarObjetos(True, False, grpEncab, grpTotales, MenuBarraRenglon, MenuDescuentos)
         ft.habilitarObjetos(True, True, txtComentario, txtEmision, cmbCliente, cmbTarifa, cmbTransportes, cmbAlmacenes,
-                         txtReferencia, btnCodigoContable)
+                         txtReferencia, cmbCC)
         If CBool(ParametroPlus(myConn, Gestion.iVentas, "VENFACPA09")) Then cmbAsesores.Enabled = True
         ft.visualizarObjetos(True, grpDisponibilidad)
         MenuBarra.Enabled = False
@@ -327,7 +331,7 @@ Public Class jsVenArcFacturas
         ft.habilitarObjetos(False, True, txtCodigo, txtEmision, txtControl, txtEstatus,
                 cmbCliente, txtComentario, cmbAsesores, cmbMonedas,
                 cmbTarifa, txtVencimiento, txtCondicionPago, cmbTransportes, cmbAlmacenes,
-                txtReferencia, txtCodigoContable, btnCodigoContable, txtImpresion)
+                txtReferencia, cmbCC, txtImpresion)
 
         ft.habilitarObjetos(False, True, txtDescuentos, txtCargos, MenuDescuentos, txtSubTotal, txtTotalIVA, txtTotal)
         ft.visualizarObjetos(False, grpDisponibilidad)
@@ -532,7 +536,7 @@ Public Class jsVenArcFacturas
 
         InsertEditVENTASEncabezadoFactura(myConn, lblInfo, Inserta, Codigo, txtEmision.Value, cliente.Codcli,
                                                txtComentario.Text, asesor.Codigo, almacen.Codigo, transporte.Codigo,
-                                               CDate(txtVencimiento.Text), txtReferencia.Text, txtCodigoContable.Text,
+                                               CDate(txtVencimiento.Text), txtReferencia.Text, cmbCC.SelectedValue,
                                                ValorEntero(dtRenglones.Rows.Count), 0.0, ValorCantidad(tslblPesoT.Text),
                                                ValorNumero(txtSubTotal.Text), 0.0, 0.0, 0.0, 0.0, 0.0, ValorNumero(txtDescuentos.Text),
                                                0.0, 0.0, 0.0, 0.0, ValorNumero(txtCargos.Text), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
@@ -620,7 +624,7 @@ Public Class jsVenArcFacturas
             InsertEditVENTASCXC(myConn, lblInfo, True, cliente.Codcli, "FC", NumeroFactura, txtEmision.Value, ft.FormatoHora(Now),
                                 FechaVencimiento, txtReferencia.Text, "Factura : " & NumeroFactura, ValorNumero(txtTotal.Text),
                                 ValorNumero(txtTotalIVA.Text), "", "", "", "", "", "FAC", NumeroFactura, "0", "", jytsistema.sFechadeTrabajo,
-                                txtCodigoContable.Text, "", "", 0.0, 0.0, "", "", "", "", asesor.Codigo, asesor.Codigo, "0", "0", "",
+                                cmbCC.SelectedValue, "", "", 0.0, 0.0, "", "", "", "", asesor.Codigo, asesor.Codigo, "0", "0", "",
                                 moneda.Moneda, DateTime.Now())
 
 
@@ -1074,11 +1078,6 @@ Public Class jsVenArcFacturas
             CalculaTotales()
             f = Nothing
         End If
-    End Sub
-
-    Private Sub btnCodigoContable_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCodigoContable.Click
-        txtCodigoContable.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcon codigo, descripcion from jscotcatcon where marca = 0 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Cuentas Contables",
-                                                   txtCodigoContable.Text)
     End Sub
 
     Private Sub dgDescuentos_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)

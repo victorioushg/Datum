@@ -691,7 +691,7 @@ namespace fTransport
 
         public void IniciarDataGridWithList<T>(SfDataGrid dg, List<T> list, List<SfDataGridField> fields, bool Encabezado = true,
             bool EditaCampos = false, Font fnt = null, bool EncabezadoDeFila = true, int AltoDeFila = 18,
-            bool AsignaDataSource = true, bool SeleccionSimple = true, bool UnidadDeSeleccion = false)
+            bool AsignaDataSource = true, bool SeleccionSimple = true, bool UnidadDeSeleccion = false, bool allowFiltering = true)
         {
             dg.Columns.Clear();
             dg.AutoGenerateColumns = false;
@@ -720,7 +720,7 @@ namespace fTransport
             dg.AllowEditing = false;
             dg.AllowDeleting = false;
             dg.AllowGrouping = false;
-            dg.AllowFiltering = true;
+            dg.AllowFiltering = allowFiltering;
             dg.RowHeight = AltoDeFila;
             dg.RowHeaderWidth = 25;
             dg.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;

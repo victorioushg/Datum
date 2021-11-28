@@ -10,53 +10,46 @@ Public Class jsBanArcBancosMovimientosPlus
     Private dtMovimientos As DataTable
     Private ft As New Transportables
 
+
     Private strSQLMov As String = ""
     Private nTablamovimientos As String = "tblMovimientos"
     Private nPosicionRenglon As Integer
+    Private moneda As Integer
 
     Private i_modo As Integer
     Private Codigobanco As String
-    Private aTipo() As String = {"Deposito", "Nota Crédito", "Cheque", "Nota Débito"}
-    Private aTipoDeposito() As String = {"Normal", "Diferido"}
-    Private aaTipo() As String = {"DP", "NC", "CH", "ND"}
-    Private n_Apuntador As Long
+
     Private numComprobante As String
     Private nConciliado As String = "0"
     Private nMesConcilia As Date = MyDate
     Private nFecConcilia As Date = MyDate
     Public Property Apuntador() As Long
-        Get
-            Return n_Apuntador
-        End Get
-        Set(ByVal value As Long)
-            n_Apuntador = value
-        End Set
-    End Property
-    Public Sub Agregar(ByVal MyCon As MySqlConnection, ByVal dsMov As DataSet, ByVal dtMov As DataTable, ByVal Codban As String)
+    Public Sub Agregar(ByVal MyCon As MySqlConnection, ByVal dsMov As DataSet, ByVal dtMov As DataTable, ByVal Codban As String,
+                       ByVal MonedaBanco As Integer)
         i_modo = movimiento.iAgregar
         MyConn = MyCon
         ds = dsMov
         dt = dtMov
         Codigobanco = Codban
+        moneda = MonedaBanco
+        IniciarControles()
         If dt.Rows.Count = 0 Then Apuntador = -1
         IniciarTXT()
-        ft.habilitarObjetos(False, True, cmbTipoDeposito)
+        ft.habilitarObjetos(False, True, cmbTipoDeposito, cmbMonedas)
 
         Me.ShowDialog()
     End Sub
     Private Sub IniciarTXT()
 
-
         txtFecha.Value = jytsistema.sFechadeTrabajo
         txtDocumento.Text = ""
         txtConcepto.Text = ""
         txtImporte.Text = ft.FormatoNumero(0.0)
-
         txtCodigoBeneficiario.Text = ""
         txtBeneficiario.Text = ""
-
-        ft.RellenaCombo(aTipo, cmbTipo)
-        ft.RellenaCombo(aTipoDeposito, cmbTipoDeposito)
+        cmbTipo.SelectedIndex = 0
+        cmbTipoDeposito.SelectedIndex = 0
+        cmbMonedas.SelectedValue = moneda
 
         numComprobante = Contador(MyConn, lblInfo, Gestion.iBancos, "BANNUMRCC", "03")
         AbrirAsiento(numComprobante)
@@ -72,18 +65,26 @@ Public Class jsBanArcBancosMovimientosPlus
         ds = dsMov
         dt = dtMov
         Codigobanco = Codban
+        IniciarControles()
         AsignarTXT(Apuntador)
-        ft.habilitarObjetos(False, True, cmbTipo, cmbTipoDeposito)
+        ft.habilitarObjetos(False, True, cmbTipo, cmbTipoDeposito, cmbMonedas)
 
         Me.ShowDialog()
     End Sub
+
+    Private Sub IniciarControles()
+        InitiateDropDownInterchangeCurrency(MyConn, cmbMonedas, jytsistema.sFechadeTrabajo)
+        InitiateDropDown(Of TextoValor)(MyConn, cmbTipo, Tipo.TipoMovimientoBanco)
+        InitiateDropDown(Of TextoValor)(MyConn, cmbTipoDeposito, Tipo.TipoDeposito)
+    End Sub
+
     Private Sub AsignarTXT(ByVal nPosicion As Integer)
         With dt.Rows(nPosicion)
 
-
             txtFecha.Value = .Item("fechamov")
-            ft.RellenaCombo(aTipo, cmbTipo, ft.InArray(aaTipo, .Item("tipomov")))
-            ft.RellenaCombo(aTipoDeposito, cmbTipoDeposito, .Item("multican"))
+            cmbTipo.SelectedValue = .Item("tipomov")
+            cmbTipoDeposito.SelectedIndex = .Item("multican")
+            cmbMonedas.SelectedValue = .Item("Currency")
             txtDocumento.Text = ft.muestraCampoTexto(.Item("numdoc"))
             txtConcepto.Text = ft.muestraCampoTexto(.Item("concepto"))
             txtImporte.Text = ft.muestraCampoNumero(Math.Abs(.Item("importe")))
@@ -144,7 +145,6 @@ Public Class jsBanArcBancosMovimientosPlus
 
         Dim dates As SfDateTimeEdit() = {txtFecha}
         SetSizeDateObjects(dates)
-
         InsertarAuditoria(MyConn, MovAud.ientrar, sModulo, txtFecha.Value)
         Me.Tag = sModulo
 
@@ -167,7 +167,7 @@ Public Class jsBanArcBancosMovimientosPlus
         End If
 
         Dim aCampos() As String = {"tipomov", "numdoc", "id_emp"}
-        Dim aValores() As String = {aaTipo(cmbTipo.SelectedIndex), txtDocumento.Text, jytsistema.WorkID}
+        Dim aValores() As String = {cmbTipo.SelectedValue, txtDocumento.Text, jytsistema.WorkID}
         If qFound(MyConn, lblInfo, "jsbantraban", aCampos, aValores) AndAlso i_modo = movimiento.iAgregar Then
             ft.mensajeEtiqueta(lblInfo, "Esté documento ya fué incluido, verifique ...", Transportables.TipoMensaje.iAdvertencia)
             ft.enfocarTexto(txtDocumento)
@@ -180,8 +180,8 @@ Public Class jsBanArcBancosMovimientosPlus
             Return False
         End If
 
-        If cmbTipo.SelectedIndex = 2 AndAlso Trim(txtBeneficiario.Text) = "" Then
-            ft.mensajeEtiqueta(lblInfo, "Debe indicar un nombre de beneficiario ...", Transportables.TipoMensaje.iAdvertencia)
+        If cmbTipo.SelectedValue = "CH" AndAlso Trim(txtBeneficiario.Text) = "" Then
+            ft.mensajeEtiqueta(lblInfo, "Debe indicar un nombre de beneficiario ...", Transportables.tipoMensaje.iAdvertencia)
             ft.enfocarTexto(txtBeneficiario)
             Return False
         End If
@@ -190,7 +190,6 @@ Public Class jsBanArcBancosMovimientosPlus
             ft.enfocarTexto(txtImporte)
             Return False
         End If
-
 
         If CBool(ParametroPlus(MyConn, Gestion.iBancos, "BANPARAM08")) Then
             Dim montoAsiento As Double = ft.DevuelveScalarDoble(MyConn, " select sum(importe) from jsbanordpag where comproba = '" & numComprobante & "' and id_emp = '" & jytsistema.WorkID & "' GROUP BY COMPROBA ")
@@ -208,7 +207,6 @@ Public Class jsBanArcBancosMovimientosPlus
             End If
 
         End If
-
 
         If CBool(ParametroPlus(MyConn, Gestion.iBancos, "BANPARAM09")) AndAlso txtCodigoBeneficiario.Text.Trim() = "" _
             AndAlso cmbTipo.SelectedIndex = 2 Then
@@ -232,10 +230,10 @@ Public Class jsBanArcBancosMovimientosPlus
 
             End If
 
-            InsertEditBANCOSMovimientoBanco(MyConn, lblInfo, Insertar, txtFecha.Value, txtDocumento.Text, aaTipo(cmbTipo.SelectedIndex),
+            InsertEditBANCOSMovimientoBanco(MyConn, lblInfo, Insertar, txtFecha.Value, txtDocumento.Text, cmbTipo.SelectedValue,
                 Codigobanco, "", txtConcepto.Text, IIf(cmbTipo.SelectedIndex < 2, ValorNumero(txtImporte.Text), -1 * ValorNumero(txtImporte.Text)),
                 "BAN", txtDocumento.Text, IIf(Trim(txtBeneficiario.Text) = "", ".", txtBeneficiario.Text),
-                numComprobante, nConciliado, nMesConcilia, nFecConcilia, aaTipo(cmbTipo.SelectedIndex), "", MyDate,
+                numComprobante, nConciliado, nMesConcilia, nFecConcilia, cmbTipo.SelectedValue, "", MyDate,
                 cmbTipoDeposito.SelectedIndex, txtCodigoBeneficiario.Text, "", jytsistema.WorkCurrency.Id, DateTime.Now())
 
             If cmbTipo.SelectedIndex = 2 And txtCodigoBeneficiario.Text <> "" Then
@@ -250,11 +248,11 @@ Public Class jsBanArcBancosMovimientosPlus
                                      ValorNumero(txtImporte.Text), 0.0, "CH", txtDocumento.Text, Codigobanco, txtBeneficiario.Text,
                                      "BAN", "", "", "", "", txtDocumento.Text, "0",
                                      "", txtFecha.Value, "", "", "", 0.0, 0.0, numComprobante, Codigobanco,
-                                     numCtaBan, "", "", "", tipoProveedor, "1", "0")
+                                     numCtaBan, "", "", "", tipoProveedor, "1", "0", cmbMonedas.SelectedValue, jytsistema.sFechadeTrabajo)
             End If
 
 
-            IncluirImpuestoDebitoBancario(MyConn, lblInfo, aaTipo(cmbTipo.SelectedIndex), Codigobanco, txtDocumento.Text,
+            IncluirImpuestoDebitoBancario(MyConn, lblInfo, cmbTipo.SelectedValue, Codigobanco, txtDocumento.Text,
                                             txtFecha.Value, Convert.ToDouble(txtImporte.Text))
             ImprimirComprobante()
             InsertarAuditoria(MyConn, MovAud.iSalir, sModulo, Codigobanco & " " & txtDocumento.Text)
@@ -277,31 +275,31 @@ Public Class jsBanArcBancosMovimientosPlus
         End If
     End Sub
 
-    Private Sub cmbTipo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbTipo.GotFocus
-        ft.mensajeEtiqueta(lblInfo, "seleccione el tipo de movimiento a realizar", Transportables.TipoMensaje.iInfo)
+    Private Sub cmbTipo_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
+        ft.mensajeEtiqueta(lblInfo, "seleccione el tipo de movimiento a realizar", Transportables.tipoMensaje.iInfo)
     End Sub
 
     Private Sub txtDocumento_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDocumento.GotFocus
-        ft.mensajeEtiqueta(lblInfo, "Indique el número de documento para este movimiento ...", Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, "Indique el número de documento para este movimiento ...", Transportables.tipoMensaje.iInfo)
     End Sub
 
     Private Sub txtConcepto_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtConcepto.GotFocus
-        ft.mensajeEtiqueta(lblInfo, "Indique el concepto por el cual se realiza este movimiento ...", Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, "Indique el concepto por el cual se realiza este movimiento ...", Transportables.tipoMensaje.iInfo)
     End Sub
 
-    Private Sub txtImporte_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtImporte.Click, _
+    Private Sub txtImporte_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtImporte.Click,
         txtDocumento.Click, txtBeneficiario.Click, txtConcepto.Click
         Dim objTXT As TextBox = sender
         ft.enfocarTexto(objTXT)
     End Sub
 
     Private Sub txtImporte_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtImporte.GotFocus
-        ft.mensajeEtiqueta(lblInfo, "Indique el importe monetario de este movimiento ...", Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, "Indique el importe monetario de este movimiento ...", Transportables.tipoMensaje.iInfo)
         ft.enfocarTexto(txtImporte)
     End Sub
 
     Private Sub txtBeneficiario_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtBeneficiario.GotFocus
-        ft.mensajeEtiqueta(lblInfo, "Indique el nombre y apellido del beneficiario de este movimiento ...", Transportables.TipoMensaje.iInfo)
+        ft.mensajeEtiqueta(lblInfo, "Indique el nombre y apellido del beneficiario de este movimiento ...", Transportables.tipoMensaje.iInfo)
     End Sub
 
     Private Sub txtImporte_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtImporte.KeyPress
@@ -312,7 +310,7 @@ Public Class jsBanArcBancosMovimientosPlus
 
     End Sub
 
-    Private Sub cmbTipo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipo.SelectedIndexChanged
+    Private Sub cmbTipo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ft.habilitarObjetos(False, True, cmbTipoDeposito, txtCodigoBeneficiario, txtBeneficiario)
 
         Select Case cmbTipo.SelectedIndex
@@ -330,11 +328,7 @@ Public Class jsBanArcBancosMovimientosPlus
             Case 3 'Nota Débito
 
         End Select
-
-
         ActualizarPrimerRegistroAsiento()
-
-
     End Sub
 
 
