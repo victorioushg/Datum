@@ -99,6 +99,7 @@ Partial Class jsBanArcBancos
         Me.btnEditaTarjeta = New System.Windows.Forms.ToolStripButton()
         Me.btnEliminaTarjeta = New System.Windows.Forms.ToolStripButton()
         Me.C1DockingTabPage2 = New C1.Win.C1Command.C1DockingTabPage()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.MenuBarra.SuspendLayout()
         CType(Me.dgTar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -315,7 +316,7 @@ Partial Class jsBanArcBancos
         '
         Me.Label11.BackColor = System.Drawing.Color.Transparent
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(5, 250)
+        Me.Label11.Location = New System.Drawing.Point(5, 287)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(104, 71)
         Me.Label11.TabIndex = 107
@@ -330,7 +331,7 @@ Partial Class jsBanArcBancos
         Me.dgTar.AllowUserToResizeColumns = False
         Me.dgTar.AllowUserToResizeRows = False
         Me.dgTar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgTar.Location = New System.Drawing.Point(141, 255)
+        Me.dgTar.Location = New System.Drawing.Point(141, 292)
         Me.dgTar.Name = "dgTar"
         Me.dgTar.ReadOnly = True
         Me.dgTar.Size = New System.Drawing.Size(503, 83)
@@ -339,7 +340,7 @@ Partial Class jsBanArcBancos
         'btnFormatos
         '
         Me.btnFormatos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFormatos.Location = New System.Drawing.Point(455, 228)
+        Me.btnFormatos.Location = New System.Drawing.Point(455, 265)
         Me.btnFormatos.Name = "btnFormatos"
         Me.btnFormatos.Size = New System.Drawing.Size(25, 20)
         Me.btnFormatos.TabIndex = 104
@@ -349,7 +350,7 @@ Partial Class jsBanArcBancos
         'txtFormato
         '
         Me.txtFormato.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFormato.Location = New System.Drawing.Point(408, 228)
+        Me.txtFormato.Location = New System.Drawing.Point(408, 265)
         Me.txtFormato.MaxLength = 25
         Me.txtFormato.Name = "txtFormato"
         Me.txtFormato.Size = New System.Drawing.Size(41, 20)
@@ -361,7 +362,7 @@ Partial Class jsBanArcBancos
         Me.cmbCondicion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCondicion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbCondicion.FormattingEnabled = True
-        Me.cmbCondicion.Location = New System.Drawing.Point(547, 230)
+        Me.cmbCondicion.Location = New System.Drawing.Point(547, 267)
         Me.cmbCondicion.Margin = New System.Windows.Forms.Padding(1)
         Me.cmbCondicion.Name = "cmbCondicion"
         Me.cmbCondicion.Size = New System.Drawing.Size(97, 21)
@@ -370,7 +371,7 @@ Partial Class jsBanArcBancos
         'txtComision
         '
         Me.txtComision.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtComision.Location = New System.Drawing.Point(299, 228)
+        Me.txtComision.Location = New System.Drawing.Point(299, 265)
         Me.txtComision.MaxLength = 5
         Me.txtComision.Name = "txtComision"
         Me.txtComision.Size = New System.Drawing.Size(44, 20)
@@ -464,7 +465,7 @@ Partial Class jsBanArcBancos
         '
         Me.Label15.BackColor = System.Drawing.Color.Transparent
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(490, 229)
+        Me.Label15.Location = New System.Drawing.Point(490, 266)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(53, 19)
         Me.Label15.TabIndex = 42
@@ -475,7 +476,7 @@ Partial Class jsBanArcBancos
         '
         Me.Label14.BackColor = System.Drawing.Color.Transparent
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(349, 223)
+        Me.Label14.Location = New System.Drawing.Point(349, 260)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(53, 29)
         Me.Label14.TabIndex = 41
@@ -486,7 +487,7 @@ Partial Class jsBanArcBancos
         '
         Me.Label13.BackColor = System.Drawing.Color.Transparent
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(226, 224)
+        Me.Label13.Location = New System.Drawing.Point(226, 261)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(68, 27)
         Me.Label13.TabIndex = 40
@@ -497,7 +498,7 @@ Partial Class jsBanArcBancos
         '
         Me.Label12.BackColor = System.Drawing.Color.Transparent
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(2, 229)
+        Me.Label12.Location = New System.Drawing.Point(2, 266)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(104, 19)
         Me.Label12.TabIndex = 39
@@ -792,6 +793,7 @@ Partial Class jsBanArcBancos
         '
         'C1DockingTabPage1
         '
+        Me.C1DockingTabPage1.Controls.Add(Me.Label2)
         Me.C1DockingTabPage1.Controls.Add(Me.txtContacto)
         Me.C1DockingTabPage1.Controls.Add(Me.cmbMonedas)
         Me.C1DockingTabPage1.Controls.Add(Me.cmbCC)
@@ -855,9 +857,9 @@ Partial Class jsBanArcBancos
         Me.cmbMonedas.DisplayMember = "nombre"
         Me.cmbMonedas.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
         Me.cmbMonedas.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.cmbMonedas.Location = New System.Drawing.Point(369, 205)
+        Me.cmbMonedas.Location = New System.Drawing.Point(112, 231)
         Me.cmbMonedas.Name = "cmbMonedas"
-        Me.cmbMonedas.Size = New System.Drawing.Size(275, 20)
+        Me.cmbMonedas.Size = New System.Drawing.Size(532, 20)
         Me.cmbMonedas.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
         Me.cmbMonedas.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
         Me.cmbMonedas.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
@@ -878,7 +880,7 @@ Partial Class jsBanArcBancos
         Me.cmbCC.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.cmbCC.Location = New System.Drawing.Point(112, 205)
         Me.cmbCC.Name = "cmbCC"
-        Me.cmbCC.Size = New System.Drawing.Size(251, 20)
+        Me.cmbCC.Size = New System.Drawing.Size(532, 20)
         Me.cmbCC.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
         Me.cmbCC.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
         Me.cmbCC.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
@@ -895,7 +897,7 @@ Partial Class jsBanArcBancos
         Me.txtIngreso.Cursor = System.Windows.Forms.Cursors.Default
         Me.txtIngreso.DateTimeEditingMode = Syncfusion.WinForms.Input.Enums.DateTimeEditingMode.Mask
         Me.txtIngreso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtIngreso.Location = New System.Drawing.Point(112, 228)
+        Me.txtIngreso.Location = New System.Drawing.Point(112, 265)
         Me.txtIngreso.Name = "txtIngreso"
         Me.txtIngreso.Size = New System.Drawing.Size(114, 19)
         Me.txtIngreso.Style.BackColor = System.Drawing.Color.AliceBlue
@@ -944,7 +946,7 @@ Partial Class jsBanArcBancos
         Me.MenuComisiones.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.MenuComisiones.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAgregaTarjeta, Me.btnEditaTarjeta, Me.btnEliminaTarjeta})
         Me.MenuComisiones.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow
-        Me.MenuComisiones.Location = New System.Drawing.Point(112, 255)
+        Me.MenuComisiones.Location = New System.Drawing.Point(112, 292)
         Me.MenuComisiones.Name = "MenuComisiones"
         Me.MenuComisiones.Size = New System.Drawing.Size(25, 83)
         Me.MenuComisiones.TabIndex = 108
@@ -992,6 +994,17 @@ Partial Class jsBanArcBancos
         Me.C1DockingTabPage2.Size = New System.Drawing.Size(816, 386)
         Me.C1DockingTabPage2.TabIndex = 1
         Me.C1DockingTabPage2.Text = "Movimientos"
+        '
+        'Label2
+        '
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(5, 232)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(104, 19)
+        Me.Label2.TabIndex = 243
+        Me.Label2.Text = "Moneda"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'jsBanArcBancos
         '
@@ -1112,4 +1125,5 @@ Partial Class jsBanArcBancos
     Friend WithEvents cmbCC As Syncfusion.WinForms.ListView.SfComboBox
     Friend WithEvents cmbMonedas As Syncfusion.WinForms.ListView.SfComboBox
     Friend WithEvents txtContacto As TextBox
+    Friend WithEvents Label2 As Label
 End Class

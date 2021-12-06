@@ -56,7 +56,7 @@
     <DocumentationFile>POS_Datum.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
@@ -441,6 +441,9 @@
     </Compile>
     <Compile Include="..\..\Datum\jytsuite\Models\Control\Monedas.vb">
       <Link>Models\Control\Monedas.vb</Link>
+    </Compile>
+    <Compile Include="..\..\Datum\jytsuite\Models\Control\RetencionesISLR.vb">
+      <Link>Models\Control\RetencionesISLR.vb</Link>
     </Compile>
     <Compile Include="..\..\Datum\jytsuite\Models\General\functionStructure.vb">
       <Link>Models\General\functionStructure.vb</Link>

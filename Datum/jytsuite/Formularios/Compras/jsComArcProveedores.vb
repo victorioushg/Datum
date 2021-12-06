@@ -2,32 +2,33 @@ Imports MySql.Data.MySqlClient
 Imports C1.Win.C1Chart
 Imports Syncfusion.WinForms.Input
 Imports fTransport
+Imports dgFieldSF = fTransport.Models.SfDataGridField
+Imports fTransport.Models
+
 Public Class jsComArcProveedores
 
     Private Const sModulo As String = "Proveedores y CxP"
     Private Const lRegion As String = "RibbonButton55"
     Private Const nTabla As String = "tblProveedores"
-    Private Const nTablaMovimientos As String = "tblMovimientosProveedor"
-    Private Const nTablaMovimientosExP As String = "tblMovimientosProveedorExP"
     Private Const nTablaSaldos As String = "tblSaldosXDocumento"
     Private Const nTablaEnvases As String = "tblEnvases"
 
     Private strSQL As String = "select * from jsprocatpro where id_emp = '" & jytsistema.WorkID & "' order by codpro "
-    Private strSQLMov As String = ""
-    Private strSQLMovExP As String = ""
     Private strSQLSaldos As String = ""
     Private strSQLEnvases As String = ""
 
     Private myConn As New MySqlConnection(jytsistema.strConn)
     Private ds As New DataSet()
     Private dt As New DataTable
-    Private dtMovimientos As New DataTable
-    Private dtMovimientosExP As New DataTable
     Private dtSaldos As New DataTable
     Private dtEnvases As New DataTable
 
     Private ft As New Transportables
 
+    Private vendorTransactionsList As List(Of VendorTransaction)
+    Private vendorTransactionsExPList As List(Of VendorTransaction)
+    Private proveedor As DataRow
+    Private cxpSelected As VendorTransaction
 
     Private aIVA() As String
     Private aCondicion() As String = {"Activo", "Inactivo"}
@@ -108,18 +109,29 @@ Public Class jsComArcProveedores
 
 
     End Sub
-    Private Sub AsignaMov(ByVal nRow As Long, ByVal Actualiza As Boolean)
+    Private Sub AsignaMov(ByVal nRow As Long, ByVal Actualiza As Boolean, Optional Comprobante As String = "")
 
-        dtMovimientos = ft.MostrarFilaEnTabla(myConn, ds, nTablaMovimientos, strSQLMov, Me.BindingContext, MenuBarra,
-                dg, lRegion, jytsistema.sUsuario, nRow, Actualiza)
+        If Actualiza Then
+            Cursor.Current = Cursors.WaitCursor
+            vendorTransactionsList = GetVendorTransactions(myConn, proveedor.Item("codpro"))
+            dg.DataSource = vendorTransactionsList
+            If Comprobante <> "" Then nRow = vendorTransactionsList.IndexOf(vendorTransactionsList.FirstOrDefault(Function(f) f.NumeroMovimiento = Comprobante))
+        End If
+        dg.SelectedIndex = nRow
+
+        MostrarItemsEnMenuBarra(MenuBarra, CInt(nRow), vendorTransactionsList.Count)
 
     End Sub
 
-    Private Sub AsignaMovExP(ByVal nRow As Long, ByVal Actualiza As Boolean)
-
-        dtMovimientosExP = ft.MostrarFilaEnTabla(myConn, ds, nTablaMovimientosExP, strSQLMovExP, Me.BindingContext, MenuBarra,
-               dgExP, lRegion, jytsistema.sUsuario, nRow, Actualiza)
-
+    Private Sub AsignaMovExP(ByVal nRow As Long, ByVal Actualiza As Boolean, Optional Comprobante As String = "")
+        If Actualiza Then
+            Cursor.Current = Cursors.WaitCursor
+            vendorTransactionsExPList = GetVendorTransactions(myConn, proveedor.Item("codpro"), "1")
+            dgExP.DataSource = vendorTransactionsExPList
+            dgExP.Refresh()
+            If Comprobante <> "" Then nRow = vendorTransactionsExPList.IndexOf(vendorTransactionsExPList.FirstOrDefault(Function(f) f.NumeroMovimiento = Comprobante))
+        End If
+        MostrarItemsEnMenuBarra(MenuBarra, CInt(nRow), vendorTransactionsExPList.Count)
 
     End Sub
 
@@ -127,6 +139,9 @@ Public Class jsComArcProveedores
     Private Sub AsignaTXT(ByVal nRow As Long)
 
         If dt.Rows.Count > 0 Then
+
+            proveedor = dt.Rows(nRow)
+
             With dt
 
                 MostrarItemsEnMenuBarra(MenuBarra, nRow, .Rows.Count)
@@ -199,7 +214,6 @@ Public Class jsComArcProveedores
                     txtDisponibleExP.Text = ft.FormatoNumero(0.0) ' ft.FormatoNumero(CDbl(ft.MuestraCampoTexto(.Item("disponible"), "0.00")))
 
 
-                    AsignaMovimientos(.Item("codpro"))
                     AsignaMovimientosExP(.Item("codpro"))
 
                     'Salods por Documento 
@@ -225,45 +239,6 @@ Public Class jsComArcProveedores
         ft.ActivarMenuBarra(myConn, ds, dt, lRegion, MenuBarra, jytsistema.sUsuario)
 
     End Sub
-    Private Sub AsignaMovimientos(ByVal CodigoProveedor As String)
-
-        Dim dtUltPago As DataTable
-        Dim nTablaUltPago As String = "tblUltimoPago"
-
-        ds = DataSetRequery(ds, " select emision, importe, formapag, numpag, nompag from jsprotrapag where codpro = '" & CodigoProveedor & "' and " _
-                            & " remesa = '' and " _
-                            & " tipomov in ('AB','CA') and " _
-                            & " id_emp = '" & jytsistema.WorkID & "' " _
-                            & " order by emision desc limit 1 ", myConn, nTablaUltPago, lblInfo)
-
-        dtUltPago = ds.Tables(nTablaUltPago)
-
-        If dtUltPago.Rows.Count > 0 Then
-            With dtUltPago.Rows(0)
-                txtUltimoPago.Text = .Item("importe")
-                txtFechaUltimopago.Text = ft.FormatoFecha(CDate(.Item("emision").ToString))
-                txtFormaUltimoPago.Text = .Item("formapag") & " " & .Item("nompag") & " " & .Item("numpag")
-            End With
-        Else
-            txtUltimoPago.Text = "0.00"
-            txtFechaUltimopago.Text = ""
-            txtFormaUltimoPago.Text = ""
-        End If
-
-        Dim aFld() As String = {"codpro", "id_emp"}
-        Dim aStr() As String = {CodigoProveedor, jytsistema.WorkID}
-
-        SaldoCxP(myConn, lblInfo, CodigoProveedor)
-
-        txtCredito.Text = ft.FormatoNumero(CDbl(qFoundAndSign(myConn, lblInfo, "jsprocatpro", aFld, aStr, "limcredito")))
-        txtCreditoM.Text = ft.FormatoNumero(CDbl(qFoundAndSign(myConn, lblInfo, "jsprocatpro", aFld, aStr, "limcredito")))
-        txtSaldo.Text = ft.FormatoNumero(CDbl(qFoundAndSign(myConn, lblInfo, "jsprocatpro", aFld, aStr, "saldo")))
-        txtSaldoM.Text = ft.FormatoNumero(CDbl(qFoundAndSign(myConn, lblInfo, "jsprocatpro", aFld, aStr, "saldo")))
-        txtDisponible.Text = ft.FormatoNumero(CDbl(qFoundAndSign(myConn, lblInfo, "jsprocatpro", aFld, aStr, "disponible")))
-        txtDisponibleM.Text = ft.FormatoNumero(CDbl(qFoundAndSign(myConn, lblInfo, "jsprocatpro", aFld, aStr, "disponible")))
-
-    End Sub
-
     Private Sub AsignaMovimientosExP(ByVal CodigoProveedor As String)
 
         Dim dtUltPagoExP As DataTable
@@ -298,37 +273,27 @@ Public Class jsComArcProveedores
 
     Private Sub AbrirMovimientosExP(ByVal CodigoProveedor As String)
 
-
-        dgExP.DataSource = Nothing
         AsignaMovimientosExP(CodigoProveedor)
-        Dim aTipo() As String = {"FC.GR.ND.AB.CA.NC", "FC", "GR", "ND", "AB", "CA", "NC"}
+        vendorTransactionsExPList = GetVendorTransactions(myConn, CodigoProveedor, "1")
+        Dim aCampos As List(Of dgFieldSF) = New List(Of dgFieldSF)() From {
+            New dgFieldSF(TypeColumn.DateTimeColumn, "Emision", "Emision", 80, HorizontalAlignment.Center, FormatoFecha.Corta),
+            New dgFieldSF(TypeColumn.TextColumn, "TipoMovimiento", "TP", 50, HorizontalAlignment.Center, ""),
+            New dgFieldSF(TypeColumn.TextColumn, "NumeroMovimiento", "Documento", 120, HorizontalAlignment.Left, ""),
+            New dgFieldSF(TypeColumn.TextColumn, "Concepto", "Concepto", 350, HorizontalAlignment.Left, ""),
+            New dgFieldSF(TypeColumn.DateTimeColumn, "Vencimiento", "Vencimiento", 120, HorizontalAlignment.Center, FormatoFecha.Corta),
+            New dgFieldSF(TypeColumn.TextColumn, "Referencia", "Referencia", 120, HorizontalAlignment.Left, ""),
+            New dgFieldSF(TypeColumn.NumericColumn, "Importe", "Importe", 120, HorizontalAlignment.Right, FormatoNumero.FormatoNumero),
+            New dgFieldSF(TypeColumn.NumericColumn, "ImporteReal", "Importe(" + WorkCurrency.CodigoISO + ")", 120, HorizontalAlignment.Right, FormatoNumero.FormatoNumero),
+            New dgFieldSF(TypeColumn.TextColumn, "Origen", "ORG", 80, HorizontalAlignment.Center, ""),
+            New dgFieldSF(TypeColumn.TextColumn, "FormaDePago", "FP", 50, HorizontalAlignment.Center, ""),
+            New dgFieldSF(TypeColumn.TextColumn, "NombreDePago", "Nombre de Pago", 180, HorizontalAlignment.Left, ""),
+            New dgFieldSF(TypeColumn.TextColumn, "NumeroDePago", "Numero de Pago", 180, HorizontalAlignment.Left, ""),
+            New dgFieldSF(TypeColumn.TextColumn, "Comprobante", "Nº Comprobante", 180, HorizontalAlignment.Left, "")
+        }
 
-        strSQLMovExP = "select a.*  from jsprotrapag a " _
-                           & " where " _
-                           & " a.remesa = '1' and " _
-                           & " a.historico = '0' and " _
-                           & " a.codpro  = '" & CodigoProveedor & "' and " _
-                           & " a.ejercicio = '" & jytsistema.WorkExercise & "' and " _
-                           & " a.id_emp = '" & jytsistema.WorkID & "' " _
-                           & " order by a.nummov, a.fotipo, a.emision, a.tipomov "
-        dtMovimientosExP = ft.AbrirDataTable(ds, nTablaMovimientosExP, myConn, strSQLMovExP)
+        ft.IniciarDataGridWithList(Of VendorTransaction)(dgExP, vendorTransactionsExPList, aCampos,,,,,,,,, False)
 
-        Dim aCampos() As String = {"emision.Emisión.80.C.Fecha",
-                                   "tipomov.TP.25.C.",
-                                   "nummov.Documento.100.I.",
-                                   "concepto.Concepto.300.I.",
-                                   "vence.Vence.80.C.Fecha",
-                                   "refer.Referencia.110.I.",
-                                   "importe.Importe.110.D.Numero",
-                                   "origen.ORG.50.C.",
-                                   "formapag.FP.25.C.",
-                                   "nompag.Nombre Pago.100.I.",
-                                   "numpag.Nº Pago.100.I.",
-                                   "comproba.Comprobante Nº.100.I."}
-
-        ft.IniciarTablaPlus(dgExP, dtMovimientosExP, aCampos)
-
-        If dtMovimientosExP.Rows.Count > 0 Then
+        If vendorTransactionsExPList.Count > 0 Then
             nPosicionMovExP = 0
             AsignarTextosMovimientosExP(nPosicionMovExP)
         End If
@@ -338,53 +303,50 @@ Public Class jsComArcProveedores
 
     Private Sub AbrirMovimientos(ByVal CodigoProveedor As String)
 
+        Cursor.Current = Cursors.WaitCursor
+        txtUltimoPago.Text = ft.FormatoNumero(proveedor.Item("ultpago"))
+        txtFechaUltimopago.Text = ft.FormatoFecha(proveedor.Item("fecultpago").ToString())
+        txtFormaUltimoPago.Text = proveedor.Item("forultpago") ''& " " & .Item("nompag") & " " & .Item("numpag")
 
-        dg.DataSource = Nothing
-        dg.Columns.Clear()
+        SaldoCxP(myConn, lblInfo, CodigoProveedor)
 
-        AsignaMovimientos(CodigoProveedor)
+        txtCredito.Text = ft.FormatoNumero(proveedor.Item("limcredito"))
+        txtCreditoM.Text = ft.FormatoNumero(proveedor.Item("limcredito"))
+        txtSaldo.Text = ft.FormatoNumero(proveedor.Item("saldo"))
+        txtSaldoM.Text = ft.FormatoNumero(proveedor.Item("saldo"))
+        txtDisponible.Text = ft.FormatoNumero(proveedor.Item("disponible"))
+        txtDisponibleM.Text = ft.FormatoNumero(proveedor.Item("disponible"))
 
-        Dim aTipo() As String = {"FC.GR.ND.AB.CA.NC", "FC", "GR", "ND", "AB", "CA", "NC"}
+        vendorTransactionsList = GetVendorTransactions(myConn, CodigoProveedor)
+        Dim aCampos As List(Of dgFieldSF) = New List(Of dgFieldSF)() From {
+            New dgFieldSF(TypeColumn.DateTimeColumn, "Emision", "Emision", 80, HorizontalAlignment.Center, FormatoFecha.Corta),
+            New dgFieldSF(TypeColumn.TextColumn, "TipoMovimiento", "TP", 50, HorizontalAlignment.Center, ""),
+            New dgFieldSF(TypeColumn.TextColumn, "NumeroMovimiento", "Documento", 120, HorizontalAlignment.Left, ""),
+            New dgFieldSF(TypeColumn.TextColumn, "Concepto", "Concepto", 350, HorizontalAlignment.Left, ""),
+            New dgFieldSF(TypeColumn.DateTimeColumn, "Vencimiento", "Vencimiento", 120, HorizontalAlignment.Center, FormatoFecha.Corta),
+            New dgFieldSF(TypeColumn.TextColumn, "Referencia", "Referencia", 120, HorizontalAlignment.Left, ""),
+            New dgFieldSF(TypeColumn.NumericColumn, "Importe", "Importe", 120, HorizontalAlignment.Right, FormatoNumero.FormatoNumero),
+            New dgFieldSF(TypeColumn.NumericColumn, "ImporteReal", "Importe(" + WorkCurrency.CodigoISO + ")", 120, HorizontalAlignment.Right, FormatoNumero.FormatoNumero),
+            New dgFieldSF(TypeColumn.TextColumn, "Origen", "ORG", 80, HorizontalAlignment.Center, ""),
+            New dgFieldSF(TypeColumn.TextColumn, "FormaDePago", "FP", 50, HorizontalAlignment.Center, ""),
+            New dgFieldSF(TypeColumn.TextColumn, "NombreDePago", "Nombre de Pago", 180, HorizontalAlignment.Left, ""),
+            New dgFieldSF(TypeColumn.TextColumn, "NumeroDePago", "Numero de Pago", 180, HorizontalAlignment.Left, ""),
+            New dgFieldSF(TypeColumn.TextColumn, "Comprobante", "Nº Comprobante", 180, HorizontalAlignment.Left, "")
+        }
 
-        strSQLMov = "select a.*  from jsprotrapag a " _
-                           & " where " _
-                           & " a.remesa = '' and " _
-                           & " a.historico = '0' and " _
-                           & " a.codpro  = '" & CodigoProveedor & "' and " _
-                           & " a.ejercicio = '" & jytsistema.WorkExercise & "' and " _
-                           & " a.id_emp = '" & jytsistema.WorkID & "' " _
-                           & " order by a.nummov, a.fotipo, a.emision, a.tipomov  "
+        ft.IniciarDataGridWithList(Of VendorTransaction)(dg, vendorTransactionsList, aCampos,,,,,,,,, False)
 
-        ds = DataSetRequery(ds, strSQLMov, myConn, nTablaMovimientos, lblInfo)
-        dtMovimientos = ds.Tables(nTablaMovimientos)
-
-        Dim aCampos() As String = {"emision.Emisión.80.C.fecha",
-                                   "tipomov.TP.25.C.",
-                                   "nummov.Documento.100.I.",
-                                   "concepto.Concepto.300.I.",
-                                   "vence.Vence.80.C.fecha",
-                                   "refer.Referencia.120.I.",
-                                   "importe.Importe.120.D.Numero",
-                                   "origen.ORG.50.C.",
-                                   "formapag.FP.25.C.",
-                                   "nompag.Nombre Pago.100.I.",
-                                   "numpag.Nº Pago.100.I.",
-                                   "comproba.Comprobante Nº.100.I.",
-                                   "sada..10.I."}
-
-        ft.IniciarTablaPlus(dg, dtMovimientos, aCampos)
-        If dtMovimientos.Rows.Count > 0 Then
+        If vendorTransactionsList.Count > 0 Then
             nPosicionMov = 0
-
             AsignarTextosMovimientos(nPosicionMov)
 
-            For Each Item As DataGridViewRow In dg.Rows
-                With Item
-                    If .Cells("refer").Value.ToString.Length >= 2 Then
-                        If .Cells("REFER").Value.ToString.Substring(0, 2) = "FL" Then .DefaultCellStyle.BackColor = ColorRojoClaro
-                    End If
-                End With
-            Next
+            'For Each Item As DataGridViewRow In dg.Rows
+            '    With Item
+            '        If .Cells("refer").Value.ToString.Length >= 2 Then
+            '            If .Cells("REFER").Value.ToString.Substring(0, 2) = "FL" Then .DefaultCellStyle.BackColor = ColorRojoClaro
+            '        End If
+            '    End With
+            'Next
 
         End If
     End Sub
@@ -435,30 +397,8 @@ Public Class jsComArcProveedores
         ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
     End Sub
-    Private Sub ActivarMarco1()
 
-        ft.visualizarObjetos(True, grpMovimientosCxP, grpAceptarSalir)
-        ft.habilitarObjetos(False, False, MenuBarra, tbcProveedor.TabPages(0), tbcProveedor.TabPages(2), tbcProveedor.TabPages(3),
-                             tbcProveedor.TabPages(4), tbcProveedor.TabPages(5))
-        ft.habilitarObjetos(False, False, cmbTipoCxP, txtDocumentoCXP, txtEmisionCXP, txtCausaNCCXP, txtReferenciaCXP, txtConceptoCXP,
-                         txtImporteCXP, grpCondicionCXP, cmbCajaCxP, cmbFPCxP, txtNumeroPagoCxP, cmbNombrePagoCxP, txtBeneficiarioCxP,
-                         txtNumDepositoCxP, txtCtaDepositoCxP, txtBancoDepositoCxP)
 
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
-
-    End Sub
-    Private Sub ActivarMarco2()
-
-        ft.visualizarObjetos(True, grpMovimientosExP, grpAceptarSalir)
-        ft.habilitarObjetos(False, False, MenuBarra, tbcProveedor.TabPages(0), tbcProveedor.TabPages(1), tbcProveedor.TabPages(2),
-                             tbcProveedor.TabPages(3), tbcProveedor.TabPages(4), tbcProveedor.TabPages(6))
-        ft.habilitarObjetos(False, False, cmbTipoExP, txtDocumentoEXP, txtEmisionEXP, txtCausaNCEXP, txtReferenciaExP, txtConceptoExP,
-                         txtImporteExP, grpCondicionExP, cmbCajaExP, cmbFPExP, txtNumeroPagoExP, cmbNombrePagoExP, txtBeneficiarioExP,
-                         txtNumeroDepositoExP, txtCuentaDepositoExP, txtBancoDepositoExP)
-
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
-
-    End Sub
     Private Sub DesactivarMarco0()
 
         ft.visualizarObjetos(False, grpAceptarSalir)
@@ -482,32 +422,7 @@ Public Class jsComArcProveedores
         ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
 
     End Sub
-    Private Sub DesactivarMarco1()
 
-        ft.visualizarObjetos(False, grpMovimientosCxP, grpAceptarSalir)
-        ft.habilitarObjetos(True, False, MenuBarra, tbcProveedor.TabPages(0), tbcProveedor.TabPages(1), tbcProveedor.TabPages(2), tbcProveedor.TabPages(3),
-                             tbcProveedor.TabPages(4), tbcProveedor.TabPages(5))
-
-        ft.habilitarObjetos(True, False, cmbTipoCxP, txtDocumentoCXP, txtEmisionCXP, txtCausaNCCXP, txtReferenciaCXP, txtConceptoCXP,
-                         txtImporteCXP, grpCondicionCXP, cmbCajaCxP, cmbFPCxP, txtNumeroPagoCxP, cmbNombrePagoCxP, txtBeneficiarioCxP,
-                         txtNumDepositoCxP, txtCtaDepositoCxP, txtBancoDepositoCxP)
-
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
-
-    End Sub
-    Private Sub DesactivarMarco2()
-
-        ft.visualizarObjetos(False, grpMovimientosExP, grpAceptarSalir)
-        ft.habilitarObjetos(True, False, MenuBarra, tbcProveedor.TabPages(0), tbcProveedor.TabPages(1), tbcProveedor.TabPages(2),
-                             tbcProveedor.TabPages(3), tbcProveedor.TabPages(4), tbcProveedor.TabPages(5))
-
-        ft.habilitarObjetos(True, False, cmbTipoExP, txtDocumentoEXP, txtEmisionEXP, txtCausaNCEXP, txtReferenciaExP, txtConceptoExP,
-                         txtImporteExP, grpCondicionExP, cmbCajaExP, cmbFPExP, txtNumeroPagoExP, cmbNombrePagoExP, txtBeneficiarioExP,
-                         txtNumeroDepositoExP, txtCuentaDepositoExP, txtBancoDepositoExP)
-
-        ft.mensajeEtiqueta(lblInfo, "Haga click sobre cualquier botón de la barra menu...", Transportables.tipoMensaje.iAyuda)
-
-    End Sub
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
@@ -520,12 +435,10 @@ Public Class jsComArcProveedores
                 AsignaTXT(Me.BindingContext(ds, nTabla).Position)
             Case "Movimientos CxP"
                 nPosicionMov = 0
-                Me.BindingContext(ds, nTablaMovimientos).Position = 0
-                AsignaMov(Me.BindingContext(ds, nTablaMovimientos).Position, False)
+                AsignaMov(nPosicionMov, False)
             Case "Movimientos ExP"
                 nPosicionMovExP = 0
-                Me.BindingContext(ds, nTablaMovimientosExP).Position = 0
-                AsignaMovExP(Me.BindingContext(ds, nTablaMovimientosExP).Position, False)
+                AsignaMovExP(nPosicionMovExP, False)
             Case "Estadísticas"
                 nPosicionCat = 0
                 Me.BindingContext(ds, nTabla).Position = 0
@@ -552,13 +465,11 @@ Public Class jsComArcProveedores
                 nPosicionCat = Me.BindingContext(ds, nTabla).Position
                 AsignaTXT(Me.BindingContext(ds, nTabla).Position)
             Case "Movimientos CxP"
-                Me.BindingContext(ds, nTablaMovimientos).Position -= 1
-                nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
-                AsignaMov(Me.BindingContext(ds, nTablaMovimientos).Position, False)
+                nPosicionMov = IIf(dg.SelectedIndex - 1 < 0, 0, dg.SelectedIndex - 1)
+                AsignaMov(nPosicionMov, False)
             Case "Movimientos ExP"
-                Me.BindingContext(ds, nTablaMovimientosExP).Position -= 1
-                nPosicionMovExP = Me.BindingContext(ds, nTablaMovimientosExP).Position
-                AsignaMovExP(Me.BindingContext(ds, nTablaMovimientosExP).Position, False)
+                nPosicionMovExP = IIf(dgExP.SelectedIndex - 1 < 0, 0, dgExP.SelectedIndex - 1)
+                AsignaMovExP(nPosicionMovExP, False)
             Case "Estadísticas"
                 Me.BindingContext(ds, nTabla).Position -= 1
                 nPosicionCat = Me.BindingContext(ds, nTabla).Position
@@ -586,13 +497,11 @@ Public Class jsComArcProveedores
                 nPosicionCat = Me.BindingContext(ds, nTabla).Position
                 AsignaTXT(Me.BindingContext(ds, nTabla).Position)
             Case "Movimientos CxP"
-                Me.BindingContext(ds, nTablaMovimientos).Position += 1
-                nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
-                AsignaMov(Me.BindingContext(ds, nTablaMovimientos).Position, False)
+                nPosicionMov = IIf(dg.SelectedIndex + 1 > dg.RowCount, dg.RowCount, dg.SelectedIndex + 1)
+                AsignaMov(nPosicionMov, False)
             Case "Movimientos ExP"
-                Me.BindingContext(ds, nTablaMovimientosExP).Position += 1
-                nPosicionMovExP = Me.BindingContext(ds, nTablaMovimientosExP).Position
-                AsignaMovExP(Me.BindingContext(ds, nTablaMovimientosExP).Position, False)
+                nPosicionMovExP = IIf(dgExP.SelectedIndex + 1 > dgExP.RowCount, dgExP.RowCount, dgExP.SelectedIndex + 1)
+                AsignaMovExP(nPosicionMovExP, False)
             Case "Estadísticas"
                 Me.BindingContext(ds, nTabla).Position += 1
                 nPosicionCat = Me.BindingContext(ds, nTabla).Position
@@ -610,8 +519,6 @@ Public Class jsComArcProveedores
                 AsignarExpediente(txtCodigo.Text)
         End Select
 
-
-
     End Sub
 
     Private Sub btnUltimo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUltimo.Click
@@ -621,13 +528,11 @@ Public Class jsComArcProveedores
                 nPosicionCat = Me.BindingContext(ds, nTabla).Position
                 AsignaTXT(Me.BindingContext(ds, nTabla).Position)
             Case "Movimientos CxP"
-                Me.BindingContext(ds, nTablaMovimientos).Position = ds.Tables(nTablaMovimientos).Rows.Count - 1
-                nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
-                AsignaMov(Me.BindingContext(ds, nTablaMovimientos).Position, False)
+                nPosicionMov = dg.RowCount - 1
+                AsignaMov(nPosicionMov, False)
             Case "Movimientos ExP"
-                Me.BindingContext(ds, nTablaMovimientosExP).Position = ds.Tables(nTablaMovimientosExP).Rows.Count - 1
-                nPosicionMovExP = Me.BindingContext(ds, nTablaMovimientosExP).Position
-                AsignaMovExP(Me.BindingContext(ds, nTablaMovimientosExP).Position, False)
+                nPosicionMovExP = dgExP.RowCount - 1
+                AsignaMovExP(nPosicionMovExP, False)
             Case "Estadísticas"
                 Me.BindingContext(ds, nTabla).Position = ds.Tables(nTabla).Rows.Count - 1
                 AsignaTXT(Me.BindingContext(ds, nTabla).Position)
@@ -655,78 +560,26 @@ Public Class jsComArcProveedores
                 IniciarProveedor(True)
             Case "Movimientos CxP"
                 If Trim(txtCodigo.Text) <> "" Then
-
                     Dim f As New jsComArcProveedoresCXP
-                    f.Apuntador = Me.BindingContext(ds, nTablaMovimientos).Position
-                    f.Agregar(myConn, ds, dtMovimientos, txtCodigo.Text, cmbTipo.SelectedIndex)
-
+                    f.Apuntador = 0
+                    f.Agregar(myConn, txtCodigo.Text, cmbTipo.SelectedIndex)
                     SaldoCxP(myConn, lblInfo, txtCodigo.Text)
-
-                    ds = DataSetRequery(ds, strSQLMov, myConn, nTablaMovimientos, lblInfo)
-                    AsignaMovimientos(txtCodigo.Text)
-                    AbrirMovimientos(txtCodigo.Text)
-
-                    If f.Comprobante <> "" Then
-                        Select Case f.TipoMovimientoCXP
-                            Case 0 'Debitos
-                                Dim row As DataRow = dtMovimientos.Select(" NUMMOV = '" & f.Comprobante & "' AND ID_EMP = '" & jytsistema.WorkID & "' ")(0)
-                                nPosicionMov = dtMovimientos.Rows.IndexOf(row)
-                            Case 1 'Creditos
-                                Dim row As DataRow = dtMovimientos.Select(" COMPROBA = '" & f.Comprobante & "' AND ID_EMP = '" & jytsistema.WorkID & "' ")(0)
-                                nPosicionMov = dtMovimientos.Rows.IndexOf(row)
-                            Case 2 'Retencion IVA
-                                Dim row As DataRow = dtMovimientos.Select(" REFER = '" & f.Comprobante & "' AND ID_EMP = '" & jytsistema.WorkID & "' ")(0)
-                                nPosicionMov = dtMovimientos.Rows.IndexOf(row)
-                            Case 3 'Retencion ISLR
-                                Dim row As DataRow = dtMovimientos.Select(" REFER = '" & f.Comprobante & "' AND ID_EMP = '" & jytsistema.WorkID & "' ")(0)
-                                nPosicionMov = dtMovimientos.Rows.IndexOf(row)
-                            Case Else
-                                nPosicionMov = f.Apuntador
-                        End Select
-                    Else
-                        nPosicionMov = f.Apuntador
+                    If nPosicionMov >= 0 Then
+                        AsignaMov(nPosicionMov, True, f.Comprobante)
                     End If
-                    If nPosicionMov >= 0 Then AsignaMov(nPosicionMov, True)
                     f = Nothing
                 End If
             Case "Movimientos ExP"
                 If Trim(txtCodigo.Text) <> "" Then
-
                     Dim f As New jsComArcProveedoresCXP
-                    f.Apuntador = Me.BindingContext(ds, nTablaMovimientosExP).Position
-                    f.Agregar(myConn, ds, dtMovimientosExP, txtCodigo.Text, cmbTipo.SelectedIndex, 1)
+                    f.Agregar(myConn, txtCodigo.Text, cmbTipo.SelectedIndex, 1)
                     SaldoExP(myConn, lblInfo, txtCodigo.Text)
-
-                    ds = DataSetRequery(ds, strSQLMovExP, myConn, nTablaMovimientosExP, lblInfo)
-
-                    AsignaMovimientosExP(txtCodigo.Text)
-
-                    If f.Comprobante <> "" Then
-                        Select Case f.TipoMovimientoCXP
-                            Case 0 'Debitos
-                                Dim row As DataRow = dtMovimientosExP.Select(" NUMMOV = '" & f.Comprobante & "' AND ID_EMP = '" & jytsistema.WorkID & "' ")(0)
-                                nPosicionMovExP = dtMovimientosExP.Rows.IndexOf(row)
-                            Case 1 'Creditos
-                                Dim row As DataRow = dtMovimientosExP.Select(" COMPROBA = '" & f.Comprobante & "' AND ID_EMP = '" & jytsistema.WorkID & "' ")(0)
-                                nPosicionMovExP = dtMovimientosExP.Rows.IndexOf(row)
-                            Case 2 'Retencion IVA
-                                Dim row As DataRow = dtMovimientosExP.Select(" REFER = '" & f.Comprobante & "' AND ID_EMP = '" & jytsistema.WorkID & "' ")(0)
-                                nPosicionMovExP = dtMovimientosExP.Rows.IndexOf(row)
-                            Case 3 'Retencion ISLR
-                                Dim row As DataRow = dtMovimientosExP.Select(" REFER = '" & f.Comprobante & "' AND ID_EMP = '" & jytsistema.WorkID & "' ")(0)
-                                nPosicionMovExP = dtMovimientosExP.Rows.IndexOf(row)
-                            Case Else
-                                nPosicionMovExP = f.Apuntador
-                        End Select
-                    Else
-                        nPosicionMovExP = f.Apuntador
+                    If nPosicionMovExP >= 0 Then
+                        AsignaMovExP(nPosicionMovExP, True)
                     End If
-                    If nPosicionMovExP >= 0 Then AsignaMovExP(nPosicionMovExP, True)
                     f = Nothing
                 End If
-
             Case "Estadísticas"
-
             Case "Expediente"
                 Dim g As New jsComArcProveedoresExpediente
                 g.Agregar(myConn, txtCodigo.Text, cmbCondicion.SelectedIndex)
@@ -744,19 +597,9 @@ Public Class jsComArcProveedores
                 nPosicionCat = Me.BindingContext(ds, nTabla).Position
                 ActivarMarco0()
             Case "Movimientos CxP"
-                If txtCodigo.Text.Trim <> "" And dg.RowCount > 0 Then
-                    If dtMovimientos.Rows(nPosicionMov).Item("origen") = "CXP" Then
-                        ActivarMarco1()
-                    End If
-                End If
             Case "Estadísticas"
             Case "Expediente"
             Case "Movimientos ExP"
-                If txtCodigo.Text.Trim <> "" And dgExP.RowCount > 0 Then
-                    If dtMovimientosExP.Rows(nPosicionMovExP).Item("origen") = "CXP" Then
-                        ActivarMarco2()
-                    End If
-                End If
         End Select
 
     End Sub
@@ -768,7 +611,6 @@ Public Class jsComArcProveedores
             Case "Movimientos CxP"
                 If cmbCondicion.Text = "Activo" Then
                     EliminarMovimiento()
-                    AsignaMovimientos(txtCodigo.Text)
                 Else
                     ft.mensajeCritico("Este proveedor está Inactivo ....")
                 End If
@@ -817,149 +659,132 @@ Public Class jsComArcProveedores
     End Function
     Private Sub EliminarMovimiento()
 
-        nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
-
-        If nPosicionMov >= 0 Then
-            If dtMovimientos.Rows(nPosicionMov).Item("origen") = "CXP" Then
+        nPosicionMov = vendorTransactionsList.IndexOf(cxpSelected)
+        If Not cxpSelected Is Nothing Then
+            If cxpSelected.Origen = "CXP" Then
 
                 If ft.PreguntaEliminarRegistro() = Windows.Forms.DialogResult.Yes Then
-                    With dtMovimientos.Rows(nPosicionMov)
-                        Dim aCamposAdicionales() As String = {"codpro|'" & txtCodigo.Text & "'",
-                                                            "emision|'" & ft.FormatoFechaMySQL(Convert.ToDateTime(.Item("EMISION"))) & "'",
-                                                            "nummov|'" & .Item("NUMMOV") & "'",
-                                                            "tipomov|'" & .Item("TIPOMOV") & "'",
-                                                            "hora|'" & .Item("HORA") & "'",
-                                                            "tipo|'" & .Item("TIPO") & "'"}
+                    If ft.FormatoFechaMySQL(cxpSelected.FechaBloqueo) <> "2009-01-01" Then
+                        ft.mensajeCritico("DOCUMENTO BLOQUEADO. POR FAVOR VERIFIQUE...")
+                    Else
+                        InsertarAuditoria(myConn, MovAud.iEliminar, sModulo, cxpSelected.NumeroMovimiento)
 
-                        If DocumentoBloqueado(myConn, "jsprotrapag", aCamposAdicionales) Then
-                            ft.mensajeCritico("DOCUMENTO BLOQUEADO. POR FAVOR VERIFIQUE...")
-                        Else
-                            InsertarAuditoria(myConn, MovAud.iEliminar, sModulo, .Item("nummov"))
-                            Dim TipoMovimiento As String = .Item("tipomov")
-                            Select Case TipoMovimiento
-                                Case "FC", "GR", "ND"
-                                    If PoseeMovimientosAsociados(myConn, lblInfo, .Item("codpro"), .Item("nummov"), .Item("tipomov")) Then
-                                        ft.mensajeAdvertencia("Este documento posee documentos asociados a él...")
-                                    Else
-                                        ft.Ejecutar_strSQL(myConn, "DELETE from jsprotrapag where " _
-                                            & " CODPRO = '" & .Item("codpro") & "' and " _
-                                            & " TIPOMOV ='" & .Item("tipomov") & "' and " _
-                                            & " EMISION = '" & ft.FormatoFechaMySQL(CDate(.Item("emision").ToString)) & "'AND " _
-                                            & " NUMMOV = '" & .Item("nummov") & "' and " _
-                                            & " REFER = '" & .Item("refer") & "' AND " _
-                                            & " EJERCICIO = '" & jytsistema.WorkExercise & "' AND " _
-                                            & " ID_EMP ='" & jytsistema.WorkID & "' ")
-                                    End If
-                                Case "AB", "CA", "NC"
-
-                                    If .Item("multican") = "1" Then
-
-                                        If ft.PreguntaEliminarRegistro("Este documento pertenece a una cancelación múltiple. Se eliminará en todos los documentos") = Windows.Forms.DialogResult.No Then
-                                            Return
-                                        End If
-                                    End If
+                        Select Case cxpSelected.TipoMovimiento
+                            Case "FC", "GR", "ND"
+                                If PoseeMovimientosAsociados(myConn, lblInfo, cxpSelected.CodigoProveedor, cxpSelected.NumeroMovimiento, cxpSelected.TipoMovimiento) Then
+                                    ft.mensajeAdvertencia("Este documento posee documentos asociados a él...")
+                                Else
                                     ft.Ejecutar_strSQL(myConn, "DELETE from jsprotrapag where " _
-                                        & " CODPRO = '" & .Item("codpro") & "' AND " _
-                                        & " REFER = '" & .Item("refer") & "' AND " _
-                                        & " COMPROBA = '" & .Item("comproba") & "' AND  " _
+                                        & " CODPRO = '" & cxpSelected.CodigoProveedor & "' and " _
+                                        & " TIPOMOV ='" & cxpSelected.TipoMovimiento & "' and " _
+                                        & " EMISION = '" & ft.FormatoFechaMySQL(cxpSelected.Emision) & "'AND " _
+                                        & " NUMMOV = '" & cxpSelected.NumeroMovimiento & "' and " _
+                                        & " REFER = '" & cxpSelected.Referencia & "' AND " _
                                         & " EJERCICIO = '" & jytsistema.WorkExercise & "' AND " _
-                                        & " ID_EMP = '" & jytsistema.WorkID & "' ")
-
-                                    ft.Ejecutar_strSQL(myConn, "DELETE from jsprotrapagcan where " _
-                                        & " CODPRO = '" & .Item("codpro") & "' AND " _
-                                        & " COMPROBA = '" & .Item("comproba") & "' AND  " _
-                                        & " ID_EMP = '" & jytsistema.WorkID & "' ")
-
-                                    ' Actualiza encabezado de compra
-                                    ft.Ejecutar_strSQL(myConn, " update jsproenccom set " _
-                                        & " formapag = '', numpag = '', nompag = '', benefic = '', caja = '' " _
-                                        & IIf(.Item("tipomov") = "NC" AndAlso Mid(.Item("REFER"), 1, 5) = "ISLR-", ", ret_islr = 0.00, num_ret_islr = '', fecha_ret_islr = '2007-01-01' ", "") _
-                                        & IIf(.Item("tipomov") = "NC" AndAlso Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA", ", ret_iva = 0.00, num_ret_iva = '', fecha_ret_iva = '2007-01-01' ", "") _
-                                        & " where " _
-                                        & " numcom = '" & .Item("nummov") & "' and " _
-                                        & " codpro = '" & .Item("codpro") & "' and " _
-                                        & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
-                                        & " id_emp = '" & jytsistema.WorkID & "' ")
-
-                                    If .Item("tipomov") = "NC" AndAlso Mid(.Item("REFER"), 1, 5) = "ISLR-" Then
-                                        ft.Ejecutar_strSQL(myConn, " update jsproenccom set ret_islr = 0.00, num_ret_islr = '', " _
-                                                       & " fecha_ret_islr = '2007-01-01', por_ret_islr = 0.00, base_ret_islr = 0.00 " _
-                                                       & " where codpro = '" & .Item("codpro") & "' and num_ret_islr = '" & .Item("refer") & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                                        & " ID_EMP ='" & jytsistema.WorkID & "' ")
+                                End If
+                            Case "AB", "CA", "NC"
+                                If cxpSelected.Multicancelacion = "1" Then
+                                    If ft.PreguntaEliminarRegistro("Este documento pertenece a una cancelación múltiple. Se eliminará en todos los documentos") = Windows.Forms.DialogResult.No Then
+                                        Return
                                     End If
+                                End If
+                                ft.Ejecutar_strSQL(myConn, "DELETE from jsprotrapag where " _
+                                                                & " CODPRO = '" & cxpSelected.CodigoProveedor & "' AND " _
+                                                                & " REFER = '" & cxpSelected.Referencia & "' AND " _
+                                                                & " COMPROBA = '" & cxpSelected.Comprobante & "' AND  " _
+                                                                & " EJERCICIO = '" & jytsistema.WorkExercise & "' AND " _
+                                                                & " ID_EMP = '" & jytsistema.WorkID & "' ")
 
-                                    If .Item("tipomov") = "NC" AndAlso Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA" Then
-                                        ft.Ejecutar_strSQL(myConn, " update jsproenccom set ret_iva = 0.00, num_ret_iva = '', " _
-                                                       & " fecha_ret_iva = '2007-01-01' " _
-                                                       & " where codpro = '" & .Item("codpro") & "' and num_ret_iva = '" & .Item("refer") & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                                ft.Ejecutar_strSQL(myConn, "DELETE from jsprotrapagcan where " _
+                                                                & " CODPRO = '" & cxpSelected.CodigoProveedor & "' AND " _
+                                                                & " COMPROBA = '" & cxpSelected.Comprobante & "' AND  " _
+                                                                & " ID_EMP = '" & jytsistema.WorkID & "' ")
 
-                                        ft.Ejecutar_strSQL(myConn, " update jsproivacom set retencion = 0.00, numretencion = '' " _
-                                                      & " where codpro = '" & .Item("codpro") & "' and numcom = '" & .Item("nummov") & "' and numretencion = '" & .Item("refer") & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                                ' Actualiza encabezado de compra
+                                ft.Ejecutar_strSQL(myConn, " update jsproenccom set " _
+                                                                & " formapag = '', numpag = '', nompag = '', benefic = '', caja = '' " _
+                                                                & IIf(cxpSelected.TipoMovimiento = "NC" AndAlso Mid(cxpSelected.Referencia, 1, 5) = "ISLR-", ", ret_islr = 0.00, num_ret_islr = '', fecha_ret_islr = '2007-01-01' ", "") _
+                                                                & IIf(cxpSelected.TipoMovimiento = "NC" AndAlso Mid(cxpSelected.Concepto, 1, 13) = "RETENCION IVA", ", ret_iva = 0.00, num_ret_iva = '', fecha_ret_iva = '2007-01-01' ", "") _
+                                                                & " where " _
+                                                                & " numcom = '" & cxpSelected.NumeroMovimiento & "' and " _
+                                                                & " codpro = '" & cxpSelected.CodigoProveedor & "' and " _
+                                                                & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
+                                                                & " id_emp = '" & jytsistema.WorkID & "' ")
 
-                                    End If
+                                If cxpSelected.TipoMovimiento = "NC" AndAlso Mid(cxpSelected.Referencia, 1, 5) = "ISLR-" Then
+                                    ft.Ejecutar_strSQL(myConn, " update jsproenccom set ret_islr = 0.00, num_ret_islr = '', " _
+                                                                               & " fecha_ret_islr = '2007-01-01', por_ret_islr = 0.00, base_ret_islr = 0.00 " _
+                                                                               & " where codpro = '" & cxpSelected.CodigoProveedor & "' and num_ret_islr = '" & cxpSelected.Referencia & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                                End If
 
-
-                                    ' Actualiza encabezado de gasto
-                                    ft.Ejecutar_strSQL(myConn, " update jsproencgas set " _
-                                        & " formapag = '', numpag = '', nompag = '', benefic = '', caja = '' " _
-                                        & IIf(.Item("tipomov") = "NC" AndAlso Mid(.Item("REFER"), 1, 5) = "ISLR-", ", ret_islr = 0.00, num_ret_islr = '', fecha_ret_islr = '2007-01-01' ", "") _
-                                        & IIf(.Item("tipomov") = "NC" AndAlso Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA", ", ret_iva = 0.00, num_ret_iva = '', fecha_ret_iva = '2007-01-01' ", "") _
-                                        & " where " _
-                                        & " numgas = '" & .Item("nummov") & "' and " _
-                                        & " codpro = '" & .Item("codpro") & "' and " _
-                                        & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
-                                        & " id_emp = '" & jytsistema.WorkID & "' ")
-
-
-                                    If .Item("tipomov") = "NC" AndAlso Mid(.Item("REFER"), 1, 5) = "ISLR-" Then
-                                        ft.Ejecutar_strSQL(myConn, " update jsproencgas set ret_islr = 0.00, num_ret_islr = '', " _
-                                                       & " fecha_ret_islr = '2007-01-01', por_ret_islr = 0.00, base_ret_islr = 0.00 " _
-                                                       & " where codpro = '" & .Item("codpro") & "' and num_ret_islr = '" & .Item("refer") & "' and id_emp = '" & jytsistema.WorkID & "' ")
-                                    End If
-
-                                    If .Item("tipomov") = "NC" AndAlso Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA" Then
-                                        ft.Ejecutar_strSQL(myConn, " update jsproencgas set ret_iva = 0.00, num_ret_iva = '', " _
-                                                       & " fecha_ret_iva = '2007-01-01' " _
-                                                       & " where codpro = '" & .Item("codpro") & "' and num_ret_iva = '" & .Item("refer") & "' and id_emp = '" & jytsistema.WorkID & "' ")
-
-                                        ft.Ejecutar_strSQL(myConn, " update jsproivagas set retencion = 0.00, numretencion = '' " _
-                                                      & " where codpro = '" & .Item("codpro") & "' and numgas = '" & .Item("nummov") & "' and numretencion = '" & .Item("refer") & "' and id_emp = '" & jytsistema.WorkID & "' ")
-
-                                    End If
+                                If cxpSelected.TipoMovimiento = "NC" AndAlso Mid(cxpSelected.Concepto, 1, 13) = "RETENCION IVA" Then
+                                    ft.Ejecutar_strSQL(myConn, " update jsproenccom set ret_iva = 0.00, num_ret_iva = '', " _
+                                                                               & " fecha_ret_iva = '2007-01-01' " _
+                                                                               & " where codpro = '" & cxpSelected.CodigoProveedor & "' and num_ret_iva = '" & cxpSelected.Referencia & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                                    ft.Ejecutar_strSQL(myConn, " update jsproivacom set retencion = 0.00, numretencion = '' " _
+                                                                              & " where codpro = '" & cxpSelected.CodigoProveedor & "' and numcom = '" & cxpSelected.NumeroMovimiento & "' and numretencion = '" & cxpSelected.Referencia & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                                End If
 
 
-                                    'elimina movimiento en caja
-                                    ft.Ejecutar_strSQL(myConn, " delete from jsbantracaj where " _
-                                        & " nummov = '" & .Item("comproba") & "' and " _
-                                        & " origen = 'CXP' and " _
-                                        & " caja = '" & .Item("cajapag") & "' and " _
-                                        & " id_emp = '" & jytsistema.WorkID & "'")
-
-                                    'elimina movimiento en banco
-                                    ft.Ejecutar_strSQL(myConn, " delete from jsbantraban where " _
-                                        & " numorg = '" & .Item("comproba") & "' and " _
-                                        & " origen = 'CXP' and " _
-                                        & " codban = '" & .Item("nompag") & "' and " _
-                                        & " id_emp = '" & jytsistema.WorkID & "'")
-
-                                    'ELIMINAR IMPUESTO AL DEBITO BANCARIO
-                                    If .Item("FORMAPAG") = "CH" Or .Item("FORMAPAG") = "TR" Or .Item("FORMAPAG") = "TA" Then
-                                        EliminarImpuestoDebitoBancario(myConn, lblInfo, .Item("NOMPAG"), .Item("NUMPAG"), CDate(.Item("EMISION").ToString))
-                                    End If
+                                ' Actualiza encabezado de gasto
+                                ft.Ejecutar_strSQL(myConn, " update jsproencgas set " _
+                                                                & " formapag = '', numpag = '', nompag = '', benefic = '', caja = '' " _
+                                                                & IIf(cxpSelected.TipoMovimiento = "NC" AndAlso Mid(cxpSelected.Referencia, 1, 5) = "ISLR-", ", ret_islr = 0.00, num_ret_islr = '', fecha_ret_islr = '2007-01-01' ", "") _
+                                                                & IIf(cxpSelected.TipoMovimiento = "NC" AndAlso Mid(cxpSelected.Concepto, 1, 13) = "RETENCION IVA", ", ret_iva = 0.00, num_ret_iva = '', fecha_ret_iva = '2007-01-01' ", "") _
+                                                                & " where " _
+                                                                & " numgas = '" & cxpSelected.NumeroMovimiento & "' and " _
+                                                                & " codpro = '" & cxpSelected.CodigoProveedor & "' and " _
+                                                                & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
+                                                                & " id_emp = '" & jytsistema.WorkID & "' ")
 
 
-                            End Select
+                                If cxpSelected.TipoMovimiento = "NC" AndAlso Mid(cxpSelected.Referencia, 1, 5) = "ISLR-" Then
+                                    ft.Ejecutar_strSQL(myConn, " update jsproencgas set ret_islr = 0.00, num_ret_islr = '', " _
+                                                                               & " fecha_ret_islr = '2007-01-01', por_ret_islr = 0.00, base_ret_islr = 0.00 " _
+                                                                               & " where codpro = '" & cxpSelected.CodigoProveedor & "' and num_ret_islr = '" & cxpSelected.Referencia & "' and id_emp = '" & jytsistema.WorkID & "' ")
+                                End If
 
-                            ds = DataSetRequery(ds, strSQLMov, myConn, nTablaMovimientos, lblInfo)
-                            dtMovimientos = ds.Tables(nTablaMovimientos)
+                                If cxpSelected.TipoMovimiento = "NC" AndAlso Mid(cxpSelected.Concepto, 1, 13) = "RETENCION IVA" Then
+                                    ft.Ejecutar_strSQL(myConn, " update jsproencgas set ret_iva = 0.00, num_ret_iva = '', " _
+                                                                               & " fecha_ret_iva = '2007-01-01' " _
+                                                                               & " where codpro = '" & cxpSelected.CodigoProveedor & "' and num_ret_iva = '" & cxpSelected.Referencia & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
-                            If nPosicionMov > dtMovimientos.Rows.Count - 1 Then nPosicionMov = dtMovimientos.Rows.Count - 1
-                            AsignaMov(nPosicionMov, False)
+                                    ft.Ejecutar_strSQL(myConn, " update jsproivagas set retencion = 0.00, numretencion = '' " _
+                                                   & " where codpro = '" & cxpSelected.CodigoProveedor & "' and numgas = '" & cxpSelected.NumeroMovimiento & "' and numretencion = '" & cxpSelected.Referencia & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
-                        End If
+                                End If
 
-                    End With
+
+                                'elimina movimiento en caja
+                                ft.Ejecutar_strSQL(myConn, " delete from jsbantracaj where " _
+                                                                & " nummov = '" & cxpSelected.Comprobante & "' and " _
+                                                                & " origen = 'CXP' and " _
+                                                                & " caja = '" & cxpSelected.CajaDePago & "' and " _
+                                                                & " id_emp = '" & jytsistema.WorkID & "'")
+
+                                'elimina movimiento en banco
+                                ft.Ejecutar_strSQL(myConn, " delete from jsbantraban where " _
+                                                                & " numorg = '" & cxpSelected.Comprobante & "' and " _
+                                                                & " origen = 'CXP' and " _
+                                                                & " codban = '" & cxpSelected.NombreDePago & "' and " _
+                                                                & " id_emp = '" & jytsistema.WorkID & "'")
+
+                                'ELIMINAR IMPUESTO AL DEBITO BANCARIO
+                                If cxpSelected.FormaDePago = "CH" Or cxpSelected.FormaDePago = "TR" Or cxpSelected.FormaDePago = "TA" Then
+                                    EliminarImpuestoDebitoBancario(myConn, lblInfo, cxpSelected.NombreDePago, cxpSelected.NumeroDePago, cxpSelected.Emision)
+                                End If
+
+
+                        End Select
+
+                        If nPosicionMov > vendorTransactionsList.Count - 1 Then nPosicionMov = vendorTransactionsList.Count - 1
+                        AsignaMov(nPosicionMov, True)
+
+                    End If
+
                 End If
-            Else
+                Else
                 ft.mensajeAdvertencia("Movimiento no puede ser eliminado desde CXP...")
             End If
         End If
@@ -969,147 +794,147 @@ Public Class jsComArcProveedores
     Private Sub EliminarMovimientoExP()
 
 
-        nPosicionMovExP = Me.BindingContext(ds, nTablaMovimientosExP).Position
+        'nPosicionMovExP = Me.BindingContext(ds, nTablaMovimientosExP).Position
 
-        If nPosicionMovExP >= 0 Then
-            If dtMovimientosExP.Rows(nPosicionMovExP).Item("origen") = "CXP" Then
+        'If nPosicionMovExP >= 0 Then
+        '    If dtMovimientosExP.Rows(nPosicionMovExP).Item("origen") = "CXP" Then
 
-                If ft.PreguntaEliminarRegistro() = Windows.Forms.DialogResult.Yes Then
-                    With dtMovimientosExP.Rows(nPosicionMovExP)
+        '        If ft.PreguntaEliminarRegistro() = Windows.Forms.DialogResult.Yes Then
+        '            With dtMovimientosExP.Rows(nPosicionMovExP)
 
-                        Dim aCamposAdicionales() As String = {"codpro|'" & txtCodigo.Text & "'",
-                                                              "emision|'" & ft.FormatoFechaMySQL(Convert.ToDateTime(.Item("EMISION"))) & "'",
-                                                              "nummov|'" & .Item("NUMMOV") & "'",
-                                                              "tipomov|'" & .Item("TIPOMOV") & "'",
-                                                              "hora|'" & .Item("HORA") & "'",
-                                                              "tipo|'" & .Item("TIPO") & "'"}
+        '                Dim aCamposAdicionales() As String = {"codpro|'" & txtCodigo.Text & "'",
+        '                                                      "emision|'" & ft.FormatoFechaMySQL(Convert.ToDateTime(.Item("EMISION"))) & "'",
+        '                                                      "nummov|'" & .Item("NUMMOV") & "'",
+        '                                                      "tipomov|'" & .Item("TIPOMOV") & "'",
+        '                                                      "hora|'" & .Item("HORA") & "'",
+        '                                                      "tipo|'" & .Item("TIPO") & "'"}
 
-                        If DocumentoBloqueado(myConn, "jsprotrapag", aCamposAdicionales) Then
-                            ft.mensajeCritico("DOCUMENTO BLOQUEADO. POR FAVOR VERIFIQUE...")
-                        Else
+        '                If DocumentoBloqueado(myConn, "jsprotrapag", aCamposAdicionales) Then
+        '                    ft.mensajeCritico("DOCUMENTO BLOQUEADO. POR FAVOR VERIFIQUE...")
+        '                Else
 
-                            InsertarAuditoria(myConn, MovAud.iEliminar, sModulo, .Item("nummov"))
-                            Dim TipoMovimiento As String = .Item("tipomov")
-                            Select Case TipoMovimiento
-                                Case "FC", "GR", "ND"
-                                    If PoseeMovimientosAsociados(myConn, lblInfo, .Item("codpro"), .Item("nummov"), .Item("tipomov"), 1) Then
-                                        ft.mensajeAdvertencia("Este documento posee documentos asociados a él...")
-                                    Else
-                                        ft.Ejecutar_strSQL(myConn, "DELETE from jsprotrapag where " _
-                                            & " CODPRO = '" & .Item("codpro") & "' and " _
-                                            & " TIPOMOV ='" & .Item("tipomov") & "' and " _
-                                            & " EMISION = '" & ft.FormatoFechaMySQL(CDate(.Item("emision").ToString)) & "'AND " _
-                                            & " NUMMOV = '" & .Item("nummov") & "' and " _
-                                            & " REFER = '" & .Item("refer") & "' AND " _
-                                            & " REMESA = '1' AND " _
-                                            & " EJERCICIO = '" & jytsistema.WorkExercise & "' AND " _
-                                            & " ID_EMP ='" & jytsistema.WorkID & "' ")
-                                    End If
-                                Case "AB", "CA", "NC"
+        '                    InsertarAuditoria(myConn, MovAud.iEliminar, sModulo, .Item("nummov"))
+        '                    Dim TipoMovimiento As String = .Item("tipomov")
+        '                    Select Case TipoMovimiento
+        '                        Case "FC", "GR", "ND"
+        '                            If PoseeMovimientosAsociados(myConn, lblInfo, .Item("codpro"), .Item("nummov"), .Item("tipomov"), 1) Then
+        '                                ft.mensajeAdvertencia("Este documento posee documentos asociados a él...")
+        '                            Else
+        '                                ft.Ejecutar_strSQL(myConn, "DELETE from jsprotrapag where " _
+        '                                    & " CODPRO = '" & .Item("codpro") & "' and " _
+        '                                    & " TIPOMOV ='" & .Item("tipomov") & "' and " _
+        '                                    & " EMISION = '" & ft.FormatoFechaMySQL(CDate(.Item("emision").ToString)) & "'AND " _
+        '                                    & " NUMMOV = '" & .Item("nummov") & "' and " _
+        '                                    & " REFER = '" & .Item("refer") & "' AND " _
+        '                                    & " REMESA = '1' AND " _
+        '                                    & " EJERCICIO = '" & jytsistema.WorkExercise & "' AND " _
+        '                                    & " ID_EMP ='" & jytsistema.WorkID & "' ")
+        '                            End If
+        '                        Case "AB", "CA", "NC"
 
-                                    If .Item("multican") = "1" Then
-                                        If ft.PreguntaEliminarRegistro("Este documento pertenece a una cancelación múltiple. Se eliminará en todos los documentos") = Windows.Forms.DialogResult.No Then
-                                            Return
-                                        End If
-                                    End If
-                                    ft.Ejecutar_strSQL(myConn, "DELETE from jsprotrapag where " _
-                                        & " CODPRO = '" & .Item("codpro") & "' AND " _
-                                        & " REFER = '" & .Item("refer") & "' AND " _
-                                        & " COMPROBA = '" & .Item("comproba") & "' AND  " _
-                                        & " REMESA = '1' AND " _
-                                        & " EJERCICIO = '" & jytsistema.WorkExercise & "' AND " _
-                                        & " ID_EMP = '" & jytsistema.WorkID & "' ")
+        '                            If .Item("multican") = "1" Then
+        '                                If ft.PreguntaEliminarRegistro("Este documento pertenece a una cancelación múltiple. Se eliminará en todos los documentos") = Windows.Forms.DialogResult.No Then
+        '                                    Return
+        '                                End If
+        '                            End If
+        '                            ft.Ejecutar_strSQL(myConn, "DELETE from jsprotrapag where " _
+        '                                & " CODPRO = '" & .Item("codpro") & "' AND " _
+        '                                & " REFER = '" & .Item("refer") & "' AND " _
+        '                                & " COMPROBA = '" & .Item("comproba") & "' AND  " _
+        '                                & " REMESA = '1' AND " _
+        '                                & " EJERCICIO = '" & jytsistema.WorkExercise & "' AND " _
+        '                                & " ID_EMP = '" & jytsistema.WorkID & "' ")
 
-                                    ft.Ejecutar_strSQL(myConn, "DELETE from jsprotrapagcan where " _
-                                        & " CODPRO = '" & .Item("codpro") & "' AND " _
-                                        & " COMPROBA = '" & .Item("comproba") & "' AND  " _
-                                        & " ID_EMP = '" & jytsistema.WorkID & "' ")
+        '                            ft.Ejecutar_strSQL(myConn, "DELETE from jsprotrapagcan where " _
+        '                                & " CODPRO = '" & .Item("codpro") & "' AND " _
+        '                                & " COMPROBA = '" & .Item("comproba") & "' AND  " _
+        '                                & " ID_EMP = '" & jytsistema.WorkID & "' ")
 
-                                    ' Actualiza encabezado de compra
-                                    ft.Ejecutar_strSQL(myConn, " update jsproenccom set " _
-                                        & " formapag = '', numpag = '', nompag = '', benefic = '', caja = '' " _
-                                        & IIf(.Item("tipomov") = "NC" AndAlso Mid(.Item("REFER"), 1, 5) = "ISLR-", ", ret_islr = 0.00, num_ret_islr = '', fecha_ret_islr = '2007-01-01' ", "") _
-                                        & IIf(.Item("tipomov") = "NC" AndAlso Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA", ", ret_iva = 0.00, num_ret_iva = '', fecha_ret_iva = '2007-01-01' ", "") _
-                                        & " where " _
-                                        & " numcom = '" & .Item("nummov") & "' and " _
-                                        & " codpro = '" & .Item("codpro") & "' and " _
-                                        & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
-                                        & " id_emp = '" & jytsistema.WorkID & "' ")
+        '                            ' Actualiza encabezado de compra
+        '                            ft.Ejecutar_strSQL(myConn, " update jsproenccom set " _
+        '                                & " formapag = '', numpag = '', nompag = '', benefic = '', caja = '' " _
+        '                                & IIf(.Item("tipomov") = "NC" AndAlso Mid(.Item("REFER"), 1, 5) = "ISLR-", ", ret_islr = 0.00, num_ret_islr = '', fecha_ret_islr = '2007-01-01' ", "") _
+        '                                & IIf(.Item("tipomov") = "NC" AndAlso Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA", ", ret_iva = 0.00, num_ret_iva = '', fecha_ret_iva = '2007-01-01' ", "") _
+        '                                & " where " _
+        '                                & " numcom = '" & .Item("nummov") & "' and " _
+        '                                & " codpro = '" & .Item("codpro") & "' and " _
+        '                                & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
+        '                                & " id_emp = '" & jytsistema.WorkID & "' ")
 
-                                    If .Item("tipomov") = "NC" AndAlso Mid(.Item("REFER"), 1, 5) = "ISLR-" Then
-                                        ft.Ejecutar_strSQL(myConn, " update jsproenccom set ret_islr = 0.00, num_ret_islr = '', " _
-                                                       & " fecha_ret_islr = '2007-01-01', por_ret_islr = 0.00, base_ret_islr = 0.00 " _
-                                                       & " where codpro = '" & .Item("codpro") & "' and num_ret_islr = '" & .Item("refer") & "' and id_emp = '" & jytsistema.WorkID & "' ")
-                                    End If
+        '                            If .Item("tipomov") = "NC" AndAlso Mid(.Item("REFER"), 1, 5) = "ISLR-" Then
+        '                                ft.Ejecutar_strSQL(myConn, " update jsproenccom set ret_islr = 0.00, num_ret_islr = '', " _
+        '                                               & " fecha_ret_islr = '2007-01-01', por_ret_islr = 0.00, base_ret_islr = 0.00 " _
+        '                                               & " where codpro = '" & .Item("codpro") & "' and num_ret_islr = '" & .Item("refer") & "' and id_emp = '" & jytsistema.WorkID & "' ")
+        '                            End If
 
-                                    If .Item("tipomov") = "NC" AndAlso Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA" Then
-                                        ft.Ejecutar_strSQL(myConn, " update jsproenccom set ret_iva = 0.00, num_ret_iva = '', " _
-                                                       & " fecha_ret_iva = '2007-01-01' " _
-                                                       & " where codpro = '" & .Item("codpro") & "' and num_ret_iva = '" & .Item("refer") & "' and id_emp = '" & jytsistema.WorkID & "' ")
+        '                            If .Item("tipomov") = "NC" AndAlso Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA" Then
+        '                                ft.Ejecutar_strSQL(myConn, " update jsproenccom set ret_iva = 0.00, num_ret_iva = '', " _
+        '                                               & " fecha_ret_iva = '2007-01-01' " _
+        '                                               & " where codpro = '" & .Item("codpro") & "' and num_ret_iva = '" & .Item("refer") & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
-                                        ft.Ejecutar_strSQL(myConn, " update jsproivacom set retencion = 0.00, numretencion = '' " _
-                                                      & " where codpro = '" & .Item("codpro") & "' and numcom = '" & .Item("nummov") & "' and numretencion = '" & .Item("refer") & "' and id_emp = '" & jytsistema.WorkID & "' ")
+        '                                ft.Ejecutar_strSQL(myConn, " update jsproivacom set retencion = 0.00, numretencion = '' " _
+        '                                              & " where codpro = '" & .Item("codpro") & "' and numcom = '" & .Item("nummov") & "' and numretencion = '" & .Item("refer") & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
-                                    End If
-
-
-                                    ' Actualiza encabezado de gasto
-                                    ft.Ejecutar_strSQL(myConn, " update jsproencgas set " _
-                                        & " formapag = '', numpag = '', nompag = '', benefic = '', caja = '' " _
-                                        & IIf(.Item("tipomov") = "NC" AndAlso Mid(.Item("REFER"), 1, 5) = "ISLR-", ", ret_islr = 0.00, num_ret_islr = '', fecha_ret_islr = '2007-01-01' ", "") _
-                                        & IIf(.Item("tipomov") = "NC" AndAlso Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA", ", ret_iva = 0.00, num_ret_iva = '', fecha_ret_iva = '2007-01-01' ", "") _
-                                        & " where " _
-                                        & " numgas = '" & .Item("nummov") & "' and " _
-                                        & " codpro = '" & .Item("codpro") & "' and " _
-                                        & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
-                                        & " id_emp = '" & jytsistema.WorkID & "' ")
+        '                            End If
 
 
-                                    If .Item("tipomov") = "NC" AndAlso Mid(.Item("REFER"), 1, 5) = "ISLR-" Then
-                                        ft.Ejecutar_strSQL(myConn, " update jsproencgas set ret_islr = 0.00, num_ret_islr = '', " _
-                                                       & " fecha_ret_islr = '2007-01-01', por_ret_islr = 0.00, base_ret_islr = 0.00 " _
-                                                       & " where codpro = '" & .Item("codpro") & "' and num_ret_islr = '" & .Item("refer") & "' and id_emp = '" & jytsistema.WorkID & "' ")
-                                    End If
-
-                                    If .Item("tipomov") = "NC" AndAlso Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA" Then
-                                        ft.Ejecutar_strSQL(myConn, " update jsproencgas set ret_iva = 0.00, num_ret_iva = '', " _
-                                                       & " fecha_ret_iva = '2007-01-01' " _
-                                                       & " where codpro = '" & .Item("codpro") & "' and num_ret_iva = '" & .Item("refer") & "' and id_emp = '" & jytsistema.WorkID & "' ")
-
-                                        ft.Ejecutar_strSQL(myConn, " update jsproivagas set retencion = 0.00, numretencion = '' " _
-                                                      & " where codpro = '" & .Item("codpro") & "' and numgas = '" & .Item("nummov") & "' and numretencion = '" & .Item("refer") & "' and id_emp = '" & jytsistema.WorkID & "' ")
-
-                                    End If
+        '                            ' Actualiza encabezado de gasto
+        '                            ft.Ejecutar_strSQL(myConn, " update jsproencgas set " _
+        '                                & " formapag = '', numpag = '', nompag = '', benefic = '', caja = '' " _
+        '                                & IIf(.Item("tipomov") = "NC" AndAlso Mid(.Item("REFER"), 1, 5) = "ISLR-", ", ret_islr = 0.00, num_ret_islr = '', fecha_ret_islr = '2007-01-01' ", "") _
+        '                                & IIf(.Item("tipomov") = "NC" AndAlso Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA", ", ret_iva = 0.00, num_ret_iva = '', fecha_ret_iva = '2007-01-01' ", "") _
+        '                                & " where " _
+        '                                & " numgas = '" & .Item("nummov") & "' and " _
+        '                                & " codpro = '" & .Item("codpro") & "' and " _
+        '                                & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
+        '                                & " id_emp = '" & jytsistema.WorkID & "' ")
 
 
-                                    'elimina movimiento en caja
-                                    ft.Ejecutar_strSQL(myConn, " delete from jsbantracaj where " _
-                                        & " nummov = '" & .Item("comproba") & "' and " _
-                                        & " origen = 'CXP' and " _
-                                        & " caja = '" & .Item("cajapag") & "' and " _
-                                        & " id_emp = '" & jytsistema.WorkID & "'")
+        '                            If .Item("tipomov") = "NC" AndAlso Mid(.Item("REFER"), 1, 5) = "ISLR-" Then
+        '                                ft.Ejecutar_strSQL(myConn, " update jsproencgas set ret_islr = 0.00, num_ret_islr = '', " _
+        '                                               & " fecha_ret_islr = '2007-01-01', por_ret_islr = 0.00, base_ret_islr = 0.00 " _
+        '                                               & " where codpro = '" & .Item("codpro") & "' and num_ret_islr = '" & .Item("refer") & "' and id_emp = '" & jytsistema.WorkID & "' ")
+        '                            End If
 
-                                    'elimina movimiento en banco
-                                    ft.Ejecutar_strSQL(myConn, " delete from jsbantraban where " _
-                                        & " numorg = '" & .Item("comproba") & "' and " _
-                                        & " origen = 'CXP' and " _
-                                        & " codban = '" & .Item("nompag") & "' and " _
-                                        & " id_emp = '" & jytsistema.WorkID & "'")
-                            End Select
+        '                            If .Item("tipomov") = "NC" AndAlso Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA" Then
+        '                                ft.Ejecutar_strSQL(myConn, " update jsproencgas set ret_iva = 0.00, num_ret_iva = '', " _
+        '                                               & " fecha_ret_iva = '2007-01-01' " _
+        '                                               & " where codpro = '" & .Item("codpro") & "' and num_ret_iva = '" & .Item("refer") & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
-                            ds = DataSetRequery(ds, strSQLMovExP, myConn, nTablaMovimientosExP, lblInfo)
-                            dtMovimientosExP = ds.Tables(nTablaMovimientosExP)
+        '                                ft.Ejecutar_strSQL(myConn, " update jsproivagas set retencion = 0.00, numretencion = '' " _
+        '                                              & " where codpro = '" & .Item("codpro") & "' and numgas = '" & .Item("nummov") & "' and numretencion = '" & .Item("refer") & "' and id_emp = '" & jytsistema.WorkID & "' ")
 
-                            If nPosicionMovExP > dtMovimientosExP.Rows.Count - 1 Then nPosicionMovExP = dtMovimientosExP.Rows.Count - 1
-                            AsignaMovExP(nPosicionMovExP, False)
-                        End If
+        '                            End If
 
-                    End With
-                End If
-            Else
-                ft.mensajeAdvertencia("Movimiento no puede ser eliminado desde CXP...")
-            End If
-        End If
+
+        '                            'elimina movimiento en caja
+        '                            ft.Ejecutar_strSQL(myConn, " delete from jsbantracaj where " _
+        '                                & " nummov = '" & .Item("comproba") & "' and " _
+        '                                & " origen = 'CXP' and " _
+        '                                & " caja = '" & .Item("cajapag") & "' and " _
+        '                                & " id_emp = '" & jytsistema.WorkID & "'")
+
+        '                            'elimina movimiento en banco
+        '                            ft.Ejecutar_strSQL(myConn, " delete from jsbantraban where " _
+        '                                & " numorg = '" & .Item("comproba") & "' and " _
+        '                                & " origen = 'CXP' and " _
+        '                                & " codban = '" & .Item("nompag") & "' and " _
+        '                                & " id_emp = '" & jytsistema.WorkID & "'")
+        '                    End Select
+
+        '                    ds = DataSetRequery(ds, strSQLMovExP, myConn, nTablaMovimientosExP, lblInfo)
+        '                    dtMovimientosExP = ds.Tables(nTablaMovimientosExP)
+
+        '                    If nPosicionMovExP > dtMovimientosExP.Rows.Count - 1 Then nPosicionMovExP = dtMovimientosExP.Rows.Count - 1
+        '                    AsignaMovExP(nPosicionMovExP, False)
+        '                End If
+
+        '            End With
+        '        End If
+        '    Else
+        '        ft.mensajeAdvertencia("Movimiento no puede ser eliminado desde CXP...")
+        '    End If
+        'End If
 
     End Sub
 
@@ -1151,71 +976,71 @@ Public Class jsComArcProveedores
                 f = Nothing
             Case "Movimientos CxP"
                 Dim f As New jsComRepParametros
-                With dtMovimientos.Rows(nPosicionMov)
-                    If .Item("tipomov") = "NC" And Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA" Then
+                With cxpSelected
+                    If .TipoMovimiento = "NC" And Mid(.Concepto, 1, 13) = "RETENCION IVA" Then
                         'IMPRIMIR COMPROBANTE RETENCIOIN IVA
-                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cRetencionIVA, "Comprobante de Retención de IVA", txtCodigo.Text, .Item("refer"))
-                    ElseIf .Item("tipomov") = "ND" And Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA" Then
+                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cRetencionIVA, "Comprobante de Retención de IVA", txtCodigo.Text, .Referencia)
+                    ElseIf .TipoMovimiento = "ND" And Mid(.Concepto, 1, 13) = "RETENCION IVA" Then
                         'IMPRIMIR COMPROBANTE RETENCION IVA
-                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cRetencionIVA, "Comprobante de Retención de IVA", txtCodigo.Text, .Item("refer"))
-                    ElseIf .Item("tipomov") = "NC" And Mid(.Item("REFER"), 1, 5) = "ISLR-" Then
+                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cRetencionIVA, "Comprobante de Retención de IVA", txtCodigo.Text, .Referencia)
+                    ElseIf .TipoMovimiento = "NC" And Mid(.Referencia, 1, 5) = "ISLR-" Then
                         'IMPRIMNIR COMPROBANTE RETENCION ISLR
-                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cRetencionISLR, "Comprobante de Retención de ISLR", txtCodigo.Text, .Item("refer"))
-                    ElseIf dtMovimientos.Rows(nPosicionMov).Item("comproba") <> "" Then
+                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cRetencionISLR, "Comprobante de Retención de ISLR", txtCodigo.Text, .Referencia)
+                    ElseIf .Comprobante <> "" Then
                         'IMPRIMIR COMPROBANTE DE EGRESO
-                        If dtMovimientos.Rows(nPosicionMov).Item("formapag") = "CH" Then
+                        If .FormaDePago = "CH" Then
                             Dim fr As New jsBanRepParametros
-                            fr.Cargar(TipoCargaFormulario.iShowDialog, ReporteBancos.cComprobanteDeEgreso, "COMPROBANTE DE PAGO", dtMovimientos.Rows(nPosicionMov).Item("nompag"), dtMovimientos.Rows(nPosicionMov).Item("COMPROBA"), , "CXP")
+                            fr.Cargar(TipoCargaFormulario.iShowDialog, ReporteBancos.cComprobanteDeEgreso, "COMPROBANTE DE PAGO", .NombreDePago, .Comprobante, , "CXP")
                             fr.Dispose()
                             fr = Nothing
                         Else
                             f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cComprobantePago, "COMPROBANTE DE EGRESO",
-                                     txtCodigo.Text, dtMovimientos.Rows(nPosicionMov).Item("COMPROBA"))
+                                                 txtCodigo.Text, .Comprobante)
                         End If
 
                     Else
                         'IMPRIMIR MOVIMIENTOS DE CXP
                         f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cMovimientosProveedores, "Movimientos Proveedores",
-                                 txtCodigo1.Text)
+                                         txtCodigo1.Text)
                     End If
                 End With
                 f = Nothing
             Case "Movimientos ExP"
-                Dim f As New jsComRepParametros
-                With dtMovimientosExP.Rows(nPosicionMovExP)
-                    If .Item("tipomov") = "NC" And Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA" Then
-                        'IMPRIMIR COMPROBANTE RETENCIOIN IVA
-                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cRetencionIVA, "Comprobante de Retención de IVA",
-                                 txtCodigo.Text, .Item("refer"), , , , , 1)
-                    ElseIf .Item("tipomov") = "ND" And Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA" Then
-                        'IMPRIMIR COMPROBANTE RETENCION IVA
-                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cRetencionIVA, "Comprobante de Retención de IVA",
-                                 txtCodigo.Text, .Item("refer"), , , , , 1)
-                    ElseIf .Item("tipomov") = "NC" And Mid(.Item("REFER"), 1, 5) = "ISLR-" Then
-                        'IMPRIMNIR COMPROBANTE RETENCION ISLR
-                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cRetencionISLR, "Comprobante de Retención de ISLR",
-                                 txtCodigo.Text, .Item("refer"), , , , , 1)
-                    ElseIf dtMovimientosExP.Rows(nPosicionMovExP).Item("comproba") <> "" Then
-                        'IMPRIMIR COMPROBANTE DE EGRESO
-                        If dtMovimientosExP.Rows(nPosicionMovExP).Item("formapag") = "CH" Then
-                            Dim fr As New jsBanRepParametros
-                            fr.Cargar(TipoCargaFormulario.iShowDialog, ReporteBancos.cComprobanteDeEgreso, "COMPROBANTE DE PAGO",
-                                      dtMovimientosExP.Rows(nPosicionMovExP).Item("nompag"),
-                                      dtMovimientosExP.Rows(nPosicionMovExP).Item("COMPROBA"), , "CXP")
-                            fr.Dispose()
-                            fr = Nothing
-                        Else
-                            f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cComprobantePago, "COMPROBANTE DE EGRESO",
-                                     txtCodigo.Text, dtMovimientosExP.Rows(nPosicionMovExP).Item("COMPROBA"))
-                        End If
+                'Dim f As New jsComRepParametros
+                'With dtMovimientosExP.Rows(nPosicionMovExP)
+                '    If .Item("tipomov") = "NC" And Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA" Then
+                '        'IMPRIMIR COMPROBANTE RETENCIOIN IVA
+                '        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cRetencionIVA, "Comprobante de Retención de IVA",
+                '                 txtCodigo.Text, .Item("refer"), , , , , 1)
+                '    ElseIf .Item("tipomov") = "ND" And Mid(.Item("CONCEPTO"), 1, 13) = "RETENCION IVA" Then
+                '        'IMPRIMIR COMPROBANTE RETENCION IVA
+                '        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cRetencionIVA, "Comprobante de Retención de IVA",
+                '                 txtCodigo.Text, .Item("refer"), , , , , 1)
+                '    ElseIf .Item("tipomov") = "NC" And Mid(.Item("REFER"), 1, 5) = "ISLR-" Then
+                '        'IMPRIMNIR COMPROBANTE RETENCION ISLR
+                '        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cRetencionISLR, "Comprobante de Retención de ISLR",
+                '                 txtCodigo.Text, .Item("refer"), , , , , 1)
+                '    ElseIf dtMovimientosExP.Rows(nPosicionMovExP).Item("comproba") <> "" Then
+                '        'IMPRIMIR COMPROBANTE DE EGRESO
+                '        If dtMovimientosExP.Rows(nPosicionMovExP).Item("formapag") = "CH" Then
+                '            Dim fr As New jsBanRepParametros
+                '            fr.Cargar(TipoCargaFormulario.iShowDialog, ReporteBancos.cComprobanteDeEgreso, "COMPROBANTE DE PAGO",
+                '                      dtMovimientosExP.Rows(nPosicionMovExP).Item("nompag"),
+                '                      dtMovimientosExP.Rows(nPosicionMovExP).Item("COMPROBA"), , "CXP")
+                '            fr.Dispose()
+                '            fr = Nothing
+                '        Else
+                '            f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cComprobantePago, "COMPROBANTE DE EGRESO",
+                '                     txtCodigo.Text, dtMovimientosExP.Rows(nPosicionMovExP).Item("COMPROBA"))
+                '        End If
 
-                    Else
-                        'IMPRIMIR MOVIMIENTOS DE CXP
-                        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cMovimientosProveedores, "Movimientos ExP Proveedores",
-                                 txtCodigo1.Text, , , , , , 1)
-                    End If
-                End With
-                f = Nothing
+                '    Else
+                '        'IMPRIMIR MOVIMIENTOS DE CXP
+                '        f.Cargar(TipoCargaFormulario.iShowDialog, ReporteCompras.cMovimientosProveedores, "Movimientos ExP Proveedores",
+                '                 txtCodigo1.Text, , , , , , 1)
+                '    End If
+                'End With
+                'f = Nothing
 
             Case "Estadísticas"
         End Select
@@ -1389,89 +1214,89 @@ Public Class jsComArcProveedores
         ft.mensajeEtiqueta(lblInfo, mensaje, Transportables.tipoMensaje.iInfo)
     End Sub
 
-    Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dg.RowHeaderMouseClick,
-        dg.CellMouseClick, dg.RegionChanged
+    'Private Sub dg_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles 
+    '    dg.CellMouseClick, dg.RegionChanged
 
-        Me.BindingContext(ds, nTablaMovimientos).Position = e.RowIndex
-        nPosicionMov = e.RowIndex
-        AsignarTextosMovimientos(nPosicionMov)
+    '    Me.BindingContext(ds, nTablaMovimientos).Position = e.RowIndex
+    '    nPosicionMov = e.RowIndex
+    '    AsignarTextosMovimientos(nPosicionMov)
 
-    End Sub
+    'End Sub
     Private Sub AsignarTextosMovimientos(nRow As Long)
 
-        ft.MostrarItemsEnMenuBarra(MenuBarra, nRow, dtMovimientos.Rows.Count)
+        'ft.MostrarItemsEnMenuBarra(MenuBarra, nRow, dtMovimientos.Rows.Count)
 
-        If dtMovimientos.Rows.Count > 0 Then
-            With dtMovimientos.Rows(nRow)
+        'If dtMovimientos.Rows.Count > 0 Then
+        '    With dtMovimientos.Rows(nRow)
 
-                If .Item("origen") = "CXP" Then
+        '        If .Item("origen") = "CXP" Then
 
-                    IniciarTipoMovimiento(.Item("TIPOMOV"), .Item("CONCEPTO"), .Item("REFER"), cmbTipoCxP)
+        '            IniciarTipoMovimiento(.Item("TIPOMOV"), .Item("CONCEPTO"), .Item("REFER"), cmbTipoCxP)
 
-                    txtDocumentoCXP.Text = ft.muestraCampoTexto(.Item("nummov"))
-                    txtNombrePagoCxP.Text = ft.muestraCampoTexto(.Item("COMPROBA"))
-                    txtEmisionCXP.Text = ft.muestraCampoFecha(.Item("Emision"))
-                    txtCausaNCCXP.Text = ft.muestraCampoTexto(.Item("asiento"))
-                    IniciarCausaCredito(lblDescripCausaNCCxP, txtCausaNCCXP.Text, rbtnCRCXP, rbtnCOCXP, .Item("tipomov"), grpCondicionCXP)
-                    txtReferenciaCXP.Text = ft.muestraCampoTexto(.Item("refer"))
-                    txtConceptoCXP.Text = ft.muestraCampoTexto(.Item("concepto"))
-                    txtImporteCXP.Text = ft.muestraCampoNumero(.Item("importe"))
+        '            txtDocumentoCXP.Text = ft.muestraCampoTexto(.Item("nummov"))
+        '            txtNombrePagoCxP.Text = ft.muestraCampoTexto(.Item("COMPROBA"))
+        '            txtEmisionCXP.Text = ft.muestraCampoFecha(.Item("Emision"))
+        '            txtCausaNCCXP.Text = ft.muestraCampoTexto(.Item("asiento"))
+        '            IniciarCausaCredito(lblDescripCausaNCCxP, txtCausaNCCXP.Text, rbtnCRCXP, rbtnCOCXP, .Item("tipomov"), grpCondicionCXP)
+        '            txtReferenciaCXP.Text = ft.muestraCampoTexto(.Item("refer"))
+        '            txtConceptoCXP.Text = ft.muestraCampoTexto(.Item("concepto"))
+        '            txtImporteCXP.Text = ft.muestraCampoNumero(.Item("importe"))
 
-                    IniciarCajas(.Item("CAJAPAG"), cmbCajaCxP)
+        '            IniciarCajas(.Item("CAJAPAG"), cmbCajaCxP)
 
-                    InitiateDropDown(Of TextoValor)(myConn, cmbFPCxP, Tipo.FormaDePago, 0)
-                    cmbFPCxP.SelectedValue = .Item("FORMAPAG")
+        '            InitiateDropDown(Of TextoValor)(myConn, cmbFPCxP, Tipo.FormaDePago, 0)
+        '            cmbFPCxP.SelectedValue = .Item("FORMAPAG")
 
-                    txtNumeroPagoCxP.Text = ft.muestraCampoTexto(.Item("NUMPAG"))
+        '            txtNumeroPagoCxP.Text = ft.muestraCampoTexto(.Item("NUMPAG"))
 
-                    IniciarNombrePago(.Item("FORMAPAG"), .Item("NOMPAG"), cmbNombrePagoCxP)
+        '            IniciarNombrePago(.Item("FORMAPAG"), .Item("NOMPAG"), cmbNombrePagoCxP)
 
-                    txtBeneficiarioCxP.Text = ft.muestraCampoTexto(.Item("BENEFIC"))
-                    txtCodConCxP.Text = ft.muestraCampoTexto(.Item("CODCON"))
+        '            txtBeneficiarioCxP.Text = ft.muestraCampoTexto(.Item("BENEFIC"))
+        '            txtCodConCxP.Text = ft.muestraCampoTexto(.Item("CODCON"))
 
 
-                End If
+        '        End If
 
-            End With
-        End If
+        '    End With
+        'End If
 
     End Sub
     Private Sub AsignarTextosMovimientosExP(nRow As Long)
 
-        ft.MostrarItemsEnMenuBarra(MenuBarra, nRow, dtMovimientosExP.Rows.Count)
+        'ft.MostrarItemsEnMenuBarra(MenuBarra, nRow, dtMovimientosExP.Rows.Count)
 
-        If dtMovimientosExP.Rows.Count > 0 Then
-            With dtMovimientosExP.Rows(nRow)
+        'If dtMovimientosExP.Rows.Count > 0 Then
+        '    With dtMovimientosExP.Rows(nRow)
 
-                If .Item("origen") = "CXP" Then
+        '        If .Item("origen") = "CXP" Then
 
-                    IniciarTipoMovimiento(.Item("TIPOMOV"), .Item("CONCEPTO"), .Item("REFER"), cmbTipoExP)
+        '            IniciarTipoMovimiento(.Item("TIPOMOV"), .Item("CONCEPTO"), .Item("REFER"), cmbTipoExP)
 
-                    txtDocumentoEXP.Text = ft.muestraCampoTexto(.Item("nummov"))
-                    txtNombrePagoExP.Text = ft.muestraCampoTexto(.Item("COMPROBA"))
-                    txtEmisionEXP.Text = ft.muestraCampoFecha(.Item("Emision"))
-                    txtCausaNCEXP.Text = ft.muestraCampoTexto(.Item("asiento"))
-                    IniciarCausaCredito(lblDescripCausaNCExP, txtCausaNCEXP.Text, rbtnCRExP, rbtnCOExP, .Item("tipomov"), grpCondicionExP)
-                    txtReferenciaExP.Text = ft.muestraCampoTexto(.Item("refer"))
-                    txtConceptoExP.Text = ft.muestraCampoTexto(.Item("concepto"))
-                    txtImporteExP.Text = ft.muestraCampoNumero(.Item("importe"))
+        '            txtDocumentoEXP.Text = ft.muestraCampoTexto(.Item("nummov"))
+        '            txtNombrePagoExP.Text = ft.muestraCampoTexto(.Item("COMPROBA"))
+        '            txtEmisionEXP.Text = ft.muestraCampoFecha(.Item("Emision"))
+        '            txtCausaNCEXP.Text = ft.muestraCampoTexto(.Item("asiento"))
+        '            IniciarCausaCredito(lblDescripCausaNCExP, txtCausaNCEXP.Text, rbtnCRExP, rbtnCOExP, .Item("tipomov"), grpCondicionExP)
+        '            txtReferenciaExP.Text = ft.muestraCampoTexto(.Item("refer"))
+        '            txtConceptoExP.Text = ft.muestraCampoTexto(.Item("concepto"))
+        '            txtImporteExP.Text = ft.muestraCampoNumero(.Item("importe"))
 
-                    IniciarCajas(.Item("CAJAPAG"), cmbCajaExP)
+        '            IniciarCajas(.Item("CAJAPAG"), cmbCajaExP)
 
-                    InitiateDropDown(Of TextoValor)(myConn, cmbFPExP, Tipo.FormaDePago)
-                    cmbFPExP.SelectedValue = .Item("FORMAPAG")
+        '            InitiateDropDown(Of TextoValor)(myConn, cmbFPExP, Tipo.FormaDePago)
+        '            cmbFPExP.SelectedValue = .Item("FORMAPAG")
 
-                    txtNumeroPagoExP.Text = ft.muestraCampoTexto(.Item("NUMPAG"))
+        '            txtNumeroPagoExP.Text = ft.muestraCampoTexto(.Item("NUMPAG"))
 
-                    IniciarNombrePago(.Item("FORMAPAG"), .Item("NOMPAG"), cmbNombrePagoExP)
+        '            IniciarNombrePago(.Item("FORMAPAG"), .Item("NOMPAG"), cmbNombrePagoExP)
 
-                    txtBeneficiarioExP.Text = ft.muestraCampoTexto(.Item("BENEFIC"))
-                    txtCodConExP.Text = ft.muestraCampoTexto(.Item("CODCON"))
+        '            txtBeneficiarioExP.Text = ft.muestraCampoTexto(.Item("BENEFIC"))
+        '            txtCodConExP.Text = ft.muestraCampoTexto(.Item("CODCON"))
 
-                End If
+        '        End If
 
-            End With
-        End If
+        '    End With
+        'End If
 
     End Sub
     Private Sub IniciarCausaCredito(lblDescripCausaNotaCredito As System.Windows.Forms.Label, CausaNotaCredito As String,
@@ -1532,13 +1357,13 @@ Public Class jsComArcProveedores
                 End If
         End Select
     End Sub
-    Private Sub dgExP_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgExP.RowHeaderMouseClick,
-        dgExP.CellMouseClick, dgExP.RegionChanged
-        Me.BindingContext(ds, nTablaMovimientosExP).Position = e.RowIndex
-        nPosicionMovExP = e.RowIndex
-        AsignarTextosMovimientosExP(nPosicionMovExP)
+    'Private Sub dgExP_RowHeaderMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles 
+    '    dgExP.CellMouseClick, dgExP.RegionChanged
+    '    Me.BindingContext(ds, nTablaMovimientosExP).Position = e.RowIndex
+    '    nPosicionMovExP = e.RowIndex
+    '    AsignarTextosMovimientosExP(nPosicionMovExP)
 
-    End Sub
+    'End Sub
 
     Private Sub tbcProveedor_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tbcProveedor.SelectedIndexChanged
         Select Case tbcProveedor.SelectedIndex
@@ -1798,14 +1623,6 @@ Public Class jsComArcProveedores
                     AsignaTXT(nPosicionCat)
                 End If
                 DesactivarMarco0()
-            Case "Movimientos CxP"
-                ft.visualizarObjetos(False, grpMovimientosCxP, grpAceptarSalir)
-                ft.habilitarObjetos(True, False, MenuBarra, tbcProveedor.TabPages(0), tbcProveedor.TabPages(2),
-                                            tbcProveedor.TabPages(3), tbcProveedor.TabPages(4), tbcProveedor.TabPages(5))
-            Case "Movimientos ExP"
-                ft.visualizarObjetos(False, grpMovimientosExP, grpAceptarSalir)
-                ft.habilitarObjetos(True, False, MenuBarra, tbcProveedor.TabPages(0), tbcProveedor.TabPages(1),
-                                            tbcProveedor.TabPages(2), tbcProveedor.TabPages(3), tbcProveedor.TabPages(4))
         End Select
     End Sub
 
@@ -1815,65 +1632,9 @@ Public Class jsComArcProveedores
                 If Validado() Then
                     GuardarTXT()
                 End If
-            Case "Movimientos CxP"
-                If ValidadoCxP() Then
-                    GuardarTXTCxP()
-                    DesactivarMarco1()
-                End If
-
-            Case "Movimientos ExP"
-                If ValidadoExP() Then
-                    GuardarTXTExP()
-                    DesactivarMarco2()
-                End If
         End Select
     End Sub
 
-    Private Function ValidadoCxP() As Boolean
-        If ft.DevuelveScalarEntero(myConn, " Select count(*) from jscotcatcon where codcon = '" & txtCodConCxP.Text & "' and id_emp = '" & jytsistema.WorkID & "' ") = 0 Then
-            ft.mensajeCritico(" Debe indicar una CUENTA CONTABLE Válida...")
-            Return False
-        End If
-        Return True
-    End Function
-    Private Sub GuardarTXTCxP()
-
-        ft.Ejecutar_strSQL(myConn, " update jsprotrapag set codcon = '" & txtCodConCxP.Text & "' " _
-                           & " where " _
-                           & " codpro = '" & txtCodigo.Text & "' and " _
-                           & " tipomov = '" & aTipoNick(cmbTipoCxP.SelectedIndex) & "' and " _
-                           & " nummov = '" & txtDocumentoCXP.Text & "' and " _
-                           & " emision = '" & ft.FormatoFechaMySQL(CDate(txtEmisionCXP.Text)) & "' and " _
-                           & " REMESA = '' and " _
-                           & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
-                           & " id_emp = '" & jytsistema.WorkID & "' ")
-
-        AsignaMov(nPosicionMov, True)
-
-    End Sub
-
-    Private Function ValidadoExP() As Boolean
-        If ft.DevuelveScalarEntero(myConn, " Select count(*) from jscotcatcon where codcon = '" & txtCodConExP.Text & "' and id_emp = '" & jytsistema.WorkID & "' ") = 0 Then
-            ft.mensajeCritico(" Debe indicar una CUENTA CONTABLE Válida...")
-            Return False
-        End If
-        Return True
-    End Function
-    Private Sub GuardarTXTExP()
-
-        ft.Ejecutar_strSQL(myConn, " update jsprotrapag set codcon = '" & txtCodConExP.Text & "' " _
-                               & " where " _
-                               & " codpro = '" & txtCodigo.Text & "' and " _
-                               & " tipomov = '" & aTipoNick(cmbTipoExP.SelectedIndex) & "' and " _
-                               & " nummov = '" & txtDocumentoEXP.Text & "' and " _
-                               & " emision = '" & ft.FormatoFechaMySQL(CDate(txtEmisionEXP.Text)) & "' and " _
-                               & " REMESA = '1' and " _
-                               & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
-                               & " id_emp = '" & jytsistema.WorkID & "' ")
-
-        AsignaMovExP(nPosicionMovExP, True)
-
-    End Sub
     Private Sub txtCredito_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCredito.KeyPress
         e.Handled = ft.validaNumeroEnTextbox(e)
     End Sub
@@ -2136,7 +1897,7 @@ Public Class jsComArcProveedores
 
     Private Sub btnForma_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnForma.Click
 
-        txtFormaPago.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codfor codigo, nomfor descripcion from jsconctafor where id_emp = '" & jytsistema.WorkID & "' order by codfor ", _
+        txtFormaPago.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codfor codigo, nomfor descripcion from jsconctafor where id_emp = '" & jytsistema.WorkID & "' order by codfor ",
                                               "FORMA DE PAGO", txtFormaPago.Text)
 
 
@@ -2210,7 +1971,7 @@ Public Class jsComArcProveedores
             ' Callculate data coordinates
             Dim aNom() As String = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"}
             If ds.Group.CoordToDataCoord(p.X, p.Y, x, y) Then
-                e.TooltipText = String.Format("{0}" + ControlChars.Lf + "Mes = " + aNom(Math.Round(x) - 1) + _
+                e.TooltipText = String.Format("{0}" + ControlChars.Lf + "Mes = " + aNom(Math.Round(x) - 1) +
                                               ControlChars.Lf + "Valor = {2:#.##}", ds.Label, x, y)
             Else
                 e.TooltipText = ""
@@ -2219,30 +1980,30 @@ Public Class jsComArcProveedores
         End If
     End Sub
 
-    Private Sub dg_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles dg.KeyUp
-        Select Case e.KeyCode
-            Case Keys.Down
-                Me.BindingContext(ds, nTablaMovimientos).Position += 1
-                nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
-                AsignaMov(nPosicionMov, False)
-            Case Keys.Up
-                Me.BindingContext(ds, nTablaMovimientos).Position -= 1
-                nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
-                AsignaMov(nPosicionMov, False)
-        End Select
+    Private Sub dg_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs)
+        'Select Case e.KeyCode
+        '    Case Keys.Down
+        '        Me.BindingContext(ds, nTablaMovimientos).Position += 1
+        '        nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
+        '        AsignaMov(nPosicionMov, False)
+        '    Case Keys.Up
+        '        Me.BindingContext(ds, nTablaMovimientos).Position -= 1
+        '        nPosicionMov = Me.BindingContext(ds, nTablaMovimientos).Position
+        '        AsignaMov(nPosicionMov, False)
+        'End Select
     End Sub
 
-    Private Sub dgExP_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles dgExP.KeyUp
-        Select Case e.KeyCode
-            Case Keys.Down
-                Me.BindingContext(ds, nTablaMovimientosExP).Position += 1
-                nPosicionMovExP = Me.BindingContext(ds, nTablaMovimientosExP).Position
-                AsignaMovExP(nPosicionMovExP, False)
-            Case Keys.Up
-                Me.BindingContext(ds, nTablaMovimientosExP).Position -= 1
-                nPosicionMovExP = Me.BindingContext(ds, nTablaMovimientosExP).Position
-                AsignaMovExP(nPosicionMovExP, False)
-        End Select
+    Private Sub dgExP_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs)
+        'Select Case e.KeyCode
+        '    Case Keys.Down
+        '        Me.BindingContext(ds, nTablaMovimientosExP).Position += 1
+        '        nPosicionMovExP = Me.BindingContext(ds, nTablaMovimientosExP).Position
+        '        AsignaMovExP(nPosicionMovExP, False)
+        '    Case Keys.Up
+        '        Me.BindingContext(ds, nTablaMovimientosExP).Position -= 1
+        '        nPosicionMovExP = Me.BindingContext(ds, nTablaMovimientosExP).Position
+        '        AsignaMovExP(nPosicionMovExP, False)
+        'End Select
     End Sub
 
 
@@ -2273,7 +2034,7 @@ Public Class jsComArcProveedores
     End Sub
 
     Private Sub btnCodigoContable_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCodigoContable.Click
-        txtCodigoContable.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcon codigo, descripcion from jscotcatcon where marca = 0 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Cuentas Contables", _
+        txtCodigoContable.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcon codigo, descripcion from jscotcatcon where marca = 0 and id_emp = '" & jytsistema.WorkID & "' order by 1 ", "Cuentas Contables",
                                                    txtCodigoContable.Text)
     End Sub
 
@@ -2290,67 +2051,67 @@ Public Class jsComArcProveedores
     End Sub
 
     Private Sub btnReprocesar_Click(sender As System.Object, e As System.EventArgs) Handles btnReprocesar.Click
-        Select Case tbcProveedor.SelectedTab.Text
-            Case "Movimientos CxP"
-                If LoginUser(myConn, lblInfo) = "jytsuite" Then
-                    With dtMovimientos.Rows(nPosicionMov)
-                        Select Case .Item("FORMAPAG")
-                            Case "EF"
-                                InsertEditBANCOSRenglonCaja(myConn, lblInfo, True, .Item("CAJAPAG"), UltimoCajaMasUno(myConn, lblInfo, .Item("CAJAPAG")),
-                                    CDate(.Item("EMISION").ToString), "CXP", "SA", .Item("COMPROBA"), .Item("FORMAPAG"),
-                                    .Item("NUMPAG"), .Item("NOMPAG"), -1 * ValorNumero(.Item("IMPORTE")), .Item("CODCON"), .Item("CONCEPTO"), "", jytsistema.sFechadeTrabajo, 1,
-                                    "", "", "", jytsistema.sFechadeTrabajo, .Item("CODPRO"), "", "1", jytsistema.WorkCurrency.Id, DateTime.Now())
-                            Case "CH", "TA", "DP", "TR"
-                                InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, CDate(.Item("EMISION").ToString), .Item("NUMPAG"),
-                                    IIf(.Item("FORMAPAG") <> "CH", "ND", "CH"), .Item("NOMPAG"), "", .Item("CONCEPTO"), -1 * ValorNumero(.Item("IMPORTE")),
-                                    "CXP", .Item("COMPROBA"), .Item("BENEFIC"), .Item("COMPROBA"), "0", CDate(.Item("EMISION").ToString), CDate(.Item("EMISION").ToString),
-                                     .Item("TIPDOCCAN"), "", jytsistema.sFechadeTrabajo, "0", .Item("CODPRO"), "", jytsistema.WorkCurrency.Id, DateTime.Now())
-                        End Select
-                    End With
-                End If
-        End Select
+        'Select Case tbcProveedor.SelectedTab.Text
+        '    Case "Movimientos CxP"
+        '        If LoginUser(myConn, lblInfo) = "jytsuite" Then
+        '            With dtMovimientos.Rows(nPosicionMov)
+        '                Select Case .Item("FORMAPAG")
+        '                    Case "EF"
+        '                        InsertEditBANCOSRenglonCaja(myConn, lblInfo, True, .Item("CAJAPAG"), UltimoCajaMasUno(myConn, lblInfo, .Item("CAJAPAG")),
+        '                            CDate(.Item("EMISION").ToString), "CXP", "SA", .Item("COMPROBA"), .Item("FORMAPAG"),
+        '                            .Item("NUMPAG"), .Item("NOMPAG"), -1 * ValorNumero(.Item("IMPORTE")), .Item("CODCON"), .Item("CONCEPTO"), "", jytsistema.sFechadeTrabajo, 1,
+        '                            "", "", "", jytsistema.sFechadeTrabajo, .Item("CODPRO"), "", "1", jytsistema.WorkCurrency.Id, DateTime.Now())
+        '                    Case "CH", "TA", "DP", "TR"
+        '                        InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, CDate(.Item("EMISION").ToString), .Item("NUMPAG"),
+        '                            IIf(.Item("FORMAPAG") <> "CH", "ND", "CH"), .Item("NOMPAG"), "", .Item("CONCEPTO"), -1 * ValorNumero(.Item("IMPORTE")),
+        '                            "CXP", .Item("COMPROBA"), .Item("BENEFIC"), .Item("COMPROBA"), "0", CDate(.Item("EMISION").ToString), CDate(.Item("EMISION").ToString),
+        '                             .Item("TIPDOCCAN"), "", jytsistema.sFechadeTrabajo, "0", .Item("CODPRO"), "", jytsistema.WorkCurrency.Id, DateTime.Now())
+        '                End Select
+        '            End With
+        '        End If
+        'End Select
     End Sub
 
     Private Sub btnExP_Click(sender As System.Object, e As System.EventArgs) Handles btnExP.Click
-        Dim nPos As Long
-        Select Case tbcProveedor.SelectedIndex
-            Case 1
-                If nPosicionMov >= 0 Then
+        'Dim nPos As Long
+        'Select Case tbcProveedor.SelectedIndex
+        '    Case 1
+        '        If nPosicionMov >= 0 Then
 
-                    nPos = nPosicionMov
-                    ft.Ejecutar_strSQL(myConn, " update jsprotrapag set remesa = '1' " _
-                        & " where  " _
-                        & " codpro = '" & txtCodigo.Text & "' and " _
-                        & " nummov = '" & dtMovimientos.Rows(nPosicionMov).Item("nummov") & "' and " _
-                        & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
-                        & " id_emp = '" & jytsistema.WorkID & "' ")
+        '            nPos = nPosicionMov
+        '            ft.Ejecutar_strSQL(myConn, " update jsprotrapag set remesa = '1' " _
+        '                & " where  " _
+        '                & " codpro = '" & txtCodigo.Text & "' and " _
+        '                & " nummov = '" & dtMovimientos.Rows(nPosicionMov).Item("nummov") & "' and " _
+        '                & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
+        '                & " id_emp = '" & jytsistema.WorkID & "' ")
 
-                    AbrirMovimientos(txtCodigo.Text)
-                    nPosicionMov = IIf(nPos > dtMovimientos.Rows.Count - 1, dtMovimientos.Rows.Count - 1, nPos)
-                    AsignaMov(nPosicionMov, False)
-
-
-                End If
-
-            Case 5
-                If nPosicionMovExP >= 0 Then
-
-                    nPos = nPosicionMovExP
-                    ft.Ejecutar_strSQL(myConn, " update jsprotrapag set remesa = '' " _
-                        & " where  " _
-                        & " codpro = '" & txtCodigo.Text & "' and " _
-                        & " nummov = '" & dtMovimientosExP.Rows(nPosicionMovExP).Item("nummov") & "' and " _
-                        & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
-                        & " id_emp = '" & jytsistema.WorkID & "' ")
-
-                    AbrirMovimientosExP(txtCodigo.Text)
-                    nPosicionMovExP = IIf(nPos > dtMovimientosExP.Rows.Count - 1, dtMovimientosExP.Rows.Count - 1, nPos)
-                    AsignaMovExP(nPosicionMovExP, False)
-
-                End If
+        '            AbrirMovimientos(txtCodigo.Text)
+        '            nPosicionMov = IIf(nPos > dtMovimientos.Rows.Count - 1, dtMovimientos.Rows.Count - 1, nPos)
+        '            AsignaMov(nPosicionMov, False)
 
 
-        End Select
+        '        End If
+
+        '    Case 5
+        '        If nPosicionMovExP >= 0 Then
+
+        '            nPos = nPosicionMovExP
+        '            ft.Ejecutar_strSQL(myConn, " update jsprotrapag set remesa = '' " _
+        '                & " where  " _
+        '                & " codpro = '" & txtCodigo.Text & "' and " _
+        '                & " nummov = '" & dtMovimientosExP.Rows(nPosicionMovExP).Item("nummov") & "' and " _
+        '                & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
+        '                & " id_emp = '" & jytsistema.WorkID & "' ")
+
+        '            AbrirMovimientosExP(txtCodigo.Text)
+        '            nPosicionMovExP = IIf(nPos > dtMovimientosExP.Rows.Count - 1, dtMovimientosExP.Rows.Count - 1, nPos)
+        '            AsignaMovExP(nPosicionMovExP, False)
+
+        '        End If
+
+
+        'End Select
 
     End Sub
 
@@ -2366,12 +2127,21 @@ Public Class jsComArcProveedores
         End If
     End Sub
 
-    Private Sub btnCodConCxP_Click(sender As Object, e As EventArgs) Handles btnCodConCxP.Click
-        txtCodConCxP.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcon codigo, descripcion from jscotcatcon where marca = 0 and id_emp = '" & jytsistema.WorkID & "' order by codcon ", "Cuentas Contables", txtCodConCxP.Text)
+    Private Sub dg_DataSourceChanged(sender As Object, e As Syncfusion.WinForms.DataGrid.Events.DataSourceChangedEventArgs) Handles _
+            dg.DataSourceChanged, dgExP.DataSourceChanged
+        Cursor.Current = Cursors.Default
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnCodConExP.Click
-        txtCodConExP.Text = CargarTablaSimple(myConn, lblInfo, ds, " select codcon codigo, descripcion from jscotcatcon where marca = 0 and id_emp = '" & jytsistema.WorkID & "' order by codcon ", "Cuentas Contables", txtCodConExP.Text)
+    Private Sub dg_CellDoubleClick(sender As Object, e As Syncfusion.WinForms.DataGrid.Events.CellClickEventArgs) Handles dg.CellDoubleClick
+        'If txtCodigo.Text.Trim <> "" And dg.RowCount > 0 Then
+        '    If vendorTransactionsList.Item(nPosicionMov).Origen = "CXP" Then
+        '        ActivarMarco1()
+        '    End If
+        'End If
     End Sub
 
+    Private Sub dg_SelectionChanged(sender As Object, e As Syncfusion.WinForms.DataGrid.Events.SelectionChangedEventArgs) Handles dg.SelectionChanged
+        cxpSelected = dg.SelectedItem
+        nPosicionMov = dg.SelectedIndex
+    End Sub
 End Class

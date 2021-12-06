@@ -43,7 +43,7 @@
 
     Public Property Saldo As Decimal
     Public Property SaldoReal As Decimal
-    Public Property ImpIVA As Decimal
+    Public Property ImporteIVA As Decimal
     Public Property NumeroControl As String
 
 End Class

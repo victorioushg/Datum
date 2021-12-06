@@ -10,8 +10,6 @@ Public Class jsComArcProveedoresCXP
     Private Const nTablaTarjetas As String = "tarjetas"
 
     Private myConn As New MySqlConnection
-    Private ds As New DataSet
-    Private dt As DataTable
 
     Private dtBancosExt As DataTable
     Private dtTarjetas As DataTable
@@ -22,6 +20,8 @@ Public Class jsComArcProveedoresCXP
     Private listaMonedas As New List(Of CambioMonedaPlus)
     Private tipoCxP As TextoValor
     Private causaCredito As CreditCause
+    Private cxpProveedor As VendorTransaction
+    Private retencionISLR As RetencionesISLR
 
     Private strSQLBancosExt As String = " select codigo, descrip, descrip descripcion from jsconctatab where modulo = '00010' and id_emp = '" & jytsistema.WorkID & "' "
     Private strSQLTarjetas As String = " select codtar codigo, nomtar descripcion from jsconctatar where id_emp = '" & jytsistema.WorkID & "' "
@@ -45,7 +45,6 @@ Public Class jsComArcProveedoresCXP
     Private MontoNegativo As Double = 0.0
     Private ComprobanteNumero As String = ""
     Private nTipoMovimientoCXP As Integer = 0 '0 = Debitos ; 1 = Creditos; 2 = Retenciones IVA; 3 = Retenciones ISLR
-    Private strDocsRetIVA As String = " nummov = 'XX XX' OR "
     Private TotalRetencionIVA As Double = 0.0
     Private Remesa As String = ""
 
@@ -53,27 +52,27 @@ Public Class jsComArcProveedoresCXP
     Public Property Comprobante() As String
     Public Property TipoMovimientoCXP() As Integer
 
-    Public Sub Agregar(ByVal MyCon As MySqlConnection, ByVal dsMov As DataSet, ByVal dtMov As DataTable, ByVal Codigo As String,
-                       ByVal ProveedorTipo As Integer, Optional CxP_ExP As Integer = 0)
+    Public Sub Agregar(ByVal MyCon As MySqlConnection, ByVal Codigo As String, ByVal ProveedorTipo As Integer, Optional CxP_ExP As Integer = 0)
+
         i_modo = movimiento.iAgregar
         myConn = MyCon
-        ds = dsMov
-        dt = dtMov
+
         CodigoProveedor = Codigo
         TipoProveedor = ProveedorTipo
+
         If CxP_ExP = 1 Then Remesa = "1"
-        If dt.Rows.Count = 0 Then Apuntador = -1
+
         listaTipoCxP = InitiateDropDown(Of TextoValor)(myConn, cmbTipo, Tipo.TipoMovimientoCxP)
         cmbTipo.SelectedIndex = 0
+
         Me.ShowDialog()
 
     End Sub
-    Public Sub Editar(ByVal MyCon As MySqlConnection, ByVal dsMov As DataSet, ByVal dtMov As DataTable, ByVal Codigo As String,
-                       ByVal ProveedorTipo As Integer)
+    Public Sub Editar(ByVal MyCon As MySqlConnection, ByVal vendorTransaction As VendorTransaction,
+                      ByVal Codigo As String, ByVal ProveedorTipo As Integer)
         i_modo = movimiento.iEditar
         myConn = MyCon
-        ds = dsMov
-        dt = dtMov
+        cxpProveedor = vendorTransaction
         CodigoProveedor = Codigo
         TipoProveedor = ProveedorTipo
         listaTipoCxP = InitiateDropDown(Of TextoValor)(myConn, cmbTipo, Tipo.TipoMovimientoCxP)
@@ -83,11 +82,11 @@ Public Class jsComArcProveedoresCXP
 
     End Sub
     Private Function MovimientoCxP() As Integer
-        Dim tipomov As String = dt.Rows(Apuntador).Item("tipomov")
+        Dim tipomov As String = cxpProveedor.TipoMovimiento
         If tipomov = "NC" Then
-            If Mid(dt.Rows(Apuntador).Item("REFER"), 1, 5) = "ISLR-" Then
+            If Mid(cxpProveedor.Referencia, 1, 5) = "ISLR-" Then
                 Return listaTipoCxP.FirstOrDefault(Function(e) e.Text = "Retención ISLR").Index
-            ElseIf Mid(dt.Rows(Apuntador).Item("CONCEPTO"), 1, 13) = "RETENCION IVA" Then
+            ElseIf Mid(cxpProveedor.Concepto, 1, 13) = "RETENCION IVA" Then
                 Return listaTipoCxP.FirstOrDefault(Function(e) e.Text = "Retención IVA").Index
             Else
                 Return listaTipoCxP.FirstOrDefault(Function(e) e.Text = "Nota Crédito").Index
@@ -107,6 +106,11 @@ Public Class jsComArcProveedoresCXP
 
         Dim dates As SfDateTimeEdit() = {txtEmisionCR, txtEmisionDB, txtFechaRetISLR, txtFechaRetIVA, txtVenceDB}
         SetSizeDateObjects(dates)
+
+        grpCreditos.Location = New Point(0, 49)
+        grpDebitos.Location = New Point(0, 49)
+        grpRetencionISLR.Location = New Point(0, 49)
+        grpRetencionIVA.Location = New Point(0, 49)
 
         InitiateDropDown(Of AccountBase)(myConn, cmbCCDebitos)
         InitiateDropDown(Of AccountBase)(myConn, cmbCCISLR)
@@ -129,7 +133,7 @@ Public Class jsComArcProveedoresCXP
     Private Sub cmbTipo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTipo.SelectedIndexChanged
 
         tipoCxP = cmbTipo.SelectedItem
-
+        Cursor.Current = Cursors.WaitCursor
         Select Case cmbTipo.SelectedIndex
             Case 0, 1, 2
                 ft.visualizarObjetos(True, grpDebitos)
@@ -150,7 +154,6 @@ Public Class jsComArcProveedoresCXP
                 ft.visualizarObjetos(False, grpDebitos, grpCreditos, grpRetencionISLR)
                 IniciarRetencionIVA()
                 nTipoMovimientoCXP = 2
-                strDocsRetIVA = " nummov = 'XX XX' OR "
                 TotalRetencionIVA = 0.0
             Case 8
                 ft.visualizarObjetos(True, grpRetencionISLR)
@@ -163,7 +166,7 @@ Public Class jsComArcProveedoresCXP
 
         ResetearVariablesDEUsoComun()
         ft.habilitarObjetos(False, True, txtDocumentoCR, txtDocSel, txtSaldoSel, txtNumPagCR, cmbNombrePago,
-                            txtDocSel, txtSaldoSel)
+                            txtDocSel, txtSaldoSel, txtACancelar)
 
         If Tipo = 3 Then
             strDocsIni = "ABONO "
@@ -179,8 +182,11 @@ Public Class jsComArcProveedoresCXP
         txtConceptoCR.Text = strDocs
         txtSaldoSel.Text = ft.FormatoNumero(0.0)
         txtImporteCR.Text = ft.FormatoNumero(0.0)
+        txtImporteCRReal.Text = ft.FormatoNumero(0.0)
+        txtACancelar.Text = ft.FormatoNumero(0.0)
 
         IniciarSaldos()
+        Cursor.Current = Cursors.Default
 
         optCO.Checked = True
         If Tipo <> 5 Then
@@ -215,6 +221,8 @@ Public Class jsComArcProveedoresCXP
             & " 3. El Documento YA posee una Retención Asignada." & vbLf _
             & " 4. El documento tiene saldo cero (0) (YA fué cancelado) "
 
+        Cursor.Current = Cursors.Default
+
     End Sub
     Private Function CalculaRetencionIVA() As Double
         Return Math.Round(ValorNumero(txtPorRetIVA.Text) / 100 * ValorNumero(txtSaldoRetIVA.Text), 2)
@@ -230,23 +238,11 @@ Public Class jsComArcProveedoresCXP
 
         txtDocsSelRetISLR.Text = 0
         txtSaldoSelRetISLR.Text = ft.FormatoNumero(0.0)
-
         txtFechaRetISLR.Value = jytsistema.sFechadeTrabajo
 
-        Dim dtRetISLR As DataTable
-        Dim nTablaRetISLR As String = "tblRetIVA"
-        ds = DataSetRequery(ds, " select codret, concat(codret,'-', elt( tipo + 1, 'PNR  ', 'PNNR ', 'PJD  ', 'PJND ', 'PJNCD'), '-' ,concepto) retencion from jscontabret where id_emp = '" & jytsistema.WorkID & "' order by codret ", myConn, nTablaRetISLR, lblInfo)
-        dtRetISLR = ds.Tables(nTablaRetISLR)
-        RellenaComboConDatatable(cmbConceptoRetISLR, dtRetISLR, "retencion", "codret")
+        InitiateDropDown(Of RetencionesISLR)(myConn, cmbRetencionesISLR,, 0)
 
-        txtPorcentajeMontoBaseRetISLR.Text = ft.FormatoNumero(0.0)
-        txtMontoBaseRetISLR.Text = ft.FormatoNumero(0.0)
-        txtMinimoRetISLR.Text = ft.FormatoNumero(0.0)
-        txtAcumuladoSinRetISLR.Text = ft.FormatoNumero(0.0)
-        txtPorcentajeRetISLR.Text = ft.FormatoNumero(0.0)
-        txtSustraendoRetISLR.Text = ft.FormatoNumero(0.0)
-        txtMontoRetencionISLR.Text = ft.FormatoNumero(0.0)
-
+        Cursor.Current = Cursors.Default
 
     End Sub
 
@@ -308,7 +304,7 @@ Public Class jsComArcProveedoresCXP
                 New dgFieldSF(TypeColumn.NumericColumn, "ImporteIVA", "Importe IVA", 180, HorizontalAlignment.Right, FormatoNumero.FormatoNumero)
             }
 
-        ft.IniciarDataGridWithList(Of VendorTransaction)(dgISLR, listaSaldos, aCampos,,,,,,, False, , False)
+        ft.IniciarDataGridWithList(Of VendorTransaction)(dgIVA, listaSaldos, aCampos,,,,,,, False, , False)
 
     End Sub
     Private Sub IniciarDebitos(ByVal Tipo As Integer)
@@ -321,20 +317,20 @@ Public Class jsComArcProveedoresCXP
         txtReferDB.Text = ""
         txtConceptoDB.Text = ""
         txtImporteDB.Text = ft.FormatoNumero(0.0)
+        Cursor.Current = Cursors.Default
 
     End Sub
     Private Sub AsignarDebitos(ByVal Puntero As Long)
 
         ft.habilitarObjetos(False, True, txtDocumentoDB, txtReferDB, txtConceptoDB, txtImporteDB)
 
-        With dt.Rows(Puntero)
-            txtDocumentoDB.Text = .Item("nummov")
-            txtEmisionDB.Value = .Item("emision")
-            txtVenceDB.Value = .Item("vence")
-            txtReferDB.Text = ft.muestraCampoTexto(.Item("refer"))
-            txtConceptoDB.Text = ft.muestraCampoTexto(.Item("concepto"))
-            txtImporteDB.Text = ft.FormatoNumero(.Item("importe"))
-        End With
+        txtDocumentoDB.Text = cxpProveedor.NumeroMovimiento
+        txtEmisionDB.Value = ft.FormatoFecha(cxpProveedor.Emision)
+        txtVenceDB.Value = ft.FormatoFecha(cxpProveedor.Vencimiento)
+        txtReferDB.Text = cxpProveedor.Referencia
+        txtConceptoDB.Text = cxpProveedor.Concepto
+        txtImporteDB.Text = ft.FormatoNumero(cxpProveedor.Importe)
+        Cursor.Current = Cursors.Default
 
 
     End Sub
@@ -383,12 +379,12 @@ Public Class jsComArcProveedoresCXP
     Private Sub GuardarDebito(ByVal Tipo As Integer)
 
         Dim Inserta As Boolean = False
-        Apuntador = Me.BindingContext(ds, dt.TableName).Position
+
         Dim Documento As String = txtDocumentoDB.Text
 
         If i_modo = movimiento.iAgregar Then
             Inserta = True
-            Apuntador = dt.Rows.Count
+
             Documento = Contador(myConn, lblInfo, Gestion.iCompras, aContador(Tipo), aContadorModulo(Tipo))
         End If
 
@@ -484,146 +480,118 @@ Public Class jsComArcProveedoresCXP
 
     End Sub
     Private Sub GuardarRetencionISLR()
-
         Dim Inserta As Boolean = False
-        Apuntador = Me.BindingContext(ds, dt.TableName).Position
         Dim Documento As String = txtDocumentoDB.Text
-
         If i_modo = movimiento.iAgregar Then
             Inserta = True
-            Apuntador = dt.Rows.Count
             Documento = "ISLR-" & Contador(myConn, lblInfo, Gestion.iCompras, aContador(8), aContadorModulo(8))
         End If
+        For Each doc As VendorTransaction In dgISLR.SelectedItems
 
-        Dim gCont As Integer
-        'For gCont = 0 To lvRetISLR.Items.Count - 1
-        '    With lvRetISLR.Items.Item(gCont)
+            InsertEditCOMPRASCXP(myConn, lblInfo, Inserta, CodigoProveedor,
+                 "NC", doc.NumeroMovimiento, txtFechaRetISLR.Value, ft.FormatoHora(Now()), txtFechaRetISLR.Value,
+                 Documento, retencionISLR.DisplayName, ValorNumero(txtMontoRetencionISLR.Text), 0.0, "", "", "", "",
+                 "CXP", "", "", "", "", Documento, "0", "", jytsistema.sFechadeTrabajo, cmbCCISLR.SelectedValue, "0",
+                 "", 0.0, 0.0, "", "", "", Remesa, "", "", TipoProveedor, FOTipo.Credito, "0",
+                 jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
 
-        '        If .Checked Then
+            ft.Ejecutar_strSQL(myConn, " update jsproenccom set " _
+                            & " ret_islr = " & ValorNumero(txtMontoRetencionISLR.Text) & ", " _
+                            & " num_ret_islr = '" & Documento & "', " _
+                            & " fecha_ret_islr = '" & ft.FormatoFechaMySQL(txtFechaRetISLR.Value) & "',  " _
+                            & " base_ret_islr = " & ValorNumero(txtMontoBaseRetISLR.Text) & ", " _
+                            & " por_ret_islr = " & ValorNumero(txtPorcentajeRetISLR.Text) & " " _
+                            & " where " _
+                            & " numcom = '" & doc.NumeroMovimiento & "' and " _
+                            & " codpro = '" & CodigoProveedor & "' and " _
+                            & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
+                            & " id_emp = '" & jytsistema.WorkID & "' ")
 
-        '            InsertEditCOMPRASCXP(myConn, lblInfo, Inserta, CodigoProveedor,
-        '                 "NC", .Text, txtFechaRetISLR.Value, ft.FormatoHora(Now()), txtFechaRetISLR.Value,
-        '                  Documento, cmbConceptoRetISLR.Text, ValorNumero(txtMontoRetencionISLR.Text), 0.0, "", "", "", "",
-        '                 "CXP", "", "", "", "", Documento, "0", "", jytsistema.sFechadeTrabajo, txtCodigoContableISLR.Text, "0",
-        '                 "", 0.0, 0.0, "", "", "", Remesa, "", "", TipoProveedor, FOTipo.Credito, "0",
-        '                  jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
-
-        '            ft.Ejecutar_strSQL(myConn, " update jsproenccom set " _
-        '                            & " ret_islr = " & ValorNumero(txtMontoRetencionISLR.Text) & ", " _
-        '                            & " num_ret_islr = '" & Documento & "', " _
-        '                            & " fecha_ret_islr = '" & ft.FormatoFechaMySQL(txtFechaRetISLR.Value) & "',  " _
-        '                            & " base_ret_islr = " & ValorNumero(txtMontoBaseRetISLR.Text) & ", " _
-        '                            & " por_ret_islr = " & ValorNumero(txtPorcentajeRetISLR.Text) & " " _
-        '                            & " where " _
-        '                            & " numcom = '" & .Text & "' and " _
-        '                            & " codpro = '" & CodigoProveedor & "' and " _
-        '                            & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
-        '                            & " id_emp = '" & jytsistema.WorkID & "' ")
-
-        '            ft.Ejecutar_strSQL(myConn, " update jsproencgas set " _
-        '                            & " ret_islr = " & ValorNumero(txtMontoRetencionISLR.Text) & ", " _
-        '                            & " num_ret_islr = '" & Documento & "', " _
-        '                            & " fecha_ret_islr = '" & ft.FormatoFechaMySQL(txtFechaRetISLR.Value) & "',  " _
-        '                            & " base_ret_islr = " & ValorNumero(txtMontoBaseRetISLR.Text) & ", " _
-        '                            & " por_ret_islr = " & ValorNumero(txtPorcentajeRetISLR.Text) & " " _
-        '                            & " where " _
-        '                            & " numgas = '" & .Text & "' and " _
-        '                            & " codpro = '" & CodigoProveedor & "' and " _
-        '                            & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
-        '                            & " id_emp = '" & jytsistema.WorkID & "' ")
-        '        End If
-
-        '    End With
-        'Next
-
+            ft.Ejecutar_strSQL(myConn, " update jsproencgas set " _
+                            & " ret_islr = " & ValorNumero(txtMontoRetencionISLR.Text) & ", " _
+                            & " num_ret_islr = '" & Documento & "', " _
+                            & " fecha_ret_islr = '" & ft.FormatoFechaMySQL(txtFechaRetISLR.Value) & "',  " _
+                            & " base_ret_islr = " & ValorNumero(txtMontoBaseRetISLR.Text) & ", " _
+                            & " por_ret_islr = " & ValorNumero(txtPorcentajeRetISLR.Text) & " " _
+                            & " where " _
+                            & " numgas = '" & doc.NumeroMovimiento & "' and " _
+                            & " codpro = '" & CodigoProveedor & "' and " _
+                            & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
+                            & " id_emp = '" & jytsistema.WorkID & "' ")
+        Next
         ComprobanteNumero = Documento
-
         InsertarAuditoria(myConn, IIf(Inserta, MovAud.iIncluir, MovAud.imodificar), sModulo, Documento)
 
     End Sub
     Private Sub GuardarRetencionIVA()
 
         Dim Inserta As Boolean = False
-        Apuntador = Me.BindingContext(ds, dt.TableName).Position
         Dim Documento As String = txtDocumentoDB.Text
 
         If i_modo = movimiento.iAgregar Then
             Inserta = True
-            Apuntador = dt.Rows.Count
             Documento = Format(txtFechaRetIVA.Value, "yyyyMM") & Contador(myConn, lblInfo, Gestion.iCompras, aContador(7), aContadorModulo(7))
         End If
 
-        Dim gCont As Integer
-        'For gCont = 0 To lvRetIVA.Items.Count - 1
-        '    With lvRetIVA.Items.Item(gCont)
-        '        If .Checked Then
+        For Each doc As VendorTransaction In dgISLR.SelectedItems
 
-        '            Dim CodigoDocumento As String = .Text
-
-        '            InsertEditCOMPRASCXP(myConn, lblInfo, Inserta, CodigoProveedor,
-        '                 IIf(.SubItems(1).Text = "NC", "ND", "NC"), .Text, txtFechaRetIVA.Value, ft.FormatoHora(Now()), txtFechaRetIVA.Value,
-        '                 Documento, "RETENCION IVA S/COMPROBANTE Nº " & Documento, IIf(.SubItems(1).Text = "NC", -1, 1) * Math.Round(ValorNumero(.SubItems(6).Text) * ValorNumero(txtPorRetIVA.Text) / 100, 2), 0.0, "", "", "", "",
-        '                 "CXP", "", "", "", "", Documento, "0", "", jytsistema.sFechadeTrabajo, txtCodigoContableIVA.Text, "0",
-        '                 "", 0.0, 0.0, "", "", "", Remesa, "", "", TipoProveedor, IIf(.SubItems(1).Text = "NC", FOTipo.Debito, FOTipo.Credito), "0",
-        '                  jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
-
-        '            ft.Ejecutar_strSQL(myConn, " update jsproenccom set " _
-        '                            & " ret_iva = " & Math.Round(ValorNumero(.SubItems(6).Text) * ValorNumero(txtPorRetIVA.Text) / 100, 2) & ", " _
-        '                            & " num_ret_iva = '" & Documento & "', fecha_ret_iva = '" & ft.FormatoFechaMySQL(txtFechaRetIVA.Value) & "' " _
-        '                            & " where " _
-        '                            & " numcom = '" & CodigoDocumento & "' and " _
-        '                            & " codpro = '" & CodigoProveedor & "' and " _
-        '                            & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
-        '                            & " id_emp = '" & jytsistema.WorkID & "' ")
-
-        '            ft.Ejecutar_strSQL(myConn, " update jsproivacom set " _
-        '                            & " retencion = round(impiva*" & ValorNumero(txtPorRetIVA.Text) / 100 & ", 2), " _
-        '                            & " numretencion = '" & Documento & "' " _
-        '                            & " where " _
-        '                            & " numcom = '" & .Text & "' and " _
-        '                            & " codpro = '" & CodigoProveedor & "' and " _
-        '                            & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
-        '                            & " id_emp = '" & jytsistema.WorkID & "' ")
-
-        '            ft.Ejecutar_strSQL(myConn, " update jsproencgas set " _
-        '                            & " ret_iva = " & Math.Round(ValorNumero(.SubItems(6).Text) * ValorNumero(txtPorRetIVA.Text) / 100, 2) & ", " _
-        '                            & " num_ret_iva = '" & Documento & "', fecha_ret_iva = '" & ft.FormatoFechaMySQL(txtFechaRetIVA.Value) & "' " _
-        '                            & " where " _
-        '                            & " numgas = '" & .Text & "' and " _
-        '                            & " codpro = '" & CodigoProveedor & "' and " _
-        '                            & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
-        '                            & " id_emp = '" & jytsistema.WorkID & "' ")
-
-        '            ft.Ejecutar_strSQL(myConn, " update jsproivagas set " _
-        '                            & " retencion = round(impiva*" & ValorNumero(txtPorRetIVA.Text) / 100 & ", 2), " _
-        '                            & " numretencion = '" & Documento & "' " _
-        '                            & " where " _
-        '                            & " numgas = '" & .Text & "' and " _
-        '                            & " codpro = '" & CodigoProveedor & "' and " _
-        '                            & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
-        '                            & " id_emp = '" & jytsistema.WorkID & "' ")
-
-        '            ft.Ejecutar_strSQL(myConn, " update jsproivancr set " _
-        '                           & " retencion = -1*round(impiva*" & ValorNumero(txtPorRetIVA.Text) / 100 & ", 2), " _
-        '                           & " numretencion = '" & Documento & "' " _
-        '                           & " where " _
-        '                           & " numncr = '" & .Text & "' and " _
-        '                           & " codpro = '" & CodigoProveedor & "' and " _
-        '                           & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
-        '                           & " id_emp = '" & jytsistema.WorkID & "' ")
-
-        '            ft.Ejecutar_strSQL(myConn, " update jsproivandb set " _
-        '                           & " retencion = round(impiva*" & ValorNumero(txtPorRetIVA.Text) / 100 & ", 2), " _
-        '                           & " numretencion = '" & Documento & "' " _
-        '                           & " where " _
-        '                           & " numndb = '" & .Text & "' and " _
-        '                           & " codpro = '" & CodigoProveedor & "' and " _
-        '                           & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
-        '                           & " id_emp = '" & jytsistema.WorkID & "' ")
-
-        '        End If
-        '    End With
-        'Next
+            Dim CodigoDocumento As String = doc.NumeroMovimiento
+            InsertEditCOMPRASCXP(myConn, lblInfo, Inserta, CodigoProveedor,
+                 IIf(doc.TipoMovimiento = "NC", "ND", "NC"), doc.NumeroMovimiento, txtFechaRetIVA.Value, ft.FormatoHora(Now()), txtFechaRetIVA.Value,
+                 Documento, "RETENCION IVA S/COMPROBANTE Nº " & Documento, IIf(doc.TipoMovimiento = "NC", -1, 1) * Math.Round(doc.Saldo * ValorNumero(txtPorRetIVA.Text) / 100, 2),
+                 0.0, "", "", "", "",
+                 "CXP", "", "", "", "", Documento, "0", "", jytsistema.sFechadeTrabajo, cmbCCIVA.SelectedValue, "0",
+                 "", 0.0, 0.0, "", "", "", Remesa, "", "", TipoProveedor, IIf(doc.TipoMovimiento = "NC", FOTipo.Debito, FOTipo.Credito), "0",
+                  jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
+            ft.Ejecutar_strSQL(myConn, " update jsproenccom set " _
+                            & " ret_iva = " & Math.Round(doc.Saldo * ValorNumero(txtPorRetIVA.Text) / 100, 2) & ", " _
+                            & " num_ret_iva = '" & Documento & "', fecha_ret_iva = '" & ft.FormatoFechaMySQL(txtFechaRetIVA.Value) & "' " _
+                            & " where " _
+                            & " numcom = '" & CodigoDocumento & "' and " _
+                            & " codpro = '" & CodigoProveedor & "' and " _
+                            & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
+                            & " id_emp = '" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsproivacom set " _
+                            & " retencion = round(impiva*" & ValorNumero(txtPorRetIVA.Text) / 100 & ", 2), " _
+                            & " numretencion = '" & Documento & "' " _
+                            & " where " _
+                            & " numcom = '" & doc.NumeroMovimiento & "' and " _
+                            & " codpro = '" & CodigoProveedor & "' and " _
+                            & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
+                            & " id_emp = '" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsproencgas set " _
+                            & " ret_iva = " & Math.Round(doc.Saldo * ValorNumero(txtPorRetIVA.Text) / 100, 2) & ", " _
+                            & " num_ret_iva = '" & Documento & "', fecha_ret_iva = '" & ft.FormatoFechaMySQL(txtFechaRetIVA.Value) & "' " _
+                            & " where " _
+                            & " numgas = '" & doc.NumeroMovimiento & "' and " _
+                            & " codpro = '" & CodigoProveedor & "' and " _
+                            & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
+                            & " id_emp = '" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsproivagas set " _
+                            & " retencion = round(impiva*" & ValorNumero(txtPorRetIVA.Text) / 100 & ", 2), " _
+                            & " numretencion = '" & Documento & "' " _
+                            & " where " _
+                            & " numgas = '" & doc.NumeroMovimiento & "' and " _
+                            & " codpro = '" & CodigoProveedor & "' and " _
+                            & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
+                            & " id_emp = '" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsproivancr set " _
+                           & " retencion = -1*round(impiva*" & ValorNumero(txtPorRetIVA.Text) / 100 & ", 2), " _
+                           & " numretencion = '" & Documento & "' " _
+                           & " where " _
+                           & " numncr = '" & doc.NumeroMovimiento & "' and " _
+                           & " codpro = '" & CodigoProveedor & "' and " _
+                           & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
+                           & " id_emp = '" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsproivandb set " _
+                           & " retencion = round(impiva*" & ValorNumero(txtPorRetIVA.Text) / 100 & ", 2), " _
+                           & " numretencion = '" & Documento & "' " _
+                           & " where " _
+                           & " numndb = '" & doc.NumeroMovimiento & "' and " _
+                           & " codpro = '" & CodigoProveedor & "' and " _
+                           & " ejercicio = '" & jytsistema.WorkExercise & "' and " _
+                           & " id_emp = '" & jytsistema.WorkID & "' ")
+        Next
 
         ComprobanteNumero = Documento
         InsertarAuditoria(myConn, IIf(Inserta, MovAud.iIncluir, MovAud.imodificar), sModulo, Documento)
@@ -742,7 +710,7 @@ Public Class jsComArcProveedoresCXP
 
     Private Sub GuardarCreditos(ByVal Tipo As Integer)
         Dim Inserta As Boolean = False
-        Dim jCont As Integer
+
         Dim Resto As Double = ValorNumero(txtImporteCR.Text)
         Dim Documento As String = txtDocumentoCR.Text
         Dim NombreDePago As String = ""
@@ -750,7 +718,6 @@ Public Class jsComArcProveedoresCXP
 
         If i_modo = movimiento.iAgregar Then
             Inserta = True
-            Apuntador = dt.Rows.Count
             Documento = Contador(myConn, lblInfo, Gestion.iCompras, aContador(Tipo), aContadorModulo(Tipo))
         End If
 
@@ -761,14 +728,16 @@ Public Class jsComArcProveedoresCXP
                     InsertEditBANCOSRenglonCaja(myConn, lblInfo, True, cmbCaja.SelectedValue, UltimoCajaMasUno(myConn, lblInfo, cmbCaja.SelectedValue),
                         txtEmisionCR.Value, "CXP", "SA", Documento, cmbFPCR.SelectedValue,
                         txtNumPagCR.Text, NombreDePago, ValorNumero(txtImporteCR.Text), cmbCC.SelectedValue, txtConceptoCR.Text, "", jytsistema.sFechadeTrabajo, 1,
-                        "", "", "", jytsistema.sFechadeTrabajo, CodigoProveedor, "", "1", jytsistema.WorkCurrency.Id, DateTime.Now())
+                        "", "", "", jytsistema.sFechadeTrabajo, CodigoProveedor, "", "1",
+                        cmbMonedas.SelectedValue, DateTime.Now())
                 Case 1, 2, 4, 5 'CH, TA, DP, TR
                     NombreDePago = cmbNombrePago.SelectedValue
 
                     InsertEditBANCOSMovimientoBanco(myConn, lblInfo, True, txtEmisionCR.Value, txtNumPagCR.Text,
                         IIf(cmbFPCR.SelectedIndex <> 1, "ND", "CH"), NombreDePago, "", txtConceptoCR.Text, ValorNumero(txtImporteCR.Text),
                         "CXP", Documento, txtBeneficiario.Text, Documento, "0", jytsistema.sFechadeTrabajo, jytsistema.sFechadeTrabajo,
-                         cmbTipo.SelectedValue, "", jytsistema.sFechadeTrabajo, "0", CodigoProveedor, "", jytsistema.WorkCurrency.Id, DateTime.Now())
+                         cmbTipo.SelectedValue, "", jytsistema.sFechadeTrabajo, "0", CodigoProveedor, "",
+                         cmbMonedas.SelectedItem, DateTime.Now())
 
                     If cmbFPCR.SelectedIndex = 1 Or cmbFPCR.SelectedIndex = 5 Then _
                         IncluirImpuestoDebitoBancario(myConn, lblInfo, IIf(cmbFPCR.SelectedIndex <> 1, "ND", "CH"), NombreDePago, txtNumPagCR.Text, txtEmisionCR.Value, ValorNumero(txtImporteCR.Text))
@@ -786,174 +755,157 @@ Public Class jsComArcProveedoresCXP
         MontoNegativo = Math.Abs(MontoNegativo)
 
         Dim NumeroDocumento As String = ""
-        'For jCont = 0 To lv.Items.Count - 1
-        '    If lv.Items(jCont).Checked Then
+        For Each doc As VendorTransaction In dg.SelectedItems
+            Dim MontoACancelar As Decimal = doc.SaldoReal
+            NumeroDocumento = doc.NumeroMovimiento
 
-        '        Dim MontoACancelar As Double = CDbl(lv.Items(jCont).SubItems(6).Text)
-        '        Dim TipoDocumento As String = lv.Items(jCont).SubItems(1).Text
-        '        NumeroDocumento = lv.Items(jCont).Text
+            If doc.SaldoReal < 0 Then 'FC,GR,ND
+                If MontoNegativo > 0 Then
+                    InsertEditCOMPRASCancelacion(myConn, lblInfo, True, CodigoProveedor, doc.TipoMovimiento,
+                                                doc.NumeroMovimiento, doc.Emision, txtReferenciaCR.Text,
+                                                txtConceptoCR.Text, doc.Saldo, Documento, "",
+                                                doc.Currency, jytsistema.sFechadeTrabajo)
+                    If doc.TipoMovimiento = "FC" Or doc.TipoMovimiento = "GR" Then
+                        If doc.Saldo > MontoNegativo Then
+                            InsertEditCOMPRASCXP(myConn, lblInfo, True, CodigoProveedor,
+                                                 IIf(Tipo = 3 OrElse Tipo = 4, "AB", "NC"), doc.NumeroMovimiento,
+                                                 txtEmisionCR.Value, ft.FormatoHora(Now()), txtEmisionCR.Value,
+                                                 txtReferenciaCR.Text, txtConceptoCR.Text, Math.Abs(MontoNegativo), 0.0,
+                                                 cmbFPCR.SelectedValue, txtNumPagCR.Text, NombreDePago, txtBeneficiario.Text,
+                                                 "CXP", txtNumeroDeposito.Text, txtCuentaDeposito.Text, txtBancoDeposito.Text,
+                                                 cmbCaja.SelectedValue, Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"),
+                                                 cmbCausaNC.SelectedValue, jytsistema.sFechadeTrabajo, cmbCC.SelectedValue, "", doc.TipoMovimiento, 0.0, 0.0,
+                                                 Documento, "", "", Remesa, "", "", TipoProveedor, FOTipo.Credito, "0",
+                                                 doc.Currency, jytsistema.sFechadeTrabajo)
+                        Else
+                            InsertEditCOMPRASCXP(myConn, lblInfo, True, CodigoProveedor, cmbTipo.SelectedValue, NumeroDocumento,
+                                txtEmisionCR.Value, ft.FormatoHora(Now), txtEmisionCR.Value,
+                                txtReferenciaCR.Text, txtConceptoCR.Text,
+                                Math.Abs(MontoACancelar), 0.0, cmbFPCR.SelectedValue,
+                                txtNumPagCR.Text, NombreDePago, txtBeneficiario.Text, "CXP", txtNumeroDeposito.Text, txtCuentaDeposito.Text,
+                                txtBancoDeposito.Text, cmbCaja.SelectedValue, Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), cmbCausaNC.SelectedValue, jytsistema.sFechadeTrabajo,
+                                cmbCC.SelectedValue, "", doc.TipoMovimiento, 0.0, 0.0, Documento, "", "", Remesa, "", "", TipoProveedor, FOTipo.Credito, "0",
+                                doc.Currency, jytsistema.sFechadeTrabajo)
+                        End If
+                    Else
 
-        '        If MontoACancelar < 0 Then 'FC,GR,ND
-        '            If MontoNegativo > 0 Then
+                        If Math.Abs(MontoACancelar) > MontoNegativo Then
+                            InsertEditCOMPRASCXP(myConn, lblInfo, True, CodigoProveedor, "NC", NumeroDocumento,
+                                        txtEmisionCR.Value, ft.FormatoHora(Now()), txtEmisionCR.Value,
+                                        txtReferenciaCR.Text, txtConceptoCR.Text, Math.Abs(MontoNegativo), 0.0, cmbFPCR.SelectedValue,
+                                        txtNumPagCR.Text, NombreDePago, txtBeneficiario.Text, "CXP", txtNumeroDeposito.Text, txtCuentaDeposito.Text,
+                                        txtBancoDeposito.Text, cmbCaja.SelectedValue, Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"),
+                                        cmbCausaNC.SelectedValue, jytsistema.sFechadeTrabajo,
+                                        cmbCC.SelectedValue, "", doc.TipoMovimiento, 0.0, 0.0, Documento, "", "", Remesa, "", "", TipoProveedor, FOTipo.Credito, "0",
+                                        doc.Currency, jytsistema.sFechadeTrabajo)
+                        Else
+                            InsertEditCOMPRASCXP(myConn, lblInfo, True, CodigoProveedor, "NC", NumeroDocumento,
+                                        txtEmisionCR.Value, ft.FormatoHora(Now()), txtEmisionCR.Value,
+                                        txtReferenciaCR.Text, txtConceptoCR.Text, Math.Abs(MontoACancelar), 0.0, cmbFPCR.SelectedValue,
+                                        txtNumPagCR.Text, NombreDePago, txtBeneficiario.Text, "CXP", txtNumeroDeposito.Text, txtCuentaDeposito.Text,
+                                        txtBancoDeposito.Text, cmbCaja.SelectedValue, Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"),
+                                        cmbCausaNC.SelectedValue, jytsistema.sFechadeTrabajo,
+                                        cmbCC.SelectedValue, "", doc.TipoMovimiento, 0.0, 0.0, Documento, "", "", Remesa, "", "", TipoProveedor, FOTipo.Credito, "0",
+                                        doc.Currency, jytsistema.sFechadeTrabajo)
+                        End If
+                    End If
 
+                    MontoNegativo -= Math.Abs(MontoACancelar)
 
-        '                InsertEditCOMPRASCancelacion(myConn, lblInfo, True, CodigoProveedor, lv.Items(jCont).SubItems(1).Text,
-        '                                            NumeroDocumento, CDate(lv.Items(jCont).SubItems(3).Text), txtReferenciaCR.Text,
-        '                                            txtConceptoCR.Text, CDbl(lv.Items(jCont).SubItems(6).Text), Documento, "",
-        '                                             jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
+                End If
 
+            ElseIf MontoACancelar > 0 Then
 
-        '                If TipoDocumento = "FC" Or TipoDocumento = "GR" Then
+                If Math.Abs(MontoACancelar) > MontoPositivo Then
 
-        '                    If Math.Abs(MontoACancelar) > MontoNegativo Then
-        '                        InsertEditCOMPRASCXP(myConn, lblInfo, True, CodigoProveedor, IIf(Tipo = 3 OrElse Tipo = 4, "AB", "NC"), NumeroDocumento,
-        '                             txtEmisionCR.Value, ft.FormatoHora(Now()), txtEmisionCR.Value,
-        '                            txtReferenciaCR.Text, txtConceptoCR.Text, Math.Abs(MontoNegativo), 0.0, cmbFPCR.SelectedValue,
-        '                            txtNumPagCR.Text, NombreDePago, txtBeneficiario.Text, "CXP", txtNumeroDeposito.Text, txtCuentaDeposito.Text,
-        '                            txtBancoDeposito.Text, cmbCajaCR.SelectedValue, Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), causaNotaCredito, jytsistema.sFechadeTrabajo,
-        '                            txtCodigoContable.Text, "", lv.Items(jCont).SubItems(1).Text, 0.0, 0.0, Documento, "", "", Remesa, "", "", TipoProveedor, FOTipo.Credito, "0",
-        '                             jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
+                    InsertEditCOMPRASCXP(myConn, lblInfo, True, CodigoProveedor, "ND", NumeroDocumento,
+                        txtEmisionCR.Value, ft.FormatoHora(Now()), txtEmisionCR.Value,
+                        txtReferenciaCR.Text, txtConceptoCR.Text, -1 * Math.Abs(MontoPositivo),
+                        0.0, cmbFPCR.SelectedValue, txtNumPagCR.Text, NombreDePago,
+                        txtBeneficiario.Text, "CXP", txtNumeroDeposito.Text, txtCuentaDeposito.Text, txtBancoDeposito.Text,
+                        cmbCaja.SelectedValue, Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), "", jytsistema.sFechadeTrabajo,
+                        cmbCC.SelectedValue, "", doc.TipoMovimiento, 0.0, 0.0, Documento, "", "", Remesa, "", "",
+                        TipoProveedor, FOTipo.Debito, "0",
+                        jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
+                Else
+                    InsertEditCOMPRASCXP(myConn, lblInfo, True, CodigoProveedor, "ND", NumeroDocumento,
+                        txtEmisionCR.Value, ft.FormatoHora(Now()), txtEmisionCR.Value,
+                        txtReferenciaCR.Text, txtConceptoCR.Text, -1 * Math.Abs(MontoACancelar),
+                        0.0, cmbFPCR.SelectedValue, txtNumPagCR.Text, NombreDePago,
+                        txtBeneficiario.Text, "CXP", txtNumeroDeposito.Text, txtCuentaDeposito.Text, txtBancoDeposito.Text,
+                        cmbCaja.SelectedValue, Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), "", jytsistema.sFechadeTrabajo,
+                        cmbCC.SelectedValue, "", doc.TipoMovimiento, 0.0, 0.0, Documento, "", "", Remesa, "", "",
+                        TipoProveedor, FOTipo.Debito, "0",
+                         jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
 
+                End If
 
-        '                    Else
-
-        '                        InsertEditCOMPRASCXP(myConn, lblInfo, True, CodigoProveedor, cmbTipo.SelectedValue, NumeroDocumento,
-        '                            txtEmisionCR.Value, ft.FormatoHora(Now), txtEmisionCR.Value,
-        '                            txtReferenciaCR.Text, txtConceptoCR.Text,
-        '                            Math.Abs(MontoACancelar), 0.0, cmbFPCR.SelectedValue,
-        '                            txtNumPagCR.Text, NombreDePago, txtBeneficiario.Text, "CXP", txtNumeroDeposito.Text, txtCuentaDeposito.Text,
-        '                            txtBancoDeposito.Text, cmbCajaCR.SelectedValue, Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), "", jytsistema.sFechadeTrabajo,
-        '                            txtCodigoContable.Text, "", lv.Items(jCont).SubItems(1).Text, 0.0, 0.0, Documento, "", "", Remesa, "", "", TipoProveedor, FOTipo.Credito, "0",
-        '                             jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
-
-        '                    End If
-
-
-        '                Else
-
-        '                    If Math.Abs(MontoACancelar) > MontoNegativo Then
-
-        '                        InsertEditCOMPRASCXP(myConn, lblInfo, True, CodigoProveedor, "NC", NumeroDocumento,
-        '                                    txtEmisionCR.Value, ft.FormatoHora(Now()), txtEmisionCR.Value,
-        '                                    txtReferenciaCR.Text, txtConceptoCR.Text, Math.Abs(MontoNegativo), 0.0, cmbFPCR.SelectedValue,
-        '                                    txtNumPagCR.Text, NombreDePago, txtBeneficiario.Text, "CXP", txtNumeroDeposito.Text, txtCuentaDeposito.Text,
-        '                                    txtBancoDeposito.Text, cmbCajaCR.SelectedValue, Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), causaNotaCredito, jytsistema.sFechadeTrabajo,
-        '                                    txtCodigoContable.Text, "", lv.Items(jCont).SubItems(1).Text, 0.0, 0.0, Documento, "", "", Remesa, "", "", TipoProveedor, FOTipo.Credito, "0",
-        '                                     jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
-
-
-        '                    Else
-
-        '                        InsertEditCOMPRASCXP(myConn, lblInfo, True, CodigoProveedor, "NC", NumeroDocumento,
-        '                                    txtEmisionCR.Value, ft.FormatoHora(Now()), txtEmisionCR.Value,
-        '                                    txtReferenciaCR.Text, txtConceptoCR.Text, Math.Abs(MontoACancelar), 0.0, cmbFPCR.SelectedValue,
-        '                                    txtNumPagCR.Text, NombreDePago, txtBeneficiario.Text, "CXP", txtNumeroDeposito.Text, txtCuentaDeposito.Text,
-        '                                    txtBancoDeposito.Text, cmbCajaCR.SelectedValue, Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), causaNotaCredito, jytsistema.sFechadeTrabajo,
-        '                                    txtCodigoContable.Text, "", lv.Items(jCont).SubItems(1).Text, 0.0, 0.0, Documento, "", "", Remesa, "", "", TipoProveedor, FOTipo.Credito, "0",
-        '                                     jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
-
-        '                    End If
-
-        '                End If
-
-        '                MontoNegativo -= Math.Abs(MontoACancelar)
-
-        '            End If
-
-        '        ElseIf MontoACancelar > 0 Then
-
-
-        '            If Math.Abs(MontoACancelar) > MontoPositivo Then
-
-        '                InsertEditCOMPRASCXP(myConn, lblInfo, True, CodigoProveedor, "ND", NumeroDocumento,
-        '                    txtEmisionCR.Value, ft.FormatoHora(Now()), txtEmisionCR.Value,
-        '                    txtReferenciaCR.Text, txtConceptoCR.Text, -1 * Math.Abs(MontoPositivo),
-        '                    0.0, cmbFPCR.SelectedValue, txtNumPagCR.Text, NombreDePago,
-        '                    txtBeneficiario.Text, "CXP", txtNumeroDeposito.Text, txtCuentaDeposito.Text, txtBancoDeposito.Text,
-        '                    cmbCajaCR.SelectedValue, Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), "", jytsistema.sFechadeTrabajo,
-        '                    txtCodigoContable.Text, "", lv.Items(jCont).SubItems(1).Text, 0.0, 0.0, Documento, "", "", Remesa, "", "",
-        '                    TipoProveedor, FOTipo.Debito, "0",
-        '                     jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
-        '            Else
-        '                InsertEditCOMPRASCXP(myConn, lblInfo, True, CodigoProveedor, "ND", NumeroDocumento,
-        '                    txtEmisionCR.Value, ft.FormatoHora(Now()), txtEmisionCR.Value,
-        '                    txtReferenciaCR.Text, txtConceptoCR.Text, -1 * Math.Abs(MontoACancelar),
-        '                    0.0, cmbFPCR.SelectedValue, txtNumPagCR.Text, NombreDePago,
-        '                    txtBeneficiario.Text, "CXP", txtNumeroDeposito.Text, txtCuentaDeposito.Text, txtBancoDeposito.Text,
-        '                    cmbCajaCR.SelectedValue, Documento, IIf(CInt(txtDocSel.Text) <= 1, "0", "1"), "", jytsistema.sFechadeTrabajo,
-        '                    txtCodigoContable.Text, "", lv.Items(jCont).SubItems(1).Text, 0.0, 0.0, Documento, "", "", Remesa, "", "",
-        '                    TipoProveedor, FOTipo.Debito, "0",
-        '                     jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
-
-        '            End If
-
-        '            InsertEditCOMPRASCancelacion(myConn, lblInfo, True, CodigoProveedor, lv.Items(jCont).SubItems(1).Text,
-        '                    NumeroDocumento, CDate(lv.Items(jCont).SubItems(3).Text), txtReferenciaCR.Text,
-        '                    txtConceptoCR.Text, CDbl(lv.Items(jCont).SubItems(6).Text), Documento, "",
-        '                     jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
+                InsertEditCOMPRASCancelacion(myConn, lblInfo, True, CodigoProveedor, doc.TipoMovimiento,
+                        NumeroDocumento, doc.Emision, txtReferenciaCR.Text,
+                        txtConceptoCR.Text, doc.Saldo, Documento, "",
+                         jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
 
 
-        '            MontoPositivo -= CDbl(MontoACancelar)
+                MontoPositivo -= CDbl(MontoACancelar)
 
-        '        Else
+            Else
 
-        '        End If
+            End If
 
-        '        'Resto -= CDbl(lv.Items(jCont).SubItems(6).Text)
-        '        'MODIFICA PROPIETARIO -> ULTIMO PAGO, FECHA ULTIMO PAGO , FORMA DE PAGO 
+            'Resto -= CDbl(lv.Items(jCont).SubItems(6).Text)
+            'MODIFICA PROPIETARIO -> ULTIMO PAGO, FECHA ULTIMO PAGO , FORMA DE PAGO 
 
-        '        ft.Ejecutar_strSQL(myConn, " update jsprocatpro set " _
-        '            & " ultpago = " & ValorNumero(txtImporteCR.Text) & ", " _
-        '            & " fecultpago = '" & ft.FormatoFechaMySQL(txtEmisionCR.Value) & "', " _
-        '            & " forultpago = '" & cmbFPCR.SelectedValue & "' " _
-        '            & " where " _
-        '            & " codpro = '" & CodigoProveedor & "' and " _
-        '            & " id_emp = '" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsprocatpro set " _
+                & " ultpago = " & ValorNumero(txtImporteCR.Text) & ", " _
+                & " fecultpago = '" & ft.FormatoFechaMySQL(txtEmisionCR.Value) & "', " _
+                & " forultpago = '" & cmbFPCR.SelectedValue & "' " _
+                & " where " _
+                & " codpro = '" & CodigoProveedor & "' and " _
+                & " id_emp = '" & jytsistema.WorkID & "' ")
 
-        '        'MODIFICA FACTURA QUE ORIGINÓ LA CXP
-        '        ft.Ejecutar_strSQL(myConn, " update jsproencgas set " _
-        '                       & " formapag = '" & cmbFPCR.SelectedValue & "', " _
-        '                       & " numpag = '" & txtNumPagCR.Text & "', " _
-        '                       & " nompag = '" & NombreDePago & "', " _
-        '                       & " benefic = '" & txtBeneficiario.Text & "', " _
-        '                       & " caja = '" & cmbCajaCR.SelectedValue & "' " _
-        '                       & " where " _
-        '                       & " numgas = '" & NumeroDocumento & "' and " _
-        '                       & " codpro = '" & CodigoProveedor & "' and " _
-        '                       & " id_emp = '" & jytsistema.WorkID & "' ")
+            'MODIFICA FACTURA QUE ORIGINÓ LA CXP
+            ft.Ejecutar_strSQL(myConn, " update jsproencgas set " _
+                           & " formapag = '" & cmbFPCR.SelectedValue & "', " _
+                           & " numpag = '" & txtNumPagCR.Text & "', " _
+                           & " nompag = '" & NombreDePago & "', " _
+                           & " benefic = '" & txtBeneficiario.Text & "', " _
+                           & " caja = '" & cmbCaja.SelectedValue & "' " _
+                           & " where " _
+                           & " numgas = '" & NumeroDocumento & "' and " _
+                           & " codpro = '" & CodigoProveedor & "' and " _
+                           & " id_emp = '" & jytsistema.WorkID & "' ")
 
-        '        ft.Ejecutar_strSQL(myConn, " update jsproenccom set " _
-        '                       & " formapag = '" & cmbFPCR.SelectedValue & "', " _
-        '                       & " numpag = '" & txtNumPagCR.Text & "', " _
-        '                       & " nompag = '" & NombreDePago & "', " _
-        '                       & " benefic = '" & txtBeneficiario.Text & "', " _
-        '                       & " caja = '" & cmbCajaCR.SelectedValue & "' " _
-        '                       & " where " _
-        '                       & " numcom = '" & NumeroDocumento & "' and " _
-        '                       & " codpro = '" & CodigoProveedor & "' and " _
-        '                       & " id_emp = '" & jytsistema.WorkID & "' ")
+            ft.Ejecutar_strSQL(myConn, " update jsproenccom set " _
+                           & " formapag = '" & cmbFPCR.SelectedValue & "', " _
+                           & " numpag = '" & txtNumPagCR.Text & "', " _
+                           & " nompag = '" & NombreDePago & "', " _
+                           & " benefic = '" & txtBeneficiario.Text & "', " _
+                           & " caja = '" & cmbCaja.SelectedValue & "' " _
+                           & " where " _
+                           & " numcom = '" & NumeroDocumento & "' and " _
+                           & " codpro = '" & CodigoProveedor & "' and " _
+                           & " id_emp = '" & jytsistema.WorkID & "' ")
 
-        '    End If
-        'Next
+        Next
 
         If Resto > 0 Then
             Dim sDocSel As String = ""
             Dim sDocCan As String = ""
             If txtDocSel.Text <> "" And txtDocSel.Text <> "0" Then
                 sDocSel = IIf(CInt(txtDocSel.Text) <= 1, "0", "1")
-                'sDocCan = lv.Items(jCont).SubItems(1).Text
             End If
 
             If NumeroDocumento.Trim = "" Then NumeroDocumento = Contador(myConn, lblInfo, Gestion.iCompras, "COMNUMNCC", "08")
 
             InsertEditCOMPRASCXP(myConn, lblInfo, True, CodigoProveedor, "NC", NumeroDocumento,
                            txtEmisionCR.Value, ft.FormatoHora(Now()), txtEmisionCR.Value, txtReferenciaCR.Text, txtConceptoCR.Text,
-                           Resto, 0.0, cmbFPCR.SelectedValue, txtNumPagCR.Text, NombreDePago, txtBeneficiario.Text, "CXP", txtNumeroDeposito.Text,
-                           txtCuentaDeposito.Text, txtBancoDeposito.Text,
+                           Resto, 0.0, cmbFPCR.SelectedValue, txtNumPagCR.Text, NombreDePago, txtBeneficiario.Text, "CXP",
+                           txtNumeroDeposito.Text, txtCuentaDeposito.Text, txtBancoDeposito.Text,
                            cmbCaja.SelectedValue, Documento, sDocSel, causaCredito.Codigo, jytsistema.sFechadeTrabajo,
                            cmbCC.SelectedValue, "", sDocCan, 0.0, 0.0, Documento, "", "", Remesa, "", "",
                            TipoProveedor, FOTipo.Credito, "0",
-                            jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
+                           jytsistema.WorkCurrency.Id, jytsistema.sFechadeTrabajo)
+            '' Todo Currency depends of documents currencies
         End If
 
         InsertarAuditoria(myConn, IIf(i_modo = movimiento.iAgregar, MovAud.iIncluir, MovAud.imodificar), sModulo, Documento)
@@ -991,53 +943,49 @@ Public Class jsComArcProveedoresCXP
         txtImporteCR.KeyPress, txtPorRetIVA.KeyPress
         e.Handled = ft.validaNumeroEnTextbox(e)
     End Sub
-
-    Private Sub lvRetIVA_ItemChecked(ByVal sender As Object, ByVal e As System.Windows.Forms.ItemCheckedEventArgs)
-        If e.Item.SubItems.Count >= 3 Then
-            If e.Item.Checked Then
-                strDocsRetIVA += " nummov = '" & e.Item.Text & "' OR "
-                TotalRetencionIVA += CDbl(e.Item.SubItems(6).Text)
-            Else
-                strDocsRetIVA = Replace(strDocsRetIVA, " nummov = '" & e.Item.Text & "' OR ", "")
-                TotalRetencionIVA -= CDbl(e.Item.SubItems(6).Text)
-            End If
-
+    Private Sub dgIVA_SelectionChanged(sender As Object, e As Syncfusion.WinForms.DataGrid.Events.SelectionChangedEventArgs) Handles dgIVA.SelectionChanged
+        TotalRetencionIVA = 0.00
+        If dgIVA.SelectedItems.Count > 0 Then
+            For Each item As VendorTransaction In dgIVA.SelectedItems
+                TotalRetencionIVA += item.ImporteIVA
+            Next
             IniciarTablaRetencionIVA(ValorNumero(txtPorRetIVA.Text))
             CalculaTotalRetIVA()
-
         End If
-
     End Sub
     Private Sub IniciarTablaRetencionIVA(ByVal PorcentajeRetencion As Double)
 
+        Dim ds As New DataSet
         Dim dtIVA As DataTable
         Dim tblIVA As String = "tblIVA"
+        Dim strDocs As String = String.Join("','", dgIVA.SelectedItems.Select(Of String)(Function(s) s.NumeroMovimiento).ToArray())
+
         ds = DataSetRequery(ds, " SELECT a.tipoiva, a.poriva, SUM(a.baseiva) baseiva, SUM(a.impiva) impiva, SUM(a.impiva)*" & PorcentajeRetencion / 100 & " retiva " _
                                     & " FROM (SELECT a.tipoiva, a.poriva, -1*a.baseiva baseiva, -1*a.impiva impiva " _
                                     & "       	FROM jsproivacom a " _
                                     & "         WHERE " _
-                                    & Replace("(" & strDocsRetIVA.Substring(0, strDocsRetIVA.Length - 4) & ") and ", "nummov", "a.numcom") _
+                                    & "         a.numcom in ('" & strDocs & "') and " _
                                     & "         codpro = '" & CodigoProveedor & "' AND " _
                                     & "     	id_emp = '" & jytsistema.WorkID & "' " _
-                                    & "         UNION " _
+                                    & " UNION ALL " _
                                     & " 	  SELECT a.tipoiva, a.poriva, -1*a.baseiva baseiva, -1*a.impiva impiva " _
                                     & "    	    FROM jsproivagas a " _
                                     & "         WHERE " _
-                                    & Replace("(" & strDocsRetIVA.Substring(0, strDocsRetIVA.Length - 4) & ") and ", "nummov", "a.numgas") _
+                                    & "         a.numgas in ('" & strDocs & "') and " _
                                     & "     	CODPRO = '" & CodigoProveedor & "' AND  " _
                                     & "  	    id_emp = '" & jytsistema.WorkID & "' " _
-                                    & " UNION " _
+                                    & " UNION ALL " _
                                     & " 	  SELECT a.tipoiva, a.poriva, a.baseiva, a.impiva " _
                                     & "    	    FROM jsproivancr a " _
                                     & "         WHERE " _
-                                    & Replace("(" & strDocsRetIVA.Substring(0, strDocsRetIVA.Length - 4) & ") and ", "nummov", "a.numncr") _
+                                     & "        a.numncr in ('" & strDocs & "') and " _
                                     & "     	CODPRO = '" & CodigoProveedor & "' AND  " _
                                     & "  	    id_emp = '" & jytsistema.WorkID & "'" _
-                                    & " UNION " _
+                                    & " UNION ALL " _
                                     & " 	  SELECT a.tipoiva, a.poriva, -1*a.baseiva baseiva, -1*a.impiva impiva " _
                                     & "    	    FROM jsproivandb a " _
                                     & "         WHERE " _
-                                    & Replace("(" & strDocsRetIVA.Substring(0, strDocsRetIVA.Length - 4) & ") and ", "nummov", "a.numndb") _
+                                    & "         a.numndb in ('" & strDocs & "') and " _
                                     & "     	CODPRO = '" & CodigoProveedor & "' AND  " _
                                     & "  	    id_emp = '" & jytsistema.WorkID & "' ) a " _
                                     & " GROUP BY a.tipoiva ", myConn, tblIVA, lblInfo)
@@ -1066,10 +1014,35 @@ Public Class jsComArcProveedoresCXP
             IniciarTablaRetencionIVA(ValorNumero(txtPorRetIVA.Text))
         CalculaTotalRetIVA()
     End Sub
+    Private Sub cmbRetencionesISLR_SelectedIndexChanged(sender As Object, e As EventArgs) Handles _
+        cmbRetencionesISLR.SelectedIndexChanged, txtSaldoSelRetISLR.TextChanged, txtPorcentajeRetISLR.TextChanged
 
-    Private Sub cmbConceptoRetIVA_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbConceptoRetISLR.SelectedIndexChanged,
-        txtSaldoSelRetISLR.TextChanged, txtPorcentajeRetISLR.TextChanged
-        CalculaTotalesRetISLR()
+        txtPorcentajeMontoBaseRetISLR.Text = ft.FormatoNumero(0.0)
+        txtMinimoRetISLR.Text = ft.FormatoNumero(0.0)
+        txtAcumuladoSinRetISLR.Text = ft.FormatoNumero(0.0)
+        txtPorcentajeRetISLR.Text = ft.FormatoNumero(0.0)
+        txtSustraendoRetISLR.Text = ft.FormatoNumero(0.0)
+        txtMontoRetencionISLR.Text = ft.FormatoNumero(0.0)
+
+        If cmbRetencionesISLR.SelectedIndex > -1 Then
+            retencionISLR = cmbRetencionesISLR.SelectedItem
+
+            txtPorcentajeMontoBaseRetISLR.Text = ft.FormatoNumero(retencionISLR.BasseImponible)
+            txtMontoBaseRetISLR.Text = ft.FormatoNumero(Math.Round(ValorNumero(txtPorcentajeMontoBaseRetISLR.Text) / 100 * ValorNumero(txtSaldoSelRetISLR.Text), 2))
+
+            txtMinimoRetISLR.Text = ft.FormatoNumero(retencionISLR.PagoMinimo)
+
+            txtAcumuladoSinRetISLR.Text = ft.FormatoNumero(0.0)
+
+            If ValorNumero(txtMontoBaseRetISLR.Text) > 0 Then
+                If ValorNumero(txtMontoBaseRetISLR.Text) > ValorNumero(txtMinimoRetISLR.Text) Then
+                    txtPorcentajeRetISLR.Text = ft.FormatoNumero(retencionISLR.Tarifa)
+                    txtSustraendoRetISLR.Text = ft.FormatoNumero(retencionISLR.Menos)
+                End If
+            End If
+            txtMontoRetencionISLR.Text = ft.FormatoNumero(Math.Round(ValorNumero(txtMontoBaseRetISLR.Text) * ValorNumero(txtPorcentajeRetISLR.Text) / 100, 2) - ValorNumero(txtSustraendoRetISLR.Text))
+
+        End If
     End Sub
 
     Private Sub lvRetISLR_ItemChecked(ByVal sender As Object, ByVal e As System.Windows.Forms.ItemCheckedEventArgs)
@@ -1096,27 +1069,6 @@ Public Class jsComArcProveedoresCXP
 
     End Sub
 
-    Private Sub CalculaTotalesRetISLR()
-        If cmbConceptoRetISLR.SelectedValue IsNot Nothing Then
-            txtPorcentajeMontoBaseRetISLR.Text = ft.FormatoNumero(ft.DevuelveScalarDoble(myConn, " select baseimp from jscontabret where codret = '" & cmbConceptoRetISLR.SelectedValue.ToString & "' and id_emp = '" & jytsistema.WorkID & "' "))
-            txtMontoBaseRetISLR.Text = ft.FormatoNumero(Math.Round(ValorNumero(txtPorcentajeMontoBaseRetISLR.Text) / 100 * ValorNumero(txtSaldoSelRetISLR.Text), 2))
-            txtMinimoRetISLR.Text = ft.FormatoNumero(ft.DevuelveScalarDoble(myConn, " select pagomin from jscontabret where codret = '" & cmbConceptoRetISLR.SelectedValue.ToString & "' and id_emp = '" & jytsistema.WorkID & "' "))
-            txtAcumuladoSinRetISLR.Text = ft.FormatoNumero(0.0)
-
-            If ValorNumero(txtMontoBaseRetISLR.Text) > 0 Then
-                If ValorNumero(txtMontoBaseRetISLR.Text) > ValorNumero(txtMinimoRetISLR.Text) Then
-                    txtPorcentajeRetISLR.Text = ft.FormatoNumero(ft.DevuelveScalarDoble(myConn, " select tarifa from jscontabret where codret = '" & cmbConceptoRetISLR.SelectedValue.ToString & "' and id_emp = '" & jytsistema.WorkID & "' "))
-                    txtSustraendoRetISLR.Text = ft.FormatoNumero(ft.DevuelveScalarDoble(myConn, " select menos from jscontabret where codret = '" & cmbConceptoRetISLR.SelectedValue.ToString & "' and id_emp = '" & jytsistema.WorkID & "' "))
-                Else
-                    txtPorcentajeRetISLR.Text = ft.FormatoNumero(0.0)
-                    txtSustraendoRetISLR.Text = ft.FormatoNumero(0.0)
-                End If
-            End If
-
-            txtMontoRetencionISLR.Text = ft.FormatoNumero(Math.Round(ValorNumero(txtMontoBaseRetISLR.Text) * ValorNumero(txtPorcentajeRetISLR.Text) / 100, 2) - ValorNumero(txtSustraendoRetISLR.Text))
-
-        End If
-    End Sub
     Private Sub cmbCausaNC_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbCausaNC.SelectedIndexChanged
 
         causaCredito = cmbCausaNC.SelectedItem
@@ -1134,43 +1086,26 @@ Public Class jsComArcProveedoresCXP
     End Sub
 
     Private Sub dg_SelectionChanged(sender As Object, e As Syncfusion.WinForms.DataGrid.Events.SelectionChangedEventArgs) Handles dg.SelectionChanged
-        txtDocSel.Text = ft.FormatoEntero(dg.SelectedItems.Count)
-        txtSaldoSel.Text = ft.FormatoNumero(dg.SelectedItems.Sum(Function(s) s.Saldo))
-    End Sub
+        iSel = dg.SelectedItems.Count
+        dSel = dg.SelectedItems.Sum(Function(s) s.SaldoReal)
 
-    Private Sub lv_ItemChecked(ByVal sender As Object, ByVal e As System.Windows.Forms.ItemCheckedEventArgs)
-        If e.Item.Checked Then
-            iSel += 1
-            dSel += CDbl(e.Item.SubItems(6).Text)
-            strDocs = strDocs & e.Item.Text & ", "
-            MontoPositivo += IIf(CDbl(e.Item.SubItems(6).Text) > 0, Math.Round(CDbl(e.Item.SubItems(6).Text), 2), 0)
-            MontoNegativo += IIf(CDbl(e.Item.SubItems(6).Text) < 0, Math.Round(CDbl(e.Item.SubItems(6).Text), 2), 0)
-        Else
-            iSel -= 1
-            If e.Item.SubItems.Count > 1 Then
-                dSel -= CDbl(e.Item.SubItems(6).Text)
-                strDocs = Replace(strDocs, e.Item.Text & ", ", "")
-                MontoPositivo -= IIf(CDbl(e.Item.SubItems(6).Text) > 0, Math.Round(CDbl(e.Item.SubItems(6).Text), 2), 0)
-                MontoNegativo -= IIf(CDbl(e.Item.SubItems(6).Text) < 0, Math.Round(CDbl(e.Item.SubItems(6).Text), 2), 0)
-            End If
+        strDocs = String.Join(", ", dg.SelectedItems.Select(Of String)(Function(x) x.NumeroMovimiento))
 
-        End If
+        MontoPositivo = dg.SelectedItems.Where(Function(l) l.Saldo > 0).Sum(Function(s) s.Saldo)
+        MontoNegativo = dg.SelectedItems.Where(Function(l) l.Saldo < 0).Sum(Function(s) s.Saldo)
 
-        If iSel < 0 Then
-            iSel = 0
-            dSel = 0.0
-            MontoNegativo = 0.0
-            MontoPositivo = 0.0
-        End If
+        txtImporteCR.Text = ft.FormatoNumero(dg.SelectedItems.Sum(Function(s) s.Saldo))
+        txtImporteCRReal.Text = ft.FormatoNumero(dg.SelectedItems.Sum(Function(s) s.SaldoReal))
+        txtACancelar.Text = ft.FormatoNumero(Math.Round(cmbMonedas.SelectedItem.Equivale * ValorNumero(txtImporteCRReal.Text), 2))
 
-
-
-        txtConceptoCR.Text = strDocsIni & " " & IIf(iSel > 1, "DOCUMENTOS ", "DOCUMENTO ")
-        If strDocs.Length >= 2 Then
-            txtConceptoCR.Text = strDocsIni & " " & IIf(iSel > 1, "DOCUMENTOS ", "DOCUMENTO ") & strDocs.Substring(0, strDocs.Length - 2)
-        End If
-
-        txtImporteCR.Text = ft.FormatoNumero(dSel)
+        txtDocSel.Text = ft.FormatoEntero(iSel)
+        txtSaldoSel.Text = ft.FormatoNumero(dSel)
+        txtConceptoCR.Text = strDocsIni & " " & IIf(iSel > 1, "DOCUMENTOS ", "DOCUMENTO ") & strDocs
 
     End Sub
+    Private Sub cmbMonedas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMonedas.SelectedIndexChanged
+        Dim mon As CambioMonedaPlus = cmbMonedas.SelectedItem
+        txtACancelar.Text = ft.FormatoNumero(Math.Round(mon.Equivale * ValorNumero(txtImporteCRReal.Text), 2))
+    End Sub
+
 End Class

@@ -24,12 +24,12 @@ Partial Class jsComArcProveedoresCXP
         Me.cmbTipo = New Syncfusion.WinForms.ListView.SfComboBox()
         Me.lbl = New System.Windows.Forms.Label()
         Me.grpRetencionISLR = New System.Windows.Forms.GroupBox()
+        Me.cmbRetencionesISLR = New Syncfusion.WinForms.ListView.SfComboBox()
         Me.cmbCCISLR = New Syncfusion.WinForms.ListView.SfComboBox()
         Me.dgISLR = New Syncfusion.WinForms.DataGrid.SfDataGrid()
         Me.txtFechaRetISLR = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.Label37 = New System.Windows.Forms.Label()
         Me.lblLeyendaISLR = New System.Windows.Forms.Label()
-        Me.cmbConceptoRetISLR = New System.Windows.Forms.ComboBox()
         Me.Label31 = New System.Windows.Forms.Label()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.txtMinimoRetISLR = New System.Windows.Forms.TextBox()
@@ -90,13 +90,13 @@ Partial Class jsComArcProveedoresCXP
         Me.grptextos = New System.Windows.Forms.GroupBox()
         Me.cmbCausaNC = New Syncfusion.WinForms.ListView.SfComboBox()
         Me.Label41 = New System.Windows.Forms.Label()
-        Me.txtImporteReal = New System.Windows.Forms.TextBox()
+        Me.txtImporteCRReal = New System.Windows.Forms.TextBox()
         Me.txtEmisionCR = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.lblNotaCredito = New System.Windows.Forms.Label()
         Me.txtNombrePago = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.grpPago = New System.Windows.Forms.GroupBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtACancelar = New System.Windows.Forms.TextBox()
         Me.Label40 = New System.Windows.Forms.Label()
         Me.cmbMonedas = New Syncfusion.WinForms.ListView.SfComboBox()
         Me.cmbNombrePago = New Syncfusion.WinForms.ListView.SfComboBox()
@@ -136,6 +136,7 @@ Partial Class jsComArcProveedoresCXP
         Me.grpCaja.SuspendLayout()
         CType(Me.cmbTipo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpRetencionISLR.SuspendLayout()
+        CType(Me.cmbRetencionesISLR, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cmbCCISLR, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgISLR, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpTotalISLR.SuspendLayout()
@@ -204,12 +205,12 @@ Partial Class jsComArcProveedoresCXP
         '
         'grpRetencionISLR
         '
+        Me.grpRetencionISLR.Controls.Add(Me.cmbRetencionesISLR)
         Me.grpRetencionISLR.Controls.Add(Me.cmbCCISLR)
         Me.grpRetencionISLR.Controls.Add(Me.dgISLR)
         Me.grpRetencionISLR.Controls.Add(Me.txtFechaRetISLR)
         Me.grpRetencionISLR.Controls.Add(Me.Label37)
         Me.grpRetencionISLR.Controls.Add(Me.lblLeyendaISLR)
-        Me.grpRetencionISLR.Controls.Add(Me.cmbConceptoRetISLR)
         Me.grpRetencionISLR.Controls.Add(Me.Label31)
         Me.grpRetencionISLR.Controls.Add(Me.Label30)
         Me.grpRetencionISLR.Controls.Add(Me.txtMinimoRetISLR)
@@ -226,12 +227,33 @@ Partial Class jsComArcProveedoresCXP
         Me.grpRetencionISLR.Controls.Add(Me.Label25)
         Me.grpRetencionISLR.Controls.Add(Me.Label24)
         Me.grpRetencionISLR.Controls.Add(Me.grpTotalISLR)
-        Me.grpRetencionISLR.Location = New System.Drawing.Point(0, 0)
+        Me.grpRetencionISLR.Location = New System.Drawing.Point(177, 78)
         Me.grpRetencionISLR.Name = "grpRetencionISLR"
-        Me.grpRetencionISLR.Size = New System.Drawing.Size(836, 394)
+        Me.grpRetencionISLR.Size = New System.Drawing.Size(836, 421)
         Me.grpRetencionISLR.TabIndex = 105
         Me.grpRetencionISLR.TabStop = False
         Me.grpRetencionISLR.Text = " Retención ISLR"
+        '
+        'cmbRetencionesISLR
+        '
+        Me.cmbRetencionesISLR.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbRetencionesISLR.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
+        Me.cmbRetencionesISLR.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.cmbRetencionesISLR.DisplayMember = "nombre"
+        Me.cmbRetencionesISLR.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.cmbRetencionesISLR.Font = New System.Drawing.Font("Segoe UI", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbRetencionesISLR.Location = New System.Drawing.Point(205, 223)
+        Me.cmbRetencionesISLR.Name = "cmbRetencionesISLR"
+        Me.cmbRetencionesISLR.Size = New System.Drawing.Size(614, 22)
+        Me.cmbRetencionesISLR.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.cmbRetencionesISLR.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbRetencionesISLR.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbRetencionesISLR.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
+        Me.cmbRetencionesISLR.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbRetencionesISLR.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbRetencionesISLR.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbRetencionesISLR.TabIndex = 245
+        Me.cmbRetencionesISLR.ValueMember = "codcli"
         '
         'cmbCCISLR
         '
@@ -297,17 +319,6 @@ Partial Class jsComArcProveedoresCXP
         Me.lblLeyendaISLR.Size = New System.Drawing.Size(440, 40)
         Me.lblLeyendaISLR.TabIndex = 205
         Me.lblLeyendaISLR.Text = resources.GetString("lblLeyendaISLR.Text")
-        '
-        'cmbConceptoRetISLR
-        '
-        Me.cmbConceptoRetISLR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbConceptoRetISLR.Font = New System.Drawing.Font("Consolas", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbConceptoRetISLR.FormattingEnabled = True
-        Me.cmbConceptoRetISLR.Location = New System.Drawing.Point(205, 225)
-        Me.cmbConceptoRetISLR.Margin = New System.Windows.Forms.Padding(1)
-        Me.cmbConceptoRetISLR.Name = "cmbConceptoRetISLR"
-        Me.cmbConceptoRetISLR.Size = New System.Drawing.Size(613, 18)
-        Me.cmbConceptoRetISLR.TabIndex = 204
         '
         'Label31
         '
@@ -525,7 +536,6 @@ Partial Class jsComArcProveedoresCXP
         '
         'grpRetencionIVA
         '
-        Me.grpRetencionIVA.Controls.Add(Me.grpRetencionISLR)
         Me.grpRetencionIVA.Controls.Add(Me.cmbCCIVA)
         Me.grpRetencionIVA.Controls.Add(Me.dgIVA)
         Me.grpRetencionIVA.Controls.Add(Me.txtFechaRetIVA)
@@ -540,9 +550,9 @@ Partial Class jsComArcProveedoresCXP
         Me.grpRetencionIVA.Controls.Add(Me.txtPorRetIVA)
         Me.grpRetencionIVA.Controls.Add(Me.txtSaldoRetIVA)
         Me.grpRetencionIVA.Controls.Add(Me.dgRetIVA)
-        Me.grpRetencionIVA.Location = New System.Drawing.Point(0, 49)
+        Me.grpRetencionIVA.Location = New System.Drawing.Point(12, 224)
         Me.grpRetencionIVA.Name = "grpRetencionIVA"
-        Me.grpRetencionIVA.Size = New System.Drawing.Size(836, 394)
+        Me.grpRetencionIVA.Size = New System.Drawing.Size(836, 424)
         Me.grpRetencionIVA.TabIndex = 104
         Me.grpRetencionIVA.TabStop = False
         Me.grpRetencionIVA.Text = " Retención IVA"
@@ -555,9 +565,9 @@ Partial Class jsComArcProveedoresCXP
         Me.cmbCCIVA.DisplayMember = "nombre"
         Me.cmbCCIVA.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
         Me.cmbCCIVA.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.cmbCCIVA.Location = New System.Drawing.Point(9, 278)
+        Me.cmbCCIVA.Location = New System.Drawing.Point(18, 308)
         Me.cmbCCIVA.Name = "cmbCCIVA"
-        Me.cmbCCIVA.Size = New System.Drawing.Size(296, 24)
+        Me.cmbCCIVA.Size = New System.Drawing.Size(465, 24)
         Me.cmbCCIVA.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
         Me.cmbCCIVA.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
         Me.cmbCCIVA.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
@@ -596,7 +606,7 @@ Partial Class jsComArcProveedoresCXP
         'Label39
         '
         Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label39.Location = New System.Drawing.Point(11, 251)
+        Me.Label39.Location = New System.Drawing.Point(20, 281)
         Me.Label39.Name = "Label39"
         Me.Label39.Size = New System.Drawing.Size(167, 24)
         Me.Label39.TabIndex = 127
@@ -607,7 +617,7 @@ Partial Class jsComArcProveedoresCXP
         '
         Me.lblLeyendaIVA.BackColor = System.Drawing.Color.Transparent
         Me.lblLeyendaIVA.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLeyendaIVA.Location = New System.Drawing.Point(9, 309)
+        Me.lblLeyendaIVA.Location = New System.Drawing.Point(18, 339)
         Me.lblLeyendaIVA.Name = "lblLeyendaIVA"
         Me.lblLeyendaIVA.Size = New System.Drawing.Size(472, 65)
         Me.lblLeyendaIVA.TabIndex = 118
@@ -773,9 +783,9 @@ Partial Class jsComArcProveedoresCXP
         Me.grpDebitos.Controls.Add(Me.Label2)
         Me.grpDebitos.Controls.Add(Me.Label1)
         Me.grpDebitos.Controls.Add(Me.Label16)
-        Me.grpDebitos.Location = New System.Drawing.Point(0, 49)
+        Me.grpDebitos.Location = New System.Drawing.Point(44, 175)
         Me.grpDebitos.Name = "grpDebitos"
-        Me.grpDebitos.Size = New System.Drawing.Size(836, 394)
+        Me.grpDebitos.Size = New System.Drawing.Size(836, 424)
         Me.grpDebitos.TabIndex = 88
         Me.grpDebitos.TabStop = False
         Me.grpDebitos.Text = "Débitos"
@@ -943,7 +953,7 @@ Partial Class jsComArcProveedoresCXP
         Me.grpCreditos.Controls.Add(Me.dg)
         Me.grpCreditos.Controls.Add(Me.grptextos)
         Me.grpCreditos.Controls.Add(Me.grpTotales)
-        Me.grpCreditos.Location = New System.Drawing.Point(0, 49)
+        Me.grpCreditos.Location = New System.Drawing.Point(93, 120)
         Me.grpCreditos.Name = "grpCreditos"
         Me.grpCreditos.Size = New System.Drawing.Size(836, 424)
         Me.grpCreditos.TabIndex = 91
@@ -965,7 +975,7 @@ Partial Class jsComArcProveedoresCXP
         '
         Me.grptextos.Controls.Add(Me.cmbCausaNC)
         Me.grptextos.Controls.Add(Me.Label41)
-        Me.grptextos.Controls.Add(Me.txtImporteReal)
+        Me.grptextos.Controls.Add(Me.txtImporteCRReal)
         Me.grptextos.Controls.Add(Me.txtEmisionCR)
         Me.grptextos.Controls.Add(Me.lblNotaCredito)
         Me.grptextos.Controls.Add(Me.txtNombrePago)
@@ -1010,20 +1020,20 @@ Partial Class jsComArcProveedoresCXP
         'Label41
         '
         Me.Label41.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label41.Location = New System.Drawing.Point(0, 186)
+        Me.Label41.Location = New System.Drawing.Point(0, 189)
         Me.Label41.Name = "Label41"
-        Me.Label41.Size = New System.Drawing.Size(79, 27)
+        Me.Label41.Size = New System.Drawing.Size(79, 20)
         Me.Label41.TabIndex = 216
         Me.Label41.Text = "Importe Real"
         Me.Label41.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'txtImporteReal
+        'txtImporteCRReal
         '
-        Me.txtImporteReal.Location = New System.Drawing.Point(85, 189)
-        Me.txtImporteReal.Name = "txtImporteReal"
-        Me.txtImporteReal.Size = New System.Drawing.Size(108, 20)
-        Me.txtImporteReal.TabIndex = 215
-        Me.txtImporteReal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtImporteCRReal.Location = New System.Drawing.Point(85, 189)
+        Me.txtImporteCRReal.Name = "txtImporteCRReal"
+        Me.txtImporteCRReal.Size = New System.Drawing.Size(108, 20)
+        Me.txtImporteCRReal.TabIndex = 215
+        Me.txtImporteCRReal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtEmisionCR
         '
@@ -1068,7 +1078,7 @@ Partial Class jsComArcProveedoresCXP
         '
         'grpPago
         '
-        Me.grpPago.Controls.Add(Me.TextBox1)
+        Me.grpPago.Controls.Add(Me.txtACancelar)
         Me.grpPago.Controls.Add(Me.Label40)
         Me.grpPago.Controls.Add(Me.cmbMonedas)
         Me.grpPago.Controls.Add(Me.cmbNombrePago)
@@ -1096,13 +1106,13 @@ Partial Class jsComArcProveedoresCXP
         Me.grpPago.TabStop = False
         Me.grpPago.Text = " Pago "
         '
-        'TextBox1
+        'txtACancelar
         '
-        Me.TextBox1.Location = New System.Drawing.Point(112, 58)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(147, 20)
-        Me.TextBox1.TabIndex = 250
-        Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtACancelar.Location = New System.Drawing.Point(112, 58)
+        Me.txtACancelar.Name = "txtACancelar"
+        Me.txtACancelar.Size = New System.Drawing.Size(147, 20)
+        Me.txtACancelar.TabIndex = 250
+        Me.txtACancelar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label40
         '
@@ -1514,12 +1524,13 @@ Partial Class jsComArcProveedoresCXP
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(836, 506)
         Me.ControlBox = False
+        Me.Controls.Add(Me.grpRetencionISLR)
+        Me.Controls.Add(Me.grpRetencionIVA)
         Me.Controls.Add(Me.grpAceptarSalir)
         Me.Controls.Add(Me.lblInfo)
         Me.Controls.Add(Me.grpCaja)
         Me.Controls.Add(Me.grpCreditos)
         Me.Controls.Add(Me.grpDebitos)
-        Me.Controls.Add(Me.grpRetencionIVA)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "jsComArcProveedoresCXP"
@@ -1531,6 +1542,7 @@ Partial Class jsComArcProveedoresCXP
         CType(Me.cmbTipo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpRetencionISLR.ResumeLayout(False)
         Me.grpRetencionISLR.PerformLayout()
+        CType(Me.cmbRetencionesISLR, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cmbCCISLR, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgISLR, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpTotalISLR.ResumeLayout(False)
@@ -1649,7 +1661,6 @@ Partial Class jsComArcProveedoresCXP
     Friend WithEvents Label34 As System.Windows.Forms.Label
     Friend WithEvents lblLeyendaIVA As System.Windows.Forms.Label
     Friend WithEvents btnFechaRetISLR As System.Windows.Forms.Button
-    Friend WithEvents cmbConceptoRetISLR As System.Windows.Forms.ComboBox
     Friend WithEvents lblLeyendaISLR As System.Windows.Forms.Label
     Friend WithEvents Label37 As System.Windows.Forms.Label
     Friend WithEvents Label38 As System.Windows.Forms.Label
@@ -1674,7 +1685,8 @@ Partial Class jsComArcProveedoresCXP
     Friend WithEvents Label40 As Label
     Friend WithEvents cmbMonedas As Syncfusion.WinForms.ListView.SfComboBox
     Friend WithEvents Label41 As Label
-    Friend WithEvents txtImporteReal As TextBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtImporteCRReal As TextBox
+    Friend WithEvents txtACancelar As TextBox
     Friend WithEvents cmbCausaNC As Syncfusion.WinForms.ListView.SfComboBox
+    Friend WithEvents cmbRetencionesISLR As Syncfusion.WinForms.ListView.SfComboBox
 End Class

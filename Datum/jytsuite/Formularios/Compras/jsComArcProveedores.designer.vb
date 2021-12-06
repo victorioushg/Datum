@@ -76,7 +76,6 @@ Partial Class jsComArcProveedores
         Me.txtUnidadNombre = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtCodigo = New System.Windows.Forms.TextBox()
-        Me.dg = New System.Windows.Forms.DataGridView()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.txtUltimoPago = New System.Windows.Forms.TextBox()
@@ -161,49 +160,7 @@ Partial Class jsComArcProveedores
         Me.Label38 = New System.Windows.Forms.Label()
         Me.Label37 = New System.Windows.Forms.Label()
         Me.txtFormaUltimoPago = New System.Windows.Forms.TextBox()
-        Me.grpMovimientosCxP = New System.Windows.Forms.GroupBox()
-        Me.Label63 = New System.Windows.Forms.Label()
-        Me.cmbTipoCxP = New System.Windows.Forms.ComboBox()
-        Me.lblDescripCausaNCCxP = New System.Windows.Forms.Label()
-        Me.Label64 = New System.Windows.Forms.Label()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.txtCausaNCCXP = New System.Windows.Forms.TextBox()
-        Me.txtNombrePagoCxP = New System.Windows.Forms.TextBox()
-        Me.Label65 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.btnCodConCxP = New System.Windows.Forms.Button()
-        Me.txtCodConCxP = New System.Windows.Forms.TextBox()
-        Me.cmbNombrePagoCxP = New System.Windows.Forms.ComboBox()
-        Me.Label66 = New System.Windows.Forms.Label()
-        Me.Label67 = New System.Windows.Forms.Label()
-        Me.txtBancoDepositoCxP = New System.Windows.Forms.TextBox()
-        Me.Label68 = New System.Windows.Forms.Label()
-        Me.Label69 = New System.Windows.Forms.Label()
-        Me.txtCtaDepositoCxP = New System.Windows.Forms.TextBox()
-        Me.txtNumDepositoCxP = New System.Windows.Forms.TextBox()
-        Me.txtBeneficiarioCxP = New System.Windows.Forms.TextBox()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Label70 = New System.Windows.Forms.Label()
-        Me.Label75 = New System.Windows.Forms.Label()
-        Me.Label76 = New System.Windows.Forms.Label()
-        Me.Label77 = New System.Windows.Forms.Label()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
-        Me.txtNumeroPagoCxP = New System.Windows.Forms.TextBox()
-        Me.cmbCajaCxP = New System.Windows.Forms.ComboBox()
-        Me.grpCondicionCXP = New System.Windows.Forms.GroupBox()
-        Me.rbtnCOCXP = New System.Windows.Forms.RadioButton()
-        Me.rbtnCRCXP = New System.Windows.Forms.RadioButton()
-        Me.txtImporteCXP = New System.Windows.Forms.TextBox()
-        Me.txtReferenciaCXP = New System.Windows.Forms.TextBox()
-        Me.Label78 = New System.Windows.Forms.Label()
-        Me.Button6 = New System.Windows.Forms.Button()
-        Me.txtConceptoCXP = New System.Windows.Forms.TextBox()
-        Me.txtEmisionCXP = New System.Windows.Forms.TextBox()
-        Me.txtDocumentoCXP = New System.Windows.Forms.TextBox()
-        Me.Label79 = New System.Windows.Forms.Label()
-        Me.Label80 = New System.Windows.Forms.Label()
-        Me.Label81 = New System.Windows.Forms.Label()
+        Me.dg = New Syncfusion.WinForms.DataGrid.SfDataGrid()
         Me.C1DockingTabPage4 = New C1.Win.C1Command.C1DockingTabPage()
         Me.dgSaldos = New System.Windows.Forms.DataGridView()
         Me.txtSaldoSel = New System.Windows.Forms.TextBox()
@@ -237,49 +194,7 @@ Partial Class jsComArcProveedores
         Me.txtNombreExpediente = New System.Windows.Forms.TextBox()
         Me.dgExpediente = New System.Windows.Forms.DataGridView()
         Me.C1DockingTabPage6 = New C1.Win.C1Command.C1DockingTabPage()
-        Me.grpMovimientosExP = New System.Windows.Forms.GroupBox()
-        Me.Label82 = New System.Windows.Forms.Label()
-        Me.cmbTipoExP = New System.Windows.Forms.ComboBox()
-        Me.lblDescripCausaNCExP = New System.Windows.Forms.Label()
-        Me.lblNotaCredito = New System.Windows.Forms.Label()
-        Me.btnCausaNCExP = New System.Windows.Forms.Button()
-        Me.txtCausaNCEXP = New System.Windows.Forms.TextBox()
-        Me.txtNombrePagoExP = New System.Windows.Forms.TextBox()
-        Me.Label50 = New System.Windows.Forms.Label()
-        Me.grpPago = New System.Windows.Forms.GroupBox()
-        Me.btnCodConExP = New System.Windows.Forms.Button()
-        Me.txtCodConExP = New System.Windows.Forms.TextBox()
-        Me.cmbNombrePagoExP = New System.Windows.Forms.ComboBox()
-        Me.Label51 = New System.Windows.Forms.Label()
-        Me.Label52 = New System.Windows.Forms.Label()
-        Me.txtBancoDepositoExP = New System.Windows.Forms.TextBox()
-        Me.Label53 = New System.Windows.Forms.Label()
-        Me.Label54 = New System.Windows.Forms.Label()
-        Me.txtCuentaDepositoExP = New System.Windows.Forms.TextBox()
-        Me.txtNumeroDepositoExP = New System.Windows.Forms.TextBox()
-        Me.txtBeneficiarioExP = New System.Windows.Forms.TextBox()
-        Me.btnNomPago = New System.Windows.Forms.Button()
-        Me.btnNumPago = New System.Windows.Forms.Button()
-        Me.Label55 = New System.Windows.Forms.Label()
-        Me.Label56 = New System.Windows.Forms.Label()
-        Me.Label57 = New System.Windows.Forms.Label()
-        Me.Label58 = New System.Windows.Forms.Label()
-        Me.txtNomPagCR = New System.Windows.Forms.TextBox()
-        Me.txtNumeroPagoExP = New System.Windows.Forms.TextBox()
-        Me.cmbCajaExP = New System.Windows.Forms.ComboBox()
-        Me.grpCondicionExP = New System.Windows.Forms.GroupBox()
-        Me.rbtnCOExP = New System.Windows.Forms.RadioButton()
-        Me.rbtnCRExP = New System.Windows.Forms.RadioButton()
-        Me.txtImporteExP = New System.Windows.Forms.TextBox()
-        Me.txtReferenciaExP = New System.Windows.Forms.TextBox()
-        Me.Label59 = New System.Windows.Forms.Label()
-        Me.btnEmisionEXP = New System.Windows.Forms.Button()
-        Me.txtConceptoExP = New System.Windows.Forms.TextBox()
-        Me.txtEmisionEXP = New System.Windows.Forms.TextBox()
-        Me.txtDocumentoEXP = New System.Windows.Forms.TextBox()
-        Me.Label60 = New System.Windows.Forms.Label()
-        Me.Label61 = New System.Windows.Forms.Label()
-        Me.Label62 = New System.Windows.Forms.Label()
+        Me.dgExP = New Syncfusion.WinForms.DataGrid.SfDataGrid()
         Me.Label42 = New System.Windows.Forms.Label()
         Me.txtDisponibleExP = New System.Windows.Forms.TextBox()
         Me.txtCreditoExP = New System.Windows.Forms.TextBox()
@@ -288,7 +203,6 @@ Partial Class jsComArcProveedores
         Me.Label44 = New System.Windows.Forms.Label()
         Me.Label45 = New System.Windows.Forms.Label()
         Me.txtFormaUltimoPagoExP = New System.Windows.Forms.TextBox()
-        Me.dgExP = New System.Windows.Forms.DataGridView()
         Me.Label46 = New System.Windows.Forms.Label()
         Me.Label47 = New System.Windows.Forms.Label()
         Me.txtCodigoExP = New System.Windows.Forms.TextBox()
@@ -303,18 +217,13 @@ Partial Class jsComArcProveedores
         Me.txtCodigoEnvase = New System.Windows.Forms.TextBox()
         Me.Label84 = New System.Windows.Forms.Label()
         Me.txtNombreEnvase = New System.Windows.Forms.TextBox()
-        Me.cmbFPExP = New Syncfusion.WinForms.ListView.SfComboBox()
-        Me.cmbFPCxP = New Syncfusion.WinForms.ListView.SfComboBox()
         Me.MenuBarra.SuspendLayout()
-        CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpAceptarSalir.SuspendLayout()
         CType(Me.tbcProveedor, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbcProveedor.SuspendLayout()
         Me.C1DockingTabPage1.SuspendLayout()
         Me.C1DockingTabPage2.SuspendLayout()
-        Me.grpMovimientosCxP.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.grpCondicionCXP.SuspendLayout()
+        CType(Me.dg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.C1DockingTabPage4.SuspendLayout()
         CType(Me.dgSaldos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgMercasDocumentos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -325,14 +234,9 @@ Partial Class jsComArcProveedores
         Me.C1DockingTabPage5.SuspendLayout()
         CType(Me.dgExpediente, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.C1DockingTabPage6.SuspendLayout()
-        Me.grpMovimientosExP.SuspendLayout()
-        Me.grpPago.SuspendLayout()
-        Me.grpCondicionExP.SuspendLayout()
         CType(Me.dgExP, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.C1DockingTabPage7.SuspendLayout()
         CType(Me.dgEnvases, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.cmbFPExP, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.cmbFPCxP, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuBarra
@@ -810,23 +714,6 @@ Partial Class jsComArcProveedores
         Me.txtCodigo.Name = "txtCodigo"
         Me.txtCodigo.Size = New System.Drawing.Size(103, 20)
         Me.txtCodigo.TabIndex = 26
-        '
-        'dg
-        '
-        Me.dg.AllowUserToAddRows = False
-        Me.dg.AllowUserToDeleteRows = False
-        Me.dg.AllowUserToOrderColumns = True
-        Me.dg.AllowUserToResizeColumns = False
-        Me.dg.AllowUserToResizeRows = False
-        Me.dg.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dg.Location = New System.Drawing.Point(3, 76)
-        Me.dg.Name = "dg"
-        Me.dg.ReadOnly = True
-        Me.dg.Size = New System.Drawing.Size(942, 352)
-        Me.dg.TabIndex = 48
         '
         'Label19
         '
@@ -1673,7 +1560,6 @@ Partial Class jsComArcProveedores
         Me.C1DockingTabPage2.Controls.Add(Me.txtUltimoPago)
         Me.C1DockingTabPage2.Controls.Add(Me.txtFechaUltimopago)
         Me.C1DockingTabPage2.Controls.Add(Me.txtNombre1)
-        Me.C1DockingTabPage2.Controls.Add(Me.grpMovimientosCxP)
         Me.C1DockingTabPage2.Controls.Add(Me.dg)
         Me.C1DockingTabPage2.Location = New System.Drawing.Point(1, 24)
         Me.C1DockingTabPage2.Name = "C1DockingTabPage2"
@@ -1762,451 +1648,20 @@ Partial Class jsComArcProveedores
         Me.txtFormaUltimoPago.Size = New System.Drawing.Size(208, 20)
         Me.txtFormaUltimoPago.TabIndex = 49
         '
-        'grpMovimientosCxP
+        'dg
         '
-        Me.grpMovimientosCxP.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.dg.AccessibleName = "Table"
+        Me.dg.AllowGrouping = False
+        Me.dg.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.grpMovimientosCxP.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.grpMovimientosCxP.Controls.Add(Me.Label63)
-        Me.grpMovimientosCxP.Controls.Add(Me.cmbTipoCxP)
-        Me.grpMovimientosCxP.Controls.Add(Me.lblDescripCausaNCCxP)
-        Me.grpMovimientosCxP.Controls.Add(Me.Label64)
-        Me.grpMovimientosCxP.Controls.Add(Me.Button2)
-        Me.grpMovimientosCxP.Controls.Add(Me.txtCausaNCCXP)
-        Me.grpMovimientosCxP.Controls.Add(Me.txtNombrePagoCxP)
-        Me.grpMovimientosCxP.Controls.Add(Me.Label65)
-        Me.grpMovimientosCxP.Controls.Add(Me.GroupBox2)
-        Me.grpMovimientosCxP.Controls.Add(Me.grpCondicionCXP)
-        Me.grpMovimientosCxP.Controls.Add(Me.txtImporteCXP)
-        Me.grpMovimientosCxP.Controls.Add(Me.txtReferenciaCXP)
-        Me.grpMovimientosCxP.Controls.Add(Me.Label78)
-        Me.grpMovimientosCxP.Controls.Add(Me.Button6)
-        Me.grpMovimientosCxP.Controls.Add(Me.txtConceptoCXP)
-        Me.grpMovimientosCxP.Controls.Add(Me.txtEmisionCXP)
-        Me.grpMovimientosCxP.Controls.Add(Me.txtDocumentoCXP)
-        Me.grpMovimientosCxP.Controls.Add(Me.Label79)
-        Me.grpMovimientosCxP.Controls.Add(Me.Label80)
-        Me.grpMovimientosCxP.Controls.Add(Me.Label81)
-        Me.grpMovimientosCxP.Location = New System.Drawing.Point(0, 75)
-        Me.grpMovimientosCxP.Name = "grpMovimientosCxP"
-        Me.grpMovimientosCxP.Size = New System.Drawing.Size(942, 355)
-        Me.grpMovimientosCxP.TabIndex = 277
-        Me.grpMovimientosCxP.TabStop = False
-        Me.grpMovimientosCxP.Visible = False
-        '
-        'Label63
-        '
-        Me.Label63.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label63.Location = New System.Drawing.Point(14, 12)
-        Me.Label63.Name = "Label63"
-        Me.Label63.Size = New System.Drawing.Size(67, 19)
-        Me.Label63.TabIndex = 134
-        Me.Label63.Text = "Tipo: "
-        Me.Label63.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'cmbTipoCxP
-        '
-        Me.cmbTipoCxP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbTipoCxP.FormattingEnabled = True
-        Me.cmbTipoCxP.Location = New System.Drawing.Point(85, 11)
-        Me.cmbTipoCxP.Margin = New System.Windows.Forms.Padding(1)
-        Me.cmbTipoCxP.Name = "cmbTipoCxP"
-        Me.cmbTipoCxP.Size = New System.Drawing.Size(207, 21)
-        Me.cmbTipoCxP.TabIndex = 133
-        '
-        'lblDescripCausaNCCxP
-        '
-        Me.lblDescripCausaNCCxP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDescripCausaNCCxP.Location = New System.Drawing.Point(195, 81)
-        Me.lblDescripCausaNCCxP.Name = "lblDescripCausaNCCxP"
-        Me.lblDescripCausaNCCxP.Size = New System.Drawing.Size(232, 19)
-        Me.lblDescripCausaNCCxP.TabIndex = 132
-        Me.lblDescripCausaNCCxP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label64
-        '
-        Me.Label64.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label64.Location = New System.Drawing.Point(4, 79)
-        Me.Label64.Name = "Label64"
-        Me.Label64.Size = New System.Drawing.Size(72, 19)
-        Me.Label64.TabIndex = 131
-        Me.Label64.Text = "Causa NC:"
-        Me.Label64.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Button2
-        '
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(168, 79)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(25, 20)
-        Me.Button2.TabIndex = 130
-        Me.Button2.Text = "•••"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'txtCausaNCCXP
-        '
-        Me.txtCausaNCCXP.Location = New System.Drawing.Point(85, 80)
-        Me.txtCausaNCCXP.Name = "txtCausaNCCXP"
-        Me.txtCausaNCCXP.Size = New System.Drawing.Size(77, 20)
-        Me.txtCausaNCCXP.TabIndex = 129
-        Me.txtCausaNCCXP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'txtNombrePagoCxP
-        '
-        Me.txtNombrePagoCxP.Location = New System.Drawing.Point(196, 36)
-        Me.txtNombrePagoCxP.Name = "txtNombrePagoCxP"
-        Me.txtNombrePagoCxP.Size = New System.Drawing.Size(96, 20)
-        Me.txtNombrePagoCxP.TabIndex = 121
-        Me.txtNombrePagoCxP.Visible = False
-        '
-        'Label65
-        '
-        Me.Label65.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label65.Location = New System.Drawing.Point(-2, 101)
-        Me.Label65.Name = "Label65"
-        Me.Label65.Size = New System.Drawing.Size(80, 19)
-        Me.Label65.TabIndex = 120
-        Me.Label65.Text = "Referencia:"
-        Me.Label65.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.cmbFPCxP)
-        Me.GroupBox2.Controls.Add(Me.btnCodConCxP)
-        Me.GroupBox2.Controls.Add(Me.txtCodConCxP)
-        Me.GroupBox2.Controls.Add(Me.cmbNombrePagoCxP)
-        Me.GroupBox2.Controls.Add(Me.Label66)
-        Me.GroupBox2.Controls.Add(Me.Label67)
-        Me.GroupBox2.Controls.Add(Me.txtBancoDepositoCxP)
-        Me.GroupBox2.Controls.Add(Me.Label68)
-        Me.GroupBox2.Controls.Add(Me.Label69)
-        Me.GroupBox2.Controls.Add(Me.txtCtaDepositoCxP)
-        Me.GroupBox2.Controls.Add(Me.txtNumDepositoCxP)
-        Me.GroupBox2.Controls.Add(Me.txtBeneficiarioCxP)
-        Me.GroupBox2.Controls.Add(Me.Button4)
-        Me.GroupBox2.Controls.Add(Me.Button5)
-        Me.GroupBox2.Controls.Add(Me.Label70)
-        Me.GroupBox2.Controls.Add(Me.Label75)
-        Me.GroupBox2.Controls.Add(Me.Label76)
-        Me.GroupBox2.Controls.Add(Me.Label77)
-        Me.GroupBox2.Controls.Add(Me.TextBox9)
-        Me.GroupBox2.Controls.Add(Me.txtNumeroPagoCxP)
-        Me.GroupBox2.Controls.Add(Me.cmbCajaCxP)
-        Me.GroupBox2.Location = New System.Drawing.Point(433, 30)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(392, 188)
-        Me.GroupBox2.TabIndex = 119
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = " Pago "
-        '
-        'btnCodConCxP
-        '
-        Me.btnCodConCxP.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCodConCxP.Location = New System.Drawing.Point(360, 161)
-        Me.btnCodConCxP.Name = "btnCodConCxP"
-        Me.btnCodConCxP.Size = New System.Drawing.Size(25, 20)
-        Me.btnCodConCxP.TabIndex = 126
-        Me.btnCodConCxP.Text = "•••"
-        Me.btnCodConCxP.UseVisualStyleBackColor = True
-        '
-        'txtCodConCxP
-        '
-        Me.txtCodConCxP.Location = New System.Drawing.Point(111, 161)
-        Me.txtCodConCxP.Name = "txtCodConCxP"
-        Me.txtCodConCxP.Size = New System.Drawing.Size(243, 20)
-        Me.txtCodConCxP.TabIndex = 125
-        '
-        'cmbNombrePagoCxP
-        '
-        Me.cmbNombrePagoCxP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbNombrePagoCxP.FormattingEnabled = True
-        Me.cmbNombrePagoCxP.Location = New System.Drawing.Point(112, 76)
-        Me.cmbNombrePagoCxP.Margin = New System.Windows.Forms.Padding(1)
-        Me.cmbNombrePagoCxP.Name = "cmbNombrePagoCxP"
-        Me.cmbNombrePagoCxP.Size = New System.Drawing.Size(273, 21)
-        Me.cmbNombrePagoCxP.TabIndex = 124
-        '
-        'Label66
-        '
-        Me.Label66.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label66.Location = New System.Drawing.Point(8, 142)
-        Me.Label66.Name = "Label66"
-        Me.Label66.Size = New System.Drawing.Size(100, 18)
-        Me.Label66.TabIndex = 123
-        Me.Label66.Text = "Banco depósito:"
-        Me.Label66.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label67
-        '
-        Me.Label67.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label67.Location = New System.Drawing.Point(8, 162)
-        Me.Label67.Name = "Label67"
-        Me.Label67.Size = New System.Drawing.Size(100, 18)
-        Me.Label67.TabIndex = 122
-        Me.Label67.Text = "Cta. Con.:"
-        Me.Label67.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtBancoDepositoCxP
-        '
-        Me.txtBancoDepositoCxP.Location = New System.Drawing.Point(111, 140)
-        Me.txtBancoDepositoCxP.Name = "txtBancoDepositoCxP"
-        Me.txtBancoDepositoCxP.Size = New System.Drawing.Size(274, 20)
-        Me.txtBancoDepositoCxP.TabIndex = 121
-        '
-        'Label68
-        '
-        Me.Label68.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label68.Location = New System.Drawing.Point(6, 119)
-        Me.Label68.Name = "Label68"
-        Me.Label68.Size = New System.Drawing.Size(100, 18)
-        Me.Label68.TabIndex = 120
-        Me.Label68.Text = "Nº y Cta Dep.:"
-        Me.Label68.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label69
-        '
-        Me.Label69.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label69.Location = New System.Drawing.Point(19, 95)
-        Me.Label69.Name = "Label69"
-        Me.Label69.Size = New System.Drawing.Size(89, 21)
-        Me.Label69.TabIndex = 119
-        Me.Label69.Text = "Beneficiario:"
-        Me.Label69.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtCtaDepositoCxP
-        '
-        Me.txtCtaDepositoCxP.Location = New System.Drawing.Point(240, 119)
-        Me.txtCtaDepositoCxP.Name = "txtCtaDepositoCxP"
-        Me.txtCtaDepositoCxP.Size = New System.Drawing.Size(145, 20)
-        Me.txtCtaDepositoCxP.TabIndex = 118
-        '
-        'txtNumDepositoCxP
-        '
-        Me.txtNumDepositoCxP.Location = New System.Drawing.Point(112, 119)
-        Me.txtNumDepositoCxP.Name = "txtNumDepositoCxP"
-        Me.txtNumDepositoCxP.Size = New System.Drawing.Size(122, 20)
-        Me.txtNumDepositoCxP.TabIndex = 117
-        '
-        'txtBeneficiarioCxP
-        '
-        Me.txtBeneficiarioCxP.Location = New System.Drawing.Point(112, 98)
-        Me.txtBeneficiarioCxP.Name = "txtBeneficiarioCxP"
-        Me.txtBeneficiarioCxP.Size = New System.Drawing.Size(274, 20)
-        Me.txtBeneficiarioCxP.TabIndex = 116
-        '
-        'Button4
-        '
-        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.Location = New System.Drawing.Point(235, 77)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(25, 20)
-        Me.Button4.TabIndex = 115
-        Me.Button4.Text = "•••"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
-        'Button5
-        '
-        Me.Button5.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button5.Location = New System.Drawing.Point(235, 55)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(25, 20)
-        Me.Button5.TabIndex = 114
-        Me.Button5.Text = "•••"
-        Me.Button5.UseVisualStyleBackColor = True
-        '
-        'Label70
-        '
-        Me.Label70.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label70.Location = New System.Drawing.Point(19, 77)
-        Me.Label70.Name = "Label70"
-        Me.Label70.Size = New System.Drawing.Size(89, 18)
-        Me.Label70.TabIndex = 113
-        Me.Label70.Text = "Nombre Pago:"
-        Me.Label70.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label75
-        '
-        Me.Label75.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label75.Location = New System.Drawing.Point(6, 57)
-        Me.Label75.Name = "Label75"
-        Me.Label75.Size = New System.Drawing.Size(102, 20)
-        Me.Label75.TabIndex = 112
-        Me.Label75.Text = " Número Pago:"
-        Me.Label75.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label76
-        '
-        Me.Label76.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label76.Location = New System.Drawing.Point(6, 34)
-        Me.Label76.Name = "Label76"
-        Me.Label76.Size = New System.Drawing.Size(102, 19)
-        Me.Label76.TabIndex = 111
-        Me.Label76.Text = "Forma de Pago:"
-        Me.Label76.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label77
-        '
-        Me.Label77.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label77.Location = New System.Drawing.Point(41, 12)
-        Me.Label77.Name = "Label77"
-        Me.Label77.Size = New System.Drawing.Size(67, 19)
-        Me.Label77.TabIndex = 110
-        Me.Label77.Text = "Caja:"
-        Me.Label77.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'TextBox9
-        '
-        Me.TextBox9.Enabled = False
-        Me.TextBox9.Location = New System.Drawing.Point(112, 77)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(122, 20)
-        Me.TextBox9.TabIndex = 107
-        '
-        'txtNumeroPagoCxP
-        '
-        Me.txtNumeroPagoCxP.Enabled = False
-        Me.txtNumeroPagoCxP.Location = New System.Drawing.Point(112, 55)
-        Me.txtNumeroPagoCxP.Name = "txtNumeroPagoCxP"
-        Me.txtNumeroPagoCxP.Size = New System.Drawing.Size(122, 20)
-        Me.txtNumeroPagoCxP.TabIndex = 106
-        Me.txtNumeroPagoCxP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'cmbCajaCxP
-        '
-        Me.cmbCajaCxP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbCajaCxP.FormattingEnabled = True
-        Me.cmbCajaCxP.Location = New System.Drawing.Point(112, 11)
-        Me.cmbCajaCxP.Margin = New System.Windows.Forms.Padding(1)
-        Me.cmbCajaCxP.Name = "cmbCajaCxP"
-        Me.cmbCajaCxP.Size = New System.Drawing.Size(273, 21)
-        Me.cmbCajaCxP.TabIndex = 104
-        '
-        'grpCondicionCXP
-        '
-        Me.grpCondicionCXP.Controls.Add(Me.rbtnCOCXP)
-        Me.grpCondicionCXP.Controls.Add(Me.rbtnCRCXP)
-        Me.grpCondicionCXP.Location = New System.Drawing.Point(234, 168)
-        Me.grpCondicionCXP.Name = "grpCondicionCXP"
-        Me.grpCondicionCXP.Size = New System.Drawing.Size(194, 50)
-        Me.grpCondicionCXP.TabIndex = 118
-        Me.grpCondicionCXP.TabStop = False
-        Me.grpCondicionCXP.Text = " Condición "
-        '
-        'rbtnCOCXP
-        '
-        Me.rbtnCOCXP.AutoSize = True
-        Me.rbtnCOCXP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnCOCXP.Location = New System.Drawing.Point(116, 13)
-        Me.rbtnCOCXP.Name = "rbtnCOCXP"
-        Me.rbtnCOCXP.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.rbtnCOCXP.Size = New System.Drawing.Size(72, 17)
-        Me.rbtnCOCXP.TabIndex = 1
-        Me.rbtnCOCXP.TabStop = True
-        Me.rbtnCOCXP.Text = "Contado"
-        Me.rbtnCOCXP.UseVisualStyleBackColor = True
-        '
-        'rbtnCRCXP
-        '
-        Me.rbtnCRCXP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnCRCXP.Location = New System.Drawing.Point(32, 13)
-        Me.rbtnCRCXP.Name = "rbtnCRCXP"
-        Me.rbtnCRCXP.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.rbtnCRCXP.Size = New System.Drawing.Size(72, 17)
-        Me.rbtnCRCXP.TabIndex = 0
-        Me.rbtnCRCXP.TabStop = True
-        Me.rbtnCRCXP.Text = "Crédito"
-        Me.rbtnCRCXP.UseVisualStyleBackColor = True
-        '
-        'txtImporteCXP
-        '
-        Me.txtImporteCXP.Location = New System.Drawing.Point(85, 185)
-        Me.txtImporteCXP.Name = "txtImporteCXP"
-        Me.txtImporteCXP.Size = New System.Drawing.Size(108, 20)
-        Me.txtImporteCXP.TabIndex = 117
-        Me.txtImporteCXP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtReferenciaCXP
-        '
-        Me.txtReferenciaCXP.Location = New System.Drawing.Point(85, 102)
-        Me.txtReferenciaCXP.Name = "txtReferenciaCXP"
-        Me.txtReferenciaCXP.Size = New System.Drawing.Size(108, 20)
-        Me.txtReferenciaCXP.TabIndex = 110
-        '
-        'Label78
-        '
-        Me.Label78.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label78.Location = New System.Drawing.Point(16, 187)
-        Me.Label78.Name = "Label78"
-        Me.Label78.Size = New System.Drawing.Size(61, 15)
-        Me.Label78.TabIndex = 109
-        Me.Label78.Text = "Importe:"
-        Me.Label78.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Button6
-        '
-        Me.Button6.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button6.Location = New System.Drawing.Point(195, 57)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(25, 20)
-        Me.Button6.TabIndex = 104
-        Me.Button6.Text = "•••"
-        Me.Button6.UseVisualStyleBackColor = True
-        '
-        'txtConceptoCXP
-        '
-        Me.txtConceptoCXP.Location = New System.Drawing.Point(85, 124)
-        Me.txtConceptoCXP.Multiline = True
-        Me.txtConceptoCXP.Name = "txtConceptoCXP"
-        Me.txtConceptoCXP.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtConceptoCXP.Size = New System.Drawing.Size(342, 44)
-        Me.txtConceptoCXP.TabIndex = 6
-        '
-        'txtEmisionCXP
-        '
-        Me.txtEmisionCXP.Enabled = False
-        Me.txtEmisionCXP.Location = New System.Drawing.Point(85, 58)
-        Me.txtEmisionCXP.Name = "txtEmisionCXP"
-        Me.txtEmisionCXP.Size = New System.Drawing.Size(108, 20)
-        Me.txtEmisionCXP.TabIndex = 5
-        Me.txtEmisionCXP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'txtDocumentoCXP
-        '
-        Me.txtDocumentoCXP.Location = New System.Drawing.Point(85, 36)
-        Me.txtDocumentoCXP.Name = "txtDocumentoCXP"
-        Me.txtDocumentoCXP.Size = New System.Drawing.Size(108, 20)
-        Me.txtDocumentoCXP.TabIndex = 4
-        '
-        'Label79
-        '
-        Me.Label79.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label79.Location = New System.Drawing.Point(7, 122)
-        Me.Label79.Name = "Label79"
-        Me.Label79.Size = New System.Drawing.Size(72, 19)
-        Me.Label79.TabIndex = 2
-        Me.Label79.Text = "Concepto:"
-        Me.Label79.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label80
-        '
-        Me.Label80.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label80.Location = New System.Drawing.Point(7, 58)
-        Me.Label80.Name = "Label80"
-        Me.Label80.Size = New System.Drawing.Size(72, 17)
-        Me.Label80.TabIndex = 1
-        Me.Label80.Text = "Emisión:"
-        Me.Label80.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label81
-        '
-        Me.Label81.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label81.Location = New System.Drawing.Point(0, 38)
-        Me.Label81.Name = "Label81"
-        Me.Label81.Size = New System.Drawing.Size(79, 18)
-        Me.Label81.TabIndex = 0
-        Me.Label81.Text = "Documento:"
-        Me.Label81.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.dg.BackColor = System.Drawing.SystemColors.ControlDark
+        Me.dg.Location = New System.Drawing.Point(-1, 78)
+        Me.dg.Name = "dg"
+        Me.dg.Size = New System.Drawing.Size(949, 355)
+        Me.dg.TabIndex = 278
+        Me.dg.Text = "SfDataGrid1"
+        Me.dg.ThemeName = "Office2016DarkGray"
         '
         'C1DockingTabPage4
         '
@@ -2590,7 +2045,7 @@ Partial Class jsComArcProveedores
         '
         'C1DockingTabPage6
         '
-        Me.C1DockingTabPage6.Controls.Add(Me.grpMovimientosExP)
+        Me.C1DockingTabPage6.Controls.Add(Me.dgExP)
         Me.C1DockingTabPage6.Controls.Add(Me.Label42)
         Me.C1DockingTabPage6.Controls.Add(Me.txtDisponibleExP)
         Me.C1DockingTabPage6.Controls.Add(Me.txtCreditoExP)
@@ -2599,7 +2054,6 @@ Partial Class jsComArcProveedores
         Me.C1DockingTabPage6.Controls.Add(Me.Label44)
         Me.C1DockingTabPage6.Controls.Add(Me.Label45)
         Me.C1DockingTabPage6.Controls.Add(Me.txtFormaUltimoPagoExP)
-        Me.C1DockingTabPage6.Controls.Add(Me.dgExP)
         Me.C1DockingTabPage6.Controls.Add(Me.Label46)
         Me.C1DockingTabPage6.Controls.Add(Me.Label47)
         Me.C1DockingTabPage6.Controls.Add(Me.txtCodigoExP)
@@ -2614,451 +2068,20 @@ Partial Class jsComArcProveedores
         Me.C1DockingTabPage6.TabIndex = 5
         Me.C1DockingTabPage6.Text = "Movimientos ExP"
         '
-        'grpMovimientosExP
+        'dgExP
         '
-        Me.grpMovimientosExP.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.dgExP.AccessibleName = "Table"
+        Me.dgExP.AllowGrouping = False
+        Me.dgExP.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.grpMovimientosExP.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(250, Byte), Integer))
-        Me.grpMovimientosExP.Controls.Add(Me.Label82)
-        Me.grpMovimientosExP.Controls.Add(Me.cmbTipoExP)
-        Me.grpMovimientosExP.Controls.Add(Me.lblDescripCausaNCExP)
-        Me.grpMovimientosExP.Controls.Add(Me.lblNotaCredito)
-        Me.grpMovimientosExP.Controls.Add(Me.btnCausaNCExP)
-        Me.grpMovimientosExP.Controls.Add(Me.txtCausaNCEXP)
-        Me.grpMovimientosExP.Controls.Add(Me.txtNombrePagoExP)
-        Me.grpMovimientosExP.Controls.Add(Me.Label50)
-        Me.grpMovimientosExP.Controls.Add(Me.grpPago)
-        Me.grpMovimientosExP.Controls.Add(Me.grpCondicionExP)
-        Me.grpMovimientosExP.Controls.Add(Me.txtImporteExP)
-        Me.grpMovimientosExP.Controls.Add(Me.txtReferenciaExP)
-        Me.grpMovimientosExP.Controls.Add(Me.Label59)
-        Me.grpMovimientosExP.Controls.Add(Me.btnEmisionEXP)
-        Me.grpMovimientosExP.Controls.Add(Me.txtConceptoExP)
-        Me.grpMovimientosExP.Controls.Add(Me.txtEmisionEXP)
-        Me.grpMovimientosExP.Controls.Add(Me.txtDocumentoEXP)
-        Me.grpMovimientosExP.Controls.Add(Me.Label60)
-        Me.grpMovimientosExP.Controls.Add(Me.Label61)
-        Me.grpMovimientosExP.Controls.Add(Me.Label62)
-        Me.grpMovimientosExP.Location = New System.Drawing.Point(0, 75)
-        Me.grpMovimientosExP.Name = "grpMovimientosExP"
-        Me.grpMovimientosExP.Size = New System.Drawing.Size(952, 355)
-        Me.grpMovimientosExP.TabIndex = 276
-        Me.grpMovimientosExP.TabStop = False
-        Me.grpMovimientosExP.Visible = False
-        '
-        'Label82
-        '
-        Me.Label82.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label82.Location = New System.Drawing.Point(15, 11)
-        Me.Label82.Name = "Label82"
-        Me.Label82.Size = New System.Drawing.Size(67, 19)
-        Me.Label82.TabIndex = 136
-        Me.Label82.Text = "Tipo: "
-        Me.Label82.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'cmbTipoExP
-        '
-        Me.cmbTipoExP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbTipoExP.FormattingEnabled = True
-        Me.cmbTipoExP.Location = New System.Drawing.Point(85, 11)
-        Me.cmbTipoExP.Margin = New System.Windows.Forms.Padding(1)
-        Me.cmbTipoExP.Name = "cmbTipoExP"
-        Me.cmbTipoExP.Size = New System.Drawing.Size(207, 21)
-        Me.cmbTipoExP.TabIndex = 135
-        '
-        'lblDescripCausaNCExP
-        '
-        Me.lblDescripCausaNCExP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDescripCausaNCExP.Location = New System.Drawing.Point(196, 81)
-        Me.lblDescripCausaNCExP.Name = "lblDescripCausaNCExP"
-        Me.lblDescripCausaNCExP.Size = New System.Drawing.Size(232, 19)
-        Me.lblDescripCausaNCExP.TabIndex = 132
-        Me.lblDescripCausaNCExP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'lblNotaCredito
-        '
-        Me.lblNotaCredito.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNotaCredito.Location = New System.Drawing.Point(7, 80)
-        Me.lblNotaCredito.Name = "lblNotaCredito"
-        Me.lblNotaCredito.Size = New System.Drawing.Size(72, 19)
-        Me.lblNotaCredito.TabIndex = 131
-        Me.lblNotaCredito.Text = "Causa NC:"
-        Me.lblNotaCredito.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'btnCausaNCExP
-        '
-        Me.btnCausaNCExP.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCausaNCExP.Location = New System.Drawing.Point(169, 79)
-        Me.btnCausaNCExP.Name = "btnCausaNCExP"
-        Me.btnCausaNCExP.Size = New System.Drawing.Size(25, 20)
-        Me.btnCausaNCExP.TabIndex = 130
-        Me.btnCausaNCExP.Text = "•••"
-        Me.btnCausaNCExP.UseVisualStyleBackColor = True
-        '
-        'txtCausaNCEXP
-        '
-        Me.txtCausaNCEXP.Location = New System.Drawing.Point(86, 80)
-        Me.txtCausaNCEXP.Name = "txtCausaNCEXP"
-        Me.txtCausaNCEXP.Size = New System.Drawing.Size(77, 20)
-        Me.txtCausaNCEXP.TabIndex = 129
-        Me.txtCausaNCEXP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'txtNombrePagoExP
-        '
-        Me.txtNombrePagoExP.Location = New System.Drawing.Point(196, 36)
-        Me.txtNombrePagoExP.Name = "txtNombrePagoExP"
-        Me.txtNombrePagoExP.Size = New System.Drawing.Size(96, 20)
-        Me.txtNombrePagoExP.TabIndex = 121
-        Me.txtNombrePagoExP.Visible = False
-        '
-        'Label50
-        '
-        Me.Label50.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label50.Location = New System.Drawing.Point(1, 102)
-        Me.Label50.Name = "Label50"
-        Me.Label50.Size = New System.Drawing.Size(80, 19)
-        Me.Label50.TabIndex = 120
-        Me.Label50.Text = "Referencia:"
-        Me.Label50.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'grpPago
-        '
-        Me.grpPago.Controls.Add(Me.cmbFPExP)
-        Me.grpPago.Controls.Add(Me.btnCodConExP)
-        Me.grpPago.Controls.Add(Me.txtCodConExP)
-        Me.grpPago.Controls.Add(Me.cmbNombrePagoExP)
-        Me.grpPago.Controls.Add(Me.Label51)
-        Me.grpPago.Controls.Add(Me.Label52)
-        Me.grpPago.Controls.Add(Me.txtBancoDepositoExP)
-        Me.grpPago.Controls.Add(Me.Label53)
-        Me.grpPago.Controls.Add(Me.Label54)
-        Me.grpPago.Controls.Add(Me.txtCuentaDepositoExP)
-        Me.grpPago.Controls.Add(Me.txtNumeroDepositoExP)
-        Me.grpPago.Controls.Add(Me.txtBeneficiarioExP)
-        Me.grpPago.Controls.Add(Me.btnNomPago)
-        Me.grpPago.Controls.Add(Me.btnNumPago)
-        Me.grpPago.Controls.Add(Me.Label55)
-        Me.grpPago.Controls.Add(Me.Label56)
-        Me.grpPago.Controls.Add(Me.Label57)
-        Me.grpPago.Controls.Add(Me.Label58)
-        Me.grpPago.Controls.Add(Me.txtNomPagCR)
-        Me.grpPago.Controls.Add(Me.txtNumeroPagoExP)
-        Me.grpPago.Controls.Add(Me.cmbCajaExP)
-        Me.grpPago.Location = New System.Drawing.Point(434, 30)
-        Me.grpPago.Name = "grpPago"
-        Me.grpPago.Size = New System.Drawing.Size(392, 188)
-        Me.grpPago.TabIndex = 119
-        Me.grpPago.TabStop = False
-        Me.grpPago.Text = " Pago "
-        '
-        'btnCodConExP
-        '
-        Me.btnCodConExP.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCodConExP.Location = New System.Drawing.Point(360, 161)
-        Me.btnCodConExP.Name = "btnCodConExP"
-        Me.btnCodConExP.Size = New System.Drawing.Size(25, 20)
-        Me.btnCodConExP.TabIndex = 126
-        Me.btnCodConExP.Text = "•••"
-        Me.btnCodConExP.UseVisualStyleBackColor = True
-        '
-        'txtCodConExP
-        '
-        Me.txtCodConExP.Location = New System.Drawing.Point(111, 161)
-        Me.txtCodConExP.Name = "txtCodConExP"
-        Me.txtCodConExP.Size = New System.Drawing.Size(243, 20)
-        Me.txtCodConExP.TabIndex = 125
-        '
-        'cmbNombrePagoExP
-        '
-        Me.cmbNombrePagoExP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbNombrePagoExP.FormattingEnabled = True
-        Me.cmbNombrePagoExP.Location = New System.Drawing.Point(112, 76)
-        Me.cmbNombrePagoExP.Margin = New System.Windows.Forms.Padding(1)
-        Me.cmbNombrePagoExP.Name = "cmbNombrePagoExP"
-        Me.cmbNombrePagoExP.Size = New System.Drawing.Size(273, 21)
-        Me.cmbNombrePagoExP.TabIndex = 124
-        '
-        'Label51
-        '
-        Me.Label51.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label51.Location = New System.Drawing.Point(8, 142)
-        Me.Label51.Name = "Label51"
-        Me.Label51.Size = New System.Drawing.Size(100, 18)
-        Me.Label51.TabIndex = 123
-        Me.Label51.Text = "Banco depósito:"
-        Me.Label51.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label52
-        '
-        Me.Label52.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label52.Location = New System.Drawing.Point(8, 162)
-        Me.Label52.Name = "Label52"
-        Me.Label52.Size = New System.Drawing.Size(100, 18)
-        Me.Label52.TabIndex = 122
-        Me.Label52.Text = "Cta. Con.:"
-        Me.Label52.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtBancoDepositoExP
-        '
-        Me.txtBancoDepositoExP.Location = New System.Drawing.Point(111, 140)
-        Me.txtBancoDepositoExP.Name = "txtBancoDepositoExP"
-        Me.txtBancoDepositoExP.Size = New System.Drawing.Size(274, 20)
-        Me.txtBancoDepositoExP.TabIndex = 121
-        '
-        'Label53
-        '
-        Me.Label53.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label53.Location = New System.Drawing.Point(6, 119)
-        Me.Label53.Name = "Label53"
-        Me.Label53.Size = New System.Drawing.Size(100, 18)
-        Me.Label53.TabIndex = 120
-        Me.Label53.Text = "Nº y Cta Dep.:"
-        Me.Label53.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label54
-        '
-        Me.Label54.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label54.Location = New System.Drawing.Point(19, 95)
-        Me.Label54.Name = "Label54"
-        Me.Label54.Size = New System.Drawing.Size(89, 21)
-        Me.Label54.TabIndex = 119
-        Me.Label54.Text = "Beneficiario:"
-        Me.Label54.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtCuentaDepositoExP
-        '
-        Me.txtCuentaDepositoExP.Location = New System.Drawing.Point(240, 119)
-        Me.txtCuentaDepositoExP.Name = "txtCuentaDepositoExP"
-        Me.txtCuentaDepositoExP.Size = New System.Drawing.Size(145, 20)
-        Me.txtCuentaDepositoExP.TabIndex = 118
-        '
-        'txtNumeroDepositoExP
-        '
-        Me.txtNumeroDepositoExP.Location = New System.Drawing.Point(112, 119)
-        Me.txtNumeroDepositoExP.Name = "txtNumeroDepositoExP"
-        Me.txtNumeroDepositoExP.Size = New System.Drawing.Size(122, 20)
-        Me.txtNumeroDepositoExP.TabIndex = 117
-        '
-        'txtBeneficiarioExP
-        '
-        Me.txtBeneficiarioExP.Location = New System.Drawing.Point(112, 98)
-        Me.txtBeneficiarioExP.Name = "txtBeneficiarioExP"
-        Me.txtBeneficiarioExP.Size = New System.Drawing.Size(274, 20)
-        Me.txtBeneficiarioExP.TabIndex = 116
-        '
-        'btnNomPago
-        '
-        Me.btnNomPago.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNomPago.Location = New System.Drawing.Point(235, 77)
-        Me.btnNomPago.Name = "btnNomPago"
-        Me.btnNomPago.Size = New System.Drawing.Size(25, 20)
-        Me.btnNomPago.TabIndex = 115
-        Me.btnNomPago.Text = "•••"
-        Me.btnNomPago.UseVisualStyleBackColor = True
-        '
-        'btnNumPago
-        '
-        Me.btnNumPago.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNumPago.Location = New System.Drawing.Point(235, 55)
-        Me.btnNumPago.Name = "btnNumPago"
-        Me.btnNumPago.Size = New System.Drawing.Size(25, 20)
-        Me.btnNumPago.TabIndex = 114
-        Me.btnNumPago.Text = "•••"
-        Me.btnNumPago.UseVisualStyleBackColor = True
-        '
-        'Label55
-        '
-        Me.Label55.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label55.Location = New System.Drawing.Point(19, 77)
-        Me.Label55.Name = "Label55"
-        Me.Label55.Size = New System.Drawing.Size(89, 18)
-        Me.Label55.TabIndex = 113
-        Me.Label55.Text = "Nombre Pago:"
-        Me.Label55.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label56
-        '
-        Me.Label56.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label56.Location = New System.Drawing.Point(6, 57)
-        Me.Label56.Name = "Label56"
-        Me.Label56.Size = New System.Drawing.Size(102, 20)
-        Me.Label56.TabIndex = 112
-        Me.Label56.Text = " Número Pago:"
-        Me.Label56.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label57
-        '
-        Me.Label57.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label57.Location = New System.Drawing.Point(6, 34)
-        Me.Label57.Name = "Label57"
-        Me.Label57.Size = New System.Drawing.Size(102, 19)
-        Me.Label57.TabIndex = 111
-        Me.Label57.Text = "Forma de Pago:"
-        Me.Label57.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label58
-        '
-        Me.Label58.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label58.Location = New System.Drawing.Point(41, 12)
-        Me.Label58.Name = "Label58"
-        Me.Label58.Size = New System.Drawing.Size(67, 19)
-        Me.Label58.TabIndex = 110
-        Me.Label58.Text = "Caja:"
-        Me.Label58.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtNomPagCR
-        '
-        Me.txtNomPagCR.Enabled = False
-        Me.txtNomPagCR.Location = New System.Drawing.Point(112, 77)
-        Me.txtNomPagCR.Name = "txtNomPagCR"
-        Me.txtNomPagCR.Size = New System.Drawing.Size(122, 20)
-        Me.txtNomPagCR.TabIndex = 107
-        '
-        'txtNumeroPagoExP
-        '
-        Me.txtNumeroPagoExP.Enabled = False
-        Me.txtNumeroPagoExP.Location = New System.Drawing.Point(112, 55)
-        Me.txtNumeroPagoExP.Name = "txtNumeroPagoExP"
-        Me.txtNumeroPagoExP.Size = New System.Drawing.Size(122, 20)
-        Me.txtNumeroPagoExP.TabIndex = 106
-        Me.txtNumeroPagoExP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'cmbCajaExP
-        '
-        Me.cmbCajaExP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbCajaExP.FormattingEnabled = True
-        Me.cmbCajaExP.Location = New System.Drawing.Point(112, 11)
-        Me.cmbCajaExP.Margin = New System.Windows.Forms.Padding(1)
-        Me.cmbCajaExP.Name = "cmbCajaExP"
-        Me.cmbCajaExP.Size = New System.Drawing.Size(273, 21)
-        Me.cmbCajaExP.TabIndex = 104
-        '
-        'grpCondicionExP
-        '
-        Me.grpCondicionExP.Controls.Add(Me.rbtnCOExP)
-        Me.grpCondicionExP.Controls.Add(Me.rbtnCRExP)
-        Me.grpCondicionExP.Location = New System.Drawing.Point(235, 168)
-        Me.grpCondicionExP.Name = "grpCondicionExP"
-        Me.grpCondicionExP.Size = New System.Drawing.Size(194, 50)
-        Me.grpCondicionExP.TabIndex = 118
-        Me.grpCondicionExP.TabStop = False
-        Me.grpCondicionExP.Text = " Condición "
-        '
-        'rbtnCOExP
-        '
-        Me.rbtnCOExP.AutoSize = True
-        Me.rbtnCOExP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnCOExP.Location = New System.Drawing.Point(116, 13)
-        Me.rbtnCOExP.Name = "rbtnCOExP"
-        Me.rbtnCOExP.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.rbtnCOExP.Size = New System.Drawing.Size(72, 17)
-        Me.rbtnCOExP.TabIndex = 1
-        Me.rbtnCOExP.TabStop = True
-        Me.rbtnCOExP.Text = "Contado"
-        Me.rbtnCOExP.UseVisualStyleBackColor = True
-        '
-        'rbtnCRExP
-        '
-        Me.rbtnCRExP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnCRExP.Location = New System.Drawing.Point(32, 13)
-        Me.rbtnCRExP.Name = "rbtnCRExP"
-        Me.rbtnCRExP.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.rbtnCRExP.Size = New System.Drawing.Size(72, 17)
-        Me.rbtnCRExP.TabIndex = 0
-        Me.rbtnCRExP.TabStop = True
-        Me.rbtnCRExP.Text = "Crédito"
-        Me.rbtnCRExP.UseVisualStyleBackColor = True
-        '
-        'txtImporteExP
-        '
-        Me.txtImporteExP.Location = New System.Drawing.Point(86, 185)
-        Me.txtImporteExP.Name = "txtImporteExP"
-        Me.txtImporteExP.Size = New System.Drawing.Size(108, 20)
-        Me.txtImporteExP.TabIndex = 117
-        Me.txtImporteExP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtReferenciaExP
-        '
-        Me.txtReferenciaExP.Location = New System.Drawing.Point(86, 102)
-        Me.txtReferenciaExP.Name = "txtReferenciaExP"
-        Me.txtReferenciaExP.Size = New System.Drawing.Size(108, 20)
-        Me.txtReferenciaExP.TabIndex = 110
-        '
-        'Label59
-        '
-        Me.Label59.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label59.Location = New System.Drawing.Point(19, 188)
-        Me.Label59.Name = "Label59"
-        Me.Label59.Size = New System.Drawing.Size(61, 15)
-        Me.Label59.TabIndex = 109
-        Me.Label59.Text = "Importe:"
-        Me.Label59.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'btnEmisionEXP
-        '
-        Me.btnEmisionEXP.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmisionEXP.Location = New System.Drawing.Point(196, 57)
-        Me.btnEmisionEXP.Name = "btnEmisionEXP"
-        Me.btnEmisionEXP.Size = New System.Drawing.Size(25, 20)
-        Me.btnEmisionEXP.TabIndex = 104
-        Me.btnEmisionEXP.Text = "•••"
-        Me.btnEmisionEXP.UseVisualStyleBackColor = True
-        '
-        'txtConceptoExP
-        '
-        Me.txtConceptoExP.Location = New System.Drawing.Point(86, 124)
-        Me.txtConceptoExP.Multiline = True
-        Me.txtConceptoExP.Name = "txtConceptoExP"
-        Me.txtConceptoExP.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtConceptoExP.Size = New System.Drawing.Size(342, 44)
-        Me.txtConceptoExP.TabIndex = 6
-        '
-        'txtEmisionEXP
-        '
-        Me.txtEmisionEXP.Enabled = False
-        Me.txtEmisionEXP.Location = New System.Drawing.Point(86, 58)
-        Me.txtEmisionEXP.Name = "txtEmisionEXP"
-        Me.txtEmisionEXP.Size = New System.Drawing.Size(108, 20)
-        Me.txtEmisionEXP.TabIndex = 5
-        Me.txtEmisionEXP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'txtDocumentoEXP
-        '
-        Me.txtDocumentoEXP.Location = New System.Drawing.Point(86, 36)
-        Me.txtDocumentoEXP.Name = "txtDocumentoEXP"
-        Me.txtDocumentoEXP.Size = New System.Drawing.Size(108, 20)
-        Me.txtDocumentoEXP.TabIndex = 4
-        '
-        'Label60
-        '
-        Me.Label60.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label60.Location = New System.Drawing.Point(10, 123)
-        Me.Label60.Name = "Label60"
-        Me.Label60.Size = New System.Drawing.Size(72, 19)
-        Me.Label60.TabIndex = 2
-        Me.Label60.Text = "Concepto:"
-        Me.Label60.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label61
-        '
-        Me.Label61.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label61.Location = New System.Drawing.Point(10, 59)
-        Me.Label61.Name = "Label61"
-        Me.Label61.Size = New System.Drawing.Size(72, 17)
-        Me.Label61.TabIndex = 1
-        Me.Label61.Text = "Emisión:"
-        Me.Label61.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label62
-        '
-        Me.Label62.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label62.Location = New System.Drawing.Point(3, 39)
-        Me.Label62.Name = "Label62"
-        Me.Label62.Size = New System.Drawing.Size(79, 18)
-        Me.Label62.TabIndex = 0
-        Me.Label62.Text = "Documento:"
-        Me.Label62.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.dgExP.BackColor = System.Drawing.SystemColors.ControlDark
+        Me.dgExP.Location = New System.Drawing.Point(0, 74)
+        Me.dgExP.Name = "dgExP"
+        Me.dgExP.Size = New System.Drawing.Size(945, 357)
+        Me.dgExP.TabIndex = 279
+        Me.dgExP.Text = "SfDataGrid1"
+        Me.dgExP.ThemeName = "Office2016DarkGray"
         '
         'Label42
         '
@@ -3140,23 +2163,6 @@ Partial Class jsComArcProveedores
         Me.txtFormaUltimoPagoExP.Name = "txtFormaUltimoPagoExP"
         Me.txtFormaUltimoPagoExP.Size = New System.Drawing.Size(208, 20)
         Me.txtFormaUltimoPagoExP.TabIndex = 268
-        '
-        'dgExP
-        '
-        Me.dgExP.AllowUserToAddRows = False
-        Me.dgExP.AllowUserToDeleteRows = False
-        Me.dgExP.AllowUserToOrderColumns = True
-        Me.dgExP.AllowUserToResizeColumns = False
-        Me.dgExP.AllowUserToResizeRows = False
-        Me.dgExP.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgExP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgExP.Location = New System.Drawing.Point(3, 76)
-        Me.dgExP.Name = "dgExP"
-        Me.dgExP.ReadOnly = True
-        Me.dgExP.Size = New System.Drawing.Size(942, 352)
-        Me.dgExP.TabIndex = 267
         '
         'Label46
         '
@@ -3316,46 +2322,6 @@ Partial Class jsComArcProveedores
         Me.txtNombreEnvase.Size = New System.Drawing.Size(508, 20)
         Me.txtNombreEnvase.TabIndex = 49
         '
-        'cmbFPExP
-        '
-        Me.cmbFPExP.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cmbFPExP.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
-        Me.cmbFPExP.DisplayMember = "nombre"
-        Me.cmbFPExP.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
-        Me.cmbFPExP.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
-        Me.cmbFPExP.Location = New System.Drawing.Point(111, 34)
-        Me.cmbFPExP.Name = "cmbFPExP"
-        Me.cmbFPExP.Size = New System.Drawing.Size(274, 19)
-        Me.cmbFPExP.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
-        Me.cmbFPExP.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
-        Me.cmbFPExP.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
-        Me.cmbFPExP.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
-        Me.cmbFPExP.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
-        Me.cmbFPExP.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.cmbFPExP.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
-        Me.cmbFPExP.TabIndex = 221
-        Me.cmbFPExP.ValueMember = "codcli"
-        '
-        'cmbFPCxP
-        '
-        Me.cmbFPCxP.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cmbFPCxP.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
-        Me.cmbFPCxP.DisplayMember = "nombre"
-        Me.cmbFPCxP.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
-        Me.cmbFPCxP.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
-        Me.cmbFPCxP.Location = New System.Drawing.Point(111, 34)
-        Me.cmbFPCxP.Name = "cmbFPCxP"
-        Me.cmbFPCxP.Size = New System.Drawing.Size(274, 19)
-        Me.cmbFPCxP.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
-        Me.cmbFPCxP.Style.EditorStyle.DisabledBackColor = System.Drawing.Color.Azure
-        Me.cmbFPCxP.Style.EditorStyle.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
-        Me.cmbFPCxP.Style.ReadOnlyEditorStyle.DisabledBackColor = System.Drawing.Color.Azure
-        Me.cmbFPCxP.Style.ReadOnlyEditorStyle.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
-        Me.cmbFPCxP.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.cmbFPCxP.Style.TokenStyle.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
-        Me.cmbFPCxP.TabIndex = 222
-        Me.cmbFPCxP.ValueMember = "codcli"
-        '
         'jsComArcProveedores
         '
         Me.AcceptButton = Me.btnOK
@@ -3376,7 +2342,6 @@ Partial Class jsComArcProveedores
         Me.Tag = "Proveedores y movimientos"
         Me.MenuBarra.ResumeLayout(False)
         Me.MenuBarra.PerformLayout()
-        CType(Me.dg, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpAceptarSalir.ResumeLayout(False)
         CType(Me.tbcProveedor, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbcProveedor.ResumeLayout(False)
@@ -3384,12 +2349,7 @@ Partial Class jsComArcProveedores
         Me.C1DockingTabPage1.PerformLayout()
         Me.C1DockingTabPage2.ResumeLayout(False)
         Me.C1DockingTabPage2.PerformLayout()
-        Me.grpMovimientosCxP.ResumeLayout(False)
-        Me.grpMovimientosCxP.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.grpCondicionCXP.ResumeLayout(False)
-        Me.grpCondicionCXP.PerformLayout()
+        CType(Me.dg, System.ComponentModel.ISupportInitialize).EndInit()
         Me.C1DockingTabPage4.ResumeLayout(False)
         Me.C1DockingTabPage4.PerformLayout()
         CType(Me.dgSaldos, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3404,18 +2364,10 @@ Partial Class jsComArcProveedores
         CType(Me.dgExpediente, System.ComponentModel.ISupportInitialize).EndInit()
         Me.C1DockingTabPage6.ResumeLayout(False)
         Me.C1DockingTabPage6.PerformLayout()
-        Me.grpMovimientosExP.ResumeLayout(False)
-        Me.grpMovimientosExP.PerformLayout()
-        Me.grpPago.ResumeLayout(False)
-        Me.grpPago.PerformLayout()
-        Me.grpCondicionExP.ResumeLayout(False)
-        Me.grpCondicionExP.PerformLayout()
         CType(Me.dgExP, System.ComponentModel.ISupportInitialize).EndInit()
         Me.C1DockingTabPage7.ResumeLayout(False)
         Me.C1DockingTabPage7.PerformLayout()
         CType(Me.dgEnvases, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.cmbFPExP, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.cmbFPCxP, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3474,7 +2426,6 @@ Partial Class jsComArcProveedores
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents txtUltimoPago As System.Windows.Forms.TextBox
     Friend WithEvents txtNombre1 As System.Windows.Forms.TextBox
-    Friend WithEvents dg As System.Windows.Forms.DataGridView
     Friend WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents grpAceptarSalir As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnCancel As System.Windows.Forms.Button
@@ -3597,7 +2548,6 @@ Partial Class jsComArcProveedores
     Friend WithEvents Label44 As System.Windows.Forms.Label
     Friend WithEvents Label45 As System.Windows.Forms.Label
     Friend WithEvents txtFormaUltimoPagoExP As System.Windows.Forms.TextBox
-    Friend WithEvents dgExP As System.Windows.Forms.DataGridView
     Friend WithEvents Label46 As System.Windows.Forms.Label
     Friend WithEvents Label47 As System.Windows.Forms.Label
     Friend WithEvents txtCodigoExP As System.Windows.Forms.TextBox
@@ -3609,92 +2559,6 @@ Partial Class jsComArcProveedores
     Friend WithEvents btnExP As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator7 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents btnAuditoria As System.Windows.Forms.ToolStripButton
-    Friend WithEvents grpMovimientosExP As System.Windows.Forms.GroupBox
-    Friend WithEvents lblDescripCausaNCExP As System.Windows.Forms.Label
-    Friend WithEvents lblNotaCredito As System.Windows.Forms.Label
-    Friend WithEvents btnCausaNCExP As System.Windows.Forms.Button
-    Friend WithEvents txtCausaNCEXP As System.Windows.Forms.TextBox
-    Friend WithEvents txtNombrePagoExP As System.Windows.Forms.TextBox
-    Friend WithEvents Label50 As System.Windows.Forms.Label
-    Friend WithEvents grpPago As System.Windows.Forms.GroupBox
-    Friend WithEvents btnCodConExP As System.Windows.Forms.Button
-    Friend WithEvents txtCodConExP As System.Windows.Forms.TextBox
-    Friend WithEvents cmbNombrePagoExP As System.Windows.Forms.ComboBox
-    Friend WithEvents Label51 As System.Windows.Forms.Label
-    Friend WithEvents Label52 As System.Windows.Forms.Label
-    Friend WithEvents txtBancoDepositoExP As System.Windows.Forms.TextBox
-    Friend WithEvents Label53 As System.Windows.Forms.Label
-    Friend WithEvents Label54 As System.Windows.Forms.Label
-    Friend WithEvents txtCuentaDepositoExP As System.Windows.Forms.TextBox
-    Friend WithEvents txtNumeroDepositoExP As System.Windows.Forms.TextBox
-    Friend WithEvents txtBeneficiarioExP As System.Windows.Forms.TextBox
-    Friend WithEvents btnNomPago As System.Windows.Forms.Button
-    Friend WithEvents btnNumPago As System.Windows.Forms.Button
-    Friend WithEvents Label55 As System.Windows.Forms.Label
-    Friend WithEvents Label56 As System.Windows.Forms.Label
-    Friend WithEvents Label57 As System.Windows.Forms.Label
-    Friend WithEvents Label58 As System.Windows.Forms.Label
-    Friend WithEvents txtNomPagCR As System.Windows.Forms.TextBox
-    Friend WithEvents txtNumeroPagoExP As System.Windows.Forms.TextBox
-    Friend WithEvents cmbCajaExP As System.Windows.Forms.ComboBox
-    Friend WithEvents grpCondicionExP As System.Windows.Forms.GroupBox
-    Friend WithEvents rbtnCOExP As System.Windows.Forms.RadioButton
-    Friend WithEvents rbtnCRExP As System.Windows.Forms.RadioButton
-    Friend WithEvents txtImporteExP As System.Windows.Forms.TextBox
-    Friend WithEvents txtReferenciaExP As System.Windows.Forms.TextBox
-    Friend WithEvents Label59 As System.Windows.Forms.Label
-    Friend WithEvents btnEmisionEXP As System.Windows.Forms.Button
-    Friend WithEvents txtConceptoExP As System.Windows.Forms.TextBox
-    Friend WithEvents txtEmisionEXP As System.Windows.Forms.TextBox
-    Friend WithEvents txtDocumentoEXP As System.Windows.Forms.TextBox
-    Friend WithEvents Label60 As System.Windows.Forms.Label
-    Friend WithEvents Label61 As System.Windows.Forms.Label
-    Friend WithEvents Label62 As System.Windows.Forms.Label
-    Friend WithEvents grpMovimientosCxP As System.Windows.Forms.GroupBox
-    Friend WithEvents lblDescripCausaNCCxP As System.Windows.Forms.Label
-    Friend WithEvents Label64 As System.Windows.Forms.Label
-    Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents txtCausaNCCXP As System.Windows.Forms.TextBox
-    Friend WithEvents txtNombrePagoCxP As System.Windows.Forms.TextBox
-    Friend WithEvents Label65 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents btnCodConCxP As System.Windows.Forms.Button
-    Friend WithEvents txtCodConCxP As System.Windows.Forms.TextBox
-    Friend WithEvents cmbNombrePagoCxP As System.Windows.Forms.ComboBox
-    Friend WithEvents Label66 As System.Windows.Forms.Label
-    Friend WithEvents Label67 As System.Windows.Forms.Label
-    Friend WithEvents txtBancoDepositoCxP As System.Windows.Forms.TextBox
-    Friend WithEvents Label68 As System.Windows.Forms.Label
-    Friend WithEvents Label69 As System.Windows.Forms.Label
-    Friend WithEvents txtCtaDepositoCxP As System.Windows.Forms.TextBox
-    Friend WithEvents txtNumDepositoCxP As System.Windows.Forms.TextBox
-    Friend WithEvents txtBeneficiarioCxP As System.Windows.Forms.TextBox
-    Friend WithEvents Button4 As System.Windows.Forms.Button
-    Friend WithEvents Button5 As System.Windows.Forms.Button
-    Friend WithEvents Label70 As System.Windows.Forms.Label
-    Friend WithEvents Label75 As System.Windows.Forms.Label
-    Friend WithEvents Label76 As System.Windows.Forms.Label
-    Friend WithEvents Label77 As System.Windows.Forms.Label
-    Friend WithEvents TextBox9 As System.Windows.Forms.TextBox
-    Friend WithEvents txtNumeroPagoCxP As System.Windows.Forms.TextBox
-    Friend WithEvents cmbCajaCxP As System.Windows.Forms.ComboBox
-    Friend WithEvents grpCondicionCXP As System.Windows.Forms.GroupBox
-    Friend WithEvents rbtnCOCXP As System.Windows.Forms.RadioButton
-    Friend WithEvents rbtnCRCXP As System.Windows.Forms.RadioButton
-    Friend WithEvents txtImporteCXP As System.Windows.Forms.TextBox
-    Friend WithEvents txtReferenciaCXP As System.Windows.Forms.TextBox
-    Friend WithEvents Label78 As System.Windows.Forms.Label
-    Friend WithEvents Button6 As System.Windows.Forms.Button
-    Friend WithEvents txtConceptoCXP As System.Windows.Forms.TextBox
-    Friend WithEvents txtEmisionCXP As System.Windows.Forms.TextBox
-    Friend WithEvents txtDocumentoCXP As System.Windows.Forms.TextBox
-    Friend WithEvents Label79 As System.Windows.Forms.Label
-    Friend WithEvents Label80 As System.Windows.Forms.Label
-    Friend WithEvents Label81 As System.Windows.Forms.Label
-    Friend WithEvents Label63 As System.Windows.Forms.Label
-    Friend WithEvents cmbTipoCxP As System.Windows.Forms.ComboBox
-    Friend WithEvents Label82 As System.Windows.Forms.Label
-    Friend WithEvents cmbTipoExP As System.Windows.Forms.ComboBox
     Friend WithEvents C1DockingTabPage7 As C1.Win.C1Command.C1DockingTabPage
     Friend WithEvents Label83 As System.Windows.Forms.Label
     Friend WithEvents txtCodigoEnvase As System.Windows.Forms.TextBox
@@ -3702,6 +2566,6 @@ Partial Class jsComArcProveedores
     Friend WithEvents txtNombreEnvase As System.Windows.Forms.TextBox
     Friend WithEvents dgEnvases As System.Windows.Forms.DataGridView
     Friend WithEvents txtIngreso As Syncfusion.WinForms.Input.SfDateTimeEdit
-    Friend WithEvents cmbFPExP As Syncfusion.WinForms.ListView.SfComboBox
-    Friend WithEvents cmbFPCxP As Syncfusion.WinForms.ListView.SfComboBox
+    Friend WithEvents dg As Syncfusion.WinForms.DataGrid.SfDataGrid
+    Friend WithEvents dgExP As Syncfusion.WinForms.DataGrid.SfDataGrid
 End Class

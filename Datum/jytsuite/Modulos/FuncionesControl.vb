@@ -724,5 +724,12 @@ Module FuncionesControl
 
     End Function
 
+    Public Function GetRetencionesISLRList(MyConn As MySqlConnection) As List(Of RetencionesISLR)
+        Dim strSQL = " select codret CodigoRetencion, Concepto, baseimp BaseImponible, Tarifa, pagomin PagoMinimo, " _
+                & " Menos, Persona, Acumula, Tipo, Comentario, codcon CodigoContable " _
+                & " from jscontabret where id_emp = '" & jytsistema.WorkID & "' order by codret "
+        Return Lista(Of RetencionesISLR)(MyConn, strSQL)
+    End Function
+
 
 End Module

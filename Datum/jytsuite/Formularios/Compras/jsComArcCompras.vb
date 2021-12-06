@@ -415,7 +415,7 @@ Public Class jsComArcCompras
             Return False
         End If
 
-        If cmbAlmacenes.SelectedValue = "" Then
+        If cmbAlmacenes.SelectedItem Is Nothing Then
             ft.mensajeCritico("Debe indicar un almacén válido...")
             Return False
         End If

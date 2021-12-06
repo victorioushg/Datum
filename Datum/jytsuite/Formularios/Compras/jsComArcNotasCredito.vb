@@ -114,6 +114,7 @@ Public Class jsComArcNotasCredito
                 txtEmision.Value = .Item("emision")
                 txtFacturaAfectada.Text = ft.muestraCampoTexto(.Item("numcom"))
                 txtEmisionIVA.Value = .Item("emisioniva")
+
                 cmbProveedor.SelectedValue = .Item("codpro")
                 CodigoProveedorAnterior = .Item("codpro")
                 txtReferencia.Text = ft.muestraCampoTexto(.Item("refer"))
@@ -460,7 +461,8 @@ Public Class jsComArcNotasCredito
 
                                 ActivarMarco0()
                                 ft.habilitarObjetos(IIf(dtRenglones.Rows.Count > 0, False, True), True, cmbProveedor, txtCodigo, txtNumeroSerie)
-                                If txtReferencia.Text.Length > 2 And txtReferencia.Text.Substring(0, 2) = "FL" Then ft.habilitarObjetos(True, True, txtCodigo, txtNumeroSerie)
+                                If txtReferencia.Text.Length > 2 AndAlso
+                                    txtReferencia.Text.Substring(0, 2) = "FL" Then ft.habilitarObjetos(True, True, txtCodigo, txtNumeroSerie)
 
                             Else
                                 If NivelUsuario(myConn, lblInfo, jytsistema.sUsuario) = 0 Then

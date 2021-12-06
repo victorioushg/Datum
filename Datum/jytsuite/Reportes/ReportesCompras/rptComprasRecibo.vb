@@ -45,7 +45,7 @@ Public Class rptComprasRecibo
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "ReportesDeCompras.rptComprasRecibo.rpt"
+            Return "Datum.rptComprasRecibo.rpt"
         End Get
         Set
             'Do nothing

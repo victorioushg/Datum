@@ -52,7 +52,7 @@
     <DocumentationFile>Datum.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <UseVSHostingProcess>false</UseVSHostingProcess>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
@@ -2114,6 +2114,7 @@
     <Compile Include="Models\Control\FormaDePago.vb" />
     <Compile Include="Models\Control\Monedas.vb" />
     <Compile Include="Models\Control\CambioMoneda.vb" />
+    <Compile Include="Models\Control\RetencionesISLR.vb" />
     <Compile Include="Models\General\SimpleTable.vb" />
     <Compile Include="Models\PurchasesExpensesAndAccountsPayable\Vendor.vb" />
     <Compile Include="Models\PurchasesExpensesAndAccountsPayable\VendorTransaction.vb" />

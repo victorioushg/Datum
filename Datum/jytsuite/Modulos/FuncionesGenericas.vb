@@ -97,7 +97,7 @@ Module FuncionesGenericas
             '' Compras 
             Case GetType(Vendor)
                 cmb.DisplayMember = "Nombre"
-                cmb.ValueMember = "CodigoProveedor"
+                cmb.ValueMember = "Codigo"
                 cmb.Watermark = "Escriba o seleccione un Proveedor"
                 list = GetVendorList(MyConn).Cast(Of T)
             Case GetType(CreditCause)
@@ -106,6 +106,10 @@ Module FuncionesGenericas
                 cmb.Watermark = "Escriba o seleccione una Causa para el Crédito"
                 list = GetCreditCauses(MyConn, campoOptional).Cast(Of T)
                 cmb.DropDownStyle = DropDownStyle.DropDownList
+            Case GetType(RetencionesISLR)
+                cmb.DisplayMember = "DisplayName"
+                cmb.ValueMember = "CodigoRetencion"
+                list = GetRetencionesISLRList(MyConn).Cast(Of T)
             '' Ventas
             Case GetType(Customer)
                 cmb.DisplayMember = "Nombre"

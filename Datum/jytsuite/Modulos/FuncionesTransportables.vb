@@ -604,7 +604,7 @@ Module FuncionesTransportables
         If dt.Rows(0).Item(ItemMenu) = "1" Then ItemMenuActivo = True
     End Function
     Function ModificarCadena(ByVal Str As String, ByVal Campo As String) As String
-        If Str <> ":-)" Then
+        If Str <> ":-)" AndAlso Not Str Is Nothing Then
             ModificarCadena = IIf(Str.Length > 0,
                                   " " & Campo & " = '" & Str.Replace("'", "''").Replace("\", " ") & "', ",
                                   " " & Campo & " = '', ")

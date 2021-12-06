@@ -461,22 +461,22 @@ Public Class jsVenArcFacturas
             Return False
         End If
 
-        If cmbCliente.SelectedIndex < 0 Then
+        If cmbCliente.SelectedItem Is Nothing Then
             ft.mensajeCritico("Debe indicar un cliente válido...")
             Return False
         End If
 
-        If cmbAsesores.SelectedIndex < 0 Then
+        If cmbAsesores.SelectedItem Is Nothing Then
             ft.mensajeCritico("Debe indicar un nombre de Asesor válido...")
             Return False
         End If
 
-        If cmbTransportes.SelectedIndex < 0 Then
+        If cmbTransportes.SelectedItem Is Nothing Then
             ft.mensajeCritico("Debe indicar un transporte válido...")
             Return False
         End If
 
-        If cmbAlmacenes.SelectedIndex < 0 Then
+        If cmbAlmacenes.SelectedItem Is Nothing Then
             ft.mensajeCritico("Debe indicar un almacén válido...")
             Return False
         End If

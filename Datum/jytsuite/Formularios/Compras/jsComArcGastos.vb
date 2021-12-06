@@ -432,7 +432,7 @@ Public Class jsComArcGastos
             ft.mensajeCritico("Debe seleccionar Grupo de Gastos válido...")
             Return False
         End If
-        If cmbAlmacenes.SelectedIndex < 0 Then
+        If cmbAlmacenes.SelectedItem Is Nothing Then
             ft.mensajeCritico("Debe indicar un almacén válido...")
             Return False
         End If

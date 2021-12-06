@@ -16,7 +16,8 @@ Module QueryFunctionsBanks
     Public Function GetSavingLines(MyConn As MySqlConnection, savingCode As String) As List(Of SavingLines)
 
         Dim strSQL = "select c.caja Codigo, c.Id, c.Fecha, c.Origen, c.tipomov TipoMovimiento, c.nummov NumeroMovimiento, " _
-            & " c.formpag FormaDePago, c.numpag NumeroDePago, c.refpag ReferenciaDePago, c.Importe, m.CodigoIso, IFNULL ( c.Importe/m.Equivale , c.importe ) ImporteReal, " _
+            & " c.formpag FormaDePago, c.numpag NumeroDePago, c.refpag ReferenciaDePago, c.Importe, m.CodigoIso, " _
+            & " IFNULL ( c.Importe/m.Equivale , c.importe ) ImporteReal, " _
             & " c.currency, c.currency_date, c.codcon, c.concepto, c.deposito, c.fecha_dep FechaDeposito, c.cantidad CantidadDocumentos, " _
             & " c.codban CodigoBancario, c.multican MultiCancelacion, " _
             & " c.Asiento, c.fechasi FechaAsiento, c.prov_cli ProveedorCliente, c.codven CodigoVendedor, c.block_date FechaBloqueo " _
